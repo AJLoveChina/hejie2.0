@@ -20,6 +20,5 @@ define(function (require, exports, module) {
             $scope.types = arr;
         });
     });
-    // ng-app='upload' ng-controller='init'
     angular.bootstrap($('#aj-upload'), ["upload"]);
 });
