@@ -1,10 +1,8 @@
 {
     "manifest_version": 2,
-
     "name": "Words",
     "description": "AJ To The World.",
     "version": "2.0",
-
     "browser_action": {
         "default_icon": "/images/user.png",
         "default_popup": "/demo.html"
@@ -20,10 +18,11 @@
     "content_scripts" : [
         {
             "matches": ["http://*/", "https://*/"],
-            "js": ["/js/library/jquery.js", "/js/modules/fanyi/mouse.js"]
+            "js": [
+                "/js/library/jquery.js",
+                "/js/modules/fanyi/mouse.js"
+            ],
+            "run_at" : "document_end"
         }
-    ],
-    "background": {
-        "scripts": ["/js/modules/fanyi/background.js"]
-    }
+    ]
 }

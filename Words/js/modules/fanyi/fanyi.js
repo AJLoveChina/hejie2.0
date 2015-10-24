@@ -5,12 +5,11 @@ define(function (require, exports, module) {
     var container = $("#aj-container"),
         ajax = require("youdao").ajax,
         params = {
-            url: 'http://openapi.baidu.com/public/2.0/bmt/translate',
+            url: 'http://openapi.baidu.com/public/2.0/bmt/translate'
         };
     var app = angular.module('fanyi', []);
-
+    var url = "http://openapi.baidu.com/public/2.0/bmt/translate?&client_id=s7C9XO8kYGOOh5AgeTrjyxAG&from=auto&to=auto";
     app.controller('fanyi', function ($scope, $http) {
-        var url = "http://openapi.baidu.com/public/2.0/bmt/translate?&client_id=s7C9XO8kYGOOh5AgeTrjyxAG&from=auto&to=auto";
         $scope.q = "Apple";
         $scope.results = [];
         $scope.isajax = false;
@@ -29,6 +28,19 @@ define(function (require, exports, module) {
         };
     });
     angular.bootstrap(container, ['fanyi']);
+
+    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+        if (message.action === "fanyi") {
+            $.ajax({
+                url : url + "&q=" + encodeURIComponent(message.word),
+                dataType : 'json',
+                async : false,  // 这地方必须同步, 异步content_script 获取不到返回值
+                success : function (json) {
+                    sendResponse(json);
+                }
+            });
+        }
+    });
 
     chrome.tabs.executeScript(null, {
         file: "/js/library/jquery.js"
