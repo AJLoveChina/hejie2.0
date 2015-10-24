@@ -46,9 +46,13 @@
 
 <div id="aj-container" ng-controller="fanyi">
     <h4>Translate:</h4>
-    <input type="text" ng-keydown="keydown($event)" name="word" id="word" ng-model="q" style="width:160px;" class=smallInput>
-    <button id="querybutton" ng-click="query()">提交</button>
-    <img class="wait" src="/images/wait.gif" />
+    <div class="top">
+        <input  class="input" type="text" ng-keydown="keydown($event)" name="word" ng-model="q" >
+        <div class="cutline"></div>
+        <button class="button" id="querybutton" ng-click="query()">提交</button>
+        <img style="display: {{isajax ? 'inline-block' : 'none'}};" class="wait" src="/images/wait.gif" />
+    </div>
+
     <ul ng-repeat="item in results">
         <li ng-bind="item.dst"></li>
     </ul>

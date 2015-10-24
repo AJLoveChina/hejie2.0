@@ -1,4 +1,9 @@
-#aj-container .wait {
+#aj-container .top .input {
+  width: 150px;
+  height: 20px;
+  padding: 0 10px;
+}
+#aj-container .top .wait {
   width: 20px;
   height: 20px;
 }

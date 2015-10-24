@@ -304,12 +304,12 @@ define(function (require, exports, module) {
 
     }
 
-    document.body.onload = function () {
-        //restore_options();
-        document.getElementById('word').focus();
-        changeIcon();
-    }
-    ;
+//    document.body.onload = function () {
+//        //restore_options();
+//        document.getElementById('word').focus();
+//        changeIcon();
+//    }
+//    ;
     document.getElementById("dict_disable").onclick = function () {
         save_options();
     }

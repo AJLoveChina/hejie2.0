@@ -3,16 +3,23 @@
 
     "name": "Words",
     "description": "AJ To The World.",
-    "version": "1.0",
+    "version": "2.0",
 
     "browser_action": {
-        "default_icon": "/images/icon_dict.gif",
-        "default_popup": "/options.html"
+        "default_icon": "/images/user.png",
+        "default_popup": "/demo.html"
     },
     "permissions": [
         "tabs",
         "http://*/",
         "https://*/",
-        "notifications"
+        "notifications",
+        "activeTab"
+    ],
+    "content_scripts" : [
+        {
+            "matches": ["http://*/", "https://*/"],
+            "js": ["/js/library/jquery.js", "/js/modules/fanyi/mouse.js"]
+        }
     ]
 }
