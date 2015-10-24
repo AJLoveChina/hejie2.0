@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+
+    "name": "Words",
+    "description": "AJ To The World.",
+    "version": "1.0",
+
+    "browser_action": {
+        "default_icon": "images/user.png",
+        "default_popup": "demo.html"
+    },
+    "permissions": [
+        "activeTab",
+        "https://ajax.googleapis.com/"
+    ]
+}

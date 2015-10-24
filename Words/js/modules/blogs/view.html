@@ -1,0 +1,82 @@
+<div class="one-blog" blog_id="63">
+    <div class="one-blog-wrap">
+        <div class="title"><%=item.title%></div>
+        <div class="info">
+            <span class="stamp time" title="Pub Time">
+                <span class="stamp-name"></span>
+                <span class="stamp-one"><span class="date_show_inside"><%=item.time%></span></span>
+            </span>
+            <span class="stamp biaoqian" title="Stamp">
+                <span class="stamp-name"></span>
+                    <%_.each(item.stampsArr, function(one){%>
+                        <span class="stamp-one biaoqian-one"><%=one%></span>
+
+                    <%})%>
+            </span>
+            <span class="stamp view" title="Views">
+                <span class="stamp-name"></span>
+                <span class="stamp-one"><%=item.view%></span>
+            </span>
+            <span class="blog-nav select" index="0">
+                文章
+                <span class="huakuai">
+                    <span class="huakuai-wrap"></span>
+                </span>
+            </span>
+            <span class="blog-nav blog-nav-comment" index="1">
+                评论
+                <span class="huakuai">
+                    <span class="huakuai-wrap"></span>
+                </span>
+            </span>
+        </div>
+        <div class="content-wrap">
+            <div class="content content-block-one" style="display:block;">
+                <div class="content-wrap">
+                    <div class="content-desc">
+                        <%=item.desc%>
+                    </div>
+                    <a href="javascript:void(0);" data-aj-id="<%=item.id%>" class="show-more-btn show-more c-tran">Show Detail</a>
+                    <div class="content-detail c-wordwrap"></div>
+                </div>
+            </div>
+            <div class="content content-block-one content-block-one-commentswrap"></div>
+        </div>
+        <div class="bottom">
+            <ul>
+                <li class="li nice c-hover">Nice</li>
+                <li class="li comment c-hover">Comment</li>
+                <!--
+                    <li class='li danmu c-hover'>Danmu</li>
+                -->
+                <div class="c-clear"></div>
+            </ul>
+            <div class="blog-types">
+                <%_.each(item.typesArr, function (one) {%>
+                    <span class="type-one">
+                        <a href="javascript:;" data-type="<%=one['key']%>"><%=one['val']%></a>
+                    </span>
+                <%})%>
+            </div>
+            <div class="c-clear"></div>
+        </div>
+        <div class="bottom-zujian">
+            <div class="zujian-one">
+                <form class="comment-form">
+                    <div class="div">
+                        <input class="nickname c-textarea" type="text" name="nickname" placeholder="Enter Your Nickname">
+                        <span class="submit-comment-btn c-button">Submit</span>
+                    </div>
+                    <div class="div"><textarea class="comment-val c-textarea" name="comment" placeholder="Say something..."></textarea></div>
+                    <div class="query-info"></div>
+                    <input type="hidden" name="id" value="63">
+                </form>
+            </div>
+        </div>
+        <form class="form">
+            <input type="hidden" name="is-detail-show" value="0">
+            <input type="hidden" name="blog-id" value="<%=item.id%>">
+            <input type="hidden" name="file" value="">
+        </form>
+    </div>
+</div>

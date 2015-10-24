@@ -1,0 +1,26 @@
+#aj-diamonds-roll-x{
+	position:relative;
+	margin-bottom:20px;
+	width:706px;
+}
+#aj-diamonds-roll-x:after{
+	content:'';
+	clear:both;
+	display:block;
+}
+#aj-diamonds-roll-x .diamond{
+	float:left;
+	width:6px;height:6px;
+	background-color:rgb(238, 238, 238);
+	margin:1px;
+	border:1px solid rgb(238, 238, 238);
+}
+#aj-diamonds-roll-x .diamond:hover{
+	border:1px solid #ccc;
+}
+#aj-diamonds-roll-x .diamond.active{
+	background-color:rgb(140, 198, 101)!important;
+	border-color:lightgreen!important;
+	opacity:1!important;
+}
+

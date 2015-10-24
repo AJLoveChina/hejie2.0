@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Words</title>
+    <link rel="stylesheet" type="text/css" href="js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap/js/bootstrap.js" />
+    <link rel="stylesheet" type="text/css" href="js/underscore.js" />
+    <script src="js/jquery.js"></script>
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/sea.js"></script>
+    <script>
+        seajs.config({
+            base : 'modules',
+            alias : {
+                index : "index/index.js",
+                fanyi : 'fanyi/fanyi.js'
+            },
+            charset : 'UTF-8'
+        });
+        seajs.use("index");
+    </script>
+</head>
+<body>
+
+<div class="aj-main">
+    <form class="aj-fanyi-form">
+        <input type="hidden" name="client_id" value="s7C9XO8kYGOOh5AgeTrjyxAG">
+        <input type="hidden" name="from" value="auto">
+        <input type="hidden" name="to" value="auto">
+        <label>查询单词:</label>
+        <input type="text" required="required" name="q" value="">
+        <button>Submit</button>
+    </form>
+</div>
+
+
+
+</body>
+</html>
