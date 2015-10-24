@@ -6,12 +6,13 @@
     "version": "1.0",
 
     "browser_action": {
-        "default_icon": "images/user.png",
-        "default_popup": "demo.html"
+        "default_icon": "/images/icon_dict.gif",
+        "default_popup": "/options.html"
     },
     "permissions": [
-        "activeTab",
-        "https://ajax.googleapis.com/",
-        "http://openapi.baidu.com/"
+        "tabs",
+        "http://*/",
+        "https://*/",
+        "notifications"
     ]
 }

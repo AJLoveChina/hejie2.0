@@ -5,7 +5,8 @@ seajs.config({
     base : '/js/modules',
     alias : {
         index : "index/index.js",
-        fanyi : 'fanyi/fanyi.js'
+        fanyi : 'fanyi/fanyi.js',
+        youdao : 'fanyi/options.js'
     },
     charset : 'UTF-8'
 });
