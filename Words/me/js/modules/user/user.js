@@ -1,5 +1,7 @@
 define(function (require, exports, module) {
     var app = angular.module('user', ['ngSanitize']),
+        win = window,
+        words = require("words"),
         container = $("#aj-sign-module"),
         user = Parse.User.current();
 
@@ -14,15 +16,66 @@ define(function (require, exports, module) {
         $scope.isShowInside = false;
         $scope.name = "";
         $scope.words = [];
+        $scope.whichOne = -1; // 展示单词本中哪个单词
+        $scope.allWords = [];
+        $scope.pages = [];      // 单词本分页
+        $scope.page = 1;
+        $scope.size = 8;
 
         if (user) {
             user.fetch().then(function(user){
+
                 $scope.$apply(function () {
                     $scope.name = user.getUsername();
+                    $scope.listWords();
                 });
-                name = user.getUsername();
+
             }, function(err){});
         }
+        
+        $scope.listWords = function (page, size) {
+            if ($scope.allWords.length === 0) {
+                this.getAllWords();
+            }
+            page = page || $scope.page;
+            size = size || $scope.size;
+            $scope.words = $scope.allWords.slice((page -1) * size, page * size);
+
+            $scope.pagination();
+        };
+
+        $scope.pagination = function () {
+            var total = $scope.allWords.length,
+                selected = false,
+                pages = Math.ceil(total / $scope.size);
+            $scope.pages = [];
+            for(var i = 1; i <= pages; i++) {
+                selected = i === $scope.page ? true : false;
+                $scope.pages.push({
+                    index : i,
+                    selected : selected
+                });
+            }
+        };
+
+        $scope.goTo = function (page) {
+            $scope.page = page;
+            $scope.listWords();
+        };
+
+
+
+        $scope.getAllWords = function () {
+            var list = words.getAll(),
+                one,
+                arr = [];
+            list.forEach(function (item) {
+                one = $.parseJSON(item);
+                one.time = _.dateShow(one.date);
+                arr.unshift(one);
+            });
+            $scope.allWords = arr;
+        };
 
 
         $scope.signIn = function () {
@@ -37,6 +90,7 @@ define(function (require, exports, module) {
                         $scope.denlu.info = "登陆成功";
                         $scope.denlu.isAjax = false;
                         $scope.name = $scope.denlu.name;
+                        $scope.listWords();
                         console.log(user);
                     });
                 },
@@ -49,6 +103,7 @@ define(function (require, exports, module) {
                 }
             });
         };
+
         $scope.signUp = function () {
             if ($scope.zhuce.isAjax) {
                 $scope.zhuce.info = "正在登陆, 亲(づ￣3￣)づ╭❤～";
@@ -69,6 +124,7 @@ define(function (require, exports, module) {
                         $scope.zhuce.info = "";
                         $scope.zhuce.isAjax = false;
                         $scope.name = $scope.zhuce.name;
+                        $scope.listWords();
                         console.log(user);
                     });
                 },

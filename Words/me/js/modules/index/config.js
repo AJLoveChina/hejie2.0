@@ -8,7 +8,8 @@ seajs.config({
         fanyi : 'fanyi/fanyi.js',
         youdao : 'fanyi/options.js',
         lookup : 'fanyi/lookup.js',
-        user : 'user/user.js'
+        user : 'user/user.js',
+        words : 'words/words.js'
     },
     charset : 'UTF-8'
 });
