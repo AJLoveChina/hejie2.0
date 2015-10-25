@@ -36,8 +36,9 @@
         <button class="button" id="querybutton" ng-click="query()">提交</button>
         <img style="display: {{isajax ? 'inline-block' : 'none'}};" class="wait" src="/images/wait.gif" />
     </div>
-    <div class="aj-hide" style="display: {{q === '' ? 'none' : 'block'}};">
-        <a href="javascript:;" ng-click="add()">添加到单词本</a>
+    <div class="aj-hide" style="display: {{content === '' ? 'none' : 'block'}};">
+        <a href="javascript:;" ng-click="add()" class="aj-hide" style="display: {{hasAdded ? 'none' : 'block'}};">添加到单词本</a>
+        <a href="javascript:;" class="aj-hide" style="display: {{hasAdded ? 'block' : 'none'}};">已添加</a>
     </div>
     <div class="content" ng-bind-html="content" style="padding: 5px 0 0 0"></div>
     <ul ng-repeat="item in results">
@@ -58,7 +59,6 @@
     </div>
     <a href="javscript:;" ng-click="isShowInside = !isShowInside">折叠</a>
     <div class="inside-wrap" style="display: {{isShowInside ? 'block' : 'none'}}">
-
         <div style="display: {{name === '' ? 'block' : 'none'}};">
             <div class="aj-sign-in" style="display: {{isSignin ? 'block' : 'none'}};">
                 <form>

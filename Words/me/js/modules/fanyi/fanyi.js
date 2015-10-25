@@ -26,18 +26,18 @@ define(function (require, exports, module) {
 
         $scope.query = function () {
             $scope.isajax = true;
-            var words = this.getWords(),
-                keys =
-            if (words[$scope.q]) {
-                $scope.content = $.parseJSON(words[$scope.q]).content;
+            var inlocal = this.inLocal($scope.q);
+            if (inlocal) {
+                $scope.content = inlocal;
                 $scope.isajax = false;
+                $scope.hasAdded = true;
             } else {
                 $http.get(url + "&q=" + encodeURIComponent($scope.q)).success(function (res) {
                     var xml = $.parseXML(res);
                     var html = youdao.translateXML(xml);
                     $scope.content = html;
                     $scope.isajax = false;
-                    console.log(html);
+                    $scope.hasAdded = false;
                 });
             }
         };
@@ -56,6 +56,7 @@ define(function (require, exports, module) {
             }
             results.push(JSON.stringify(item));
             localStorage.setItem('aj-words', JSON.stringify(results));
+            $scope.hasAdded = true;
         };
         $scope.getWords = function () {
             var words = localStorage.getItem("aj-words"),
@@ -66,8 +67,15 @@ define(function (require, exports, module) {
             return results;
         }
         $scope.inLocal = function (word) {
-            var words = $scope.getWords();
-
+            var words = $scope.getWords(),
+                one;
+            for (var i = 0; i < words.length; i++) {
+                one = $.parseJSON(words[i]);
+                if (one.word.toLowerCase() === word.toLowerCase()){
+                    return one.content;
+                }
+            }
+            return null;
         }
     });
     angular.bootstrap(container, ['fanyi']);
