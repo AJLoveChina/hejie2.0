@@ -1,0 +1,27 @@
+{
+    "manifest_version": 2,
+    "name": "歪歪词典",
+    "description": "This is to my little sister HYY.Wish luck with her forever.",
+    "version": "2.0",
+    "browser_action": {
+        "default_icon": "/images/user.png",
+        "default_popup": "/demo.html"
+    },
+    "permissions": [
+        "tabs",
+        "http://*/",
+        "https://*/",
+        "notifications",
+        "activeTab",
+        "<all_urls>"
+    ],
+    "content_scripts" : [
+        {
+            "matches": ["http://*/", "https://*/"],
+            "js": [
+                "/js/library/jquery.js",
+                "/js/modules/fanyi/mouse.js"
+            ]
+        }
+    ]
+}

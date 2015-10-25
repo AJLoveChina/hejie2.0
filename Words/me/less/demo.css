@@ -1,0 +1,53 @@
+body {
+  font-size: 13px;
+  color: #666;
+  min-width: 230px;
+  overflow-x: hidden;
+  font-family: "Helvetica", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+  padding: 10px;
+}
+body br {
+  height: 0;
+}
+body .aj-hide {
+  display: none;
+}
+#aj-container .top .input {
+  width: 150px;
+  height: 20px;
+  padding: 10px 0;
+  margin: 2px 0;
+}
+#aj-container .top .wait {
+  width: 20px;
+  height: 20px;
+}
+#aj-container .content {
+  font-size: 12px;
+}
+#aj-container .cutline {
+  height: 0;
+  border-bottom: 1px dashed #ccc;
+  margin: 4px 0;
+}
+#aj-sign-module .inside-wrap {
+  display: none;
+}
+#aj-sign-module .aj-sign-up {
+  display: none;
+}
+#aj-sign-module .user-center {
+  display: none;
+}
+#aj-sign-module .user-center .one {
+  display: none;
+}
+#aj-sign-module .wait {
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+#aj-sign-module .welcome p {
+  display: none;
+  font-size: 12px;
+}

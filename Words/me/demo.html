@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        input.smallInput{border:1px solid black;FONT-SIZE: 9pt; FONT-STYLE: normal; FONT-VARIANT: normal; FONT-WEIGHT: normal; HEIGHT: 18px; LINE-HEIGHT: normal}
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>歪歪词典:</title>
+    <link rel="stylesheet" type="text/css" href="js/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="js/bootstrap/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/less/demo.css" />
+    <script src="js/library/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/bootstrap/js/bootstrap.min.js" />
+    <script src="js/library/underscore.js"></script>
+    <script src="js/library/parse.min.js"></script>
+    <script src="js/angular/angular.js"></script>
+    <script src="js/angular/angular.sannitize.js"></script>
+    <script src="js/library/sea.js"></script>
+</head>
+<body>
+<table style="display: none" cellpadding="1" width=230px align = "center" style="word-break:keep-all;">
+    <tr><td>
+        <div id='opt_text'><input type="checkbox" id="dict_disable"> 关闭划词翻译</div>
+    </td></tr>
+    <tr><td>
+        <div id='opt_text'><input type="checkbox" id="ctrl_only"> 指词即译模式（按下Ctrl键指词）</div>
+    </td></tr>
+    <tr><td>
+        <div id='opt_text'><input type="checkbox" id="english_only"> 仅对英文划译</div>
+    </td></tr>
+</table>
+
+<div id="aj-container" ng-controller="fanyi">
+    <div class="top">
+        <input  class="input" type="text" ng-keydown="keydown($event)" name="word" ng-model="q" >
+        <button class="button" id="querybutton" ng-click="query()">提交</button>
+        <img style="display: {{isajax ? 'inline-block' : 'none'}};" class="wait" src="/images/wait.gif" />
+    </div>
+    <div class="aj-hide" style="display: {{q === '' ? 'none' : 'block'}};">
+        <a href="javascript:;" ng-click="add()">添加到单词本</a>
+    </div>
+    <div class="content" ng-bind-html="content" style="padding: 5px 0 0 0"></div>
+    <ul ng-repeat="item in results">
+        <li ng-bind="item.dst"></li>
+    </ul>
+
+    <div class="cutline"></div>
+</div>
+
+<div id="aj-sign-module" ng-controller="sign">
+    <div class="welcome">
+        <p style="display: {{name == '' ? 'block' : 'none'}};">登陆后可以云同步单词</p>
+        <p style="display: {{name == '' ? 'none' : 'block'}};">
+            你好 :
+            <style></style><span ng-bind="name"></span>
+            <a href="javascript:;" ng-click="logout()" style="float: right">退出登陆</a>
+        </p>
+    </div>
+    <a href="javscript:;" ng-click="isShowInside = !isShowInside">折叠</a>
+    <div class="inside-wrap" style="display: {{isShowInside ? 'block' : 'none'}}">
+
+        <div style="display: {{name === '' ? 'block' : 'none'}};">
+            <div class="aj-sign-in" style="display: {{isSignin ? 'block' : 'none'}};">
+                <form>
+                    <input ng-model="denlu.name" class="form-control" type="text" name="name" value="" placeholder="用户名"/>
+                    <input ng-model="denlu.pass" class="form-control" type="password" name="pass" value="" placeholder="密码"/>
+                    <p ng-bind="denlu.info"></p>
+                </form>
+                <img style="display: {{denlu.isAjax ? 'inline-block' : 'none'}};" class="wait" src="/images/wait.gif" />
+                <div class="btn-group" role="group">
+                    <button ng-click="signIn()" type="button" class="btn btn-default">登陆</button>
+                    <button ng-click="isSignin = false" type="button" class="btn btn-default">木有账号,来注册</button>
+                </div>
+            </div>
+            <div class="aj-sign-up" style="display: {{isSignin ? 'none' : 'block'}};">
+                <form>
+                    <input ng-model="zhuce.name" class="form-control" type="text" name="name" value="" required placeholder="用户名">
+                    <input ng-model="zhuce.pass" class="form-control" type="password" name="pass" value="" required placeholder="密码">
+                    <input ng-model="zhuce.confirm" class="form-control" type="password" name="confirm" value="" required placeholder="确认密码">
+                    <p ng-bind="zhuce.info"></p>
+                </form>
+                <div class="btn-group" role="group">
+                    <button ng-click="signUp()" type="button" class="btn btn-default">注册</button>
+                    <button ng-click="isSignin = true" type="button" class="btn btn-default">返回登陆</button>
+                    <img style="display: {{zhuce.isAjax ? 'inline-block' : 'none'}};" class="wait" src="/images/wait.gif" />
+                </div>
+            </div>
+        </div>
+        <div class="user-center" style="display: {{name === '' ? 'none' : 'block'}};">
+            <div class="one" style="display:{{words.length === 0 ? 'block' : 'none'}};">
+                亲, 您的单词本还木有任何单词...
+            </div>
+            <div class="one" style="display: {{words.length > 0 ? 'block' : 'none'}};">
+                单词本
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/js/modules/index/config.js"></script>
+
+</body>
+</html>
+
