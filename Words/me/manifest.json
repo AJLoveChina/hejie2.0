@@ -14,14 +14,14 @@
         "notifications",
         "activeTab",
         "<all_urls>"
-    ],
-    "content_scripts" : [
-        {
-            "matches": ["http://*/", "https://*/"],
-            "js": [
-                "/js/library/jquery.js",
-                "/js/modules/fanyi/mouse.js"
-            ]
-        }
     ]
+//    "content_scripts" : [
+//        {
+//            "matches": ["http://*/", "https://*/"],
+//            "js": [
+//                "/js/library/jquery.js",
+//                "/js/modules/fanyi/mouse.js"
+//            ]
+//        }
+//    ]
 }

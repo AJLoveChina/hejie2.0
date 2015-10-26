@@ -61,7 +61,15 @@
                 <a href="javascript:;" ng-click="logout()" style="float: right">退出登陆</a>
             </p>
         </div>
-        <a href="javscript:;" ng-click="isShowInside = !isShowInside">折叠</a>
+        <div style="line-height: 25px;">
+            <a href="javscript:;" ng-click="isShowInside = !isShowInside">折叠</a>
+            <span style="display: {{isShowInside && name !== '' ? 'inline-block' : 'none'}};">
+                <a class="glyphicon glyphicon-refresh" title="刷新"  ng-click="refresh()"></a>
+                <a class="glyphicon glyphicon-upload" title="上传到云端" ng-click="sysnc()"></a>
+            </span>
+        </div>
+
+
         <div class="inside-wrap" style="display: {{isShowInside ? 'block' : 'none'}}">
             <div style="display: {{name === '' ? 'block' : 'none'}};">
                 <div class="aj-sign-in" style="display: {{isSignin ? 'block' : 'none'}};">
@@ -97,14 +105,20 @@
                 </div>
                 <div class="one" style="display: {{words.length > 0 ? 'block' : 'none'}};">
                     <ul class="list-group">
-                        <li class="list-group-item"  ng-repeat="item in words" ng-click="whichOne = whichOne === $index ? -1 : $index;">
-                            <span class="badge">{{item.time}}</span>
+                        <li class="list-group-item{{item.is_sysnc ? ' list-group-item-success' : ' list-group-item-warning'}}"  ng-repeat="item in words" ng-click="whichOne = whichOne === $index ? -1 : $index;">
+                            <span class="badge" ng-bind-html="item.time"></span>
                             <h4 class="list-group-item-heading">{{item.word}}</h4>
                             <p class="aj-hide list-group-item-text" style="display: {{$index == whichOne ? 'block' : 'none'}};" ng-bind-html="item.content"></p>
                         </li>
                     </ul>
                     <div class="btn-group" role="group" aria-label="...">
                         <button type="button" class="btn{{page.selected ? ' btn-success' : ' btn-default'}}" ng-repeat="page in pages" ng-click="goTo(page.index)">{{page.index}}</button>
+                    </div>
+                    <div>
+                        <span>
+                            <span class="label label-success" style="width: 10px;height: 10px;">&nbsp;</span>已上传
+                            <span class="label label-warning" style="width: 10px;height: 10px;">&nbsp;</span>未上传
+                        </span>
                     </div>
                 </div>
             </div>

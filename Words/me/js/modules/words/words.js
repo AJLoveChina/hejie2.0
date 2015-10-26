@@ -43,6 +43,25 @@ define(function (require, exports, module) {
                 }
             }
             return null;
+        },
+        sysnc : function (fn) {
+            var words = this.getAll(),
+                user = Parse.User.current();
+            if (user === null) {
+                fn({
+                    isok : false,
+                    info : "Not sign in!"
+                });
+                return false;
+            }
+            words.forEach(function (item) {
+                var one = $.parseJSON(item);
+                console.log(one);
+            });
+            fn({
+                isok : true,
+                info : '单词本已同步到云端'
+            });
         }
     };
     var w = new Words();

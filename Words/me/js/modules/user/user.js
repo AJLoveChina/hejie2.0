@@ -33,8 +33,8 @@ define(function (require, exports, module) {
             }, function(err){});
         }
         
-        $scope.listWords = function (page, size) {
-            if ($scope.allWords.length === 0) {
+        $scope.listWords = function (page, size, bool) { // bool == true 强制刷新
+            if ($scope.allWords.length === 0 || bool) {
                 this.getAllWords();
             }
             page = page || $scope.page;
@@ -63,7 +63,13 @@ define(function (require, exports, module) {
             $scope.listWords();
         };
 
+        $scope.refresh = function () {
+            this.listWords(null, null, true);
+        };
 
+        $scope.sysnc = function () {
+            words.sysnc();
+        };
 
         $scope.getAllWords = function () {
             var list = words.getAll(),
