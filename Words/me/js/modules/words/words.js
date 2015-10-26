@@ -1,6 +1,7 @@
 define(function (require, exports, module) {
     function Words() {
         this.word = null;
+        this.item = "aj-words";
     }
     Words.prototype = {
         add  : function (word, desc) {
@@ -19,7 +20,7 @@ define(function (require, exports, module) {
                 results = $.parseJSON(words);
             }
             results.push(JSON.stringify(item));
-            localStorage.setItem('aj-words', JSON.stringify(results));
+            localStorage.setItem(this.item, JSON.stringify(results));
             return true;
         },
         getAll : function () {
@@ -46,21 +47,52 @@ define(function (require, exports, module) {
         },
         sysnc : function (fn) {
             var words = this.getAll(),
-                user = Parse.User.current();
+                wordsAfter = [],
+                OBJ = Parse.Object.extend("words"),
+                user = Parse.User.current(),
+                acl = new Parse.ACL(user),
+                that = this,
+                up = [];
             if (user === null) {
-                fn({
+                fn && fn({
                     isok : false,
                     info : "Not sign in!"
                 });
                 return false;
             }
-            words.forEach(function (item) {
-                var one = $.parseJSON(item);
-                console.log(one);
-            });
-            fn({
-                isok : true,
-                info : '单词本已同步到云端'
+            user.fetch().then(function (user) {
+
+                words.forEach(function (item) {
+                    var one = $.parseJSON(item);
+                    if (!one.is_sysnc) {
+                        one.is_sysnc = true;
+                        wordsAfter.push(JSON.stringify(one));
+
+                        var obj = new OBJ();
+                        obj.set('word', one.word);
+                        obj.set("user_id", user.id);
+                        obj.setACL(acl);
+                        up.push(obj);
+                    }
+                });
+
+                localStorage.setItem(that.item, JSON.stringify(wordsAfter));
+
+                Parse.Object.saveAll(up, {
+                    success : function (res) {
+                        fn && fn({
+                            isok : true,
+                            info : '单词本已同步到云端'
+                        });
+                    },
+                    error : function (res) {
+                        fn && fn({
+                            isok : false,
+                            info : '网络异常'
+                        });
+                    }
+                });
+
             });
         }
     };

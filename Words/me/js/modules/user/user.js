@@ -15,6 +15,7 @@ define(function (require, exports, module) {
         $scope.isSignin = true;
         $scope.isShowInside = false;
         $scope.name = "";
+        $scope.userid = null;
         $scope.words = [];
         $scope.whichOne = -1; // 展示单词本中哪个单词
         $scope.allWords = [];
@@ -27,6 +28,7 @@ define(function (require, exports, module) {
 
                 $scope.$apply(function () {
                     $scope.name = user.getUsername();
+                    $scope.userid = user.id;
                     $scope.listWords();
                 });
 
@@ -68,7 +70,11 @@ define(function (require, exports, module) {
         };
 
         $scope.sysnc = function () {
-            words.sysnc();
+            words.sysnc(function () {
+                $scope.$apply(function () {
+                    $scope.listWords(null, null, true);
+                });
+            });
         };
 
         $scope.getAllWords = function () {
