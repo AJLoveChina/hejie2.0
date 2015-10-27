@@ -94,6 +94,19 @@ define(function (require, exports, module) {
                 });
 
             });
+        },
+        download : function (fn) {
+            var res = {
+                isok : 1,
+                info : ''
+            };
+            var user = Parse.User.current();
+            if (!user) {
+                fn && fn($.extend(res, {
+                    isok : 0,
+                    info : ''
+                }));
+            }
         }
     };
     var w = new Words();

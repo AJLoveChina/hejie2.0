@@ -66,7 +66,11 @@
             <span style="display: {{isShowInside && name !== '' ? 'inline-block' : 'none'}};">
                 <a class="glyphicon glyphicon-refresh" title="刷新"  ng-click="refresh()"></a>
                 <a class="glyphicon glyphicon-upload" title="上传到云端" ng-click="sysnc()"></a>
+                <a class="glyphicon glyphicon-circle-arrow-down" title="同步到本地" ng-click="download()"></a>
             </span>
+            <img class="wait aj-hide" style="float:right;display: {{isTalkingWithServer ? 'inline-block' : 'none'}};" src="/images/wait.gif" />
+            <div class="clearfix"></div>
+            <p ng-bind="ajax_info"></p>
         </div>
 
 

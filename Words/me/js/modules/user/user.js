@@ -22,6 +22,8 @@ define(function (require, exports, module) {
         $scope.pages = [];      // 单词本分页
         $scope.page = 1;
         $scope.size = 8;
+        $scope.isTalkingWithServer = false;  // 是否与服务器通信中
+        $scope.ajax_info = "";
 
         if (user) {
             user.fetch().then(function(user){
@@ -71,6 +73,15 @@ define(function (require, exports, module) {
 
         $scope.sysnc = function () {
             words.sysnc(function () {
+                $scope.$apply(function () {
+                    $scope.listWords(null, null, true);
+                });
+            });
+        };
+
+        $scope.download = function () {
+            this.isTalkingWithServer = true;
+            words.download(function () {
                 $scope.$apply(function () {
                     $scope.listWords(null, null, true);
                 });
