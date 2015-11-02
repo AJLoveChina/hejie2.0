@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/slidesjs/3.0/jquery.slides.min.js"></script>
+<script>
+    $(function(){
+        $("#aj-slides").slidesjs({
+            width: 1920,
+            height: 500,
+            play : {
+                effect: "slide",
+                active: true,
+                auto: true,
+                interval: 3000,
+                swap: true
+            }
+        });
+    });
+</script>
+<style>
+    #aj-slides{
+        position: relative;
+        font-family: "Helvetica","Hiragino Sans GB","Microsoft Yahei",sans-serif;
+    }
+    #aj-slides a{
+        text-decoration: none;
+    }
+    .slidesjs-navigation{
+
+    }
+    .slidesjs-stop,.slidesjs-play{
+        display: none!important;
+    }
+    .slidesjs-previous{
+        left: 20px;
+        position: absolute;
+        top:50%;
+        width:30px;height:30px;
+        margin-top:-15px;
+        border-radius: 50%;
+        font-size: 0;
+        background-color: white;
+        opacity: 0.5;
+        filter:alpha(opacity=50);
+        z-index: 99;
+        line-height: 30px;text-align: center;
+    }
+    .slidesjs-previous:before{
+        content: '<';
+        font-size: 20px;
+    }
+    .slidesjs-next{
+        right:20px;
+        position: absolute;
+        top:50%;
+        width:30px;height:30px;
+        margin-top:-15px;
+        border-radius: 50%;
+        font-size: 0;
+        background-color: white;
+        opacity: 0.5;
+        filter:alpha(opacity=50);
+        z-index: 99;
+        line-height: 30px;text-align: center;
+    }
+    .slidesjs-next:before{
+        content: '>';
+        font-size: 20px;
+    }
+    .slidesjs-pagination{
+        position: absolute;
+        bottom: 20px;right: 20px;
+        list-style: none;
+        z-index: 99;
+    }
+    .slidesjs-pagination a{
+        text-decoration: none;
+        color: #333;
+        display: inline-block;
+        text-align: center;line-height: 18px;
+        width: 100%;height: 100%;
+        font-size: 12px;
+    }
+    .slidesjs-pagination a.active{
+        color: white;
+        background-color: #c20000;
+    }
+    .slidesjs-pagination .slidesjs-pagination-item{
+        float: left;
+        width:18px;height: 18px;
+        border-radius: 50%;
+        background-color: white;
+        text-align: center;
+        margin: 0 5px;
+        overflow: hidden;
+    }
+</style>
+
+
+<div id="aj-slides">
+    <img src="images/1.jpg">
+    <img src="images/2.jpg">
+    <img src="images/3.jpg">
+    <img src="images/4.jpg">
+    <img src="images/5.jpg">
+</div>
+
+</body>
+</html>
