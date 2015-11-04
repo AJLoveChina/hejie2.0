@@ -1,7 +1,7 @@
 /**
  * Created by ajax on 2015/10/24.
  */
-$(function () {
+
     var doc = document,
         win = window,
         body = doc.body,
@@ -11,12 +11,12 @@ $(function () {
 
     function addComponents() {
         if (wrap.length === 0) {
-            var html = ["<style>#aj-hyy-dic-wrap{position:fixed;background-color:white;width:100px;min-height: 50px;padding:5px 10px;box-shadow: #444 0 0 2px;border:1px solid #ccc;}",
+            var html = ["<style>#aj-hyy-dic-wrap{position:fixed;background-color:white;width:200px;min-height: 50px;padding:5px 10px;box-shadow: #444 0 0 2px;border:1px solid #ccc;}",
                 "#aj-hyy-dic-wrap .aj-line{font-size:12px;color:#666;}",
-                "#aj-hyy-dic-wrap .aj-desc{font-weight:bold;}",
+                "#aj-hyy-dic-wrap .aj-desc{font-weight:normal;font-size:12px;}",
+                "#aj-hyy-dic-wrap p{margin:0;line-height:20px;}",
                 "</style>",
                 "<div id='aj-hyy-dic-wrap' class=\"aj-mouse\">",
-                "   <p class='aj-head aj-line'>翻译结果 : </p>",
                 "    <p class=\"aj-desc aj-line\"><span class='key'></span> : <span class='val'></span></p>",
                 "</div>"
             ].join("");
@@ -43,7 +43,7 @@ $(function () {
         pX = event.pageX;
         pY = event.pageY;
         var so = r.startOffset, eo = r.endOffset;
-        if (prevC === r.startContainer && prevO === so) return true
+        if (prevC === r.startContainer && prevO === so) return true;
 
         prevC = r.startContainer;
         prevO = so;
@@ -73,25 +73,29 @@ $(function () {
 
 
         if (word.length >= 1){
-
-            timer = setTimeout(function(){
-                scr_flag = true;
-                var s = window.getSelection();
-                s.removeAllRanges();
-                s.addRange(tr);
-                xx = event.pageX,yy = event.pageY, sx = event.screenX, sy = event.screenY;
-
-//                getYoudaoDict(word,event.pageX,event.pageY,event.screenX,event.screenY);
-                $(win).trigger("aj.ajax", {
-                    'word' : word,
-                    'pos' : {
-                        'x' : xx,
-                        'y' : yy,
-                        'sx' : sx,
-                        'sy' : sy
-                    }
-                });
-            }, 100);
+            if (!timer) {
+                timer = setTimeout(function(){
+                    scr_flag = true;
+                    var s = window.getSelection();
+                    s.removeAllRanges();
+                    s.addRange(tr);
+                    xx = event.pageX,yy = event.pageY, sx = event.screenX, sy = event.screenY;
+                    var ax = event.clientX;
+                    var ay = event.clientY;
+                    $(win).trigger("aj.ajax", {
+                        'word' : word,
+                        'pos' : {
+                            'x' : xx,
+                            'y' : yy,
+                            'sx' : sx,
+                            'sy' : sy,
+                            'ax' : ax,
+                            'ay' : ay
+                        }
+                    });
+                    timer = 0;
+                }, 100);
+            }
         }
     }
 
@@ -99,16 +103,21 @@ $(function () {
     $(win).on("aj.ajax", function (e, params) {
         console.log(params);
         wrap.css({
-            top : params.pos.y + 'px',
-            left : params.pos.x + 'px'
+            top : params.pos.ay + 20 + 'px',
+            left : params.pos.ax + 20 + 'px'
         });
+        wrap.show();
         chrome.runtime.sendMessage(null, {
             action : 'fanyi',
             word : params.word
-        }, null, function (json) {
-            wrap.find(".aj-desc .key").html(json.trans_result[0].src);
-            wrap.find(".aj-desc .val").html(json.trans_result[0].dst);
+        }, null, function (html) {
+            if (html) {
+                wrap.find('.aj-desc').html(html);
+            } else{
+                wrap.find('.aj-desc').html("<p>木有找到翻译~~~~(>_<)~~~~</p>");
+            }
         });
     });
-
-});
+    $(document).on('click', function () {
+        wrap.hide();
+    });
