@@ -14,14 +14,21 @@
         "notifications",
         "activeTab",
         "<all_urls>"
+    ],
+//    "background": {
+//        "scripts": ["", ""],
+//        "persistent": false
+//    },
+//    "background": {
+//        "scripts": ["/js/modules/fanyi/background.js"]
+//    },
+    "content_scripts" : [
+        {
+            "matches": ["http://*/", "https://*/"],
+            "js": [
+                "/js/library/jquery.js",
+                "/js/modules/fanyi/mouse.js"
+            ]
+        }
     ]
-//    "content_scripts" : [
-//        {
-//            "matches": ["http://*/", "https://*/"],
-//            "js": [
-//                "/js/library/jquery.js",
-//                "/js/modules/fanyi/mouse.js"
-//            ]
-//        }
-//    ]
 }

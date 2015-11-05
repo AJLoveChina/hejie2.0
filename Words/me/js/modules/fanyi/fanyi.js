@@ -70,13 +70,16 @@ define(function (require, exports, module) {
     angular.bootstrap(container, ['fanyi']);
 
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+        console.log(message.word);
         if (message.action === "fanyi") {
             $.ajax({
                 url : url + "&q=" + encodeURIComponent(message.word),
-                dataType : 'json',
+                dataType : 'html',
                 async : false,  // 这地方必须同步, 异步content_script 获取不到返回值
-                success : function (json) {
-                    sendResponse(json);
+                success : function (res) {
+                    var xml = $.parseXML(res);
+                    var html = youdao.translateXML(xml)
+                    sendResponse(html);
                 }
             });
         }
