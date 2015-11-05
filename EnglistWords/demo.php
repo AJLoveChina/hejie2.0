@@ -1,29 +1,9 @@
 <?php
 
-class Word {
-	public $w_val, $w_desc, $w_md5;
-	protected  $dbc, $table;
-	function __construct () {
-		$this->dbc = mysql_connect("localhost", 'name', '123');
-		mysql_select_db("test", $this->dbc);
-		$this->table = "words";
-	}
-	public function set($word) {
-		$s_w = trim($word);
-		$this->w_val = $s_w;
-		$this->w_desc = "";
-		$this->w_md5 = md5($s_w);
-	}
-	public function upload() {
-		$query = sprintf("INSERT INTO %s (w_val, w_desc, w_md5) VALUES('%s', '%s', '%s')",
-					$this->table, $this->w_val, $this->w_desc, $this->w_md5);
-		if (mysql_query($query, $this->dbc)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-}
+include("app/words.php");
+use \Ajlovechina\Word;
+
+
 
 class ajReadFile {
 	public $fileName;
@@ -50,6 +30,7 @@ class ajReadFile {
 	}
 }
 
+set_time_limit(0);
 $arf = new ajReadFile();
 $arf->fileName = "words.txt";
 $arf->read();
