@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var stop = false;
+    (function () {
+        var id = 2781;
+        setInterval(function () {
+            if (!stop) {
+                ajax();
+                id ++;
+            }
+        }, 1000 / 10);
+        function ajax () {
+            var xhr = new XMLHttpRequest(),
+                url = "http://localhost:568/meAjax/EnglistWords/query.php?id=" + id;
+            xhr.onreadystatechange = function () {
+                if (xhr.status >= 200 && xhr.readyState === 4) {
+
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+    })();
+</script>
+
+
+
+</body>
+</html>

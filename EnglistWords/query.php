@@ -8,9 +8,14 @@ class Query {
         $w = new Word();
         $w->get(1, 1000);
     }
+    public function queryById ($id) {
+        $s_id = (int)$id;
+        $w = new Word();
+        echo $w->queryById($s_id);
+    }
     public function select () {
         $w = new Word();
-        $rows = $w->select(100, 10);
+        $rows = $w->selectLatest(100);
 //        foreach($rows as $key=>$val) {
 //            echo $val["w_desc"]."<hr>";
 //        }
@@ -21,7 +26,12 @@ class Query {
 
 set_time_limit(0);
 $q = new Query();
-//$q->ajax();
-$q->select();
+if (isset($_GET["id"])) {
+    $q->queryById($_GET['id']);
+} else if (isset($_GET['select'])){
+    //$q->ajax();
+    $q->select();
+}
+
 
 ?>

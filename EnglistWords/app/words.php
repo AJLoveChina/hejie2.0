@@ -58,15 +58,15 @@ class Word
 
         for ($index = 0, $len = count($rows); $index < $len; $index++) {
             $step++;
-//            if ($step === 10) {
-//                $step = 0;
-//                echo "Sleep 2 seconds...";
-//                sleep(2);
-//            }
+            if ($step === 100) {
+                $step = 0;
+                echo "Sleep 10 seconds...";
+                sleep(10);
+            }
             $this->w_id = $rows[$index]['w_id'];
             $this->w_val = $rows[$index]['w_val'];
             $this->w_desc = mysql_real_escape_string($this->ajax());
-            echo $this->w_desc . "<br>";
+            echo $this->w_val . "<br>";
             $this->save();
         }
     }
@@ -75,6 +75,22 @@ class Word
      * @param $begin
      * @param $num
      */
+    public function queryById($id) {
+        $query = sprintf("SELECT w_id, w_val, w_desc, w_md5, w_date_entered
+                FROM %s WHERE w_id = %d AND w_desc = '' LIMIT 1", $this->table, $id);
+        $results = mysql_query($query, $this->dbc);
+        if ($results AND mysql_num_rows($results) > 0) {
+
+            $row = mysql_fetch_array($results);
+            $this->w_id = $row['w_id'];
+            $this->w_val = $row['w_val'];
+            $this->w_desc = mysql_real_escape_string($this->ajax());
+            $this->save();
+            return $this->w_desc;
+        } else {
+            return "This word has w_desc.";
+        }
+    }
     public function select ($begin, $num) {
         $query = sprintf("SELECT w_id, w_val, w_desc, w_md5, w_date_entered
                 FROM %s WHERE w_id >= %d LIMIT %d", $this->table, $begin, $num);
@@ -83,6 +99,22 @@ class Word
         if ($results) {
             while ($row = mysql_fetch_array($results)) {
                 array_push($rows, [
+                    "w_val" => $row["w_val"],
+                    "w_desc" => base64_encode($row["w_desc"])
+                ]);
+            }
+        }
+        return $rows;
+    }
+    public function selectLatest($num) {
+        $query = sprintf("SELECT w_id, w_val, w_desc, w_md5, w_date_entered
+                FROM %s WHERE w_desc != '' ORDER BY w_id DESC LIMIT %d", $this->table, $num);
+        $results = mysql_query($query, $this->dbc);
+        $rows = [];
+        if ($results) {
+            while ($row = mysql_fetch_array($results)) {
+                array_push($rows, [
+                    "w_id" => $row["w_id"],
                     "w_val" => $row["w_val"],
                     "w_desc" => base64_encode($row["w_desc"])
                 ]);
