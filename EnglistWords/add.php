@@ -31,9 +31,11 @@ class ajReadFile {
 }
 
 set_time_limit(0);
-$arf = new ajReadFile();
-$arf->fileName = "words.txt";
-$arf->read();
+if (isset($_GET["add"])) {
+	$arf = new ajReadFile();
+	$arf->fileName = "words.txt";
+	$arf->read();
+}
 
 
 ?>

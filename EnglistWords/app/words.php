@@ -5,6 +5,7 @@ class Word
 {
     public $w_id, $w_val, $w_desc, $w_md5;
     protected $dbc, $table;
+    protected  $selectQuery = "SELECT w_id, w_val, w_desc, w_md5, w_date_entered";
     public $url = "http://dict.youdao.com/fsearch?client=deskdict&keyfrom=chrome.extension&pos=-1&doctype=xml&xmlVersion=3.2&dogVersion=1.0&vendor=unknown&appVer=3.1.17.4208&le=eng&q=";
 
     function __construct()
@@ -71,6 +72,17 @@ class Word
         }
     }
 
+    public function getById($id) {
+        $query = sprintf("%s FROM %s WHERE w_id = %d LIMIT 1",
+            $this->selectQuery, $this->table, (int)$id);
+        $result = mysql_query($query, $this->dbc);
+        if ($result AND mysql_num_rows($result) > 0) {
+            $row = mysql_fetch_array($result);
+        } else {
+            $row = null;
+        }
+        return $row;
+    }
     /**
      * @param $begin
      * @param $num

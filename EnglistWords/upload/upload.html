@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="../js/parse.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    Parse.initialize("ghPOvDWOhUQQuyjFkqjBJH9V4Dm4NLweSRYwwt0X", "z7Uon26Prq4SpPz3N5DPx3l8CnKeKvHucRXH0xY9");
+</script>
+
+
+<script>
+    $(function () {
+        if (location.href.indexOf("upload") !== -1) {
+            upload();
+        }
+        function upload () {
+            var id = 30;
+            setInterval(function () {
+                ajax();
+                id ++;
+            }, 1000 / 10);
+            setInterval(function () {
+                console.clear();
+            }, 10 * 1000);
+            ajax();
+            function ajax() {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300)) {
+                        var json = $.parseJSON(xhr.responseText);
+                        if (json) {
+                            var Dict = Parse.Object.extend("dict");
+                            var acl = new Parse.ACL();
+                            acl.setPublicReadAccess(true);
+                            var dict = new Dict();
+                            dict.setACL(acl);
+                            dict.save({
+                                "w_id" : json["w_id"],
+                                "w_val" : json["w_val"],
+                                "w_desc" : json["w_desc"],
+                                "w_md5" : json["w_md5"]
+                            }, {
+                                success : function (dic) {
+                                    console.log(dic.id);
+                                    Dict = null;
+                                    dict = null;
+                                    acl = null;
+                                    dic = null;
+                                },
+                                error : function (err) {
+                                    console.log("error" + err.message);
+                                    Dict = null;
+                                    dict = null;
+                                    acl = null;
+                                    err = null;
+                                }
+                            });
+                        }
+                    }
+                };
+                xhr.open("GET", "upload.php?id=" + id, true);
+                xhr.send();
+            }
+        }
+    });
+</script>
+</body>
+</html>
