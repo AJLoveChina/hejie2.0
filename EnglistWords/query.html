@@ -9,23 +9,32 @@
 <script type="text/javascript">
     var stop = false;
     (function () {
-        var id = 2781;
-        setInterval(function () {
-            if (!stop) {
-                ajax();
-                id ++;
-            }
-        }, 1000 / 10);
-        function ajax () {
-            var xhr = new XMLHttpRequest(),
-                url = "http://localhost:568/meAjax/EnglistWords/query.php?id=" + id;
-            xhr.onreadystatechange = function () {
-                if (xhr.status >= 200 && xhr.readyState === 4) {
+        if (location.href.indexOf('begin') !== -1) {
+            begin();
+        }
 
+        function begin() {
+            var id = 158185;
+            setInterval(function () {
+                if (!stop) {
+                    ajax();
+                    id ++;
                 }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
+            }, 1000 / 24);
+            setInterval(function () {
+                console.clear();
+            }, 1000 * 10);
+            function ajax () {
+                var xhr = new XMLHttpRequest(),
+                        url = "http://localhost:568/meAjax/EnglistWords/query.php?id=" + id;
+                xhr.onreadystatechange = function () {
+                    if (xhr.status >= 200 && xhr.readyState === 4) {
+
+                    }
+                };
+                xhr.open("GET", url, true);
+                xhr.send();
+            }
         }
     })();
 </script>
