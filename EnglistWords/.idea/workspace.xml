@@ -25,7 +25,7 @@
       <file leaf-file-name="query.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.5625">
+            <state vertical-scroll-proportion="0.0">
               <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
               <folding />
             </state>
@@ -35,7 +35,7 @@
       <file leaf-file-name="upload.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/upload/upload.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.6875">
+            <state vertical-scroll-proportion="0.0">
               <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding />
             </state>
@@ -45,8 +45,8 @@
       <file leaf-file-name="upload.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/upload/upload.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3285968">
-              <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+            <state vertical-scroll-proportion="-0.040852576">
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -55,7 +55,7 @@
       <file leaf-file-name="words.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/words.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.46875">
+            <state vertical-scroll-proportion="0.0">
               <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
               <folding>
                 <element signature="e#388#563#0#PHP" expanded="false" />
@@ -145,8 +145,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="PhpXdebugProxy" ide_key="PHPSTORM" host="localhost" port="80" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="45" />
-    <option name="y" value="14" />
+    <option name="x" value="149" />
+    <option name="y" value="10" />
     <option name="width" value="1132" />
     <option name="height" value="714" />
   </component>
@@ -204,7 +204,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -268,6 +267,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -275,7 +275,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../workAtQmm/m44_optimize" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FullScreen" value="false" />
@@ -316,6 +316,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <configuration default="false" name="words" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="local" start_url="/Github/meAjax/EnglistWords/query.php">
@@ -339,10 +345,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="14" width="1132" height="714" extended-state="1" />
+    <frame x="149" y="10" width="1132" height="714" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18548387" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19444445" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -381,6 +387,154 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload/upload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload/upload.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/words.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+          <folding>
+            <element signature="e#388#563#0#PHP" expanded="false" />
+            <element signature="e#569#726#0#PHP" expanded="false" />
+            <element signature="e#732#1054#0#PHP" expanded="false" />
+            <element signature="e#780#922#0#PHP" expanded="false" />
+            <element signature="e#932#1048#0#PHP" expanded="false" />
+            <element signature="e#1006#1048#0#PHP" expanded="false" />
+            <element signature="e#1060#1258#0#PHP" expanded="false" />
+            <element signature="e#1159#1252#0#PHP" expanded="false" />
+            <element signature="e#1208#1252#0#PHP" expanded="false" />
+            <element signature="e#1264#2205#0#PHP" expanded="false" />
+            <element signature="e#1340#1494#0#PHP" expanded="false" />
+            <element signature="e#1576#1713#0#PHP" expanded="false" />
+            <element signature="e#1604#1703#0#PHP" expanded="false" />
+            <element signature="e#1723#2199#0#PHP" expanded="false" />
+            <element signature="e#1821#1953#0#PHP" expanded="false" />
+            <element signature="e#2598#2649#0#PHP" expanded="false" />
+            <element signature="e#2654#3295#0#PHP" expanded="false" />
+            <element signature="e#2704#2847#0#PHP" expanded="false" />
+            <element signature="e#2909#3289#0#PHP" expanded="false" />
+            <element signature="e#3229#3289#0#PHP" expanded="false" />
+            <element signature="e#3300#3865#0#PHP" expanded="false" />
+            <element signature="e#3357#3495#0#PHP" expanded="false" />
+            <element signature="e#3577#3837#0#PHP" expanded="false" />
+            <element signature="e#3605#3827#0#PHP" expanded="false" />
+            <element signature="e#3666#3812#0#PHP" expanded="false" />
+            <element signature="e#3684#3811#0#PHP" expanded="false" />
+            <element signature="e#3870#4489#0#PHP" expanded="false" />
+            <element signature="e#3924#4075#0#PHP" expanded="false" />
+            <element signature="e#4157#4461#0#PHP" expanded="false" />
+            <element signature="e#4185#4451#0#PHP" expanded="false" />
+            <element signature="e#4246#4436#0#PHP" expanded="false" />
+            <element signature="e#4264#4435#0#PHP" expanded="false" />
+            <element signature="e#4494#4788#0#PHP" expanded="false" />
+            <element signature="e#4540#4656#0#PHP" expanded="false" />
+            <element signature="e#4666#4782#0#PHP" expanded="false" />
+            <element signature="e#4740#4782#0#PHP" expanded="false" />
+            <marker date="1446901134899" expanded="false" signature="789:851" placeholder="INSERT INTO ..." />
+            <marker date="1446901134899" expanded="false" signature="1349:1464" placeholder="SELECT w_id,..." />
+            <marker date="1446901134899" expanded="false" signature="2713:2826" placeholder="SELECT w_id,..." />
+            <marker date="1446901134899" expanded="false" signature="3366:3465" placeholder="SELECT w_id,..." />
+            <marker date="1446901134899" expanded="false" signature="3933:4053" placeholder="SELECT w_id,..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload/upload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/upload/upload.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/words.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+          <folding>
+            <element signature="e#388#563#0#PHP" expanded="false" />
+            <element signature="e#569#726#0#PHP" expanded="false" />
+            <element signature="e#732#1054#0#PHP" expanded="false" />
+            <element signature="e#780#922#0#PHP" expanded="false" />
+            <element signature="e#932#1048#0#PHP" expanded="false" />
+            <element signature="e#1006#1048#0#PHP" expanded="false" />
+            <element signature="e#1060#1258#0#PHP" expanded="false" />
+            <element signature="e#1159#1252#0#PHP" expanded="false" />
+            <element signature="e#1208#1252#0#PHP" expanded="false" />
+            <element signature="e#1264#2205#0#PHP" expanded="false" />
+            <element signature="e#1340#1494#0#PHP" expanded="false" />
+            <element signature="e#1576#1713#0#PHP" expanded="false" />
+            <element signature="e#1604#1703#0#PHP" expanded="false" />
+            <element signature="e#1723#2199#0#PHP" expanded="false" />
+            <element signature="e#1821#1953#0#PHP" expanded="false" />
+            <element signature="e#2598#2649#0#PHP" expanded="false" />
+            <element signature="e#2654#3295#0#PHP" expanded="false" />
+            <element signature="e#2704#2847#0#PHP" expanded="false" />
+            <element signature="e#2909#3289#0#PHP" expanded="false" />
+            <element signature="e#3229#3289#0#PHP" expanded="false" />
+            <element signature="e#3300#3865#0#PHP" expanded="false" />
+            <element signature="e#3357#3495#0#PHP" expanded="false" />
+            <element signature="e#3577#3837#0#PHP" expanded="false" />
+            <element signature="e#3605#3827#0#PHP" expanded="false" />
+            <element signature="e#3666#3812#0#PHP" expanded="false" />
+            <element signature="e#3684#3811#0#PHP" expanded="false" />
+            <element signature="e#3870#4489#0#PHP" expanded="false" />
+            <element signature="e#3924#4075#0#PHP" expanded="false" />
+            <element signature="e#4157#4461#0#PHP" expanded="false" />
+            <element signature="e#4185#4451#0#PHP" expanded="false" />
+            <element signature="e#4246#4436#0#PHP" expanded="false" />
+            <element signature="e#4264#4435#0#PHP" expanded="false" />
+            <element signature="e#4494#4788#0#PHP" expanded="false" />
+            <element signature="e#4540#4656#0#PHP" expanded="false" />
+            <element signature="e#4666#4782#0#PHP" expanded="false" />
+            <element signature="e#4740#4782#0#PHP" expanded="false" />
+            <marker date="1446901134899" expanded="false" signature="789:851" placeholder="INSERT INTO ..." />
+            <marker date="1446901134899" expanded="false" signature="1349:1464" placeholder="SELECT w_id,..." />
+            <marker date="1446901134899" expanded="false" signature="2713:2826" placeholder="SELECT w_id,..." />
+            <marker date="1446901134899" expanded="false" signature="3366:3465" placeholder="SELECT w_id,..." />
+            <marker date="1446901134899" expanded="false" signature="3933:4053" placeholder="SELECT w_id,..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/query.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -443,7 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -509,7 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -575,7 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,7 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3886793">
           <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -935,7 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.043071162">
           <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -943,13 +1092,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/query.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.5625">
+        <state vertical-scroll-proportion="0.0">
           <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
           <folding />
         </state>
@@ -973,7 +1121,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/words.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.46875">
+        <state vertical-scroll-proportion="0.0">
           <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
           <folding>
             <element signature="e#388#563#0#PHP" expanded="false" />
@@ -1023,7 +1171,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/upload/upload.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.6875">
+        <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
@@ -1031,8 +1179,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/upload/upload.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3285968">
-          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+        <state vertical-scroll-proportion="-0.040852576">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
           <folding />
         </state>
       </provider>

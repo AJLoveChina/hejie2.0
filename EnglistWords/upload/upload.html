@@ -14,15 +14,15 @@
 
 <script>
     $(function () {
-        if (location.href.indexOf("upload") !== -1) {
+        if (location.href.indexOf("upload=1") !== -1) {
             upload();
         }
         function upload () {
-            var id = 30;
+            var id = 228934;
             setInterval(function () {
                 ajax();
                 id ++;
-            }, 1000 / 10);
+            }, 1000 / 24);
             setInterval(function () {
                 console.clear();
             }, 10 * 1000);
