@@ -22,8 +22,8 @@
     <favorites_list name="packages" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="519" />
-    <option name="y" value="153" />
+    <option name="x" value="467" />
+    <option name="y" value="223" />
     <option name="width" value="1267" />
     <option name="height" value="727" />
   </component>
@@ -81,7 +81,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="options.lastSelected" value="JavaScript.Libraries" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -124,7 +124,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="519" y="153" width="1267" height="727" extended-state="0" />
+    <frame x="467" y="223" width="1267" height="727" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
