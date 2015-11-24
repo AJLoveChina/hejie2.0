@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "hanoi.js",
+  "sourceRoot": "",
+  "sources": [
+    "hanoi.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;;AAAA"
+}
