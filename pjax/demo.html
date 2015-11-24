@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- styles, scripts, etc -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery-pjax/jquery.pjax.js"></script>
+</head>
+<body>
+<h1>My Site</h1>
+<div class="container" id="pjax-container">
+    Go to <a data-pjax href="pages/2.html">next page</a>.
+</div>
+
+
+<script>
+    $(function () {
+        //$(document).pjax('a', '#pjax-container')
+
+        $(document).pjax('[data-pjax] a, a[data-pjax]', '#pjax-container')
+    });
+</script>
+</body>
+</html>
