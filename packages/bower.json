@@ -1,0 +1,24 @@
+{
+  "name": "ajlovechina",
+  "homepage": "https://github.com/AJLoveChina/meAjax",
+  "authors": [
+    "AJ <735267452@qq.com>"
+  ],
+  "description": "Web pacpac",
+  "main": "",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.8",
+    "jquery": "~2.1.4",
+    "less": "~2.5.3",
+    "seajs": "~3.0.0",
+    "markdown": "~0.5.0"
+  }
+}
