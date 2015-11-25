@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+*:focus {
+  outline: none;
+}
+h2,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+body {
+  background-color: #fff;
+  font: 12px Simsun;
+  margin: 0;
+  padding: 0;
+  width: 390px;
+}
+header {
+  height: 44px;
+  vertical-align: middle;
+  padding:0 5px 0 10px;
+  background-color: #f6f7f9;
+  border-bottom: 1px solid #e8991f;
+}
+header .logo {
+  float: left;
+  width: 135px;
+  height: 28px;
+  background-position: -40px 0;
+  margin-top: 8px;
+}
+header #search {
+    margin-top: 6px;
+    float: right;
+}
+#search .text {
+    box-sizing: border-box;
+    height: 30px;
+    padding-left: 5px;
+    border: solid 1px #CCC;
+    border-right: none;
+    font-size: 12px;
+    color: #cbcbcb;
+}
+#search .search-btn {
+    width: 30px;
+    height: 30px;
+    vertical-align: top;
+    border: none;
+    cursor: pointer;
+    background: url(../images/icon.png) -199px -110px;
+}
+#feeds-wrapper {
+    border-top: 1px solid #e8991f;
+}
+
+a {
+    color: #333;
+}
+a:hover {
+    color: #c03;
+}
+footer a {
+    display: inline-block;
+}
+
+
+.update-count {
+    float: left;
+    margin-left: 10px;
+}
+
+
+#feeds-wrapper .feeds-hd {
+    height: 16px;
+    text-align: center;
+    border-bottom: 1px solid #dfdfdf;
+    padding-top: 7px;
+    padding-bottom: 4px;
+} 
+
+#feeds-wrapper .feeds-hd a {
+    font-size: 12px;
+    color: #999;
+}
+#feeds-wrapper .feeds-hd .order-detailshowLink {
+    float: right;
+    margin-right: 3px;
+    margin-left: 7px;
+    color: blue;
+}
+.feeds-hd .update-tips {
+    display: inline-block;
+    width: 15px;
+    height: 14px;
+    background-position: -80px -120px;
+    vertical-align: text-top;
+    margin-right: -2px;
+}
+.update-count > span {
+    display: inline-block;
+    margin: 0 4px;
+    color: #fd8712;
+    font-weight: bolder;
+}
+
+#feeds-wrapper ul {
+    max-height: 411px;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+::-webkit-scrollbar-thumb {
+    background: #cdcdcd;
+}
+
+#feeds-wrapper li {
+    margin-right: 6px;
+    border-bottom: 1px dashed #dfdfdf;
+    padding: 15px 0 10px 15px;
+    min-height: 77px;
+}
+#feeds-wrapper li:hover {
+    background-color: #f9f9f9;
+}
+
+#feeds-wrapper li:last-child {
+    border-bottom: 1px solid #fff;
+}
+
+#feeds-wrapper .content-detail p,
+#feeds-wrapper .content-detail div{
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+#feeds-wrapper .image-wrapper {
+    float: left;
+    font-size: 0;
+}
+
+#feeds-wrapper .image-wrapper a {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 74px;
+    height: 69px;
+}
+
+#feeds-wrapper .image-wrapper img {
+    max-height: 59px;
+    max-width: 74px;
+    padding: 3px;
+}
+
+#feeds-wrapper .content-wrapper {
+    overflow: hidden;
+    margin-left: 90px;
+    min-height: 60px;
+    max-height: 66px;
+}
+
+#feeds-wrapper .infront .content-wrapper {
+    max-height: 72px;
+}
+
+.content-wrapper .content-title {
+    display: block;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: bolder;
+    color: #333;
+    line-height: 14px;
+    padding-top: 4px;
+    max-height: 33px;
+    margin-bottom: 10px;
+}
+
+.infront .content-title:before {
+    content: "";
+    display: inline-block;
+    background: url(../images/icon.png) -492px 0 no-repeat;
+    width: 31px;
+    height: 17px;
+}
+.infront .content-title:after {
+    content: "";
+    display: inline-block;
+    background: url(../images/icon.png) -172px -120px no-repeat;
+    width: 9px;
+    height: 11px;
+}
+
+.content-wrapper .content-title:hover {
+    color: #c03;
+}
+.content-wrapper .content-detail {
+    color: #fa8200;
+    overflow: hidden;
+    line-height: 13px;
+    max-height: 44px;
+}
+footer {
+    background-color: #fff;
+    border-top: 1px solid #dfdfdf;
+    height: 33px;
+    padding: 5px;
+    line-height: 35px;
+}
+footer .tips-wrapper{
+    width: 22px;
+    padding: 7px 2px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #f7f7f7;
+    border-radius: 4px 0 0 0;
+}
+footer .app-promote {
+    border-right: 1px solid #dfdfdf;
+    color: #fa8200;
+    width: 50%;
+}
+.see-more {
+    width: 45%;
+}
+.app-promote,
+.see-more {
+    color: #999;
+    text-align: center;
+    font-size: 12px;
+}
+
+.app-promote b,
+.order-detailshowLink b ,
+.see-more b {
+    display: inline-block;
+    background-position: -117px -118px;
+    width: 12px;
+    height: 12px;
+    vertical-align: text-bottom;
+}
+
+.entry-myzhushou b{
+    display: inline-block;
+    width: 14px;
+    height: 13px;
+    background-position: -152px -120px;
+    vertical-align: text-bottom;
+}
+
+.app-promote b{
+    background-position: -132px -118px;
+}
+.app-promote:hover,
+.see-more:hover {
+    color: #c03;
+    text-decoration: underline;
+}
+.setting {
+    color: #333;
+    font-size: 13px;
+    vertical-align: top;
+    text-indent: -9999px;
+    background-position: 0 -170px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #c3c3c3;
+}
+.setting:hover {
+    background-position: -24px -171px;
+}
+
+.feedback , .setting {
+    display: block;
+    margin-left: 5px;
+    vertical-align: text-bottom;
+    width: 12px;
+    height: 12px;
+}
+.feedback {
+    vertical-align: top;
+    text-indent: -999px;
+    font-size: 13px;
+    margin-top: 5px;
+    background-position: -45px -170px;
+}
+.order-detail {
+    display: none;
+}
+.notify-setting {
+    float: right;
+    margin-right: -1px;
+    border-right: 1px solid #999;
+    padding-right: 6px;
+}
+#feeds-wrapper .feeds-hd .entry-myzhushou {
+    float: right;
+    margin-right: 3px;
+    margin-left: 7px;
+    color: blue;
+}
+
+#notify-setting.notify-setting:hover {
+    color: blue;
+}
+.order-detailshowLink {
+
+}
+.feeds-hd .showLink {
+    display: inline;
+}
+.feedback:hover {
+    background-position: -69px -171px;
+}
+
+.feeds-hd .update-tips,
+.setting ,
+header .logo,
+.order-detailshowLink b ,
+.entry-myzhushou b,
+.see-more b ,
+.app-promote b,
+.feedback {
+  background-image: url(../images/icon.png);
+  background-repeat: no-repeat;
+}
+
+#feeds-wrapper .banner-item {
+    border-bottom: none;
+    padding-bottom: 0;
+    min-height: 60px;
+}

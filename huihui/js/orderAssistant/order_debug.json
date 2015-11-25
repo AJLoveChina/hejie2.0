@@ -1,0 +1,17 @@
+{
+    "siteName":"DEBUG",
+    "orderId":"400772382605918",
+    "orderKey":"order:DEBUG:400772382605918",
+    "trackUrl":"http://wuliu.taobao.com/user/order_detail_new.htm?&trade_id=400772382605918&seller_id=836425353",
+    "trackOtherInfo": {
+        "tradeId":"400772382605918",
+        "sellerId":"836425353"
+    },
+    "detailLink":"http://trade.taobao.com/trade/detail/trade_item_detail.htm?bizOrderId=400772382605918",
+    "logisticsStatus":"NEW",
+    "orderStatus":"交易关闭",
+    "baobeiInfo":[{
+        "imgSrc":"http://img03.taobaocdn.com/bao/uploaded/i3/15353018790540524/T1qwguXhxcXXXXXXXX_!!0-item_pic.jpg_sum.jpg ",
+        "title":" 正品 Supor苏泊尔银悦系列厨房定时器计时器蛋形提醒器KG07A1包邮","spec":" "
+    }]
+}

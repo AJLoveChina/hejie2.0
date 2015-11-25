@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="购物助手,网购,比价" />
+    <meta name="description" content="惠惠购物助手，一站购物，多站比价。你的网购秘密武器。自动显示网上各大商城报价。轻松找到最低价。网易有道出品。" />
+    <title>惠惠购物助手 | 聪明网购不吃亏</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/orderDetail.css"></head>
+<body>
+    <div id="topbar">
+        <div class="boxwrap">
+            <ul class="topnav clearfix">
+                <li>
+                    <a href="http://www.huihui.cn" title="惠惠首页"  target="_blank">惠惠首页</a>
+                </li>
+                <li>
+                    <a href="http://www.huihui.cn/ihome" title="我的关注"  target="_blank">我的关注</a>
+                </li>
+                <li>
+                    <a href="http://www.huihui.cn/guide/series" title="购物锦囊"  target="_blank">购物锦囊</a>
+                </li>
+                <li>
+                    <a href="http://www.huihui.cn/mall" title="购物返现"  target="_blank">购物返现</a>
+                </li>
+                <li>
+                    <a href="http://zhushou.huihui.cn" title="购物助手"  target="_blank">购物助手</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="header">
+        <div class="boxwrap">
+            <h1 class="logo">
+                <a href="http://zhushou.huihui.cn"  target="_blank">惠惠购物助手</a>
+            </h1>
+            <p class="desp"></p>
+        </div>
+    </div>
+    <div class="boxwrap">
+        <div class="order-header">
+            <h1 class="title-ordertrack"></h1>
+            <p class="privacy-statement">
+                <i class="privacy-tips"></i>
+                隐私声明：助手没有获取您的账号和密码信息，绝不涉及用户隐私问题。<a href="http://zhushou.huihui.cn/help" target="_blank">更多详情》</a></p>
+        </div>
+        <div id="order-notice">
+        </div>
+        <div id="order-info">
+            <div class="ordertrack-setting">
+                <a href="options.html" target="_blank"
+                    log-action="CHROME_ORDER_TO_SETTING_CLICK">
+                    设置物流提醒>>
+                </a>
+            </div>
+            <div id="order-detail">
+            </div>
+        </div>
+  </div>
+
+    <div id="footer">
+        <p>
+            <a href="http://www.huihui.cn/intro/about" target="_blank">关于我们</a>
+            <span class="sp">|</span>
+            <a href="http://fanxian163.blog.163.com" target="_blank">官方博客</a>
+            <span class="sp">|</span>
+            <a href="http://www.huihui.cn/intro/cooperation" target="_blank">商务合作</a>
+            <span class="sp">|</span>
+            <a href="http://www.huihui.cn/intro/links" target="_blank">友情链接</a>
+            <span class="sp">|</span>
+            <a href="http://zhushou.huihui.cn/help" target="_blank">帮助</a>
+        </p>
+        <p class="copyr">&copy; 2012 网易公司 京ICP证080268号 京ICP备12032105号-1</p>
+    </div>
+
+    <div class="order-checkbox -checkbox">
+        <div class="hd">
+        </div>
+        <div class="bd">
+            <span class="btn-close -close" log-action="CHROME_ORDER_DEL_CLOSE_CLICK">×</span>
+            <h3>您是否确定删除该订单？</h3>
+            <p>删除后将不再跟踪该订单状态。</p>
+        </div>
+        <div class="ft">
+            <a class="btn-submit -submit" href="#submit" data-orderkey="" 
+                log-action="CHROME_ORDER_DEL_SUBMIT_CLICK">确定</a>
+            <a class="btn-cancel -cancel" href="#cancel" 
+                log-action="CHROME_ORDER_DEL_CANCEL_CLICK">取消</a>
+        </div>
+    </div>
+    <script type="text/template" id="orderInvalid">
+            <%=inValidOrder%>个检测失效的订单，
+    </script>
+    <script type="text/template" id="orderNotice">
+        <div class="order-notice">
+            <p>物流提醒功能可自动跟踪多家商城的订单物流信息，并第一时间提醒您</p>
+            <%=newOrderStatusHtml%>
+            <p><%=orderInvalidHtml%>去登录可获取该帐号下最新的订单物流信息，并开始跟踪新订单。</p>
+        </div>
+    </script>
+    <script type="text/template" id="newOrderStatusTmpl">
+        <p><a class="state-lh" href="#">您有<%=newStatusNum%>条新订单状态提醒。</a></p>
+    </script>
+    <script type="text/template" id="orderStaticsTmpl">
+        <p class="state-lh" >您目前有<%=validOrderNum%>个待收货订单：
+            <%=submitOrderNumHtml%>
+            <%=deliverOrderNumHtml%>
+            <%=runningOrderNumHtml%>
+        </p>
+    </script>
+    <script type="text/template" id="submitOrderNumTmpl">
+        <%=submitOrderNum%>个提交订单 
+    </script>
+    <script type="text/template" id="deliverOrderNumTmpl">
+        <%=deliverOrderNum%>个已发货
+    </script>
+    <script type="text/template" id="runningOrderNumTmpl">
+        <%=runningOrderNum%>个运送中
+    </script>
+    <script type="text/template" id="baobeiItemTmpl">
+        <a href="<%=baobeiItem.href%>" class="img-box" target="_blank"
+            log-action="CHROME_ORDER_IMG_CLICK">
+            <img title="<%=baobeiItem.title%>" src="<%=baobeiItem.imgSrc%>" width="50" height="50">
+        </a>
+    </script>
+
+    <script type="text/template" id="logisticsItemTmpl">
+        <li>
+            <span class="order-date"><%=logisticsItem.time%></span>
+            <span class="order-context" title="<%=logisticsItem.context%>"><%=logisticsItem.context%></span>
+        </li>
+    </script>
+    <script type="text/template" id="orderStateCurrentStatusTmpl">
+        <div class="order-state state-2">
+            当前状态：<%=orderNewestFlow.text%>
+        </div>
+    </script>
+    <script type="text/template" id="orderStateNewStatusTmpl">
+        <div class="order-state state-1">
+            有新物流状态更新
+        </div>
+    </script>
+    <script type="text/template" id="orderWrapperTmpl">
+        <div class="hd clearfix">
+            <a class="btn-delorder -cancelOrder" href="#deleteOrder" 
+                log-action="CHROME_ORDER_DEL_CLICK"
+                data-orderkey="<%=orderItem.orderKey%>">删除订单跟踪</a>
+            包裹<%=index%>　　<%=trackCompany%>　　　运单号:<%=trackId%>
+        </div>
+        <div class="bd clearfix">
+            <div class="order-thumb-cont">
+                <div class="img-list clearfix">
+                    <%=baobeiHtml%>
+                </div>
+                <%=orderStateHtml%>
+            </div>
+            <div class="order-follow-cont -follow-cont">
+                <div class="order-state-flow">
+                    <div class="hd-flow flow-<%=newestFlow.id%>">
+                        <%=orderFlowTimeHtml%>
+                   </div>
+                    <div class="order-state-words -state-words">
+                        <span class="point point-1"
+                            log-hover-action="CHROME_ORDER_STATE_1_HOVER"
+                            data-flownum="1"></span>
+                        <span class="point point-2"
+                            log-hover-action="CHROME_ORDER_STATE_2_HOVER"
+                            data-flownum="2"></span>
+                        <span class="point point-3"
+                            log-hover-action="CHROME_ORDER_STATE_3_HOVER"
+                            data-flownum="3"></span>
+                        <span class="point point-4"
+                            log-hover-action="CHROME_ORDER_STATE_4_HOVER"
+                            data-flownum="4"></span>
+                        <span class="words-1"
+                            log-hover-action="CHROME_ORDER_STATE_1_HOVER"
+                            data-flownum="1">提交订单</span>
+                        <span class="words-2" 
+                            log-hover-action="CHROME_ORDER_STATE_2_HOVER"
+                            data-flownum="2">已发货</span>
+                        <span class="words-3" 
+                            log-hover-action="CHROME_ORDER_STATE_3_HOVER"
+                            data-flownum="3">运送中</span>
+                        <span class="words-4" 
+                            log-hover-action="CHROME_ORDER_STATE_4_HOVER"
+                            data-flownum="4">已签收</span>
+                    </div>
+                </div>
+                <ul class="order-tracklist">
+                    <%=logisticsHtml%>
+                </ul>
+           </div>
+            <div class="ft">
+                <a class="btn-goshop" href="<%=trackUrl%>"
+                    log-action="CHROME_ORDER_SITE_DETAIL_CLICK"
+                    target="_blank">去商城看物流详情 &gt;&gt;</a>
+            </div>
+       </div>
+    </script>
+    <script type="text/template" id="orderFlowTimeTmpl">
+        <div class="order-state-time time-<%=orderFlowNum%>" data-statenum="<%=orderFlowNum%>">
+            <%=time%>
+            <div class="order-state-arrow"> <em></em>
+                <span></span>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="loginWithNoRunningTmpl">
+        <div class="hd clearfix">
+            无在送包裹
+        </div>
+        <div class="bd clearfix">
+            <div class="order-state-notice">
+                <div class="order-state state-2">已登录，您的登录账号下无在送订单</div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="notLoginWithNoRunningTmpl">
+        <div class="hd clearfix">
+            无在送包裹
+        </div>
+        <div class="bd clearfix">
+            <div class="order-state-notice">
+                <div class="order-state state-3">未检测到在送订单，点击登录可跟踪订单物流状态</div>
+                <a class="btn-login" href="<%=loginUrl%>" target="_blank" 
+                    log-action="CHROME_ORDER_LOGIN_CLICK">马上登录</a>
+            </div>
+        </div>
+    </script>
+ 
+    <script type="text/template" id="notLoginWithRunningTmpl">
+        <div class="hd clearfix">
+        </div>
+        <div class="bd clearfix">
+            <div class="order-state-notice">
+                <div class="order-state state-3"><%=runningOrderNum%>个在送订单，登录以更新订单物流状态</div>
+                <a class="btn-login" href="<%=loginUrl%>"  target="_blank" 
+                    log-action="CHROME_ORDER_LOGIN_CLICK">马上登录</a>
+            </div>
+        </div>
+    </script>
+   <script type="text/template" id="siteItemWrapperTmpl">
+        <div class="order-detail clearfix">
+            <div class="shop-cont">
+                <div class="hd"><%=siteConf.cnName%></div>
+                <%=newMessageHtml%>
+            </div>
+            <div class="order-cont">
+                <div class="order-tracking-list">
+                    <%=orderItemsHtml%>
+               </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="newMessageTmpl">
+        <div class="bd">
+            <a class="new-message" href="#"  target="_blank"><%=newStatusNum%>条新物流状态</a>
+        </div>
+    </script>
+    <script type="text/template" id="morePicTmpl">
+        <div class="more-image-box">
+            <img src="images/more_pic.png" 
+                 alt="更多<%=morePicNum%>件" />
+            <span>更多<%=morePicNum%>件</span>
+        </div>
+    </script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/zepto.js"></script>
+    <script type="text/javascript" src='js/log.js'></script>
+    <script type="text/javascript" src='js/orderAssistant/util.js'></script>
+    <script type="text/javascript" src='js/tmpl.js'></script>
+    <script type="text/javascript" src='js/orderDetail.js'></script>
+</body>
+</html>
+

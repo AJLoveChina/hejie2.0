@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/popup.css">
+    <script type="text/javascript" src="lib/underscore.js"></script>
+</head>
+<body>
+<header>
+    <a href='http://www.huihui.cn/?keyfrom=zhushou_ico' log-action="ICO_LOGO_CLICK" target='_blank'><h2 class="logo"></h2></a>
+    <form id='search' action="http://www.huihui.cn/search" target="_blank">
+        <input class="text" name="q" type="text" placeholder='请输入想查找的商品' value="" autocomplete="off" role="textbox" aria-autocomplete="list" /><input type="hidden" name="keyfrom" value="chromepopup" /><input class="search-btn" type="submit" value="" hidefocus="true" log-action="CHROMEPOPUP_SEARCH_CLICK" />
+    </form>
+</header>
+
+<div id="feeds-wrapper">
+</div>
+
+<script type="text/template" id="feedsHd">
+    <div class="feeds-hd">
+        <a class='update-count' target='_blank' href='http://www.huihui.cn/?keyfrom=chromepopup' log-action="ICO_FEEDS_MSGCOUNT_CLICK">
+            <i class="update-tips"></i>
+            今日有<span><%=updateCount%>条 </span>更新
+        </a>
+        <a href="./orderDetail.html" target="_blank" class="order-detail" 
+            log-action="CHROME_ENTRY_ORDER_DETAIL_CLICK"
+            id="order-detail">
+            我的订单跟踪
+           <b></b>
+        </a>
+        <a href="http://zhushou.huihui.cn/myzhushou?keyfrom=chromepopup" target="_blank" class="entry-myzhushou" 
+            log-action="CHROME_ENTRY_MYZHUSHOU_CLICK"
+            id="entry-myzhushou">
+           <b></b>
+            我的收藏
+        </a>
+        <a href="./options.html" target="_blank" class="notify-setting" 
+            log-action="ICO_NOTIFY_SETTING_CLICK"
+            id="notify-setting">
+            弹框设置
+        </a>
+    </div>
+</script>
+<script type="text/template" id="bannerItem">
+    <li class="banner-item">
+    <a title="<%= title %>" href="<%=link%>" log-channel="BANNER" log-action="ICO_BANNER_CLICK" target="_blank">
+            <img src="http://page.zhushou.youdao.com/chrome_ext_banner/banner-item.png" alt="" />
+        </a>
+    </li>
+</script>
+<script type="text/template" id="feedsItem">
+    <li class="<%=feed.type%>">
+        <div class="image-wrapper">
+            <a title="<%=feed.title%>" href="<%=feed.link%>"
+                log-status="<%=feed.channel%>" log-action="ICO_FEEDS_ITEM_CLICK"
+                log-position="IMG"
+                log-category="<%=feed.allCategoryMask%>"
+                target="_blank">
+                <img src="<%=feed.imageUrl%>" alt="<%=feed.title%>" />
+            </a>
+        </div>
+        <div class="content-wrapper">
+                <a title="<%=feed.title%>" href="<%=feed.link%>"
+                    log-status="<%=feed.channel%>" log-action="ICO_FEEDS_ITEM_CLICK"
+                    log-position="TITLE"
+                    log-category="<%=feed.allCategoryMask%>"
+                    class="content-title" target="_blank">
+                <%=feed.title%>
+            </a>
+            <div class="content-detail"><%=feed.subTitle%>。
+                <%=feed.summary%></div>
+        </div>
+    </li>
+</script>
+<footer>
+   <a href="http://www.huihui.cn/app?keyfrom=zhushou_ico" class="app-promote"
+       log-action="ICO_APP_CLICK" target="_blank">
+       下载手机app
+       <b></b>
+    </a>
+   <a href="http://www.huihui.cn/?keyfrom=chromepopup" class="see-more"
+       log-action="ICO_MORE_CLICK" target="_blank">
+       点击查看更多特价
+       <b></b>
+    </a>
+    <div class="tips-wrapper">
+        <a class='setting' href="options.html" target="_blank" log-action="ICO_SETTING_CLICK">
+            订阅设置
+        </a>
+        <a class="feedback" href="http://zhushou.huihui.cn/help?keyfrom=chromepopup"
+            log-action="ICO_FEEDBACK_CLICK" target="_blank">
+            帮助与反馈
+        </a>
+    </div>
+</footer>
+<script type="text/javascript" src='js/log.js'></script>
+<script type="text/javascript" src='js/tmpl.js'></script>
+<script type="text/javascript" src='js/popup.js'></script>
+
+</body>
+</html>

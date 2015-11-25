@@ -1,0 +1,90 @@
+h2,
+p {
+    margin: 0;
+    padding: 0;
+}
+.deprice-notify {
+    border-radius: 5px;
+    width: 280px;
+    height: 110px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+
+.deprice-img {
+    display: inline;
+    background-color: #fff;
+    border: 1px solid #d0d2d5;
+    border-radius: 3px;
+    -moz-box-shadow: 0 0 10px #d0d2d5;
+    -webkit-box-shadow: 0 0 10px #d0d2d5;
+    box-shadow: 0 0 10px #d0d3d5;
+    float: left;
+}
+
+.deprice-img a {
+    display: table-cell;
+    width: 80px;
+    height: 80px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.deprice-img img {
+    vertical-align: middle;
+    border: 0;
+}
+
+.deprice-detail {
+    overflow: hidden;
+    word-break: break-all;
+    zoom: 1;
+    margin-left: 90px;
+    margin-right: 35px;
+}
+.deprice-detail h2 {
+    max-height: 44px;
+    line-height: 18px;
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 9px;
+}
+
+.deprice-detail a {
+    font-size: 13px;
+    font-weight: normal;
+    color: #06c;
+    text-decoration: none;
+}
+
+.deprice-detail a:hover {
+    color: #c03;
+}
+.deprice-detail p{
+    color: #666;
+    font-size: 13px;
+}
+.deprice-notify-tosee {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 83px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-position: -240px -80px;
+}
+
+.deprice-notify-tosee:hover {
+    background-position: -240px -110px;
+    color: #fff;
+}
+
+.deprice-notify-tosee {
+    background-image: url(../images/icon.png);
+    background-repeat: no-repeat;
+}
