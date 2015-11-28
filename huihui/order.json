@@ -1,0 +1,50 @@
+ {
+    "switchKey": "ON",
+    "timer": 5,
+    "sitesConf": [{
+        "siteName": "JD",
+        "listUrl": "http://order.jd.com/center/list.action",
+        "urlPattern": "^(http://cart\\.jd\\.com/.*|http://cart\\.360buy\\.com/.*|http://order\\.jd\\.com/.*)",
+        "notLoginReg": "<input .*id=\"loginname\".*",
+        "listPageFilterReg": "<table.*</table>",
+        "tradeStartStatus": "等待自提|等待收货|正在出库",
+        "rowQ":"tbody[id^='tb-']",
+        "orderIdQ": "td a[name='orderIdLinks']",
+        "orderDetailLinkQ": "td a[name='orderIdLinks']",
+        "orderStatusQ": "td:nth-child(6)",
+        "baobeiQ": ".img-list",
+        "baobeiImgQ": "img",
+        "trackBaseURL": "http://order.jd.com/lazy/getOrderShowJson.action"
+    },{
+        "name": "TAOBAO",
+        "listUrl": "http://trade.taobao.com/trade/itemlist/list_bought_items.htm",
+        "urlPattern": "^(http://buy\\.tmall.com/.*|http://buy\\.taobao.com/.*|http://trade\\.taobao.com/.*)",
+        "notLoginReg": "登录名.*登录密码.*忘记登录密码|login.taobao.com/member/login.jhtml|TPL_password",
+        "listPageFilterReg": "<table.*</table>",
+        "tradeStartStatus": "买家已付款|卖家已发货",
+        "tradeEndStatus": "交易成功|交易关闭|退款中的订单|",
+        "rowQ":"tbody[data-orderid]",
+        "orderIdQ": ".no .order-num",
+        "orderStatusQ": ".trade-status",
+        "orderDetailLinkQ": ".trade-status span a.detail-link",
+        "baobeiQ": ".baobei",
+        "baobeiImgQ": "a img",
+        "baobeiDescQ": ".desc .baobei-name",
+        "baobeiSpecQ": ".spec",
+        "orderIdAttr": "data-orderid",
+        "trackBaseURL": "http://partner.taobao.com/call/json_trace_query.do?source=trade&require_statement=yes",
+        "sellerIdArrQ": ".order-hd input[name='sellerId']"
+    }, {
+        "name": "AMAZON",
+        "listUrl": "https://www.amazon.cn/gp/css/order-history",
+        "urlPattern": "^(http://www.amazon.cn/gp/product/handle-buy-box/.*)",
+        "notLoginReg": "我是一个新客户.*记住登录状态。",
+        "listPageFilterReg": '<div id="cs-orders".*</table>',
+        "rowQ": "div.action-box",
+        "orderIdQ": "ul.order-details .info-data a",
+        "orderDetailLinkQ": "div.order-details > a:nth-child(1)",
+        "baobeiQ": ".ship-listing .shipment li",
+        "baobeiImgQ": ".image-box img",
+        "trackQ": ".track-window > span a"
+    }]
+}

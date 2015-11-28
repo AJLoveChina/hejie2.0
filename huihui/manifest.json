@@ -1,0 +1,35 @@
+{
+    "update_url": "http://clients2.google.com/service/update2/crx",
+    "description": "【网易出品】在您网购浏览商品的同时，自动对比其他优质电商同款商品价格，并提供商品价格历史，帮您轻松抄底，聪明网购不吃亏！",
+    "name": "惠惠购物助手",
+    "version": "4.2.8.1",
+    "background": {
+        "page": "bg.html"
+    },
+    "minimum_chrome_version": "18",
+    "permissions": ["http://*/*", "https://*/*", "notifications" ],
+    "icons": {
+        "16": "images/icon-16.png",
+        "48": "images/icon-32.png",
+        "128": "images/icon-128.png"
+    },
+    "browser_action": {
+        "default_icon": "images/icon-19.png",
+        "default_title": "惠惠购物助手\u2122",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [{
+        "js": ["js/loader.js"],
+        "matches": ["http://*/*","https://*/*" ],
+        "run_at": "document_end"
+    },{
+        "js": ["js/extension_3_1.js"],
+        "css":["css/extension_3_1.css"],
+        "matches": ["*://*.taobao.com/*","*://*.tmall.com/*"],
+        "run_at": "document_end"
+    }],
+    "web_accessible_resources": ["images/*.png","images/*.gif"],
+    "options_page": "options.html",
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self'; object-src 'self'"
+}

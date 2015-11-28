@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+    <link rel="stylesheet" href="css/deprice-notify.css" type="text/css" media="screen" charset="utf-8">
+</head>
+<body>
+    <div id="doc1">
+   </div>
+<script type="text/template" id="depriceTmpl">
+    	<div class="deprice-notify">
+            <div class="deprice-img">
+                <a href="<%=shop.url%>" target="_blank" title="<%=shop.title%>"
+                    log-action="DEMSG_IMAGE_CLICK">
+                    <img src="<%=shop.img%>" alt="<%=shop.title%>" />
+                </a>
+            </div>
+            <div class="deprice-detail">
+                <h2>
+                    <a href="<%=shop.url%>" target="_blank"
+                    title="<%=shop.title%>" 
+                    log-action="DEMSG_TITLE_CLICK">
+                    【<%=shop.cnName%>】<%=shop.title%>
+                    </a>
+                </h2>
+                <p>下降<%=shop.priceChanged%><%= shop.priceUnit %>，现价<%=shop.price%><%= shop.priceUnit %></p>
+            </div>
+            <a class="deprice-notify-tosee" href="<%=shop.url%>"
+                target="_blank"
+                log-action ="DEMSG_BUTTON_CLICK">
+                马上去看
+            </a>
+    	</div>
+</script> 
+
+    <script type="text/javascript" charset="utf-8" src="js/log.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/tmpl.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="js/deprice-notify.js"> </script>
+</body>
+</html>

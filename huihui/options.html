@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>惠惠实时折扣推送订阅设置</title>
+    <link rel="stylesheet" href="css/options.css" type="text/css"/>
+    <link rel="stylesheet" href="lib/bootstrap.css" type="text/css"/>
+</head>
+<body>
+    <div id="header">
+        <div class="boxwrap">
+            <h1 class="logo">
+                <a href="http://zhushou.huihui.cn" target="_blank">惠惠购物助手</a>
+            </h1>
+            <p class="desp"></p>
+        </div>
+    </div>
+    <div id="options">
+    	<div class="hd">
+            <div class="title">
+                <h3><span></span>惠惠购物助手自定义设置</h3>
+            </div>
+        </div>
+        <div class="bd">
+            <div class="box">
+                <div class="title">
+                    <h4><i>•</i>优惠提醒设置</h4>
+                    <p class="disc">惠惠购物助手每日推荐以下几种您可能感兴趣的购物资讯，在助手条左下方展示</p>
+                </div>
+                <div class="content">
+                    <ul class="set-list">
+                        <li>
+                            <label class="btn-cur-out" data-type="isRecommandOpen" data-group="youhui" data-default="open">
+                                <input type="checkbox">
+                                <span class="btn-cur" log-value="true" log-action="EXTOPTION_REC_CLICK">
+                                    <span class="open">已开启</span>
+                                    <span class="close">已关闭</span>
+                                    <i></i>
+                                </span>
+                            </label>
+                            <h5>猜你喜欢</h5>
+                            <p>根据您的商品浏览历史，推荐您可能喜欢的其他商品</p>
+                        </li>
+                        <li>
+                            <label class="btn-cur-out" data-type="showIncidentallyBuy" data-group="youhui" data-default="open">
+                                <input type="checkbox">
+                                <span class="btn-cur" log-value="true" log-action="EXTOPTION_TOPDEAL_CLICK">
+                                    <span class="open">已开启</span>
+                                    <span class="close">已关闭</span>
+                                    <i></i>
+                                </span>
+                            </label>
+                            <h5>今日特价</h5>
+                            <p>精选全网最超值的优惠信息</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">
+                    <h4><i>•</i>全网收藏提醒设置</h4>
+                    <p class="disc">您收藏的商品符合您设定的条件后，我们将通过以下方式通知您</p>
+                </div>
+                <div class="content">
+                    <ul class="set-list">
+                        <li>
+                            <label class="btn-cur-out" data-type="isDepriceOpen" data-group="youhui" data-default="open">
+                                <input type="checkbox">
+                                <span class="btn-cur" log-value="true" log-action="EXTOPTION_PRICEALERT_CLICK">
+                                    <span class="open">已开启</span>
+                                    <span class="close">已关闭</span>
+                                    <i></i>
+                                </span>
+                            </label>
+                            <h5>降价提醒 桌面弹框</h5>
+                            <p>您收藏的商品达到设置的目标价时，在桌面弹框提醒
+                            </p>
+                        </li>
+                        <!--<li>
+                            <label class="btn-cur-out">
+                                <input type="checkbox">
+                                <span class="btn-cur">
+                                    <span class="open">已开启</span>
+                                    <span class="close">已关闭</span>
+                                    <i></i>
+                                </span>
+                            </label>
+                            <h5>到货提醒 桌面弹框</h5>
+                            <p>您收藏的商品到货时，在桌面弹框提醒
+                                <button class="btn btn-info try-switcher">观看样式</button></p>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">
+                    <h4><i>•</i>实时折扣推送订阅设置</h4>
+                    <p class="disc">将惠惠网达人收集整理的第一手购物资讯、购物攻略，第一时间推送到您面前</p>
+                </div>
+                <div class="content">
+                    <ul class="set-list">
+                        <li>
+                            <h5>内容订阅设置</h5>
+                            <p>选择您感兴趣的内容,我们将通过以下方式通知您</p>
+
+                            <div class="category-list">
+                                <ul class="channel clearfix">
+                                    <li data-value="SHARE_BAICAI"
+                                        log-action="EXTOPTIONS_FEEDITEM_CHECK" log-feedchn="SHARE_BAICAI">
+                                        <a href="#baicai"
+                                           log-action="EXTOPTIONS_FEEDLINK_CLICK" log-feedchn="SHARE_BAICAI"
+                                           class="category-title class-title">
+                                            每日白菜价
+                                        </a>
+                                        <div>
+                                            <p class="about">超值低价、凑单商品汇总每日一条，12点更新</p>
+                                        </div>
+                                        <span class="selectedTip"></span>
+                                        <span class="newTip"></span>
+                                    </li>
+                                    <li data-value="SHARE_SHARE"
+                                        log-action="EXTPOTIONS_FEEDITEM_CHECK" log-feedchn="SHARE_SHARE">
+                                        <a href="#share"
+                                           log-action="EXTPOTIONS_FEEDLINK_CLICK" log-feedchn="SHARE_SHARE"
+                                           class="category-title class-title">
+                                            晒物园
+                                        </a>
+                                        <div>
+                                            <p class="about">惠惠社区达人的经验晒单新、奇、特每日三条</p>
+                                        </div>
+                                        <span class="selectedTip"></span>
+                                        <span class="newTip"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="btn-cur-out" data-type="push.isNotify" data-default="true">
+                                <input type="checkbox">
+                                <span class="btn-cur" log-value="true" log-action="EXTOPTIONS_FEEDSWITCHER_CLICK">
+                                    <span class="open">已开启</span>
+                                    <span class="close">已关闭</span>
+                                    <i></i>
+                                </span>
+                            </label>
+                            <h5>桌面弹框提醒</h5>
+                            <p>您订阅的内容更新时,以桌面弹框形式推送给您
+                                <button class="btn btn-info try-switcher">观看样式</button></p>
+                        </li>
+                        <li>
+                            <label class="btn-cur-out" data-type="push.figureRemind" data-default="true">
+                                <input type="checkbox">
+                                <span class="btn-cur" log-value="true" log-action="EXTOPTIONS_FIGUREREMIND_CLICK">
+                                    <span class="open">已开启</span>
+                                    <span class="close">已关闭</span>
+                                    <i></i>
+                                </span>
+                            </label>
+                            <h5>数字提醒</h5>
+                            <p>内容有更新时，助手图标上有数字提示</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title">
+                    <h4><i>•</i>桌面弹框提醒停留时间设置</h4>
+                    <p class="disc">以上所有桌面弹框提醒的停留时长，都将符合您设置的停留时间</p>
+                </div>
+                <div class="content">
+                    <div class="btn-group time-set" data-toggle="buttons-radio"
+                         data-default="30" data-type="push.stayTime">
+                        <button class="btn btn-primary" value="10"
+                                log-action="EXTOPTIONS_FEEDTIME_CLICK" log-value="10">
+                            10秒
+                        </button>
+                        <button class="btn btn-primary" value="30"
+                                log-action="EXTOPTIONS_FEEDTIME_CLICK" log-value="30">
+                            30秒
+                        </button>
+                        <button class="btn btn-primary" value="60"
+                                log-action="EXTOPTIONS_FEEDTIME_CLICK" log-value="60">
+                            60秒
+                        </button>
+                        <button class="btn btn-primary" value="120"
+                                log-action="EXTOPTIONS_FEEDTIME_CLICK" log-value="120">
+                            120秒
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-setting">
+            <div class="hd">
+                <div class="title">
+                    <span></span>
+                    <h3>惠惠订单物流提醒设置</h3>
+                </div>
+                <p class="disc">惠惠订单物流提醒功能，将自动跟踪多家商城订单派送信息，第一时间自动提醒您物流状态。</p>
+            </div>
+           <div class="bd">
+                <div class="title">
+                        <span></span>
+                        <h4>基本设置</h4>
+                </div>
+                <div class="other-setting">
+                    <ul class="clearfix">
+                        <li>
+                            <p>是否开启物流提醒</p>
+                            <div class="btn-group" data-toggle="buttons-radio"
+                                data-default="true" data-type="order.isFeeded">
+                                <button class="btn btn-primary" value="true"
+                                    log-action="EXTPOTIONS_ORDERSWITCHER_CLICK" data-toggle="button"
+                                    log-value="true">
+                                    开启</button>
+                                <button class="btn btn-primary" value="false"
+                                    log-action="EXTPOTIONS_ORDERSWITCHER_CLICK" data-toggle="button"
+                                    log-value="false">
+                                    关闭</button>
+                            </div>
+                        </li>
+                        <li>
+                            <p>是否隐藏物流详情入口</p>
+                            <div class="btn-group" data-toggle="buttons-radio"
+                                data-default="true" data-type="order.isShowDetail">
+                                <button class="btn btn-primary" value="false"
+                                    log-action="EXTPOTIONS_ORDERSDETAILWITCHER_CLICK" data-toggle="button"
+                                    log-value="false">
+                                    隐藏</button>
+                                <button class="btn btn-primary" value="true"
+                                    log-action="EXTPOTIONS_ORDERSDETAILWITCHER_CLICK" data-toggle="button"
+                                    log-value="true">
+                                    不隐藏</button>
+                            </div>
+     
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="ft"></div>
+        <div class="fragement fade">
+            <div class="hd">
+                <h4>惠惠购物助手</h4>
+                <span>升级到2.10</span>
+                <a href="#2" class="close" log-action="CHROME_UPDATE_TIP"
+                    log-type="ARMANI_EXTENSION_POPUP">关闭</a>
+            </div>
+        	<div class="bd">
+        		<h5>2.10新功能：惠惠网优质购物资讯订阅</h5>
+        		<p>小编精选【全网商家超值促销】、购物达人【购物全攻略】等内容，第一时间马上送达！</p>
+                <a href="#5" class="setting" 
+                    log-action="CHROME_UPDATE_TIP" log-type="ARMANI_EXTENSION_POPUP">设置我的订阅</a>
+        	</div>
+            <span class="mascot"></span>
+        </div>
+    </div>
+    <script type="text/javascript" charset="utf-8" src="lib/jquery.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="lib/bootstrap.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="js/options.js"></script>
+    <script type="text/javascript" charset="utf-8" src='js/log.js'></script>
+</body>
+</html>

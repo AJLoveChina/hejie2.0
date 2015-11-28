@@ -1,0 +1,111 @@
+h3,
+h4,
+p,
+a{
+    margin: 0;
+    padding: 0;
+}
+.notification {
+    position: relative;
+    font-size: 12px;
+}
+
+.notification a {
+    text-decoration: none;
+}
+.img-wrapper {
+    float: left;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #d1d3d5;
+    border-radius: 2px;
+    box-shadow: 1px 2px 3px 2px #f5f5f5;  
+}
+
+.img-wrapper img {
+    width: 80px;
+    height: 80px;
+}
+
+.content {
+    overflow: hidden;
+    zoom: 1;
+    margin-left: 88px;
+    max-height: 99px;
+}
+.content h3:hover {
+    cursor: hand;
+}
+.content h3 {
+    max-height: 32px;
+    overflow: hidden;
+    line-height: 16px;
+}
+.content h3 a{
+    text-decoration: none;
+    font-weight: bolder;
+    color: #333;
+}
+.content .sub-title {
+    margin-top: 5px;
+    max-height: 29px;
+    overflow: hidden;
+    color: #fa8200;
+}
+.content .summary {
+    max-height: 80px;
+    line-height: 16px;
+}
+
+.to-see {
+    position: absolute;
+    font-weight: bolder;
+    color: #333;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    display: inline-block;
+    height: 22px;
+    text-align: center;
+    line-height: 22px;
+    width: 70px;
+    background-image: -webkit-linear-gradient(top, #FEFEFE 0%, #F2F2F2 100%);
+}
+
+.notify-bottom {
+    margin-top: 15px;
+}
+.notify-bottom i {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url(../images/icon.png);
+    background-repeat: no-repeat;
+}
+
+.notify-bottom a {
+    color: #333;
+    vertical-align: top;
+}
+
+.notify-bottom a:hover{
+    color: #c03;
+}
+
+.notify-bottom .notify-setting {
+    background-position: 0 0;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.notify-bottom .notify-setting:hover {
+}
+.notify-bottom .feedback {
+    width: 17px;
+    margin-left: 5px;
+    margin-right: 2px;
+    background-position: -20px 0;
+}
+

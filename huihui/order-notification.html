@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="js/orderAssistant/util.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="js/orderNotifyUtil.js"></script>
+    <script type="text/javascript" src="js/order-notification.js"></script>
+<style>
+    body,div,ul,li,dl,dt,dd,p{
+        margin:0;
+        padding:0;
+    }
+    li{
+        list-style:none;
+    }
+    .login li{
+        padding-top:25px 0;
+    }
+    .huihuigwzs-shiptips{
+        background-color:#fff;
+        /*border-radius:5px;
+        border:1px solid #7d7d7d;
+        color:#666;
+        width:300px;
+        margin:10px;
+        height:180px;*/
+        font:12px/1.5 \5b8b\4f53;
+        /*-webkit-box-shadow:0 2px 0 rgba(0,0,0,0.1);*/
+    }
+    .order-status {
+        font-size: 0;
+        margin: 3px 0 3px 19px;
+    }
+    .point {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border: 2px solid #999;
+        border-radius: 8px;
+    }
+    .order-start {
+        margin-left: 19px;
+        margin-right: 25px;
+    }
+    .order-running {
+        margin-right: 23px;
+    }
+    .line {
+        display: inline-block;
+        width: 54px;
+        margin: 0 2px 3px;
+        border-top: 1px solid #999;
+        border-bottom: 1px solid #999;
+    }
+    .full {
+        background-color: #fa8200;
+        border-color: #fa8200;
+    }
+    .huihuigwzs-shiptips a{
+        color:#0066cc;
+    }
+    .huihuigwzs-shiptips .hd{
+        background-color:#f5f5f5;
+        border-bottom:1px solid #b4b4b4;
+        color:#7d7d7d;
+        height:22px;
+        padding-left:10px;
+        position:relative;
+        line-height:22px;
+    }
+    .huihuigwzs-shiptips .btn-edit,
+    .huihuigwzs-shiptips .btn-close,
+    .huihuigwzs-shiptips .content .pin,
+    .huihuigwzs-shiptips .arrow-dot,
+    .huihuigwzs-shiptips .faq-login{
+        background-image:url(images/huihuigwzs_sp.png);
+        background-repeat:no-repeat;
+    }
+    .huihuigwzs-shiptips .btn-edit{
+        width:14px;
+        height:11px;
+        background-position:0 -8px;
+        text-indent:-999em;
+        overflow:hidden;
+        position: absolute;
+        top:5px;
+        right:25px;
+    }
+    .huihuigwzs-shiptips .btn-close{
+        width:8px;
+        height:8px;
+        text-indent:-999em;
+        overflow:hidden;
+        position: absolute;
+        top:7px;
+        right:7px;
+    }
+    .huihuigwzs-shiptips .bd{
+        padding:3px 8px 5px;
+        height:109px;
+    }
+    .huihuigwzs-shiptips.list-notify .content{
+        margin-top: 30px;
+        padding-right: 0;
+    }
+    .huihuigwzs-shiptips.list-notify .content p{
+        height: 40px;
+        line-height: 40px;
+    }
+    .huihuigwzs-shiptips .content{
+        border:1px solid #e4dfba;
+        background-color:#fefcea;
+        position:relative;
+        padding:0 20px 2px;
+        margin:3px 0 0;
+    }
+    .huihuigwzs-shiptips .content .pin{
+        position:absolute;
+        width:9px;
+        height:21px;
+        background-position:0 -45px;
+        top:-4px;
+        left:3px;
+    }
+    .huihuigwzs-shiptips.new-order .content li{
+        line-height: 15px;
+        height: 15px;
+    }
+    .huihuigwzs-shiptips .content li{
+        padding:2px 0;
+        height: 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 20px;
+        overflow: hidden;
+    }
+    .huihuigwzs-shiptips .arrow-dot{
+        display:inline-block;
+        width:3px;
+        height:3px;
+        background-position:0 -68px;
+        margin-right:5px;
+    }
+    .huihuigwzs-shiptips .c-hl{
+        color:#fa8200;
+    }
+    .huihuigwzs-shiptips .c-gray{
+        color:#999;
+    }
+    .huihuigwzs-shiptips .c-333{
+        color:#333;
+    }
+    .huihuigwzs-shiptips .f-wb{
+        font-weight:bold;
+    }
+    .huihuigwzs-shiptips .fl{
+        float:left;
+    }
+    .huihuigwzs-shiptips .fr{
+        float:right;
+    }
+    .huihuigwzs-shiptips .ft{
+        padding:5px 8px 0 10px;
+    }
+    .huihuigwzs-shiptips .ft a{
+        text-decoration:none;
+    }
+    .huihuigwzs-shiptips .faq-login{
+        background-position:0 -19px;
+        height:13px;
+        line-height:13px;
+        padding-left:20px;
+        margin-top:5px;
+        float: right;
+    }
+    .huihuigwzs-shiptips .faq-login:hover{
+        background-position:0 -32px;
+    }
+    .huihuigwzs-shiptips .clearfix:after{
+        content:'.';
+        display:block;
+        visibility:hidden;
+        height:0;
+        line-height:0;
+        font-size:0;
+        clear:both;
+    }
+    .huihuigwzs-shiptips .clearfix{
+        zoom:1;
+    }
+    .huihuigwzs-shiptips .btn-submit{
+        display:inline-block;
+        height:18px;
+        width:49px;
+        border:1px solid #ccc;
+        border-radius:2px;
+        text-align:center;
+        background:-webkit-gradient(linear,0 0,0 100%,from(#fefefe),to(#f2f2f2));
+        cursor:pointer;
+    }
+    .huihuigwzs-shiptips .btn-submit:hover{
+        background:-webkit-gradient(linear,0 0,0 100%,from(#fefefe),to(#fafafa));
+    }
+    .notify-setting {
+        background-position: 0 0;
+        float: left;
+        margin-left: 5px;
+        margin-right: 5px;
+        display: inline-block;
+        line-height: 15px;
+        text-align: text-bottom;
+        width: 15px;
+        height: 15px;
+        background-image: url(../images/icon.png);
+        background-repeat: no-repeat;
+    }
+    .settings {
+        float: left;
+    }
+    .shipment-detail dt {
+        height: 16px;
+        overflow: hidden;
+    }
+    .shipment-detail .context {
+        height: 35px;
+        overflow: hidden;
+    }
+</style>
+</head>
+
+<body>
+	<div class="huihuigwzs-shiptips login" style="display:none">
+    <div class="bd">
+        订单物流体系功能将第一时间提醒您最新的物流状态
+        <div class="content">
+            <div class="pin"></div>
+            <ul>
+                <li class="clearfix"><a class="fr -close" href="#" target="_blank"
+                    log-action="CHROME_ORDER_POPUP_LOGIN_CLICK" 
+                    log-type="ARMANI_EXTENSION_POPUP" 
+                    log-site="">去登录</a><em class="arrow-dot"></em><span class="f-wb c-333">京东商城</span><span class="c-hl">(有一个待收货订单)</span></li>
+            </ul>
+        </div>
+        <a class="c-gray fl faq-login -close" 
+            href="http://zhushou.huihui.cn/help" 
+            target="_blank" 
+            log-type="ARMANI_EXTENSION_POPUP" 
+            log-action="CHROME_ORDER_POPUP_HOWTO_KEEP_LOGIN" log-site="">登录更新物流状态</a>
+    </div>
+    <div class="ft clearfix">
+        <a class="c-gray fr -close" href="#" 
+            log-type="ARMANI_EXTENSION_POPUP" 
+            log-action="CHROME_ORDER_POPUP_NOT_LOGIN" log-site="">暂不登录</a>
+        <a href="options.html" target="_blank" class="c-gray -close"
+            log-action="CHROME_ORDER_POPUP_SETTING_CLICK" 
+            log-type="ARMANI_EXTENSION_POPUP" 
+            log-site="">
+            <i class="notify-setting"></i>
+            提醒设置
+        </a>
+    </div>
+</div>
+    
+    
+<div class="huihuigwzs-shiptips new-order" style="display:none">
+    <div class="bd">
+        检测到<span class="c-hl">您有新订单</span>，自动为您跟踪快递状态，第一时间提醒您物流变化。
+        <div class="content">
+            <div class="pin"></div>
+            <ul>
+                <li>购物商城：<span class="c-hl site">京东商城</span></li>
+                <li>商品摘要：<span class="c-hl title">MAMMA妈妈布书，益智玩具...</span></li>
+                <li>物流信息：<span class="c-hl id">京东物流（152178962）</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="ft clearfix">
+        <a href="options.html" target="_blank" class="settings c-gray"
+            log-type="ARMANI_EXTENSION_POPUP" 
+            log-action="CHROME_ORDER_POPUP_SETTING_CLICK" log-site="">
+            <i class="notify-setting"></i>
+            提醒设置
+        </a>
+        <div class="fr">
+            <a class="c-gray" href="#" 
+                log-type="ARMANI_EXTENSION_POPUP" 
+                log-action="CHROME_ORDER_POPUP_NEW_CANCEL_CLICK" log-site="">取消提醒</a>
+            <a class="btn-submit c-333" href="#" 
+                log-type="ARMANI_EXTENSION_POPUP" 
+                log-action="CHROME_ORDER_POPUP_NEW_CONFIRM_CLICK" log-site="">确定跟踪</a>
+        </div>
+    </div>
+</div>
+<div class="huihuigwzs-shiptips list-notify" style="display:none">
+    <div class="bd">
+        <div class="content">
+            <p>
+                <span class="cnName"></span>
+                <span class="runningMsg"></span>
+                <span class="statusMsg"></span>
+            </p>
+       </div>
+    </div>
+    <div class="ft clearfix">
+       <div class="fr">
+           <a class="btn-submit c-333" 
+               href="orderDetail.html?keyfrom=dialog" target="_blank" 
+                log-type="ARMANI_EXTENSION_POPUP" 
+                log-action="CHROME_ORDER_POPUP_LIST_DETAIL_CLICK" log-site="">查看详情</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="huihuigwzs-shiptips new-status" style="display:none">
+    <div class="bd">
+        <div class="content">
+            <div class="pin"></div>
+                <dl class="shipment-detail">
+                    <dt>京东商城（MAMMA妈妈布书，益智玩具...）</dt>
+                    <dd class="order-status">
+                        <span class="point"></span>
+                        <span class="line"></span>
+                        <span class="point"></span>
+                        <span class="line"></span>
+                        <span class="point"></span>
+                        <span class="line"></span>
+                        <span class="point"></span>
+                    </dd>
+                    <dd>
+                        <span class="order-commit" >提交订单</span>
+                        <span class="order-start">已发货</span>
+                        <span class="order-running">运送中</span>
+                        <span class="order-finish">已签收</span>
+                    </dd>
+                    <dd class="f-wb c-hl time">2013.12.17  12:25:26</dd>
+                    <dd class="f-wb c-hl context">北京分拨中心</dd>
+                </dl>
+        </div>
+    </div>
+    <div class="ft clearfix">
+        <a href="options.html" target="_blank" class="settings c-gray"
+            log-type="ARMANI_EXTENSION_POPUP" 
+            log-action="CHROME_ORDER_POPUP_SETTING_CLICK" log-site="">
+            <i class="notify-setting"></i>
+            提醒设置
+        </a>
+        <div class="fr">
+            <a class="c-gray" href="#" 
+                log-type="ARMANI_EXTENSION_POPUP" 
+                log-action="CHROME_ORDER_POPUP_STATUS_CANCEL_CLICK" log-site="">取消提醒</a>
+            <a class="btn-submit c-333" href="#" target="_blank" 
+                log-type="ARMANI_EXTENSION_POPUP" 
+                log-action="CHROME_ORDER_POPUP_SINGLE_DETAIL_CLICK" log-site="">去查看</a>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" charset="utf-8" src="js/log.js"></script>
+</html>
+

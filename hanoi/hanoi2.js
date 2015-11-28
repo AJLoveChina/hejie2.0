@@ -19,3 +19,15 @@ function hannoi (n, from, buffer, to)
 }
 
 hannoi(10, a, b, c);
+
+
+function h(n, a, b, c){
+    if (n === 1) {
+        console.log("Move " + n + " from " + a + " to " + c);
+    } else {
+        h(n -1, a, c, b);
+        console.log("Move " + n + " from " + a + " to " + c);
+        h(n-1, b, a, c);
+    }
+}
+h(10, "a", "b", "c")
