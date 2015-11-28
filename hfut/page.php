@@ -52,20 +52,20 @@ class Page{
 				<link rel='stylesheet' type='text/css' href='css/xy.css' />
 				<link rel='stylesheet' type='text/css' href='css/aj.css' />
 			</head>
-			<body>
+			<body>		
 		";
         $back .= "
 			<div id='aj-header'>
 				<div class='aj-header-bg'>
 					<div class='aj-nav'></div>
 					<div class='aj-nav-ul'>
-						<ul>
+						<ul>		
 		";
         forEach($header->nav->li as $li){
             $back.= "
 						<li class='aj-li aj-bg-tran'>
 							<a href='{$arr['url']}?r=1&kind1={$li['kind']}' class='aj-title'>{$li['title']}</a>
-
+							
 					";
             if(count($li->span)>0){
                 $back.= "<div class='aj-lis-div'>";
@@ -99,7 +99,7 @@ class Page{
 								<div class='aj-lis-div'>
 									<span class='aj-span'><a href='{$userCenterUrl}'>个人中心</a></span>
 									<span class='aj-span'><a class='aj-logout'>退出登录</a></span>
-								</div>
+								</div>					
 							</li>
 			";
         }else{
@@ -112,9 +112,9 @@ class Page{
         $back .="
 							<div class='aj-clear'></div>
 						</ul>
-					</div>
+					</div>	
 				</div>
-			</div>
+			</div>		
 		";
         return $back;
     }
@@ -151,18 +151,18 @@ class Page{
 								<div class='line'>
 									<tr class='tr'>
 										<td>Email</td>
-										<td>735267452@qq.com</td>
+										<td>735267452@qq.com</td>				
 									</tr>
 								</div>
 								<div class='line'>
 									<tr class='tr'>
 										<td>Phone</td>
-										<td>(+86)18075076612</td>
+										<td>(+86)18075076612</td>				
 									</tr>
 								</div>
 								</table>
 							</div>
-							<div class='clear'></div>
+							<div class='clear'></div>			
 						</div>
 					</div>
 					<div class='aj-footer-bottom'>
@@ -172,7 +172,7 @@ class Page{
 								<div class='aj-one'><a href=''>学术交流</a></div>
 								<div class='aj-one'><a href=''>关于我们</a></div>
 								<div class='aj-one'><a href=''>联系我们</a></div>
-								<div class='aj-one'><a href=''>其他服务</a></div>
+								<div class='aj-one'><a href=''>其他服务</a></div>				
 							</div>
 							<div class='aj-center'>Copyright &copy;合肥工业大学土木与水利学院</div>
 						</div>
@@ -570,7 +570,7 @@ class News{
                 case "wrapNews2":
                     $back .= "
 							</table>
-						</div>
+						</div>					
 					";
                     break;
                 case "wrapNews":
@@ -793,7 +793,7 @@ class News{
         $back .="		</ul>
 					</div>
 				</div>
-			</div>
+			</div>		
 		";
         return $back;
     }
@@ -843,7 +843,7 @@ class News{
 				<hr class='xy_download_block2_div2_li_p1_hr'/>
 				<p class='xy_wenjian_desc'>{$rows['u_desc']}</p>
 				<p class='xy_download_block2_div2_li_p2'> <a href='{$root}{$dir}{$rows['u_href']}'>点击下载</a> 上传日期&nbsp;{$date} 下载次数:15</p>
-			</li>
+			</li>		
 		";
         return $back;
     }
@@ -908,7 +908,7 @@ class News{
 					-->
 				</div>
 				<div style='clear:both;'></div>
-			</div>
+			</div>		
 		";
 
         return $back;
@@ -1300,8 +1300,8 @@ class User{
         $back .= $this->getFamousHotUsers( 'famous' );
         $back .="
 								</div>
-							</div>
-						</div>
+							</div>			
+						</div>			
 						<div class='aj-roll-block'>
 							<div class='aj-roll-x-hk aj-tran' aj-index='left'>&lt;</div>
 							<div class='aj-roll-x-hk aj-tran' aj-index='right'>&gt;</div>
@@ -1311,12 +1311,12 @@ class User{
         $back .= $this->getFamousHotUsers( 'hot' );
         $back .="
 								</div>
-							</div>
-						</div>
+							</div>			
+						</div>			
 
 					</div>
 				</div>
-			</div>
+			</div>		
 		";
 
         $back .= "<script src='{$this->arr['root_dir']}/js/user_module.js'></script>";
@@ -1334,8 +1334,8 @@ class User{
 				<a href='{$this->arr['index_url']}?r=1&kind1=a9&user_center_id={$rows['user_id']}' class='aj-img-one'>
 					<img class='aj-img' src='{$this->arr['root_dir']}img/aj/user/cartoon/{$rows['user_img']}' />
 					<p class='aj-price'>{$name}</p>
-					<p class='aj-name'>{$rows['user_desc']}</p>
-				</a>
+					<p class='aj-name'>{$rows['user_desc']}</p>	
+				</a>			
 			";
         }
         return $back;
@@ -1426,9 +1426,9 @@ class User{
         }
         $back .= "
 						</div>
-					</div>
+					</div>	
 				</div>
-			</div>
+			</div>		
 		";
         return $back;
     }
@@ -1501,7 +1501,7 @@ class User{
         $this->saveGerendangInSQL($sqlArr);
         foreach($names as $name) {
             if (isset($_GET[$name])) {
-                $arr[$name] = htmlentities($_GET[$name]);
+                $arr[$name] = htmlentities($_GET[$name], ENT_QUOTES, "UTF-8");
             } else {
                 $arr[$name] = '未设置';
             }
@@ -1553,9 +1553,9 @@ class User{
 								<td class='aj-td'>{$arr['email']}</td>
 							</tr>
 						</table>
-					</div>
+					</div>					
 				</div>
-			</div>
+			</div>			
 		";
         if (file_put_contents(dirname(__FILE__).'/users/self/'.$id.'.txt', $back)) {
             $arr = array(
@@ -1714,7 +1714,7 @@ class Query{
 
             $arr = array();
             $arr['kinds'] = C::safe( $_POST['kinds'], $this->dbc );
-            $arr['title'] = C::safe( $_POST['title'], $this->dbc );
+            $arr['title'] = C::safe( urldecode($_POST['title']), $this->dbc );
             $arr['content'] = urldecode($_POST['content']);
 
             $xueshu = new Xueshu( $this->arr );
@@ -1856,7 +1856,7 @@ class Health{
 					<hr class='xy_health_niwenwoda_block0_hr'/>
 				</div>
 				<div id='xy_health_niwenwoda_block1'>
-					<div class='xy_health_niwenwoda_block1_div'>
+					<div class='xy_health_niwenwoda_block1_div'> 
 						<img src='{$root}img/xy/health_niwenwoda_div1.jpg' class='xy_health_niwenwoda_block1_div_img'/>
 						<div class='xy_health_niwenwoda_block1_div_collect'>
 							<a  class='xy_health_niwenwoda_block1_div_collect_a'>心理健康手抄报：早恋的类型</a>
@@ -1937,7 +1937,7 @@ class Health{
 					</div>
 
 				</div>
-			</div>
+			</div>		
 		";
         return $back;
     }
@@ -2245,7 +2245,7 @@ class Xueshu{
 			<!-- 配置文件 -->
 			<script type='text/javascript' src='{$this->arr['root_dir']}ueditor/ueditor.config.js'></script>
 			<!-- 编辑器源码文件 -->
-			<script type='text/javascript' src='{$this->arr['root_dir']}ueditor/ueditor.all.js'></script>
+			<script type='text/javascript' src='{$this->arr['root_dir']}ueditor/ueditor.all.js'></script>		
 		";
         return $back;
     }

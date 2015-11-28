@@ -26,7 +26,7 @@
       <file leaf-file-name="page.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.95027626" vertical-offset="50744" max-vertical-offset="51380">
+            <state vertical-scroll-proportion="0.92633516" vertical-offset="50757" max-vertical-offset="51380">
               <caret line="2563" column="2" selection-start-line="2563" selection-start-column="2" selection-end-line="2563" selection-end-column="2" />
               <folding />
             </state>
@@ -155,6 +155,9 @@
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\ajax\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="bafa123f-682b-4683-809e-dc90b437e2b6" name="Default" comment="" />
@@ -208,7 +211,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.95027626" vertical-offset="50744" max-vertical-offset="51380">
+        <state vertical-scroll-proportion="0.92633516" vertical-offset="50757" max-vertical-offset="51380">
           <caret line="2563" column="2" selection-start-line="2563" selection-start-column="2" selection-end-line="2563" selection-end-column="2" />
           <folding />
         </state>
