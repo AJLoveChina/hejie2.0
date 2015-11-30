@@ -21,7 +21,8 @@
     "jquery-pjax": "~1.9.6",
     "underscore": "~1.8.3",
     "d3": "~3.5.9",
-    "polymer": "Polymer/polymer#1.2.0"
+    "polymer": "Polymer/polymer#1.2.0",
+    "parse": "~1.6.7"
   },
   "ignore": [
     "**/.*",
