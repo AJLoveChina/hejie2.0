@@ -108,6 +108,7 @@
             return canPush;
         }
     };
+
     function main(n, opt) {
         var towerNum = 3,
             towers = [],
@@ -190,3 +191,4 @@
 
     });
 })();
+
