@@ -1,19 +1,5 @@
-var buttons = require('sdk/ui/button/action');
-var tabs = require("sdk/tabs");
-var self = require("sdk/self");
 var audios = [],
     page;
-
-var button = buttons.ActionButton({
-  id: "mozilla-link",
-  label: "Visit Mozilla",
-  icon: {
-    "16": "./icon-16.png",
-    "32": "./icon-32.png",
-    "64": "./icon-64.png"
-  },
-  onClick: handleClick //handleClick
-});
 
 function Audio(dom) {   // 每一个Audio的实例对应页面上的 一个 audio 标签, 负责其相应的逻辑
     this.dom = dom;
@@ -26,9 +12,13 @@ Audio.prototype = {
     pause : function () {
         this.dom.pause();
     },
+    play : function () {
+        this.dom.play();
+    },
     backInit : function () {
+        console.log(this.initStatus);
         if (this.initStatus) {
-            this.dom.parse();
+            this.dom.pause();
         } else {
             this.dom.play();
         }
@@ -37,12 +27,14 @@ Audio.prototype = {
 
 function Page() {   // Page的实例负责一个html页面的一些逻辑
     this.audios = null; // Audio实例组成的数组
+    this.initBgColor = getComputedStyle(document.body)["backgroundColor"];
 }
 Page.prototype = {
     mute : function () {    // 静音
         this.audios.forEach(function (audio) {
             audio.pause();
         });
+        document.body.style.backgroundColor = "lightblue";
     },
     backInit : function () {    // 将所有 audio 恢复初始状态
         this.audios.forEach(function (audio) {
@@ -57,15 +49,41 @@ Page.prototype = {
             }
         });
         return bool;
+    },
+    play : function () {
+        this.audios.forEach(function (audio) {
+            audio.play();
+        });
+        console.log(this.initBgColor);
+        document.body.style.backgroundColor = this.initBgColor;
     }
 };
 
 
 function handleClick(state) {
-    var worker = tabs.activeTab.attach({
-        contentScriptFile: self.data.url("mute.js")
-    });
-    worker.port.emit("mute");
+    var tags = document.getElementsByTagName("audio"),
+        audios = [];
+    for(var i = 0; i < tags.length; i++) {
+        audios.push(new Audio(tags[i]));
+    }
+
+    if (!page) {
+        page = new Page();
+        page.audios = audios;
+    }
+
+    // 用户点击的时候
+    // 如果页面在播放声音, 则关闭所有声音; 否则将所有audio置为初始状态
+    if (page.isPlaying()) {
+        page.mute();
+    } else {
+        page.play();
+    }
 }
 
-// PPS : 因为没找到 firefox 扩展关于音频的 API, 所以用HTML5音频的API来替代了, 不过和要求有点出入...  囧
+
+self.port.on("mute", function() {
+    handleClick();
+});
+
+// PPS : 因为没找到 firefox 扩展关于音频的 API, 所以用上面的代码来实现静音. 但这并不是真正的静音.

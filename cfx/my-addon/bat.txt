@@ -1,0 +1,7 @@
+cd /d G:\XAMPP\htdocs\Github\meAjax\cfx
+
+bin\activate
+
+cd my-addon
+
+cfx run
