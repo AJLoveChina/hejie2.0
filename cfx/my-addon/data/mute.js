@@ -1,5 +1,4 @@
-var audios = [],
-    page;
+var page;
 
 function Audio(dom) {   // 每一个Audio的实例对应页面上的 一个 audio 标签, 负责其相应的逻辑
     this.dom = dom;
@@ -77,7 +76,7 @@ function handleClick(state) {
     if (page.isPlaying()) {
         page.mute();
     } else {
-        page.play();
+        page.backInit();
     }
 }
 
