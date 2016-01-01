@@ -1,6 +1,8 @@
+<h2>2016-01-01</h2>
+<article>新的一年, Hello 2016</article>
+
 <h2>2015-12-31</h2>
 <article>新年快乐!</article>
-
 
 <h2>2015-12-30</h2>
 <article>nui form 还有许多值得挖掘的地方, 还有明天要提交一下API, 不然太难搞了. 今天看了半天的Thinking in java, 感觉缺氧了..</article>
