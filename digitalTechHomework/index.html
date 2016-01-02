@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>数字图像处理</title>
+	<link rel='stylesheet' type='text/css' href='css/index.css'>
+</head>
+<body>
+<<<<<<< HEAD
+<p>注意本地测试时，需使用本地服务器方式打开，例如localhost或者127.0.0.1 因为HTML5的getImageData方法不支持处理跨域请求的图片，而在本地文件系统中，浏览器默认是跨域加载的图片。</p>
+=======
+<p>(请使用IE9+,Firefox,safari)(不支持chrome,opera)</p>
+>>>>>>> 8d64645f22d4eaef8163208854dcf32baba178a6
+
+<h2>请点击一张图片进行直方图均衡化</h2>
+<img src='img/1.jpg' class='img'>
+<img src='img/2.jpg' class='img'>
+<img src='img/3.jpg' class='img'>
+<img src='img/4.jpg' class='img'>
+<img src='img/5.jpg' class='img'>
+<img src='img/6.jpg' class='img'>
+<img src='img/7.jpg' class='img'>
+<img src='img/8.jpg' class='img'>
+<img src='img/9.jpg' class='img'>
+<img src='img/10.jpg' class='img'>
+<canvas id='canvas' width='150' height='175'>
+canvas not supported
+</canvas>
+<hr>
+<h2>图像分割</h2>
+<p>1.基于阈值的分割</p>
+<input type='text' id='huidu' value='请输入灰度值'>
+<input type='button' id='huidubtn' value='分割'>
+<p>2.大津阈值法</p>
+<input type='button' value='分割' id='dajin'>
+<span>最佳阈值分割点：<span id='GMAXYUZHI'>?</span>
+<br>
+<span style='font-size:12px;'>(原图直方图分布)下图</span><br>
+<canvas id='can0' width='256' height='100'></canvas>
+<br>
+<img src='img/ss.jpg'>
+<canvas id='can' width='222' height='269'></canvas>
+<!--**************************************************-->
+
+<hr>
+<script type='text/javascript' src='js/index.js'></script>
+
+</body>
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> 8d64645f22d4eaef8163208854dcf32baba178a6
