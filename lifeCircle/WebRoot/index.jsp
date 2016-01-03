@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +22,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    	<h1>大家好</h1>
+   Life circle <br>
+   Simpel dateformate
+   <%
+   	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+   	String s = sdf.format(new Date());
+   	out.println(s);
+   	String key = request.getParameter("key");
+    out.print(key);
+    %>
+    
+    
   </body>
 </html>
