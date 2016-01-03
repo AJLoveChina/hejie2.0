@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	out.println(s);
    	String key = request.getParameter("key");
     out.print(key);
-    %>
+    %> 
     
     
   </body>
