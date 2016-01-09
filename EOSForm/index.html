@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="css/index.css" type="text/css"/>
 </head>
 <body>
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -10,13 +11,29 @@
 <script src="bower_components/seajs/dist/sea-debug.js"></script>
 
 
+<div id="container"></div>
 
 
-<div id="div1"></div>
+<div id="conponents">
+
+    <div class="component">
+        A
+    </div>
+
+</div>
 
 
+<script>
+    seajs.config({
+        base: './js/modules',
+        alias: {
+            load : "load.js",
+            index: "index.js"
+        },
+        debug : true
+    });
+    seajs.use("load");
+</script>
 
-
-<script src="js/index.js"></script>
 </body>
 </html>

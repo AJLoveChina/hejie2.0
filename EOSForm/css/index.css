@@ -1,0 +1,18 @@
+*{
+    margin:0;padding: 0;
+}
+
+#container {
+    width:400px;height:400px;
+    border : 1px solid #ccc;
+    margin:20px;
+}
+
+#conponents{
+    margin:20px;
+}
+.component{
+    width:100px;
+    min-width:100px;min-height: 50px;
+    border:1px solid #ccc;
+}
