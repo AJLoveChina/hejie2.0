@@ -1,11 +1,13 @@
 define(function (require, exports, module) {
 
 
-    $(".component").draggable();
+    $(".component").draggable({
+        revert : true
+    });
     $("#container").droppable({
         drop : function (event, ui) {
             console.log("Something in my body");
-            $(this).html(ui.draggable.clone().removeAttr("style"));
+            $(this).append(ui.draggable.clone().removeAttr("style"));
         }
     });
 
