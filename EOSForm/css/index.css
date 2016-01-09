@@ -12,6 +12,7 @@
     margin:20px;
 }
 .component{
+    float:left;
     width:100px;
     min-width:100px;min-height: 50px;
     border:1px solid #ccc;
