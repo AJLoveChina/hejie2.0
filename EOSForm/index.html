@@ -11,10 +11,10 @@
 <script src="bower_components/seajs/dist/sea-debug.js"></script>
 
 
-<div id="container"></div>
+<div id="container" class="connectedSortable"></div>
+<div id="gabbage" class="connectedSortable"></div>
 
-
-<div id="conponents">
+<div id="conponents" class="clearfix">
 
     <div class="component">
         A
@@ -28,20 +28,27 @@
     <div class="component">
         D
     </div>
-
 </div>
+
+<div id="resizable"></div>
+
+
+
 
 
 <script>
-    seajs.config({
-        base: './js/modules',
-        alias: {
-            load : "load.js",
-            index: "index.js"
-        },
-        debug : true
+    $(function () {
+        seajs.config({
+            base: './js/modules',
+            alias: {
+                load : "load.js",
+                index: "index.js"
+            },
+            debug : true
+        });
+        seajs.use("load");
     });
-    seajs.use("load");
+    $("#resizable").resizable();
 </script>
 
 </body>

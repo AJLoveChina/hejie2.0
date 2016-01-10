@@ -6,8 +6,18 @@
     width:400px;height:400px;
     border : 1px solid #ccc;
     margin:20px;
+    display: inline-block;
 }
-
+#gabbage{
+    width:400px;height:400px;
+    border : 1px solid #ccc;
+    margin:20px;
+    display: inline-block;
+}
+#resizable {
+    width:100px;height: 100px;
+    border: 1px solid #ccc;
+}
 #conponents{
     margin:20px;
 }
@@ -15,5 +25,11 @@
     float:left;
     width:100px;
     min-width:100px;min-height: 50px;
-    border:1px solid #ccc;
+    outline:1px solid #ccc;
+}
+.clearfix:after{
+    display: block;
+    height: 0;
+    clear: both;
+    content: "";
 }
