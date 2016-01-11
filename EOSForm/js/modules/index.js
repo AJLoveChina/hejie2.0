@@ -20,9 +20,5 @@ define(function (require, exports, module) {
     $("#container, #gabbage").sortable({
         connectWith: ".connectedSortable"
     }).disableSelection();
-    $("#container").resizable();
-
-
-
 
 });
