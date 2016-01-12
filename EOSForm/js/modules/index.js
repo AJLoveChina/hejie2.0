@@ -21,4 +21,6 @@ define(function (require, exports, module) {
         connectWith: ".connectedSortable"
     }).disableSelection();
 
+
+    $("#resizable").resizable();
 });
