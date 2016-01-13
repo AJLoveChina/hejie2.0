@@ -7,42 +7,22 @@
 <body>
 
 <script src="js/modules/jsFormat.js"></script>
+<script src="js/modules/htmlFormat.js"></script>
+<script src="js/modules/cssFormat.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="js/modules/jq-tool.js"></script>
 
-<div id="content">
 
-    (function () { console.log(123); })();
-
-</div>
 
 <script>
-
-    $(function () {
-        $("#beautify") .click(function () {
-            document.getElementById('beautify').disabled = true;
-            js_source = document.getElementById('content').value.replace(/^\s+/, '');
-            tabsize = document.getElementById('tabsize').value;
-            tabchar = ' ';
-            if (tabsize == 1) {
-                tabchar = '\t';
-            }
-
-            if (js_source && js_source.charAt(0) === '<') {
-                document.getElementById('result').value = style_html(js_source, tabsize, tabchar, 80);
-            } else {
-                document.getElementById('result').value = js_beautify(js_source, tabsize, tabchar);
-            }
+    var html = '<div class="GuoLvCbtn"><input type="button" value="格式化" class="GLOkBtn" id="beautify"><input type="button" value="普通压缩" class="GLOkBtn" id="pack0"><input type="button" value="加密压缩" class="GLOkBtn" id="pack1"><input type="button" value="复制" class="bg-blue02" id="clip" data-clipboard-target="txtInitCode"><input type="button" id="clear" value="清空" class="bg-blue02"></div>';
+    var js = "for(var i = 0; i < 100; i++) {console.log(i);}";
+    var css = "#div{color:red;font-size:12px;}#span{color:lightblue;}";
 
 
 
-            if (jQuery("#result").val()) $("#result").siblings().hide();
-            document.getElementById('beautify').disabled = false;
-            return false;
-
-        });
-    });
-
+    console.log(style_html(html));
+    console.log(lCSSCoder.format(css));
+    console.log(js_beautify(js));
 </script>
 
 
