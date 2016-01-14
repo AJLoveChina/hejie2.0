@@ -16,7 +16,8 @@
     "jquery": "~2.1.4",
     "less": "~2.5.3",
     "seajs": "~3.0.0",
-    "slick-carousel": "slick.js#~1.5.8"
+    "slick-carousel": "slick.js#~1.5.8",
+    "requirejs": "~2.1.22"
   },
   "ignore": [
     "**/.*",
