@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script src="../bower_components/requirejs/require.js"></script>
+
+<script>
+    require.config({
+        baseUrl: "",
+        paths: {
+            "some": "some/v1.0"
+        },
+        waitSeconds: 15
+    });
+
+    require(["js/model/A.js"], function (a) {
+        console.log(a.name);
+    });
+
+
+    require(["js/model/B.js"], function (b) {
+        console.log(b.age);
+    });
+
+    require(["js/controller/X.js"], function (X) {
+        console.log(X);
+    });
+
+    require(["js/controller/Y.js"], function (Y) {
+        console.log(Y);
+    });
+</script>
+
+</body>
+</html>
