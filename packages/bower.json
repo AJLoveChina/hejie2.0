@@ -7,22 +7,16 @@
   "description": "Web pacpac",
   "main": "",
   "moduleType": [
-    "amd",
-    "es6",
-    "globals",
-    "node",
-    "yui"
+    "amd"
   ],
   "license": "MIT",
   "dependencies": {
-    "animate.css": "~3.4.0",
-    "Chart.js": "Chart-js#~1.0.2",
-    "hammerjs": "hammer.js#~2.0.4",
-    "jquery-pjax": "~1.9.6",
-    "underscore": "~1.8.3",
-    "d3": "~3.5.9",
-    "polymer": "Polymer/polymer#1.2.0",
-    "parse": "~1.6.7"
+    "angular": "~1.4.8",
+    "markdown": "~0.5.0",
+    "jquery": "~2.1.4",
+    "less": "~2.5.3",
+    "seajs": "~3.0.0",
+    "slick-carousel": "slick.js#~1.5.8"
   },
   "ignore": [
     "**/.*",
