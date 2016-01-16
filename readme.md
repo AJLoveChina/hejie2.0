@@ -2,7 +2,7 @@
 2016-01-16
 </h2>
 <article>
-比较了requirejs 与seajs之后, 我还是决定用seajs了.我并不是说requirejs 比seajs内部的实现要优秀, 我也没这个能力看得出来. 只是觉得requirejs的开发者们提供了很全面的文档以及便于找到的部署打包工具, 从这个point上, seajs还是很让许多开始支持它的开发者们失望的,我希望看到国内开发者的优秀js库, 但seajs可能还不够用心.
+比较了requirejs 与seajs之后, 我还是决定用requirejs了.我并不是说requirejs 比seajs内部的实现要优秀, 我也没这个能力看得出来. 只是觉得requirejs的开发者们提供了很全面的文档以及便于找到的部署打包工具, 从这个point上, seajs还是很让许多开始支持它的开发者们失望的,我希望看到国内开发者的优秀js库, 但seajs可能还不够用心.
 </article>
 
 <h2>
