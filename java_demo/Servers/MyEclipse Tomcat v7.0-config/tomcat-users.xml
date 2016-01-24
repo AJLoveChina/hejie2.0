@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcat-users>
+   <role rolename="myeclipseWeb"/>
+   <user password="web-pwd" roles="myeclipseWeb" username="web"/>
+
+   <role rolename="myeclipseWebservices"/>
+   <user password="webservices-pwd" roles="myeclipseWebservices" username="webservices"/>
+
+   <user password="admin-pwd" roles="myeclipseWeb,myeclipseWebservices" username="admin"/>
+</tomcat-users>
