@@ -2,6 +2,7 @@ package ajax.model;
 
 import java.io.*;
 import java.net.*;
+import java.sql.*;
 import java.util.*;
 
 public class Joke {
@@ -10,13 +11,19 @@ public class Joke {
 	private String content;
 	private ArrayList<String> stamps;
 	
-	private int like;
+	private int likes;
 	private int dislike;
 	public String getUrl() {
 		return url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public int getLikes() {
+		return likes;
+	}
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	public String getTitle() {
 		return title;
@@ -35,12 +42,6 @@ public class Joke {
 	}
 	public void setStamps(ArrayList<String> stamps) {
 		this.stamps = stamps;
-	}
-	public int getLike() {
-		return like;
-	}
-	public void setLike(int like) {
-		this.like = like;
 	}
 	public int getDislike() {
 		return dislike;
@@ -72,14 +73,52 @@ public class Joke {
 		}
 	}
 	
+	public static Connection getConn() {
+		String url = "jdbc:mysql://127.0.0.1:3306/primeton";
+		String name = "name";
+		String pass = "123";
+		
+		
+		Connection conn = null;
+		try {
+			Class.forName("org.gjt.mm.mysql.Driver");
+			conn = DriverManager.getConnection(url, name, pass);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
 	
+	public static Statement getStat() {
+		Connection conn = getConn();
+		Statement stat = null;
+		try {
+			stat = conn.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return stat;
+	}
 	
 	public static void main(String[] args) {
-		Joke joke = new Joke();
 		
-		joke.setUrl("http://m.pengfu.com/content/1470484/");
+		Statement stat = Joke.getStat();
+		ResultSet rs;
+		try {
+			rs = stat.executeQuery("SELECT * FROM meajax.joke");
+			while(rs.next()) {
+				System.out.println(rs.getString("title"));
+				System.out.println(rs.getString("content"));
 
-		System.out.println(joke.getHtmlFromUrl());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
