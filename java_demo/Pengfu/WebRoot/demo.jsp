@@ -23,6 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <a href="main.do">Main</a>
+    <script src="source/bower_components/jquery/jquery.js"></script>
+    <script data-main="source/js/load.js" src="source/bower_components/requirejs/require.js"></script>
+
+
   </body>
 </html>

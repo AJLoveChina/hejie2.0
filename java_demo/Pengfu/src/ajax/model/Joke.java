@@ -13,6 +13,7 @@ public class Joke {
 	
 	private int likes;
 	private int dislike;
+	private static String urlPrefix = "http://m.pengfu.com/content/";
 	public String getUrl() {
 		return url;
 	}
@@ -71,6 +72,15 @@ public class Joke {
 			e.printStackTrace();
 			return "";
 		}
+	}
+	
+	public static String getHtmlByUrlId(String id) {
+		String content = "";
+		Joke joke = new Joke();
+		joke.setUrl(urlPrefix + id);
+		
+		content = joke.getHtmlFromUrl();
+		return content;
 	}
 	
 	public static Connection getConn() {
