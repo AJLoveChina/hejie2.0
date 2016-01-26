@@ -17,13 +17,13 @@ define(function () {
             type : "GET",
             contentType : "text/html;charset=utf-8",
             success : function (res) {
-                var dom = $(decodeURIComponent(res));
+                var dom = $(res);
                 console.log(dom);
                 var Joke = {
                 		urlId : copy,
-                		title : dom.find("#ctl01 > section > div.text > section.textdl > h3").html()
+                		title : $.trim(dom.find(".textdl h3 a").html()),
+                		content : $.trim(dom.find(".textdl .tex1").html())
                 };
-                console.log(Joke);
             },
             error : function () {
 

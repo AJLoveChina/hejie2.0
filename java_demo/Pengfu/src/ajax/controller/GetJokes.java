@@ -43,7 +43,7 @@ public class GetJokes extends HttpServlet {
 		String content = Joke.getHtmlByUrlId(id);
 		
 		
-		//response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();
 		System.out.println(content);
