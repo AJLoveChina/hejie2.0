@@ -22,8 +22,22 @@ define(function () {
                 var Joke = {
                 		urlId : copy,
                 		title : $.trim(dom.find(".textdl h3 a").html()),
-                		content : $.trim(dom.find(".textdl .tex1").html())
+                		content : $.trim(dom.find(".textdl .tex1").html()),
+                		like : parseInt(dom.find(".textdl span[id*=Support] em").text()),
+                		dislike : parseInt(dom.find(".textdl span[id*=Oppose] em").text())
                 };
+
+                $.ajax({
+                	url : "SaveJoke.do",
+                	type : "POST",
+                	data : Joke,
+                	success : function () {
+                		
+                	},
+                	error : function () {
+                		
+                	}
+                });
             },
             error : function () {
 

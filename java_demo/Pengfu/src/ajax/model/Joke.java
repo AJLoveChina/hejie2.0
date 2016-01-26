@@ -74,10 +74,13 @@ public class Joke {
 		}
 	}
 	
+	public static String getUrlById(String id) {
+		return urlPrefix + id;
+	}
 	public static String getHtmlByUrlId(String id) {
 		String content = "";
 		Joke joke = new Joke();
-		joke.setUrl(urlPrefix + id);
+		joke.setUrl(Joke.getUrlById(id));
 		
 		content = joke.getHtmlFromUrl();
 		return content;
@@ -129,6 +132,11 @@ public class Joke {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public boolean saveToSQL() {
+		// todo
+		return true;
 	}
 	
 	

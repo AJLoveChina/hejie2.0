@@ -2,7 +2,6 @@ package ajax.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import ajax.model.Joke;
 
 /**
- * Servlet implementation class GetJokes
+ * Servlet implementation class SaveJoke
  */
-@WebServlet("/GetJokes.do")
-public class GetJokes extends HttpServlet {
+@WebServlet("/SaveJoke.do")
+public class SaveJoke extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetJokes() {
+    public SaveJoke() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,15 +37,24 @@ public class GetJokes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		String id = request.getParameter("urlId");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		int like = Integer.parseInt(request.getParameter("like").trim());
+		int dislike = Integer.parseInt(request.getParameter("dislike").trim());
 		
-		String content = Joke.getHtmlByUrlId(id);
-		
-		
-		response.setContentType("text/html;charset=utf-8");
+		Joke joke = new Joke();
+		joke.setUrl(Joke.getUrlById(id));
+		joke.setTitle(title);
+		joke.setContent(content);
+		joke.setLikes(like);
+		joke.setDislike(dislike);
 		
 		PrintWriter out = response.getWriter();
-		out.print(content);
+		out.print(123);
+	}
+	
+	public static void main(String[] args) {
 		
 	}
 
