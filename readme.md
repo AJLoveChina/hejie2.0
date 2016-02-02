@@ -1,4 +1,12 @@
 <h2>
+2016-02-02
+</h2>
+<article>
+seajs require 加载模块出现BUG, 原因未知, 标记TODO.<br>
+汤圆迷宫, 这是一个不错的名字
+</article>
+
+<h2>
 2016-02-01
 </h2>
 <article>
