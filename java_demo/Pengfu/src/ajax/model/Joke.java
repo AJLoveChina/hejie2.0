@@ -5,6 +5,13 @@ import java.net.*;
 import java.sql.*;
 import java.util.*;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import ajax.tools.Mysql;
+
 public class Joke {
 	private String url;
 	private String title;
@@ -14,6 +21,7 @@ public class Joke {
 	private int likes;
 	private int dislike;
 	private static String urlPrefix = "http://m.pengfu.com/content/";
+	private static String tableName = "joke";
 	public String getUrl() {
 		return url;
 	}
@@ -115,6 +123,63 @@ public class Joke {
 		}
 		return stat;
 	}
+
+	
+	public static void getFromPengfuAndSaveToSqlByUrlId(String id) {
+		
+		String url = Joke.getUrlById(id);
+		ArrayList<String> stampsArr = new ArrayList<String>();
+		
+		
+		try {
+			Document doc = Jsoup.connect(url).get();
+			
+			Elements title = doc.select("#ctl01 > section > div.text > section.textdl > h3 > a");
+			Elements content = doc.select("#ctl01 > section > div.text > section.textdl > div.tex1");
+			Elements likes = doc.select("em[id*=Support_Num_]");
+			Elements dislike = doc.select("em[id*=Oppose_Num_]");
+			Elements stamps = doc.select("#ctl01 > section > div.text > section.textdl > div.new_1.clearfix a");
+			
+			Iterator<Element> iterator = stamps.iterator();
+			Element ele;
+			while(iterator.hasNext()) {
+				ele = (Element) iterator.next();
+				stampsArr.add(ele.html());
+			}
+			
+			
+			
+			
+			Joke joke = new Joke();
+			joke.setTitle(title.html());
+			joke.setContent(content.html());
+			joke.setUrl(url);
+			joke.setLikes(Integer.parseInt(likes.html()));
+			joke.setDislike(Integer.parseInt(dislike.html()));
+			
+			joke.saveToSQL();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		}
+	}
+	
+	public boolean saveToSQL() {
+		Statement stat = Mysql.getStat();
+		String sqlCmd = String.format("INSERT INTO %s (title, content, stamps, likes, dislike, url) VALUES('%s', '%s', '%s', %d, %d, '%s')", 
+				tableName, this.getTitle(), this.getContent(), "", this.getLikes(), this.getDislike(), this.getUrl());
+		
+		try {
+			stat.execute(sqlCmd);
+			System.out.println("Grab OK");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Grab Error");
+		}
+		return true;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -133,11 +198,7 @@ public class Joke {
 		}
 		
 	}
-	
-	public boolean saveToSQL() {
-		// todo
-		return true;
-	}
+
 	
 	
 }
