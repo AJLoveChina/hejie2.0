@@ -13,7 +13,15 @@ import org.jsoup.select.Elements;
 import ajax.tools.Mysql;
 
 public class Joke {
+	private int jokeId;
 	private String url;
+	public int getJokeId() {
+		return jokeId;
+	}
+	public void setJokeId(int jokeId) {
+		this.jokeId = jokeId;
+	}
+
 	private String title;
 	private String content;
 	private ArrayList<String> stamps;
@@ -51,6 +59,15 @@ public class Joke {
 	}
 	public void setStamps(ArrayList<String> stamps) {
 		this.stamps = stamps;
+	}
+	public void setStampsByString(String stamps) {
+		String[] stampsArr = stamps.split(",");
+		ArrayList<String> result = new ArrayList<String>();
+		
+		for(String s : stampsArr) {
+			result.add(s);
+		}
+		this.stamps = result;
 	}
 	public int getDislike() {
 		return dislike;
@@ -179,6 +196,47 @@ public class Joke {
 			System.out.println("Grab Error");
 		}
 		return true;
+	}
+	
+	public static Joke readFromResultSet(ResultSet rs) {
+		Joke joke = new Joke();
+		
+		
+		try {
+			if (rs.next()) {
+				joke.setJokeId(rs.getInt("joke_id"));
+				joke.setTitle(rs.getString("title"));
+				joke.setContent(rs.getString("content"));
+				joke.setStampsByString(rs.getString("stamps"));
+				joke.setUrl(rs.getString("url"));
+				joke.setLikes(rs.getInt("likes"));
+				joke.setDislike(rs.getInt("dislikes"));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return joke;
+	}
+	public static Joke getOneByIdFromSQL(int id) {
+		Joke joke = null;
+		if (id <= 0) {
+			id = 1;
+		}
+		
+		Statement stat = Mysql.getStat();
+		String sqlCmd = String.format("SELECT * FROM %s WHERE joke_id = %d LIMIT 1", tableName, id);
+		
+		try {
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			joke = Joke.readFromResultSet(rs);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return joke;
 	}
 	
 	public static void main(String[] args) {

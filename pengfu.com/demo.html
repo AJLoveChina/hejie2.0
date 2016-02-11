@@ -2,25 +2,73 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Pengfu.com</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>汤圆笑屋</title>
 </head>
 <body>
 <script src="bower_components/jquery/jquery.js"></script>
-<script src="bower_components/requirejs/require.js"></script>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" href="web/css/index.css"/>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script data-main="main.js" src="bower_components/requirejs/require.js"></script>
+
+
+
+
+<nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div style="display: inline-block;height: 50px;overflow: hidden">
+                <img src="web/images/logo.PNG" height="70px " alt=""/>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div style="height: 70px;"></div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        你再唱一遍试试来
+    </div>
+    <div class="panel-body">
+        一天早晨起床后，我发现爸爸妈妈都没在家，所以我在卫生间唱了一首恶搞的歌“我家住在黄土高坡~我爸是我妈表哥~还没结婚他俩就偷偷摸摸~一不小心有了我~有了我~”这时我爸敲了敲房间的门“你再唱一遍试试来？
+    </div>
+</div>
+
+<div class="btn-group" role="group">
+    <button class="btn btn-danger">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        Previous</button>
+</div>
+
+<div class="btn-group" role="group">
+    <button class="btn btn-info">
+        <span class="glyphicon glyphicon-random"></span>
+        Random</button>
+</div>
+
+<div class="btn-group" role="group">
+    <button class="btn btn-warning">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        Next
+    </button>
+</div>
+
 
 
 <script>
     require.config({
-        baseUrl: "./js/modules",
+        baseUrl: "./web/js/modules",
         paths: {
             "some": "some/v1.0"
         },
         waitSeconds: 15
     });
-
-    require(["main.js"]);
-
-
 </script>
 
 
