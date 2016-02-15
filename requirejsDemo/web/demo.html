@@ -10,9 +10,9 @@
 
 <script>
     require.config({
-        baseUrl: "",
+        baseUrl: "js",
         paths: {
-            "some": "some/v1.0"
+            "do1": "controller/do1"
         },
         waitSeconds: 15
     });
@@ -34,7 +34,7 @@
 //    });
 
 
-    requirejs(["js/controller/do1.js"]);
+    require(["do1"]);
 </script>
 
 </body>
