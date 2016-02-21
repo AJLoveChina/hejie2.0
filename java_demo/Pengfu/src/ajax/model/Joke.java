@@ -10,26 +10,28 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import ajax.tools.Mysql;
+import ajax.tools.*;
 
 public class Joke {
 	private int jokeId;
 	private String url;
+	private String title;
+	private String content;
+	private ArrayList<String> stamps;
+	private int likes;
+	private int dislike;
+	private int hasGetImage;
+	
+	private static String urlPrefix = "http://m.pengfu.com/content/";
+	private static String tableName = "joke";
+	
+	
 	public int getJokeId() {
 		return jokeId;
 	}
 	public void setJokeId(int jokeId) {
 		this.jokeId = jokeId;
 	}
-
-	private String title;
-	private String content;
-	private ArrayList<String> stamps;
-	
-	private int likes;
-	private int dislike;
-	private static String urlPrefix = "http://m.pengfu.com/content/";
-	private static String tableName = "joke";
 	public String getUrl() {
 		return url;
 	}
@@ -75,6 +77,14 @@ public class Joke {
 	public void setDislike(int dislike) {
 		this.dislike = dislike;
 	}
+	public int getHasGetImage() {
+		return hasGetImage;
+	}
+	public void setHasGetImage(int hasGetImage) {
+		this.hasGetImage = hasGetImage;
+	}
+	
+	// GETTER AND SETTER END 
 	
 	public String getHtmlFromUrl() {
 		try {
@@ -198,47 +208,172 @@ public class Joke {
 		return true;
 	}
 	
-	public static Joke readFromResultSet(ResultSet rs) {
-		Joke joke = new Joke();
+	public boolean update(){
+		Statement stat = Mysql.getStat();
+		String sqlCmd = String.format("UPDATE %s SET title = '%s',content = '%s', stamps = '%s', likes = %d, dislike = %d, url = '%s', has_get_image = %d WHERE joke_id = %d LIMIT 1", 
+				tableName, this.getTitle(), this.getContent(), "", this.getLikes(), this.getDislike(), this.getUrl(), this.getHasGetImage(), 
+				this.getJokeId());
 		
+		try {
+			stat.execute(sqlCmd);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("UPdate error");
+		}
+		return true;
+	}
+	
+	
+//	public static Joke readFromResultSet(ResultSet rs) {
+//		Joke joke = new Joke();
+//		
+//		
+//		try {
+//			if (rs.next()) {
+//				joke.setJokeId(rs.getInt("joke_id"));
+//				joke.setTitle(rs.getString("title"));
+//				joke.setContent(rs.getString("content"));
+//				joke.setStampsByString(rs.getString("stamps"));
+//				joke.setUrl(rs.getString("url"));
+//				joke.setLikes(rs.getInt("likes"));
+//				joke.setDislike(rs.getInt("dislikes"));
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	
+//		return joke;
+//	}
+	
+	protected void readFromResultSet(ResultSet rs) {
 		
 		try {
 			if (rs.next()) {
-				joke.setJokeId(rs.getInt("joke_id"));
-				joke.setTitle(rs.getString("title"));
-				joke.setContent(rs.getString("content"));
-				joke.setStampsByString(rs.getString("stamps"));
-				joke.setUrl(rs.getString("url"));
-				joke.setLikes(rs.getInt("likes"));
-				joke.setDislike(rs.getInt("dislikes"));
+				this.setJokeId(rs.getInt("joke_id"));
+				this.setTitle(rs.getString("title"));
+				this.setContent(rs.getString("content"));
+				this.setStampsByString(rs.getString("stamps"));
+				this.setUrl(rs.getString("url"));
+				this.setLikes(rs.getInt("likes"));
+				this.setDislike(rs.getInt("dislike"));
+				this.setHasGetImage(rs.getInt("has_get_image"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
 	
+	public static Joke getOneByIdFromSQL(int id) {
+		Joke joke = Joke.getIns();
+		
+		if (id <= 17) {
+			id = 17;
+		}
+		
+		joke.setJokeId(id);
+		joke.loadById();
+		
 		return joke;
 	}
-	public static Joke getOneByIdFromSQL(int id) {
-		Joke joke = null;
-		if (id <= 0) {
-			id = 1;
-		}
+	
+	public static Joke getIns(){
+		return new Joke();
+	}
+	
+	public void loadById() {
+		int id = this.getJokeId();
 		
 		Statement stat = Mysql.getStat();
 		String sqlCmd = String.format("SELECT * FROM %s WHERE joke_id = %d LIMIT 1", tableName, id);
 		
 		try {
 			ResultSet rs = stat.executeQuery(sqlCmd);
+		
+			this.readFromResultSet(rs);
 			
-			joke = Joke.readFromResultSet(rs);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return joke;
+	}
+	protected boolean modifyImageOfContent(Document doc) {
+		Elements eles = doc.getElementsByTag("img");
+		
+		Iterator it = eles.iterator();
+		Element ele;
+		String src;
+		String fileName;
+		boolean isok = true;
+		
+		while (it.hasNext()) {
+			ele = (Element)it.next();
+			src = ele.attr("src");
+			
+			if (isImageSrcFromOuterWebsite(src)) {
+				fileName = FileTools.getImageByUrl(src);
+				
+				if (fileName.equals("")) {
+					isok = false;
+				} else {
+					ele.attr("src", "web/images/" + fileName);
+				}
+				ele.attr("alt", "汤圆小屋");
+				ele.attr("title", "汤圆小屋提醒您：点击可查看大图");
+			} else {
+				System.out.println("This is not from origin");
+			}
+		}
+		
+		return isok;
 	}
 	
+	protected boolean modifyAHrefOfContent(Document doc){
+		Elements eles = doc.getElementsByTag("a");
+		
+		for (Element ele : eles) {
+			ele.attr("href", "javascript:;");
+		}
+		
+		return true;
+	}
+	
+	public void cleanContent() {
+		// remove some information from origin webSite
+		String content = this.getContent();
+		if (content == null || content.equals("")) {
+			System.out.println("Content is empty!");
+			return;
+		}
+		Document doc = Jsoup.parse(content);
+		boolean isok = true;
+		
+		isok = this.modifyImageOfContent(doc);
+		isok = this.modifyAHrefOfContent(doc);
+		
+		if (isok) {
+			this.setContent(doc.body().html());
+			this.setHasGetImage(1);
+			this.update();
+		}
+	}
+	
+	
+	public static boolean isImageSrcFromOuterWebsite(String src){
+		boolean bool = true;
+		
+		if (src.startsWith("web/images/")) {
+			bool = false;
+		}
+		
+		return bool;
+	}
+	
+
+	
+
 	public static void main(String[] args) {
 		
 		Statement stat = Joke.getStat();
@@ -256,6 +391,8 @@ public class Joke {
 		}
 		
 	}
+
+
 
 	
 	

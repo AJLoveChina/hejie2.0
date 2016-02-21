@@ -7,25 +7,10 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Joke joke = (Joke)request.getAttribute("joke");
 
-System.out.print(joke.getContent());
 %>
 
 
 <jsp:include page="views/includes/header.jsp"></jsp:include>
-
-
-<nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <div style="display: inline-block;height: 50px;overflow: hidden">
-                <img src="web/images/logo.PNG" height="70px " alt=""/>
-            </div>
-        </div>
-    </div>
-</nav>
-
-
-<div style="height: 70px;"></div>
 
 
 <jsp:include page="views/joke/one.jsp"></jsp:include>

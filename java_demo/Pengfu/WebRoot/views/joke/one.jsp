@@ -13,3 +13,4 @@
         <%=joke.getContent()  %>
     </div>
 </div>
+

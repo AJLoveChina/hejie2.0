@@ -43,7 +43,7 @@ public class OneJoke extends HttpServlet {
 		String idParam = request.getParameter("id");
 		int id;
 		if (idParam == null) {
-			id = 17;
+			id = 18;
 		} else {
 			id = Integer.parseInt(idParam);
 		}
