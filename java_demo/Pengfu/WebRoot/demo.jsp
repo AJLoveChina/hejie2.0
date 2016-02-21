@@ -6,9 +6,17 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Joke joke = (Joke)request.getAttribute("joke");
+int previous = joke.getJokeId() - 1;
+int next = joke.getJokeId() + 1;
 
 %>
 
+<style>
+	.font-white{
+		color:white;
+	}
+
+</style>
 
 <jsp:include page="views/includes/header.jsp"></jsp:include>
 
@@ -18,8 +26,10 @@ Joke joke = (Joke)request.getAttribute("joke");
 
 <div class="btn-group" role="group">
     <button class="btn btn-danger">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        Previous</button>
+    	<a class="font-white" href="OneJoke?id=<%=previous %>">
+	    	<span class="glyphicon glyphicon-chevron-left"></span>
+	        Previous</button>
+    	</a>
 </div>
 
 <div class="btn-group" role="group">
@@ -30,8 +40,10 @@ Joke joke = (Joke)request.getAttribute("joke");
 
 <div class="btn-group" role="group">
     <button class="btn btn-warning">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        Next
+    	<a class="font-white" href="OneJoke?id=<%=next %>">
+	    	<span class="glyphicon glyphicon-chevron-right"></span>
+	        Next
+    	</a>
     </button>
 </div>
 
