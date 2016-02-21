@@ -1,31 +1,68 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+Joke joke = (Joke)request.getAttribute("joke");
+
+System.out.print(joke.getContent());
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'demo.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
 
-  </head>
-  
-  <body>
-    <script src="source/bower_components/jquery/jquery.js"></script>
-    <script data-main="source/js/load.js" src="source/bower_components/requirejs/require.js"></script>
+<jsp:include page="views/includes/header.jsp"></jsp:include>
 
 
-  </body>
-</html>
+<nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div style="display: inline-block;height: 50px;overflow: hidden">
+                <img src="web/images/logo.PNG" height="70px " alt=""/>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div style="height: 70px;"></div>
+
+
+<jsp:include page="views/joke/one.jsp"></jsp:include>
+
+
+<div class="btn-group" role="group">
+    <button class="btn btn-danger">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        Previous</button>
+</div>
+
+<div class="btn-group" role="group">
+    <button class="btn btn-info">
+        <span class="glyphicon glyphicon-random"></span>
+        Random</button>
+</div>
+
+<div class="btn-group" role="group">
+    <button class="btn btn-warning">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        Next
+    </button>
+</div>
+
+
+
+<script>
+    require.config({
+        baseUrl: "./web/js/modules",
+        paths: {
+            "some": "some/v1.0"
+        },
+        waitSeconds: 15
+    });
+</script>
+
+
+<jsp:include page="views/includes/footer.jsp"></jsp:include>
+
+

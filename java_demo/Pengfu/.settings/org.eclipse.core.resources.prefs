@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebRoot/views/includes/header.jsp=UTF-8
+encoding//WebRoot/views/joke/one.jsp=UTF-8
 encoding//src/ajax/model/Joke.java=UTF-8
 encoding/<project>=UTF-8

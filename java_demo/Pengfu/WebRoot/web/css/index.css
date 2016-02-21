@@ -1,0 +1,11 @@
+body {
+  font-size: 16px;
+  font-family: Microsoft Yahei, Arial;
+}
+#aj-header {
+  height: 50px;
+  overflow: hidden;
+}
+.panel {
+  font-size: 1.2em;
+}

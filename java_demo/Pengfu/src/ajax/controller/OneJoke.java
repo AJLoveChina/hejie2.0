@@ -40,12 +40,18 @@ public class OneJoke extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int id = Integer.parseInt(request.getParameter("id"));
+		String idParam = request.getParameter("id");
+		int id;
+		if (idParam == null) {
+			id = 17;
+		} else {
+			id = Integer.parseInt(idParam);
+		}
 		
 		Joke joke = Joke.getOneByIdFromSQL(id);
 		
 		request.setAttribute("joke", joke);
-		RequestDispatcher rd = request.getRequestDispatcher("views/joke/one.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("demo.jsp");
 		rd.forward(request, response);
 		
 	}
