@@ -1,6 +1,7 @@
 package ajax.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,19 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ajax.model.Joke;
-
+import ajax.model.*;
+import ajax.tools.*;
 /**
- * Servlet implementation class OneJoke
+ * Servlet implementation class Index
  */
-@WebServlet("/OneJoke")
-public class OneJoke extends HttpServlet {
+@WebServlet("/Index")
+public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneJoke() {
+    public Index() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,18 +41,12 @@ public class OneJoke extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String idParam = request.getParameter("id");
-		int id;
-		if (idParam == null) {
-			id = 1000;
-		} else {
-			id = Integer.parseInt(idParam);
-		}
+		ArrayList<Joke> jokes = Joke.getPageOf(1);
 		
-		Joke joke = Joke.getOneByIdFromSQL(id);
 		
-		request.setAttribute("joke", joke);
-		RequestDispatcher rd = request.getRequestDispatcher("demo.jsp");
+		request.setAttribute("jokes", jokes);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/index.jsp");
+		
 		rd.forward(request, response);
 		
 	}

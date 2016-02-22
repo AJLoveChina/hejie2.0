@@ -370,7 +370,29 @@ public class Joke {
 		
 		return bool;
 	}
-	
+	public static ArrayList<Joke> getPageOf(int page) {
+		// TODO Auto-generated method stub
+		int begin = 0;
+		int pageSize = 10;
+		ArrayList<Joke> jokes = new ArrayList<Joke>();
+		
+		Statement stat = getStat();
+		String sqlCmd = String.format("SELECT * FROM %s LIMIT %d, %d", tableName, begin + (page = 1) * pageSize, begin + page * pageSize);
+		try {
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			while(rs.next()) {
+				Joke joke = new Joke();
+				joke.readFromResultSet(rs);
+				jokes.add(joke);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return jokes;
+	}	
 
 	
 
@@ -391,6 +413,7 @@ public class Joke {
 		}
 		
 	}
+
 
 
 
