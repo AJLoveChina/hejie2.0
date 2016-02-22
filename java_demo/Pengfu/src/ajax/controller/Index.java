@@ -45,7 +45,9 @@ public class Index extends HttpServlet {
 		
 		
 		request.setAttribute("jokes", jokes);
-		RequestDispatcher rd = request.getRequestDispatcher("/views/index.jsp");
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 		
 		rd.forward(request, response);
 		

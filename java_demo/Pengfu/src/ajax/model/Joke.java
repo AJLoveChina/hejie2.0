@@ -122,7 +122,7 @@ public class Joke {
 	}
 	
 	public static Connection getConn() {
-		String url = "jdbc:mysql://127.0.0.1:3306/primeton";
+		String url = "jdbc:mysql://127.0.0.1:3306/meajax";
 		String name = "name";
 		String pass = "123";
 		
@@ -377,7 +377,7 @@ public class Joke {
 		ArrayList<Joke> jokes = new ArrayList<Joke>();
 		
 		Statement stat = getStat();
-		String sqlCmd = String.format("SELECT * FROM %s LIMIT %d, %d", tableName, begin + (page = 1) * pageSize, begin + page * pageSize);
+		String sqlCmd = String.format("SELECT * FROM %s LIMIT %d, %d", tableName, begin + (page - 1) * pageSize, pageSize);
 		try {
 			ResultSet rs = stat.executeQuery(sqlCmd);
 			
