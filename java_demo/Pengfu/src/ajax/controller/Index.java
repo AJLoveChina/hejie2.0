@@ -40,8 +40,13 @@ public class Index extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int page = Integer.parseInt(request.getParameter("page"));
 		
-		ArrayList<Joke> jokes = Joke.getPageOf(1);
+		if (page <= 0) {
+			page = 1;
+		}
+		
+		ArrayList<Joke> jokes = Joke.getPageOf(page);
 		
 		
 		request.setAttribute("jokes", jokes);

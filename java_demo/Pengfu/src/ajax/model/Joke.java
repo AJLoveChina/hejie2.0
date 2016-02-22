@@ -249,16 +249,14 @@ public class Joke {
 	protected void readFromResultSet(ResultSet rs) {
 		
 		try {
-			if (rs.next()) {
-				this.setJokeId(rs.getInt("joke_id"));
-				this.setTitle(rs.getString("title"));
-				this.setContent(rs.getString("content"));
-				this.setStampsByString(rs.getString("stamps"));
-				this.setUrl(rs.getString("url"));
-				this.setLikes(rs.getInt("likes"));
-				this.setDislike(rs.getInt("dislike"));
-				this.setHasGetImage(rs.getInt("has_get_image"));
-			}
+			this.setJokeId(rs.getInt("joke_id"));
+			this.setTitle(rs.getString("title"));
+			this.setContent(rs.getString("content"));
+			this.setStampsByString(rs.getString("stamps"));
+			this.setUrl(rs.getString("url"));
+			this.setLikes(rs.getInt("likes"));
+			this.setDislike(rs.getInt("dislike"));
+			this.setHasGetImage(rs.getInt("has_get_image"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -292,7 +290,10 @@ public class Joke {
 		try {
 			ResultSet rs = stat.executeQuery(sqlCmd);
 		
-			this.readFromResultSet(rs);
+			if (rs.next()) {
+				this.readFromResultSet(rs);
+			}
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
