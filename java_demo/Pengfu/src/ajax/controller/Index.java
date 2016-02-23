@@ -40,17 +40,21 @@ public class Index extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int page = Integer.parseInt(request.getParameter("page"));
+		String pageParam = request.getParameter("page");
+		int page = 0;
+		if (pageParam != null) {
+			page = Integer.parseInt(pageParam);
+		}
 		
 		if (page <= 0) {
-			page = 1;
+			page = 500;
 		}
 		
 		ArrayList<Joke> jokes = Joke.getPageOf(page);
 		
 		
 		request.setAttribute("jokes", jokes);
-		
+		request.setAttribute("page", page);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 		

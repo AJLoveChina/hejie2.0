@@ -8,7 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 ArrayList<Joke> jokes = (ArrayList<Joke>)request.getAttribute("jokes");
-
+Integer pageIndex = (Integer)request.getAttribute("page");
+String previousPageUrl = Joke.getIndexUrlOfPage(pageIndex - 1);
+String nextPageUrl = Joke.getIndexUrlOfPage(pageIndex + 1);
 %>
 
 <style>
@@ -22,6 +24,13 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)request.getAttribute("jokes");
 
 
 
+<div class="btn-group" role="group" aria-label="">
+  <button type="button" class="btn btn-default">上一页</button>
+   <button type="button" class="btn btn-default">当前 : <%=pageIndex %></button>
+  <button type="button" class="btn btn-default">下一页</button>
+</div>
+<div style="height:10px;"></div>
+
 <%
 	for (Joke joke : jokes) {
 		request.setAttribute("joke", joke);
@@ -32,8 +41,15 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)request.getAttribute("jokes");
 <%
 }
  %>
-
-
+ 
+<div style="height:10px;"></div>
+<div class="btn-group" role="group" aria-label="">
+	<a href="<%=previousPageUrl %>">上一页</a>
+	<a href="<%=nextPageUrl %>">下一页</a>
+  <button type="button" class="btn btn-default"></button>
+   <button type="button" class="btn btn-default">当前 : <%=pageIndex %></button>
+  <button type="button" class="btn btn-default"></button>
+</div>
 
 <script>
     require.config({
@@ -44,6 +60,8 @@ ArrayList<Joke> jokes = (ArrayList<Joke>)request.getAttribute("jokes");
         waitSeconds: 15
     });
 </script>
+
+
 
 
 <jsp:include page="views/includes/footer.jsp"></jsp:include>

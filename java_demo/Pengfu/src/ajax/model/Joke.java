@@ -395,6 +395,9 @@ public class Joke {
 		return jokes;
 	}	
 
+	public static String getIndexUrlOfPage(int page) {
+		return UrlRoute.HOME.toString() + "?page=" + page;
+	}
 	
 
 	public static void main(String[] args) {
