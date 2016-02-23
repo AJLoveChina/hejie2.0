@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -14,11 +14,14 @@
 <link rel="stylesheet" href="web/css/index.css"/>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script data-main="main.js" src="bower_components/requirejs/require.js"></script>
+
 <nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <div style="display: inline-block;height: 50px;overflow: hidden">
-                <img src="web/images/logo.PNG" height="70px " alt=""/>
+            	<a href="<%=UrlRoute.HOME%>">
+            		 <img src="web/images/logo.PNG" height="70px " alt=""/>
+            	</a>
             </div>
         </div>
     </div>

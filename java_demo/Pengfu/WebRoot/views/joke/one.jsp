@@ -7,7 +7,9 @@
  %>
 <div class="panel panel-default">
     <div class="panel-heading">
-    	<%=joke.getTitle() %>	
+    	<a style="color:#333;" href="<%=UrlRoute.ONEJOKE + "?id=" + joke.getJokeId()%>">
+    		<%=joke.getTitle() %>	
+    	</a>
     </div>
     <div class="panel-body">
         <%=joke.getContent()  %>

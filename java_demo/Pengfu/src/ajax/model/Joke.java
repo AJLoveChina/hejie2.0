@@ -399,6 +399,14 @@ public class Joke {
 		return UrlRoute.HOME.toString() + "?page=" + page;
 	}
 	
+	public static String getOneJokeUrlById(int id) {
+		return UrlRoute.ONEJOKE + "?id=" + id; 
+	}
+	public String getOneJokeUrlById() {
+		return "";
+		//return UrlRoute.ONEJOKE + "?id=" + this.getJokeId();
+	}
+	
 
 	public static void main(String[] args) {
 		
