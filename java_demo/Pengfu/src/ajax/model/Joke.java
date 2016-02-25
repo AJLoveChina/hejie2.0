@@ -123,8 +123,8 @@ public class Joke {
 	
 	public static Connection getConn() {
 		String url = "jdbc:mysql://127.0.0.1:3306/meajax";
-		String name = "name";
-		String pass = "123";
+		String name = "root";
+		String pass = "";
 		
 		
 		Connection conn = null;
