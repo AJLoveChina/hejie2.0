@@ -9,3 +9,9 @@ body {
 .panel {
   font-size: 1.2em;
 }
+
+#aj-body{
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+}
