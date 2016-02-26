@@ -10,8 +10,35 @@ body {
   font-size: 1.2em;
 }
 
+@media(max-width:640px) {
+	div#aj-body{
+		min-height:450px;
+	}
+}
 #aj-body{
 	width:100%;
 	max-width:640px;
 	margin:0 auto;
+	min-height:720px;
+}
+
+#aj-footer{
+	margin-top:20px;
+	padding-top:50px;
+	padding-bottom:50px;
+	color :#99979c;
+	text-align: center;
+	background-color:#2a2730;
+}
+#aj-footer .container{
+	padding:0 15px;
+}
+#aj-footer .container ul li{
+	display: inline-block;
+}
+#aj-footer .container ul li a {
+	color:white;
+}
+#aj-footer .bs-docs-footer-links{
+	padding:0;
 }
