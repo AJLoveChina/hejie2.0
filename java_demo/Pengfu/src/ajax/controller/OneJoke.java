@@ -51,7 +51,7 @@ public class OneJoke extends HttpServlet {
 		Joke joke = Joke.getOneByIdFromSQL(id);
 		
 		request.setAttribute("joke", joke);
-		RequestDispatcher rd = request.getRequestDispatcher("demo.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("OneJoke.jsp");
 		rd.forward(request, response);
 		
 	}

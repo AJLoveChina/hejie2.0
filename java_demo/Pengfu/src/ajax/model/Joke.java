@@ -21,7 +21,18 @@ public class Joke {
 	private int likes;
 	private int dislike;
 	private int hasGetImage;
+	private JokeType _jokeType;
 	
+	public static final int maxJokeId = 13308;
+	public static final int minJokeId = 17;
+	
+	public JokeType get_jokeType() {
+		return _jokeType;
+	}
+	public void set_jokeType(JokeType _jokeType) {
+		this._jokeType = _jokeType;
+	}
+
 	private static String urlPrefix = "http://m.pengfu.com/content/";
 	private static String tableName = "joke";
 	
@@ -257,6 +268,18 @@ public class Joke {
 			this.setLikes(rs.getInt("likes"));
 			this.setDislike(rs.getInt("dislike"));
 			this.setHasGetImage(rs.getInt("has_get_image"));
+			
+			int jokeTypeId = rs.getInt("jokeType");
+			JokeType jokeType;
+			if (jokeTypeId == JokeType.GIF.getId()) {
+				jokeType = JokeType.GIF;
+			} else if (jokeTypeId == JokeType.STATIC_IMAGE.getId()) {
+				jokeType = JokeType.STATIC_IMAGE;
+			} else {
+				jokeType = JokeType.ONLY_WORD;
+			}
+			this.set_jokeType(jokeType);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -33,10 +33,23 @@ int next = joke.getJokeId() + 1;
 </div>
 
 <div class="btn-group" role="group">
-    <button class="btn btn-info">
+    <button id="aj-random-access-btn" class="btn btn-info" min="<%=Joke.minJokeId %>" max="<%=Joke.maxJokeId %>">
         <span class="glyphicon glyphicon-random"></span>
         Random</button>
 </div>
+
+<script>
+	$(function () {
+		var btn = $("#aj-random-access-btn");
+		btn.on("click", function () {
+			var min = parseInt($(this).attr("min"));
+			var max = parseInt($(this).attr("max"));
+			
+			var random = Math.floor(min + max * Math.random());
+			location.href = "?id=" + random;
+		})
+	})
+</script>
 
 <div class="btn-group" role="group">
     <button class="btn btn-warning">

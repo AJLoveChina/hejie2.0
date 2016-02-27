@@ -37,7 +37,9 @@ public class GrabJokes {
 		}
 	}
 	public static void main(String[] args){
-		Joke.getTypeForJokeOf(13308);
+		Joke joke = Joke.getOneByIdFromSQL(18);
+		
+		System.out.println(joke);
 	}
 }
 
