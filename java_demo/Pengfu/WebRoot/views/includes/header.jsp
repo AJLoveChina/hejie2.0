@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -9,12 +11,8 @@
     <title>汤圆小屋</title>
 </head>
 <body>
-<script src="bower_components/jquery/jquery.js"></script>
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css"/>
-<link rel="stylesheet" href="web/css/index.css"/>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script data-main="main.js" src="bower_components/requirejs/require.js"></script>
+
+<jsp:include page="resource_server.jsp"></jsp:include>
 
 <nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -28,7 +26,6 @@
         </div>
     </div>
 </nav>
-
 
 <div style="height: 70px;"></div>
 <div id="aj-body">
