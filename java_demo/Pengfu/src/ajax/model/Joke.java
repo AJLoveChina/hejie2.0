@@ -407,6 +407,71 @@ public class Joke {
 		//return UrlRoute.ONEJOKE + "?id=" + this.getJokeId();
 	}
 	
+	private JokeType getJokeTypeByContent() {
+		String content = this.getContent();
+		Document doc = Jsoup.parse(content);
+		
+		Elements images = doc.getElementsByTag("img");
+		int len = images.size();
+		JokeType jokeType = null;
+		
+		if (len == 0) {
+			jokeType = JokeType.ONLY_WORD;
+		} else {
+			Iterator it = images.iterator();
+			Element ele;
+			String src;
+			while(it.hasNext()) {
+				ele = (Element) it.next();
+				src = ele.attr("src");
+				if (src.toLowerCase().matches(".+\\.gif$")) {
+					jokeType = JokeType.GIF;
+					break;
+				}
+			}
+			if (jokeType == null) {
+				jokeType = JokeType.STATIC_IMAGE;
+			}
+		}
+		return jokeType;
+	}
+	private void saveJokeTypeToDatabase(JokeType jokeType) {
+		Statement stat = Mysql.getStat();
+		int jokeTypeId;
+		switch(jokeType) {
+		case GIF :
+			jokeTypeId = jokeType.GIF.getId();
+			break;
+		case ONLY_WORD:
+			jokeTypeId = jokeType.ONLY_WORD.getId();
+			break;
+		case STATIC_IMAGE:
+		default :
+			jokeTypeId = jokeType.STATIC_IMAGE.getId();
+		}
+		String sqlCmd = String.format("UPDATE %s SET %s = %d WHERE joke_id = %d LIMIT 1", 
+					this.tableName, "jokeType", jokeTypeId, this.getJokeId());
+		
+		try {
+			stat.executeUpdate(sqlCmd);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void markJokeType() {
+		JokeType jokeType = this.getJokeTypeByContent();
+		
+		this.saveJokeTypeToDatabase(jokeType);
+	}
+	
+	public static void getTypeForJokeOf(int id) {
+		
+		Joke joke = Joke.getOneByIdFromSQL(id);
+		
+		joke.markJokeType();
+		
+	}
 
 	public static void main(String[] args) {
 		
@@ -425,10 +490,5 @@ public class Joke {
 		}
 		
 	}
-
-
-
-
-	
 	
 }
