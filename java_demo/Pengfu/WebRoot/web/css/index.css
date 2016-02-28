@@ -42,3 +42,34 @@ body {
 #aj-footer .bs-docs-footer-links{
 	padding:0;
 }
+
+
+.slidesjs-pagination{
+	list-style: none;
+	position : absolute;
+	right:10%;
+	bottom:10%;
+	z-index : 99;
+}
+.slidesjs-pagination-item{
+	float : left;
+
+}
+.slidesjs-pagination-item a{
+	width:20px;
+	height:20px;
+	border-radius:50%;
+	background-color:lightblue;
+	text-align: center;
+	margin : 0 5px;
+	display:inline-block;
+	color:lightblue;
+	position:relative;
+	top:0;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	box-shadow:white 0 0  4px;
+}
+.slidesjs-pagination-item a.active{
+	top:-10px;
+}

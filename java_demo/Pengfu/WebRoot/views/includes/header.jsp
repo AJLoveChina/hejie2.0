@@ -27,5 +27,6 @@
     </div>
 </nav>
 
-<div style="height: 70px;"></div>
+<div style="height: 50px;"></div>
 <div id="aj-body">
+

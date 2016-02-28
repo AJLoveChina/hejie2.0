@@ -20,12 +20,17 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 
 </style>
 
+
+
 <jsp:include page="views/includes/header.jsp"></jsp:include>
 
+
+<jsp:include page="views/huodong/homeImagesRoll.jsp"></jsp:include>
 
 
 <jsp:include page="views/joke/IndexPageChoice.jsp"></jsp:include>
 <div style="height:10px;"></div>
+
 
 <%
 	for (Joke joke : jokes) {

@@ -4,3 +4,4 @@
 <link rel="stylesheet" href="web/css/index.css"/>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script data-main="main.js" src="http://apps.bdimg.com/libs/require.js/2.1.9/require.min.js"></script>
+<script type="text/javascript" src="web/js/base.js"></script>
