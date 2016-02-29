@@ -1,4 +1,13 @@
 <h2>
+2016-02-29
+</h2>
+<article>
+基于canvas的js编程的乐趣比写css有趣多了啊.<br>
+还不错今天解决一个canvas的灰常棘手的bug
+</article>
+
+
+<h2>
 2016-02-26
 </h2>
 <article>
