@@ -41,6 +41,20 @@ public class Index extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pageParam = request.getParameter("page");
+		String typeParam = request.getParameter("type");
+		
+		JokeType jokeType = null;
+		if (typeParam != null) {
+			Integer typeID = Integer.parseInt(typeParam);
+			if (typeID == JokeType.ONLY_WORD.getId()) {
+				jokeType = JokeType.ONLY_WORD;
+			} else if (typeID == JokeType.STATIC_IMAGE.getId()) {
+				jokeType = JokeType.STATIC_IMAGE;
+			} else if (typeID == JokeType.GIF.getId()) {
+				jokeType = JokeType.GIF;
+			}
+		}
+		
 		int page = 0;
 		if (pageParam != null) {
 			page = Integer.parseInt(pageParam);
@@ -50,8 +64,14 @@ public class Index extends HttpServlet {
 			page = 1;
 		}
 		
-		int truePage = Joke.getTruePageNumForIndexPage(page);
-		ArrayList<Joke> jokes = Joke.getPageOf(truePage);
+		ArrayList<Joke> jokes = new ArrayList<Joke>();
+		if (jokeType == null) {
+			int truePage = Joke.getTruePageNumForIndexPage(page);
+			jokes = Joke.getPageOf(truePage);
+		} else {
+			jokes = Joke.getJokesByType(jokeType, page);
+		}
+		
 		
 		
 		request.setAttribute("jokes", jokes);

@@ -410,7 +410,7 @@ public class Joke {
 		}
 		
 		return jokes;
-	}	
+	}
 
 	public static String getIndexUrlOfPage(int page) {
 		return UrlRoute.HOME.toString() + "?page=" + page;
@@ -488,6 +488,38 @@ public class Joke {
 		
 		joke.markJokeType();
 		
+	}
+	
+	
+	public static ArrayList<Joke> getJokesByType(JokeType jokeType, int page) {
+		ArrayList<Joke> jokes = new ArrayList<Joke>();
+		int pageSize = 10;
+		
+		String sqlCmd = String.format("SELECT * FROM ? WHERE jokeType = ? LIMIT ?, ?");
+		try {
+			PreparedStatement ps = Mysql.getConn().prepareStatement(sqlCmd);
+			
+			ps.setString(1, Joke.tableName);
+			ps.setInt(2, jokeType.getId());
+			ps.setInt(3, (page - 1) * pageSize);
+			ps.setInt(4, pageSize);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Joke joke = Joke.getIns();
+				joke.readFromResultSet(rs);
+				
+				jokes.add(joke);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return jokes;
 	}
 
 	public static void main(String[] args) {

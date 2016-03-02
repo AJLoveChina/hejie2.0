@@ -20,8 +20,25 @@ public enum JokeType {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+	
+	public static JokeType getJokeType(int id) {
+		JokeType jokeType = null;
+		if (id == JokeType.ONLY_WORD.getId()) {
+			jokeType = JokeType.ONLY_WORD;
+		} else if (id == JokeType.STATIC_IMAGE.getId()) {
+			jokeType = JokeType.STATIC_IMAGE;
+		} else if (id == JokeType.GIF.getId()) {
+			jokeType = JokeType.GIF;
+		}
+		return jokeType;
+	}
 	JokeType(int id, String info) {
 		this.id = id;
 		this.info = info;
+	}
+	public static void main(String[] args) {
+		JokeType jokeType = JokeType.getJokeType(2);
+		
+		System.out.println(jokeType.getId());
 	}
 }
