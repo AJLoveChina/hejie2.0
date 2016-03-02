@@ -47,10 +47,11 @@ public class Index extends HttpServlet {
 		}
 		
 		if (page <= 0) {
-			page = 500;
+			page = 1;
 		}
 		
-		ArrayList<Joke> jokes = Joke.getPageOf(page);
+		int truePage = Joke.getTruePageNumForIndexPage(page);
+		ArrayList<Joke> jokes = Joke.getPageOf(truePage);
 		
 		
 		request.setAttribute("jokes", jokes);

@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,6 +26,7 @@ public class Joke {
 	
 	public static final int maxJokeId = 13308;
 	public static final int minJokeId = 17;
+	private static final int startPage = 520;
 	
 	public JokeType get_jokeType() {
 		return _jokeType;
@@ -394,8 +396,22 @@ public class Joke {
 		
 		return bool;
 	}
+	
+	public static int getTruePageNumForIndexPage(int page) {
+		Date date = new Date();
+		long now = date.getTime();
+		long start = 1456924424177l;
+		
+		int dayOffset = (int)Math.ceil(Math.abs(now - start) / (1000* 3600 * 24));
+		
+		page = dayOffset + Joke.startPage - page;
+		
+		if (page <= 0) {
+			page = 1;
+		}
+		return page;
+	}
 	public static ArrayList<Joke> getPageOf(int page) {
-		// TODO Auto-generated method stub
 		int begin = 0;
 		int pageSize = 10;
 		ArrayList<Joke> jokes = new ArrayList<Joke>();
@@ -498,19 +514,21 @@ public class Joke {
 
 	public static void main(String[] args) {
 		
-		Statement stat = Joke.getStat();
-		ResultSet rs;
-		try {
-			rs = stat.executeQuery("SELECT * FROM meajax.joke");
-			while(rs.next()) {
-				System.out.println(rs.getString("title"));
-				System.out.println(rs.getString("content"));
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		Statement stat = Joke.getStat();
+//		ResultSet rs;
+//		try {
+//			rs = stat.executeQuery("SELECT * FROM meajax.joke");
+//			while(rs.next()) {
+//				System.out.println(rs.getString("title"));
+//				System.out.println(rs.getString("content"));
+//
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+		Joke.getTruePageNumForIndexPage(1);
 		
 	}
 	
