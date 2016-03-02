@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class Mysql {
 	
-	public static Connection conn = null;
+	private static Connection conn = null;
 	public static Connection getConn(){
 		if (Mysql.conn != null) {
 			return Mysql.conn;
@@ -27,6 +27,7 @@ public class Mysql {
 		Mysql.conn = conn;
 		return conn;
 	}
+	
 	
 	public static Statement getStat(){
 		Connection conn = getConn();

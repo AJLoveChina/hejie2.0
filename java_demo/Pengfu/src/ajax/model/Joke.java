@@ -135,33 +135,11 @@ public class Joke {
 	}
 	
 	public static Connection getConn() {
-		String url = "jdbc:mysql://127.0.0.1:3306/meajax";
-		String name = "root";
-		String pass = "";
-		
-		
-		Connection conn = null;
-		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
-			conn = DriverManager.getConnection(url, name, pass);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return conn;
+		return Mysql.getConn();
 	}
 	
 	public static Statement getStat() {
-		Connection conn = getConn();
-		Statement stat = null;
-		try {
-			stat = conn.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return stat;
+		return Mysql.getStat();
 	}
 
 	
@@ -319,7 +297,6 @@ public class Joke {
 				this.readFromResultSet(rs);
 			}
 			
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -426,6 +403,7 @@ public class Joke {
 				joke.readFromResultSet(rs);
 				jokes.add(joke);
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
