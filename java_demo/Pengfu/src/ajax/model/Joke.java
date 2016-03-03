@@ -35,8 +35,8 @@ public class Joke {
 		this._jokeType = _jokeType;
 	}
 
-	private static String urlPrefix = "http://m.pengfu.com/content/";
-	private static String tableName = "joke";
+	private final static String urlPrefix = "http://m.pengfu.com/content/";
+	private final static String tableName = "joke";
 	
 	
 	public int getJokeId() {
@@ -305,7 +305,7 @@ public class Joke {
 	protected boolean modifyImageOfContent(Document doc) {
 		Elements eles = doc.getElementsByTag("img");
 		
-		Iterator it = eles.iterator();
+		Iterator<Element> it = eles.iterator();
 		Element ele;
 		String src;
 		String fileName;
@@ -435,7 +435,7 @@ public class Joke {
 		if (len == 0) {
 			jokeType = JokeType.ONLY_WORD;
 		} else {
-			Iterator it = images.iterator();
+			Iterator<Element> it = images.iterator();
 			Element ele;
 			String src;
 			while(it.hasNext()) {
@@ -457,17 +457,17 @@ public class Joke {
 		int jokeTypeId;
 		switch(jokeType) {
 		case GIF :
-			jokeTypeId = jokeType.GIF.getId();
+			jokeTypeId = JokeType.GIF.getId();
 			break;
 		case ONLY_WORD:
-			jokeTypeId = jokeType.ONLY_WORD.getId();
+			jokeTypeId = JokeType.ONLY_WORD.getId();
 			break;
 		case STATIC_IMAGE:
 		default :
-			jokeTypeId = jokeType.STATIC_IMAGE.getId();
+			jokeTypeId = JokeType.STATIC_IMAGE.getId();
 		}
 		String sqlCmd = String.format("UPDATE %s SET %s = %d WHERE joke_id = %d LIMIT 1", 
-					this.tableName, "jokeType", jokeTypeId, this.getJokeId());
+					tableName, "jokeType", jokeTypeId, this.getJokeId());
 		
 		try {
 			stat.executeUpdate(sqlCmd);
@@ -495,16 +495,13 @@ public class Joke {
 		ArrayList<Joke> jokes = new ArrayList<Joke>();
 		int pageSize = 10;
 		
-		String sqlCmd = String.format("SELECT * FROM ? WHERE jokeType = ? LIMIT ?, ?");
+		String sqlCmd = String.format("SELECT * FROM %s WHERE jokeType = %d LIMIT %d,%d", 
+				tableName, jokeType.getId(), (page - 1) * pageSize, pageSize);
 		try {
-			PreparedStatement ps = Mysql.getConn().prepareStatement(sqlCmd);
 			
-			ps.setString(1, Joke.tableName);
-			ps.setInt(2, jokeType.getId());
-			ps.setInt(3, (page - 1) * pageSize);
-			ps.setInt(4, pageSize);
+			Statement stat = Mysql.getStat();
 			
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = stat.executeQuery(sqlCmd);
 			
 			while(rs.next()) {
 				Joke joke = Joke.getIns();
