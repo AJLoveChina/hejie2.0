@@ -1,4 +1,4 @@
-package ajax.tools;
+package com.aj.tools;
 
 import java.awt.Image;
 import java.io.*;
@@ -16,28 +16,14 @@ public class FileTools {
 	public static String getSrc(String urlStr){
 		StringBuilder sb = new StringBuilder();
 		
-		Random rd = new Random();
-		float percent = rd.nextFloat();
+		String[] strArr = urlStr.split("\\/");
 		
-		int random = (int) Math.floor(1000 + 8000 * percent);
-		
-		
-		java.util.Date date = new java.util.Date();
-		
-		long time = date.getTime();
-		
-		sb.append(time + "" + random);
-		
-		String[] urlStrArr = urlStr.split("\\.");
-		String fileExtension = urlStrArr[urlStrArr.length - 1];
-		sb.append("." + fileExtension);
-		
-		return sb.toString();
+		return strArr[strArr.length - 1];
 		
 	}
 	
-	public static String getImageByUrl(String urlStr) {	// 成功时返回新的文件名, 失败时返回空字符串
-		String fileName = getSrc(urlStr); 	// 新的文件名
+	public static String getImageByUrl(String urlStr) {	// 成功时返回新的文件名, 失败时返回空字符�?
+		String fileName = getSrc(urlStr); 	// 新的文件�?
 		Image image = null;
 		
 		URL url;
@@ -47,7 +33,6 @@ public class FileTools {
 			url = new URL(urlStr);
 			
 			URLConnection connection = url.openConnection();
-			connection.setRequestProperty("Referer", "http://img1.pengfu.cn/");
 			
 			image = ImageIO.read(url);
 			InputStream in = new BufferedInputStream(url.openStream());
@@ -64,7 +49,7 @@ public class FileTools {
 			
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("WebRoot/web/images/");
+			sb.append("images/");
 			sb.append(fileName);
 			
 			FileOutputStream fos = new FileOutputStream(sb.toString());
@@ -74,7 +59,7 @@ public class FileTools {
 			
 			
 		} catch (Exception e) {
-			
+			//e.printStackTrace();
 			fileName = "";
 		}
 		
@@ -82,11 +67,5 @@ public class FileTools {
 	}
 	
 	public static void main(String[] args) {
-//		String src = getImageByUrl("http://img1.pengfu.cn/big/57/1006057.gif");
-//		System.out.println(src);
-		
-		String src = getSrc("http://img1.pengfu.cn/big/57/1006057.gif");
-		
-		System.out.println(src);
 	}
 }
