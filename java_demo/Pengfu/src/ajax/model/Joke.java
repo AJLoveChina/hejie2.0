@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -517,6 +519,69 @@ public class Joke {
 		
 		
 		return jokes;
+	}
+	
+	
+	public static String getHrefByJokeType(JokeType jokeType) {
+		String url = "/Pengfu/Index";
+		switch(jokeType) {
+		case ALL:
+			url += "?type=" + JokeType.ALL.getId();
+			break;
+		case ONLY_WORD:
+			url += "?type=" + JokeType.ONLY_WORD.getId();
+			break;
+		case GIF:
+			url += "?type=" + JokeType.GIF.getId();
+			break;
+		case STATIC_IMAGE:
+			url += "?type=" + JokeType.STATIC_IMAGE.getId();
+			break;
+		default:
+			url += "?type=" + JokeType.ALL.getId();
+			break; 
+		}
+		
+		return url;
+	}
+	public static String getHrefByRequest(HttpServletRequest request, PageType pageType) {
+		String pageParam = request.getParameter("page");
+		String typeParam = request.getParameter("type");
+		
+		int pageIndex = 1;
+		if (pageParam != null) {
+			pageIndex = Integer.parseInt(pageParam);
+		}
+		switch(pageType){
+		case PREV:
+			pageIndex--;
+			break;
+		case NEXT:
+			pageIndex++;
+			break;
+		default:
+			break;
+		}
+		if (pageIndex < 1) {
+			pageIndex = 1;
+		}
+		
+		int typeId = JokeType.ONLY_WORD.getId();
+		if (typeParam != null) {
+			typeId = Integer.parseInt(typeParam);
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(request.getRequestURL().toString().replaceFirst("(?i)\\.JSP$", ""));
+		sb.append("?");
+		sb.append("page=" + pageIndex);
+		
+		if (typeParam != null) {
+			sb.append("&type=" + typeId);
+		}
+		
+		return sb.toString();
 	}
 
 	public static void main(String[] args) {

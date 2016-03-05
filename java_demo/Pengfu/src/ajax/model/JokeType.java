@@ -3,7 +3,8 @@ package ajax.model;
 public enum JokeType {
 	ONLY_WORD(1, "only words"),
 	STATIC_IMAGE(2, "有图片, 不是动态图的笑话"),
-	GIF(3, "动态图");
+	GIF(3, "动态图"),
+	ALL(9, "所有内容");
 	
 	
 	private int id;
@@ -22,7 +23,7 @@ public enum JokeType {
 	}
 	
 	public static JokeType getJokeType(int id) {
-		JokeType jokeType = null;
+		JokeType jokeType = JokeType.ONLY_WORD;
 		if (id == JokeType.ONLY_WORD.getId()) {
 			jokeType = JokeType.ONLY_WORD;
 		} else if (id == JokeType.STATIC_IMAGE.getId()) {

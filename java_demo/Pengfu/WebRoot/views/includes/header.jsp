@@ -30,3 +30,6 @@
 <div style="height: 50px;"></div>
 <div id="aj-body">
 
+
+<jsp:include page="jokeTypeChoice.jsp"></jsp:include>
+

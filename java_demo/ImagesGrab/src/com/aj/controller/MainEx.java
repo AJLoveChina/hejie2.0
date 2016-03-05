@@ -5,7 +5,8 @@ import com.aj.tools.FileTools;
 public class MainEx {
 	
 	private static String urlMoban = "http://bkjw.hfut.edu.cn/student/photo/2012/2012211730.JPG";
-	private static String url = "http://bkjw.hfut.edu.cn/student/photo/2012/201221";
+	private static String url2 = "http://bkjw.hfut.edu.cn/student/photo/2012/201221";
+	private static String url = "http://bkjw.hfut.edu.cn/student/photo/2011/2011";
 	
 	
 	static String getUrl(int schid) {
