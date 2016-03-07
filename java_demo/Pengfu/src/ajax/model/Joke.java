@@ -38,7 +38,7 @@ public class Joke {
 	}
 
 	private final static String urlPrefix = "http://m.pengfu.com/content/";
-	private final static String tableName = "joke";
+	public final static String tableName = "joke";
 	
 	
 	public int getJokeId() {
@@ -298,7 +298,7 @@ public class Joke {
 			if (rs.next()) {
 				this.readFromResultSet(rs);
 			}
-			
+			Mysql.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -406,6 +406,7 @@ public class Joke {
 				jokes.add(joke);
 			}
 			
+			Mysql.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -512,6 +513,7 @@ public class Joke {
 				jokes.add(joke);
 			}
 			
+			Mysql.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
