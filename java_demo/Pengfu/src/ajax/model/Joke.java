@@ -396,7 +396,7 @@ public class Joke {
 		ArrayList<Joke> jokes = new ArrayList<Joke>();
 		
 		Statement stat = getStat();
-		String sqlCmd = String.format("SELECT * FROM %s LIMIT %d, %d", tableName, begin + (page - 1) * pageSize, pageSize);
+		String sqlCmd = String.format("SELECT * FROM %s WHERE jokeStatus = %d LIMIT %d, %d", tableName, JokeStatus.NORMAL.getId(), begin + (page - 1) * pageSize, pageSize);
 		try {
 			ResultSet rs = stat.executeQuery(sqlCmd);
 			
@@ -498,8 +498,8 @@ public class Joke {
 		ArrayList<Joke> jokes = new ArrayList<Joke>();
 		int pageSize = 10;
 		
-		String sqlCmd = String.format("SELECT * FROM %s WHERE jokeType = %d LIMIT %d,%d", 
-				tableName, jokeType.getId(), (page - 1) * pageSize, pageSize);
+		String sqlCmd = String.format("SELECT * FROM %s WHERE jokeType = %d && jokeStatus = %d LIMIT %d,%d", 
+				tableName, jokeType.getId(), JokeStatus.NORMAL.getId(), (page - 1) * pageSize, pageSize);
 		try {
 			
 			Statement stat = Mysql.getStat();
