@@ -28,4 +28,16 @@ public enum JokeStatus {
 		this.id = id;
 		this.info = info;
 	}
+
+	public static JokeStatus getStatusById(int id) {
+		if (id == JokeStatus.NORMAL.getId()) {
+			return JokeStatus.NORMAL;
+		} else if (id == JokeStatus.DELETE.getId()){
+			return JokeStatus.DELETE;
+		} else if (id == JokeStatus.SPIDER.getId()) {
+			return JokeStatus.SPIDER;
+		}
+		
+		return JokeStatus.NORMAL;
+	}
 }

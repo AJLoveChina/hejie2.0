@@ -24,12 +24,19 @@ public class Joke {
 	private int likes;
 	private int dislike;
 	private int hasGetImage;
+	private JokeStatus jokeStatus;
 	private JokeType _jokeType;
 	
 	public static final int maxJokeId = 13308;
 	public static final int minJokeId = 17;
 	private static final int startPage = 520;
 	
+	public JokeStatus getJokeStatus() {
+		return jokeStatus;
+	}
+	public void setJokeStatus(JokeStatus jokeStatus) {
+		this.jokeStatus = jokeStatus;
+	}
 	public JokeType get_jokeType() {
 		return _jokeType;
 	}
@@ -215,33 +222,12 @@ public class Joke {
 		}
 		return true;
 	}
-	
-	
-//	public static Joke readFromResultSet(ResultSet rs) {
-//		Joke joke = new Joke();
-//		
-//		
-//		try {
-//			if (rs.next()) {
-//				joke.setJokeId(rs.getInt("joke_id"));
-//				joke.setTitle(rs.getString("title"));
-//				joke.setContent(rs.getString("content"));
-//				joke.setStampsByString(rs.getString("stamps"));
-//				joke.setUrl(rs.getString("url"));
-//				joke.setLikes(rs.getInt("likes"));
-//				joke.setDislike(rs.getInt("dislikes"));
-//			}
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	
-//		return joke;
-//	}
+
 	
 	protected void readFromResultSet(ResultSet rs) {
 		
 		try {
+			
 			this.setJokeId(rs.getInt("joke_id"));
 			this.setTitle(rs.getString("title"));
 			this.setContent(rs.getString("content"));
@@ -250,17 +236,8 @@ public class Joke {
 			this.setLikes(rs.getInt("likes"));
 			this.setDislike(rs.getInt("dislike"));
 			this.setHasGetImage(rs.getInt("has_get_image"));
-			
-			int jokeTypeId = rs.getInt("jokeType");
-			JokeType jokeType;
-			if (jokeTypeId == JokeType.GIF.getId()) {
-				jokeType = JokeType.GIF;
-			} else if (jokeTypeId == JokeType.STATIC_IMAGE.getId()) {
-				jokeType = JokeType.STATIC_IMAGE;
-			} else {
-				jokeType = JokeType.ONLY_WORD;
-			}
-			this.set_jokeType(jokeType);
+			this.set_jokeType(JokeType.getJokeType(rs.getInt("jokeType")));
+			this.setJokeStatus(JokeStatus.getStatusById(rs.getInt("jokeStatus")));
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -269,6 +246,7 @@ public class Joke {
 		
 	}
 	
+
 	public static Joke getOneByIdFromSQL(int id) {
 		Joke joke = Joke.getIns();
 		
