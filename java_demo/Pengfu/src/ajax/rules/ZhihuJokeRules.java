@@ -18,7 +18,8 @@ public class ZhihuJokeRules extends JokeRules{
 	
 	@Override
 	public String dealUserPersonalPageUrlElements(Elements eles) {
-		return eles.attr("href");
+		String href = eles.attr("href");
+		return this.getAbsoluteUrlFromUrl(href);
 	}
 	
 	public static void main(String[] args) {

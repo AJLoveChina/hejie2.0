@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
 <div class="panel panel-default">
     <div class="panel-heading">
     	<a style="color:#333;" href='<c:out value="${joke.getOneJokeUrlById() }"></c:out>'>
@@ -13,7 +14,7 @@
     	<c:if test="${joke.getUsername() != null }">
     		<div style="font-size:12px;padding:0 0 10px;">
 	    		作者 : 
-	    		<a href="">
+	    		<a href='<c:out value="${joke.getUserPersonalPageUrl() }"></c:out>'>
 	    			<c:out value="${joke.getUsername() }"></c:out>
 	    		</a>
     		</div>

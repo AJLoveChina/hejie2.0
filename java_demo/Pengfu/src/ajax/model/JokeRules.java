@@ -1,5 +1,8 @@
 package ajax.model;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.jsoup.select.Elements;
 
 public class JokeRules {
@@ -92,6 +95,37 @@ public class JokeRules {
 	}
 	public void setUserPersonalPageUrlSelector(String userPersonalPageUrlSelector) {
 		this.userPersonalPageUrlSelector = userPersonalPageUrlSelector;
+	}
+	
+	public String getAbsoluteUrlFromUrl(String url) {
+		if (url.startsWith("http")) {
+			return url;
+		}
+		
+		if (url.startsWith("/")) {
+			String grabUrl = this.getUrl();
+			URL u;
+			try {
+				
+				u = new URL(grabUrl);
+				String prefix = grabUrl.replaceFirst(u.getFile(), "");
+				
+				url = prefix + url;
+				return url;
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return "";
+	}
+	
+	public static void main(String[] args) {
+		JokeRules j = new JokeRules();
+		j.setUrl("");
+		j.getAbsoluteUrlFromUrl("https://www.zhihu.com/question/35860362/answer/89207200");
 	}
 	
 	
