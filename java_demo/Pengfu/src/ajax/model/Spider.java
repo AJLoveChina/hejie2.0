@@ -34,37 +34,37 @@ public class Spider{
 			
 			if (jokeRules.getTitleSelector() != null) {
 				Elements title = doc.select(jokeRules.getTitleSelector());
-				joke.setTitle(title.html());
+				joke.setTitle(jokeRules.dealTitleElements(title));
 			}
 			
 			if (jokeRules.getContentSelector() != null) {
 				Elements content = doc.select(jokeRules.getContentSelector());
-				joke.setContent(content.html());
+				joke.setContent(jokeRules.dealContentElements(content));
 			}
 			
 			if (jokeRules.getLikesSelector() != null) {
 				Elements likes = doc.select(jokeRules.getLikesSelector());
-				joke.setLikes(Integer.parseInt(likes.html()));
+				joke.setLikes(jokeRules.dealLikesElements(likes));
 			}
 			
 			if (jokeRules.getDislikeSelector() != null) {
 				Elements dislike = doc.select("em[id*=Oppose_Num_]");
-				joke.setDislike(Integer.parseInt(dislike.html()));
+				joke.setDislike(jokeRules.dealDislikeElements(dislike));
 			}
 			
 			if (jokeRules.getStampsSelector() != null) {
 				Elements stamps = doc.select(jokeRules.getStampsSelector());
-				joke.setStamps(stamps.html());
+				joke.setStamps(jokeRules.dealStampsElements(stamps));
 			}
 			
 			if (jokeRules.getUsernameSelector() != null) {
 				Elements username = doc.select(jokeRules.getUsernameSelector());
-				joke.setUsername(username.html());
+				joke.setUsername(jokeRules.dealUsernameElements(username));
 			}
 			
 			if (jokeRules.getUserPersonalPageUrlSelector() != null) {
 				Elements userPersonalPageUrl = doc.select(jokeRules.getUserPersonalPageUrlSelector());
-				joke.setUserPersonalPageUrl(userPersonalPageUrl.html());
+				joke.setUserPersonalPageUrl(jokeRules.dealUserPersonalPageUrlElements(userPersonalPageUrl));
 			}
 			
 			joke.saveToSqlFromSpider();

@@ -1,5 +1,7 @@
 package ajax.model;
 
+import org.jsoup.select.Elements;
+
 public class JokeRules {
 	protected String tableName = "joke";
 	protected String url;
@@ -10,6 +12,31 @@ public class JokeRules {
 	protected String dislikeSelector;
 	protected String usernameSelector;
 	protected String userPersonalPageUrlSelector;
+	
+	
+	public String dealTitleElements(Elements eles) {
+		return eles.html();
+	}
+	public String dealContentElements(Elements eles) {
+		return eles.html();
+	}
+	public String dealStampsElements(Elements eles) {
+		return eles.html();
+	}
+	public int dealLikesElements(Elements eles) {
+		return Integer.parseInt(eles.html());
+	}
+	public int dealDislikeElements(Elements eles) {
+		return Integer.parseInt(eles.html());
+	}
+	public String dealUsernameElements(Elements eles) {
+		return eles.html();
+	}
+	public String dealUserPersonalPageUrlElements(Elements eles) {
+		return eles.html();
+	}
+	
+	
 	
 	
 	public String getTableName() {

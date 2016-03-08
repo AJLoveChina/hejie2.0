@@ -294,6 +294,9 @@ public class Joke {
 			this.set_jokeType(JokeType.getJokeType(rs.getInt("jokeType")));
 			this.setJokeStatus(JokeStatus.getStatusById(rs.getInt("jokeStatus")));
 			this.setDateEntered(rs.getString("dateEntered"));
+			this.setUsername(rs.getString("username"));
+			this.setUserPersonalPageUrl(rs.getString("userPersonalPageUrl"));
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -457,8 +460,7 @@ public class Joke {
 		return UrlRoute.ONEJOKE + "?id=" + id; 
 	}
 	public String getOneJokeUrlById() {
-		return "";
-		//return UrlRoute.ONEJOKE + "?id=" + this.getJokeId();
+		return UrlRoute.ONEJOKE + "?id=" + this.getJokeId();
 	}
 	
 	private JokeType getJokeTypeByContent() {
