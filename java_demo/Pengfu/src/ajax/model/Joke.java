@@ -20,17 +20,53 @@ public class Joke {
 	private String url;
 	private String title;
 	private String content;
-	private ArrayList<String> stamps;
+//	private ArrayList<String> stamps;
+	private String stamps;
 	private int likes;
 	private int dislike;
-	private int hasGetImage;
-	private JokeStatus jokeStatus;
+	private int hasGetImage = 0;	// 默认是木有获取图片的
+	private String dateEntered;
+	private String username;		// 谁发表的joke
+	private String userPersonalPageUrl; 	// 发布者的主页url
+	private JokeStatus jokeStatus = JokeStatus.NORMAL;
 	private JokeType _jokeType;
+	private String _tableName = Joke.tableName;	// 实例默认的数据表, 这个在将来有可能不同值
 	
 	public static final int maxJokeId = 13308;
 	public static final int minJokeId = 17;
 	private static final int startPage = 520;
 	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getUserPersonalPageUrl() {
+		return userPersonalPageUrl;
+	}
+	public void setUserPersonalPageUrl(String userPersonalPageUrl) {
+		this.userPersonalPageUrl = userPersonalPageUrl;
+	}
+	public String getDateEntered() {
+		return dateEntered;
+	}
+	public void setDateEntered(String dateEntered) {
+		this.dateEntered = dateEntered;
+	}
+	public String getStamps() {
+		return stamps;
+	}
+	public void setStamps(String stamps) {
+		this.stamps = stamps;
+	}
+	public String get_tableName() {
+		return _tableName;
+	}
+	public void set_tableName(String _tableName) {
+		this._tableName = _tableName;
+	}
 	public JokeStatus getJokeStatus() {
 		return jokeStatus;
 	}
@@ -78,21 +114,21 @@ public class Joke {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public ArrayList<String> getStamps() {
-		return stamps;
-	}
-	public void setStamps(ArrayList<String> stamps) {
-		this.stamps = stamps;
-	}
-	public void setStampsByString(String stamps) {
-		String[] stampsArr = stamps.split(",");
-		ArrayList<String> result = new ArrayList<String>();
-		
-		for(String s : stampsArr) {
-			result.add(s);
-		}
-		this.stamps = result;
-	}
+//	public ArrayList<String> getStamps() {
+//		return stamps;
+//	}
+//	public void setStamps(ArrayList<String> stamps) {
+//		this.stamps = stamps;
+//	}
+//	public void setStampsByString(String stamps) {
+//		String[] stampsArr = stamps.split(",");
+//		ArrayList<String> result = new ArrayList<String>();
+//		
+//		for(String s : stampsArr) {
+//			result.add(s);
+//		}
+//		this.stamps = result;
+//	}
 	public int getDislike() {
 		return dislike;
 	}
@@ -208,6 +244,24 @@ public class Joke {
 		return true;
 	}
 	
+	public void saveToSqlFromSpider() {
+		Statement stat = Mysql.getStat();
+		String sqlCmd = String.format("INSERT INTO %s (title, content, stamps, likes, dislike, url, jokeType, jokeStatus, username, userPersonalPageUrl) "
+				+ "VALUES('%s', '%s', '%s', %d, %d, '%s', %d, %d, '%s', '%s')", 
+				this.get_tableName(), this.getTitle(), this.getContent(), "", this.getLikes(), 
+				this.getDislike(), this.getUrl(), this.get_jokeType().getId(), this.getJokeStatus().getId(), this.getUsername(), 
+				this.getUserPersonalPageUrl());
+		
+		try {
+			stat.execute(sqlCmd);
+			System.out.println("Grab OK");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Grab Error");
+		}
+	}
+	
 	public boolean update(){
 		Statement stat = Mysql.getStat();
 		String sqlCmd = String.format("UPDATE %s SET title = '%s',content = '%s', stamps = '%s', likes = %d, dislike = %d, url = '%s', has_get_image = %d WHERE joke_id = %d LIMIT 1", 
@@ -231,13 +285,15 @@ public class Joke {
 			this.setJokeId(rs.getInt("joke_id"));
 			this.setTitle(rs.getString("title"));
 			this.setContent(rs.getString("content"));
-			this.setStampsByString(rs.getString("stamps"));
+//			this.setStampsByString(rs.getString("stamps"));
+			this.setStamps(rs.getString("stamps"));
 			this.setUrl(rs.getString("url"));
 			this.setLikes(rs.getInt("likes"));
 			this.setDislike(rs.getInt("dislike"));
 			this.setHasGetImage(rs.getInt("has_get_image"));
 			this.set_jokeType(JokeType.getJokeType(rs.getInt("jokeType")));
 			this.setJokeStatus(JokeStatus.getStatusById(rs.getInt("jokeStatus")));
+			this.setDateEntered(rs.getString("dateEntered"));
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -566,20 +622,6 @@ public class Joke {
 
 	public static void main(String[] args) {
 		
-//		Statement stat = Joke.getStat();
-//		ResultSet rs;
-//		try {
-//			rs = stat.executeQuery("SELECT * FROM meajax.joke");
-//			while(rs.next()) {
-//				System.out.println(rs.getString("title"));
-//				System.out.println(rs.getString("content"));
-//
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
 		Joke.getTruePageNumForIndexPage(1);
 		
 	}

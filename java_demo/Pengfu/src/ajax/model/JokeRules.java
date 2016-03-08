@@ -1,13 +1,17 @@
 package ajax.model;
 
 public class JokeRules {
-	private String tableName = "joke";
-	private String url;
-	private String titleSelector;
-	private String contentSelector;
-	private String stampsSelector;
-	private String likesSelector;
-	private String dislikeSelector;
+	protected String tableName = "joke";
+	protected String url;
+	protected String titleSelector;
+	protected String contentSelector;
+	protected String stampsSelector;
+	protected String likesSelector;
+	protected String dislikeSelector;
+	protected String usernameSelector;
+	protected String userPersonalPageUrlSelector;
+	
+	
 	public String getTableName() {
 		return tableName;
 	}
@@ -50,8 +54,18 @@ public class JokeRules {
 	public void setDislikeSelector(String dislikeSelector) {
 		this.dislikeSelector = dislikeSelector;
 	}
-	
-	
+	public String getUsernameSelector() {
+		return usernameSelector;
+	}
+	public void setUsernameSelector(String usernameSelector) {
+		this.usernameSelector = usernameSelector;
+	}
+	public String getUserPersonalPageUrlSelector() {
+		return userPersonalPageUrlSelector;
+	}
+	public void setUserPersonalPageUrlSelector(String userPersonalPageUrlSelector) {
+		this.userPersonalPageUrlSelector = userPersonalPageUrlSelector;
+	}
 	
 	
 }

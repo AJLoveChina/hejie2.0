@@ -4,6 +4,7 @@ public enum JokeType {
 	ONLY_WORD(1, "only words"),
 	STATIC_IMAGE(2, "有图片, 不是动态图的笑话"),
 	GIF(3, "动态图"),
+	ZHIHU(4, "知乎精选"),
 	ALL(9, "所有内容");
 	
 	
