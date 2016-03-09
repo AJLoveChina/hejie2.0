@@ -21,7 +21,8 @@ public class JokeRules {
 		return eles.html();
 	}
 	public String dealContentElements(Elements eles) {
-		return eles.html();
+		String content = eles.html().replaceAll("<script>", "&lt;script&gt;");
+		return content;
 	}
 	public String dealStampsElements(Elements eles) {
 		return eles.html();

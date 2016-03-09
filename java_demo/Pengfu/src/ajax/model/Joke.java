@@ -245,15 +245,33 @@ public class Joke {
 	}
 	
 	public void saveToSqlFromSpider() {
+		Connection conn = Mysql.getConn();
 		Statement stat = Mysql.getStat();
+		
 		String sqlCmd = String.format("INSERT INTO %s (title, content, stamps, likes, dislike, url, jokeType, jokeStatus, username, userPersonalPageUrl) "
 				+ "VALUES('%s', '%s', '%s', %d, %d, '%s', %d, %d, '%s', '%s')", 
 				this.get_tableName(), this.getTitle(), this.getContent(), "", this.getLikes(), 
 				this.getDislike(), this.getUrl(), this.get_jokeType().getId(), this.getJokeStatus().getId(), this.getUsername(), 
 				this.getUserPersonalPageUrl());
 		
+		String sqlCmdPre = String.format("INSERT INTO %s (title, content, stamps, likes, dislike, url, jokeType, jokeStatus, username, userPersonalPageUrl) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", this.get_tableName());
+		
 		try {
-			stat.execute(sqlCmd);
+			PreparedStatement ps = conn.prepareStatement(sqlCmdPre);
+			ps.setString(1, this.getTitle());
+			ps.setString(2, this.getContent());
+			ps.setString(3, "");
+			ps.setInt(4, this.getLikes());
+			ps.setInt(5, this.getDislike());
+			ps.setString(6, this.getUrl());
+			ps.setInt(7, this.get_jokeType().getId());
+			ps.setInt(8, this.getJokeStatus().getId());
+			ps.setString(9, this.getUsername());
+			ps.setString(10, this.getUserPersonalPageUrl());
+			
+			ps.execute();
+			//stat.execute(sqlCmd);
 			System.out.println("Grab OK");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -621,10 +639,14 @@ public class Joke {
 		
 		return sb.toString();
 	}
+	
+	public boolean hasAuthor() {
+		return (this.getUsername() != null && this.getUsername().trim() != "");
+	}
 
 	public static void main(String[] args) {
 		
-		Joke.getTruePageNumForIndexPage(1);
+		//Joke.getTruePageNumForIndexPage(1);
 		
 	}
 	

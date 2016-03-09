@@ -10,8 +10,8 @@
     		<c:out value="${joke.getTitle() }"></c:out>
     	</a>
     </div>
-    <div class="panel-body">
-    	<c:if test="${joke.getUsername() != null }">
+    <div class="panel-body" style="word-wrap:break-word;">
+    	<c:if test="${joke.hasAuthor()}">
     		<div style="font-size:12px;padding:0 0 10px;">
 	    		作者 : 
 	    		<a href='<c:out value="${joke.getUserPersonalPageUrl() }"></c:out>'>

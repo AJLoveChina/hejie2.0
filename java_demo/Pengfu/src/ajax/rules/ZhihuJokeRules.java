@@ -8,7 +8,7 @@ import ajax.model.Spider;
 public class ZhihuJokeRules extends JokeRules{
 	
 	ZhihuJokeRules() {
-		this.setUrl("https://www.zhihu.com/question/35860362/answer/89207200");
+		this.setUrl("https://www.zhihu.com/question/21872451/answer/19586789");
 		this.setTitleSelector("#zh-question-title > h2 > a");
 		this.setContentSelector("#zh-question-answer-wrap > div > div.zm-item-rich-text.js-collapse-body > div.zm-editable-content.clearfix");
 		
