@@ -1,12 +1,19 @@
 package ajax.model;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.*;
+import java.util.*;
 
-
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
@@ -188,20 +195,52 @@ public class Topic extends Entity{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
-	public static void main(String[] args) {
+	public static void sendPost() {
 		
-		getOne();
-		
-		int id = 727;
-		int max = 759;
-		
-		for (; id <= max; id++) {
-			getTwoOf(id);
-			System.out.println(id + "OK");
+		HttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("https://www.zhihu.com/topics#运动");
+
+
+		//Execute and get the response.
+		HttpResponse response;
+		try {
+			response = httpclient.execute(httppost);
+			HttpEntity entity = response.getEntity();
+
+			if (entity != null) {
+			    InputStream instream = entity.getContent();
+			    try {
+			       System.out.println(instream.toString());
+			    } finally {
+			        instream.close();
+			    }
+			}
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	
+	public static void main(String[] args) {
+		sendPost();
+		
+		
+//		getOne();
+//		
+//		int id = 727;
+//		int max = 759;
+//		
+//		for (; id <= max; id++) {
+//			getTwoOf(id);
+//			System.out.println(id + "OK");
+//		}
+		
+		
 	}
 }
