@@ -1,5 +1,8 @@
 package ajax.tools;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -42,6 +45,23 @@ public class Tools {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static String readInputStream(InputStream in) {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		byte[] bytes = new byte[1024];
+		int len;
+		
+		try {
+			while((len = in.read(bytes)) != -1) {
+				out.write(bytes, 0, len);
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return out.toString();
 	}
 	
 	public static void main(String[] args) {
