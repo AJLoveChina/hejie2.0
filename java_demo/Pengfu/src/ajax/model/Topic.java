@@ -51,6 +51,20 @@ public class Topic extends Entity{
 		String href;
 		String tname;
 		String desc;
+		int parentDataId;
+		int parentId;
+		int rank;
+		
+		void save() {
+			Topic t = new Topic();
+			t.setParentId(this.parentId);
+			t.setRank(this.rank);
+			t.setTname(this.tname);
+			t.setUrl(this.href);
+			
+			t.save();
+		}
+		
 	}
 	
 	
@@ -111,7 +125,6 @@ public class Topic extends Entity{
 			
 			ps.execute();
 			
-			Mysql.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,7 +159,6 @@ public class Topic extends Entity{
 				this.readFromResultSet(rs);
 			}
 			
-			Mysql.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -232,8 +244,6 @@ public class Topic extends Entity{
 			
 			post.setEntity(new UrlEncodedFormEntity(urlParameters));
 			HttpResponse response = client.execute(post);
-			System.out.println("Response Code : " 
-		                + response.getStatusLine().getStatusCode());
 
 			BufferedReader rd = new BufferedReader(
 			        new InputStreamReader(response.getEntity().getContent()));
@@ -256,7 +266,6 @@ public class Topic extends Entity{
 		JSONObject jsonObject = new JSONObject(jsonString);
         JSONArray msg = jsonObject.getJSONArray("msg");
         
-        System.out.println(msg.get(0));
         
         Iterator<Object> it = msg.iterator();
         
@@ -267,7 +276,7 @@ public class Topic extends Entity{
         return arr;
 	}
 	
-	public static ArrayList<TopicJson> getTopicJsons(ArrayList<String> arr) {
+	public static ArrayList<TopicJson> getTopicJsons(ArrayList<String> arr, int parentId) {
 		
 		ArrayList<TopicJson> result = new ArrayList<Topic.TopicJson>();
 		
@@ -278,6 +287,8 @@ public class Topic extends Entity{
 			tj.href = "https://www.zhihu.com" + doc.select("a[href^=/topic]").get(0).attr("href").trim();
 			tj.tname = doc.select("a strong").get(0).text().trim();
 			tj.desc = doc.select("p").get(0).text().trim();
+			tj.parentId = parentId;
+			tj.rank = TopicRank.TWO.rank;
 			
 			result.add(tj);
 		}
@@ -285,14 +296,51 @@ public class Topic extends Entity{
 		return result;
 	}
 	
-	public static void main(String[] args) {
-		String jsonString = getPost(69, 0);
+	
+	public static void do1() {
+		// 获取每个一级分类的  部分热门子类
+		
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d && id > 727", Topic.tableName, TopicRank.ONE.rank);
+		
+		Statement stat = Mysql.getStat();
+		try {
+			
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			while(rs.next()) {
+				Topic t = new Topic();
+				
+				t.readFromResultSet(rs);
+				
+				getRankTwo(t.getId(), t.getDataId(), 0);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void getRankTwo(int parentId, int parentDataId, int offset) {
+		String jsonString = getPost(parentDataId, offset);
 		ArrayList<String> msg = getMsg(jsonString);
 		
-		ArrayList<TopicJson> result = getTopicJsons(msg);
+		ArrayList<TopicJson> result = getTopicJsons(msg, parentId);
 		
-		System.out.println(result);
-		
+		for (int i = 0; i < result.size(); i ++) {
+			TopicJson tj = result.get(i);
+			tj.save();
+			System.out.println(tj.tname + " saved!");
+			
+		}
+	}
+	
+	
+	public static void main(String[] args) {
+		do1();
 		
 	}
 }
