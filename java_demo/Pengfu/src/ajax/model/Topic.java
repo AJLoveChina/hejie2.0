@@ -16,6 +16,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
@@ -44,6 +45,12 @@ public class Topic extends Entity{
 			this.rank = rank;
 			this.info = info;
 		}
+	}
+	
+	private class TopicJson{
+		String href;
+		String tname;
+		String desc;
 	}
 	
 	
@@ -200,49 +207,8 @@ public class Topic extends Entity{
 		}
 	}
 	
-	public static void sendPost() {
-		
-		HttpClient httpclient = HttpClients.createDefault();
-		
-		try {
-			URI uri;
-			uri = new URIBuilder()
-			        .setScheme("https")
-			        .setHost("www.zhihu.com")
-			        .setPath("/node/TopicsPlazzaListV2")
-			        .setParameter("method", "next")
-			        .setParameter("params", "%7B%22topic_id%22%3A253%2C%22offset%22%3A20%2C%22hash_id%22%3A%22032639baed044864d59d4b309a44ea66%22%7D&_xsrf=2e4e8f9d60c4485b480892352f5d4aad")
-			        .build();
-			
-			HttpPost httppost = new HttpPost(uri);
-		
-			HttpResponse response;
-			response = httpclient.execute(httppost);
-			HttpEntity entity = response.getEntity();
-
-			if (entity != null) {
-			    InputStream instream = entity.getContent();
-			    try {
-			       System.out.println(instream.toString());
-			    } finally {
-			        String s = Tools.readInputStream(instream);
-			        System.out.println(s);
-			    }
-			}
-			
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch(URISyntaxException e) {
-			e.printStackTrace();
-		}
-	}
 	
-	
-	public static void sendPost4() {
+	public static String getPost(int id, int offset) {
 		String url = "https://www.zhihu.com/node/TopicsPlazzaListV2";
 
 		HttpClient client = HttpClientBuilder.create().build();
@@ -256,11 +222,12 @@ public class Topic extends Entity{
 		
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		urlParameters.add(new BasicNameValuePair("method", "next"));
-		urlParameters.add(new BasicNameValuePair("params", "{\"topic_id\":69,\"offset\":0,\"hash_id\":\"\"}"));
+		urlParameters.add(new BasicNameValuePair("params", "{\"topic_id\":" + id + ",\"offset\":" + offset + ",\"hash_id\":\"\"}"));
 		urlParameters.add(new BasicNameValuePair("_xsrf", "23d6db084e55cf13a36b93c2fbb7e88b"));
 		
 		
-
+		StringBuffer result = new StringBuffer();
+		
 		try {
 			
 			post.setEntity(new UrlEncodedFormEntity(urlParameters));
@@ -271,35 +238,64 @@ public class Topic extends Entity{
 			BufferedReader rd = new BufferedReader(
 			        new InputStreamReader(response.getEntity().getContent()));
 
-			StringBuffer result = new StringBuffer();
+			
 			String line = "";
 			while ((line = rd.readLine()) != null) {
 				result.append(line);
 			}
-			System.out.println(result.toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-
+		return result.toString();
+	}
+	
+	public static ArrayList<String> getMsg(String jsonString) {
+		JSONObject jsonObject = new JSONObject(jsonString);
+        JSONArray msg = jsonObject.getJSONArray("msg");
+        
+        System.out.println(msg.get(0));
+        
+        Iterator<Object> it = msg.iterator();
+        
+        ArrayList<String> arr = new ArrayList<String>();
+        while(it.hasNext()) {
+        	arr.add((String)it.next());
+        }
+        return arr;
+	}
+	
+	public static ArrayList<TopicJson> getTopicJsons(ArrayList<String> arr) {
+		
+		ArrayList<TopicJson> result = new ArrayList<Topic.TopicJson>();
+		
+		
+		for (int i = 0; i < arr.size(); i ++) {
+			Document doc = Jsoup.parse(arr.get(i));
+			TopicJson tj = (new Topic()).new TopicJson();
+			tj.href = "https://www.zhihu.com" + doc.select("a[href^=/topic]").get(0).attr("href").trim();
+			tj.tname = doc.select("a strong").get(0).text().trim();
+			tj.desc = doc.select("p").get(0).text().trim();
+			
+			result.add(tj);
+		}
+		
+		return result;
 	}
 	
 	public static void main(String[] args) {
-		sendPost4();
+		String jsonString = getPost(69, 0);
+		ArrayList<String> msg = getMsg(jsonString);
 		
+		ArrayList<TopicJson> result = getTopicJsons(msg);
 		
-//		getOne();
-//		
-//		int id = 727;
-//		int max = 759;
-//		
-//		for (; id <= max; id++) {
-//			getTwoOf(id);
-//			System.out.println(id + "OK");
-//		}
+		System.out.println(result);
 		
 		
 	}
 }
+
+
+
