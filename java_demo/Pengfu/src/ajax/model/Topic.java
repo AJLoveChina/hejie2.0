@@ -248,24 +248,16 @@ public class Topic extends Entity{
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpPost post = new HttpPost(url);
 
-		post.setHeader("Accept", "*/*");
-		post.setHeader("Accept-Encoding", "gzip, deflate");
-		post.setHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,fr;q=0.4");
-		post.setHeader("AlexaToolbar-ALX_NS_PH", "AlexaToolbar/alxg-3.3");
-		post.setHeader("Cache-Control", "no-cache");
-		post.setHeader("Connection", "keep-alive");
-		post.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+		
 		post.setHeader("Host", "www.zhihu.com");
 		post.setHeader("origin", "https://www.zhihu.com");
-		post.setHeader("Pragma", "no-cache");
-		post.setHeader("Referer", "https://www.zhihu.com/topics");
-		post.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36");
-		post.setHeader("X-Requested-With", "XMLHttpRequest");
-		post.setHeader("cookie", "_za=d06117c9-2d79-4acc-b56d-0a175788ff38; _xsrf=2e4e8f9d60c4485b480892352f5d4aad; q_c1=10f32a16e6d043c49f922e655a6f8882|1457356546000|1446300662000; cap_id=YTMyNDRlOTdlMDFhNDRjMDk2MzI3ZjIwZTkxZWFkZDI=|1457437397|fbf86b2cf8fe373bd967d681330bb409fab1be42; z_c0=QUFBQU1iQkZBQUFYQUFBQVlRSlZUUmhJQmxjTDdDVHZrcDdhWlhQckV3OWlZZkFxdDRZQWdRPT0=|1457437464|5196062d88027703d3b7a0c2a6251efd94285ef7; udid=AABAqLNhlAmPTsppSN39oFUSihc1SdUfLj0=|1457522420; __utma=51854390.1120528287.1457615389.1457615389.1457615389.1; __utmb=51854390.4.10.1457615389; __utmc=51854390; __utmz=51854390.1457615389.1.1.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/topic; __utmv=51854390.100-1|2=registration_date=20141223=1^3=entry_date=20141223=1");
-
+		post.setHeader("referer", "https://www.zhihu.com/topics");
+		
+		
 		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
 		urlParameters.add(new BasicNameValuePair("method", "next"));
-		urlParameters.add(new BasicNameValuePair("params", "%7B%22topic_id%22%3A253%2C%22offset%22%3A20%2C%22hash_id%22%3A%22032639baed044864d59d4b309a44ea66%22%7D&_xsrf=2e4e8f9d60c4485b480892352f5d4aad"));
+		urlParameters.add(new BasicNameValuePair("params", "{\"topic_id\":69,\"offset\":0,\"hash_id\":\"\"}"));
+		urlParameters.add(new BasicNameValuePair("_xsrf", "23d6db084e55cf13a36b93c2fbb7e88b"));
 		
 		
 
