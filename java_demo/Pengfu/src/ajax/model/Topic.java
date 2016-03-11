@@ -111,6 +111,26 @@ public class Topic extends Entity{
 		this.watchIndex = watchIndex;
 	}
 	
+	public void update() {
+		Connection conn = Mysql.getConn();
+		String sql = String.format("UPDATE %s SET tname = ?, watchIndex = ?, dataId = ?, rank = ?, url = ?, parentId = ? WHERE id = ? LIMIT 1", tableName);
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, this.getTname());
+			ps.setInt(2, this.getWatchIndex());
+			ps.setInt(3, this.getDataId());
+			ps.setInt(4, this.getRank());
+			ps.setString(5, this.getUrl());
+			ps.setInt(6, this.getParentId());
+			ps.setInt(7, this.getId());
+			
+			ps.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void save() {
 		Connection conn = Mysql.getConn();
 		String sql = String.format("INSERT INTO %s (tname, watchIndex, dataId, rank, url, parentId) VALUES(?, ?, ?, ?, ?, ?) ", tableName);
@@ -136,7 +156,6 @@ public class Topic extends Entity{
 			this.setId(rs.getInt("id"));
 			this.setParentId(rs.getInt("parentId"));
 			this.setDataId(rs.getInt("dataId"));
-			this.setParentId(rs.getInt("parentId"));
 			this.setRank(rs.getInt("rank"));
 			this.setTname(rs.getString("tname"));
 			this.setUrl(rs.getString("url"));
@@ -321,7 +340,6 @@ public class Topic extends Entity{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public static void getRankTwo(int parentId, int parentDataId, int offset) {
@@ -331,6 +349,7 @@ public class Topic extends Entity{
 		ArrayList<TopicJson> result = getTopicJsons(msg, parentId);
 		
 		for (int i = 0; i < result.size(); i ++) {
+			
 			TopicJson tj = result.get(i);
 			tj.save();
 			System.out.println(tj.tname + " saved!");
@@ -338,9 +357,52 @@ public class Topic extends Entity{
 		}
 	}
 	
+	public static void do2() {
+		Statement stat = Mysql.getStat();
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d", Topic.tableName, TopicRank.TWO.rank);
+		
+		try {
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			while(rs.next()) {
+				Topic t = new Topic();
+				t.readFromResultSet(rs);
+				
+				t.grabWatchIndex();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void grabWatchIndex() {
+		String url = this.getUrl();
+		try {
+			Document doc = Jsoup.connect(url).get();
+			
+			Element ele = doc.select("#zh-topic-side-head > div > strong").get(0);
+			
+			int watcheIndex = Integer.parseInt(ele.text().trim());
+			
+			this.setWatchIndex(watcheIndex);
+			this.update();
+			
+			
+			System.out.println("Grab OK : " + this.getTname());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public static void main(String[] args) {
-		do1();
+		
+		//do1();
+		
+		do2();
 		
 	}
 }
