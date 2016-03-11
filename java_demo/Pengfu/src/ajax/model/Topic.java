@@ -359,7 +359,7 @@ public class Topic extends Entity{
 	
 	public static void do2() {
 		Statement stat = Mysql.getStat();
-		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d", Topic.tableName, TopicRank.TWO.rank);
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d && watchIndex = 0", Topic.tableName, TopicRank.TWO.rank);
 		
 		try {
 			ResultSet rs = stat.executeQuery(sqlCmd);
