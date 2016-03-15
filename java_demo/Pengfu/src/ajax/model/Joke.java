@@ -29,14 +29,22 @@ public class Joke {
 	private String username;		// 谁发表的joke
 	private String userPersonalPageUrl; 	// 发布者的主页url
 	private JokeStatus jokeStatus = JokeStatus.NORMAL;
+	private String backgroundInformation;
 	private JokeType _jokeType;
 	private String _tableName = Joke.tableName;	// 实例默认的数据表, 这个在将来有可能不同值
+	
 	
 	public static final int maxJokeId = 13308;
 	public static final int minJokeId = 17;
 	private static final int startPage = 520;
 	
 	
+	public String getBackgroundInformation() {
+		return backgroundInformation;
+	}
+	public void setBackgroundInformation(String backgroundInformation) {
+		this.backgroundInformation = backgroundInformation;
+	}
 	public String getUsername() {
 		return username;
 	}
@@ -314,6 +322,8 @@ public class Joke {
 			this.setDateEntered(rs.getString("dateEntered"));
 			this.setUsername(rs.getString("username"));
 			this.setUserPersonalPageUrl(rs.getString("userPersonalPageUrl"));
+			this.setBackgroundInformation(rs.getString("backgroundInformation"));
+			
 			
 			
 		} catch (Exception e) {

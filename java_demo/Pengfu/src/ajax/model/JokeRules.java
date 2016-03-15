@@ -15,6 +15,7 @@ public class JokeRules {
 	protected String dislikeSelector;
 	protected String usernameSelector;
 	protected String userPersonalPageUrlSelector;
+	protected String backgroundInformationSelector;
 	
 	
 	public String dealTitleElements(Elements eles) {
@@ -39,10 +40,16 @@ public class JokeRules {
 	public String dealUserPersonalPageUrlElements(Elements eles) {
 		return eles.html();
 	}
-	
-	
-	
-	
+	public String dealBackgroundInformationElements(Elements eles) {
+		return eles.html();
+	}
+	public String getBackgroundInformationSelector() {
+		return backgroundInformationSelector;
+	}
+	public void setBackgroundInformationSelector(
+			String backgroundInformationSelector) {
+		this.backgroundInformationSelector = backgroundInformationSelector;
+	}
 	public String getTableName() {
 		return tableName;
 	}

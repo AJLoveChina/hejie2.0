@@ -35,7 +35,8 @@ public enum JokeType {
 	BUSINESS(57, "商业, 金融"),
 	TECH(58, "科技"),
 	
-	ALL(9, "所有内容");
+	ALL(9, "所有内容"),
+	UNKNOWN(99, "未知分类");
 	
 	
 	private int id;
@@ -54,23 +55,27 @@ public enum JokeType {
 	}
 	
 	public static JokeType getJokeType(int id) {
-		JokeType jokeType = JokeType.ONLY_WORD;
-		if (id == JokeType.ONLY_WORD.getId()) {
-			jokeType = JokeType.ONLY_WORD;
-		} else if (id == JokeType.STATIC_IMAGE.getId()) {
-			jokeType = JokeType.STATIC_IMAGE;
-		} else if (id == JokeType.GIF.getId()) {
-			jokeType = JokeType.GIF;
+		
+		JokeType[] jokeTypes = JokeType.values();
+		
+		for (JokeType jt : jokeTypes) {
+			if (jt.id == id) {
+				return jt;
+			}
 		}
-		return jokeType;
+		return JokeType.UNKNOWN;
+		
 	}
 	JokeType(int id, String info) {
 		this.id = id;
 		this.info = info;
 	}
+	
+	
 	public static void main(String[] args) {
-		JokeType jokeType = JokeType.getJokeType(2);
+//		JokeType jokeType = JokeType.getJokeType(2);
+//		
+//		System.out.println(jokeType.getId());
 		
-		System.out.println(jokeType.getId());
 	}
 }

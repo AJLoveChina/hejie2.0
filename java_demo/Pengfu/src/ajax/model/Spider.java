@@ -67,6 +67,11 @@ public class Spider{
 				joke.setUserPersonalPageUrl(jokeRules.dealUserPersonalPageUrlElements(userPersonalPageUrl));
 			}
 			
+			if (jokeRules.getBackgroundInformationSelector() != null) {
+				Elements backgroundInformation = doc.select(jokeRules.getBackgroundInformationSelector());
+				joke.setBackgroundInformation(jokeRules.dealBackgroundInformationElements(backgroundInformation));
+			}
+			
 			joke.saveToSqlFromSpider();
 			
 		} catch (IOException e) {
