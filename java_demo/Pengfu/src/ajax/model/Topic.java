@@ -376,6 +376,31 @@ public class Topic extends Entity{
 		}
 	}
 	
+	public static ArrayList<Topic> do3() {
+		// 统计topic的优先级
+		Statement stat = Mysql.getStat();
+		
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d ORDER BY watchIndex DESC", tableName, TopicRank.TWO.rank);
+		
+		try {
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			
+			ArrayList<Topic> topics = new ArrayList<Topic>();
+			while(rs.next()) {
+				Topic t = new Topic();
+				t.readFromResultSet(rs);
+				topics.add(t);
+			}
+			
+			return topics;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void grabWatchIndex() {
 		String url = this.getUrl();
 		try {
@@ -396,13 +421,86 @@ public class Topic extends Entity{
 		}
 	}
 	
+	public static void saveTopicsToFile(List<Topic> topics) {
+		File file = new File("src/data/topTopics.html");
+		
+		List<Topic> cut = new ArrayList<Topic>();
+		String data = "";
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0, len = topics.size(); i < len; i += 10) {
+			if (i + 10 < len) {
+				cut = topics.subList(i, i + 10);
+			} else {
+				cut = topics.subList(i, len);
+			}
+			
+			data = "";
+			for (int j = 0; j < cut.size(); j++) {
+				data += "<tr>";
+				data += "<td><a href='" + cut.get(j).getUrl() + "'>" + cut.get(j).getTname() + "</a></td> <td>" + cut.get(j).getWatchIndex() + "<td>\n";
+				data += "</tr>";
+			}
+			//Tools.appendDataToFile(data, file);
+			sb.append(data);
+		}
+		
+		data = "<!DOCTYPE html>"
+				+ "<html>"
+				+ "<head>"
+				+ "<meta charset = 'UTF-8' />"
+				+ "<style>body{font-family:Microsoft Yahei;}</style>"
+				+ "</head>"
+				+ "<body>"
+				+ "<table>"
+				+ "<thead>"
+				+ "<th>话题</th>"
+				+ "<th>关注度</th>"
+				+ "</thead>"
+				+ sb.toString()
+				+ "</table>"
+				+ "</body>"
+				+ "</html>";
+		
+		Tools.appendDataToFile(data, file);
+	}
+	
+	public static List<Topic> filterList(List<Topic> topics) {
+		Map<String, Topic> map = new HashMap<String, Topic>();
+		
+		for (int i = 0, len = topics.size(); i < len; i++) {
+			map.put(topics.get(i).getTname(), topics.get(i));
+		}
+		
+		List<Topic> lists = new ArrayList<Topic>();
+		Set<String> keys = map.keySet();
+		
+		Iterator<String> it = keys.iterator();
+		while(it.hasNext()) {
+			lists.add(map.get(it.next()));
+		}
+		
+
+		Collections.sort(lists, new Comparator<Topic>() {
+			@Override
+			public int compare(Topic t1, Topic t2){
+				return -(t1.getWatchIndex() - t2.getWatchIndex());
+			}
+		});
+		return lists;
+	}
 	
 	
 	public static void main(String[] args) {
 		
 		//do1();
 		
-		do2();
+		List<Topic> topics = do3();
+		
+		topics = filterList(topics);
+				
+		saveTopicsToFile(topics);
+		
 		
 	}
 }

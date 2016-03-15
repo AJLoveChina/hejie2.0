@@ -1,6 +1,11 @@
 package ajax.tools;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -62,6 +67,48 @@ public class Tools {
 			e.printStackTrace();
 		}
 		return out.toString();
+	}
+	
+	public static void writeDataToFile(String data, File file) {
+		FileWriter fw;
+		try {
+			
+			fw = new FileWriter(file);
+			fw.write(data);
+			
+			fw.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static void appendDataToFile(String data, File file) {
+		String copy = readFile(file);
+		
+		writeDataToFile(copy + data,  file);
+		
+	}
+	
+	public static String readFile(File file) {
+		FileInputStream fin;
+		
+		try {
+			
+			fin = new FileInputStream(file);
+			
+			String data = readInputStream(fin);
+			
+			return data;
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "";
 	}
 	
 	public static void main(String[] args) {
