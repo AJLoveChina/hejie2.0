@@ -503,6 +503,34 @@ public class Topic extends Entity{
 		
 		
 	}
+	public static List<Topic> getSecondTopics(int limit) {
+		// 获取 limit 个一级主题
+		
+		Statement stat = Mysql.getStat();
+		//id, tname, watchIndex, dataid, rank, url, parentId, lastScan
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d ORDER BY watchIndex DESC LIMIT %d",
+				tableName, TopicRank.TWO.rank, limit);
+		
+		ResultSet rs;
+		List<Topic> lists = new ArrayList<Topic>();
+		try {
+			rs = stat.executeQuery(sqlCmd);
+			
+			
+			while(rs.next()) {
+				Topic t = new Topic();
+				t.readFromResultSet(rs);
+				lists.add(t);
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return lists;
+	}
 }
 
 

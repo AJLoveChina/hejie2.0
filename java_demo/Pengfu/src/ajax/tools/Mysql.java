@@ -5,7 +5,10 @@ import java.sql.*;
 public class Mysql {
 	
 	private static Connection conn = null;
+	private static int count = 0;
+	
 	public static Connection getConn(){
+		count ++;
 		if (Mysql.conn != null) {
 			return Mysql.conn;
 		}
@@ -44,11 +47,15 @@ public class Mysql {
 	
 	public static void close() {
 		try {
-			Mysql.conn.close();
+			count--;
+			if (count == 0) {
+				// if count != 0, it shows some other code is using sql connection, so it can't be destroied!
+				Mysql.conn.close();
+				Mysql.conn = null;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Mysql.conn = null;
 	}
 }

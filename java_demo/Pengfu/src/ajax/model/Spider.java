@@ -1,15 +1,13 @@
 package ajax.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Spider{
+	
 	private JokeRules jokeRules;
 
 	public Spider(JokeRules jokeRules) {
@@ -21,7 +19,6 @@ public class Spider{
 	public void setJokeRules(JokeRules jokeRules) {
 		this.jokeRules = jokeRules;
 	}
-	
 	
 	public void run() {
 		try {
