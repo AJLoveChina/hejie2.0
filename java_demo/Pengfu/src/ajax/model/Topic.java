@@ -32,6 +32,7 @@ public class Topic extends Entity{
 	private int rank;
 	private String url;
 	private int parentId = 0;
+	private int isDelete;
 	
 	public static String tableName = "topic";
 	
@@ -68,6 +69,12 @@ public class Topic extends Entity{
 	}
 	
 	
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
 	public int getParentId() {
 		return parentId;
 	}
@@ -113,7 +120,7 @@ public class Topic extends Entity{
 	
 	public void update() {
 		Connection conn = Mysql.getConn();
-		String sql = String.format("UPDATE %s SET tname = ?, watchIndex = ?, dataId = ?, rank = ?, url = ?, parentId = ? WHERE id = ? LIMIT 1", tableName);
+		String sql = String.format("UPDATE %s SET tname = ?, watchIndex = ?, dataId = ?, rank = ?, url = ?, parentId = ?, isDelete = ? WHERE id = ? LIMIT 1", tableName);
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, this.getTname());
@@ -122,7 +129,8 @@ public class Topic extends Entity{
 			ps.setInt(4, this.getRank());
 			ps.setString(5, this.getUrl());
 			ps.setInt(6, this.getParentId());
-			ps.setInt(7, this.getId());
+			ps.setInt(7, this.getIsDelete());
+			ps.setInt(8, this.getId());
 			
 			ps.execute();
 			
@@ -160,6 +168,7 @@ public class Topic extends Entity{
 			this.setTname(rs.getString("tname"));
 			this.setUrl(rs.getString("url"));
 			this.setWatchIndex(rs.getInt("watchIndex"));
+			this.setIsDelete(rs.getInt("isDelete"));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -493,13 +502,7 @@ public class Topic extends Entity{
 	
 	public static void main(String[] args) {
 		
-		//do1();
-		
-		List<Topic> topics = do3();
-		
-		topics = filterList(topics);
-				
-		saveTopicsToFile(topics);
+		deleteDuplicateEntryOfUrl();
 		
 		
 	}
@@ -508,7 +511,7 @@ public class Topic extends Entity{
 		
 		Statement stat = Mysql.getStat();
 		//id, tname, watchIndex, dataid, rank, url, parentId, lastScan
-		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d ORDER BY watchIndex DESC LIMIT %d",
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d && isDelete = 0 ORDER BY watchIndex DESC LIMIT %d",
 				tableName, TopicRank.TWO.rank, limit);
 		
 		ResultSet rs;
@@ -530,6 +533,79 @@ public class Topic extends Entity{
 		}
 		
 		return lists;
+	}
+	
+	class DeleteDuplicateEntry{
+		boolean isDuplicate;
+		Topic t;
+		public boolean isDuplicate() {
+			return isDuplicate;
+		}
+		public void setDuplicate(boolean isDuplicate) {
+			this.isDuplicate = isDuplicate;
+		}
+		public Topic getT() {
+			return t;
+		}
+		public void setT(Topic t) {
+			this.t = t;
+		}
+		
+		public DeleteDuplicateEntry(Topic t) {
+			this.t = t;
+		}
+		
+		
+	}
+	public static void deleteDuplicateEntryOfUrl() {
+		Statement stat = Mysql.getStat();
+		String sqlCmd = String.format("SELECT * FROM %s", tableName);
+		
+		try {
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			List<Topic> topics = new ArrayList<Topic>();
+			while(rs.next())  {
+				Topic t = new Topic();
+				t.readFromResultSet(rs);
+				topics.add(t);
+			}
+			
+			List<DeleteDuplicateEntry> rows = new ArrayList<Topic.DeleteDuplicateEntry>();
+			
+			Topic tt = new Topic();
+			
+			for (Topic t : topics) {
+				rows.add(tt.new DeleteDuplicateEntry(t));
+			}
+			
+			ArrayList<String> exitedUrls = new ArrayList<String>();
+			
+			for (DeleteDuplicateEntry dd : rows) {
+				String url = dd.getT().getUrl();
+				
+				if (exitedUrls.contains(url)) {
+					dd.setDuplicate(true);
+				} else {
+					dd.setDuplicate(false);
+					exitedUrls.add(url);
+				}
+			}
+			
+			for (DeleteDuplicateEntry dd : rows) {
+				if (dd.isDuplicate()) {
+					dd.getT().setIsDelete(1);
+					dd.getT().update();
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 }
 

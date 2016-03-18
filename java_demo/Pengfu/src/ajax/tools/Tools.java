@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -111,14 +112,42 @@ public class Tools {
 		return "";
 	}
 	
-	public static String changeRelativeUrlToAbsoluteUrlByCurrent(String relativeUrl, String href) {
+	public static String getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(String relativeUrl, String absoluteUrl) {
+		try {
+			String result;
+			URL aURL = new URL(absoluteUrl);
+			if (relativeUrl.startsWith("http")) {
+				return relativeUrl;
+			}
+			if (relativeUrl.startsWith("//")) {
+				return aURL.getProtocol() + ":" + relativeUrl;
+			}
+			if (relativeUrl.startsWith("/")) {
+				
+//					such as http://www.malianyi.com:8080/Pengfu/Index?type=9
+//			        protocol = http
+//		    		authority = www.malianyi.com:8080
+//		    		host = www.malianyi.com
+//		    		port = 8080
+//		    		path = /Pengfu/Index
+//		    		query = type=9
+//		    		filename = /Pengfu/Index?type=9
+//		    		ref = null
+				return aURL.getProtocol() + "://" + aURL.getAuthority() + relativeUrl;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
 	
 	public static void main(String[] args) {
 		
-		deleteJokeById(23);
+		
+		String url = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl("/pathto/index.php", "http://www.malianyi.com:8080/Pengfu/Index?type=9");
+		
+		System.out.println(url);
 		
 		
 	}

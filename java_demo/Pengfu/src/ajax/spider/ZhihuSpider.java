@@ -64,34 +64,42 @@ public class ZhihuSpider {
 		public void save() {
 			Statement stat = Mysql.getStat();
 			
-			String sqlCmd = String.format("INSERT INTO %s (title, url, backgroundInformation, lastScan, topicTname)", 
-					tableName, this.url, this.title, this.backgroundInformation, this.lastScan, this.topicTname);
+			String sqlCmd = String.format("INSERT INTO %s (title, url, backgroundInformation, lastScan, topicTname) "
+					+ "VALUES ('%s', '%s', '%s', '%s', '%s')", 
+					tableName, this.title, this.url, this.backgroundInformation, this.lastScan, this.topicTname);
 			
 			try {
 				stat.execute(sqlCmd);
+				System.out.println("Grab ok : " + this.getTitle());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Error : " + e.getMessage());
 			}
-			
 		}
 	}
 	
 	public List<Topic> getSecondTopics(int limit) {
 		// 获取 limit 个一级主题
 		return Topic.getSecondTopics(limit);
-		
 	}
 	
 	
 	private void start() {
-		List<Topic> topics = getSecondTopics(1);
+		List<Topic> topics = getSecondTopics(30);
 		
 		for(Topic t : topics) {
 			List<Question> questions = getQuestionsOfTopic(t);
 			
-			System.out.println(questions);
+			for(Question q : questions) {				
+				q.save();
+				
+			}
 		}
+		
+		
+	}
+	
+	private void getBackgroundInformation() {
+		
 	}
 	
 	public List<Question> getQuestionsOfTopic(Topic t) {
@@ -111,8 +119,8 @@ public class ZhihuSpider {
 				
 				Question q = new Question();
 				q.setTitle(title);
+				url = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(url, t.getUrl());
 				q.setUrl(url);
-				Tools
 				q.setTopicTname(t.getTname());
 				q.setLastScan(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 				
