@@ -111,6 +111,11 @@ public class Tools {
 		return "";
 	}
 	
+	public static String changeRelativeUrlToAbsoluteUrlByCurrent(String relativeUrl, String href) {
+		
+		return null;
+	}
+	
 	public static void main(String[] args) {
 		
 		deleteJokeById(23);

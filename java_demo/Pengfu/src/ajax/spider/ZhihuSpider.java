@@ -2,10 +2,13 @@ package ajax.spider;
 
 import ajax.model.*;
 import ajax.tools.Mysql;
+import ajax.tools.Tools;
 
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
@@ -87,7 +90,7 @@ public class ZhihuSpider {
 		for(Topic t : topics) {
 			List<Question> questions = getQuestionsOfTopic(t);
 			
-			
+			System.out.println(questions);
 		}
 	}
 	
@@ -95,9 +98,12 @@ public class ZhihuSpider {
 		List<Question> lists = new ArrayList<Question>();
 		
 		try {
-			Document doc = Jsoup.connect(t.getUrl()).get();
+			Document doc = Jsoup.connect(t.getUrl() + "/hot").get();
+//			
+//			String html = doc.html();
+//			Tools.writeDataToFile(html, new File("src/data/zhihu_topic_html.txt"));
 			
-			Elements questions = doc.select("#zh-topic-feed-list > div.first-combine");
+			Elements questions = doc.select("div.zu-top-feed-list > div.first-combine");
 			
 			for (Element ele : questions) {
 				String title = ele.select("a.question_link").get(0).text().trim();
@@ -106,20 +112,18 @@ public class ZhihuSpider {
 				Question q = new Question();
 				q.setTitle(title);
 				q.setUrl(url);
+				Tools
+				q.setTopicTname(t.getTname());
+				q.setLastScan(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
 				
-				q.save();
+				lists.add(q);
 			}
-			
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		return null;
+		return lists;
 	}
 	
 	public static void main(String[] args) {
