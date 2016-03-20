@@ -604,9 +604,9 @@ public class Topic extends Entity{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
+	//END
 }
 
 

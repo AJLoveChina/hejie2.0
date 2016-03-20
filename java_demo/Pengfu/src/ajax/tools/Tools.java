@@ -144,13 +144,20 @@ public class Tools {
 	
 	public static void main(String[] args) {
 		
-		
-		String url = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl("/pathto/index.php", "http://www.malianyi.com:8080/Pengfu/Index?type=9");
-		
-		System.out.println(url);
-		
-		
 	}
+
+	public static int parseInt(String str) {
+		if(str == null || str.trim() == "") {
+			return 0;
+		}
+		try {
+			return Integer.parseInt(str);
+		}catch(Exception e) {
+			return 0;
+		}
+	}
+	
+	
 	
 	
 }

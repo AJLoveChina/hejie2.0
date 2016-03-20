@@ -1,8 +1,7 @@
 package ajax.spider;
 
 import ajax.model.*;
-import ajax.tools.Mysql;
-import ajax.tools.Tools;
+import ajax.tools.*;
 
 import java.io.*;
 import java.sql.*;
@@ -19,64 +18,6 @@ public class ZhihuSpider {
 	 * 在目前的设计里面 知乎只有 二级分类
 	 **/
 	
-	class Question{
-		private String url;
-		private String title;
-		private String backgroundInformation;
-		private String lastScan;
-		private String topicTname;
-		
-		// why not allowed for a static filed in non-static inner type
-		public static final String tableName = "zhihuquestion";
-		
-		
-		public String getBackgroundInformation() {
-			return backgroundInformation;
-		}
-		public void setBackgroundInformation(String backgroundInformation) {
-			this.backgroundInformation = backgroundInformation;
-		}
-		public String getLastScan() {
-			return lastScan;
-		}
-		public void setLastScan(String lastScan) {
-			this.lastScan = lastScan;
-		}
-		public String getTopicTname() {
-			return topicTname;
-		}
-		public void setTopicTname(String topicTname) {
-			this.topicTname = topicTname;
-		}
-		public String getUrl() {
-			return url;
-		}
-		public void setUrl(String url) {
-			this.url = url;
-		}
-		public String getTitle() {
-			return title;
-		}
-		public void setTitle(String title) {
-			this.title = title;
-		}
-		
-		public void save() {
-			Statement stat = Mysql.getStat();
-			
-			String sqlCmd = String.format("INSERT INTO %s (title, url, backgroundInformation, lastScan, topicTname) "
-					+ "VALUES ('%s', '%s', '%s', '%s', '%s')", 
-					tableName, this.title, this.url, this.backgroundInformation, this.lastScan, this.topicTname);
-			
-			try {
-				stat.execute(sqlCmd);
-				System.out.println("Grab ok : " + this.getTitle());
-			} catch (SQLException e) {
-				System.out.println("Error : " + e.getMessage());
-			}
-		}
-	}
-	
 	public List<Topic> getSecondTopics(int limit) {
 		// 获取 limit 个一级主题
 		return Topic.getSecondTopics(limit);
@@ -91,15 +32,19 @@ public class ZhihuSpider {
 			
 			for(Question q : questions) {				
 				q.save();
-				
 			}
 		}
-		
-		
 	}
 	
-	private void getBackgroundInformation() {
+
+	public static void getBackgroundInformationForSomeRows() {
+		List<Question> lists = Question.getQuestionsWhichHaveNoBackgroundInformation();
 		
+		for(Question q : lists) {
+			q.grabBackgroundInformation();
+			q.update();
+			System.out.println("UPDate ok : " + q.getTitle());
+		}
 	}
 	
 	public List<Question> getQuestionsOfTopic(Topic t) {
@@ -134,9 +79,29 @@ public class ZhihuSpider {
 		return lists;
 	}
 	
-	public static void main(String[] args) {
-		ZhihuSpider zhs = new ZhihuSpider();
+	public static void getQuestionsOfTopic() {
+		List<Question> questions = new ArrayList<Question>();
+		int page = 1;
+		do {
+			questions = Question.getTopQuestions(page, 30);
+			
+			for (Question q : questions) {
+				q.grabAnswers();
+			}
+			
+			page++;
+		}while(questions.size() > 0);
 		
-		zhs.start();
+	}
+	
+	public static void main(String[] args) {
+		getQuestionsOfTopic();
+		
+		
+//		
+//		ZhihuSpider zhs = new ZhihuSpider();
+//		
+//		zhs.start();
+		
 	}
 }
