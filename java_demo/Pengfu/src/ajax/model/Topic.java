@@ -33,6 +33,7 @@ public class Topic extends Entity{
 	private String url;
 	private int parentId = 0;
 	private int isDelete;
+	private int jokeType;
 	
 	public static String tableName = "topic";
 	
@@ -69,6 +70,12 @@ public class Topic extends Entity{
 	}
 	
 	
+	public int getJokeType() {
+		return jokeType;
+	}
+	public void setJokeType(int jokeType) {
+		this.jokeType = jokeType;
+	}
 	public int getIsDelete() {
 		return isDelete;
 	}
@@ -120,7 +127,8 @@ public class Topic extends Entity{
 	
 	public void update() {
 		Connection conn = Mysql.getConn();
-		String sql = String.format("UPDATE %s SET tname = ?, watchIndex = ?, dataId = ?, rank = ?, url = ?, parentId = ?, isDelete = ? WHERE id = ? LIMIT 1", tableName);
+		String sql = String.format("UPDATE %s SET tname = ?, watchIndex = ?, dataId = ?, rank = ?, "
+				+ "url = ?, parentId = ?, isDelete = ? , jokeType = ? WHERE id = ? LIMIT 1", tableName);
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, this.getTname());
@@ -130,7 +138,8 @@ public class Topic extends Entity{
 			ps.setString(5, this.getUrl());
 			ps.setInt(6, this.getParentId());
 			ps.setInt(7, this.getIsDelete());
-			ps.setInt(8, this.getId());
+			ps.setInt(8, this.getJokeType());
+			ps.setInt(9, this.getId());
 			
 			ps.execute();
 			
@@ -169,12 +178,17 @@ public class Topic extends Entity{
 			this.setUrl(rs.getString("url"));
 			this.setWatchIndex(rs.getInt("watchIndex"));
 			this.setIsDelete(rs.getInt("isDelete"));
+			this.setJokeType(rs.getInt("jokeType"));
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	public void load() {
+		this.get();
+	}
+	
 	public void get() {
 		Connection conn = Mysql.getConn();
 		String sql = String.format("SELECT * FROM %s WHERE id = %d", tableName, this.getId());
@@ -500,21 +514,31 @@ public class Topic extends Entity{
 	}
 	
 	
-	public static void main(String[] args) {
-		
-		deleteDuplicateEntryOfUrl();
-		
-		
-	}
+	
 	public static List<Topic> getSecondTopics(int limit) {
 		// 获取 limit 个一级主题
 		
-		Statement stat = Mysql.getStat();
 		//id, tname, watchIndex, dataid, rank, url, parentId, lastScan
 		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d && isDelete = 0 ORDER BY watchIndex DESC LIMIT %d",
 				tableName, TopicRank.TWO.rank, limit);
 		
+		return getListBySqlCmd(sqlCmd);
+	}
+	
+	public static List<Topic> getSecondTopics(int page, int pageNum) {
+		// 获取 limit 个一级主题
+		
+		
+		//id, tname, watchIndex, dataid, rank, url, parentId, lastScan
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d && isDelete = 0 ORDER BY watchIndex DESC LIMIT %d, %d",
+				tableName, TopicRank.TWO.rank, (page - 1) * pageNum, pageNum);
+		
+		return getListBySqlCmd(sqlCmd);
+	}
+	
+	private static List<Topic> getListBySqlCmd(String sqlCmd) {
 		ResultSet rs;
+		Statement stat = Mysql.getStat();
 		List<Topic> lists = new ArrayList<Topic>();
 		try {
 			rs = stat.executeQuery(sqlCmd);
@@ -606,6 +630,66 @@ public class Topic extends Entity{
 		}
 	}
 	
+	
+	public static void calculateJokeTypeForTopics() {
+		// 获取一级主题的jokeType
+		String sqlCmd = String.format("SELECT * FROM %s WHERE rank = %d", tableName, TopicRank.ONE.rank);
+		
+		Statement stat = Mysql.getStat();
+		List<Topic> topics = new ArrayList<Topic>();
+		try {
+			
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			while(rs.next()) {
+				Topic t = new Topic();
+				t.readFromResultSet(rs);
+				topics.add(t);
+			}
+			
+			for (Topic t : topics){
+				String tname = t.getTname();
+				JokeType jt = JokeType.getJokeTypeByInfo(tname);
+				
+				t.setJokeType(jt.getId());
+				
+				t.update();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void calculateJokeTypeForSecondTopicRank() {
+		List<Topic> topics = new ArrayList<Topic>();
+		int page = 1;
+		int pageNum = 30;
+		
+		do {
+			topics = Topic.getSecondTopics(page, pageNum);
+			
+			for (Topic t : topics) {
+				Topic parent = new Topic();
+				parent.setId(t.getParentId());
+				parent.load();
+				
+				t.setJokeType(parent.getJokeType());
+				t.update();
+			}
+			
+			page++;
+		}while(topics.size() > 0);
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		
+		calculateJokeTypeForSecondTopicRank();
+		
+	}
 	//END
 }
 

@@ -71,6 +71,17 @@ public enum JokeType {
 		this.info = info;
 	}
 	
+	public static JokeType getJokeTypeByInfo(String info) {
+		JokeType[] jokeTypes = JokeType.values();
+		
+		for (JokeType jt : jokeTypes) {
+			if (jt.info.contains(info)) {
+				return jt;
+			}
+		}
+		return JokeType.UNKNOWN;
+	}
+	
 	
 	public static void main(String[] args) {
 //		JokeType jokeType = JokeType.getJokeType(2);
