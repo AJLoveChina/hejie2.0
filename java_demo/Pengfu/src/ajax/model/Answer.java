@@ -13,10 +13,18 @@ public class Answer {
 	private String username;
 	private int agree;
 	private String summary;
+	private int jokeType;
 	
 	
 	public static String tableName = "answer";
 	
+	
+	public int getJokeType() {
+		return jokeType;
+	}
+	public void setJokeType(int jokeType) {
+		this.jokeType = jokeType;
+	}
 	public String getSummary() {
 		return summary;
 	}
@@ -60,12 +68,8 @@ public class Answer {
 		this.username = username;
 	}
 	public void save() {
-		String sqlCmd = String.format("INSERT INTO %s (title, content, url, username, agree, summary) "
-				+ "VALUES('%s', '%s', '%s', '%s', %d, '%s')", 
-				tableName, this.getTitle(), this.getContent(), this.getUrl(), this.getUsername(), this.getAgree(), this.getSummary());
-		
-		String sqlCmd2 = String.format("INSERT INTO %s (title, content, url, username, agree, summary) "
-				+ "VALUES(?, ?, ?, ?, ?, ?)", 
+		String sqlCmd2 = String.format("INSERT INTO %s (title, content, url, username, agree, summary, jokeType) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, ?)", 
 				tableName);
 		try {
 			PreparedStatement ps = Mysql.getConn().prepareStatement(sqlCmd2);
@@ -76,6 +80,7 @@ public class Answer {
 			ps.setString(4, this.getUsername());
 			ps.setInt(5, this.getAgree());
 			ps.setString(6, this.getSummary());
+			ps.setInt(7, this.getJokeType());
 			
 			ps.execute();
 			System.out.println("Grab OK" + this.getTitle());

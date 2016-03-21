@@ -185,7 +185,7 @@ public class Question{
 				a.setUsername(div.attr("data-author-name").trim());
 				a.setAgree(Tools.parseInt(answer.select(".zm-votebar .count").text().trim()));
 				a.setUrl(Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(div.select(".zm-item-rich-text").attr("data-entry-url").trim(), this.getUrl()));
-			
+				a.setJokeType(JokeType.getJokeTypeByInfo(this.getTopicTname()).getId());
 				
 				a.save();
 				
