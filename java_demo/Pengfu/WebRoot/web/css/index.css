@@ -1,6 +1,10 @@
 *{
 	margin:0;padding:0;
 	border:none;
+	color:#333;
+}
+ul li{
+	list-style: none;
 }
 
 body {
@@ -20,10 +24,13 @@ body {
 	div#aj-body{
 		min-height:450px;
 	}
+	.aj-body-right{
+		display: none;
+	}
 }
 #aj-body{
 	width:100%;
-	max-width:640px;
+	max-width:1050px;
 	margin:0 auto;
 	min-height:720px;
 }
@@ -36,6 +43,7 @@ body {
 	text-align: center;
 	background-color:#2a2730;
 }
+
 #aj-footer .container{
 	padding:0 15px;
 }
@@ -78,4 +86,15 @@ body {
 }
 .slidesjs-pagination-item a.active{
 	top:-10px;
+}
+
+/*2016-03-21*/
+.aj-body-left{
+	max-width:710px;
+	width:100%;
+	float:left;
+}
+.aj-body-right{
+	width:300px;
+	float:right;
 }

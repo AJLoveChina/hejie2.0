@@ -22,14 +22,14 @@
             		 <img src="web/images/logo.PNG" height="70px " alt=""/>
             	</a>
             </div>
-           	<div class="navbar-text">汤圆小屋</div>
+           	<div class="navbar-text">你个二货</div>
         </div>
     </div>
 </nav>
 
 <div style="height: 50px;"></div>
-<div id="aj-body">
+<div id="aj-body" class="clearfix">
 
 
-<jsp:include page="jokeTypeChoice.jsp"></jsp:include>
+
 
