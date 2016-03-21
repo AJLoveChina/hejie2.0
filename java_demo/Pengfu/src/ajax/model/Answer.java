@@ -99,6 +99,8 @@ public class Answer implements JokeAdapter{
 			this.setTitle(rs.getString("title"));
 			this.setUrl(rs.getString("url"));
 			this.setUsername(rs.getString("username"));
+			this.setBackgroundInformation(rs.getString("backgroundInformation"));
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -187,9 +189,8 @@ public class Answer implements JokeAdapter{
 		
 		for (Answer a : answers) {
 			
-			a.grabBackgroundInformation();
 			
-			//Joke.commit(a);
+			Joke.commit(a);
 		}
 	}
 	

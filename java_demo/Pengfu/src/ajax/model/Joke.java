@@ -339,6 +339,8 @@ public class Joke {
 		j.setBackgroundInformation(jokeAdapter.adaptedBackgroundInformation());
 		
 		j.save();
+		
+		System.out.println("Commit one to Joke : " + jokeAdapter.adaptedTitle() + "--" + jokeAdapter.adaptedUsername());
 	}
 	
 	public boolean update(){
