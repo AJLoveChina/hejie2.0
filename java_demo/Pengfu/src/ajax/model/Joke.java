@@ -251,6 +251,39 @@ public class Joke {
 		}
 		return true;
 	}
+	public void save() {
+		
+		String sqlCmd = String.format("INSERT INTO %s (title, content, stamps, likes, dislike, "
+				+ "url, has_get_image, jokeType, jokeStatus, dateEntered, "
+				+ "username, userPersonalPageUrl, backgroundInformation) "
+				+ "VALUES (?, ?, ?, ?, ?, "
+				+ "?, ?, ?, ?, ?,"
+				+ "?, ?, ?)", tableName);
+		
+		
+		try {
+			PreparedStatement ps = Mysql.getConn().prepareStatement(sqlCmd);
+			ps.setString(1, this.getTitle());
+			ps.setString(2, this.getContent());
+			ps.setString(3, this.getStamps());
+			ps.setInt(4, this.getLikes());
+			ps.setInt(5, this.getDislike());
+			ps.setString(6, this.getUrl());
+			ps.setInt(7, this.getHasGetImage());
+			ps.setInt(8, this.get_jokeType().getId());
+			ps.setInt(9, this.getJokeStatus().getId());
+			ps.setString(10, this.getDateEntered());
+			ps.setString(11, this.getUsername());
+			ps.setString(12, this.getUserPersonalPageUrl());
+			ps.setString(13, this.getBackgroundInformation());
+			
+			ps.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public void saveToSqlFromSpider() {
 		Connection conn = Mysql.getConn();
@@ -286,6 +319,26 @@ public class Joke {
 			e.printStackTrace();
 			System.out.println("Grab Error");
 		}
+	}
+	
+	public static void commit (JokeAdapter jokeAdapter) {
+		Joke j = new Joke();
+		
+		j.setTitle(jokeAdapter.adaptedTitle());
+		j.setContent(jokeAdapter.adaptedContent());
+		j.setStamps(jokeAdapter.adaptedStamps());
+		j.setUrl(jokeAdapter.adaptedUrl());
+		j.setLikes(jokeAdapter.adaptedLikes());
+		j.setDislike(jokeAdapter.adaptedDislike());
+		j.setHasGetImage(jokeAdapter.adaptedhasGetImage());
+		j.set_jokeType(jokeAdapter.adapted_JokeType());
+		j.setJokeStatus(jokeAdapter.adaptedJokeStatus());
+		j.setDateEntered(jokeAdapter.adaptedDateEntered());
+		j.setUsername(jokeAdapter.adaptedUsername());
+		j.setUserPersonalPageUrl(jokeAdapter.adaptedUserPersonalPageUrl());
+		j.setBackgroundInformation(jokeAdapter.adaptedBackgroundInformation());
+		
+		j.save();
 	}
 	
 	public boolean update(){
