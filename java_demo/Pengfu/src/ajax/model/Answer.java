@@ -14,6 +14,7 @@ public class Answer {
 	private int agree;
 	private String summary;
 	
+	
 	public static String tableName = "answer";
 	
 	public String getSummary() {
