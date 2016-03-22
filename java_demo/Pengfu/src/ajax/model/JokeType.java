@@ -1,5 +1,7 @@
 package ajax.model;
 
+import java.util.*;
+
 public enum JokeType {
 	ONLY_WORD(1, "only words"),
 	STATIC_IMAGE(2, "有图片, 不是动态图的笑话"),
@@ -41,6 +43,7 @@ public enum JokeType {
 	
 	private int id;
 	private String info;
+	private String iconClassName;
 	public int getId() {
 		return id;
 	}
@@ -53,6 +56,13 @@ public enum JokeType {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+	public String getIconClassName() {
+		return iconClassName;
+	}
+	public void setIconClassName(String iconClassName) {
+		this.iconClassName = iconClassName;
+	}
+	
 	
 	public static JokeType getJokeType(int id) {
 		
@@ -69,6 +79,12 @@ public enum JokeType {
 	JokeType(int id, String info) {
 		this.id = id;
 		this.info = info;
+		this.iconClassName = "glyphicon glyphicon-star";	// default icon classname
+	}
+	JokeType(int id, String info, String iconClassName) {
+		this.id = id;
+		this.info = info;
+		this.iconClassName = iconClassName;
 	}
 	
 	public static JokeType getJokeTypeByInfo(String info) {
@@ -80,6 +96,10 @@ public enum JokeType {
 			}
 		}
 		return JokeType.UNKNOWN;
+	}
+	
+	public static JokeType[] getAllJokeTypes() {
+		return JokeType.values();
 	}
 	
 	

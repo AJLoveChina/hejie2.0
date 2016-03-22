@@ -1,7 +1,12 @@
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+JokeType[] jokeTypes = JokeType.getAllJokeTypes();
+request.setAttribute("jokeTypes", jokeTypes);
 %>
 
 <style>
@@ -37,13 +42,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		line-height: 38px;
 		float:left;
 		font-size: 12px;
+		white-space: nowrap;
+	}
+	.aj-right-types-choices .acontent .ali:hover{
+		outline:1px solid red;
 	}
 	.aj-right-types-choices .acontent .ali .ali-wrap{
 		display: block;
 		border-right: 1px solid #ccc;
 		border-bottom: 1px solid #ccc;
+		overflow: hidden;
 	}
 	.aj-right-types-choices .acontent .ali .aicon{
+		
+	}
+	.aj-right-types-choices .acontent .ali .ainfo{
 		
 	}
 </style>
@@ -51,60 +64,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="aj-right-types-choices">
 	<div class="aheader">
 		<ul class="aul">
-			<li class="ali selected">分类导航</li>
+			<li class="ali selected">分类导航 </li>
 		</ul>
 	</div>
 	
 	<div class="acontent">
 		<ul class="clearfix">
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon glyphicon glyphicon-cloud"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
-			<li class="ali">
-				<span class="ali-wrap">
-					<em class="aicon"></em>
-					<span class="ainfo">电脑数码</span>
-				</span>
-			</li>
+		
+			<c:forEach items="${jokeTypes}" var="jokeType">
+				<li class="ali">
+					<span class="ali-wrap">
+						<em class="aicon ${jokeType.getIconClassName() }"></em>
+						<span class="ainfo">${jokeType.getInfo() }</span>
+					</span>
+				</li>
+			</c:forEach>
+			
 		</ul>
 	</div>
 </div>
