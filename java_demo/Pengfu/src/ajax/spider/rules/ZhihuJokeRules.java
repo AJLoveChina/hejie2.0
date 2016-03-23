@@ -1,4 +1,4 @@
-package ajax.rules;
+package ajax.spider.rules;
 
 import org.jsoup.select.Elements;
 

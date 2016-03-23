@@ -7,6 +7,7 @@ import org.jsoup.select.Elements;
 
 import ajax.test.Test01;
 
+@Deprecated
 public class JokeRules {
 	protected String tableName = "joke";
 	protected String url;
@@ -45,6 +46,8 @@ public class JokeRules {
 	public String dealBackgroundInformationElements(Elements eles) {
 		return eles.html();
 	}
+	
+	
 	public String getBackgroundInformationSelector() {
 		return backgroundInformationSelector;
 	}
