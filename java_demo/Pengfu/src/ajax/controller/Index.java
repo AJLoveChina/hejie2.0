@@ -68,14 +68,12 @@ public class Index extends HttpServlet {
 		}
 		
 		
-		
 		request.setAttribute("jokes", jokes);
 		request.setAttribute("page", page);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 		
 		rd.forward(request, response);
-		
 	}
 
 }

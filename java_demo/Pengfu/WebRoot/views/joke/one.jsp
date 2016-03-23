@@ -4,7 +4,15 @@
 
 
 
-<div class="panel panel-default">
+<style>
+	.aj-joke-list-one{}
+	.aj-joke-list-one .panel-body{
+		font-size:14px;
+		line-height:26px;
+	}
+</style>
+
+<div class="aj-joke-list-one panel panel-default">
     <div class="panel-heading">
     	<a style="color:#333;" href='<c:out value="${joke.getOneJokeUrlById() }"></c:out>'>
     		<c:out value="${joke.getTitle() }"></c:out>

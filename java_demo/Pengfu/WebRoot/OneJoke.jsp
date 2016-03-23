@@ -21,22 +21,48 @@ int next = joke.getJokeId() + 1;
 <jsp:include page="views/includes/header.jsp"></jsp:include>
 
 
-<jsp:include page="views/joke/one.jsp"></jsp:include>
+
+<div class="aj-body-left">
+	<div style="height:10px;"></div>
+	
+	<jsp:include page="views/joke/one.jsp"></jsp:include>
 
 
-<div class="btn-group" role="group">
-    <button class="btn btn-danger">
-    	<a class="font-white" href="OneJoke?id=<%=previous %>">
-	    	<span class="glyphicon glyphicon-chevron-left"></span>
-	        Previous</button>
-    	</a>
+	<div class="btn-group" role="group">
+	    <button class="btn btn-danger">
+	    	<a class="font-white" href="OneJoke?id=<%=previous %>">
+		    	<span class="glyphicon glyphicon-chevron-left"></span>
+		        Previous</button></a>
+	</div>
+	
+	<div class="btn-group" role="group">
+	    <button id="aj-random-access-btn" class="btn btn-info" min="<%=Joke.minJokeId %>" max="<%=Joke.maxJokeId %>">
+	        <span class="glyphicon glyphicon-random"></span>
+	        Random</button>
+	</div>
+		
+	<div class="btn-group" role="group">
+	    <button class="btn btn-warning">
+	    	<a class="font-white" href="OneJoke?id=<%=next %>">
+		    	<span class="glyphicon glyphicon-chevron-right"></span>
+		        Next
+	    	</a>
+	    </button>
+	</div>
+	
 </div>
 
-<div class="btn-group" role="group">
-    <button id="aj-random-access-btn" class="btn btn-info" min="<%=Joke.minJokeId %>" max="<%=Joke.maxJokeId %>">
-        <span class="glyphicon glyphicon-random"></span>
-        Random</button>
+<div class="aj-body-right">
+	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
+	
+	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	
+	
+
 </div>
+
+<div style="height:10px;"></div>
+
 
 <script>
 	$(function () {
@@ -50,28 +76,6 @@ int next = joke.getJokeId() + 1;
 		})
 	})
 </script>
-
-<div class="btn-group" role="group">
-    <button class="btn btn-warning">
-    	<a class="font-white" href="OneJoke?id=<%=next %>">
-	    	<span class="glyphicon glyphicon-chevron-right"></span>
-	        Next
-    	</a>
-    </button>
-</div>
-
-
-
-<script>
-    require.config({
-        baseUrl: "./web/js/modules",
-        paths: {
-            "some": "some/v1.0"
-        },
-        waitSeconds: 15
-    });
-</script>
-
 
 <jsp:include page="views/includes/footer.jsp"></jsp:include>
 

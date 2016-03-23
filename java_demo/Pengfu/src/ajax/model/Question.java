@@ -180,14 +180,15 @@ public class Question{
 				Element div = answer.select(".zm-item-rich-text").get(0);
 				
 				a.setTitle(this.getTitle());
-				a.setContent(div.select(".zm-editable-content").text().trim());
-				a.setSummary(div.select(".zh-summary").text().trim());
+				a.setContent(div.select(".zm-editable-content").html().trim());
+				a.setSummary(div.select(".zh-summary").html().trim());
 				a.setUsername(div.attr("data-author-name").trim());
-				a.setAgree(Tools.parseInt(answer.select(".zm-votebar .count").text().trim()));
+				a.setAgree(Tools.parseInt(answer.select(".zm-votebar .count").html().trim()));
 				a.setUrl(Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(div.select(".zm-item-rich-text").attr("data-entry-url").trim(), this.getUrl()));
 				a.setJokeType(JokeType.getJokeTypeByInfo(this.getTopicTname()).getId());
 				
-				a.save();
+				
+				a.update();
 				
 			}
 			Tools.sleep(0.01);
@@ -196,8 +197,5 @@ public class Question{
 			//e.printStackTrace();
 			System.out.println("Grab Error : " + e.getMessage());
 		}
-		
-		
-		
 	}
 }

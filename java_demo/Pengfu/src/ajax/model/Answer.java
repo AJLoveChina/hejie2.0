@@ -149,7 +149,7 @@ public class Answer implements JokeAdapter{
 			ps.setInt(10, this.getId());
 			
 			ps.execute();
-			System.out.println("Grab OK" + this.getTitle());
+			System.out.println("UPDATE OK" + this.getTitle());
 		} catch (SQLException e1) {
 			//e1.printStackTrace();
 			System.out.println(e1.getMessage());
