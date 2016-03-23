@@ -3,7 +3,7 @@ package ajax.rules;
 import org.jsoup.select.Elements;
 
 import ajax.model.JokeRules;
-import ajax.model.Spider;
+import ajax.spider.*;
 
 public class ZhihuJokeRules extends JokeRules{
 	

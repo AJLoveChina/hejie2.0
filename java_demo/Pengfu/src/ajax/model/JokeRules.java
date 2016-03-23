@@ -5,6 +5,8 @@ import java.net.URL;
 
 import org.jsoup.select.Elements;
 
+import ajax.test.Test01;
+
 public class JokeRules {
 	protected String tableName = "joke";
 	protected String url;
@@ -130,10 +132,12 @@ public class JokeRules {
 		return "";
 	}
 	
+	
 	public static void main(String[] args) {
-		JokeRules j = new JokeRules();
-		j.setUrl("");
-		j.getAbsoluteUrlFromUrl("https://www.zhihu.com/question/35860362/answer/89207200");
+//		JokeRules j = new JokeRules();
+//		j.setUrl("");
+//		j.getAbsoluteUrlFromUrl("https://www.zhihu.com/question/35860362/answer/89207200");
+		
 	}
 	
 	

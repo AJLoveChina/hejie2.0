@@ -1,5 +1,6 @@
-package ajax.model;
+package ajax.spider;
 
+import ajax.model.*;
 import java.io.IOException;
 
 import org.jsoup.Jsoup;

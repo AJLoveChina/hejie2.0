@@ -3,8 +3,6 @@ package ajax.spider;
 import ajax.model.*;
 import ajax.tools.*;
 
-import java.io.*;
-import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
