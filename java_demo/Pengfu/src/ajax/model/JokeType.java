@@ -102,11 +102,29 @@ public enum JokeType {
 		return JokeType.values();
 	}
 	
+	public String getTypeHref() {
+		return Joke.getHrefByJokeType(this);
+	}
+	
 	
 	public static void main(String[] args) {
 //		JokeType jokeType = JokeType.getJokeType(2);
 //		
 //		System.out.println(jokeType.getId());
 		
+	}
+	public static JokeType getLegalJokeTypeByTypeId(Integer typeID) {
+		// TODO Auto-generated method stub
+		JokeType result = null;
+		for (JokeType jokeType : JokeType.values()) {
+			if (typeID == jokeType.getId()) {
+				result = jokeType;
+			}
+		}
+		if (result == null) {
+			result = JokeType.ALL;
+		}
+		
+		return result;
 	}
 }

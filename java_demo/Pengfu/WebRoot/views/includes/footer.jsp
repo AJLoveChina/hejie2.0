@@ -25,16 +25,5 @@
 </footer>
 
 
-
-<script>
-    require.config({
-        baseUrl: "./web/js/modules",
-        paths: {
-            "some": "some/v1.0"
-        },
-        waitSeconds: 15
-    });
-</script>
-
 </body>
 </html>

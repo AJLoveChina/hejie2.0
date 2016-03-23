@@ -645,26 +645,11 @@ public class Joke {
 	
 	public static String getHrefByJokeType(JokeType jokeType) {
 		String url = "/Pengfu/Index";
-		switch(jokeType) {
-		case ALL:
-			url += "?type=" + JokeType.ALL.getId();
-			break;
-		case ONLY_WORD:
-			url += "?type=" + JokeType.ONLY_WORD.getId();
-			break;
-		case GIF:
-			url += "?type=" + JokeType.GIF.getId();
-			break;
-		case STATIC_IMAGE:
-			url += "?type=" + JokeType.STATIC_IMAGE.getId();
-			break;
-		default:
-			url += "?type=" + JokeType.ALL.getId();
-			break; 
-		}
 		
+		url += "?type=" + jokeType.getId();
 		return url;
 	}
+	
 	public static String getHrefByRequest(HttpServletRequest request, PageType pageType) {
 		String pageParam = request.getParameter("page");
 		String typeParam = request.getParameter("type");

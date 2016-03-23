@@ -46,13 +46,8 @@ public class Index extends HttpServlet {
 		JokeType jokeType = null;
 		if (typeParam != null) {
 			Integer typeID = Integer.parseInt(typeParam);
-			if (typeID == JokeType.ONLY_WORD.getId()) {
-				jokeType = JokeType.ONLY_WORD;
-			} else if (typeID == JokeType.STATIC_IMAGE.getId()) {
-				jokeType = JokeType.STATIC_IMAGE;
-			} else if (typeID == JokeType.GIF.getId()) {
-				jokeType = JokeType.GIF;
-			}
+			
+			jokeType = JokeType.getLegalJokeTypeByTypeId(typeID);
 		}
 		
 		int page = 0;
