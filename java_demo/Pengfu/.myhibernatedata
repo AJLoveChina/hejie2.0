@@ -1,0 +1,17 @@
+#MyEclipse Hibernate Properties
+#Thu Mar 24 10:06:45 CST 2016
+genVersionTag=false
+sessionFactoryName=ajax.tools.HibernateSessionFactory
+genAnnotations=false
+configFile=/Pengfu/src/hibernate.cfg.xml
+reStrategyClass=
+sessionFactoryId=
+profile=
+detectM2M=false
+genBasicCompId=false
+keyGenerator=
+createConfigFile=true
+basePersistenceClass=
+detectO2O=false
+useJavaTypes=true
+reSettingsFile=

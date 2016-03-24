@@ -14,5 +14,5 @@ CREATE TABLE `item` (
   `userPersonalPageUrl` varchar(200) DEFAULT NULL,
   `backgroundInformation` text,
   `dateEntered` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`joke_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB,DEFAULT CHARSET=utf8;
