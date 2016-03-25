@@ -15,6 +15,8 @@ import ajax.spider.rules.ZhihuAnswerRules;
 import ajax.tools.HibernateUtil;
 
 public class Entity {
+	
+
 	public void save() {
 		
 		try {
@@ -83,16 +85,7 @@ public class Entity {
 	}
 	
 	public String getTableName() {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		ClassMetadata hibernateMetadata = sessionFactory.getClassMetadata(this.getClass());
-		String tableName = null;
-
-		if (hibernateMetadata instanceof AbstractEntityPersister)
-		{
-		     AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetadata;
-		     tableName = persister.getTableName();
-		     String[] columnNames = persister.getKeyColumnNames();
-		}
+		String tableName = HibernateUtil.getTableName(this.getClass());
 		
 		return tableName;
 	}

@@ -2,7 +2,7 @@ package ajax.spider.rules;
 
 public enum RulesTag {
 
-	ZHIHU_ANSWER(1, "", "");
+	ZHIHU_ANSWER(1, "ajax.spider.rules.ZhihuAnswerRules", "");
 	
 	private int id;
 	private String className;
@@ -29,6 +29,17 @@ public enum RulesTag {
 		this.id = id;
 		this.className = className;
 		this.info = info;
+	}
+	
+	public static RulesTag getRulesTagById(int id) {
+		RulesTag[] tags = RulesTag.values();
+		
+		for (RulesTag tag : tags) {
+			if (tag.getId() == id) {
+				return tag;
+			}
+		}
+		return null;
 	}
 	
 	

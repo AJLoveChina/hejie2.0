@@ -1,20 +1,20 @@
 package ajax.spider;
 
-import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import ajax.model.ItemStatus;
 import ajax.model.*;
 import ajax.model.entity.Item;
-import ajax.spider.rules.Rules;
+import ajax.spider.rules.*;
+import ajax.spider.rules.RulesTag;
+import ajax.spider.rules.SpiderWeb;
 
 public abstract class Spider3 {
 
 	
-	public abstract Rules returnRules();
+	public abstract SpiderWeb returnSpiderWeb();
 
 	public void run() {
 		Item item = this.grabItemFromPage();
@@ -30,9 +30,10 @@ public abstract class Spider3 {
 	
 	public Item grabItemFromPage() {
 		Document doc;
-		Rules rules = this.returnRules();
-		String url = rules.returnUrl();
-		JokeType jokeType = rules.returnJokeType();
+		SpiderWeb sw = this.returnSpiderWeb();
+		Rules rules = sw.returnRules();
+		String url = sw.returnUrl();
+		JokeType jokeType = sw.returnJokeType();
 		
 		Item item = new Item();
 		

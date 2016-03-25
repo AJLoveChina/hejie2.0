@@ -1,9 +1,15 @@
 package ajax.model.entity;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 import ajax.model.JokeType;
 import ajax.spider.Spider3;
 import ajax.spider.rules.Rules;
+import ajax.spider.rules.RulesTag;
+import ajax.spider.rules.SpiderWeb;
 import ajax.spider.rules.ZhihuAnswerRules;
+import ajax.tools.HibernateUtil;
 
 
 public class Item extends Entity{
@@ -126,11 +132,13 @@ public class Item extends Entity{
 	public void updateBySpider() {
 		final String url = this.getUrl();
 		final JokeType jokeType = JokeType.getJokeType(this.getItype());
+		final RulesTag rulesTag = RulesTag.getRulesTagById(this.getRulesTagId());
 		
 		Spider3 sp3 = new Spider3() {
+			
 			@Override
-			public Rules returnRules() {
-				return new ZhihuAnswerRules() {
+			public SpiderWeb returnSpiderWeb() {
+				return new SpiderWeb() {
 					
 					@Override
 					public String returnUrl() {
@@ -138,8 +146,25 @@ public class Item extends Entity{
 					}
 					
 					@Override
+					public Rules returnRules() {
+						try {
+							return (Rules) Class.forName("ajax.spider.rules.ZhihuAnswerRules").newInstance();
+						} catch (InstantiationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return null;
+					}
+					
+					@Override
 					public JokeType returnJokeType() {
-						return jokeType;
+						return JokeType.FILM;
 					}
 				};
 			}
@@ -149,29 +174,18 @@ public class Item extends Entity{
 	}
 	
 	
+	public static Item getByItemById(int id) {
+		
+		Session session = HibernateUtil.getSession();
+		
+		Item entity = (Item)session.get(Item.class, id);
+		
+		return entity;
+		
+	}
+	
 	public static void main(String[] args) {
-//		Item item = new Item();
-//
-//		item.setContent("content");
-//		item.setTitle("This is title");
-//		item.setBackgroundInformation("backgroundInformation");
-//		
-//		item.save();
 		
-//		Item item = new Item();
-//		item.setId(1);
-//		item.delete();
-		
-		
-		Item item = new Item();
-		item.setId(2);
-		item.setTitle("this is new title!");
-		item.update();
-		
-		
-//		Item item = new Item();
-//		String tableName = item.getTableName();
-//		System.out.println(tableName);
 	}
 	
 	

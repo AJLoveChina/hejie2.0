@@ -7,11 +7,7 @@ import ajax.tools.Tools;
 
 public abstract class Rules {
 	
-	public abstract String returnUrl();
-	public abstract JokeType returnJokeType();
-	
 	public abstract RulesTag getRulesTag();
-	
 	
 	public abstract String getTitleSelector();
 	public abstract String getSummarySelector();

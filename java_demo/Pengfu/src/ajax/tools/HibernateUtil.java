@@ -5,6 +5,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.*;
+import org.hibernate.metadata.ClassMetadata;
+import org.hibernate.persister.entity.AbstractEntityPersister;
 
 
 public class HibernateUtil {
@@ -44,6 +46,21 @@ public class HibernateUtil {
 		}
 	}
 	
+	public static String getTableName(Class<?> cls) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		ClassMetadata hibernateMetadata = sessionFactory.getClassMetadata(cls);
+		String tableName = null;
+
+		if (hibernateMetadata instanceof AbstractEntityPersister)
+		{
+		     AbstractEntityPersister persister = (AbstractEntityPersister) hibernateMetadata;
+		     tableName = persister.getTableName();
+		     String[] columnNames = persister.getKeyColumnNames();
+		}
+		
+		return tableName;
+		
+	}
 	
 	public static void main(String[] args) {
 		

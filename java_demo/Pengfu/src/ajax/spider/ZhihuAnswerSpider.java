@@ -6,14 +6,22 @@ import ajax.spider.rules.*;
 public class ZhihuAnswerSpider{
 
 	public static void main(String[] args) {
+
+		
 		Spider3 sp3 = new Spider3() {
+			
 			@Override
-			public Rules returnRules() {
-				return new ZhihuAnswerRules() {
+			public SpiderWeb returnSpiderWeb() {
+				return new SpiderWeb() {
 					
 					@Override
 					public String returnUrl() {
 						return "https://www.zhihu.com/question/41033519/answer/91130738";
+					}
+					
+					@Override
+					public Rules returnRules() {
+						return new ZhihuAnswerRules();
 					}
 					
 					@Override
@@ -25,6 +33,7 @@ public class ZhihuAnswerSpider{
 		};
 		
 		sp3.run();
+		
 		
 		
 	}

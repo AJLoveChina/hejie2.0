@@ -11,8 +11,8 @@ import ajax.tools.Tools;
 
 
 
-public abstract class ZhihuAnswerRules extends Rules{
-	
+public class ZhihuAnswerRules extends Rules{
+
 	@Override
 	public RulesTag getRulesTag() {
 		return RulesTag.ZHIHU_ANSWER;
@@ -70,13 +70,16 @@ public abstract class ZhihuAnswerRules extends Rules{
 	public String preProcessUserPersonalPageUrlElements(Elements eles) {
 		String href = eles.get(0).attr("href");
 		
-		return Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, this.returnUrl());
+		return Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, "https://www.zhihu.com/");
 	};
 
 	@Override
 	public String getBackgroundInformationSelector() {
 		return "#zh-question-detail > div.zh-summary";
 	}
+
+
+
 
 	
 }
