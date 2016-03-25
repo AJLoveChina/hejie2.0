@@ -15,7 +15,7 @@ public class Item{
 	private String stamps;
 	private int likes;
 	private int dislikes;
-	private boolean hasGetImage;
+	private boolean hasGetImage = false;
 	private int itype;
 	private int status;
 	private String username;
@@ -120,13 +120,16 @@ public class Item{
 		Item item = new Item();
 
 		item.setContent("content");
+		item.setTitle("This is title");
 		
 		Session session = HibernateUtil.getSession();
 		
-		Transaction tx = session.beginTransaction();
+		session.beginTransaction();
+		
 		session.save(item);
-		tx.commit();
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
+		session.close();
 		
 	}
 	

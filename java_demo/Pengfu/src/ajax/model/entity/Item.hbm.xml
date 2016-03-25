@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="ajax.model.entity.Item2" table="ItemTest">
+	<class name="ajax.model.entity.Item" table="ItemTest">
 		
 		<id name="id" column="id" type="java.lang.Integer">
 			<generator class="increment"></generator>
@@ -38,12 +38,12 @@
 			<column name="dislikes"></column>
 		</property>		
 		
-		<property name="hasGetImage" type="java.lang.Integer">
+		<property name="hasGetImage" type="java.lang.Boolean">
 			<column name="hasGetImage"></column>
 		</property>
 		
-		<property name="iType" type="java.lang.Integer">
-			<column name="iType"></column>
+		<property name="itype" type="java.lang.Integer">
+			<column name="itype"></column>
 		</property>		
 				
 		<property name="status" type="java.lang.Integer">

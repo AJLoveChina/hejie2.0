@@ -17,7 +17,7 @@
         <property name="connection.driver_class">org.gjt.mm.mysql.Driver</property>
     
     	
-    	<mapping resource="src/ajax/model/entity/Item.hbm.xml"/>
+    	<mapping resource="ajax/model/entity/Item.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>
