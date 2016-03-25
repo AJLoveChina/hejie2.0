@@ -17,8 +17,15 @@ public class Item extends Entity{
 	private String userPersonalPageUrl;
 	private String backgroundInformation;
 	private String dateEntered;
+	private int rulesTagId;
 	
 	
+	public int getRulesTagId() {
+		return rulesTagId;
+	}
+	public void setRulesTagId(int rulesTagId) {
+		this.rulesTagId = rulesTagId;
+	}
 	public int getId() {
 		return id;
 	}

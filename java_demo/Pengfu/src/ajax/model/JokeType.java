@@ -114,7 +114,7 @@ public enum JokeType {
 		
 	}
 	public static JokeType getLegalJokeTypeByTypeId(Integer typeID) {
-		// TODO Auto-generated method stub
+		
 		JokeType result = null;
 		for (JokeType jokeType : JokeType.values()) {
 			if (typeID == jokeType.getId()) {

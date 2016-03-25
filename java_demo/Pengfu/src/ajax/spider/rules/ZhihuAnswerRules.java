@@ -1,13 +1,16 @@
 package ajax.spider.rules;
 
+import org.jsoup.select.Elements;
 
 
-public class ZhihuAnswerRules extends PreProcessor implements Rules{
+
+public class ZhihuAnswerRules extends Rules{
 
 	@Override
 	public RulesTag getRulesTag() {
 		return RulesTag.ZHIHU_ANSWER;
 	}
+	
 	
 	@Override
 	public String getTitleSelector() {

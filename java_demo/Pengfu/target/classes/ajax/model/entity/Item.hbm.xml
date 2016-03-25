@@ -66,6 +66,10 @@
 			<column name="dateEntered"></column>
 		</property>
 				
+		<property name="rulesTagId" type="java.lang.Integer">
+			<column name="rulesTagId"></column>
+		</property>
+				
 		
 	</class>
 	

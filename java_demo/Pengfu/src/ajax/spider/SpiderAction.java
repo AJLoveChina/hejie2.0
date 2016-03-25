@@ -1,5 +1,6 @@
 package ajax.spider;
 
+@Deprecated
 public class SpiderAction {
 	protected String url;
 
@@ -19,6 +20,7 @@ public class SpiderAction {
 	
 	public void start() {
 		
+		System.out.println("I am start..");
 	}
 	
 }

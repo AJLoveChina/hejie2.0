@@ -11,10 +11,10 @@ public class ZhihuAnswerSpider extends SpiderAction implements Spider2{
 	
 	
 	@Override
-	public Rules getRules() {
+	public Rules returnRules() {
 		return new ZhihuAnswerRules();
 	}
-
+	
 	
 	public static void main(String[] args) {
 		
@@ -23,4 +23,8 @@ public class ZhihuAnswerSpider extends SpiderAction implements Spider2{
 		s.start();
 		
 	}
+
+
+
+
 }
