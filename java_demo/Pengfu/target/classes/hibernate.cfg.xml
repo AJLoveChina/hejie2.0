@@ -15,7 +15,7 @@
         <property name="connection.username">name</property>
         <property name="connection.password">123</property>
         <property name="connection.driver_class">org.gjt.mm.mysql.Driver</property>
-    
+   		<property name="show_sql">true</property>
     	
     	<mapping resource="ajax/model/entity/Item.hbm.xml"/>
     </session-factory>

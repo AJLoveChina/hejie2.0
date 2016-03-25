@@ -1,12 +1,7 @@
 package ajax.model.entity;
 
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import ajax.tools.HibernateUtil;
-
-public class Item{
+public class Item extends Entity{
 	private int id;
 	private String url;
 	private String title;
@@ -115,26 +110,29 @@ public class Item{
 		this.dateEntered = dateEntered;
 	}
 	
-	public static void save() {
+	public static void main(String[] args) {
+//		Item item = new Item();
+//
+//		item.setContent("content");
+//		item.setTitle("This is title");
+//		item.setBackgroundInformation("backgroundInformation");
+//		
+//		item.save();
+		
+//		Item item = new Item();
+//		item.setId(1);
+//		item.delete();
+		
 		
 		Item item = new Item();
-
-		item.setContent("content");
-		item.setTitle("This is title");
+		item.setId(2);
+		item.setTitle("this is new title!");
+		item.update();
 		
-		Session session = HibernateUtil.getSession();
 		
-		session.beginTransaction();
-		
-		session.save(item);
-		
-		session.getTransaction().commit();
-		session.close();
-		
-	}
-	
-	public static void main(String[] args) {
-		save();
+//		Item item = new Item();
+//		String tableName = item.getTableName();
+//		System.out.println(tableName);
 	}
 	
 }

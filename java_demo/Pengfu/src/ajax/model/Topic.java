@@ -21,6 +21,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
+import ajax.model.entity.Entity;
 import ajax.tools.Mysql;
 import ajax.tools.Tools;
 

@@ -65,7 +65,8 @@
 		<property name="dateEntered" type="java.lang.String">
 			<column name="dateEntered"></column>
 		</property>
-						
+				
+		
 	</class>
 	
 
