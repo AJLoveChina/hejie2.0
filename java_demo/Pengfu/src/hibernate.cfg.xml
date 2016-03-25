@@ -18,6 +18,7 @@
    		<property name="show_sql">true</property>
     	
     	<mapping resource="ajax/model/entity/Item.hbm.xml"/>
+    	<mapping resource="ajax/model/entity/Source.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

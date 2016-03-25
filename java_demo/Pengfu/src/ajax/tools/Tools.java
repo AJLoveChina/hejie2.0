@@ -21,6 +21,7 @@ public class Tools {
 	
 	public static void sleep(int seconds) {
 		try {
+			System.out.println("休息" + seconds + "秒");
 			Thread.sleep(seconds * 1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

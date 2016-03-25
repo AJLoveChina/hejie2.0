@@ -14,24 +14,20 @@ public class HibernateUtil {
 	private static Session session;
 	
 	static {
-		
-		sessionFactory = new Configuration().configure().buildSessionFactory();
-		
-	}
-	
-	public static Session getSession() {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-														.configure()
-														.build();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+						
 		try {
 			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-			session = sessionFactory.openSession();
-		}catch (Exception e) {
-			// The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-			// so destroy it manually.
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+		}catch(Exception e) {
 			StandardServiceRegistryBuilder.destroy( registry );
 			e.printStackTrace();
 		}
+	}
+	
+	public static Session getSession() {
+		
+		session = sessionFactory.openSession();
 		
 		return session;
 	}

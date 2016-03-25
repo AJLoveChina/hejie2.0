@@ -30,8 +30,10 @@ public class Entity {
 			
 			session.flush();
 			session.close();
+
+			System.out.println("Grab OK : " + this.toString());
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("Grab Error : " + e.getMessage());
 		}
 		
 	}
