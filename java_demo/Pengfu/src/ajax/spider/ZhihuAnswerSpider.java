@@ -1,30 +1,32 @@
 package ajax.spider;
 
+import ajax.model.JokeType;
 import ajax.spider.rules.*;
 
-public class ZhihuAnswerSpider extends SpiderAction implements Spider2{
+public class ZhihuAnswerSpider{
 
-	
-	public ZhihuAnswerSpider(String url) {
-		super(url);
-	}
-	
-	
-	@Override
-	public Rules returnRules() {
-		return new ZhihuAnswerRules();
-	}
-	
-	
 	public static void main(String[] args) {
+		Spider3 sp3 = new Spider3() {
+			@Override
+			public Rules returnRules() {
+				return new ZhihuAnswerRules() {
+					
+					@Override
+					public String returnUrl() {
+						return "https://www.zhihu.com/question/41033519/answer/91130738";
+					}
+					
+					@Override
+					public JokeType returnJokeType() {
+						return JokeType.FILM;
+					}
+				};
+			}
+		};
 		
-		String url = "https://www.zhihu.com/question/38501171/answer/90733378";
-		ZhihuAnswerSpider s = new ZhihuAnswerSpider(url);
-		s.start();
+		sp3.run();
+		
 		
 	}
-
-
-
 
 }

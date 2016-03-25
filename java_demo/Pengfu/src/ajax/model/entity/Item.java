@@ -1,5 +1,10 @@
 package ajax.model.entity;
 
+import ajax.model.JokeType;
+import ajax.spider.Spider3;
+import ajax.spider.rules.Rules;
+import ajax.spider.rules.ZhihuAnswerRules;
+
 
 public class Item extends Entity{
 	private int id;
@@ -117,6 +122,33 @@ public class Item extends Entity{
 		this.dateEntered = dateEntered;
 	}
 	
+	
+	public void updateBySpider() {
+		final String url = this.getUrl();
+		final JokeType jokeType = JokeType.getJokeType(this.getItype());
+		
+		Spider3 sp3 = new Spider3() {
+			@Override
+			public Rules returnRules() {
+				return new ZhihuAnswerRules() {
+					
+					@Override
+					public String returnUrl() {
+						return url;
+					}
+					
+					@Override
+					public JokeType returnJokeType() {
+						return jokeType;
+					}
+				};
+			}
+		};
+		
+		sp3.update(this.getId());
+	}
+	
+	
 	public static void main(String[] args) {
 //		Item item = new Item();
 //
@@ -141,6 +173,8 @@ public class Item extends Entity{
 //		String tableName = item.getTableName();
 //		System.out.println(tableName);
 	}
+	
+	
 	
 }
 

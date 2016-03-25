@@ -11,41 +11,37 @@ import ajax.model.*;
 import ajax.model.entity.Item;
 import ajax.spider.rules.Rules;
 
-public class Spider3 {
-	private String url;
-	private Rules rules;
-	private JokeType jokeType = JokeType.ALL;
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public Rules getRules() {
-		return rules;
-	}
-	public void setRules(Rules rules) {
-		this.rules = rules;
-	}
-	public JokeType getJokeType() {
-		return jokeType;
-	}
-	public void setJokeType(JokeType jokeType) {
-		this.jokeType = jokeType;
-	}	
+public abstract class Spider3 {
+
 	
-	
+	public abstract Rules returnRules();
 
 	public void run() {
+		Item item = this.grabItemFromPage();
+		item.save();
+	}
+	
+	public void update(int id){
+		Item item = this.grabItemFromPage();
+		item.setId(id);
+		item.update();
+	}
+	
+	
+	public Item grabItemFromPage() {
 		Document doc;
+		Rules rules = this.returnRules();
+		String url = rules.returnUrl();
+		JokeType jokeType = rules.returnJokeType();
+		
+		Item item = new Item();
+		
 		try {
-			Rules rules = this.getRules();
-			doc = Jsoup.connect(this.getUrl()).get();
+			doc = Jsoup.connect(url).get();
 			
-			Item item = new Item();
-			item.setUrl(this.getUrl());
+			item.setUrl(url);
 			item.setStatus(ItemStatus.SPIDER.getId());
-			item.setItype(this.getJokeType().getId());
+			item.setItype(jokeType.getId());
 			item.setHasGetImage(false);
 			item.setRulesTagId(rules.getRulesTag().getId());
 			
@@ -90,9 +86,12 @@ public class Spider3 {
 				item.setBackgroundInformation(rules.preProcessBackgroundInformationElements(backgroundInformation));
 			}
 			
-			item.save();
-		} catch (IOException e) {
+			return item;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
+	
+
 }

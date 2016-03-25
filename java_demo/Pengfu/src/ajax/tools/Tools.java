@@ -12,6 +12,7 @@ import java.net.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import ajax.model.Joke;
 import ajax.model.JokeStatus;
@@ -143,21 +144,45 @@ public class Tools {
 	}
 	
 	public static void main(String[] args) {
-		
+		System.out.println(parseInt("0.1k"));
 	}
 
+	
 	public static int parseInt(String str) {
 		if(str == null || str.trim() == "") {
 			return 0;
 		}
+		int radix = 1;
+		if (str.toLowerCase().endsWith("k")) {
+			str = str.substring(0, str.length() - 1);
+			radix = 1000;
+		}
+		if (str.toLowerCase().endsWith("w")) {
+			str = str.substring(0, str.length() - 1);
+			radix = 10000;
+		}
+		if (str.toLowerCase().endsWith("m")) {
+			str = str.substring(0, str.length() - 1);
+			radix = 1000000;
+		}
+		
 		try {
-			return Integer.parseInt(str);
+			double result = Double.parseDouble(str) * radix;
+			return (int)Math.floor(result);
 		}catch(Exception e) {
 			return 0;
 		}
 	}
 	
-	
+	public static String join(List<String> list, String delimeter) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(list.get(0));
+		for (int i = 1; i < list.size(); i++) {
+			sb.append(delimeter);
+			sb.append(list.get(i));
+		}
+		return sb.toString();
+	}
 	
 	
 }

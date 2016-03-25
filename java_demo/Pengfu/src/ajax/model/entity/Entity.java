@@ -8,21 +8,29 @@ import org.hibernate.mapping.PersistentClass;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 
+import ajax.model.JokeType;
+import ajax.spider.Spider3;
+import ajax.spider.rules.Rules;
+import ajax.spider.rules.ZhihuAnswerRules;
 import ajax.tools.HibernateUtil;
 
 public class Entity {
 	public void save() {
 		
-		Session session = HibernateUtil.getSession();
-		
-		session.beginTransaction();
-		
-		session.save(this);
-		
-		session.getTransaction().commit();
-		
-		session.flush();
-		session.close();
+		try {
+			Session session = HibernateUtil.getSession();
+			
+			session.beginTransaction();
+			
+			session.save(this);
+			
+			session.getTransaction().commit();
+			
+			session.flush();
+			session.close();
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	
@@ -88,4 +96,6 @@ public class Entity {
 		
 		return tableName;
 	}
+	
+
 }

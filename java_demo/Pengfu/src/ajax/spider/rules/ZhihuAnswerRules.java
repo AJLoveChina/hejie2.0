@@ -1,11 +1,18 @@
 package ajax.spider.rules;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import ajax.model.*;
+import ajax.tools.Tools;
 
 
-public class ZhihuAnswerRules extends Rules{
 
+public abstract class ZhihuAnswerRules extends Rules{
+	
 	@Override
 	public RulesTag getRulesTag() {
 		return RulesTag.ZHIHU_ANSWER;
@@ -14,7 +21,7 @@ public class ZhihuAnswerRules extends Rules{
 	
 	@Override
 	public String getTitleSelector() {
-		return "#zh-question-title > h2.m-item-title > a";
+		return "#zh-question-title > h2 > a";
 	}
 
 	@Override
@@ -29,12 +36,20 @@ public class ZhihuAnswerRules extends Rules{
 
 	@Override
 	public String getStampsSelector() {
-		return "div.zg-wrap.zu-main.clearfix.with-indention-votebar > div.zu-main-content > div > div.zm-tag-editor.zg-section > div > a.zm-item-tag";
+		return "body > div.zg-wrap.zu-main.clearfix.with-indention-votebar > div.zu-main-content > div > div.zm-tag-editor.zg-section > div > a";
 	}
+	@Override
+	public String preProcessStampsElements(Elements eles) {
+		List<String> strs = new ArrayList<String>();
+		for (Element ele : eles) {
+			strs.add(ele.html().replace(",", ""));
+		}
+		return Tools.join(strs, ",");
+	};
 
 	@Override
 	public String getLikesSelector() {
-		return ".zm-votebar .count";
+		return "#zh-question-answer-wrap > div > div.zm-votebar > button.up > span.count";
 	}
 
 	@Override
@@ -51,6 +66,12 @@ public class ZhihuAnswerRules extends Rules{
 	public String getUserPersonalPageUrlSelector() {
 		return "#zh-question-answer-wrap > div > div.answer-head > div.zm-item-answer-author-info > a.author-link";
 	}
+	@Override 
+	public String preProcessUserPersonalPageUrlElements(Elements eles) {
+		String href = eles.get(0).attr("href");
+		
+		return Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, this.returnUrl());
+	};
 
 	@Override
 	public String getBackgroundInformationSelector() {

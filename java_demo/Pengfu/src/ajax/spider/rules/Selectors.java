@@ -2,17 +2,10 @@ package ajax.spider.rules;
 
 import org.jsoup.select.Elements;
 
-import ajax.model.JokeType;
 import ajax.tools.Tools;
 
-public abstract class Rules {
-	
-	public abstract String returnUrl();
-	public abstract JokeType returnJokeType();
-	
-	public abstract RulesTag getRulesTag();
-	
-	
+public abstract class Selectors {
+
 	public abstract String getTitleSelector();
 	public abstract String getSummarySelector();
 	public abstract String getContentSelector();
@@ -53,4 +46,6 @@ public abstract class Rules {
 	public String preProcessBackgroundInformationElements(Elements eles) {
 		return eles.html();
 	}
+	
+	
 }
