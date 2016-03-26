@@ -3,10 +3,12 @@ package ajax.model;
 import java.util.*;
 
 public enum JokeType {
-	ONLY_WORD(1, "only words"),
-	STATIC_IMAGE(2, "有图片, 不是动态图的笑话"),
-	GIF(3, "动态图"),
-	ZHIHU(4, "知乎精选"),
+	
+	// id, info, realName, iconClassName, isShowToUser
+	ONLY_WORD(1, "only words", null, null, false),
+	STATIC_IMAGE(2, "有图片, 不是动态图的笑话", null, null, false),
+	GIF(3, "动态图", null, null, false),
+	ZHIHU(4, "知乎精选", null, null, false),
 	
 	FILM(31, "电影"),
 	TOUR(32, "旅行"),
@@ -37,13 +39,28 @@ public enum JokeType {
 	BUSINESS(57, "商业, 金融"),
 	TECH(58, "科技"),
 	
-	ALL(9, "所有内容"),
-	UNKNOWN(99, "未知分类");
+	ALL(9, "所有内容", null, null, false),
+	UNKNOWN(99, "未知分类", "其它");
 	
 	
 	private int id;
 	private String info;
+	private String realName;
 	private String iconClassName;
+	private boolean isShowToUser;
+	
+	public boolean isShowToUser() {
+		return isShowToUser;
+	}
+	public void setShowToUser(boolean isShowToUser) {
+		this.isShowToUser = isShowToUser;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
 	public int getId() {
 		return id;
 	}
@@ -66,15 +83,29 @@ public enum JokeType {
 	
 
 	JokeType(int id, String info) {
-		this.id = id;
-		this.info = info;
-		this.iconClassName = "glyphicon glyphicon-star";	// default icon classname
+		this(id, info, null, null, true);
 	}
-	JokeType(int id, String info, String iconClassName) {
-		this.id = id;
-		this.info = info;
-		this.iconClassName = iconClassName;
+	JokeType(int id, String info, String realName) {
+		
+		this(id, info, realName, null, true);
+		
 	}
+	
+	JokeType(int id, String info, String realName, String iconClassName) {
+		
+		this(id, info, realName, iconClassName, true);
+		
+	}
+	
+	JokeType(int id, String info, String realName,
+			String iconClassName, boolean isShowToUser) {
+		this.id = id;
+		this.info = info == null ? "" : info;
+		this.realName = realName == null ? "" : realName;
+		this.iconClassName = iconClassName == null ? "glyphicon glyphicon-star" : iconClassName;
+		this.isShowToUser = isShowToUser;
+	}
+	
 	
 	public static JokeType getJokeTypeByInfo(String info) {
 		JokeType[] jokeTypes = JokeType.values();
@@ -88,7 +119,18 @@ public enum JokeType {
 	}
 	
 	public static JokeType[] getAllJokeTypes() {
+		
 		return JokeType.values();
+		
+	}
+	public static JokeType[] getLegalJokeTypes() {
+		List<JokeType> types = new ArrayList<JokeType>();
+		for(JokeType j : JokeType.values()) {
+			if (j.isShowToUser) {
+				types.add(j);
+			}
+		}
+		return (JokeType[]) types.toArray();
 	}
 	
 	public String getTypeHref() {
