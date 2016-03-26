@@ -13,7 +13,7 @@ import ajax.model.Topic;
 import ajax.spider.rules.RulesTag;
 import ajax.tools.Tools;
 
-public class ZhihuAnswerSource implements Source{
+public class ZhihuAnswerSource{
 	
 	private static void grabPageof(Topic t, int page) {
 		String url = t.getUrl() + "/top-answers?page=" + page;

@@ -1,20 +1,13 @@
 package ajax.model.entity;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.mapping.PersistentClass;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.persister.entity.AbstractEntityPersister;
 
-import ajax.model.JokeType;
-import ajax.spider.Spider3;
-import ajax.spider.rules.Rules;
-import ajax.spider.rules.ZhihuAnswerRules;
 import ajax.tools.HibernateUtil;
 
-public class Entity {
+public class Entity<T> {
 	
 
 	public void save() {
@@ -92,5 +85,21 @@ public class Entity {
 		return tableName;
 	}
 	
+	
+	public List<T> getPage(int page, int pageNum) {
+		Session session = HibernateUtil.getSession();
+		
+		String sqlCmd = String.format("from %s", this.getTableName());
+		//, (page - 1) * pageNum, pageNum
+		
+		Query query = session.createQuery(sqlCmd);
+		query.setFirstResult((page - 1) * pageNum);
+		query.setMaxResults(pageNum);
+		
+		
+		List<T> lists = query.list();
+		
+		return lists;
+	}
 
 }

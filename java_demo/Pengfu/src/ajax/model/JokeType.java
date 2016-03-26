@@ -64,18 +64,7 @@ public enum JokeType {
 	}
 	
 	
-	public static JokeType getJokeType(int id) {
-		
-		JokeType[] jokeTypes = JokeType.values();
-		
-		for (JokeType jt : jokeTypes) {
-			if (jt.id == id) {
-				return jt;
-			}
-		}
-		return JokeType.UNKNOWN;
-		
-	}
+
 	JokeType(int id, String info) {
 		this.id = id;
 		this.info = info;
@@ -113,6 +102,21 @@ public enum JokeType {
 //		System.out.println(jokeType.getId());
 		
 	}
+	
+	public static JokeType getJokeType(int id) {
+		
+		JokeType[] jokeTypes = JokeType.values();
+		
+		for (JokeType jt : jokeTypes) {
+			if (jt.id == id) {
+				return jt;
+			}
+		}
+		return JokeType.UNKNOWN;
+		
+	}
+	
+	@Deprecated
 	public static JokeType getLegalJokeTypeByTypeId(Integer typeID) {
 		
 		JokeType result = null;
@@ -127,4 +131,5 @@ public enum JokeType {
 		
 		return result;
 	}
+	
 }

@@ -16,15 +16,43 @@ public abstract class Spider3 {
 	
 	public abstract SpiderWeb returnSpiderWeb();
 
+	
+	private boolean checked(){
+		SpiderWeb sw = this.returnSpiderWeb();
+		Rules rules = sw.returnRules();
+		String url = sw.returnUrl();
+		JokeType jokeType = sw.returnJokeType();
+		
+		if (rules == null) {
+			System.out.println("Error : 有一只spider3 木有rules, 无法运行已跳过");
+			return false;
+		}
+		if (url == null || url == "") {
+			System.out.println("Error : 有一只spider3 木有url, 无法运行已跳过");
+			return false;
+		}
+		return true;
+	}
 	public void run() {
-		Item item = this.grabItemFromPage();
-		item.save();
+		if (this.checked()) {
+			Item item = this.grabItemFromPage();
+			item.save();
+		}
+	}
+	
+	public Item grabItem() {
+		if (this.checked()) {
+			return this.grabItemFromPage();
+		}
+		return null;
 	}
 	
 	public void update(int id){
-		Item item = this.grabItemFromPage();
-		item.setId(id);
-		item.update();
+		if (this.checked()) {
+			Item item = this.grabItemFromPage();
+			item.setId(id);
+			item.update();
+		}
 	}
 	
 	
@@ -89,7 +117,7 @@ public abstract class Spider3 {
 			
 			return item;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return null;
 	}

@@ -1,6 +1,12 @@
 package ajax.model.entity;
 
-public class Source extends Entity{
+import ajax.model.JokeType;
+import ajax.spider.Spider3;
+import ajax.spider.rules.Rules;
+import ajax.spider.rules.RulesTag;
+import ajax.spider.rules.SpiderWeb;
+
+public class Source extends Entity<Source>{
 	private int id;
 	private String url;
 	private int itype;
@@ -57,6 +63,73 @@ public class Source extends Entity{
 				+ ", rulestagid=" + rulestagid + ", isGrab=" + isGrab
 				+ ", likes=" + likes + "]";
 	}
+	
+	public void grabAndSaveToItemAndChangeSelfStatus() {
+		try {
+			Item item = this.grabSelf();
+			
+			item.save();
+			
+			this.setGrab(true);
+			this.update();
+			
+			
+			System.out.println("Grab OK : " + item.getTitle());
+			
+		}catch(Exception e) {
+			System.out.println("Grab Error : " + e.getMessage());
+		}
+		
+	}
+	
+	public Item grabSelf() {
+		final String url = this.getUrl();
+		final int rulesTagId = this.getRulestagid();
+		final int jokeTypeId = this.getItype();
+		
+		Spider3 sp = new Spider3() {
+			
+			@Override
+			public SpiderWeb returnSpiderWeb() {
+				return new SpiderWeb() {
+					
+					@Override
+					public String returnUrl() {
+						return url;
+					}
+					
+					@Override
+					public Rules returnRules() {
+						RulesTag rt = RulesTag.getRulesTagById(rulesTagId);
+						
+						try {
+							return (Rules) Class.forName(rt.getClassName()).newInstance();
+						} catch (InstantiationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return null;
+					}
+					
+					@Override
+					public JokeType returnJokeType() {
+						return JokeType.getJokeType(jokeTypeId);
+					}
+				};
+			}
+		};
+		
+		Item item = sp.grabItem();
+		
+		return item;
+	}
+	
 	
 	
 }

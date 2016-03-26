@@ -1,6 +1,7 @@
 package ajax.model.entity;
 
-import org.hibernate.Query;
+import java.util.*;
+
 import org.hibernate.Session;
 
 import ajax.model.JokeType;
@@ -8,11 +9,10 @@ import ajax.spider.Spider3;
 import ajax.spider.rules.Rules;
 import ajax.spider.rules.RulesTag;
 import ajax.spider.rules.SpiderWeb;
-import ajax.spider.rules.ZhihuAnswerRules;
 import ajax.tools.HibernateUtil;
 
 
-public class Item extends Entity{
+public class Item extends Entity<Item>{
 	private int id;
 	private String url;
 	private String title;
@@ -148,16 +148,15 @@ public class Item extends Entity{
 					@Override
 					public Rules returnRules() {
 						try {
+							
 							return (Rules) Class.forName("ajax.spider.rules.ZhihuAnswerRules").newInstance();
+							
 						} catch (InstantiationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							System.out.println("Error : " + e.getMessage());
 						} catch (IllegalAccessException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							System.out.println("Error : " + e.getMessage());
 						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							System.out.println("Error : " + e.getMessage());
 						}
 						return null;
 					}
@@ -183,6 +182,8 @@ public class Item extends Entity{
 		return entity;
 		
 	}
+	
+
 	
 	public static void main(String[] args) {
 		

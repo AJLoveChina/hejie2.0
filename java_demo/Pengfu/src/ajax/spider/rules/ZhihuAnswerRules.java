@@ -68,14 +68,19 @@ public class ZhihuAnswerRules extends Rules{
 	}
 	@Override 
 	public String preProcessUserPersonalPageUrlElements(Elements eles) {
-		String href = eles.get(0).attr("href");
-		
-		return Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, "https://www.zhihu.com/");
+		try {
+			String href = eles.get(0).attr("href");
+			
+			return Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, "https://www.zhihu.com/");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "";
 	};
 
 	@Override
 	public String getBackgroundInformationSelector() {
-		return "#zh-question-detail > div.zh-summary";
+		return "#zh-question-detail > div";
 	}
 
 
