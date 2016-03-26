@@ -64,8 +64,8 @@ public class ZhihuAnswerSource implements Source{
 			}
 			
 			begin ++;
-			System.out.println("已获取所有主题的第" + page + "页");
-			Tools.sleep(30);
+			
+			Tools.sleep(1);
 		}while(topics.size() > 0);
 		
 	}
@@ -78,7 +78,8 @@ public class ZhihuAnswerSource implements Source{
 		while(true) {
 			GrabAllTopicsOfPage(page);
 			page ++;
-			Tools.sleep(1);
+			System.out.println("已获取所有主题的第" + page + "页");
+			Tools.sleep(30);
 			
 			if (page >= limit) {
 				break;
