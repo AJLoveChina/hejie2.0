@@ -65,8 +65,8 @@ public class Entity<T> {
 		
 	}
 	
-	
-	public Class<?> getById(int id) {
+//	@Deprecated
+	public T getById(int id) {
 		Session session = HibernateUtil.getSession();
 		
 		String sqlCmd = String.format("from %s where id = :id", this.getTableName());
@@ -74,11 +74,29 @@ public class Entity<T> {
 		
 		query.setInteger("id", id);
 	
+		T entity = (T)query.uniqueResult();
 		
-		Class<?> entity = (Class<?>)query.uniqueResult();
+		HibernateUtil.closeSession(session);
+		
 		return entity;
 	}
 	
+
+	
+	public static void main(String[] args) {
+//		Item item = new Item();
+//		Item newItem = item.getById(1);
+//		
+//		// newItem 是数据库对应表 id = 1 的那一行
+//		// 但是 我现在不想这么做
+//		// 我想这样
+//		Item item2 = new Item();
+//		item2.setId(1);
+//		
+//		item2.load(); // 就是这个load方法该怎么写 我不会
+//		// item2 也是 数据库对应表 id = 1 的那一行
+		
+	}
 	public String getTableName() {
 		String tableName = HibernateUtil.getTableName(this.getClass());
 		
