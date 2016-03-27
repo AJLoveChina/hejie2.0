@@ -40,7 +40,7 @@ public enum JokeType {
 	TECH(58, "科技"),
 	
 	ALL(9, "所有内容", null, null, false),
-	UNKNOWN(99, "未知分类", "其它");
+	UNKNOWN(99, "未知分类", "其它", null, true);
 	
 	
 	private int id;
@@ -123,14 +123,14 @@ public enum JokeType {
 		return JokeType.values();
 		
 	}
-	public static JokeType[] getLegalJokeTypes() {
+	public static List<JokeType> getLegalJokeTypes() {
 		List<JokeType> types = new ArrayList<JokeType>();
 		for(JokeType j : JokeType.values()) {
 			if (j.isShowToUser) {
 				types.add(j);
 			}
 		}
-		return (JokeType[]) types.toArray();
+		return types;
 	}
 	
 	public String getTypeHref() {
@@ -156,6 +156,18 @@ public enum JokeType {
 		}
 		return JokeType.UNKNOWN;
 		
+	}
+	
+	/**
+	 * 
+	 * 返回realname, 如果为null 则返回info
+	 * @return
+	 */
+	public String getNickName() {
+		if (this.realName != null) {
+			return this.realName;
+		}
+		return this.info;
 	}
 	
 	@Deprecated

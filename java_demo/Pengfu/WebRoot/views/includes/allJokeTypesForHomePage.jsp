@@ -5,7 +5,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-JokeType[] jokeTypes = JokeType.getAllJokeTypes();
+List<JokeType> jokeTypes = JokeType.getLegalJokeTypes();
 request.setAttribute("jokeTypes", jokeTypes);
 %>
 
@@ -150,7 +150,7 @@ request.setAttribute("jokeTypes", jokeTypes);
 					<span class="ali-wrap">
 						<a href="${jokeType.getTypeHref() }">
 							<em class="aicon ${jokeType.getIconClassName() }"></em>
-							<span class="ainfo">${jokeType.getInfo() }</span>
+							<span class="ainfo">${jokeType.getNickName() }</span>
 						</a>
 					</span>
 				</li>

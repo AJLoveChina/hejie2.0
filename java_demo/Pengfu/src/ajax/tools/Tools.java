@@ -184,13 +184,26 @@ public class Tools {
 	 * @param content 内容
 	 * @param folder 新文件夹
 	 */
-	public static void grabImagesFromString(String content, String folder) {
+	public static void grabImagesFromString(URL pageUrl, String content, String folder) {
 		Document doc = Jsoup.parse(content);
 		
 		Elements images = doc.select("img");
+		String destination = "WebRoot/web";
+		if (folder == null) {
+			folder = "/images/";
+		}
+		if (!folder.startsWith("/")) {
+			folder = "/" + folder;
+		}
+		if (!folder.endsWith("/")) {
+			folder += "/";
+		}
+		destination += folder;
 		
 		for (Element img : images) {
-			
+			String src = img.attr("src");
+			src = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(src, pageUrl.toString());
+			FileTools.saveImageTo(src, destination);
 		}
 		
 		
@@ -199,20 +212,29 @@ public class Tools {
 	 * 获取content内容中的图片 并保存到 webRoot/web/路径下的images文件夹
 	 * @param content
 	 */
-	public static void grabImagesFromString(String content) {
+	public static void grabImagesFromString(URL url, String content) {
 		
-		grabImagesFromString(content, null);
+		grabImagesFromString(url, content, null);
 		
 	}
 	
 	
 	public static void main(String[] args) {
-//		Item item = new Item();
-//		Item newItem = item.getById(12);
-//		
-//		grabImagesFromString(newItem.getContent());
 		
-		FileTools.saveImageTo("https://pic3.zhimg.com/8eb22c180deea66cf7127fe6037d3de2_200x112.jpg", "WebRoot/web/zhihu/");
+		Item item = new Item();
+		Item newItem = item.getById(36);
+		try {
+			URL pageUrl = new URL(newItem.getUrl());
+			
+			grabImagesFromString(new URL(newItem.getUrl()), newItem.getContent(), "zhihu");
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		//FileTools.saveImageTo("https://pic3.zhimg.com/8eb22c180deea66cf7127fe6037d3de2_200x112.jpg", "WebRoot/web/zhihu/");
 		
 	}
 	
