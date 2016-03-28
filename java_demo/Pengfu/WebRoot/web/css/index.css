@@ -19,7 +19,7 @@ body {
   font-size: 1.2em;
 }
 
-@media(max-width:640px) {
+@media(max-width:1050px) {
 	div#aj-body{
 		min-height:450px;
 	}

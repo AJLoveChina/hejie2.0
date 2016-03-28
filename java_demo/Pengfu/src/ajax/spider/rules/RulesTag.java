@@ -2,11 +2,23 @@ package ajax.spider.rules;
 
 public enum RulesTag {
 
-	ZHIHU_ANSWER(1, "ajax.spider.rules.ZhihuAnswerRules", "");
+	ZHIHU_ANSWER(1, "ajax.spider.rules.ZhihuAnswerRules", "", "zhihu");
 	
 	private int id;
 	private String className;
 	private String info;
+	private String imageFolder;
+	
+	/**
+	 * 获取该rules抓取的图片文件夹, 相对于WebRoot/web/
+	 * @return
+	 */
+	public String getImageFolder() {
+		return imageFolder;
+	}
+	public void setImageFolder(String imageFolder) {
+		this.imageFolder = imageFolder;
+	}
 	public int getId() {
 		return id;
 	}
@@ -31,6 +43,12 @@ public enum RulesTag {
 		this.info = info;
 	}
 	
+	private RulesTag(int id, String className, String info, String imageFolder) {
+		this.id = id;
+		this.className = className;
+		this.info = info;
+		this.imageFolder = imageFolder;
+	}
 	public static RulesTag getRulesTagById(int id) {
 		RulesTag[] tags = RulesTag.values();
 		

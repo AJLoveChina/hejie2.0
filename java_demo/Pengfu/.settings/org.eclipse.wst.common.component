@@ -2,6 +2,7 @@
     <wb-module deploy-name="Pengfu">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/target"/>
         <property name="context-root" value="Pengfu"/>
         <property name="java-output-path" value="/Pengfu/WebRoot/WEB-INF/classes"/>
     </wb-module>

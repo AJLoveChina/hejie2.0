@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="web/images/favicon.ico" />
-    <title>汤圆小屋</title>
+    <title>你个二货</title>
 </head>
 <body>
 

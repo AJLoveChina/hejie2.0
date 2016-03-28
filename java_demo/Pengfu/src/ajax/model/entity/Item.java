@@ -163,7 +163,7 @@ public class Item extends Entity<Item>{
 					
 					@Override
 					public JokeType returnJokeType() {
-						return JokeType.FILM;
+						return jokeType;
 					}
 				};
 			}

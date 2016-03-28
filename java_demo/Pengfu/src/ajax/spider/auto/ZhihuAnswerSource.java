@@ -43,10 +43,6 @@ public class ZhihuAnswerSource{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 	}
 	
 	private static void GrabAllTopicsOfPage(int page) {

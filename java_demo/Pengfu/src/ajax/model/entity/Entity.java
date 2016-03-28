@@ -2,6 +2,7 @@ package ajax.model.entity;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -42,7 +43,7 @@ public class Entity<T> {
 			session.getTransaction().commit();
 			
 		}catch(RuntimeException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}finally{
 			
 			session.flush();
@@ -65,11 +66,13 @@ public class Entity<T> {
 		
 	}
 	
-//	@Deprecated
+	@Deprecated
 	public T getById(int id) {
 		Session session = HibernateUtil.getSession();
 		
-		String sqlCmd = String.format("from %s where id = :id", this.getTableName());
+		String tableName = this.getTableName();
+		// %s is not real table name , but is Java Type
+		String sqlCmd = String.format("from %s where id = :id", this.getClass().getName());
 		Query query = session.createQuery(sqlCmd);
 		
 		query.setInteger("id", id);
@@ -81,6 +84,17 @@ public class Entity<T> {
 		return entity;
 	}
 	
+	/**
+	 * 根据主键id值从数据库加载该实体对象
+	 * @param id
+	 */
+	public void load(int id) {
+		Session session = HibernateUtil.getSession();
+		
+		session.load(this,id);
+	}
+	
+
 
 	
 	public static void main(String[] args) {
@@ -107,7 +121,7 @@ public class Entity<T> {
 	public List<T> getPage(int page, int pageNum) {
 		Session session = HibernateUtil.getSession();
 		
-		String sqlCmd = String.format("from %s", this.getTableName());
+		String sqlCmd = String.format("from %s", this.getClass().getName());
 		//, (page - 1) * pageNum, pageNum
 		
 		Query query = session.createQuery(sqlCmd);
@@ -118,6 +132,12 @@ public class Entity<T> {
 		List<T> lists = query.list();
 		
 		return lists;
+	}
+	
+	public List<T> getList(Criteria criteria) {
+		
+		return criteria.list();
+		
 	}
 
 }

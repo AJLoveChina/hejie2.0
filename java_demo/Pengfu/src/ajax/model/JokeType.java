@@ -13,14 +13,14 @@ public enum JokeType {
 	FILM(31, "电影"),
 	TOUR(32, "旅行"),
 	FOOD(33, "美食"),
-	SPORTS(34, "健身, 体育, 运动"),
+	SPORTS(34, "健身, 体育, 运动", "运动"),
 	INTERNET(35, "互联网"),
 	FASHION(36, "时尚"),
 	SYB(37, "创业"),
 	DESIGN(38, "设计"),
-	SCIENCE(39, "自然科学"),
-	ECONOMICS(40, "经济学"),
-	CAREER(41, "职业发展"),
+	SCIENCE(39, "自然科学", "科学"),
+	ECONOMICS(40, "经济学", null, null, false),
+	CAREER(41, "职业发展", "职业"),
 	HOME(42, "家居"),
 	EDUCATION(43, "教育"),
 	CAR(44, "汽车"),
@@ -34,13 +34,13 @@ public enum JokeType {
 	CAPTURE(52, "摄影"),
 	LITERATURE(53, "文学"),
 	INVEST(54, "投资"),
-	PHYSICS(55, "物理学"),
+	PHYSICS(55, "物理学", null, null, false),
 	GAME(56, "游戏"),
-	BUSINESS(57, "商业, 金融"),
+	BUSINESS(57, "商业, 金融", "商业"),
 	TECH(58, "科技"),
 	
 	ALL(9, "所有内容", null, null, false),
-	UNKNOWN(99, "未知分类", "其它", null, true);
+	UNKNOWN(99, "未知分类", "未知世界", null, true);
 	
 	
 	private int id;
@@ -101,7 +101,7 @@ public enum JokeType {
 			String iconClassName, boolean isShowToUser) {
 		this.id = id;
 		this.info = info == null ? "" : info;
-		this.realName = realName == null ? "" : realName;
+		this.realName = realName == null ? info : realName;
 		this.iconClassName = iconClassName == null ? "glyphicon glyphicon-star" : iconClassName;
 		this.isShowToUser = isShowToUser;
 	}

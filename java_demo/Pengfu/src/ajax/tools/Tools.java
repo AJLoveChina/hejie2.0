@@ -12,6 +12,7 @@ import java.net.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -22,6 +23,7 @@ import org.jsoup.select.Elements;
 import ajax.model.Joke;
 import ajax.model.JokeStatus;
 import ajax.model.entity.Item;
+import ajax.model.entity.Source;
 
 public class Tools {
 	
@@ -147,7 +149,7 @@ public class Tools {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return relativeUrl;
 	}
 	
 
@@ -179,12 +181,14 @@ public class Tools {
 		}
 	}
 	/**
-	 * 获取content内容中的图片 并保存到 webRoot/web/路径下的images文件夹, 你可以替换images为 folder
-	 * 自动修改content中img src,alt 的值
+	 * 获取content内容中的图片 并保存到 webRoot/web/路径下的images文件夹, 你可以替换images为 folder<br>
+	 * 自动修改content中img src,alt 的值<br>
+	 * <span style="color:green;">返回值 : 处理后的 content</span><br>
 	 * @param content 内容
 	 * @param folder 新文件夹
 	 */
-	public static void grabImagesFromString(URL pageUrl, String content, String folder) {
+	public static String grabImagesFromString(URL pageUrl, String content, String folder) {
+		
 		Document doc = Jsoup.parse(content);
 		
 		Elements images = doc.select("img");
@@ -201,12 +205,25 @@ public class Tools {
 		destination += folder;
 		
 		for (Element img : images) {
-			String src = img.attr("src");
-			src = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(src, pageUrl.toString());
-			FileTools.saveImageTo(src, destination);
+			String src;
+			
+			if (img.attr("data-origin-image-url") != null && img.attr("data-origin-image-url") != "") {
+				src = img.attr("data-origin-image-url");
+			} else {
+				src = img.attr("src");
+			}
+			if (src != null) {
+				img.attr("data-origin-image-url", src);
+				src = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(src, pageUrl.toString());
+				String path = FileTools.saveImageTo(src, destination);
+				if (path == "") {
+					path = "web/pic/unknown.png";
+				}
+				img.attr("src", path);
+			}
 		}
 		
-		
+		return doc.body().html();
 	}
 	/**
 	 * 获取content内容中的图片 并保存到 webRoot/web/路径下的images文件夹
@@ -220,13 +237,16 @@ public class Tools {
 	
 	
 	public static void main(String[] args) {
-		
+
 		Item item = new Item();
-		Item newItem = item.getById(36);
+		item.load(36);
+		
 		try {
-			URL pageUrl = new URL(newItem.getUrl());
+			URL pageUrl = new URL(item.getUrl());
 			
-			grabImagesFromString(new URL(newItem.getUrl()), newItem.getContent(), "zhihu");
+			String newContent = grabImagesFromString(new URL(item.getUrl()), item.getContent(), "zhihu");
+			item.setContent(newContent);
+			item.update();
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -234,7 +254,6 @@ public class Tools {
 			System.out.println(e.getMessage());
 		}
 		
-		//FileTools.saveImageTo("https://pic3.zhimg.com/8eb22c180deea66cf7127fe6037d3de2_200x112.jpg", "WebRoot/web/zhihu/");
 		
 	}
 	
@@ -247,6 +266,7 @@ public class Tools {
 		}
 		return sb.toString();
 	}
+	
 
 	
 }

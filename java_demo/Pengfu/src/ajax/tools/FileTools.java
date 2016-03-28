@@ -85,7 +85,13 @@ public class FileTools {
 		
 		return sb.toString();
 	}
-	
+	/**
+	 * 成功时返回相对于项目WebRoot的图片相对路径
+	 * 错误时返回 空字符串
+	 * @param src
+	 * @param folder
+	 * @return
+	 */
 	public static String saveImageTo(String src, String folder) {
 		String newFileName = getRandomFileName(src);
 		if (!folder.endsWith("/")) {
@@ -122,6 +128,7 @@ public class FileTools {
 			fos.write(response);
 			fos.close();
 			
+			destination = destination.replaceFirst("WebRoot/", "");
 			return destination;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
