@@ -170,6 +170,11 @@ public enum JokeType {
 		return this.info;
 	}
 	
+	/**
+	 * Cause This returns null when not found the given typeID, You should use getJokeType instead of this method!
+	 * @param typeID
+	 * @return
+	 */
 	@Deprecated
 	public static JokeType getLegalJokeTypeByTypeId(Integer typeID) {
 		

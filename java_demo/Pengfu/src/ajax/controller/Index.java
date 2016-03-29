@@ -2,6 +2,7 @@ package ajax.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,10 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import ajax.model.*;
 import ajax.tools.*;
+import ajax.model.entity.*;
 /**
  * Servlet implementation class Index
  */
-@WebServlet("/Index")
+@WebServlet("")
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,36 +42,18 @@ public class Index extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String pageParam = request.getParameter("page");
-		String typeParam = request.getParameter("type");
-		
-		JokeType jokeType = null;
-		if (typeParam != null) {
-			Integer typeID = Integer.parseInt(typeParam);
-			
-			jokeType = JokeType.getLegalJokeTypeByTypeId(typeID);
-		}
-		
-		int page = 0;
-		if (pageParam != null) {
-			page = Integer.parseInt(pageParam);
-		}
-		
-		if (page <= 0) {
-			page = 1;
-		}
-		
-		ArrayList<Joke> jokes = new ArrayList<Joke>();
-		if (jokeType == null) {
-			int truePage = Joke.getTruePageNumForIndexPage(page);
-			jokes = Joke.getPageOf(truePage);
-		} else {
-			jokes = Joke.getJokesByType(jokeType, page);
-		}
 		
 		
-		request.setAttribute("jokes", jokes);
-		request.setAttribute("page", page);
+		List<Item> items = new ArrayList<Item>();
+		
+		QueryParams qp = new QueryParams(request);
+		
+		items = Item.query(qp);
+		
+		
+		request.setAttribute("items", items);
+		request.setAttribute("page", Tools.parseInt(qp.getVal("page"), 1));
+		request.setAttribute("queryParams", qp);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 		

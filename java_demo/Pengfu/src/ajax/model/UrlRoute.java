@@ -1,12 +1,28 @@
 package ajax.model;
 
 public enum UrlRoute {
-	HOME(1, "/Pengfu/Index"),
+	HOME(1, "/Pengfu/"),
 	ONEJOKE(2, "/Pengfu/OneJoke");
 	
 	private int id;
 	private String url;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	UrlRoute(int id, String url) {
 		this.id = id;
 		this.url = url;

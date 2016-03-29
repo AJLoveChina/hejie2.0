@@ -31,6 +31,8 @@ public class Joke {
 	private JokeStatus jokeStatus = JokeStatus.NORMAL;
 	private String backgroundInformation;
 	private JokeType _jokeType;
+	private boolean hasMovedToItem;
+	
 	private String _tableName = Joke.tableName;	// 实例默认的数据表, 这个在将来有可能不同值
 	
 	
@@ -39,6 +41,12 @@ public class Joke {
 	private static final int startPage = 520;
 	
 	
+	public boolean isHasMovedToItem() {
+		return hasMovedToItem;
+	}
+	public void setHasMovedToItem(boolean hasMovedToItem) {
+		this.hasMovedToItem = hasMovedToItem;
+	}
 	public String getBackgroundInformation() {
 		return backgroundInformation;
 	}
@@ -345,8 +353,8 @@ public class Joke {
 	
 	public boolean update(){
 		Statement stat = Mysql.getStat();
-		String sqlCmd = String.format("UPDATE %s SET title = '%s',content = '%s', stamps = '%s', likes = %d, dislike = %d, url = '%s', has_get_image = %d WHERE joke_id = %d LIMIT 1", 
-				tableName, this.getTitle(), this.getContent(), "", this.getLikes(), this.getDislike(), this.getUrl(), this.getHasGetImage(), 
+		String sqlCmd = String.format("UPDATE %s SET title = '%s',content = '%s', stamps = '%s', likes = %d, dislike = %d, url = '%s', has_get_image = %d, hasMovedToItem = %b WHERE joke_id = %d LIMIT 1", 
+				tableName, this.getTitle(), this.getContent(), "", this.getLikes(), this.getDislike(), this.getUrl(), this.getHasGetImage(), this.isHasMovedToItem(),
 				this.getJokeId());
 		
 		try {
@@ -378,7 +386,7 @@ public class Joke {
 			this.setUsername(rs.getString("username"));
 			this.setUserPersonalPageUrl(rs.getString("userPersonalPageUrl"));
 			this.setBackgroundInformation(rs.getString("backgroundInformation"));
-			
+			this.setHasMovedToItem(rs.getBoolean("hasMovedToItem"));
 			
 			
 		} catch (Exception e) {
@@ -642,9 +650,38 @@ public class Joke {
 		return jokes;
 	}
 	
+	public static List<Joke> getJokesNotStaticImage(int page, int pageNum) {
+		List<Joke> jokes = new ArrayList<Joke>();
+		int pageSize = pageNum;
+		
+		String sqlCmd = String.format("SELECT * FROM %s WHERE jokeType != %d && jokeStatus = %d && hasMovedToItem = 0 LIMIT %d,%d", 
+				tableName, JokeType.STATIC_IMAGE.getId(), JokeStatus.NORMAL.getId(), (page - 1) * pageSize, pageSize);
+		try {
+			
+			Statement stat = Mysql.getStat();
+			
+			ResultSet rs = stat.executeQuery(sqlCmd);
+			
+			while(rs.next()) {
+				Joke joke = Joke.getIns();
+				joke.readFromResultSet(rs);
+				
+				jokes.add(joke);
+			}
+			
+			Mysql.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return jokes;
+	}
+	
 	
 	public static String getHrefByJokeType(JokeType jokeType) {
-		String url = "/Pengfu/Index";
+		String url = "/Pengfu/";
 		
 		url += "?type=" + jokeType.getId();
 		return url;
@@ -699,5 +736,6 @@ public class Joke {
 		//Joke.getTruePageNumForIndexPage(1);
 		
 	}
+
 	
 }

@@ -63,8 +63,5 @@ public class GrabImages {
 			
 		}while(items.size() > 0);
 		
-		
-		
-		
 	}
 }

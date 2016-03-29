@@ -2,14 +2,19 @@ package ajax.model.entity;
 
 import java.util.*;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import ajax.model.JokeType;
+import ajax.model.QueryParams;
+import ajax.model.UrlRoute;
 import ajax.spider.Spider3;
 import ajax.spider.rules.Rules;
 import ajax.spider.rules.RulesTag;
 import ajax.spider.rules.SpiderWeb;
 import ajax.tools.HibernateUtil;
+import ajax.tools.Tools;
 
 
 public class Item extends Entity<Item>{
@@ -183,10 +188,61 @@ public class Item extends Entity<Item>{
 		
 	}
 	
-
+	public String getOneJokeUrlById() {
+		return UrlRoute.ONEJOKE + "?id=" + this.getId(); 
+	}
+	
+	public boolean hasAuthor() {
+		return (this.getUsername() != null && this.getUsername().trim() != "");
+	}
 	
 	public static void main(String[] args) {
 		
+	}
+	
+	/**
+	 * 根据QueryParams 对象查询 item实体集
+	 * @param qp
+	 * @return
+	 */
+	public static List<Item> query(QueryParams qp) {
+		Session session = HibernateUtil.getSession();
+		
+		Criteria criteria = session.createCriteria(Item.class);
+		
+		int page = 1;
+		int size = 10;
+		if (qp.isSet("page")) {
+			page = Tools.parseInt(qp.getVal("page"), 1);
+		}
+		if (qp.isSet("size")) {
+			size = Tools.parseInt(qp.getVal("size"), 10);
+		}
+			
+		criteria.setFirstResult((page - 1) * size);
+		criteria.setMaxResults(size);
+		
+		if (qp.isSet("type")) {
+			criteria.add(Restrictions.eq("itype", Tools.parseInt(qp.getVal("type"), JokeType.UNKNOWN.getId())));
+		}
+		
+		return criteria.list();
+	}
+	
+	/**
+	 * 根据QueryParams 获取对应的URL
+	 * @param qp
+	 * @return
+	 */
+	public static String getHrefByQueryParams(UrlRoute urlRoute, QueryParams qp) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(urlRoute.getUrl());
+		sb.append("?");
+		
+		
+		
+		
+		return sb.toString();
 	}
 	
 	

@@ -65,9 +65,9 @@ public class GetItem extends HttpServlet {
 		Item item = new Item();
 		item.load(id);
 		
-//		request.setAttribute("item", item);
-//		RequestDispatcher rd = request.getRequestDispatcher("oneJoke.jsp");
-//		rd.forward(request, response);
+		request.setAttribute("item", item);
+		RequestDispatcher rd = request.getRequestDispatcher("Item.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

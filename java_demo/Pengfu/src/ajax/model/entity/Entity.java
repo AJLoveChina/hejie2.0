@@ -91,7 +91,11 @@ public class Entity<T> {
 	public void load(int id) {
 		Session session = HibernateUtil.getSession();
 		
-		session.load(this,id);
+		try {
+			session.load(this,id);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 

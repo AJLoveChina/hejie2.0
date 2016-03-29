@@ -154,10 +154,24 @@ public class Tools {
 	
 
 
-	
+	/**
+	 * 解析一个字符串, 如果无法解析返回0
+	 * @param str
+	 * @return
+	 */
 	public static int parseInt(String str) {
+		return parseInt(str, 0);
+	}
+	
+	/**
+	 * 解析一个字符串, 如果无法解析返回defaultValue
+	 * @param str
+	 * @param defaultValue
+	 * @return
+	 */
+	public static int parseInt(String str, int defaultValue) {
 		if(str == null || str.trim() == "") {
-			return 0;
+			return defaultValue;
 		}
 		int radix = 1;
 		if (str.toLowerCase().endsWith("k")) {
@@ -177,9 +191,9 @@ public class Tools {
 			double result = Double.parseDouble(str) * radix;
 			return (int)Math.floor(result);
 		}catch(Exception e) {
-			return 0;
+			return defaultValue;
 		}
-	}
+	}	
 	/**
 	 * 获取content内容中的图片 并保存到 webRoot/web/路径下的images文件夹, 你可以替换images为 folder<br>
 	 * 自动修改content中img src,alt 的值<br>

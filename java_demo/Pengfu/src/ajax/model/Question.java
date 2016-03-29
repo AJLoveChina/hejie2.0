@@ -1,5 +1,6 @@
 package ajax.model;
 
+
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import org.jsoup.select.Elements;
 import ajax.spider.ZhihuSpider;
 import ajax.tools.Mysql;
 import ajax.tools.Tools;
+
 
 public class Question{
 	private int id;

@@ -25,15 +25,15 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	<jsp:include page="views/huodong/homeImagesRoll.jsp"></jsp:include>
 	
 	
-	<jsp:include page="views/joke/IndexPageChoice.jsp"></jsp:include>
+	<jsp:include page="views/item/IndexPageChoice.jsp"></jsp:include>
 	
-	<c:forEach items="${jokes }" var="item">
-	 	<c:set scope="request" var="joke" value="${item }" />
-		<jsp:include page="views/joke/one.jsp"></jsp:include>
+	<c:forEach items="${items }" var="item">
+	 	<c:set scope="request" var="item" value="${item }" />
+		<jsp:include page="views/item/one.jsp"></jsp:include>
 	</c:forEach>
 	 
 	<div style="height:10px;"></div>
-	<jsp:include page="views/joke/IndexPageChoice.jsp"></jsp:include>
+	<jsp:include page="views/item/IndexPageChoice.jsp"></jsp:include>
 		 
 </div>
 

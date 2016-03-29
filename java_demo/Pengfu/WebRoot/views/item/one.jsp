@@ -10,6 +10,9 @@
 		font-size:14px;
 		line-height:26px;
 	}
+	.aj-joke-list-one .panel-body img{
+		max-width:100%;
+	}
 </style>
 
 <div class="aj-joke-list-one panel panel-default">
