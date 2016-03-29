@@ -2,7 +2,7 @@ package ajax.model;
 
 public enum UrlRoute {
 	HOME(1, "/Pengfu/"),
-	ONEJOKE(2, "/Pengfu/OneJoke");
+	ONEJOKE(2, "/Pengfu/OneItem");
 	
 	private int id;
 	private String url;

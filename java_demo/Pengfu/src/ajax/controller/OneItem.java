@@ -1,6 +1,7 @@
 package ajax.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,18 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ajax.model.Joke;
+import ajax.model.QueryParams;
+import ajax.model.entity.Item;
 
 /**
  * Servlet implementation class OneJoke
  */
-@WebServlet("/OneJoke")
-public class OneJoke extends HttpServlet {
+@WebServlet("/OneItem")
+public class OneItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OneJoke() {
+    public OneItem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,18 +43,20 @@ public class OneJoke extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String idParam = request.getParameter("id");
-		int id;
-		if (idParam == null) {
-			id = 1000;
+		QueryParams qp = new QueryParams(request);
+		
+		List<Item> items = Item.query(qp);
+		Item item = new Item();
+		if (items.size() > 0) {
+			item = items.get(0);
 		} else {
-			id = Integer.parseInt(idParam);
+			item.load(36);
 		}
 		
-		Joke joke = Joke.getOneByIdFromSQL(id);
+		request.setAttribute("item", item);
+		request.setAttribute("queryParams", qp);
 		
-		request.setAttribute("joke", joke);
-		RequestDispatcher rd = request.getRequestDispatcher("OneJoke.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("OneItem.jsp");
 		rd.forward(request, response);
 		
 	}
