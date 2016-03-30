@@ -29,13 +29,13 @@ public class GrabImages {
 					folder = "images";
 				}
 				
-				String newContent = Tools.grabImagesFromString(new URL(row.getUrl()), row.getContent(), folder);
+				String newContent = row.grabImagesFromContent();
 				row.setContent(newContent);
 				row.setHasGetImage(true);
 				row.update();
-				System.out.println("图片抓取成功 : " + row.getTitle());
 				
 				
+				Tools.sleep(0.1);
 			} catch (Exception e) {
 				
 				System.out.println(e.getMessage());
@@ -47,12 +47,13 @@ public class GrabImages {
 	public static void main(String[] args) {
 		List<Item> items = new ArrayList<Item>();
 		int page = 1;
-		int pageNum = 2;
+		int pageNum = 100;
 		
 		Item item = new Item();
 		
-		Session session = HibernateUtil.getSession();
+		
 		do {
+			Session session = HibernateUtil.getSession();
 			Criteria cr = session.createCriteria(Item.class);
 			cr.add(Restrictions.eq("hasGetImage", true));
 			cr.setFirstResult((page - 1) * pageNum);
@@ -61,9 +62,9 @@ public class GrabImages {
 			items = cr.list();
 			
 			grab(items);
-			Tools.sleep(0.01);
 			
 			page ++;
+			HibernateUtil.closeSession(session);
 		}while(items.size() > 0);
 		
 	}

@@ -22,13 +22,11 @@ public class Entity<T> {
 			
 			session.getTransaction().commit();
 			
-			session.flush();
-			session.close();
 			
+			HibernateUtil.closeSession(session);
 		}catch(Exception e) {
 			System.out.println("Grab Error : " + e.toString());
 		}
-		
 	}
 	
 	public void update() {
@@ -41,13 +39,9 @@ public class Entity<T> {
 			
 			session.getTransaction().commit();
 			
+			HibernateUtil.closeSession(session);
 		}catch(RuntimeException e) {
 			System.out.println(e.getMessage());
-		}finally{
-			
-			session.flush();
-			session.close();
-			
 		}
 	}
 	
@@ -60,9 +54,9 @@ public class Entity<T> {
 		
 		session.getTransaction().commit();
 		
-		session.flush();
-		session.close();
-		
+//		session.flush();
+//		session.close();
+		HibernateUtil.closeSession(session);
 	}
 	
 	@Deprecated
@@ -92,6 +86,9 @@ public class Entity<T> {
 		
 		try {
 			session.load(this,id);
+			
+			HibernateUtil.closeSession(session);
+			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}

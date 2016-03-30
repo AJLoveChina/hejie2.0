@@ -11,12 +11,11 @@ public class Test01 {
 	}
 	
 	public static void main(String[] args) {
-		ImagesContainer ic = ImagesContainer.existed("https://pic4.zhimg.com/68fce24ebb7205dccf864db2a54a77bf_b.png2");
-		
-		System.out.println(ic);
-		
+		Item item = new Item();
+		item.load(36);
 		
 		
+		System.out.println(item);
 		
 	}
 

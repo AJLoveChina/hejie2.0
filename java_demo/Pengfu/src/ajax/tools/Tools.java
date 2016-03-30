@@ -220,25 +220,22 @@ public class Tools {
 		destination += folder;
 		
 		for (Element img : images) {
-			String src;
+			img.removeAttr("data-origin-image-url");
+			String src = img.attr("data-actualsrc");
 			
-			if (img.attr("data-origin-image-url") != null && img.attr("data-origin-image-url") != "") {
-				src = img.attr("data-origin-image-url");
-			} else {
-				src = img.attr("data-actualsrc");
-			}
 			
 			if (src != "") {
 				
-				img.attr("data-origin-image-url", src);
 				src = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(src, pageUrl.toString());
 				
 				ImagesContainer ic = ImagesContainer.existed(src);
 				String path;
 				
 				if (ic != null) {
+					
 					path = ic.getWebPath();
 					System.out.println("图片已存在");
+					
 				} else {
 					path = FileTools.saveImageTo(src, destination);
 					if (path == "") {

@@ -12,17 +12,18 @@ import org.hibernate.persister.entity.AbstractEntityPersister;
 public class HibernateUtil {
 	private static SessionFactory sessionFactory;
 	private static Session session;
+	private static StandardServiceRegistry registry;
 	
 	static {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-						
+		
+		registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
 			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-			sessionFactory = new Configuration().configure().buildSessionFactory();
 		}catch(Exception e) {
 			StandardServiceRegistryBuilder.destroy( registry );
 			e.printStackTrace();
 		}
+
 	}
 	
 	public static Session getSession() {
@@ -38,6 +39,7 @@ public class HibernateUtil {
 	
 	public static void closeSession(Session session) {
 		if (session != null) {
+			session.flush();
 			session.close();
 		}
 	}
