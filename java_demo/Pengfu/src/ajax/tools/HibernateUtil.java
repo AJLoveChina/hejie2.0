@@ -38,9 +38,13 @@ public class HibernateUtil {
 	}
 	
 	public static void closeSession(Session session) {
-		if (session != null) {
-			session.flush();
-			session.close();
+		try {
+			if (session != null) {
+				session.flush();
+				session.close();
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 	

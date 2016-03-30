@@ -233,7 +233,8 @@ public class Item extends Entity<Item>{
 	
 	/**
 	 * 根据content获取图片并保存到本地磁盘<br>
-	 * return new Content that contains imgs which src is alright. 
+	 * return new Content that contains imgs which src is alright.
+	 * 注意该方法不会在抓取完毕后更新 content 的值, 如果需要抓取后更新实体请使用 grabImagesFromContentAndUpdate
 	 */
 	public String grabImagesFromContent() {
 		int rulesTagid = this.getRulesTagId();
@@ -252,6 +253,18 @@ public class Item extends Entity<Item>{
 		}
 		
 		return newContent;
+	}
+	
+	/**
+	 * 根据content获取图片并保存到本地磁盘<br>抓取后更新实体
+	 */
+	public void grabImagesFromContentAndUpdate() {
+		
+		String newContent = this.grabImagesFromContent();
+		this.setContent(newContent);
+		this.setHasGetImage(true);
+		this.update();
+		
 	}
 	
 	/**

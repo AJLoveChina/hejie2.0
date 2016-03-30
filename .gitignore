@@ -12,3 +12,5 @@ java_demo/Pengfu/target/Pengfu-0.0.1-SNAPSHOT
 java_demo2/.metadata/
 *.index
 *.class
+*.prefs
+java_demo3/.metadata

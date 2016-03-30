@@ -24,16 +24,13 @@ public class GrabImages {
 		for (Item row : items) {
 			
 			try {
-				String folder = RulesTag.getRulesTagById(row.getRulesTagId()).getImageFolder();
-				if (folder == null || folder == "") {
-					folder = "images";
-				}
+
+//				String newContent = row.grabImagesFromContent();
+//				row.setContent(newContent);
+//				row.setHasGetImage(true);
+//				row.update();
 				
-				String newContent = row.grabImagesFromContent();
-				row.setContent(newContent);
-				row.setHasGetImage(true);
-				row.update();
-				
+				row.grabImagesFromContentAndUpdate();
 				
 				Tools.sleep(0.1);
 			} catch (Exception e) {
@@ -44,7 +41,7 @@ public class GrabImages {
 		}
 	}
 	
-	public static void main(String[] args) {
+	private static void do1() {
 		List<Item> items = new ArrayList<Item>();
 		int page = 1;
 		int pageNum = 100;
@@ -66,6 +63,30 @@ public class GrabImages {
 			page ++;
 			HibernateUtil.closeSession(session);
 		}while(items.size() > 0);
+	}
+	
+	private static void do2() {
+		List<Item> items = new ArrayList<Item>();
+		Session session = HibernateUtil.getSession();
+		int page = 1;
+		int size = 20;
+		do {
+			Criteria cr = session.createCriteria(Item.class);
+			cr.add(Restrictions.eq("hasGetImage", false));
+			cr.add(Restrictions.eq("rulesTagId", RulesTag.ZHIHU_ANSWER.getId()));
+			cr.setFirstResult((page - 1) * size );
+			cr.setMaxResults(size);
+			
+			
+			items = cr.list();
+			
+			grab(items);
+			page++;
+		}while(items.size() > 0);
 		
+	}
+	
+	public static void main(String[] args) {
+		do2();
 	}
 }
