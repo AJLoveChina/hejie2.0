@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.entity.*;
@@ -35,7 +36,7 @@ public class GrabImages {
 				System.out.println("图片抓取成功 : " + row.getTitle());
 				
 				
-			} catch (MalformedURLException e) {
+			} catch (Exception e) {
 				
 				System.out.println(e.getMessage());
 				
@@ -46,21 +47,23 @@ public class GrabImages {
 	public static void main(String[] args) {
 		List<Item> items = new ArrayList<Item>();
 		int page = 1;
-		int pageNum = 10;
+		int pageNum = 2;
 		
 		Item item = new Item();
 		
+		Session session = HibernateUtil.getSession();
 		do {
-			Criteria cr = HibernateUtil.getSession().createCriteria(Item.class);
-			cr.add(Restrictions.eq("hasGetImage", false));
+			Criteria cr = session.createCriteria(Item.class);
+			cr.add(Restrictions.eq("hasGetImage", true));
 			cr.setFirstResult((page - 1) * pageNum);
 			cr.setMaxResults(pageNum);
 			
 			items = cr.list();
 			
 			grab(items);
-			Tools.sleep(1);
+			Tools.sleep(0.01);
 			
+			page ++;
 		}while(items.size() > 0);
 		
 	}

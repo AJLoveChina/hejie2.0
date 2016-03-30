@@ -97,3 +97,13 @@ body {
 	width:300px;
 	float:right;
 }
+
+.aj-joke-list-one{}
+.aj-joke-list-one .panel-body{
+	font-size:14px;
+	line-height:26px;
+}
+.aj-joke-list-one .panel-body img{
+	max-width:100%;
+	display: block;
+}

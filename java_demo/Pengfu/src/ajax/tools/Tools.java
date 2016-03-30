@@ -22,6 +22,7 @@ import org.jsoup.select.Elements;
 
 import ajax.model.Joke;
 import ajax.model.JokeStatus;
+import ajax.model.entity.ImagesContainer;
 import ajax.model.entity.Item;
 import ajax.model.entity.Source;
 
@@ -224,16 +225,36 @@ public class Tools {
 			if (img.attr("data-origin-image-url") != null && img.attr("data-origin-image-url") != "") {
 				src = img.attr("data-origin-image-url");
 			} else {
-				src = img.attr("src");
+				src = img.attr("data-actualsrc");
 			}
-			if (src != null) {
+			
+			if (src != "") {
+				
 				img.attr("data-origin-image-url", src);
 				src = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(src, pageUrl.toString());
-				String path = FileTools.saveImageTo(src, destination);
-				if (path == "") {
-					path = "web/pic/unknown.png";
+				
+				ImagesContainer ic = ImagesContainer.existed(src);
+				String path;
+				
+				if (ic != null) {
+					path = ic.getWebPath();
+					System.out.println("图片已存在");
+				} else {
+					path = FileTools.saveImageTo(src, destination);
+					if (path == "") {
+						path = "web/pic/unknown.png";
+					}
+					//*******
+					ImagesContainer ic2 = new ImagesContainer();
+					ic2.setUrl(src);
+					ic2.setDiskPath("WebRoot/" + path);
+					ic2.setWebPath(path);
+					ic2.save();
+					//********
 				}
+				
 				img.attr("src", path);
+				
 			}
 		}
 		

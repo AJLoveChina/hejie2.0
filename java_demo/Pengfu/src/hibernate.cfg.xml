@@ -19,6 +19,7 @@
     	
     	<mapping resource="ajax/model/entity/Item.hbm.xml"/>
     	<mapping resource="ajax/model/entity/Source.hbm.xml"/>
+    	<mapping resource="ajax/model/entity/ImagesContainer.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

@@ -4,18 +4,7 @@
 
 
 
-<style>
-	.aj-joke-list-one{}
-	.aj-joke-list-one .panel-body{
-		font-size:14px;
-		line-height:26px;
-	}
-	.aj-joke-list-one .panel-body img{
-		max-width:100%;
-	}
-</style>
-
-<div class="aj-joke-list-one panel panel-default">
+<div class="aj-joke-list-one panel panel-default" data-id="${item.getId() }">
     <div class="panel-heading">
     	<a style="color:#333;" href='<c:out value="${item.getOneJokeUrlById() }"></c:out>'>
     		<c:out value="${item.getTitle() }"></c:out>

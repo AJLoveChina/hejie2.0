@@ -11,6 +11,8 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
+import ajax.model.entity.ImagesContainer;
+
 public class FileTools {
 	
 	public static String getSrc(String urlStr){
@@ -86,13 +88,16 @@ public class FileTools {
 		return sb.toString();
 	}
 	/**
-	 * 成功时返回相对于项目WebRoot的图片相对路径
-	 * 错误时返回 空字符串
-	 * @param src
-	 * @param folder
+	 * 该方法会在imagesContainer 表中查找是否有同url(src)值的图片,有不再抓取直接返回本地磁盘地址<br> 
+	 * 成功时返回相对于项目WebRoot的图片相对路径<br>
+	 * 错误时返回 空字符串<br>
+	 * @param src 必须是图片的绝对路径
+	 * @param folder 图片输出文件夹
 	 * @return
 	 */
 	public static String saveImageTo(String src, String folder) {
+		
+		
 		String newFileName = getRandomFileName(src);
 		if (!folder.endsWith("/")) {
 			folder += "/";

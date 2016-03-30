@@ -37,10 +37,10 @@ public enum RulesTag {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+	
+	
 	private RulesTag(int id, String className, String info) {
-		this.id = id;
-		this.className = className;
-		this.info = info;
+		this(id, className, info, "images");
 	}
 	
 	private RulesTag(int id, String className, String info, String imageFolder) {
@@ -49,6 +49,8 @@ public enum RulesTag {
 		this.info = info;
 		this.imageFolder = imageFolder;
 	}
+	
+	
 	public static RulesTag getRulesTagById(int id) {
 		RulesTag[] tags = RulesTag.values();
 		

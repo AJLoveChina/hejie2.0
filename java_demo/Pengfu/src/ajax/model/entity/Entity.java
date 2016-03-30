@@ -24,10 +24,9 @@ public class Entity<T> {
 			
 			session.flush();
 			session.close();
-
-			System.out.println("Grab OK : " + this.toString());
+			
 		}catch(Exception e) {
-			System.out.println("Grab Error : " + e.getMessage());
+			System.out.println("Grab Error : " + e.toString());
 		}
 		
 	}

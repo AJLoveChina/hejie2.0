@@ -1,5 +1,7 @@
 package ajax.model.entity;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 
 import org.hibernate.Criteria;
@@ -227,6 +229,29 @@ public class Item extends Entity<Item>{
 		}
 		
 		return criteria.list();
+	}
+	
+	/**
+	 * 根据content获取图片并保存到本地磁盘<br>
+	 * return new Content that contains imgs which src is alright. 
+	 */
+	public String grabImagesFromContent() {
+		int rulesTagid = this.getRulesTagId();
+		RulesTag rt = RulesTag.getRulesTagById(rulesTagid);
+		String folder = rt.getImageFolder();
+		
+		String newContent;
+		try {
+			
+			newContent = Tools.grabImagesFromString(new URL(this.getUrl()), this.getContent(), folder);
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			newContent = this.getContent();
+		}
+		
+		return newContent;
 	}
 	
 	/**

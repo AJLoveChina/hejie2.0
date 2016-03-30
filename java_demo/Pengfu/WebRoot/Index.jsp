@@ -27,11 +27,13 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	
 	<jsp:include page="views/item/IndexPageChoice.jsp"></jsp:include>
 	
-	<c:forEach items="${items }" var="item">
-	 	<c:set scope="request" var="item" value="${item }" />
-		<jsp:include page="views/item/one.jsp"></jsp:include>
-	</c:forEach>
-	 
+	<div class="aj-rows-wrap">
+		<c:forEach items="${items }" var="item">
+		 	<c:set scope="request" var="item" value="${item }" />
+			<jsp:include page="views/item/one.jsp"></jsp:include>
+		</c:forEach>
+	</div>
+	
 	<div style="height:10px;"></div>
 	<jsp:include page="views/item/IndexPageChoice.jsp"></jsp:include>
 		 
