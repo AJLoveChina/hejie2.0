@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.nigeerhuo.aliyun</groupId>
-  <artifactId>aliyun</artifactId>
+  <groupId>com.nigeerhuo.tencent</groupId>
+  <artifactId>tencent</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>aliyun Maven Webapp</name>
+  <name>tencent Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -20,15 +20,22 @@
 		<artifactId>javax.servlet-api</artifactId>
 		<version>4.0.0-b01</version>
 	</dependency>
-	    
+	
 	<dependency>
-	    <groupId>com.aliyun.oss</groupId>
-	    <artifactId>aliyun-sdk-oss</artifactId>
-	    <version>2.2.1</version>
+		<groupId>com.qcloud</groupId>
+		<artifactId>qcloud-sdk</artifactId>
+		<version>2.1.4</version>
 	</dependency>
-	    
+	
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>5.1.0.Final</version>
+	</dependency>	
+
+		    
   </dependencies>
   <build>
-    <finalName>aliyun</finalName>
+    <finalName>tencent</finalName>
   </build>
 </project>
