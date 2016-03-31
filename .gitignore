@@ -14,3 +14,6 @@ java_demo2/.metadata/
 *.class
 *.prefs
 java_demo3/.metadata
+*.fdt
+*.lock
+java_demo3/.recommenders
