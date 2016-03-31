@@ -71,6 +71,8 @@ public class ImagesContainer extends Entity<ImagesContainer>{
 		cr.add(Restrictions.eq("webPath", src));
 		
 		List<ImagesContainer> lists = cr.list();
+		
+		HibernateUtil.closeSession(session);
 		if (lists.size() > 0) {
 			return lists.get(0);
 		} else {

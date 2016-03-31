@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import ajax.model.Joke;
 import ajax.model.QueryParams;
 import ajax.model.entity.Item;
+import ajax.tools.Tools;
 
 /**
  * Servlet implementation class OneJoke
@@ -43,18 +44,11 @@ public class OneItem extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		QueryParams qp = new QueryParams(request);
-		
-		List<Item> items = Item.query(qp);
+		int id = Tools.parseInt(request.getParameter("id"), 11);
 		Item item = new Item();
-		if (items.size() > 0) {
-			item = items.get(0);
-		} else {
-			item.load(36);
-		}
+		item.load(id);
 		
 		request.setAttribute("item", item);
-		request.setAttribute("queryParams", qp);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("OneItem.jsp");
 		rd.forward(request, response);

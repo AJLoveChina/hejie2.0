@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<jsp:include page="resource_server.jsp"></jsp:include>
+<jsp:include page="resource_local.jsp"></jsp:include>
 
 <nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">

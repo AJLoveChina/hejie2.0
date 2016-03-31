@@ -5,7 +5,7 @@
 <div class="aj-list-one" data-id="${item.getId() }">
     <div class="a-l-header">
         <a href="${item.getOneJokeUrlById() }" class="a-l-type">${item.getITypeRealName() }</a>
-        <a href="" class="a-l-title">${item.getTitle() }</a>
+        <a href="${item.getOneJokeUrlById() }" class="a-l-title">${item.getTitle() }</a>
     </div>
     <div class="a-l-body">
         <div class="a-l-image">

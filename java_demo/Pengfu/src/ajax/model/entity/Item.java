@@ -28,7 +28,7 @@ import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 
-public class Item extends Entity<Item>{
+public class Item extends Entity<Item> implements Iterable<Item>{
 	private int id;
 	private String url;
 	private String title;
@@ -232,12 +232,15 @@ public class Item extends Entity<Item>{
 	 * @return
 	 */
 	public static List<Item> query(QueryParams qp) {
+		
 		Session session = HibernateUtil.getSession();
 		
 		Criteria criteria = session.createCriteria(Item.class);
 		
+		
 		int page = 1;
 		int size = 10;
+		
 		if (qp.isSet("page")) {
 			page = Tools.parseInt(qp.getVal("page"), 1);
 		}
@@ -378,6 +381,44 @@ public class Item extends Entity<Item>{
 			System.out.println(e.getMessage());
 		}
 		
+	}
+	
+	@Override
+	public Iterator<Item> iterator() {
+		return new Iterator<Item>() {
+			
+			private int page = 1;
+			private int size = 1;
+			private boolean hasNext = true;
+			
+			@Override
+			public Item next() {
+				Session session = HibernateUtil.getSession();
+				
+				Criteria cr = session.createCriteria(Item.class);
+				cr.setFirstResult((page - 1) * size);
+				cr.setMaxResults(size);
+				
+				List<Item> items = cr.list();
+				
+				
+				HibernateUtil.closeSession(session);
+				
+				if (items.size() > 0) {
+					page ++;
+					return items.get(0);
+				} else {
+					hasNext = false;
+					return null;
+				}
+				
+			}
+			
+			@Override
+			public boolean hasNext() {
+				return hasNext;
+			}
+		};
 	}
 	
 }
