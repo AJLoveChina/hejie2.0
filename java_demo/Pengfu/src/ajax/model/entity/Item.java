@@ -348,10 +348,14 @@ public class Item extends Entity<Item>{
 					ImagesContainer ic = ImagesContainer.getByWebPath(src);
 					
 					if (ic != null) {
-						File picture = new File(ic.getDiskPath());
-						BufferedImage sourceImg =ImageIO.read(new FileInputStream(picture));
-						if (sourceImg.getWidth() > 50) {
-							map.put(ic.getDiskPath(), Math.abs((float)sourceImg.getWidth() / sourceImg.getHeight() - 1));
+						try {
+							File picture = new File(ic.getDiskPath());
+							BufferedImage sourceImg =ImageIO.read(new FileInputStream(picture));
+							if (sourceImg.getWidth() > 50) {
+								map.put(ic.getWebPath(), Math.abs((float)sourceImg.getWidth() / sourceImg.getHeight() - 1));
+							}
+						}catch(Exception e) {
+							System.out.println(e.getMessage());
 						}
 					}
 					

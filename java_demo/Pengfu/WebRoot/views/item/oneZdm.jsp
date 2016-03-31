@@ -9,7 +9,7 @@
     </div>
     <div class="a-l-body">
         <div class="a-l-image">
-            <img src="" alt=""/>
+            <img src="${item.getPreviewImage() }" alt=""/>
         </div>
         <div class="a-l-content clearfix">
             <div class="a-l-c-header">

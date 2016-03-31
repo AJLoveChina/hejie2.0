@@ -17,3 +17,5 @@ java_demo3/.metadata
 *.fdt
 *.lock
 java_demo3/.recommenders
+*.properties
+*.properties
