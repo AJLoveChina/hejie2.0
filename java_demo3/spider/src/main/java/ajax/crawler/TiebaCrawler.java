@@ -5,24 +5,19 @@ import cn.edu.hfut.dmic.webcollector.model.Links;
 import cn.edu.hfut.dmic.webcollector.model.Page;
 import java.util.regex.Pattern;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import ajax.model.entity.Tieba;
 
 public class TiebaCrawler extends BreadthCrawler{
-	/**
-     * @param crawlPath crawlPath is the path of the directory which maintains
-     * information of this crawler
-     * @param autoParse if autoParse is true,BreadthCrawler will auto extract
-     * links which match regex rules from pag
-     */
+	
     public TiebaCrawler(String crawlPath, boolean autoParse) {
         super(crawlPath, autoParse);
         /*start page*/
-        this.addSeed("http://news.yahoo.com/");
+        this.addSeed("http://tieba.baidu.com/");
 
         /*fetch url like http://news.yahoo.com/xxxxx*/
-        this.addRegex("http://news.yahoo.com/.*");
-        /*do not fetch url like http://news.yahoo.com/xxxx/xxx)*/
-        this.addRegex("-http://news.yahoo.com/.+/.*");
-        /*do not fetch jpg|png|gif*/
+        this.addRegex("http://tieba.baidu.com/p/\\d+");
         this.addRegex("-.*\\.(jpg|png|gif).*");
         /*do not fetch url contains #*/
         this.addRegex("-.*#.*");
@@ -32,17 +27,22 @@ public class TiebaCrawler extends BreadthCrawler{
     public void visit(Page page, Links nextLinks) {
         String url = page.getUrl();
         /*if page is news page*/
-        if (Pattern.matches("http://news.yahoo.com/.+html", url)) {
-            /*we use jsoup to parse page*/
+        if (Pattern.matches("http://tieba.baidu.com/p/\\d+", url)) {
+           
             Document doc = page.getDoc();
 
             /*extract title and content of news by css selector*/
-            String title = doc.select("h1[class=headline]").first().text();
-            String content = doc.select("div[class=body yom-art-content clearfix]").first().text();
-
-            System.out.println("URL:\n" + url);
-            System.out.println("title:\n" + title);
-            System.out.println("content:\n" + content);
+            Elements contents = doc.select(".d_post_content");
+            Elements title = doc.select("#j_core_title_wrap > h3");
+            
+            
+            Tieba tb = new Tieba();
+            tb.setContent(contents.html());
+            tb.setTitle(title.html());
+            
+            tb.save();
+            
+            
 
             /*If you want to add urls to crawl,add them to nextLinks*/
             /*WebCollector automatically filters links that have been fetched before*/
@@ -53,7 +53,7 @@ public class TiebaCrawler extends BreadthCrawler{
 
     public static void main(String[] args) throws Exception {
         TiebaCrawler crawler = new TiebaCrawler("crawl", true);
-        crawler.setThreads(50);
+        crawler.setThreads(1);
         crawler.setTopN(100);
         //crawler.setResumable(true);
         /*start crawl with depth of 4*/
