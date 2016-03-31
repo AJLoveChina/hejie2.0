@@ -70,6 +70,10 @@
 			<column name="rulesTagId"></column>
 		</property>
 		
+		<property name="previewImage" type="java.lang.String">
+			<column name="previewImage"></column>
+		</property>
+		
 	</class>
 	
 

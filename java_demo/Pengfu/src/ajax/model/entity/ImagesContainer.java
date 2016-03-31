@@ -1,5 +1,6 @@
 package ajax.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -52,6 +53,24 @@ public class ImagesContainer extends Entity<ImagesContainer>{
 		cr.add(Restrictions.eq("url", url));
 		List<ImagesContainer> lists = cr.list();
 		
+		if (lists.size() > 0) {
+			return lists.get(0);
+		} else {
+			return null;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param src src is webPath
+	 * @return null if not found 
+	 */
+	public static ImagesContainer getByWebPath(String src) {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(ImagesContainer.class);
+		cr.add(Restrictions.eq("webPath", src));
+		
+		List<ImagesContainer> lists = cr.list();
 		if (lists.size() > 0) {
 			return lists.get(0);
 		} else {

@@ -1,12 +1,21 @@
 package ajax.model.entity;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
+import javax.imageio.ImageIO;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
@@ -36,8 +45,15 @@ public class Item extends Entity<Item>{
 	private String backgroundInformation;
 	private String dateEntered;
 	private int rulesTagId;
+	private String previewImage;
 	
 	
+	public String getPreviewImage() {
+		return previewImage;
+	}
+	public void setPreviewImage(String previewImage) {
+		this.previewImage = previewImage;
+	}
 	public int getRulesTagId() {
 		return rulesTagId;
 	}
@@ -135,6 +151,14 @@ public class Item extends Entity<Item>{
 		this.dateEntered = dateEntered;
 	}
 	
+	
+	/**
+	 * @return 实体的jokeType realname
+	 */
+	public String getITypeRealName() {
+		JokeType jt = JokeType.getJokeType(this.itype);
+		return jt.getRealName();
+	}
 	
 	public void updateBySpider() {
 		final String url = this.getUrl();
@@ -282,8 +306,75 @@ public class Item extends Entity<Item>{
 		
 		return sb.toString();
 	}
-	
-	
+	/**
+	 * 根据content生成summary内容并update实体
+	 */
+	public void generateSummary() {
+		Document doc = Jsoup.parse(this.getContent());
+		
+		try {
+			
+			String text = doc.body().text();
+			
+			int length = 110;
+			int random = (new Random()).nextInt(20);
+			String summary = text.substring(0, length + random);
+			
+			this.setSummary(summary);
+			
+			this.update();
+			
+		}catch(Exception e) {
+			String summary = doc.body().text();
+			this.setSummary(summary);
+			this.update();
+		}
+		
+	}
+	/**
+	 * 根据content获取一张代表图片并update实体
+	 */
+	public void generateItemImage() {
+		try {
+			Document doc = Jsoup.parse(this.getContent());
+			
+			Elements imgs = doc.select("img");
+			
+			Map<String, Float> map = new HashMap<String, Float>();
+			
+			if (imgs.size() > 0) {
+				for (Element img : imgs) {
+					String src = img.attr("src");
+					ImagesContainer ic = ImagesContainer.getByWebPath(src);
+					
+					if (ic != null) {
+						File picture = new File(ic.getDiskPath());
+						BufferedImage sourceImg =ImageIO.read(new FileInputStream(picture));
+						if (sourceImg.getWidth() > 50) {
+							map.put(ic.getDiskPath(), Math.abs((float)sourceImg.getWidth() / sourceImg.getHeight() - 1));
+						}
+					}
+					
+				}
+				
+				String result = null;
+				float des = 999;
+				
+				for(String key : map.keySet()) {
+					if (map.get(key) < des) {
+						result = key;
+					}
+				}
+				
+				this.setPreviewImage(result);
+				this.update();
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
 	
 }
 

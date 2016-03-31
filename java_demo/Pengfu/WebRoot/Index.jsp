@@ -30,7 +30,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	<div class="aj-rows-wrap">
 		<c:forEach items="${items }" var="item">
 		 	<c:set scope="request" var="item" value="${item }" />
-			<jsp:include page="views/item/one.jsp"></jsp:include>
+			<jsp:include page="views/item/oneZdm.jsp"></jsp:include>
 		</c:forEach>
 	</div>
 	
