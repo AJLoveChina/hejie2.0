@@ -52,7 +52,7 @@
 	
 	})
 </script>
-<div id="aj-top-type-choice" class="clearfix">
+<div id="aj-top-type-choice" class="clearfix aj-phone-only">
 	<div class="one">
 		<a class="atag" href="<%=Joke.getHrefByJokeType(JokeType.ALL) %>">
 			<span class="icon glyphicon glyphicon-th"></span>

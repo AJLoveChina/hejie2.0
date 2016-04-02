@@ -19,7 +19,13 @@ body {
   font-size: 1.2em;
 }
 
+.aj-phone-only{
+	display: none;
+}
 @media(max-width:1050px) {
+	.aj-phone-only{
+		display: block;
+	}
 	div#aj-body{
 		min-height:450px;
 	}
@@ -92,6 +98,7 @@ body {
 	max-width:710px;
 	width:100%;
 	float:left;
+	padding-top: 10px;
 }
 .aj-body-right{
 	width:300px;

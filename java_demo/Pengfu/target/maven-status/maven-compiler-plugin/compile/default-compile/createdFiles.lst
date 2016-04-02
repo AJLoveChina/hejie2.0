@@ -40,7 +40,6 @@ ajax\model\entity\Item$1.class
 org\json\JSONObject.class
 org\json\HTTPTokener.class
 ajax\controller\GrabImageFromUrlOfJokeContent.class
-ajax\controller\OneJoke.class
 ajax\spider\Spiders.class
 ajax\spider\auto\DealWithSource.class
 ajax\spider\ZhihuAnswerSpider$1$1.class

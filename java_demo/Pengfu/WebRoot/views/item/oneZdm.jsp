@@ -20,7 +20,7 @@
                 </span>
 	    	</c:if>
                 
-                <span class="a-stamps">${item.getStamps() }</span>
+                <span class="a-stamps">标签 : ${item.getStamps() }</span>
             </div>
             <div class="a-l-c-body">
                 <span>
