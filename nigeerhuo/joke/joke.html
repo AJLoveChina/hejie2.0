@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <link rel="stylesheet" href="css.css"/>
+</head>
+<body>
+
+<style>
+    *{
+        margin:0;padding:0;
+        border:none;
+    }
+    ul li{
+        list-style: none;
+    }
+
+    body {
+        font-size: 14px;
+        font-family: Microsoft Yahei, Arial;
+    }
+</style>
+
+
+
+
+<div style="width: 300px;margin: 30px">
+    <div id="container" class="aj-joke-roll" ng-controller="myCtrl">
+
+        <h3 class="head" ng-bind="head"></h3>
+        <div class="control">
+            <a href="javascript:;" ng-click="prev()">Prev</a>
+            <span ng-bind="cur + 1"></span>
+            <span>/</span>
+            <span ng-bind="items.length"></span>
+            <a href="javascript:;" ng-click="next()">Next</a>
+        </div>
+        <div class="cutline-x">
+            <div class="culine-y"></div>
+            <div class="culine-y offset"></div>
+        </div>
+
+        <h5 class="title" ng-bind="items[cur].title"></h5>
+        <div class="content" ng-bind="items[cur].content"></div>
+    </div>
+
+</div>
+
+
+
+<script>
+    $(function () {
+        var app = angular.module('myApp', []);
+
+        app.controller('myCtrl', function($scope, $timeout) {
+            $scope.head = "Jokes";
+            $scope.items = [
+                {
+                    "title" : "Nigeerhuo",
+                    "content" : "生活处处是精彩.."
+                },
+                {
+                    "title" : "读书",
+                    "content" : "有人拿据传是钱（钟书）老年轻时评价三位老师的话来洗地"
+                }
+            ];
+            $scope.stop = false;
+            $scope.interval = 3000;
+            $scope.cur = 0;
+
+            $scope.prev = function () {
+                var prev = $scope.cur - 1;
+                if(prev < 0) {
+                    prev =  $scope.items.length - 1;
+                }
+                $scope.cur = prev;
+            };
+
+            $scope.next = function () {
+                var next = $scope.cur + 1;
+                if (next >= $scope.items.length) {
+                    next = 0;
+                }
+                $scope.cur = next;
+            };
+
+            $scope.roll = function () {
+
+                $timeout(function () {
+                    if (!$scope.stop) {
+                        $scope.next();
+                    }
+                    $scope.roll();
+                }, this.interval);
+
+            };
+            $scope.roll();
+
+
+        });
+
+        angular.bootstrap($("#container"), ['myApp']);
+    })
+</script>
+
+
+</body>
+</html>

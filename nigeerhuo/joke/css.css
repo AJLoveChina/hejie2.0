@@ -1,0 +1,49 @@
+.aj-joke-roll {
+  position: relative;
+  width: 100%;
+  color: #666;
+}
+.aj-joke-roll a {
+  color: #666;
+  text-decoration: none;
+}
+.aj-joke-roll a:hover {
+  color: #333;
+}
+.aj-joke-roll .control {
+  position: absolute;
+  height: 30px;
+  line-height: 30px;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+}
+.aj-joke-roll .head {
+  line-height: 30px;
+  height: 30px;
+}
+.aj-joke-roll .cutline-x {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+  margin: 5px 0;
+}
+.aj-joke-roll .culine-y {
+  position: absolute;
+  left: 20px;
+  top: -10px;
+  height: 20px;
+  border-left: 1px solid #ccc;
+}
+.aj-joke-roll .culine-y.offset {
+  left: 30px;
+}
+.aj-joke-roll .title {
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+}
+.aj-joke-roll .content {
+  word-break: break-all;
+  max-height: 80px;
+  line-height: 20px;
+}

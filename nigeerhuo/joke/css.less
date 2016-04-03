@@ -1,0 +1,54 @@
+.aj-joke-roll{
+    position: relative;
+    width: 100%;
+
+    color: #666;
+
+    a{
+        color: #666;
+        text-decoration: none;
+        &:hover{
+            color: #333;
+        }
+    }
+    .control{
+        position: absolute;
+        height: 30px;
+        line-height: 30px;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+    }
+    .head{
+        line-height: 30px;
+        height: 30px;
+    }
+    .cutline-x{
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        margin: 5px 0;
+    }
+    .culine-y{
+        position: absolute;
+        left: 20px;
+        top: -10px;
+        height: 20px;
+        border-left: 1px solid #ccc;
+
+        &.offset{
+            left: 30px;
+        }
+    }
+
+    .title{
+        height: 20px;
+        line-height: 20px;
+        overflow: hidden;
+    }
+
+    .content{
+        word-break: break-all;
+        max-height: 80px;
+        line-height: 20px;
+    }
+}

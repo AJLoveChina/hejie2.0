@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+</head>
+<body>
+
+
+<div>
+    <input type="text" ng-model="value"/>
+    Hello {{value ||'World'}}
+</div>
+
+
+
+
+<div id="container" ng-controller="myCtrl">
+
+    名: <input type="text" ng-model="firstName"><br>
+    姓: <input type="text" ng-model="lastName"><br>
+
+    姓名: {{firstName + " " + lastName}}
+
+</div>
+
+<script>
+    $(function () {
+        var app = angular.module('myApp', []);
+
+        app.controller('myCtrl', function($scope) {
+            $scope.firstName= "John";
+            $scope.lastName= "Doe";
+        });
+
+        angular.bootstrap($("#container"), ['myApp']);
+    })
+</script>
+
+
+</body>
+</html>

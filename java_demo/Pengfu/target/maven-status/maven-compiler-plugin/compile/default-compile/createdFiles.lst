@@ -18,6 +18,7 @@ ajax\spider\Spider3.class
 ajax\spider\ZhihuSpider.class
 ajax\model\Joke$1.class
 org\json\JSONException.class
+ajax\model\entity\Item$2.class
 org\json\JSONString.class
 ajax\controller\GetJokes.class
 ajax\model\Answer.class
