@@ -21,3 +21,4 @@ java_demo3/.recommenders
 *.properties
 *.class
 *.jdb
+*.class

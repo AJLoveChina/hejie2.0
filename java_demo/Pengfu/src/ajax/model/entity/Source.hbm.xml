@@ -30,9 +30,39 @@
 			<column name="likes"></column>
 		</property>
 		
-		
 	</class>
 	
 
+	<class name="ajax.model.entity.ItemsRoll" table="itemsRoll">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="itemId" type="java.lang.Integer">
+			<column name="itemId"></column>
+		</property>
+		
+		<property name="rank" type="java.lang.Integer">
+			<column name="rank"></column>
+		</property>
+		
+		<property name="src" type="java.lang.String">
+			<column name="src"></column>
+		</property>
+		
+		<property name="title" type="java.lang.String">
+			<column name="title"></column>
+		</property>
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+		
+		<property name="deleted" type="java.lang.Boolean">
+			<column name="deleted"></column>
+		</property>
+		
+	</class>
 
 </hibernate-mapping>

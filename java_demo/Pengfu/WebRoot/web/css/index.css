@@ -10,6 +10,9 @@ body {
   font-size: 14px;
   font-family: Microsoft Yahei, Arial;
 }
+.font-white{
+	color:white;
+}
 
 #aj-header {
   height: 50px;
@@ -67,7 +70,7 @@ body {
 	list-style: none;
 	position : absolute;
 	right:10%;
-	bottom:10%;
+	bottom:30px;
 	z-index : 99;
 }
 .slidesjs-pagination-item{

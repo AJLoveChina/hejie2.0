@@ -433,7 +433,16 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 			}
 		};
 	}
-	
+	/**
+	 * 返回oneItem page 的url地址
+	 * @return
+	 */
+	public String getOneItemPageUrl() {
+		return UrlRoute.ONEJOKE.getUrl() + "?id=" + this.id;
+	}
+	public static String getOneItemPageUrl(int id) {
+		return UrlRoute.ONEJOKE.getUrl() + "?id=" + id;
+	}
 }
 
 

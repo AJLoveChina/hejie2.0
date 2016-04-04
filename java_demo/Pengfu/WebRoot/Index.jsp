@@ -10,11 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Integer pageIndex = (Integer)request.getAttribute("page");
 %>
 
-<style>
-	.font-white{
-		color:white;
-	}
-</style>
+
 
 
 <jsp:include page="views/includes/header.jsp"></jsp:include>
@@ -39,6 +35,9 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 		 
 </div>
 
+<style>
+
+</style>
 <div class="aj-body-right">
 	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
 	

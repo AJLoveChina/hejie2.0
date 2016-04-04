@@ -36,6 +36,8 @@ G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\SpiderAction.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\auto\ZhihuAnswerSource.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\OneItem.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\entity\Source.java
+G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\entity\ItemsRoll.java
+G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\task\GenerateItemsRoll.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\rules\RulesTag.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\Answer.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\auto\UpdateItem.java

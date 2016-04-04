@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+</head>
+<body>
+
+
+
+<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css"/>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" href="/web/css/index.css"/>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/web/js/base.js"></script>
+
+<nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div style="display: inline-block;height: 50px;overflow: hidden;float:left;">
+                <a href="/">
+                    <img src="web/pic/logo.PNG" height="70px " alt=""/>
+                </a>
+            </div>
+            <div class="navbar-text">你个二货</div>
+        </div>
+    </div>
+</nav>
+
+<div style="height: 50px;"></div>
+<div id="aj-body" class="clearfix">
+
+
+
+
+
+
+
+<div class="aj-body-left">
+
+<style>
+    #aj-top-type-choice{
+        width:100%;
+        background-color: white;
+        padding:10px 0;
+    }
+    #aj-top-type-choice a{
+        text-decoration: none;
+    }
+    #aj-top-type-choice .one{
+        float:left;
+        width:25%;
+        height:70px;
+    }
+    #aj-top-type-choice .one .atag{}
+    #aj-top-type-choice .one .atag .icon{
+        display:block;
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        background-color:lightblue;
+        margin:0 auto;
+        text-align: center;
+        font-size: 20px;
+        line-height: 40px;
+        color:white;
+    }
+    #aj-top-type-choice .one .atag .text{
+        display:block;
+        text-align:center;
+        height:30px;
+        line-height:30px;
+        font-size:12px;
+        color:#777;
+    }
+</style>
+<script>
+    $(function () {
+        var items = $("#aj-top-type-choice .one .icon");
+        var colors = [
+            '#ffb700', '#ff68b9', '#56b2ff', '#ff67b9',
+            '#a8dd99', '#f61d4b', '#31bd80', '#3ea3ff',
+            '#ff7d00', '#ffb30f', '#e4000f'
+        ];
+
+        var random;
+        items.each(function (index, item) {
+            random = Math.floor(Math.random() * colors.length);
+            $(this).css("backgroundColor", colors[random]);
+        })
+
+    })
+</script>
+<div id="aj-top-type-choice" class="clearfix aj-phone-only">
+    <div class="one">
+        <a class="atag" href="/Pengfu/?type=9">
+            <span class="icon glyphicon glyphicon-th"></span>
+            <span class="text">全部笑话</span>
+        </a>
+    </div>
+    <div class="one">
+        <a class="atag" href="/Pengfu/?type=1">
+            <span class="icon glyphicon glyphicon-text-width"></span>
+            <span class="text">文字笑话</span>
+        </a>
+    </div>
+    <div class="one">
+        <a class="atag" href="/Pengfu/?type=2">
+            <span class="icon glyphicon glyphicon-picture"></span>
+            <span class="text">图片笑话</span>
+        </a>
+    </div>
+    <div class="one">
+        <a class="atag" href="/Pengfu/?type=3">
+            <span class="icon glyphicon glyphicon-gift"></span>
+            <span class="text">动态图笑话</span>
+        </a>
+    </div>
+</div>
+<div id="aj-home-images-roll">
+    <div>
+        <img alt="" src="web/pic/home1.jpg">
+    </div>
+    <div>
+        <img alt="" src="web/pic/home2.jpg">
+    </div>
+</div>
+
+<style>
+    #aj-home-images-roll{
+        margin-bottom:10px;
+        width:100%;
+        position:relative;
+        display: none;
+    }
+    #aj-home-images-roll img{
+        width:100%;
+    }
+
+</style>
+
+<script>
+    $(function () {
+        var container = $("#aj-home-images-roll");
+        container.slidesjs({
+            start : 1,
+            pagination : {
+                active : true
+            },
+            navigation : {
+                active : false
+            },
+            play : {
+                auto : true,
+                interval : 3000
+            },
+            callback : {
+                loaded : function () {
+                    container.fadeIn();
+                    container.css("height" , container.width() / 2);
+                }
+            }
+        });
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group" role="group" aria-label="" style="padding:5px 0;">
+    <a href="?page=1">
+        <button type="button" class="btn btn-default">上一页</button>
+    </a>
+    <a href="javascript:;">
+        <button type="button" class="btn btn-default">当前 :1页</button>
+    </a>
+    <a href="?page=2">
+        <button type="button" class="btn btn-default">下一页</button>
+    </a>
+</div>
+
+<div class="aj-rows-wrap">
+
+
+
+
+
+
+<div class="aj-list-one" data-id="11">
+    <div class="a-l-header">
+        <a href="/OneItem?id=11" class="a-l-type">未知世界</a>
+        <a href="/OneItem?id=11" class="a-l-title">想要充实自己，有哪 10 本书和 10 部电影值得推荐</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+        <div class="a-l-image">
+            <img src="web/zhihu/14592674305431229.jpg" alt=""/>
+        </div>
+        <div class="a-l-content clearfix">
+
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/li-xin-79-4-57">Jee Xin</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 书籍推荐,电影,文化,书籍,电影推荐</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	85K收藏，赞同才36K，你们这。。。。。。。。 - 声明，如果有微博或者公众号发表了我的这篇回答，请一定要把链接私信给我。我将会跟官方沟通维护我的权益。具体转载事项请看文尾。 --------------- - 这个问题我回答是最合适不过了！十个
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=11">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=11" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="13">
+    <div class="a-l-header">
+        <a href="/OneItem?id=13" class="a-l-type">美食</a>
+        <a href="/OneItem?id=13" class="a-l-title">有哪些很重要又被忽视的炒菜技巧</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+        <div class="a-l-image">
+            <img src="web/zhihu/14592679922748486.jpg" alt=""/>
+        </div>
+        <div class="a-l-content clearfix">
+
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/zhuang-li-68-40">庄力</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 美食,生活,烹饪,美食家</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	先在这里说明一下：以下答案拒绝转载到其他网站。（特别是新浪，老是让我以为有妹子艾特我 ） ----------------------------------更新----------------------------------------------
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=13">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=13" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="17">
+    <div class="a-l-header">
+        <a href="/OneItem?id=17" class="a-l-type">电影</a>
+        <a href="/OneItem?id=17" class="a-l-title">什么样的青春片才是如今国内需要的</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+
+        <div class="a-l-image" style="display:none;">
+            <img src="" alt=""/>
+        </div>
+        <div class="a-l-content clearfix" style="padding-left:0;">
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/CookiesNee">明爱暗恋补习社长</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 电影,青春,青春片</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	《我的少女时代》上映后，一个朋友发微博说：“真的不要约我看青春片，作为一个自懂事起就努力按成人规则过活的人，我实在无法感同身受。” 这让我想起高三那年，同样来自台湾的《那些年》大热，一位女同学在食堂边嚼菜叶子边跟我们说，能不能以后发达了拍部纪实的片子啊，就叫“好多年，我们这些没人追的女孩”。 一转眼，好多年就过去了。 我的私信里拥堵着很多问题，有的是关于父母
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=17">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=17" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="18">
+    <div class="a-l-header">
+        <a href="/OneItem?id=18" class="a-l-type">电影</a>
+        <a href="/OneItem?id=18" class="a-l-title">《不能说的秘密》是部好电影吗</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+        <div class="a-l-image">
+            <img src="web/zhihu/14592680572286136.jpg" alt=""/>
+        </div>
+        <div class="a-l-content clearfix">
+
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/beABadGuy">刘志国</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 电影,周杰伦（人物）,华语电影,不能说的秘密（电影）</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	怒答！ 看了前排几个，感觉很不过瘾。大都没说到点子上。这么一部牛X的电影，能是几句话就概括的了的吗，你总得解释解释为什么牛X吧。 看过的观众会说，<不能说的秘密>还不至于“牛逼”吧？ 恩，那我就试着一点点说吧。 首先一点，这部电影 “没有一句废话”
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=18">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=18" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="19">
+    <div class="a-l-header">
+        <a href="/OneItem?id=19" class="a-l-type">电影</a>
+        <a href="/OneItem?id=19" class="a-l-title">现实中的警察像电影中那么勇猛吗</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+        <div class="a-l-image">
+            <img src="web/zhihu/14592680912667457.jpeg" alt=""/>
+        </div>
+        <div class="a-l-content clearfix">
+
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/yao-le-le-13">姚乐乐</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 电影,警察,警匪</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	ne我88的，干刑警5年了。昨天跟队里的兄弟抓捕毒贩，查获冰毒一公斤。发生枪战，我们兄弟开了10几枪，毒贩开了两枪。我跟我上铺的兄弟在20公分厚的雪地里狂奔200米把人制服。没什么想法，这个就是工作吧。有人问我当时想什么了，我说，我追嫌疑
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=19">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=19" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="20">
+    <div class="a-l-header">
+        <a href="/OneItem?id=20" class="a-l-type">电影</a>
+        <a href="/OneItem?id=20" class="a-l-title">六小龄童演的孙悟空真的好吗好在哪里</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+        <div class="a-l-image">
+            <img src="web/zhihu/14592680917778803.png" alt=""/>
+        </div>
+        <div class="a-l-content clearfix">
+
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/luo-hao-98-87">罗罔极</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 电影,电视剧,西游记,艺术家,影视评论</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	附赠大年初四最新更新《西游降魔篇》影评： 如何评价电影《西游·降魔篇》？ - 罗罔极的回答 —— 六小龄童演的猴确实好，几近以假乱真的程度，但它未必像孙悟空，最起码，不像原著小说里的孙悟空。 那孙悟空究竟是什么样的？吴承恩
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=20">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=20" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="28">
+    <div class="a-l-header">
+        <a href="/OneItem?id=28" class="a-l-type">电影</a>
+        <a href="/OneItem?id=28" class="a-l-title">如何评价电影《西游记之大圣归来》</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+
+        <div class="a-l-image" style="display:none;">
+            <img src="" alt=""/>
+        </div>
+        <div class="a-l-content clearfix" style="padding-left:0;">
+
+
+
+            <div class="a-l-c-header">
+
+
+
+                <span class="a-stamps">标签 : 西游记之大圣归来</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	事情是这样的。 小的时候，我家伙食不错，邻居家伙食也挺好，我呢，自己家吃两天，邻居家吃两天，开心得不得了； 然而我家伙食越来越差，没办法我只好每天都去邻居家蹭饭，这一蹭就是快20年。 是的，邻居家的饭一直都是挺好吃的。但
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=28">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=28" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="29">
+    <div class="a-l-header">
+        <a href="/OneItem?id=29" class="a-l-type">电影</a>
+        <a href="/OneItem?id=29" class="a-l-title">哪部电影曾经让你在深夜中痛哭</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+
+        <div class="a-l-image" style="display:none;">
+            <img src="" alt=""/>
+        </div>
+        <div class="a-l-content clearfix" style="padding-left:0;">
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/geng-di-71">乔维里</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 电影,电影推荐,影视评论</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	《爆裂鼓手》。 因为羡慕，因为我从来都没有那样炽烈的热爱，别说是爱，很强烈的恨，很绝望的悲伤，很无奈的沮丧，我都没有。 我喜欢踢足球，喜欢弹吉他，可球踢得一般，吉他弹得也不好， 但当别人问起“你喜欢什么”的时候，我还是会告诉他，“我喜欢踢球
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=29">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=29" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="30">
+    <div class="a-l-header">
+        <a href="/OneItem?id=30" class="a-l-type">电影</a>
+        <a href="/OneItem?id=30" class="a-l-title">如何评价电影《西游记之大圣归来》</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+
+        <div class="a-l-image" style="display:none;">
+            <img src="" alt=""/>
+        </div>
+        <div class="a-l-content clearfix" style="padding-left:0;">
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/zhu-xuan-86">朱炫</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 西游记之大圣归来</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	谢邀 这世上，有多少这样的快意，定海神针，一万三千六百斤，搅的满天神佛不得安宁。 这世上，又有多少这样的不甘，七十二变，如来佛祖，压在五行山下整整五百寻。 你说这金箍棒的主人是一只猴子。 可我看见的，分明是我们自己。 正文 1 作为一个
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=30">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=30" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="aj-list-one" data-id="31">
+    <div class="a-l-header">
+        <a href="/OneItem?id=31" class="a-l-type">电影</a>
+        <a href="/OneItem?id=31" class="a-l-title">如何评价电影《夏洛特烦恼》</a>
+    </div>
+    <div class="a-l-body">
+
+
+
+
+
+        <div class="a-l-image" style="display:none;">
+            <img src="" alt=""/>
+        </div>
+        <div class="a-l-content clearfix" style="padding-left:0;">
+
+
+
+            <div class="a-l-c-header">
+
+
+	    		<span class="a-person">作者：
+                    <a href="https://www.zhihu.com/people/liangbianyao">梁边妖</a>
+                </span>
+
+
+                <span class="a-stamps">标签 : 影视评论,开心麻花,喜剧电影,你如何评价 X,夏洛特烦恼（电影）</span>
+            </div>
+            <div class="a-l-c-body">
+                <span>
+                	一， 看《夏洛特烦恼》这部电影之前，先去医院灌灌肠吧。反正灌肠又叫肠道水疗，偶尔干一票对身体还蛮有好处的。 一次科学的灌肠可以确保一个人在随后的观影过程中不需要离开座位去上厕所。 在我们有限的一生当中，中国大陆能上映几部值得观众灌肠为敬的电影呢？ 这
+                </span>
+                <span>
+                    ...<a href="/OneItem?id=31">阅读全文</a>
+                </span>
+            </div>
+            <div class="a-l-c-footer">
+                <a href="/OneItem?id=31" class="alink">阅读全文</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+<div style="height:10px;"></div>
+
+
+
+
+
+
+
+
+<div class="btn-group" role="group" aria-label="" style="padding:5px 0;">
+    <a href="?page=1">
+        <button type="button" class="btn btn-default">上一页</button>
+    </a>
+    <a href="javascript:;">
+        <button type="button" class="btn btn-default">当前 :1页</button>
+    </a>
+    <a href="?page=2">
+        <button type="button" class="btn btn-default">下一页</button>
+    </a>
+</div>
+
+</div>
+
+<style>
+
+</style>
+<div class="aj-body-right">
+
+
+
+<style>
+    .user-login{
+        position:relative;
+        width:100%;
+        margin-top: 10px;
+    }
+    .user-login .u-l-photo{
+        position:absolute;
+        top:0;left:0;
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        line-height: 60px;
+        text-align: center;
+        color:white;
+        font-size: 30px;
+        background-color: #ccc;
+    }
+    .user-login .u-l-right{
+        padding-left: 70px;
+    }
+    .user-login .u-l-right .line{
+        height:20px;
+        line-height: 20px;
+        font-size: 12px;
+        margin: 0;
+    }
+    .user-login .u-l-footer{
+        padding-top: 10px;
+    }
+    .user-login .u-l-footer .ajbtn{
+        position:relative;
+        width:50%;
+        height:30px;
+        float:left;
+    }
+    .user-login .u-l-footer .href{
+        width:90%;
+        height: 30px;
+        display:block;
+        margin:0 auto;
+        border-radius:2px;
+        background-color: #f04848;
+        color:white;
+        text-align: center;
+        line-height: 30px;
+    }
+    .user-login .u-l-footer .href.blue{
+        background-color: #2e76a8;
+    }
+</style>
+
+<div class="user-login">
+    <div class="u-l-photo glyphicon glyphicon-user"></div>
+    <div class="u-l-right">
+        <p class="line">Hi 你好</p>
+        <p class="line">
+            <a href="">登陆</a>
+            ,发现更多精彩
+        </p>
+        <p class="line">二货俱乐部</p>
+    </div>
+    <div class="u-l-footer clearfix">
+        <div class="ajbtn">
+            <a class="href" href="">签到领积分</a>
+        </div>
+        <div class="ajbtn">
+            <a class="href blue" href="">积分兑换</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<style>
+    .aj-right-types-choices{
+        margin-top:10px;
+    }
+    .aj-right-types-choices .aheader{
+        height:30px;
+        border-bottom: 1px solid #ccc;
+    }
+    .aj-right-types-choices a{
+        text-decoration: none;
+        color:#666;
+    }
+    .aj-right-types-choices ul{
+        margin-bottom:0;
+    }
+    .aj-right-types-choices .aheader .ali{
+        display: inline-block;
+        height: 29px;
+        border-bottom: 1px solid #ccc;
+        padding: 0 10px;
+        text-align: center;
+        line-height: 30px;
+        font-size:18px;
+    }
+    .aj-right-types-choices .aheader .ali.selected{
+        border-bottom: 2px solid #f04848;
+    }
+    .aj-right-types-choices .acontent{
+        margin-top:10px;
+    }
+
+    .aj-right-types-choices .acontent .ali{
+        position:relative;
+        width:33.3%;
+        height: 38px;
+        text-align: center;
+        line-height: 38px;
+        float:left;
+        font-size: 12px;
+        white-space: nowrap;
+        transition:all 0.3s;
+        cursor: pointer;
+        color:#666;
+        border:1px solid #ccc;/*#f0f0f0*/
+        margin-left:-1px;
+        margin-top:-1px;
+    }
+    .aj-right-types-choices .acontent .ali:hover .ainfo{
+        color:#d62222;
+    }
+    .aj-right-types-choices .acontent .ali:hover .aicon{
+        color:#d62222;
+    }
+    .aj-right-types-choices .acontent .ali .ali-wrap{
+        position:relative;
+        display: block;
+        overflow: hidden;
+    }
+
+    .aj-right-types-choices .acontent .ali:hover{
+        border-color:#d62222;
+        z-index:9;
+    }
+    .aj-right-types-choices .acontent .ali .aicon{
+
+    }
+    .aj-right-types-choices .acontent .ali .ainfo{
+
+    }
+    .aj-right-types-choices .showMore{
+        width:100%;
+        text-align:center;
+        height:25px;
+        line-height: 25px;
+        font-size: 12px;
+        color:#666;
+        border:1px solid #ccc;
+        margin-left:-1px;
+        float:left;
+        margin-top:-1px;
+        cursor:pointer;
+        display: none;
+    }
+    .aj-right-types-choices .showMore:hover{
+        color:#d62222;
+    }
+</style>
+
+<script>
+    $(function () {
+        var lis = $(".aj-right-types-choices .acontent .ali");
+        var i;
+        var showMore = $(".aj-right-types-choices .showMore");
+        for (i = 0; i < 15; i++){
+            lis.eq(i).show();
+        }
+
+
+
+        var showMoreWidth = parseInt(lis.css("width")) * 3 - 3;
+        showMore.css("width", showMoreWidth + "px");
+
+        if (lis.length > 3 * 5) {
+            showMore.show();
+        }
+
+        var onText = showMore.attr("data-on-text"),
+                offText = showMore.attr("data-off-text");
+
+        showMore.on("click", function () {
+            if (onText === $.trim($(this).text())) {
+                for (i = 3 * 5; i < lis.length; i++) {
+                    lis.eq(i).hide();
+                }
+                $(this).html(offText);
+            } else {
+                lis.each(function (i, item) {
+                    $(this).show();
+                });
+                $(this).html(onText);
+            }
+        });
+
+    });
+</script>
+<div class="aj-right-types-choices">
+<div class="aheader">
+    <ul class="aul">
+        <li class="ali selected">分类导航 </li>
+    </ul>
+</div>
+
+<div class="acontent">
+<ul class="clearfix">
+
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=31">
+                            <em class="aicon glyphicon glyphicon-film"></em>
+                            <span class="ainfo">电影</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=32">
+                            <em class="aicon glyphicon glyphicon-plane"></em>
+                            <span class="ainfo">旅行</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=33">
+                            <em class="aicon glyphicon glyphicon-cutlery"></em>
+                            <span class="ainfo">美食</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=34">
+                            <em class="aicon glyphicon glyphicon-fire"></em>
+                            <span class="ainfo">运动</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=35">
+                            <em class="aicon glyphicon glyphicon-cloud"></em>
+                            <span class="ainfo">互联网</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=36">
+                            <em class="aicon glyphicon glyphicon-credit-card"></em>
+                            <span class="ainfo">时尚</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=37">
+                            <em class="aicon glyphicon glyphicon-usd"></em>
+                            <span class="ainfo">创业</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=38">
+                            <em class="aicon glyphicon glyphicon-tower"></em>
+                            <span class="ainfo">设计</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=39">
+                            <em class="aicon glyphicon glyphicon-tree-deciduous"></em>
+                            <span class="ainfo">科学</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=41">
+                            <em class="aicon glyphicon glyphicon-star"></em>
+                            <span class="ainfo">职业</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=42">
+                            <em class="aicon glyphicon glyphicon-home"></em>
+                            <span class="ainfo">家居</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=43">
+                            <em class="aicon glyphicon glyphicon-education"></em>
+                            <span class="ainfo">教育</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=44">
+                            <em class="aicon glyphicon glyphicon-asterisk"></em>
+                            <span class="ainfo">汽车</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=45">
+                            <em class="aicon glyphicon glyphicon-lock"></em>
+                            <span class="ainfo">法律</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=46">
+                            <em class="aicon glyphicon glyphicon-leaf"></em>
+                            <span class="ainfo">医疗</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=47">
+                            <em class="aicon glyphicon glyphicon-headphones"></em>
+                            <span class="ainfo">音乐</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=48">
+                            <em class="aicon glyphicon glyphicon-book"></em>
+                            <span class="ainfo">阅读</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=49">
+                            <em class="aicon glyphicon glyphicon-heart"></em>
+                            <span class="ainfo">健康</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=50">
+                            <em class="aicon glyphicon glyphicon-lamp"></em>
+                            <span class="ainfo">生活</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=51">
+                            <em class="aicon glyphicon glyphicon-list-alt"></em>
+                            <span class="ainfo">历史</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=52">
+                            <em class="aicon glyphicon glyphicon-camera"></em>
+                            <span class="ainfo">摄影</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=53">
+                            <em class="aicon glyphicon glyphicon-book"></em>
+                            <span class="ainfo">文学</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=54">
+                            <em class="aicon glyphicon glyphicon-object-align-top"></em>
+                            <span class="ainfo">投资</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=56">
+                            <em class="aicon glyphicon glyphicon-knight"></em>
+                            <span class="ainfo">游戏</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=57">
+                            <em class="aicon glyphicon glyphicon-jpy"></em>
+                            <span class="ainfo">商业</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=58">
+                            <em class="aicon glyphicon glyphicon-apple"></em>
+                            <span class="ainfo">科技</span>
+                        </a>
+					</span>
+</li>
+
+<li class="ali" style="display:none;">
+					<span class="ali-wrap">
+						<a href="/Pengfu/?type=99">
+                            <em class="aicon glyphicon glyphicon-menu-right"></em>
+                            <span class="ainfo">未知世界</span>
+                        </a>
+					</span>
+</li>
+
+<li class="showMore" data-off-text="显示全部" data-on-text="折叠显示">
+    显示全部
+</li>
+</ul>
+
+</div>
+</div>
+
+
+
+
+
+<div id="aj-joke-switch" class="aj-joke-roll" ng-controller="myCtrl">
+
+    <h3 class="head" ng-bind="head"></h3>
+    <div class="control">
+        <a href="javascript:;" ng-click="prev()">Prev</a>
+        <span ng-bind="cur + 1"></span>
+        <span>/</span>
+        <span ng-bind="items.length"></span>
+        <a href="javascript:;" ng-click="next()">Next</a>
+    </div>
+    <div class="cutline-x">
+        <div class="culine-y"></div>
+        <div class="culine-y offset"></div>
+    </div>
+
+    <h5 class="title" ng-bind="items[cur].title"></h5>
+    <div class="content" ng-bind="items[cur].content"></div>
+</div>
+
+<script>
+    $(function () {
+        var app = angular.module('myApp', []);
+
+        app.controller('myCtrl', function($scope, $timeout) {
+            $scope.head = "开心麻花";
+            $scope.items = [
+                {
+                    "title" : "Nigeerhuo",
+                    "content" : "生活处处是精彩.."
+                },
+                {
+                    "title" : "读书",
+                    "content" : "有人拿据传是钱（钟书）老年轻时评价三位老师的话来洗地"
+                }
+            ];
+            $scope.stop = false;
+            $scope.interval = 3000 * 2;
+            $scope.cur = 0;
+
+            $scope.prev = function () {
+                var prev = $scope.cur - 1;
+                if(prev < 0) {
+                    prev =  $scope.items.length - 1;
+                }
+                $scope.cur = prev;
+            };
+
+            $scope.next = function () {
+                var next = $scope.cur + 1;
+                if (next >= $scope.items.length) {
+                    next = 0;
+                }
+                $scope.cur = next;
+            };
+
+            $scope.roll = function () {
+
+                $timeout(function () {
+                    if (!$scope.stop) {
+                        $scope.next();
+                    }
+                    $scope.roll();
+                }, this.interval);
+
+            };
+            $scope.roll();
+
+
+        });
+
+        angular.bootstrap($("#aj-joke-switch"), ['myApp']);
+    })
+</script>
+
+<style>
+    .aj-joke-roll {
+        position: relative;
+        width: 100%;
+        color: #666;
+    }
+    .aj-joke-roll a {
+        color: #666;
+        text-decoration: none;
+    }
+    .aj-joke-roll a:hover {
+        color: #333;
+    }
+    .aj-joke-roll .control {
+        position: absolute;
+        height: 30px;
+        line-height: 30px;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+    }
+    .aj-joke-roll .head {
+        line-height: 30px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .aj-joke-roll .cutline-x {
+        position: relative;
+        border-bottom: 1px solid #ccc;
+        margin: 5px 0;
+    }
+    .aj-joke-roll .culine-y {
+        position: absolute;
+        left: 20px;
+        top: -10px;
+        height: 20px;
+        border-left: 1px solid #ccc;
+    }
+    .aj-joke-roll .culine-y.offset {
+        left: 30px;
+    }
+    .aj-joke-roll .title {
+        height: 20px;
+        line-height: 20px;
+        overflow: hidden;
+    }
+    .aj-joke-roll .content {
+        word-break: break-all;
+        max-height: 80px;
+        line-height: 20px;
+    }
+
+</style>
+</div>
+
+<div style="height:10px;"></div>
+
+
+
+
+
+
+
+</div>
+<!-- Close div#aj-body -->
+
+
+<footer id="aj-footer" role="contentinfo">
+    <div class="container">
+        <ul class="bs-docs-footer-links">
+            <li><a href="https://github.com/AJLoveChina">GitHub</a></li>
+            <li><a href="http://www.meajax.com/">Blog</a></li>
+            <li><a href="http://www.oshjf.com">Shop</a></li>
+        </ul>
+        <p>
+            Designed and built By AJ. This is for my little sister HYY, wish her happy forever.
+        </p>
+        <p>
+            Code licensed MIT docs CC BY 3.0
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>
