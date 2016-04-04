@@ -43,6 +43,8 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
 	
 	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	
+	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>

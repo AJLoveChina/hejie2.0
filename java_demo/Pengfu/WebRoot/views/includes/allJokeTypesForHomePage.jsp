@@ -38,7 +38,6 @@ request.setAttribute("jokeTypes", jokeTypes);
 	}
 	.aj-right-types-choices .acontent{
 		margin-top:10px;
-		max-height:190px;
 	}
 	
 	.aj-right-types-choices .acontent .ali{

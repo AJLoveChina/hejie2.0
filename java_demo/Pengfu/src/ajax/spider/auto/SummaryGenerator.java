@@ -19,7 +19,8 @@ public class SummaryGenerator {
 		}
 	}
 	
-	public static void main(String[] args) {
+	
+	private static void do1() {
 		int page = 1, size = 100;
 		List<Item> items = new ArrayList<Item>();
 		
@@ -41,6 +42,19 @@ public class SummaryGenerator {
 			page ++;
 			System.out.println(page);
 		}while(items.size() > 0);
+	}
+	
+	
+	private static void do2() {
+		Item item = new Item();
+		item.load(17);
 		
+		item.generateSummary();
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		do2();
 	}
 }

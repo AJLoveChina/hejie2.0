@@ -8,10 +8,23 @@
         <a href="${item.getOneJokeUrlById() }" class="a-l-title">${item.getTitle() }</a>
     </div>
     <div class="a-l-body">
-        <div class="a-l-image">
-            <img src="${item.getPreviewImage() }" alt=""/>
-        </div>
-        <div class="a-l-content clearfix">
+    
+    	
+    	<c:choose>
+		  <c:when test="${item.hasPreviewImage() }">
+		    <div class="a-l-image">
+	            <img src="${item.getPreviewImage() }" alt=""/>
+	        </div>
+	         <div class="a-l-content clearfix">
+		  </c:when>
+		  <c:otherwise>
+		    <div class="a-l-image" style="display:none;">
+	            <img src="${item.getPreviewImage() }" alt=""/>
+	        </div>
+	         <div class="a-l-content clearfix" style="padding-left:0;">
+		  </c:otherwise>
+		</c:choose>
+        
             <div class="a-l-c-header">
             
             <c:if test="${item.hasAuthor()}">

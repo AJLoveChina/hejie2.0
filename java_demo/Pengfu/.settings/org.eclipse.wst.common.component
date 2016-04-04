@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
-        <property name="context-root" value="Pengfu"/>
         <property name="java-output-path" value="/Pengfu/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="/"/>
     </wb-module>
 </project-modules>

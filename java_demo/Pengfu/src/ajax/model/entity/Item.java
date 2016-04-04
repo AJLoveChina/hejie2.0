@@ -222,8 +222,12 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 		return (this.getUsername() != null && this.getUsername().trim() != "");
 	}
 	
-	public static void main(String[] args) {
-		
+	/**
+	 * 是否有预览图片
+	 * @return
+	 */
+	public boolean hasPreviewImage() {
+		return this.previewImage != null;
 	}
 	
 	/**
@@ -319,9 +323,18 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 			
 			String text = doc.body().text();
 			
-			int length = 110;
-			int random = (new Random()).nextInt(20);
-			String summary = text.substring(0, length + random);
+			String summary;
+			int length,random;
+			if (this.getPreviewImage() == null || this.getPreviewImage() == "") {
+				length = 170;
+				random = (new Random()).nextInt(20);
+				
+				summary = text.substring(0, length + random);
+			} else {
+				length = 110;
+				random = (new Random()).nextInt(20);
+				summary = text.substring(0, length + random);
+			}
 			
 			this.setSummary(summary);
 			
