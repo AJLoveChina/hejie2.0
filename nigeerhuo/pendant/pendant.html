@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <link rel="stylesheet" href="item.css"/>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<style>
+    *{
+        margin:0;padding:0;
+        border:none;
+    }
+    ul li{
+        list-style: none;
+    }
+
+    body {
+        font-size: 14px;
+        font-family: Microsoft Yahei, Arial;
+    }
+
+</style>
+
+<div id="aj-body" style="width:1050px;border: 1px solid #333;height: 900px;margin: 0 auto;">
+
+</div>
+
+<div style="margin: 40px">
+    <div ng-controller="pendant-controller" id="aj-pendant" class="aj-pendant clearfix">
+        <div class="aitems">
+            <span ng-repeat="item in items">
+                <a ng-if="item.link" href="{{item.link}}" class="aitem" >
+                    <span class="icon" ng-class="item.icon"></span>
+                    <h4 class="title" ng-bind="item.title"></h4>
+                </a>
+                <a ng-if="!item.link" href="javascript:;" class="aitem" >
+                    <span class="icon" ng-class="item.icon"></span>
+                    <h4 class="title" ng-bind="item.title"></h4>
+                </a>
+            </span>
+            <div class="bdsharebuttonbox aitem" style="position:relative;">
+                <span class="icon glyphicon glyphicon-share"></span>
+                <h4 class="title">分享</h4>
+                <a href="#" class="bds_more" data-cmd="more"></a>
+            </div>
+        </div>
+        <div style="height: 10px"></div>
+        <img src="http://localhost/web/pic/erweima.png" alt="微信二维码"/>
+    </div>
+</div>
+
+
+
+
+<textarea id="aj-baidu-share-script" style="display: none;">
+    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</textarea>
+
+<script>
+    $(function () {
+        var app = angular.module("pendant", []);
+        var pendant = $("#aj-pendant");
+        var body = $("#aj-body"),
+            bodyWidth = body.width();
+
+        app.controller("pendant-controller", function ($scope) {
+
+            $scope.items = [
+                {
+                    "icon" : "glyphicon glyphicon-home",
+                    "title" : "首页",
+                    "link" : "http://localhost/",
+                    "class" : ""
+                }
+            ]
+
+        });
+
+        var timeout;
+        $(window).on("resize", function () {
+            if (!timeout) {
+                timeout = setTimeout(function () {
+                    resize();
+                    timeout = 0;
+
+                }, 1000 / 24);
+            }
+        });
+        resize();
+
+        function resize() {
+            var docWidth = $(document).width(),
+                winHeight = $(window).height();
+            pendant.css({
+                "left" : (docWidth - bodyWidth) / 2 - pendant.width() - 10 + "px",
+                "top" : (winHeight - pendant.height()) / 2 + "px"
+            })
+        }
+
+        addBaiduShare();
+        function addBaiduShare() {
+            var area = $("#aj-baidu-share-script");
+            var script = document.createElement("script");
+
+            script.innerText = area.val();
+            $(document.body).append(script)
+        }
+        angular.bootstrap(pendant, ["pendant"]);
+    })
+</script>
+
+</body>
+</html>
