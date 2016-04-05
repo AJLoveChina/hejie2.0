@@ -64,5 +64,23 @@
 		</property>
 		
 	</class>
+	
+	
+	<class name="ajax.model.entity.Page" table="page">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="page" type="java.lang.Integer">
+			<column name="page"></column>
+		</property>
+
+		<property name="items" type="java.lang.String">
+			<column name="items"></column>
+		</property>
+		
+	</class>	
+	
 
 </hibernate-mapping>

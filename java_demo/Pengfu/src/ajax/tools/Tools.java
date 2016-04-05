@@ -269,27 +269,19 @@ public class Tools {
 	
 	
 	public static void main(String[] args) {
-
-		Item item = new Item();
-		item.load(36);
+		List<Integer> strs = new ArrayList<Integer>();
 		
-		try {
-			URL pageUrl = new URL(item.getUrl());
-			
-			String newContent = grabImagesFromString(new URL(item.getUrl()), item.getContent(), "zhihu");
-			item.setContent(newContent);
-			item.update();
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
+		strs.add(1);
+		strs.add(12);
+		strs.add(12);
+		strs.add(412);
 		
+		
+		System.out.println(Tools.join(strs, ","));
 		
 	}
 	
-	public static String join(List<String> list, String delimeter) {
+	public static <T> String join(List<T> list, String delimeter) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(list.get(0));
 		for (int i = 1; i < list.size(); i++) {
@@ -298,6 +290,7 @@ public class Tools {
 		}
 		return sb.toString();
 	}
+	
 	
 
 	

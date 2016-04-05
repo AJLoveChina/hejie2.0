@@ -46,8 +46,20 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 	private String dateEntered;
 	private int rulesTagId;
 	private String previewImage;
+	/**
+	 * 属于哪一页
+	 */
+	private int page;
 	
 	
+	
+	
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
 	public String getPreviewImage() {
 		return previewImage;
 	}
@@ -442,6 +454,27 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 	}
 	public static String getOneItemPageUrl(int id) {
 		return UrlRoute.ONEJOKE.getUrl() + "?id=" + id;
+	}
+	
+	/**
+	 * 获取一个还没有放入page表的item(未放入page表的item的page字段值为0)
+	 * @return
+	 */
+	public static Item getOneItemWhichIsNotInPage() {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Item.class);
+		cr.add(Restrictions.eq("page", 0));
+		cr.add(Restrictions.gt("likes", 500));
+		cr.setMaxResults(200);
+		
+		List<Item> items = cr.list();
+		Random rd = new Random();
+		int rand = rd.nextInt(items.size());
+		Item item = items.get(rand);
+		
+		HibernateUtil.closeSession(session);
+		
+		return item;
 	}
 }
 

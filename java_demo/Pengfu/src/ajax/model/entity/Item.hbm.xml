@@ -73,7 +73,11 @@
 		<property name="previewImage" type="java.lang.String">
 			<column name="previewImage"></column>
 		</property>
-		
+
+		<property name="page" type="java.lang.Integer">
+			<column name="page"></column>
+		</property>
+				
 	</class>
 	
 

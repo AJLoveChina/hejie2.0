@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		width:50%;
 		height:30px;
 		float:left;
+		text-decoration: none;
 	}
 	.user-login .u-l-footer .href{
 		width:90%;
@@ -54,6 +55,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.user-login .u-l-footer .href.blue{
 		background-color: #2e76a8;
 	}
+	
+	#qqLoginBtn a{
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:30px;
+		opacity:0;
+		filter:alpha(opacity=0);
+	}
 </style>
 
 <div class="user-login">
@@ -68,10 +79,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div class="u-l-footer clearfix">
 		<div class="ajbtn">
-			<a class="href" href="">签到领积分</a>
+			<a class="href" href="javascript:;">
+				<img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_1.png"/>
+				<span>QQ登陆</span>
+				<span id="qqLoginBtn"></span>
+			</a>
 		</div>
 		<div class="ajbtn">
-			<a class="href blue" href="">积分兑换</a>
+			<a class="href blue" href="">
+				微博登陆
+			</a>
 		</div>
 	</div>
 </div>
+
+
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101305556" data-redirecturi="http://www.nigeerhuo.com/sign/qq" charset="utf-8" ></script>
+
+
+
+<script type="text/javascript">
+	$(function() {
+		try {
+		
+			 QC.Login({
+			  btnId : "qqLoginBtn",//插入按钮的html标签id
+			  size : "C_S",//按钮尺寸
+			  scope : "get_user_info",//展示授权，全部可用授权可填 all
+			  display : "pc"//应用场景，可选
+			 });
+			 
+		}catch(ex) {
+			console.log(ex.message);
+		}
+	
+	});
+</script>
