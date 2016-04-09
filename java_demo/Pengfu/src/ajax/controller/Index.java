@@ -48,8 +48,8 @@ public class Index extends HttpServlet {
 		
 		QueryParams qp = new QueryParams(request);
 		
-		items = Item.query(qp);
-		
+//		items = Item.query(qp);
+		items = Page.getPage(qp.getPage());
 		
 		request.setAttribute("items", items);
 		request.setAttribute("page", Tools.parseInt(qp.getVal("page"), 1));

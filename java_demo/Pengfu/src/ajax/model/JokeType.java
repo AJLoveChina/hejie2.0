@@ -8,7 +8,7 @@ public enum JokeType {
 	ONLY_WORD(1, "only words", null, null, false),
 	STATIC_IMAGE(2, "有图片, 不是动态图的笑话", null, null, false),
 	GIF(3, "动态图", null, null, false),
-	ZHIHU(4, "知乎精选", null, null, false),
+	ZHIHU(4, "知乎精选", "知乎", null, false),
 	
 	FILM(31, "电影", "电影", "glyphicon glyphicon-film", true, 100),
 	TOUR(32, "旅行", "旅行", "glyphicon glyphicon-plane", true, 100),
@@ -19,7 +19,7 @@ public enum JokeType {
 	SYB(37, "创业", "创业", "glyphicon glyphicon-usd", true, 90),
 	DESIGN(38, "设计", "设计", "glyphicon glyphicon-tower", true, 90),
 	SCIENCE(39, "自然科学", "科学", "glyphicon glyphicon-tree-deciduous", true, 80),
-	ECONOMICS(40, "经济学", null, null, false),
+	ECONOMICS(40, "经济学", "经济学", null, false),
 	CAREER(41, "职业发展", "职业"),
 	HOME(42, "家居", "家居", "glyphicon glyphicon-home", true, 80),
 	EDUCATION(43, "教育", "教育", "glyphicon glyphicon-education", true, 80),

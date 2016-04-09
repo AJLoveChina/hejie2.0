@@ -153,6 +153,63 @@ public class QueryParams {
 		}
 		return sb.toString();
 	}
+	
+	/**
+	 * @param url
+	 * @return url + "?" + this.toString()
+	 */
+	public String toString(String url) {
+		StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		for (Param p : this.getParams()) {
+			if (first) {
+				sb.append(p.key + "=" + p.value);
+			} else {
+				sb.append("&" + p.key + "=" + p.value);
+			}
+		}
+		return url + "?" + sb.toString();
+	}
+	/**
+	 * 获取一页周围页面的query string 集合 (例如用于换页)
+	 * @return
+	 */
+	public List<QueryParams> getSurroundingQueryParams() {
+		int curPage = this.getPage();
+		int offset = 3;
+		while(curPage > 1 && offset > 0) {
+			curPage --;
+			offset --;
+		}
+		
+		List<Integer> pages = new ArrayList<Integer>();
+		pages.add(curPage);
+		pages.add(curPage + 1);
+		pages.add(curPage + 2);
+		pages.add(curPage + 3);
+		pages.add(curPage + 4);
+		pages.add(curPage + 5);
+		pages.add(curPage + 6);
+		
+		List<QueryParams> pageParams = new ArrayList<QueryParams>();
+		for (int i : pages) {
+			QueryParams qp = this.clone();
+			qp.set("page", i + "");
+			pageParams.add(qp);
+		}
+		
+		return pageParams;
+	}
 
 	
+
+	public static void main(String[] args) {
+		QueryParams qp = new QueryParams();
+		
+		qp.set("page", "7");
+		
+		List<QueryParams> lists = qp.getSurroundingQueryParams();
+		
+		System.out.println(lists);
+	}
 }

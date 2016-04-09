@@ -6,7 +6,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
+import ajax.model.QueryParams;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
@@ -84,6 +86,35 @@ public class Page extends Entity<Page>{
 		this.setItems(Tools.join(this.get$items(), ","));
 	}
 	
-	
+	/**
+	 * 获取第page页<br>
+	 * 注意 page = 1, 指的是获取page表的页码最大的一页 
+	 * @param page
+	 * @return
+	 */
+	public static List<Item> getPage(int page) {
+		int maxPage = Page.getNowMaxPage();
+		int tablePage = maxPage - page + 1;
+		if (tablePage <= 1) {
+			tablePage = 1;
+		}
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Page.class);
+		
+		cr.add(Restrictions.eq("page", tablePage));
+		List<Page> list = cr.list();
+		
+		HibernateUtil.closeSession(session);
+		
+		
+		List<Item> items = new ArrayList<Item>();
+		if (list.size() > 0) {
+			Page p = list.get(0);
+			List<Integer> itemsId = p.get$items();
+			items = Item.get(itemsId);
+		}
+		
+		return items;
+	}
 	
 }

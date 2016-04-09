@@ -17,6 +17,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import ajax.model.JokeStatus;
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
 import ajax.model.UrlRoute;
@@ -339,7 +340,7 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 			int length,random;
 			if (this.getPreviewImage() == null || this.getPreviewImage() == "") {
 				length = 170;
-				random = (new Random()).nextInt(20);
+				random = (new Random()).nextInt(40);
 				
 				summary = text.substring(0, length + random);
 			} else {
@@ -465,6 +466,7 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 		Criteria cr = session.createCriteria(Item.class);
 		cr.add(Restrictions.eq("page", 0));
 		cr.add(Restrictions.gt("likes", 500));
+		cr.add(Restrictions.ne("status", JokeStatus.DELETE.getId()));
 		cr.setMaxResults(200);
 		
 		List<Item> items = cr.list();
@@ -475,6 +477,16 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 		HibernateUtil.closeSession(session);
 		
 		return item;
+	}
+	public static List<Item> get(List<Integer> itemsId) {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Item.class);
+		
+		cr.add(Restrictions.in("id", itemsId));
+		List<Item> items = cr.list();
+		HibernateUtil.closeSession(session);
+		return items;
+		
 	}
 }
 
