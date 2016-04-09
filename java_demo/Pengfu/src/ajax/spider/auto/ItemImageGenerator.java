@@ -19,7 +19,7 @@ import ajax.tools.Tools;
  */
 public class ItemImageGenerator {
 	
-	public static void main(String[] args) {
+	private static void do1() {
 		int page = 1;
 		int size = 100;
 		
@@ -45,6 +45,18 @@ public class ItemImageGenerator {
 			System.out.println(page);
 			
 		}while(items.size() > 0);
-
+	}
+	
+	
+	private static void do2() {
+		Item item = new Item();
+		item.load(124);
+		
+		item.generateItemImage();
+		
+	}
+	public static void main(String[] args) {
+	
+		do2();
 	}
 }

@@ -86,7 +86,23 @@ public class GrabImages {
 		
 	}
 	
+	
+	private static void do3() {
+		int maxPage = Page.getNowMaxPage();
+		int page  = 1;
+		do {
+			List<Item> items = Page.getPage(page);
+			
+			for(Item item : items) {
+				item.grabImagesFromContentAndUpdate();
+				System.out.println("Images OK : " + item.getTitle());
+			}
+		}while(page ++  < maxPage);
+		
+	}
+	
+	
 	public static void main(String[] args) {
-		do2();
+		do3();
 	}
 }

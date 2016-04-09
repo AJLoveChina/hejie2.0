@@ -41,24 +41,7 @@ public class ImagesContainer extends Entity<ImagesContainer>{
 		this.webPath = webPath;
 	}
 	
-	/**
-	 * 根据url从表中判断是否存在该url图片<br>
-	 * 如果有, 返回实体对象<br>
-	 * 否则返回 null
-	 * @return
-	 */
-	public static ImagesContainer existed(String url) {
-		Session session = HibernateUtil.getSession();
-		Criteria cr = session.createCriteria(ImagesContainer.class);
-		cr.add(Restrictions.eq("url", url));
-		List<ImagesContainer> lists = cr.list();
-		
-		if (lists.size() > 0) {
-			return lists.get(0);
-		} else {
-			return null;
-		}
-	}
+
 	
 	/**
 	 * 
@@ -78,6 +61,30 @@ public class ImagesContainer extends Entity<ImagesContainer>{
 		} else {
 			return null;
 		}
+	}
+	
+	/**
+	 * 根据url从表中判断是否存在该url图片<br>
+	 * 如果有, 返回实体对象<br>
+	 * 否则返回 null
+	 * @return
+	 */
+	public static ImagesContainer existed(String url) {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(ImagesContainer.class);
+		cr.add(Restrictions.eq("url", url));
+		List<ImagesContainer> lists = cr.list();
+		
+		HibernateUtil.closeSession(session);
+		if (lists.size() > 0) {
+			return lists.get(0);
+		} else {
+			return null;
+		}
+	}
+	
+	public static ImagesContainer getByUrl(String url) {
+		return existed(url);
 	}
 	
 }

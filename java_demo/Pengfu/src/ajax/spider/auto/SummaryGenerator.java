@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.entity.Item;
+import ajax.model.entity.Page;
 import ajax.spider.rules.RulesTag;
 import ajax.tools.HibernateUtil;
 
@@ -47,14 +48,27 @@ public class SummaryGenerator {
 	
 	private static void do2() {
 		Item item = new Item();
-		item.load(17);
+		item.load(925);
 		
 		item.generateSummary();
 		
 	}
 	
+	private static void do3() {
+		int maxPage = Page.getNowMaxPage();
+		
+		do {
+			List<Item> items = Page.getPage(maxPage);
+			
+			for(Item item : items) {
+				item.generateSummary();
+				System.out.println("Summary OK : " + item.getTitle());
+			}
+		}while(maxPage-- > 0);
+	}
+	
 	public static void main(String[] args) {
 		
-		do2();
+		do3();
 	}
 }

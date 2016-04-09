@@ -97,7 +97,7 @@ public class FileTools {
 	 */
 	public static String saveImageTo(String src, String folder) {
 		
-		
+		System.out.println("正在下载图片 : " + src);
 		String newFileName = getRandomFileName(src);
 		if (!folder.endsWith("/")) {
 			folder += "/";
@@ -112,6 +112,7 @@ public class FileTools {
 			URLConnection connection = url.openConnection();
 //			connection.setRequestProperty("Referer", "http://img1.pengfu.cn/");
 			
+			connection.setConnectTimeout(20 * 1000); // 20秒超时
 			image = ImageIO.read(url);
 			InputStream in = new BufferedInputStream(url.openStream());
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -134,10 +135,15 @@ public class FileTools {
 			fos.close();
 			
 			destination = destination.replaceFirst("WebRoot/", "");
+			
+			System.out.println("下载图片完成!");
 			return destination;
+			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("下载图片失败 : " + e.getMessage());
 		}
+		
+		System.out.println("下载图片完成!");
 		return "";
 	}
 	
