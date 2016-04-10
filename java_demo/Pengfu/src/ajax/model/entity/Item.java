@@ -12,6 +12,8 @@ import javax.imageio.ImageIO;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.json.JSONObject;
+import org.json.JSONString;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,7 +31,7 @@ import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 
-public class Item extends Entity<Item> implements Iterable<Item>{
+public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	private int id;
 	private String url;
 	private String title;
@@ -53,8 +55,14 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 	private int page;
 	
 	
+	private String[] $stampsArr;
 	
 	
+	
+	
+	public String[] get$stampsArr() {
+		return this.getStamps().split(",");
+	}
 	public int getPage() {
 		return page;
 	}
@@ -488,6 +496,137 @@ public class Item extends Entity<Item> implements Iterable<Item>{
 		return items;
 		
 	}
+	
+	
+	@Override
+	public String toJSONString() {
+		JSONObject jo = new JSONObject();
+			
+		jo.put("id", this.getId());
+		jo.put("url", this.getUrl());
+		jo.put("title", this.getTitle());
+		jo.put("summary", this.getSummary());
+		jo.put("content", this.getContent());
+		jo.put("stamps", this.getStamps());
+		jo.put("likes", this.getLikes());
+		jo.put("dislikes", this.getDislikes());
+		jo.put("hasGetImage", this.isHasGetImage());
+		jo.put("itype", this.getItype());
+		jo.put("status", this.getStatus());
+		jo.put("username", this.getUsername());
+		jo.put("userPersonalPageUrl", this.getUserPersonalPageUrl());
+		jo.put("backgroundInformation", this.getBackgroundInformation());
+		jo.put("dateEntered", this.getDateEntered());
+		jo.put("rulesTagId", this.getRulesTagId());
+		jo.put("previewImage", this.getPreviewImage());
+		jo.put("page", this.getPage());
+		
+		return jo.toString();
+	}
+	
+	/**
+	 * 将item的content中的图片设置成延时加载的图片
+	 */
+	public void lazyImage() {
+		Document doc = Jsoup.parse(this.getContent());
+		
+		Elements imgs = doc.select("img");
+		
+		for (Element ele : imgs) {
+			if (!ele.hasClass("aj-lazy")) {
+				ele.addClass("aj-lazy");
+				ele.attr("data-lazy", ele.attr("src"));
+				ele.removeAttr("src");
+			}
+			ele.attr("src", "web/pic/dot.jpg");
+		
+		}
+		
+		doc.select("noscript").remove();
+		this.setContent(doc.body().html());
+		this.update();
+		
+	}
+	
+	/**
+	 * 把该item从对应的page 删除, 替换另一个随机的item. <br>
+	 * 如果不想随机替代, 请添加参数 id
+	 */
+	public void removeFromPage() {
+		Item item = Item.getOneItemWhichIsNotInPage();
+		
+		this.removeFromPage(item);
+	}
+	
+	public void removeFromPage(int replaceid) {
+		Item item = new Item();
+		item.load(replaceid);
+		
+		if (item != null) {
+			this.removeFromPage(item);
+		}
+	}
+	
+	private void removeFromPage(Item item) {
+		Page page = Page.getByPage(this.getPage());
+		
+		List<Integer> itemsid = page.get$items();
+		
+		for (int i = 0; i < itemsid.size(); i++) {
+			if (itemsid.get(i) == this.getId()) {
+				itemsid.set(i, item.getId());
+			}
+		}
+		
+		page.set$items(itemsid);
+		page.update(); // 更新 page
+		
+		
+		item.setPage(this.getPage());
+		item.update(); // 更新 要替换的item
+		
+		
+		this.setPage(0);
+		this.setStatus(JokeStatus.DELETE.getId());
+		this.update(); // 更新 被替换的item
+		
+		System.out.println("已将 " + this.getId() + " 替换成  " + item.getId());
+		
+	}
+	/**
+	 * generate item の jokeType
+	 */
+	public void generateType() {
+		String[] stamps = this.get$stampsArr();
+		
+		for (String stamp : stamps) {
+		
+			JokeType jokeType = JokeType.guessType(stamp.trim());
+			
+			if (jokeType != null) {
+				this.setItype(jokeType.getId());
+				this.update();
+				System.out.println("Generate itype ok" + this.getTitle() + " type" + jokeType.getRealName());
+				return;
+			}
+		}
+		
+		for (JokeType type : JokeType.getAllJokeTypes()) {
+			String[] stampArr = type.getInfo().split(",");
+			
+			for (String s : stampArr) {
+				if (this.getContent().contains(s)) {
+					this.setItype(type.getId());
+					this.update();
+					System.out.println("Generate itype ok" + this.getTitle() + " type" + type.getRealName());
+					return;
+				}
+			}
+		}
+		
+		System.out.println("Generate itype fail" + this.getTitle());
+	}
+	
 }
 
 

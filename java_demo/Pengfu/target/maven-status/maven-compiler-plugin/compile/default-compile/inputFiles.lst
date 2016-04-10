@@ -12,7 +12,6 @@ G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\org\json\HTTPTokener.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\rules\Rules.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\Spider3.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\GetJokes.java
-G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\DemoController.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\UrlRoute.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\org\json\JSONStringer.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\auto\ItemImageGenerator.java
@@ -24,6 +23,7 @@ G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\tools\Tools.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\QueryParams.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\GetItem.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\Topic.java
+G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\QQSign.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\org\json\JSONString.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\org\json\CookieList.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\rules\SpiderWeb.java
@@ -31,11 +31,14 @@ G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\test\Test01.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\Spider2.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\org\json\JSONObject.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\GrabImageFromUrlOfJokeContent.java
+G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\entity\Page.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\Spider.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\SpiderAction.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\auto\ZhihuAnswerSource.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\controller\OneItem.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\entity\Source.java
+G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\auto\PageGenerator.java
+G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\entity\NJoke.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\model\entity\ItemsRoll.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\task\GenerateItemsRoll.java
 G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\src\ajax\spider\rules\RulesTag.java

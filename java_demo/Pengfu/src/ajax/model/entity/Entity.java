@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import ajax.tools.HibernateUtil;
 
@@ -87,13 +88,12 @@ public class Entity<T> {
 		try {
 			session.load(this,id);
 			
-			HibernateUtil.closeSession(session);
-			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
+		}finally {
+			HibernateUtil.closeSession(session);
 		}
 	}
-	
 
 
 	

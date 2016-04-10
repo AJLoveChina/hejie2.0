@@ -14,30 +14,32 @@ public enum JokeType {
 	TOUR(32, "旅行", "旅行", "glyphicon glyphicon-plane", true, 100),
 	FOOD(33, "美食", "美食", "glyphicon glyphicon-cutlery", true, 100),
 	SPORTS(34, "健身, 体育, 运动", "运动", "glyphicon glyphicon-fire", true, 100),
-	INTERNET(35, "互联网", "互联网", "glyphicon glyphicon-cloud", true, 90),
+	INTERNET(35, "互联网, 社交网络,网络安全", "互联网", "glyphicon glyphicon-cloud", true, 90),
 	FASHION(36, "时尚", "时尚", "glyphicon glyphicon-credit-card", true, 90),
 	SYB(37, "创业", "创业", "glyphicon glyphicon-usd", true, 90),
-	DESIGN(38, "设计", "设计", "glyphicon glyphicon-tower", true, 90),
+	DESIGN(38, "设计,平面设计", "设计", "glyphicon glyphicon-tower", true, 90),
 	SCIENCE(39, "自然科学", "科学", "glyphicon glyphicon-tree-deciduous", true, 80),
-	ECONOMICS(40, "经济学", "经济学", null, false),
+	ECONOMICS(40, "经济学, 经济", "经济学", null, false),
 	CAREER(41, "职业发展", "职业"),
 	HOME(42, "家居", "家居", "glyphicon glyphicon-home", true, 80),
 	EDUCATION(43, "教育", "教育", "glyphicon glyphicon-education", true, 80),
 	CAR(44, "汽车", "汽车", "glyphicon glyphicon-asterisk", true, 80),
-	LAW(45, "法律", "法律", "glyphicon glyphicon-lock", true, 80),
+	LAW(45, "法律,税务", "法律", "glyphicon glyphicon-lock", true, 80),
 	MEDICINE(46, "医疗", "医疗", "glyphicon glyphicon-leaf", true, 80),
 	MUSIC(47, "音乐", "音乐", "glyphicon glyphicon-headphones", true, 70),
 	READ(48, "阅读", "阅读", "glyphicon glyphicon-book", true, 70),
 	HEALTH(49, "健康", "健康", "glyphicon glyphicon-heart", true, 70),
-	LIFESTYLE(50, "生活方式", "生活", "glyphicon glyphicon-lamp", true, 60),
+	LIFESTYLE(50, "生活方式,室友,人生,恋爱,社会现象", "生活", "glyphicon glyphicon-lamp", true, 60),
 	HISTORY(51, "历史", "历史", "glyphicon glyphicon-list-alt", true, 60),
 	CAPTURE(52, "摄影", "摄影", "glyphicon glyphicon-camera", true, 50),
 	LITERATURE(53, "文学", "文学", "glyphicon glyphicon-book", true, 50),
 	INVEST(54, "投资", "投资", "glyphicon glyphicon-object-align-top", true, 50),
 	PHYSICS(55, "物理学", "", "", false),
 	GAME(56, "游戏", "游戏", "glyphicon glyphicon-knight", true, 50),
-	BUSINESS(57, "商业, 金融", "商业", "glyphicon glyphicon-jpy", true, 40),
+	BUSINESS(57, "商业, 金融,职场", "商业", "glyphicon glyphicon-jpy", true, 40),
 	TECH(58, "科技", "科技", "glyphicon glyphicon-apple", true, 40),
+	
+	STORY(101, "故事,清朝历史,考古,AV", "故事", "glyphicon glyphicon-bookmark", true, 30),
 	
 	ALL(9, "所有内容", null, null, false),
 	UNKNOWN(99, "未知分类", "未知世界", "glyphicon glyphicon-menu-right", true);
@@ -154,9 +156,9 @@ public enum JokeType {
 	
 	
 	public static void main(String[] args) {
-//		JokeType jokeType = JokeType.getJokeType(2);
-//		
-//		System.out.println(jokeType.getId());
+		String s = "你好世界";
+		
+		System.out.println(s.contains("世界2"));
 		
 	}
 	
@@ -204,6 +206,23 @@ public enum JokeType {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * 根据stamp猜测一个jokeType并返回, 猜测不到返回null
+	 * @param stamp
+	 * @return
+	 */
+	public static JokeType guessType(String stamp) {
+		JokeType[] types = JokeType.getAllJokeTypes();
+		
+		for (JokeType type : types) {
+			
+			if (type.getInfo().contains(stamp)) {
+				return type;
+			}
+		}
+		return null;
 	}
 	
 }

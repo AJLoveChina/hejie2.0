@@ -84,6 +84,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		opacity:0;
 		filter:alpha(opacity=0);		
 	}
+	
+	#aj-sign-panel .other-ways{
+		line-height: 20px;
+		margin-top:20px;
+		text-align: left;
+	}
+	#aj-sign-panel a{
+		text-decoration: none;
+	}
+	#aj-sign-panel .other-ways .aj-icon{
+		font-size:25px;
+	}
 </style>
 
 <div class="user-login">
@@ -138,6 +150,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="modal-body" style="text-align: center;">
 				<span id="qqLoginBtn2" ></span>
 				<span id="wb_connect_btn" style="margin-left:20px;"></span>
+				
+				<div class="other-ways">
+					<span>其它登陆方式 : </span>
+					<a href="javascript:;" class="aj-icon github">&#xe615;</a>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -244,6 +261,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        }
 			    });
 			});
+			
+			$("#aj-sign-panel .other-ways .github").on("click", function () {
+				var params = {
+					client_id : "ab170726816e269ab1ba",
+					redirect_uri : "http://www.nigeerhuo.com/sign/github",
+					//scope : "",
+					state : Math.random()
+				};
+				
+				var url = "https://github.com/login/oauth/authorize";
+				var paramsArr = [];
+				for (var key in params) {
+					paramsArr.push(key + "=" + encodeURIComponent(params[key]));
+				}
+				url = url + "?" + paramsArr.join("&");
+				
+				console.log(url);
+				//location.href = url;
+			})
 		}catch(ex) {
 			console.log(ex.message);
 		}

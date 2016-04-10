@@ -31,6 +31,7 @@ public class PageGenerator {
 	public static void main(String[] args) {
 		int pages =  20;
 		
+		
 		while(pages-- > 0) {
 			generate();
 		}

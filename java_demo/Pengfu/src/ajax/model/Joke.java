@@ -681,7 +681,7 @@ public class Joke {
 	
 	
 	public static String getHrefByJokeType(JokeType jokeType) {
-		String url = "/Pengfu/";
+		String url = UrlRoute.type.getUrl();
 		
 		url += "?type=" + jokeType.getId();
 		return url;

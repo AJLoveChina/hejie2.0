@@ -36,6 +36,7 @@ public class Page extends Entity<Page>{
 	}
 	public void set$items(List<Integer> $items) {
 		this.$items = $items;
+		this.items = Tools.join($items, ",");
 	}
 	
 	public int getId() {
@@ -115,6 +116,22 @@ public class Page extends Entity<Page>{
 		}
 		
 		return items;
+	}
+	public static Page getByPage(int page2) {
+		Session sess = HibernateUtil.getSession();
+		Criteria cr = sess.createCriteria(Page.class);
+		
+		cr.add(Restrictions.eq("page", page2));
+		List<Page> pages = cr.list();
+		HibernateUtil.closeSession(sess);
+		
+		
+		if (pages.size() > 0) {
+			return pages.get(0);
+		} else {
+			return null;
+		}
+		
 	}
 	
 }

@@ -3,6 +3,7 @@ package ajax.model;
 public enum JokeStatus {
 	NORMAL(0, "正常"),
 	DELETE(1, "删除"),
+	STATIC(3, "已静态化"),
 	SPIDER(2, "刚刚获取");
 	
 	private int id;

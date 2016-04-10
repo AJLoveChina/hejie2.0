@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="你个二货, 二货的俱乐部.电影, 旅行, 美食, 笑话...木有神马我不知道">
+    <meta name="description" content="你个二货, 二货的俱乐部.电影, 旅行, 美食, 笑话...木有什么不知道">
     <link rel="shortcut icon" type="image/x-icon" href="web/pic/favicon.ico" />
     <meta property="qc:admins" content="771240325766175520576375" />
     <title>你个二货</title>

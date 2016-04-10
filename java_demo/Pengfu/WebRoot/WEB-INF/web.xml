@@ -29,6 +29,13 @@
     <servlet-name>QQSign</servlet-name>
     <servlet-class>ajax.controller.QQSign</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Type</servlet-name>
+    <servlet-class>ajax.controller.Type</servlet-class>
+  </servlet>
+
 
 
 
@@ -47,5 +54,9 @@
   <servlet-mapping>
     <servlet-name>QQSign</servlet-name>
     <url-pattern>/servlet/QQSign</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Type</servlet-name>
+    <url-pattern>/servlet/Type</url-pattern>
   </servlet-mapping>
 </web-app>

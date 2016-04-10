@@ -3,6 +3,7 @@ package ajax.model;
 public enum UrlRoute {
 	HOME(1, "/"),
 	ONEJOKE(2, "/OneItem"),
+	type(4, "/type"),
 	ROOT(3, "/");
 	
 	private int id;

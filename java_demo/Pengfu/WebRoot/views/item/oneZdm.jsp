@@ -13,14 +13,11 @@
     	<c:choose>
 		  <c:when test="${item.hasPreviewImage() }">
 		    <div class="a-l-image">
-	            <img src="${item.getPreviewImage() }" alt=""/>
+	            <img class="aj-lazy" src="web/pic/dot.jpg" data-lazy="${item.getPreviewImage() }" alt=""/>
 	        </div>
 	         <div class="a-l-content clearfix">
 		  </c:when>
 		  <c:otherwise>
-		    <div class="a-l-image" style="display:none;">
-	            <img src="${item.getPreviewImage() }" alt=""/>
-	        </div>
 	         <div class="a-l-content clearfix" style="padding-left:0;">
 		  </c:otherwise>
 		</c:choose>
@@ -33,7 +30,11 @@
                 </span>
 	    	</c:if>
                 
-                <span class="a-stamps">标签 : ${item.getStamps() }</span>
+                <span class="a-stamps">标签 : 
+                	<c:forEach items="${item.get$stampsArr() }" var="stamp">
+                		<span class='astamp'>${stamp }</span>
+                	</c:forEach>
+                </span>
             </div>
             <div class="a-l-c-body">
                 <span>

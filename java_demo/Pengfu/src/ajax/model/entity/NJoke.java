@@ -5,8 +5,16 @@ public class NJoke extends Entity<NJoke>{
 	private String title;
 	private String content;
 	private int jokeType;
+	private int jokeStatus;
 	
 	
+	
+	public int getJokeStatus() {
+		return jokeStatus;
+	}
+	public void setJokeStatus(int jokeStatus) {
+		this.jokeStatus = jokeStatus;
+	}
 	public int getId() {
 		return id;
 	}

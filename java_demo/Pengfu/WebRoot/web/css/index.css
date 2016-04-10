@@ -11,14 +11,21 @@ body {
   font-family: Microsoft Yahei, Arial;
 }
 
+.animated.infinite {
+	-webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite
+}
+
+/*ali font*/
 @font-face {
   font-family: 'nigeerhuo';
-  src: url('//at.alicdn.com/t/font_1460180970_024712.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/font_1460180970_024712.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/font_1460180970_024712.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/font_1460180970_024712.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-  url('//at.alicdn.com/t/font_1460180970_024712.svg#nigeerhuo') format('svg'); /* iOS 4.1- */
-}
+  src: url('//at.alicdn.com/t/font_1460339472_1778975.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1460339472_1778975.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1460339472_1778975.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1460339472_1778975.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1460339472_1778975.svg#nigeerhuo') format('svg'); /* iOS 4.1- */
+}             
+/*ali font end*/
                     
 .aj-icon{
 	font-family:"nigeerhuo";
@@ -275,5 +282,8 @@ body {
     border-radius: 2px;
     font-size: 14px;
     float :right;
+}
+.aj-list-one .astamp{
+	padding: 0 4px;
 }
 
