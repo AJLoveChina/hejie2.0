@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="你个二货, 二货的俱乐部.电影, 旅行, 美食, 笑话...木有神马我不知道">
+    <link rel="shortcut icon" type="image/x-icon" href="web/pic/favicon.ico" />
+    <meta property="qc:admins" content="771240325766175520576375" />
+    <title>你个二货</title>
+    <base href="http://localhost/"/>
+    <link rel="stylesheet" href="http://localhost:63342/nigeerhuo/test/demo.css"/>
+</head>
+<body>
+
+
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css"/>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.0.0/animate.min.css"/>
+<link rel="stylesheet" href="/web/css/index.css"/>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div style="display: inline-block;height: 50px;overflow: hidden;float:left;">
+                <a href="/">
+                    <img src="web/pic/logo.PNG" height="70px " alt=""/>
+                </a>
+            </div>
+            <div class="navbar-text">你个二货</div>
+        </div>
+    </div>
+</nav>
+
+<div style="height: 50px;"></div>
+<div id="aj-body" class="clearfix">
+
+
+
+
+
+
+<div class="aj-body-left">
+
+    <div class="aj-exercise" id="aj-exam" ng-controller="examController">
+        <div class="cover" ng-hide="isStart">
+            <div class="inside">
+                <em class="glyphicon glyphicon-th-large"></em>
+                <span class="title" ng-bind="cover.title"></span>
+                <div class="amid">
+                    <div style="position:relative;">
+                        <img class="img" src="{{cover.img}}"/>
+                        <div class="info">
+                            <p class="line">
+                                题目类型 :
+                                <span ng-bind="cover.type"></span>
+                            </p>
+                            <p class="line">完成时间 :
+                                <span ng-bind="cover.time"></span>
+                            </p>
+                            <p class="line">难度系数 :
+                                <span ng-repeat="diff in cover.difficulty">
+                                    <em class="icon glyphicon glyphicon-star"></em>
+                                </span>
+                            </p>
+                            <p class="line">题目数量 :
+                                <span ng-bind="cover.num"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="desc">
+                        <p class="line">1、请在规定时间完成试卷内全部题目，考试时间结束，系统将自动交卷。</p>
+                        <p class="line">2、所有题目可通过答题卡返回修改，点击提前交卷后试卷提交，将无法继续答案，请谨慎提交。</p>
+                        <p class="line">3、请诚信答题，独立完成。</p>
+                        <p class="line">4、祝你好运。</p>
+                    </div>
+                </div>
+                <div class="afot">
+                    <a class="start" href="javascript:;" ng-click="start()">开始</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cover-end">
+            <div class="logo">
+                <em class="glyphicon glyphicon-tower"></em>
+            </div>
+            <div class="amid">
+                <div class="title">
+                    你已完成测试 :
+                    <span ng-bind="cover.title"></span>
+                </div>
+                <div class="result">
+                    你的得分 :
+                    <span class="score" ng-bind="score"></span>
+                </div>
+                <div class="share">
+                    分享给好友
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+
+
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+                </div>
+            </div>
+
+        </div>
+        <div style="min-height: 450px">
+            <div class="timing clearfix">
+                <div class="left">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="finishNum()" aria-valuemin="1" aria-valuemax="{{questions.length}}" style="width: {{finishPercent()}};">
+                            {{finishPercent()}}
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <span>时间 : </span>
+                    <span ng-bind="time"></span>
+                </div>
+            </div>
+
+            <div class="atop">
+                <span class="icon glyphicon glyphicon-question-sign"></span>
+                <span class="title" ng-bind="title"></span>
+            </div>
+            <div class="amid">
+                <span class="question" ng-bind="questions[cur - 1].title"> </span>
+                <ul class="choices">
+                    <li class="choice" ng-repeat="choice in questions[cur - 1].choices">
+                        <a ng-class="choice.checked ? 'selected' : ''"
+                           href="javascript:;" class="atag" ng-click="mkChoice($index)">
+                            <em  class="icon glyphicon glyphicon-record"></em>
+                            <span ng-bind="choice.title"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="afot">
+                <a href="javascript:;" class="prev abtn" ng-click="prev()">上一题</a>
+                <a href="javascript:;" class="next abtn" ng-click="next()">下一题</a>
+                <a href="javascript:;" class="submit abtn" ng-click="submit()">提交</a>
+
+            <span class="zhishi2" style="padding-left: 10px;">
+                <span>当前</span>
+                <span ng-bind="cur"></span>
+                <span>/</span>
+                <span>共</span>
+                <span ng-bind="questions.length"></span>
+            </span>
+            </div>
+            <div class="zhishi">
+                <div class="btn-group" role="group" aria-label="First group">
+                <span ng-class="cur == ($index + 1) ? 'cur' : ''" ng-repeat="question in questions">
+                    <button
+                            ng-click="changeQuestion($index + 1)"
+                            ng-class="question.finish ? 'finish' : ''" type="button" class="btn btn-default"
+                            ng-bind="$index + 1"></button>
+                </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(function () {
+        var app = angular.module("exam", []);
+        var container = $("#aj-exam");
+        app.controller("examController", function ($scope, $timeout, $http) {
+            $scope.cover = {};
+            $scope.title = "测试题";
+            $scope.cur = 1;
+            $scope.isFinished = false;
+            $scope.time = "00:00";
+            $scope.isStart = false;
+            $scope.startTime = null;
+            $scope.questions = [];
+            $scope.score = "计算中..."
+
+
+            $scope.finishPercent = function () {
+                return ($scope.finishNum() / $scope.questions.length) * 100 + "%";
+            };
+
+            $scope.finishNum = function () {
+                var num = 0;
+                angular.forEach($scope.questions, function (key) {
+                    if (key.finish) {
+                        num++;
+                    }
+                });
+                return num;
+            };
+            
+            $scope.mkChoice = function (index) {
+                // index starts from 0
+                angular.forEach($scope.questions[$scope.cur - 1].choices, function (key) {
+                    key.checked = false;
+                });
+                $scope.questions[$scope.cur - 1].choices[index].checked = true;
+                $scope.questions[$scope.cur - 1].finish = true;
+                $scope.checkFinish();
+            };
+            
+            $scope.next = function () {
+                if ($scope.cur + 1 <= $scope.questions.length) {
+                    $scope.cur ++;
+                }
+            };
+            $scope.prev = function () {
+                if ($scope.cur - 1 > 0) {
+                    $scope.cur--;
+                }
+            };
+
+            $scope.checkFinish = function () {
+                var bool = true;
+                angular.forEach($scope.questions, function (key) {
+                    if (!key.finish) {
+                        bool = false;
+                    }
+                });
+                $scope.isFinished = bool;
+            };
+
+            $scope.changeQuestion = function ($index) {
+                $scope.cur = $index;
+            };
+            
+            $scope.calculateTime = function () {
+                $timeout(function () {
+                    var interval = ((new Date()).getTime() - ($scope.startTime.getTime())) / 1000;
+                    var seconds = Math.floor(interval % 60);
+                    var minutes = Math.floor(interval / 60);
+                    if (seconds < 10) {
+                        seconds = "0" + seconds;
+                    }
+                    if (minutes < 10) {
+                        minutes = "0" + minutes;
+                    }
+
+                    $scope.time = minutes + ":" + seconds;
+                    $scope.calculateTime();
+                }, 1000);
+            };
+
+            $scope.loadPaper = function (fn) {
+                $http.get("http://localhost:63342/nigeerhuo/test/data.json").then(function (data) {
+                    $scope.questions = data.data.data.questions;
+                    $scope.cover = data.data.data.cover;
+                    fn && fn();
+                });
+            };
+
+
+            $scope.start = function () {
+                $scope.isStart = true;
+                $scope.startTime = new Date();
+                $scope.calculateTime();
+            };
+
+            $scope.init = function () {
+                $scope.loadPaper();
+            };
+            $scope.init();
+        });
+        angular.bootstrap(container, ["exam"]);
+    })
+
+</script>
+
+
+<div style="height:10px;"></div>
+
+
+
+
+
+
+
+</div>
+<!-- Close div#aj-body -->
+
+
+<footer id="aj-footer" role="contentinfo">
+    <div class="container">
+        <ul class="bs-docs-footer-links">
+            <li><a href="https://github.com/AJLoveChina">GitHub</a></li>
+            <li><a href="http://www.meajax.com/">Blog</a></li>
+            <li><a href="http://www.oshjf.com">Shop</a></li>
+        </ul>
+        <p>
+            Designed and built By AJ. This is for my little sister HYY, wish her happy forever.
+        </p>
+        <p>
+            Code licensed MIT docs CC BY 3.0
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>
