@@ -22,6 +22,7 @@ java_demo3/.recommenders
 *.class
 *.jdb
 *.class
+*.war
+java_demo/Pengfu/WebRoot/static
+java_demo/Pengfu/src/ajax/model/safe
 java_demo/Pengfu/target
-java_demo/Pengfu/WebRoot/static/joke
-java_demo/Pengfu/target/classes
