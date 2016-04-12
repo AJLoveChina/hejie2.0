@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					scope : "get_user_info",//展示授权，全部可用授权可填 all
 					display : "pc"//应用场景，可选
 				},function(reqData, opts){//登录成功
-				    signin(reqData, opts);
+				    signin(reqData.figureurl, reqData.nickname, "qq");
 				}, function(opts){//注销成功
 				     signout(opts);
 				});
@@ -200,27 +200,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					scope : "get_user_info",//展示授权，全部可用授权可填 all
 					display : "pc"//应用场景，可选
 				},function(reqData, opts){//登录成功
-				    signin(reqData, opts);
+				    signin(reqData.figureurl, reqData.nickname, "qq");
 				}, function(opts){//注销成功
 				     signout(opts);
 				});
 				
-							   
-			function signin(reqData, opts) {
+			// 登陆成功后做的事情
+			function signin(userimg, nickname, from) {
 					//根据返回数据，更换按钮显示状态方法
 			      
 			       $("#aj-user-login-choices").hide();
 			       
 			       var img = $(document.createElement("img"));
-			       img.attr("src", reqData.figureurl);
+			       img.attr("src", userimg);
 			       $(".user-login .u-l-photo").append(img);
 			       
 			       
 			       before.hide();
-			       after.find(".nickname").html(reqData.nickname);
+			       after.find(".nickname").html(nickname);
 			       after.show();
-			       // reqData.nickname
-			       // reqData.figureurl
+			       
+			       if (from === "qq") {
+			       		QC.Login.getMe(function(openId, accessToken){
+							
+						})
+			       }
 			}
 			
 			function signout() {
@@ -230,15 +234,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        before.show();
 			}
 			   
+			// QQ 注销   
 			$("#aj-qq-sign-out").on("click", function() {
 				if (QC.Login.check()) {
 					QC.Login.signOut();
 				}
 			}) 
 			
+			// 微博登陆
 			WB2.anyWhere(function(W){
 			    W.widget.connectButton({
-			        id: "wb_connect_btn",	
+			        id: "wb_connect_btn",
 			        type:"3,2",
 			        callback : {
 			            login:function(o){	//登录后的回调函数
@@ -262,6 +268,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    });
 			});
 			
+			
+			// github登陆
 			$("#aj-sign-panel .other-ways .github").on("click", function () {
 				var params = {
 					client_id : "ab170726816e269ab1ba",
@@ -280,6 +288,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				console.log(url);
 				//location.href = url;
 			})
+			
+			
+
 		}catch(ex) {
 			console.log(ex.message);
 		}
