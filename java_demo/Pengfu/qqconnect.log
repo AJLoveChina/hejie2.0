@@ -1,0 +1,719 @@
+5043 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5043 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5043 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5043 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5044 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5044 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5045 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5045 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5045 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [READ]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=?
+5045 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@64df9a61]
+5045 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5045 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5045 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5046 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5046 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5046 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5047 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5047 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [UPGRADE]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? for update
+5049 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@e260766]
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5049 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5050 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5050 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5050 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5051 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5051 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [UPGRADE_NOWAIT]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? for update
+5052 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@34a97744]
+5052 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5052 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5052 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5052 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5052 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5053 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5054 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5054 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5056 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5056 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5057 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [UPGRADE_SKIPLOCKED]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? for update
+5058 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7c56e013]
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5059 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5062 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5062 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5063 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5063 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5063 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [FORCE]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? for update
+5064 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@40258c2f]
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5064 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5065 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5065 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5065 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5067 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5068 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [PESSIMISTIC_READ]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? lock in share mode
+5068 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6731787b]
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5068 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5069 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5069 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5069 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5069 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5069 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5069 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5070 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [PESSIMISTIC_WRITE]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? for update
+5070 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7adf16aa]
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5070 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5075 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5075 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5075 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5076 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5076 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5076 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5076 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5076 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5076 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5076 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5078 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5078 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5078 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [PESSIMISTIC_FORCE_INCREMENT]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=? for update
+5079 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@58bf8650]
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5079 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5080 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5081 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5082 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5082 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [OPTIMISTIC]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=?
+5083 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@71ae31b0]
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5083 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
+5084 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
+5084 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5087 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5087 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
+          - SQL table alias mapping - item0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5087 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [OPTIMISTIC_FORCE_INCREMENT]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=?
+5088 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.Item: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=?
+5089 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.Item: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=?
+5089 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.ImagesContainer
+5090 DEBUG [2016-04-12 22:20:09]   Version select: select id from ImagesContainer where id =?
+5090 DEBUG [2016-04-12 22:20:09]   Snapshot select: select imagescont_.id, imagescont_.url as url2_0_, imagescont_.diskPath as diskPath3_0_, imagescont_.webPath as webPath4_0_ from ImagesContainer imagescont_ where imagescont_.id=?
+5090 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into ImagesContainer (url, diskPath, webPath, id) values (?, ?, ?, ?)
+5090 DEBUG [2016-04-12 22:20:09]   Update 0: update ImagesContainer set url=?, diskPath=?, webPath=? where id=?
+5090 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from ImagesContainer where id=?
+5091 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6f0ca692]
+5091 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5091 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5091 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5091 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5092 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5092 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5092 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [NONE]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=?
+5092 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2cb3d0f7]
+5092 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5092 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5093 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5093 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5093 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5093 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5093 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [READ]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=?
+5093 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@44e3760b]
+5094 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5094 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5094 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5094 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5094 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5094 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5094 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [UPGRADE]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? for update
+5095 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5860f3d7]
+5095 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5095 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5095 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5095 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5095 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5096 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5096 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [UPGRADE_NOWAIT]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? for update
+5096 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@42f3156d]
+5096 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5096 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5096 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5096 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5097 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5097 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5097 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [UPGRADE_SKIPLOCKED]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? for update
+5097 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@427b5f92]
+5097 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5097 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5097 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5097 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5097 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5098 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5098 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [FORCE]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? for update
+5098 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7e3f95fe]
+5098 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5098 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5098 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5098 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5099 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5099 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5099 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [PESSIMISTIC_READ]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? lock in share mode
+5099 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2c7d121c]
+5100 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5100 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5100 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5100 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5100 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5100 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5100 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [PESSIMISTIC_WRITE]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? for update
+5101 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@67389cb8]
+5102 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5102 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5102 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5102 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5103 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5103 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5104 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [PESSIMISTIC_FORCE_INCREMENT]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=? for update
+5104 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@533377b]
+5104 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5104 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5104 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5104 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5104 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5105 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5105 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [OPTIMISTIC]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=?
+5105 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@10fde30a]
+5105 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5105 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : diskPath
+5105 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : webPath
+5106 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5106 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5106 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ImagesContainer)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ImagesContainer, querySpaceUid=<gen:0>, path=ajax.model.entity.ImagesContainer)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ImagesContainer)
+          - SQL table alias mapping - imagescont0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_0_0_}
+
+5106 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ImagesContainer [OPTIMISTIC_FORCE_INCREMENT]: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=?
+5107 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.ImagesContainer: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=?
+5107 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.ImagesContainer: select imagescont0_.id as id1_0_0_, imagescont0_.url as url2_0_0_, imagescont0_.diskPath as diskPath3_0_0_, imagescont0_.webPath as webPath4_0_0_ from ImagesContainer imagescont0_ where imagescont0_.id=?
+5107 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.Source
+5107 DEBUG [2016-04-12 22:20:09]   Version select: select id from Source where id =?
+5107 DEBUG [2016-04-12 22:20:09]   Snapshot select: select source_.id, source_.url as url2_6_, source_.itype as itype3_6_, source_.rulestagid as rulestag4_6_, source_.isGrab as isGrab5_6_, source_.likes as likes6_6_ from Source source_ where source_.id=?
+5107 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into Source (url, itype, rulestagid, isGrab, likes, id) values (?, ?, ?, ?, ?, ?)
+5107 DEBUG [2016-04-12 22:20:09]   Update 0: update Source set url=?, itype=?, rulestagid=?, isGrab=?, likes=? where id=?
+5107 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from Source where id=?
+5108 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1ce61929]
+5108 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5108 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5108 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5108 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5108 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5108 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5108 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5109 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5109 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [NONE]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=?
+5109 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4bf3798b]
+5109 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5109 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5109 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5109 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5109 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5110 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5110 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5110 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5110 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [READ]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=?
+5110 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@74e47444]
+5110 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5110 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5110 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5111 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5111 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5111 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5111 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5112 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5112 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [UPGRADE]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? for update
+5112 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@59d2103b]
+5112 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5112 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5113 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5113 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5113 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5113 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5113 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5114 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5114 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [UPGRADE_NOWAIT]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? for update
+5114 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6e4de19b]
+5114 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5115 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5115 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5115 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5115 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5115 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5115 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5115 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5116 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [UPGRADE_SKIPLOCKED]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? for update
+5116 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@46f699d5]
+5116 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5116 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5116 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5116 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5117 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5117 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5117 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5118 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5118 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [FORCE]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? for update
+5118 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1991f767]
+5118 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5118 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5118 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5119 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5119 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5119 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5119 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5119 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5119 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [PESSIMISTIC_READ]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? lock in share mode
+5119 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4c6daf0]
+5120 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5120 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5120 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5120 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5120 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5120 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5120 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5120 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5121 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [PESSIMISTIC_WRITE]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? for update
+5121 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@659eef7]
+5121 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5121 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5121 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5121 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5121 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5121 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5121 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5122 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5122 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [PESSIMISTIC_FORCE_INCREMENT]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=? for update
+5122 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2488b073]
+5122 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5123 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5123 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5123 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5123 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5123 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5123 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5123 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5124 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [OPTIMISTIC]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=?
+5124 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@55787112]
+5124 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
+5124 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
+5124 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulestagid
+5124 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : isGrab
+5124 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
+5124 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
+5124 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
+5125 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Source)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.Source, querySpaceUid=<gen:0>, path=ajax.model.entity.Source)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Source)
+          - SQL table alias mapping - source0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_6_0_}
+
+5125 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Source [OPTIMISTIC_FORCE_INCREMENT]: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=?
+5125 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.Source: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=?
+5126 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.Source: select source0_.id as id1_6_0_, source0_.url as url2_6_0_, source0_.itype as itype3_6_0_, source0_.rulestagid as rulestag4_6_0_, source0_.isGrab as isGrab5_6_0_, source0_.likes as likes6_6_0_ from Source source0_ where source0_.id=?
+5126 DEBUG [2016-04-12 22:20:09]  Instantiated session factory
+5156 DEBUG [2016-04-12 22:20:09]  No actions specified; doing nothing
+5156 DEBUG [2016-04-12 22:20:09]  No JtaPlatform was specified, checking resolver
+5157 DEBUG [2016-04-12 22:20:09]  No JtaPlatformResolver was specified, using default [org.hibernate.engine.transaction.jta.platform.internal.StandardJtaPlatformResolver]
+5162 DEBUG [2016-04-12 22:20:09]  Could not resolve JtaPlatform, using default [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+5172 DEBUG [2016-04-12 22:20:09]  Checking 0 named HQL queries
+5173 DEBUG [2016-04-12 22:20:09]  Checking 0 named SQL queries
+5175 DEBUG [2016-04-12 22:20:09]  Initializing SessionFactoryRegistry : org.hibernate.internal.SessionFactoryRegistry@3185fa6b
+5178 DEBUG [2016-04-12 22:20:09]  Registering SessionFactory: 8fdd22d1-3e91-4e54-8947-25ad5d8b1cf4 (<unnamed>)
+5179 DEBUG [2016-04-12 22:20:09]  Not binding SessionFactory to JNDI, no JNDI name configured
+5281 DEBUG [2016-04-12 22:20:09]  Statistics initialized [enabled=false]
+5284 DEBUG [2016-04-12 22:20:09]  begin
+5294 DEBUG [2016-04-12 22:20:09]  Fetching initial value: select max(id) from info
+5299 DEBUG [2016-04-12 22:20:09]  select max(id) from info
+5330 DEBUG [2016-04-12 22:20:09]  First free id: 1
+5330 DEBUG [2016-04-12 22:20:09]  HHH000387: ResultSet's statement was not registered
+5330 DEBUG [2016-04-12 22:20:09]  Generated identifier: 1, using strategy: org.hibernate.id.IncrementGenerator
+5368 DEBUG [2016-04-12 22:20:09]  committing
+5369 DEBUG [2016-04-12 22:20:09]  Processing flush-time cascades
+5370 DEBUG [2016-04-12 22:20:09]  Dirty checking collections
+5373 DEBUG [2016-04-12 22:20:09]  Flushed: 1 insertions, 0 updates, 0 deletions to 1 objects
+5373 DEBUG [2016-04-12 22:20:09]  Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+5375 DEBUG [2016-04-12 22:20:09]  Listing entities:
+5375 DEBUG [2016-04-12 22:20:09]  ajax.model.entity.Info{id=1, value=value, key=123}
+5395 DEBUG [2016-04-12 22:20:09]  insert into info (akey, avalue, id) values (?, ?, ?)
+5407 DEBUG [2016-04-12 22:20:09]  Processing flush-time cascades
+5407 DEBUG [2016-04-12 22:20:09]  Dirty checking collections
+5407 DEBUG [2016-04-12 22:20:09]  Flushed: 0 insertions, 0 updates, 0 deletions to 1 objects
+5407 DEBUG [2016-04-12 22:20:09]  Flushed: 0 (re)creations, 0 updates, 0 removals to 0 collections
+5407 DEBUG [2016-04-12 22:20:09]  Listing entities:
+5407 DEBUG [2016-04-12 22:20:09]  ajax.model.entity.Info{id=1, value=value, key=123}
+5408 DEBUG [2016-04-12 22:20:09]  HHH000420: Closing un-released batch

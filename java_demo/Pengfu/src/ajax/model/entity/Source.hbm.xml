@@ -106,5 +106,19 @@
 		
 	</class>
 		
-
+	<class name="ajax.model.entity.Info" table="info">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="key" type="java.lang.String">
+			<column name="akey"></column>
+		</property>
+		
+		<property name="value" type="java.lang.String">
+			<column name="avalue"></column>
+		</property>
+		
+	</class>
 </hibernate-mapping>

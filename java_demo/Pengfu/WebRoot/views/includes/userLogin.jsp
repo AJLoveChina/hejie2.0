@@ -1,7 +1,10 @@
+<%@page import="ajax.model.safe.User"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+String state = User.getState(request);
 %>
 
 <style>
@@ -171,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	$(function() {
 		try {
-		
+			var CSRF_STATE = "<%=state %>";
 			$(function(){
 				$(".aj-show-sign-panel").click(function(){
 				  $("#aj-sign-panel").modal("toggle");
@@ -275,7 +278,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					client_id : "ab170726816e269ab1ba",
 					redirect_uri : "http://www.nigeerhuo.com/sign/github",
 					//scope : "",
-					state : Math.random()
+					state : CSRF_STATE
 				};
 				
 				var url = "https://github.com/login/oauth/authorize";
