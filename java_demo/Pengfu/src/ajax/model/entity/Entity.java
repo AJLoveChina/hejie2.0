@@ -12,10 +12,9 @@ import ajax.tools.HibernateUtil;
 public class Entity<T> {
 	
 
-	public void save() {
-		
+	public boolean save() {
+		Session session = HibernateUtil.getSession();
 		try {
-			Session session = HibernateUtil.getSession();
 			
 			session.beginTransaction();
 			
@@ -25,8 +24,11 @@ public class Entity<T> {
 			
 			
 			HibernateUtil.closeSession(session);
+			return true;
 		}catch(Exception e) {
 			System.out.println("Grab Error : " + e.toString());
+			HibernateUtil.closeSession(session);
+			return false;
 		}
 	}
 	

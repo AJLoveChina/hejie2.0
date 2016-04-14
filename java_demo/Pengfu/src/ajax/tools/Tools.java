@@ -15,6 +15,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -22,6 +25,8 @@ import org.jsoup.select.Elements;
 
 import ajax.model.Joke;
 import ajax.model.JokeStatus;
+import ajax.model.entity.Config;
+import ajax.model.entity.Entity;
 import ajax.model.entity.ImagesContainer;
 import ajax.model.entity.Item;
 import ajax.model.entity.Source;
@@ -265,20 +270,7 @@ public class Tools {
 		grabImagesFromString(url, content, null);
 		
 	}
-	
-	
-	public static void main(String[] args) {
-		List<Integer> strs = new ArrayList<Integer>();
-		
-		strs.add(1);
-		strs.add(12);
-		strs.add(12);
-		strs.add(412);
-		
-		
-		System.out.println(Tools.join(strs, ","));
-		
-	}
+
 	
 	public static <T> String join(List<T> list, String delimeter) {
 		StringBuilder sb = new StringBuilder();
@@ -290,7 +282,75 @@ public class Tools {
 		return sb.toString();
 	}
 	
+	public static boolean isLocal(String url) {
+		URL u;
+		try {
+			u = new URL(url);
+			
+			return u.getHost().toLowerCase().equals("localhost");
+		} catch (MalformedURLException e) {
+			
+		}
+		return false;
+		
+	}
 	
 
+	
+
+	
+	/**
+	 * 从数据库中加载配置, null if not configured!
+	 * @param key
+	 * @return
+	 */
+	public static String getConfig(String key) {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Config.class);
+		
+		cr.add(Restrictions.eq("key", key));
+		List<Config> configs = cr.list();
+		
+		HibernateUtil.closeSession(session);
+		if (configs.size() > 0) {
+			return configs.get(0).getValue();
+		} else {
+			return null;
+		}
+		
+	}
+	/**
+	 * 添加配置到数据库中, 注意key的值是唯一的
+	 * @param key
+	 * @param value
+	 */
+	public static boolean setConfig(String key, String value) {
+		Config config = new Config(key, value);
+		
+		return config.save();
+	}
+	
+	public static void updateConfig(String key, String newValue) {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Config.class);
+		
+		cr.add(Restrictions.eq("key", key));
+		List<Config> configs = cr.list();
+		
+		HibernateUtil.closeSession(session);
+		Config config = configs.get(0);
+		if (configs.size() > 0) {
+			
+			config.setValue(newValue);
+			config.update();
+			
+		}
+	}
+	
+	
+	
+	public static void main(String[] args) {
+
+	}
 	
 }

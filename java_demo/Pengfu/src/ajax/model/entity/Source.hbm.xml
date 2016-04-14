@@ -121,4 +121,55 @@
 		</property>
 		
 	</class>
+	
+	
+	<class name="ajax.model.safe.User" table="Users">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="username" type="java.lang.String">
+			<column name="username"></column>
+		</property>
+		
+		<property name="sex" type="java.lang.Integer">
+			<column name="sex"></column>
+		</property>
+		
+		<property name="openId" type="java.lang.String">
+			<column name="openId"></column>
+		</property>
+		
+		<property name="accessToken" type="java.lang.String">
+			<column name="accessToken"></column>
+		</property>
+		
+		<property name="userRights" type="java.lang.Integer">
+			<column name="userRights"></column>
+		</property>
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+		
+	</class>
+	
+	<class name="ajax.model.entity.Config" table="Config">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="key" type="java.lang.String">
+			<column name="akey"></column>
+		</property>
+		
+		<property name="value" type="java.lang.String">
+			<column name="avalue"></column>
+		</property>
+		
+	</class>
+	
+	
 </hibernate-mapping>
