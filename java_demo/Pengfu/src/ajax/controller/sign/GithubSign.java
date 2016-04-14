@@ -13,6 +13,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import ajax.model.safe.Github;
+
 @WebServlet("/sign/github")
 public class GithubSign extends HttpServlet {
 
@@ -63,7 +65,9 @@ public class GithubSign extends HttpServlet {
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
 		
-
+		String token = Github.getToken(code, state);
+		
+		System.out.println(token);
 		
 	}
 

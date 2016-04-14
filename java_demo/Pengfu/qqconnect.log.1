@@ -1,1080 +1,1118 @@
-0    DEBUG [2016-04-12 22:20:04]  Logging Provider: org.jboss.logging.Log4jLoggerProvider
-78   DEBUG [2016-04-12 22:20:04]  Adding Integrator [org.hibernate.cfg.beanvalidation.BeanValidationIntegrator].
-94   DEBUG [2016-04-12 22:20:04]  Adding Integrator [org.hibernate.secure.spi.JaccIntegrator].
-145  DEBUG [2016-04-12 22:20:04]  Adding Integrator [org.hibernate.cache.internal.CollectionCacheInvalidator].
-371  INFO  [2016-04-12 22:20:04]  HHH000412: Hibernate Core {5.1.0.Final}
-373  INFO  [2016-04-12 22:20:04]  HHH000206: hibernate.properties not found
-381  INFO  [2016-04-12 22:20:04]  HHH000021: Bytecode provider name : javassist
-473  DEBUG [2016-04-12 22:20:05]  Interpreting public/system identifier : [-//Hibernate/Hibernate Configuration DTD 3.0//EN] - [http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd]
-474  DEBUG [2016-04-12 22:20:05]  Recognized hibernate-configuration identifier; attempting to resolve on classpath under org/hibernate/
-492  DEBUG [2016-04-12 22:20:05]  cfg.xml document did not define namespaces; wrapping in custom event reader to introduce namespace information
-1247 DEBUG [2016-04-12 22:20:05]  Overriding existing service binding [org.hibernate.secure.spi.JaccService]
-1360 DEBUG [2016-04-12 22:20:05]  Cache region factory : org.hibernate.cache.internal.NoCachingRegionFactory
-1379 INFO  [2016-04-12 22:20:05]  HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
-1421 DEBUG [2016-04-12 22:20:05]  Interpreting public/system identifier : [-//Hibernate/Hibernate Mapping DTD 3.0//EN] - [http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd]
-1421 DEBUG [2016-04-12 22:20:05]  Recognized hibernate-mapping identifier; attempting to resolve on classpath under org/hibernate/
-1458 DEBUG [2016-04-12 22:20:06]  Performing JAXB binding of hbm.xml document : Origin(name=ajax/model/entity/Item.hbm.xml,type=RESOURCE)
-2651 DEBUG [2016-04-12 22:20:07]  Interpreting public/system identifier : [-//Hibernate/Hibernate Mapping DTD 3.0//EN] - [http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd]
-2651 DEBUG [2016-04-12 22:20:07]  Recognized hibernate-mapping identifier; attempting to resolve on classpath under org/hibernate/
-2659 DEBUG [2016-04-12 22:20:07]  Performing JAXB binding of hbm.xml document : Origin(name=ajax/model/entity/Source.hbm.xml,type=RESOURCE)
-2705 DEBUG [2016-04-12 22:20:07]  Interpreting public/system identifier : [-//Hibernate/Hibernate Mapping DTD 3.0//EN] - [http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd]
-2705 DEBUG [2016-04-12 22:20:07]  Recognized hibernate-mapping identifier; attempting to resolve on classpath under org/hibernate/
-2712 DEBUG [2016-04-12 22:20:07]  Performing JAXB binding of hbm.xml document : Origin(name=ajax/model/entity/ImagesContainer.hbm.xml,type=RESOURCE)
-2800 DEBUG [2016-04-12 22:20:07]  Adding type registration boolean -> org.hibernate.type.BooleanType@26275bef
-2801 DEBUG [2016-04-12 22:20:07]  Adding type registration boolean -> org.hibernate.type.BooleanType@26275bef
-2801 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@26275bef
-2803 DEBUG [2016-04-12 22:20:07]  Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@61386958
-2812 DEBUG [2016-04-12 22:20:07]  Adding type registration true_false -> org.hibernate.type.TrueFalseType@3a6bb9bf
-2814 DEBUG [2016-04-12 22:20:07]  Adding type registration yes_no -> org.hibernate.type.YesNoType@59af0466
-2816 DEBUG [2016-04-12 22:20:07]  Adding type registration byte -> org.hibernate.type.ByteType@2cd2a21f
-2816 DEBUG [2016-04-12 22:20:07]  Adding type registration byte -> org.hibernate.type.ByteType@2cd2a21f
-2817 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@2cd2a21f
-2818 DEBUG [2016-04-12 22:20:07]  Adding type registration character -> org.hibernate.type.CharacterType@3738449f
-2818 DEBUG [2016-04-12 22:20:07]  Adding type registration char -> org.hibernate.type.CharacterType@3738449f
-2819 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@3738449f
-2820 DEBUG [2016-04-12 22:20:07]  Adding type registration short -> org.hibernate.type.ShortType@72cde7cc
-2821 DEBUG [2016-04-12 22:20:07]  Adding type registration short -> org.hibernate.type.ShortType@72cde7cc
-2821 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Short -> org.hibernate.type.ShortType@72cde7cc
-2823 DEBUG [2016-04-12 22:20:07]  Adding type registration integer -> org.hibernate.type.IntegerType@2bfc268b
-2823 DEBUG [2016-04-12 22:20:07]  Adding type registration int -> org.hibernate.type.IntegerType@2bfc268b
-2824 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@2bfc268b
-2827 DEBUG [2016-04-12 22:20:07]  Adding type registration long -> org.hibernate.type.LongType@a3d8174
-2827 DEBUG [2016-04-12 22:20:07]  Adding type registration long -> org.hibernate.type.LongType@a3d8174
-2828 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Long -> org.hibernate.type.LongType@a3d8174
-2831 DEBUG [2016-04-12 22:20:07]  Adding type registration float -> org.hibernate.type.FloatType@cad498c
-2831 DEBUG [2016-04-12 22:20:07]  Adding type registration float -> org.hibernate.type.FloatType@cad498c
-2831 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Float -> org.hibernate.type.FloatType@cad498c
-2833 DEBUG [2016-04-12 22:20:07]  Adding type registration double -> org.hibernate.type.DoubleType@27ff5d15
-2833 DEBUG [2016-04-12 22:20:07]  Adding type registration double -> org.hibernate.type.DoubleType@27ff5d15
-2833 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@27ff5d15
-2835 DEBUG [2016-04-12 22:20:07]  Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@1b6e1eff
-2835 DEBUG [2016-04-12 22:20:07]  Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@1b6e1eff
-2836 DEBUG [2016-04-12 22:20:07]  Adding type registration big_integer -> org.hibernate.type.BigIntegerType@10163d6
-2836 DEBUG [2016-04-12 22:20:07]  Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@10163d6
-2838 DEBUG [2016-04-12 22:20:07]  Adding type registration string -> org.hibernate.type.StringType@247d8ae
-2838 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.String -> org.hibernate.type.StringType@247d8ae
-2839 DEBUG [2016-04-12 22:20:07]  Adding type registration nstring -> org.hibernate.type.StringNVarcharType@223aa2f7
-2840 DEBUG [2016-04-12 22:20:07]  Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@6bedbc4d
-2841 DEBUG [2016-04-12 22:20:07]  Adding type registration url -> org.hibernate.type.UrlType@3514a4c0
-2841 DEBUG [2016-04-12 22:20:07]  Adding type registration java.net.URL -> org.hibernate.type.UrlType@3514a4c0
-2844 DEBUG [2016-04-12 22:20:07]  Adding type registration date -> org.hibernate.type.DateType@4de4b452
-2844 DEBUG [2016-04-12 22:20:07]  Adding type registration java.sql.Date -> org.hibernate.type.DateType@4de4b452
-2846 DEBUG [2016-04-12 22:20:07]  Adding type registration time -> org.hibernate.type.TimeType@10feca44
-2846 DEBUG [2016-04-12 22:20:07]  Adding type registration java.sql.Time -> org.hibernate.type.TimeType@10feca44
-2848 DEBUG [2016-04-12 22:20:07]  Adding type registration timestamp -> org.hibernate.type.TimestampType@7a419da4
-2848 DEBUG [2016-04-12 22:20:07]  Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@7a419da4
-2848 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.Date -> org.hibernate.type.TimestampType@7a419da4
-2850 DEBUG [2016-04-12 22:20:07]  Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@759d26fb
-2851 DEBUG [2016-04-12 22:20:07]  Adding type registration calendar -> org.hibernate.type.CalendarType@49c7b90e
-2852 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@49c7b90e
-2852 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@49c7b90e
-2853 DEBUG [2016-04-12 22:20:07]  Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@3e84448c
-2853 DEBUG [2016-04-12 22:20:07]  Adding type registration locale -> org.hibernate.type.LocaleType@7e5afaa6
-2854 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@7e5afaa6
-2855 DEBUG [2016-04-12 22:20:07]  Adding type registration currency -> org.hibernate.type.CurrencyType@581ac8a8
-2855 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@581ac8a8
-2857 DEBUG [2016-04-12 22:20:07]  Adding type registration timezone -> org.hibernate.type.TimeZoneType@67c33749
-2857 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@67c33749
-2859 DEBUG [2016-04-12 22:20:07]  Adding type registration class -> org.hibernate.type.ClassType@2a54a73f
-2859 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Class -> org.hibernate.type.ClassType@2a54a73f
-2860 DEBUG [2016-04-12 22:20:07]  Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@3bf9ce3e
-2861 DEBUG [2016-04-12 22:20:07]  Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@3bf9ce3e
-2861 DEBUG [2016-04-12 22:20:07]  Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@383bfa16
-2863 DEBUG [2016-04-12 22:20:07]  Adding type registration binary -> org.hibernate.type.BinaryType@4d0f2471
-2863 DEBUG [2016-04-12 22:20:07]  Adding type registration byte[] -> org.hibernate.type.BinaryType@4d0f2471
-2864 DEBUG [2016-04-12 22:20:07]  Adding type registration [B -> org.hibernate.type.BinaryType@4d0f2471
-2865 DEBUG [2016-04-12 22:20:07]  Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@28f2a10f
-2865 DEBUG [2016-04-12 22:20:07]  Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@28f2a10f
-2866 DEBUG [2016-04-12 22:20:07]  Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@28f2a10f
-2867 DEBUG [2016-04-12 22:20:07]  Adding type registration image -> org.hibernate.type.ImageType@56cdfb3b
-2868 DEBUG [2016-04-12 22:20:07]  Adding type registration characters -> org.hibernate.type.CharArrayType@35aea049
-2868 DEBUG [2016-04-12 22:20:07]  Adding type registration char[] -> org.hibernate.type.CharArrayType@35aea049
-2869 DEBUG [2016-04-12 22:20:07]  Adding type registration [C -> org.hibernate.type.CharArrayType@35aea049
-2870 DEBUG [2016-04-12 22:20:07]  Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@3b6ddd1d
-2871 DEBUG [2016-04-12 22:20:07]  Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@3b6ddd1d
-2872 DEBUG [2016-04-12 22:20:07]  Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@3b6ddd1d
-2874 DEBUG [2016-04-12 22:20:07]  Adding type registration text -> org.hibernate.type.TextType@2f217633
-2875 DEBUG [2016-04-12 22:20:07]  Adding type registration ntext -> org.hibernate.type.NTextType@6cd28fa7
-2879 DEBUG [2016-04-12 22:20:07]  Adding type registration blob -> org.hibernate.type.BlobType@209da20d
-2879 DEBUG [2016-04-12 22:20:07]  Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@209da20d
-2880 DEBUG [2016-04-12 22:20:07]  Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@6392827e
-2884 DEBUG [2016-04-12 22:20:07]  Adding type registration clob -> org.hibernate.type.ClobType@f0da945
-2884 DEBUG [2016-04-12 22:20:07]  Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@f0da945
-2888 DEBUG [2016-04-12 22:20:07]  Adding type registration nclob -> org.hibernate.type.NClobType@1e1a0406
-2889 DEBUG [2016-04-12 22:20:07]  Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@1e1a0406
-2889 DEBUG [2016-04-12 22:20:07]  Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@290222c1
-2890 DEBUG [2016-04-12 22:20:07]  Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@49049a04
-2892 DEBUG [2016-04-12 22:20:07]  Adding type registration serializable -> org.hibernate.type.SerializableType@51e69659
-2896 DEBUG [2016-04-12 22:20:07]  Adding type registration object -> org.hibernate.type.ObjectType@4b0d79fc
-2896 DEBUG [2016-04-12 22:20:07]  Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@4b0d79fc
-2897 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@d9345cd
-2897 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@2d710f1a
-2897 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@29215f06
-2897 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@59505b48
-2897 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@4efac082
-2897 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@6bd61f98
-2898 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@48aca48b
-2898 DEBUG [2016-04-12 22:20:07]  Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@13fd2ccd
-2938 WARN  [2016-04-12 22:20:07]  HHH10001002: Using Hibernate built-in connection pool (not for production use!)
-2954 INFO  [2016-04-12 22:20:07]  HHH10001005: using driver [org.gjt.mm.mysql.Driver] at URL [jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8]
-2955 INFO  [2016-04-12 22:20:07]  HHH10001001: Connection properties: {user=name, password=123}
-2955 INFO  [2016-04-12 22:20:07]  HHH10001003: Autocommit mode: false
-2959 DEBUG [2016-04-12 22:20:07]  Initializing Connection pool with 1 Connections
-2959 INFO  [2016-04-12 22:20:07]  HHH000115: Hibernate connection pool size: 20 (min=1)
-3421 DEBUG [2016-04-12 22:20:07]  Database ->
+2692 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@19d481b
+2694 DEBUG [2016-04-15 00:13:15]  Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@7690781
+2696 DEBUG [2016-04-15 00:13:15]  Adding type registration true_false -> org.hibernate.type.TrueFalseType@49dc7102
+2696 DEBUG [2016-04-15 00:13:15]  Adding type registration yes_no -> org.hibernate.type.YesNoType@10959ece
+2699 DEBUG [2016-04-15 00:13:15]  Adding type registration byte -> org.hibernate.type.ByteType@55536d9e
+2699 DEBUG [2016-04-15 00:13:15]  Adding type registration byte -> org.hibernate.type.ByteType@55536d9e
+2699 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@55536d9e
+2702 DEBUG [2016-04-15 00:13:15]  Adding type registration character -> org.hibernate.type.CharacterType@2e55dd0c
+2704 DEBUG [2016-04-15 00:13:15]  Adding type registration char -> org.hibernate.type.CharacterType@2e55dd0c
+2710 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@2e55dd0c
+2712 DEBUG [2016-04-15 00:13:15]  Adding type registration short -> org.hibernate.type.ShortType@c333c60
+2713 DEBUG [2016-04-15 00:13:15]  Adding type registration short -> org.hibernate.type.ShortType@c333c60
+2713 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Short -> org.hibernate.type.ShortType@c333c60
+2715 DEBUG [2016-04-15 00:13:15]  Adding type registration integer -> org.hibernate.type.IntegerType@5fd4f8f5
+2715 DEBUG [2016-04-15 00:13:15]  Adding type registration int -> org.hibernate.type.IntegerType@5fd4f8f5
+2716 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@5fd4f8f5
+2718 DEBUG [2016-04-15 00:13:15]  Adding type registration long -> org.hibernate.type.LongType@41e1e210
+2718 DEBUG [2016-04-15 00:13:15]  Adding type registration long -> org.hibernate.type.LongType@41e1e210
+2719 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Long -> org.hibernate.type.LongType@41e1e210
+2723 DEBUG [2016-04-15 00:13:15]  Adding type registration float -> org.hibernate.type.FloatType@120f102b
+2724 DEBUG [2016-04-15 00:13:15]  Adding type registration float -> org.hibernate.type.FloatType@120f102b
+2724 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Float -> org.hibernate.type.FloatType@120f102b
+2727 DEBUG [2016-04-15 00:13:15]  Adding type registration double -> org.hibernate.type.DoubleType@b62d79
+2727 DEBUG [2016-04-15 00:13:15]  Adding type registration double -> org.hibernate.type.DoubleType@b62d79
+2728 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@b62d79
+2730 DEBUG [2016-04-15 00:13:15]  Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@31e5415e
+2731 DEBUG [2016-04-15 00:13:15]  Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@31e5415e
+2733 DEBUG [2016-04-15 00:13:15]  Adding type registration big_integer -> org.hibernate.type.BigIntegerType@306f16f3
+2734 DEBUG [2016-04-15 00:13:15]  Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@306f16f3
+2736 DEBUG [2016-04-15 00:13:15]  Adding type registration string -> org.hibernate.type.StringType@2dde1bff
+2736 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.String -> org.hibernate.type.StringType@2dde1bff
+2737 DEBUG [2016-04-15 00:13:15]  Adding type registration nstring -> org.hibernate.type.StringNVarcharType@48974e45
+2739 DEBUG [2016-04-15 00:13:15]  Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@6d3a388c
+2741 DEBUG [2016-04-15 00:13:15]  Adding type registration url -> org.hibernate.type.UrlType@932bc4a
+2741 DEBUG [2016-04-15 00:13:15]  Adding type registration java.net.URL -> org.hibernate.type.UrlType@932bc4a
+2744 DEBUG [2016-04-15 00:13:15]  Adding type registration date -> org.hibernate.type.DateType@2df9b86
+2744 DEBUG [2016-04-15 00:13:15]  Adding type registration java.sql.Date -> org.hibernate.type.DateType@2df9b86
+2746 DEBUG [2016-04-15 00:13:15]  Adding type registration time -> org.hibernate.type.TimeType@6babf3bf
+2746 DEBUG [2016-04-15 00:13:15]  Adding type registration java.sql.Time -> org.hibernate.type.TimeType@6babf3bf
+2748 DEBUG [2016-04-15 00:13:15]  Adding type registration timestamp -> org.hibernate.type.TimestampType@4d02f94e
+2749 DEBUG [2016-04-15 00:13:15]  Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@4d02f94e
+2749 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.Date -> org.hibernate.type.TimestampType@4d02f94e
+2752 DEBUG [2016-04-15 00:13:15]  Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@2053d869
+2754 DEBUG [2016-04-15 00:13:15]  Adding type registration calendar -> org.hibernate.type.CalendarType@3c73951
+2754 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@3c73951
+2754 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@3c73951
+2755 DEBUG [2016-04-15 00:13:15]  Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@73700b80
+2757 DEBUG [2016-04-15 00:13:15]  Adding type registration locale -> org.hibernate.type.LocaleType@4a7f959b
+2757 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@4a7f959b
+2758 DEBUG [2016-04-15 00:13:15]  Adding type registration currency -> org.hibernate.type.CurrencyType@63a12c68
+2759 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@63a12c68
+2762 DEBUG [2016-04-15 00:13:15]  Adding type registration timezone -> org.hibernate.type.TimeZoneType@6d4e5011
+2763 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@6d4e5011
+2764 DEBUG [2016-04-15 00:13:15]  Adding type registration class -> org.hibernate.type.ClassType@fba92d3
+2764 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Class -> org.hibernate.type.ClassType@fba92d3
+2766 DEBUG [2016-04-15 00:13:15]  Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@4efc180e
+2766 DEBUG [2016-04-15 00:13:15]  Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@4efc180e
+2768 DEBUG [2016-04-15 00:13:15]  Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@156b88f5
+2770 DEBUG [2016-04-15 00:13:15]  Adding type registration binary -> org.hibernate.type.BinaryType@4d465b11
+2771 DEBUG [2016-04-15 00:13:15]  Adding type registration byte[] -> org.hibernate.type.BinaryType@4d465b11
+2772 DEBUG [2016-04-15 00:13:15]  Adding type registration [B -> org.hibernate.type.BinaryType@4d465b11
+2773 DEBUG [2016-04-15 00:13:15]  Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@7133da86
+2774 DEBUG [2016-04-15 00:13:15]  Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@7133da86
+2774 DEBUG [2016-04-15 00:13:15]  Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@7133da86
+2775 DEBUG [2016-04-15 00:13:15]  Adding type registration image -> org.hibernate.type.ImageType@f736069
+2776 DEBUG [2016-04-15 00:13:15]  Adding type registration characters -> org.hibernate.type.CharArrayType@2b91004a
+2776 DEBUG [2016-04-15 00:13:15]  Adding type registration char[] -> org.hibernate.type.CharArrayType@2b91004a
+2776 DEBUG [2016-04-15 00:13:15]  Adding type registration [C -> org.hibernate.type.CharArrayType@2b91004a
+2778 DEBUG [2016-04-15 00:13:15]  Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@7205765b
+2778 DEBUG [2016-04-15 00:13:15]  Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@7205765b
+2780 DEBUG [2016-04-15 00:13:15]  Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@7205765b
+2782 DEBUG [2016-04-15 00:13:15]  Adding type registration text -> org.hibernate.type.TextType@3f6b0be5
+2783 DEBUG [2016-04-15 00:13:15]  Adding type registration ntext -> org.hibernate.type.NTextType@a530d0a
+2789 DEBUG [2016-04-15 00:13:15]  Adding type registration blob -> org.hibernate.type.BlobType@52af26ee
+2790 DEBUG [2016-04-15 00:13:15]  Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@52af26ee
+2790 DEBUG [2016-04-15 00:13:15]  Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@bae7dc0
+2796 DEBUG [2016-04-15 00:13:15]  Adding type registration clob -> org.hibernate.type.ClobType@3a44431a
+2796 DEBUG [2016-04-15 00:13:15]  Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@3a44431a
+2801 DEBUG [2016-04-15 00:13:15]  Adding type registration nclob -> org.hibernate.type.NClobType@36916eb0
+2801 DEBUG [2016-04-15 00:13:15]  Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@36916eb0
+2803 DEBUG [2016-04-15 00:13:15]  Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@23c30a20
+2804 DEBUG [2016-04-15 00:13:15]  Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@12aba8be
+2806 DEBUG [2016-04-15 00:13:15]  Adding type registration serializable -> org.hibernate.type.SerializableType@71a8adcf
+2810 DEBUG [2016-04-15 00:13:15]  Adding type registration object -> org.hibernate.type.ObjectType@1151e434
+2810 DEBUG [2016-04-15 00:13:15]  Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@1151e434
+2811 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@55634720
+2812 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@4b0d79fc
+2812 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@4c1909a3
+2812 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@428640fa
+2812 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@d9345cd
+2812 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@2d710f1a
+2813 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@29215f06
+2813 DEBUG [2016-04-15 00:13:15]  Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@59505b48
+2827 WARN  [2016-04-15 00:13:15]  HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2843 INFO  [2016-04-15 00:13:15]  HHH10001005: using driver [org.gjt.mm.mysql.Driver] at URL [jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8]
+2844 INFO  [2016-04-15 00:13:15]  HHH10001001: Connection properties: {user=name, password=123}
+2844 INFO  [2016-04-15 00:13:15]  HHH10001003: Autocommit mode: false
+2849 DEBUG [2016-04-15 00:13:15]  Initializing Connection pool with 1 Connections
+2849 INFO  [2016-04-15 00:13:15]  HHH000115: Hibernate connection pool size: 20 (min=1)
+3540 DEBUG [2016-04-15 00:13:16]  Database ->
        name : MySQL
     version : 5.6.20
       major : 5
       minor : 6
-3421 DEBUG [2016-04-12 22:20:07]  Driver ->
+3541 DEBUG [2016-04-15 00:13:16]  Driver ->
        name : MySQL Connector Java
     version : mysql-connector-java-5.1.38 ( Revision: fe541c166cec739c74cc727c5da96c1028b4834a )
       major : 5
       minor : 1
-3421 DEBUG [2016-04-12 22:20:07]  JDBC version : 4.0
-3465 INFO  [2016-04-12 22:20:08]  HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-3494 DEBUG [2016-04-12 22:20:08]  Unexpected error trying to gauge level of JDBC REF_CURSOR support : null
-3525 DEBUG [2016-04-12 22:20:08]  JDBC driver metadata reported database stores quoted identifiers in more than one case
-3528 DEBUG [2016-04-12 22:20:08]  IdentifierCaseStrategy for both quoted and unquoted identifiers was set to the same strategy [LOWER]; that will likely lead to problems in schema update and validation if using quoted identifiers
-3904 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [uuid2] -> [org.hibernate.id.UUIDGenerator]
-3905 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [guid] -> [org.hibernate.id.GUIDGenerator]
-3906 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [uuid] -> [org.hibernate.id.UUIDHexGenerator]
-3906 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [uuid.hex] -> [org.hibernate.id.UUIDHexGenerator]
-3907 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [assigned] -> [org.hibernate.id.Assigned]
-3908 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [identity] -> [org.hibernate.id.IdentityGenerator]
-3909 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [select] -> [org.hibernate.id.SelectGenerator]
-3910 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
-3912 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [seqhilo] -> [org.hibernate.id.SequenceHiLoGenerator]
-3913 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [increment] -> [org.hibernate.id.IncrementGenerator]
-3913 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [foreign] -> [org.hibernate.id.ForeignGenerator]
-3914 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [sequence-identity] -> [org.hibernate.id.SequenceIdentityGenerator]
-3918 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [enhanced-sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
-3920 DEBUG [2016-04-12 22:20:08]  Registering IdentifierGenerator strategy [enhanced-table] -> [org.hibernate.id.enhanced.TableGenerator]
-3998 DEBUG [2016-04-12 22:20:08]  Created database namespace [logicalName=Name{catalog=null, schema=null}, physicalName=Name{catalog=null, schema=null}]
-4055 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.Item -> ItemTest
-4075 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [id]
-4081 DEBUG [2016-04-12 22:20:08]  Forcing column [id] to be non-null as it is part of the primary key for table [itemtest]
-4082 DEBUG [2016-04-12 22:20:08]  Mapped property: url -> [url]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: title -> [title]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: summary -> [summary]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: content -> [content]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: stamps -> [stamps]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: likes -> [likes]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: dislikes -> [dislikes]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: hasGetImage -> [hasGetImage]
-4083 DEBUG [2016-04-12 22:20:08]  Mapped property: itype -> [itype]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: status -> [status]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: username -> [username]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: userPersonalPageUrl -> [userPersonalPageUrl]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: backgroundInformation -> [backgroundInformation]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: dateEntered -> [dateEntered]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: rulesTagId -> [rulesTagId]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: previewImage -> [previewImage]
-4084 DEBUG [2016-04-12 22:20:08]  Mapped property: page -> [page]
-4085 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.Source -> Source
-4085 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [id]
-4085 DEBUG [2016-04-12 22:20:08]  Forcing column [id] to be non-null as it is part of the primary key for table [source]
-4085 DEBUG [2016-04-12 22:20:08]  Mapped property: url -> [url]
-4085 DEBUG [2016-04-12 22:20:08]  Mapped property: itype -> [itype]
-4086 DEBUG [2016-04-12 22:20:08]  Mapped property: rulestagid -> [rulestagid]
-4086 DEBUG [2016-04-12 22:20:08]  Mapped property: isGrab -> [isGrab]
-4086 DEBUG [2016-04-12 22:20:08]  Mapped property: likes -> [likes]
-4086 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.ItemsRoll -> itemsRoll
-4086 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [id]
-4086 DEBUG [2016-04-12 22:20:08]  Forcing column [id] to be non-null as it is part of the primary key for table [itemsroll]
-4086 DEBUG [2016-04-12 22:20:08]  Mapped property: itemId -> [itemId]
-4086 DEBUG [2016-04-12 22:20:08]  Mapped property: rank -> [rank]
-4087 DEBUG [2016-04-12 22:20:08]  Mapped property: src -> [src]
-4087 DEBUG [2016-04-12 22:20:08]  Mapped property: title -> [title]
-4087 DEBUG [2016-04-12 22:20:08]  Mapped property: dateEntered -> [dateEntered]
-4087 DEBUG [2016-04-12 22:20:08]  Mapped property: deleted -> [deleted]
-4087 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.Page -> page
-4087 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [id]
-4087 DEBUG [2016-04-12 22:20:08]  Forcing column [id] to be non-null as it is part of the primary key for table [page]
-4088 DEBUG [2016-04-12 22:20:08]  Mapped property: page -> [page]
-4088 DEBUG [2016-04-12 22:20:08]  Mapped property: items -> [items]
-4088 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.NJoke -> joke
-4088 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [joke_id]
-4089 DEBUG [2016-04-12 22:20:08]  Forcing column [joke_id] to be non-null as it is part of the primary key for table [joke]
-4089 DEBUG [2016-04-12 22:20:08]  Mapped property: jokeType -> [jokeType]
-4089 DEBUG [2016-04-12 22:20:08]  Mapped property: jokeStatus -> [jokeStatus]
-4090 DEBUG [2016-04-12 22:20:08]  Mapped property: title -> [title]
-4090 DEBUG [2016-04-12 22:20:08]  Mapped property: content -> [content]
-4090 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.Info -> info
-4090 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [id]
-4091 DEBUG [2016-04-12 22:20:08]  Forcing column [id] to be non-null as it is part of the primary key for table [info]
-4091 DEBUG [2016-04-12 22:20:08]  Mapped property: key -> [akey]
-4091 DEBUG [2016-04-12 22:20:08]  Mapped property: value -> [avalue]
-4091 DEBUG [2016-04-12 22:20:08]  Mapping class: ajax.model.entity.ImagesContainer -> ImagesContainer
-4091 DEBUG [2016-04-12 22:20:08]  Mapped property: id -> [id]
-4091 DEBUG [2016-04-12 22:20:08]  Forcing column [id] to be non-null as it is part of the primary key for table [imagescontainer]
-4092 DEBUG [2016-04-12 22:20:08]  Mapped property: url -> [url]
-4092 DEBUG [2016-04-12 22:20:08]  Mapped property: diskPath -> [diskPath]
-4092 DEBUG [2016-04-12 22:20:08]  Mapped property: webPath -> [webPath]
-4177 DEBUG [2016-04-12 22:20:08]  Building session factory
-4180 DEBUG [2016-04-12 22:20:08]  SessionFactory name : null
-4180 DEBUG [2016-04-12 22:20:08]  Automatic flush during beforeCompletion(): disabled
-4180 DEBUG [2016-04-12 22:20:08]  Automatic session close at end of transaction: disabled
-4180 DEBUG [2016-04-12 22:20:08]  Statistics: disabled
-4180 DEBUG [2016-04-12 22:20:08]  Deleted entity synthetic identifier rollback: disabled
-4180 DEBUG [2016-04-12 22:20:08]  Default entity-mode: pojo
-4180 DEBUG [2016-04-12 22:20:08]  Check Nullability in Core (should be disabled when Bean Validation is on): enabled
-4181 DEBUG [2016-04-12 22:20:08]  Allow initialization of lazy state outside session : disabled
-4181 DEBUG [2016-04-12 22:20:08]  Using BatchFetchStyle : LEGACY
-4181 DEBUG [2016-04-12 22:20:08]  Default batch fetch size: -1
-4181 DEBUG [2016-04-12 22:20:08]  Maximum outer join fetch depth: 2
-4182 DEBUG [2016-04-12 22:20:08]  Default null ordering: NONE
-4182 DEBUG [2016-04-12 22:20:08]  Order SQL updates by primary key: disabled
-4182 DEBUG [2016-04-12 22:20:08]  Order SQL inserts for batching: disabled
-4182 DEBUG [2016-04-12 22:20:08]  multi-tenancy strategy : NONE
-4182 DEBUG [2016-04-12 22:20:08]  JTA Track by Thread: enabled
-4182 DEBUG [2016-04-12 22:20:08]  Query language substitutions: {}
-4182 DEBUG [2016-04-12 22:20:08]  JPA query language strict compliance: disabled
-4182 DEBUG [2016-04-12 22:20:08]  Named query checking : enabled
-4183 DEBUG [2016-04-12 22:20:08]  Second-level cache: enabled
-4183 DEBUG [2016-04-12 22:20:08]  Second-level query cache: disabled
-4183 DEBUG [2016-04-12 22:20:08]  Second-level query cache factory: org.hibernate.cache.internal.StandardQueryCacheFactory@36328d33
-4183 DEBUG [2016-04-12 22:20:08]  Second-level cache region prefix: null
-4183 DEBUG [2016-04-12 22:20:08]  Optimize second-level cache for minimal puts: disabled
-4183 DEBUG [2016-04-12 22:20:08]  Structured second-level cache entries: disabled
-4183 DEBUG [2016-04-12 22:20:08]  Second-level cache direct-reference entries: disabled
-4184 DEBUG [2016-04-12 22:20:08]  Automatic eviction of collection cache: disabled
-4184 DEBUG [2016-04-12 22:20:08]  JDBC batch size: 15
-4184 DEBUG [2016-04-12 22:20:08]  JDBC batch updates for versioned data: enabled
-4184 DEBUG [2016-04-12 22:20:08]  Scrollable result sets: enabled
-4185 DEBUG [2016-04-12 22:20:08]  Wrap result sets: disabled
-4185 DEBUG [2016-04-12 22:20:08]  JDBC3 getGeneratedKeys(): enabled
-4185 DEBUG [2016-04-12 22:20:08]  JDBC result set fetch size: null
-4185 DEBUG [2016-04-12 22:20:08]  Connection release mode: ON_CLOSE
-4185 DEBUG [2016-04-12 22:20:08]  Generate SQL with comments: disabled
-4336 DEBUG [2016-04-12 22:20:08]  Session factory constructed with filter configurations : {}
-4337 DEBUG [2016-04-12 22:20:08]  Instantiating session factory with properties: {hibernate.connection.password=123, java.runtime.name=Java(TM) SE Runtime Environment, java.vm.version=25.45-b02, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_45\jre\bin, hibernate.connection.username=name, hibernate.boot.CfgXmlAccessService.key=org.hibernate.boot.cfgxml.spi.LoadedConfig@f316aeb, maven.multiModuleProjectDirectory=$M2_HOME, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=;, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, sun.os.patch.level=Service Pack 1, user.script=, user.country=CN, sun.java.launcher=SUN_STANDARD, java.vm.specification.name=Java Virtual Machine Specification, user.dir=G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu, java.runtime.version=1.8.0_45-b15, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, os.arch=amd64, java.endorsed.dirs=C:\Program Files\Java\jdk1.8.0_45\jre\lib\endorsed, java.io.tmpdir=C:\Users\ajax\AppData\Local\Temp\, line.separator=
-, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 7, sun.jnu.encoding=GBK, java.library.path=C:\Program Files\Java\jdk1.8.0_45\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_45\bin;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\nodejs\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\ajax\AppData\Roaming\npm;C:\Users\ajax\Documents\Green;G:\XAMPP\htdocs\Github\nodejs\npm;C:\Users\ajax\Downloads\jetpack-sdk-latest\addon-sdk-1.17\bin;C:\Python27;C:\xampp\mysql\bin;D:\curl-7.47.1;E:\apache-maven-3.3.9\bin;., java.class.version=52.0, java.specification.name=Java Platform API Specification, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=6.1, user.home=C:\Users\ajax, connection.password=123, user.timezone=Asia/Shanghai, java.awt.printerjob=sun.awt.windows.WPrinterJob, connection.username=name, file.encoding=UTF-8, java.specification.version=1.8, hibernate.connection.driver_class=org.gjt.mm.mysql.Driver, show_sql=false, user.name=ajax, java.class.path=G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\target\classes;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.38-bin.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\jsoup-1.8.3.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\httpclient-4.5.2.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\httpcore-4.4.4.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\commons-logging-1.2.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\commons-codec-1.9.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\jstl-1.2.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\javax.servlet-api-4.0.0-b01.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\Sdk4J.jar;G:\XAMPP\htdocs\Github\mavenRepository\junit\junit\4.12\junit-4.12.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\jstl\jstl\1.2\jstl-1.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hibernate\hibernate-core\5.1.0.Final\hibernate-core-5.1.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\jboss\logging\jboss-logging\3.3.0.Final\jboss-logging-3.3.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\javassist\javassist\3.20.0-GA\javassist-3.20.0-GA.jar;G:\XAMPP\htdocs\Github\mavenRepository\antlr\antlr\2.7.7\antlr-2.7.7.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\geronimo\specs\geronimo-jta_1.1_spec\1.1.1\geronimo-jta_1.1_spec-1.1.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\jboss\jandex\2.0.0.Final\jandex-2.0.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\fasterxml\classmate\1.3.0\classmate-1.3.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hibernate\common\hibernate-commons-annotations\5.0.1.Final\hibernate-commons-annotations-5.0.1.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\jsoup\jsoup\1.8.3\jsoup-1.8.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\httpcomponents\httpclient\4.5.2\httpclient-4.5.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\httpcomponents\httpcore\4.4.4\httpcore-4.4.4.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;G:\XAMPP\htdocs\Github\mavenRepository\us\codecraft\webmagic-core\0.5.3\webmagic-core-0.5.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\google\guava\guava\15.0\guava-15.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\commons\commons-lang3\3.1\commons-lang3-3.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\us\codecraft\xsoup\0.3.1\xsoup-0.3.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\assertj\assertj-core\1.5.0\assertj-core-1.5.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\slf4j\slf4j-api\1.7.6\slf4j-api-1.7.6.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\slf4j\slf4j-log4j12\1.7.6\slf4j-log4j12-1.7.6.jar;G:\XAMPP\htdocs\Github\mavenRepository\log4j\log4j\1.2.17\log4j-1.2.17.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-io\commons-io\1.3.2\commons-io-1.3.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\jayway\jsonpath\json-path\0.8.1\json-path-0.8.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\net\minidev\json-smart\1.1.1\json-smart-1.1.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\alibaba\fastjson\1.1.37\fastjson-1.1.37.jar;G:\XAMPP\htdocs\Github\mavenRepository\us\codecraft\webmagic-extension\0.5.3\webmagic-extension-0.5.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\redis\clients\jedis\2.0.0\jedis-2.0.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-pool\commons-pool\1.5.5\commons-pool-1.5.5.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-webmvc\4.1.4.RELEASE\spring-webmvc-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-beans\4.1.4.RELEASE\spring-beans-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-context\4.1.4.RELEASE\spring-context-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-core\4.1.4.RELEASE\spring-core-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-expression\4.1.4.RELEASE\spring-expression-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-web\4.1.4.RELEASE\spring-web-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-aop\4.1.4.RELEASE\spring-aop-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\taglibs\standard\1.1.2\standard-1.1.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\google\code\gson\gson\2.6.2\gson-2.6.2.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.arch.data.model=64, sun.java.command=ajax.model.entity.Info, java.home=C:\Program Files\Java\jdk1.8.0_45\jre, hibernate.connection.url=jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8, hibernate.dialect=org.hibernate.dialect.MySQLDialect, user.language=zh, java.specification.vendor=Oracle Corporation, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_45, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext;C:\windows\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_45\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_45\jre\classes, java.vendor=Oracle Corporation, connection.driver_class=org.gjt.mm.mysql.Driver, file.separator=\, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, sun.io.unicode.encoding=UnicodeLittle, sun.cpu.endian=little, sun.desktop=windows, connection.url=jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8, dialect=org.hibernate.dialect.MySQLDialect, sun.cpu.isalist=amd64}
-4359 DEBUG [2016-04-12 22:20:08]  Skipping JACC integration as it was not enabled
-4419 DEBUG [2016-04-12 22:20:08]  Not known whether passed class name [ajax.model.entity.Page] is safe
-4419 DEBUG [2016-04-12 22:20:08]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Page
-4480 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Page] is safe
-4480 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Page
-4693 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.NJoke] is safe
-4693 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.NJoke
-4704 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.NJoke] is safe
-4704 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.NJoke
-4709 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Info] is safe
-4709 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Info
-4710 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Info] is safe
-4710 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Info
-4714 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.ItemsRoll] is safe
-4714 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ItemsRoll
-4716 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.ItemsRoll] is safe
-4716 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ItemsRoll
-4722 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Item] is safe
-4723 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Item
-4774 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Item] is safe
-4775 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Item
-4809 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.ImagesContainer] is safe
-4809 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ImagesContainer
-4811 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.ImagesContainer] is safe
-4811 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ImagesContainer
-4817 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Source] is safe
-4817 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Source
-4819 DEBUG [2016-04-12 22:20:09]  Not known whether passed class name [ajax.model.entity.Source] is safe
-4820 DEBUG [2016-04-12 22:20:09]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Source
-4847 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.Page
-4848 DEBUG [2016-04-12 22:20:09]   Version select: select id from page where id =?
-4848 DEBUG [2016-04-12 22:20:09]   Snapshot select: select page_.id, page_.page as page2_5_, page_.items as items3_5_ from page page_ where page_.id=?
-4848 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into page (page, items, id) values (?, ?, ?)
-4848 DEBUG [2016-04-12 22:20:09]   Update 0: update page set page=?, items=? where id=?
-4848 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from page where id=?
-4909 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@f73dcd6]
-4911 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4911 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4912 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4930 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4937 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+3541 DEBUG [2016-04-15 00:13:16]  JDBC version : 4.0
+3565 INFO  [2016-04-15 00:13:16]  HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+3593 DEBUG [2016-04-15 00:13:16]  Unexpected error trying to gauge level of JDBC REF_CURSOR support : null
+3647 DEBUG [2016-04-15 00:13:16]  JDBC driver metadata reported database stores quoted identifiers in more than one case
+3653 DEBUG [2016-04-15 00:13:16]  IdentifierCaseStrategy for both quoted and unquoted identifiers was set to the same strategy [LOWER]; that will likely lead to problems in schema update and validation if using quoted identifiers
+4147 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [uuid2] -> [org.hibernate.id.UUIDGenerator]
+4147 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [guid] -> [org.hibernate.id.GUIDGenerator]
+4148 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [uuid] -> [org.hibernate.id.UUIDHexGenerator]
+4148 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [uuid.hex] -> [org.hibernate.id.UUIDHexGenerator]
+4149 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [assigned] -> [org.hibernate.id.Assigned]
+4150 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [identity] -> [org.hibernate.id.IdentityGenerator]
+4151 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [select] -> [org.hibernate.id.SelectGenerator]
+4152 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+4154 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [seqhilo] -> [org.hibernate.id.SequenceHiLoGenerator]
+4155 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [increment] -> [org.hibernate.id.IncrementGenerator]
+4155 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [foreign] -> [org.hibernate.id.ForeignGenerator]
+4156 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [sequence-identity] -> [org.hibernate.id.SequenceIdentityGenerator]
+4156 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [enhanced-sequence] -> [org.hibernate.id.enhanced.SequenceStyleGenerator]
+4157 DEBUG [2016-04-15 00:13:17]  Registering IdentifierGenerator strategy [enhanced-table] -> [org.hibernate.id.enhanced.TableGenerator]
+4245 DEBUG [2016-04-15 00:13:17]  Created database namespace [logicalName=Name{catalog=null, schema=null}, physicalName=Name{catalog=null, schema=null}]
+4274 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.Item -> ItemTest
+4283 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4286 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [itemtest]
+4288 DEBUG [2016-04-15 00:13:17]  Mapped property: url -> [url]
+4288 DEBUG [2016-04-15 00:13:17]  Mapped property: title -> [title]
+4289 DEBUG [2016-04-15 00:13:17]  Mapped property: summary -> [summary]
+4289 DEBUG [2016-04-15 00:13:17]  Mapped property: content -> [content]
+4289 DEBUG [2016-04-15 00:13:17]  Mapped property: stamps -> [stamps]
+4289 DEBUG [2016-04-15 00:13:17]  Mapped property: likes -> [likes]
+4289 DEBUG [2016-04-15 00:13:17]  Mapped property: dislikes -> [dislikes]
+4289 DEBUG [2016-04-15 00:13:17]  Mapped property: hasGetImage -> [hasGetImage]
+4290 DEBUG [2016-04-15 00:13:17]  Mapped property: itype -> [itype]
+4290 DEBUG [2016-04-15 00:13:17]  Mapped property: status -> [status]
+4291 DEBUG [2016-04-15 00:13:17]  Mapped property: username -> [username]
+4291 DEBUG [2016-04-15 00:13:17]  Mapped property: userPersonalPageUrl -> [userPersonalPageUrl]
+4291 DEBUG [2016-04-15 00:13:17]  Mapped property: backgroundInformation -> [backgroundInformation]
+4293 DEBUG [2016-04-15 00:13:17]  Mapped property: dateEntered -> [dateEntered]
+4293 DEBUG [2016-04-15 00:13:17]  Mapped property: rulesTagId -> [rulesTagId]
+4293 DEBUG [2016-04-15 00:13:17]  Mapped property: previewImage -> [previewImage]
+4293 DEBUG [2016-04-15 00:13:17]  Mapped property: page -> [page]
+4294 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.Source -> Source
+4294 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4294 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [source]
+4294 DEBUG [2016-04-15 00:13:17]  Mapped property: url -> [url]
+4294 DEBUG [2016-04-15 00:13:17]  Mapped property: itype -> [itype]
+4295 DEBUG [2016-04-15 00:13:17]  Mapped property: rulestagid -> [rulestagid]
+4296 DEBUG [2016-04-15 00:13:17]  Mapped property: isGrab -> [isGrab]
+4296 DEBUG [2016-04-15 00:13:17]  Mapped property: likes -> [likes]
+4297 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.ItemsRoll -> itemsRoll
+4297 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4297 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [itemsroll]
+4297 DEBUG [2016-04-15 00:13:17]  Mapped property: itemId -> [itemId]
+4298 DEBUG [2016-04-15 00:13:17]  Mapped property: rank -> [rank]
+4298 DEBUG [2016-04-15 00:13:17]  Mapped property: src -> [src]
+4298 DEBUG [2016-04-15 00:13:17]  Mapped property: title -> [title]
+4298 DEBUG [2016-04-15 00:13:17]  Mapped property: dateEntered -> [dateEntered]
+4298 DEBUG [2016-04-15 00:13:17]  Mapped property: deleted -> [deleted]
+4299 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.Page -> page
+4299 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4299 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [page]
+4299 DEBUG [2016-04-15 00:13:17]  Mapped property: page -> [page]
+4299 DEBUG [2016-04-15 00:13:17]  Mapped property: items -> [items]
+4300 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.NJoke -> joke
+4300 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [joke_id]
+4301 DEBUG [2016-04-15 00:13:17]  Forcing column [joke_id] to be non-null as it is part of the primary key for table [joke]
+4303 DEBUG [2016-04-15 00:13:17]  Mapped property: jokeType -> [jokeType]
+4307 DEBUG [2016-04-15 00:13:17]  Mapped property: jokeStatus -> [jokeStatus]
+4319 DEBUG [2016-04-15 00:13:17]  Mapped property: title -> [title]
+4319 DEBUG [2016-04-15 00:13:17]  Mapped property: content -> [content]
+4319 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.Info -> info
+4320 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4320 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [info]
+4320 DEBUG [2016-04-15 00:13:17]  Mapped property: key -> [akey]
+4320 DEBUG [2016-04-15 00:13:17]  Mapped property: value -> [avalue]
+4320 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.safe.User -> Users
+4320 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4320 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [users]
+4321 DEBUG [2016-04-15 00:13:17]  Mapped property: username -> [username]
+4329 DEBUG [2016-04-15 00:13:17]  Mapped property: sex -> [sex]
+4330 DEBUG [2016-04-15 00:13:17]  Mapped property: openId -> [openId]
+4330 DEBUG [2016-04-15 00:13:17]  Mapped property: accessToken -> [accessToken]
+4331 DEBUG [2016-04-15 00:13:17]  Mapped property: userRights -> [userRights]
+4331 DEBUG [2016-04-15 00:13:17]  Mapped property: dateEntered -> [dateEntered]
+4331 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.Config -> Config
+4331 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4331 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [config]
+4332 DEBUG [2016-04-15 00:13:17]  Mapped property: key -> [akey]
+4332 DEBUG [2016-04-15 00:13:17]  Mapped property: value -> [avalue]
+4332 DEBUG [2016-04-15 00:13:17]  Mapping class: ajax.model.entity.ImagesContainer -> ImagesContainer
+4332 DEBUG [2016-04-15 00:13:17]  Mapped property: id -> [id]
+4332 DEBUG [2016-04-15 00:13:17]  Forcing column [id] to be non-null as it is part of the primary key for table [imagescontainer]
+4332 DEBUG [2016-04-15 00:13:17]  Mapped property: url -> [url]
+4333 DEBUG [2016-04-15 00:13:17]  Mapped property: diskPath -> [diskPath]
+4333 DEBUG [2016-04-15 00:13:17]  Mapped property: webPath -> [webPath]
+4379 DEBUG [2016-04-15 00:13:17]  Building session factory
+4381 DEBUG [2016-04-15 00:13:17]  SessionFactory name : null
+4381 DEBUG [2016-04-15 00:13:17]  Automatic flush during beforeCompletion(): disabled
+4381 DEBUG [2016-04-15 00:13:17]  Automatic session close at end of transaction: disabled
+4382 DEBUG [2016-04-15 00:13:17]  Statistics: disabled
+4382 DEBUG [2016-04-15 00:13:17]  Deleted entity synthetic identifier rollback: disabled
+4382 DEBUG [2016-04-15 00:13:17]  Default entity-mode: pojo
+4383 DEBUG [2016-04-15 00:13:17]  Check Nullability in Core (should be disabled when Bean Validation is on): enabled
+4383 DEBUG [2016-04-15 00:13:17]  Allow initialization of lazy state outside session : disabled
+4384 DEBUG [2016-04-15 00:13:17]  Using BatchFetchStyle : LEGACY
+4385 DEBUG [2016-04-15 00:13:17]  Default batch fetch size: -1
+4391 DEBUG [2016-04-15 00:13:17]  Maximum outer join fetch depth: 2
+4394 DEBUG [2016-04-15 00:13:17]  Default null ordering: NONE
+4394 DEBUG [2016-04-15 00:13:17]  Order SQL updates by primary key: disabled
+4396 DEBUG [2016-04-15 00:13:17]  Order SQL inserts for batching: disabled
+4397 DEBUG [2016-04-15 00:13:17]  multi-tenancy strategy : NONE
+4398 DEBUG [2016-04-15 00:13:17]  JTA Track by Thread: enabled
+4398 DEBUG [2016-04-15 00:13:17]  Query language substitutions: {}
+4398 DEBUG [2016-04-15 00:13:17]  JPA query language strict compliance: disabled
+4398 DEBUG [2016-04-15 00:13:17]  Named query checking : enabled
+4398 DEBUG [2016-04-15 00:13:17]  Second-level cache: enabled
+4398 DEBUG [2016-04-15 00:13:17]  Second-level query cache: disabled
+4398 DEBUG [2016-04-15 00:13:17]  Second-level query cache factory: org.hibernate.cache.internal.StandardQueryCacheFactory@22f31dec
+4398 DEBUG [2016-04-15 00:13:17]  Second-level cache region prefix: null
+4398 DEBUG [2016-04-15 00:13:17]  Optimize second-level cache for minimal puts: disabled
+4399 DEBUG [2016-04-15 00:13:17]  Structured second-level cache entries: disabled
+4399 DEBUG [2016-04-15 00:13:17]  Second-level cache direct-reference entries: disabled
+4399 DEBUG [2016-04-15 00:13:17]  Automatic eviction of collection cache: disabled
+4400 DEBUG [2016-04-15 00:13:17]  JDBC batch size: 15
+4400 DEBUG [2016-04-15 00:13:17]  JDBC batch updates for versioned data: enabled
+4400 DEBUG [2016-04-15 00:13:17]  Scrollable result sets: enabled
+4400 DEBUG [2016-04-15 00:13:17]  Wrap result sets: disabled
+4400 DEBUG [2016-04-15 00:13:17]  JDBC3 getGeneratedKeys(): enabled
+4400 DEBUG [2016-04-15 00:13:17]  JDBC result set fetch size: null
+4400 DEBUG [2016-04-15 00:13:17]  Connection release mode: ON_CLOSE
+4400 DEBUG [2016-04-15 00:13:17]  Generate SQL with comments: disabled
+4591 DEBUG [2016-04-15 00:13:17]  Session factory constructed with filter configurations : {}
+4591 DEBUG [2016-04-15 00:13:17]  Instantiating session factory with properties: {hibernate.connection.password=123, java.runtime.name=Java(TM) SE Runtime Environment, java.vm.version=25.45-b02, sun.boot.library.path=C:\Program Files\Java\jdk1.8.0_45\jre\bin, hibernate.connection.username=name, hibernate.boot.CfgXmlAccessService.key=org.hibernate.boot.cfgxml.spi.LoadedConfig@142269f2, maven.multiModuleProjectDirectory=$M2_HOME, java.vm.vendor=Oracle Corporation, java.vendor.url=http://java.oracle.com/, path.separator=;, java.vm.name=Java HotSpot(TM) 64-Bit Server VM, file.encoding.pkg=sun.io, sun.os.patch.level=Service Pack 1, user.script=, user.country=CN, sun.java.launcher=SUN_STANDARD, java.vm.specification.name=Java Virtual Machine Specification, user.dir=G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu, java.runtime.version=1.8.0_45-b15, java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment, os.arch=amd64, java.endorsed.dirs=C:\Program Files\Java\jdk1.8.0_45\jre\lib\endorsed, java.io.tmpdir=C:\Users\ajax\AppData\Local\Temp\, line.separator=
+, java.vm.specification.vendor=Oracle Corporation, user.variant=, os.name=Windows 7, sun.jnu.encoding=GBK, java.library.path=C:\Program Files\Java\jdk1.8.0_45\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_45\bin;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\windows\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\nodejs\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\ajax\AppData\Roaming\npm;C:\Users\ajax\Documents\Green;G:\XAMPP\htdocs\Github\nodejs\npm;C:\Users\ajax\Downloads\jetpack-sdk-latest\addon-sdk-1.17\bin;C:\Python27;C:\xampp\mysql\bin;D:\curl-7.47.1;E:\apache-maven-3.3.9\bin;., java.class.version=52.0, java.specification.name=Java Platform API Specification, sun.management.compiler=HotSpot 64-Bit Tiered Compilers, os.version=6.1, user.home=C:\Users\ajax, connection.password=123, user.timezone=Asia/Shanghai, java.awt.printerjob=sun.awt.windows.WPrinterJob, connection.username=name, file.encoding=UTF-8, java.specification.version=1.8, hibernate.connection.driver_class=org.gjt.mm.mysql.Driver, show_sql=false, user.name=ajax, java.class.path=G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\target\classes;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.38-bin.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\httpclient-4.5.2.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\httpcore-4.4.4.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\commons-logging-1.2.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\commons-codec-1.9.jar;G:\XAMPP\htdocs\Github\meAjax\java_demo\Pengfu\WebRoot\WEB-INF\lib\Sdk4J.jar;G:\XAMPP\htdocs\Github\mavenRepository\junit\junit\4.12\junit-4.12.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\jstl\jstl\1.2\jstl-1.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\javax\servlet\javax.servlet-api\3.1.0\javax.servlet-api-3.1.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hibernate\hibernate-core\5.1.0.Final\hibernate-core-5.1.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\jboss\logging\jboss-logging\3.3.0.Final\jboss-logging-3.3.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hibernate\javax\persistence\hibernate-jpa-2.1-api\1.0.0.Final\hibernate-jpa-2.1-api-1.0.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\javassist\javassist\3.20.0-GA\javassist-3.20.0-GA.jar;G:\XAMPP\htdocs\Github\mavenRepository\antlr\antlr\2.7.7\antlr-2.7.7.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\geronimo\specs\geronimo-jta_1.1_spec\1.1.1\geronimo-jta_1.1_spec-1.1.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\jboss\jandex\2.0.0.Final\jandex-2.0.0.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\fasterxml\classmate\1.3.0\classmate-1.3.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\dom4j\dom4j\1.6.1\dom4j-1.6.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\xml-apis\xml-apis\1.0.b2\xml-apis-1.0.b2.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\hibernate\common\hibernate-commons-annotations\5.0.1.Final\hibernate-commons-annotations-5.0.1.Final.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\jsoup\jsoup\1.8.3\jsoup-1.8.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\httpcomponents\httpclient\4.5.2\httpclient-4.5.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\httpcomponents\httpcore\4.4.4\httpcore-4.4.4.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-codec\commons-codec\1.9\commons-codec-1.9.jar;G:\XAMPP\htdocs\Github\mavenRepository\us\codecraft\webmagic-core\0.5.3\webmagic-core-0.5.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\google\guava\guava\15.0\guava-15.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\apache\commons\commons-lang3\3.1\commons-lang3-3.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\us\codecraft\xsoup\0.3.1\xsoup-0.3.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\assertj\assertj-core\1.5.0\assertj-core-1.5.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\slf4j\slf4j-api\1.7.6\slf4j-api-1.7.6.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\slf4j\slf4j-log4j12\1.7.6\slf4j-log4j12-1.7.6.jar;G:\XAMPP\htdocs\Github\mavenRepository\log4j\log4j\1.2.17\log4j-1.2.17.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-collections\commons-collections\3.2.1\commons-collections-3.2.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-io\commons-io\1.3.2\commons-io-1.3.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\jayway\jsonpath\json-path\0.8.1\json-path-0.8.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\net\minidev\json-smart\1.1.1\json-smart-1.1.1.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-lang\commons-lang\2.6\commons-lang-2.6.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\alibaba\fastjson\1.1.37\fastjson-1.1.37.jar;G:\XAMPP\htdocs\Github\mavenRepository\us\codecraft\webmagic-extension\0.5.3\webmagic-extension-0.5.3.jar;G:\XAMPP\htdocs\Github\mavenRepository\redis\clients\jedis\2.0.0\jedis-2.0.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\commons-pool\commons-pool\1.5.5\commons-pool-1.5.5.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-webmvc\4.1.4.RELEASE\spring-webmvc-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-beans\4.1.4.RELEASE\spring-beans-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-context\4.1.4.RELEASE\spring-context-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-core\4.1.4.RELEASE\spring-core-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-expression\4.1.4.RELEASE\spring-expression-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-web\4.1.4.RELEASE\spring-web-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\org\springframework\spring-aop\4.1.4.RELEASE\spring-aop-4.1.4.RELEASE.jar;G:\XAMPP\htdocs\Github\mavenRepository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;G:\XAMPP\htdocs\Github\mavenRepository\taglibs\standard\1.1.2\standard-1.1.2.jar;G:\XAMPP\htdocs\Github\mavenRepository\com\google\code\gson\gson\2.6.2\gson-2.6.2.jar, hibernate.bytecode.use_reflection_optimizer=false, hibernate.show_sql=false, java.vm.specification.version=1.8, sun.arch.data.model=64, sun.java.command=ajax.tools.Tools, java.home=C:\Program Files\Java\jdk1.8.0_45\jre, hibernate.connection.url=jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8, hibernate.dialect=org.hibernate.dialect.MySQLDialect, user.language=zh, java.specification.vendor=Oracle Corporation, awt.toolkit=sun.awt.windows.WToolkit, java.vm.info=mixed mode, java.version=1.8.0_45, java.ext.dirs=C:\Program Files\Java\jdk1.8.0_45\jre\lib\ext;C:\windows\Sun\Java\lib\ext, sun.boot.class.path=C:\Program Files\Java\jdk1.8.0_45\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_45\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_45\jre\classes, java.vendor=Oracle Corporation, connection.driver_class=org.gjt.mm.mysql.Driver, file.separator=\, java.vendor.url.bug=http://bugreport.sun.com/bugreport/, sun.io.unicode.encoding=UnicodeLittle, sun.cpu.endian=little, sun.desktop=windows, connection.url=jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8, dialect=org.hibernate.dialect.MySQLDialect, sun.cpu.isalist=amd64}
+4609 DEBUG [2016-04-15 00:13:17]  Skipping JACC integration as it was not enabled
+4658 DEBUG [2016-04-15 00:13:17]  Not known whether passed class name [ajax.model.entity.Page] is safe
+4659 DEBUG [2016-04-15 00:13:17]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Page
+4689 DEBUG [2016-04-15 00:13:17]  Not known whether passed class name [ajax.model.entity.Page] is safe
+4689 DEBUG [2016-04-15 00:13:17]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Page
+4945 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.safe.User] is safe
+4945 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.safe.User
+4949 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.safe.User] is safe
+4950 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.safe.User
+4960 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.NJoke] is safe
+4960 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.NJoke
+4961 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.NJoke] is safe
+4962 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.NJoke
+4969 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Info] is safe
+4970 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Info
+4971 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Info] is safe
+4971 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Info
+4976 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.ItemsRoll] is safe
+4977 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ItemsRoll
+4979 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.ItemsRoll] is safe
+4981 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ItemsRoll
+4990 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Config] is safe
+4990 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Config
+4991 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Config] is safe
+4991 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Config
+4996 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Item] is safe
+4996 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Item
+5002 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Item] is safe
+5003 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Item
+5026 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.ImagesContainer] is safe
+5026 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ImagesContainer
+5028 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.ImagesContainer] is safe
+5028 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.ImagesContainer
+5033 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Source] is safe
+5033 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Source
+5035 DEBUG [2016-04-15 00:13:18]  Not known whether passed class name [ajax.model.entity.Source] is safe
+5035 DEBUG [2016-04-15 00:13:18]  No temp ClassLoader provided; using live ClassLoader for loading potentially unsafe class : ajax.model.entity.Source
+5048 DEBUG [2016-04-15 00:13:18]  Static SQL for entity: ajax.model.entity.Page
+5049 DEBUG [2016-04-15 00:13:18]   Version select: select id from page where id =?
+5049 DEBUG [2016-04-15 00:13:18]   Snapshot select: select page_.id, page_.page as page2_6_, page_.items as items3_6_ from page page_ where page_.id=?
+5049 DEBUG [2016-04-15 00:13:18]   Insert 0: insert into page (page, items, id) values (?, ?, ?)
+5049 DEBUG [2016-04-15 00:13:18]   Update 0: update page set page=?, items=? where id=?
+5049 DEBUG [2016-04-15 00:13:18]   Delete 0: delete from page where id=?
+5092 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@40f1be1b]
+5094 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5094 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5094 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5117 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5124 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4940 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [NONE]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=?
-4940 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@71b3bc45]
-4940 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4940 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4940 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4940 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4941 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5128 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [NONE]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=?
+5128 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5ce33a58]
+5128 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5128 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5128 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5128 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5129 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4941 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [READ]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=?
-4941 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@150ab4ed]
-4941 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4941 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4941 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4942 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4942 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5129 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [READ]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=?
+5129 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@546ccad7]
+5129 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5129 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5129 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5130 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5130 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4942 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [UPGRADE]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? for update
-4942 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@50fe837a]
-4943 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4943 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4943 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4943 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4943 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5130 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [UPGRADE]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? for update
+5131 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1623134f]
+5131 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5131 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5131 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5131 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5131 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4943 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [UPGRADE_NOWAIT]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? for update
-4944 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7a8fa663]
-4944 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4944 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4944 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4944 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4945 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5131 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [UPGRADE_NOWAIT]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? for update
+5132 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@485a3466]
+5132 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5132 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5132 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5132 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5132 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4945 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [UPGRADE_SKIPLOCKED]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? for update
-4945 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@78a287ed]
-4945 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4945 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4945 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4946 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4947 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5132 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [UPGRADE_SKIPLOCKED]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? for update
+5133 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2b43529a]
+5133 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5133 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5133 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5133 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5133 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4947 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [FORCE]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? for update
-4947 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5357c287]
-4947 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4947 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4947 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4948 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4948 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5133 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [FORCE]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? for update
+5133 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5b04476e]
+5134 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5134 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5134 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5134 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5134 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4948 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [PESSIMISTIC_READ]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? lock in share mode
-4948 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7a527389]
-4949 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4949 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4949 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4949 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4949 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5134 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [PESSIMISTIC_READ]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? lock in share mode
+5134 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6bb75258]
+5135 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5135 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5135 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5135 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5136 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4949 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [PESSIMISTIC_WRITE]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? for update
-4950 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@25748410]
-4950 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4950 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4950 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4950 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4950 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5140 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [PESSIMISTIC_WRITE]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? for update
+5141 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@75e01201]
+5141 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5141 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5141 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5142 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5142 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4951 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [PESSIMISTIC_FORCE_INCREMENT]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=? for update
-4951 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4264b240]
-4951 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4951 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4951 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4951 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4952 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5143 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [PESSIMISTIC_FORCE_INCREMENT]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=? for update
+5143 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@76f7d241]
+5143 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5143 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5143 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5143 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5148 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4952 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [OPTIMISTIC]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=?
-4952 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5ad10c1a]
-4952 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-4952 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : items
-4952 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4952 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4953 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Page)
+5148 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [OPTIMISTIC]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=?
+5148 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3f363cf5]
+5149 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : page
+5149 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : items
+5149 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5149 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5150 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Page)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Page, querySpaceUid=<gen:0>, path=ajax.model.entity.Page)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Page)
           - SQL table alias mapping - page0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_5_0_}
+          - suffixed key columns - {id1_6_0_}
 
-4953 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Page [OPTIMISTIC_FORCE_INCREMENT]: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=?
-4983 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.Page: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=?
-4983 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.Page: select page0_.id as id1_5_0_, page0_.page as page2_5_0_, page0_.items as items3_5_0_ from page page0_ where page0_.id=?
-4983 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.NJoke
-4983 DEBUG [2016-04-12 22:20:09]   Version select: select joke_id from joke where joke_id =?
-4983 DEBUG [2016-04-12 22:20:09]   Snapshot select: select njoke_.joke_id, njoke_.jokeType as jokeType2_4_, njoke_.jokeStatus as jokeStat3_4_, njoke_.title as title4_4_, njoke_.content as content5_4_ from joke njoke_ where njoke_.joke_id=?
-4983 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into joke (jokeType, jokeStatus, title, content, joke_id) values (?, ?, ?, ?, ?)
-4984 DEBUG [2016-04-12 22:20:09]   Update 0: update joke set jokeType=?, jokeStatus=?, title=?, content=? where joke_id=?
-4984 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from joke where joke_id=?
-4984 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5b64c4b7]
-4984 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4984 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4984 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4984 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4984 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4984 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4985 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5150 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Page [OPTIMISTIC_FORCE_INCREMENT]: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=?
+5177 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_MERGE on entity ajax.model.entity.Page: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=?
+5178 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_REFRESH on entity ajax.model.entity.Page: select page0_.id as id1_6_0_, page0_.page as page2_6_0_, page0_.items as items3_6_0_ from page page0_ where page0_.id=?
+5178 DEBUG [2016-04-15 00:13:18]  Static SQL for entity: ajax.model.safe.User
+5178 DEBUG [2016-04-15 00:13:18]   Version select: select id from Users where id =?
+5178 DEBUG [2016-04-15 00:13:18]   Snapshot select: select user_.id, user_.username as username2_8_, user_.sex as sex3_8_, user_.openId as openId4_8_, user_.accessToken as accessTo5_8_, user_.userRights as userRigh6_8_, user_.dateEntered as dateEnte7_8_ from Users user_ where user_.id=?
+5179 DEBUG [2016-04-15 00:13:18]   Insert 0: insert into Users (username, sex, openId, accessToken, userRights, dateEntered, id) values (?, ?, ?, ?, ?, ?, ?)
+5179 DEBUG [2016-04-15 00:13:18]   Update 0: update Users set username=?, sex=?, openId=?, accessToken=?, userRights=?, dateEntered=? where id=?
+5179 DEBUG [2016-04-15 00:13:18]   Delete 0: delete from Users where id=?
+5179 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1252b961]
+5179 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5179 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5179 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5179 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5179 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5179 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5180 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5180 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5181 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5181 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [NONE]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=?
+5181 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@56276db8]
+5181 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5181 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5181 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5181 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5182 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5182 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5182 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5182 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5183 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5183 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [READ]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=?
+5183 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@56f6d40b]
+5183 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5183 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5183 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5183 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5183 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5183 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5183 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5184 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5185 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5185 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [UPGRADE]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? for update
+5185 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5b408dc3]
+5186 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5186 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5186 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5186 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5186 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5186 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5186 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5186 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5187 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5187 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [UPGRADE_NOWAIT]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? for update
+5187 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2dbf4cbd]
+5187 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5187 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5187 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5187 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5187 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5187 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5187 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5187 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5189 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5191 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [UPGRADE_SKIPLOCKED]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? for update
+5191 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7fc44dec]
+5191 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5191 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5191 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5191 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5191 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5191 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5191 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5192 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5192 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5192 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [FORCE]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? for update
+5192 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@293d0107]
+5192 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5192 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5193 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5193 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5193 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5193 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5193 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5193 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5193 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5193 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [PESSIMISTIC_READ]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? lock in share mode
+5234 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7b64240d]
+5234 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5234 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5234 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5234 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5234 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5234 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5234 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5234 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5235 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5235 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [PESSIMISTIC_WRITE]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? for update
+5235 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@47dbb1e2]
+5235 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5235 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5235 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5235 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5241 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5241 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5241 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5242 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5242 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5242 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [PESSIMISTIC_FORCE_INCREMENT]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=? for update
+5242 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2e54db99]
+5242 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5242 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5243 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5243 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5243 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5243 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5243 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5243 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5243 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5244 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [OPTIMISTIC]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=?
+5245 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4f2613d1]
+5247 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : username
+5247 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : sex
+5248 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : openId
+5248 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : accessToken
+5249 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : userRights
+5249 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5249 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5250 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5250 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.safe.User)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.safe.User, querySpaceUid=<gen:0>, path=ajax.model.safe.User)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.safe.User)
+          - SQL table alias mapping - user0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_8_0_}
+
+5250 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.safe.User [OPTIMISTIC_FORCE_INCREMENT]: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=?
+5251 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_MERGE on entity ajax.model.safe.User: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=?
+5253 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_REFRESH on entity ajax.model.safe.User: select user0_.id as id1_8_0_, user0_.username as username2_8_0_, user0_.sex as sex3_8_0_, user0_.openId as openId4_8_0_, user0_.accessToken as accessTo5_8_0_, user0_.userRights as userRigh6_8_0_, user0_.dateEntered as dateEnte7_8_0_ from Users user0_ where user0_.id=?
+5253 DEBUG [2016-04-15 00:13:18]  Static SQL for entity: ajax.model.entity.NJoke
+5254 DEBUG [2016-04-15 00:13:18]   Version select: select joke_id from joke where joke_id =?
+5254 DEBUG [2016-04-15 00:13:18]   Snapshot select: select njoke_.joke_id, njoke_.jokeType as jokeType2_5_, njoke_.jokeStatus as jokeStat3_5_, njoke_.title as title4_5_, njoke_.content as content5_5_ from joke njoke_ where njoke_.joke_id=?
+5254 DEBUG [2016-04-15 00:13:18]   Insert 0: insert into joke (jokeType, jokeStatus, title, content, joke_id) values (?, ?, ?, ?, ?)
+5254 DEBUG [2016-04-15 00:13:18]   Update 0: update joke set jokeType=?, jokeStatus=?, title=?, content=? where joke_id=?
+5254 DEBUG [2016-04-15 00:13:18]   Delete 0: delete from joke where joke_id=?
+5254 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@65a4798f]
+5254 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5254 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5254 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5254 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5254 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5254 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5256 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4985 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [NONE]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=?
-4985 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@72445aba]
-4985 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4985 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4985 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4985 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4986 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4986 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4986 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5256 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [NONE]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=?
+5256 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@878452d]
+5256 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5257 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5257 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5257 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5257 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5257 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5258 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4986 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [READ]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=?
-4986 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1c80e49b]
-4986 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4987 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4987 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4987 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4987 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4987 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4987 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5258 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [READ]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=?
+5258 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4c51bb7]
+5258 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5258 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5258 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5258 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5259 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5260 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5261 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4987 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [UPGRADE]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? for update
-4988 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@15c25153]
-4988 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4988 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4988 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4988 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4988 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4988 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4989 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5261 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [UPGRADE]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? for update
+5261 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@42a9e5d1]
+5261 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5261 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5261 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5262 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5267 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5267 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5268 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4989 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [UPGRADE_NOWAIT]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? for update
-4989 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@9ed238c]
-4989 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4989 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4989 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4989 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4989 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4989 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4990 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5268 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [UPGRADE_NOWAIT]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? for update
+5268 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@773cbf4f]
+5268 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5268 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5268 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5268 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5268 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5269 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5270 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4990 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [UPGRADE_SKIPLOCKED]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? for update
-4990 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@51e8e6e6]
-4990 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4990 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4990 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4990 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4990 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4990 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4990 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5270 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [UPGRADE_SKIPLOCKED]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? for update
+5271 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@665e9289]
+5271 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5271 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5271 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5271 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5271 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5271 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5272 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4991 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [FORCE]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? for update
-4991 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@36676c1a]
-4991 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4991 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4991 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4991 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4991 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4991 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4991 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5272 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [FORCE]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? for update
+5273 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6f603e89]
+5273 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5273 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5273 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5273 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5273 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5274 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5274 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4991 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [PESSIMISTIC_READ]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? lock in share mode
-4992 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4d098f9b]
-4992 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4992 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4992 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4992 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4992 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4992 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4992 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5275 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [PESSIMISTIC_READ]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? lock in share mode
+5275 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@350ec41e]
+5275 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5275 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5275 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5275 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5275 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5275 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5276 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4992 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [PESSIMISTIC_WRITE]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? for update
-4992 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@20b5f2ac]
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4993 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4993 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4993 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5276 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [PESSIMISTIC_WRITE]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? for update
+5276 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@71984c3]
+5276 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5277 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5277 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5277 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5277 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5277 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5278 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4993 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [PESSIMISTIC_FORCE_INCREMENT]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=? for update
-4993 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7e3060d8]
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4993 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4993 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4994 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4994 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5278 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [PESSIMISTIC_FORCE_INCREMENT]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=? for update
+5279 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5536379e]
+5279 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5279 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5279 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5279 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5280 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5280 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5282 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4994 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [OPTIMISTIC]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=?
-4995 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2692b61e]
-4995 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeType
-4995 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : jokeStatus
-4995 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-4995 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-4995 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4995 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4996 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.NJoke)
+5282 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [OPTIMISTIC]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=?
+5282 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6c8bca63]
+5282 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeType
+5282 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : jokeStatus
+5282 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5282 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : content
+5282 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5283 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5284 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.NJoke)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.NJoke, querySpaceUid=<gen:0>, path=ajax.model.entity.NJoke)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.NJoke)
           - SQL table alias mapping - njoke0_
           - alias suffix - 0_
-          - suffixed key columns - {joke_id1_4_0_}
+          - suffixed key columns - {joke_id1_5_0_}
 
-4996 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.NJoke [OPTIMISTIC_FORCE_INCREMENT]: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=?
-4996 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.NJoke: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=?
-4997 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.NJoke: select njoke0_.joke_id as joke_id1_4_0_, njoke0_.jokeType as jokeType2_4_0_, njoke0_.jokeStatus as jokeStat3_4_0_, njoke0_.title as title4_4_0_, njoke0_.content as content5_4_0_ from joke njoke0_ where njoke0_.joke_id=?
-4997 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.Info
-4997 DEBUG [2016-04-12 22:20:09]   Version select: select id from info where id =?
-4997 DEBUG [2016-04-12 22:20:09]   Snapshot select: select info_.id, info_.akey as akey2_1_, info_.avalue as avalue3_1_ from info info_ where info_.id=?
-4997 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into info (akey, avalue, id) values (?, ?, ?)
-4997 DEBUG [2016-04-12 22:20:09]   Update 0: update info set akey=?, avalue=? where id=?
-4998 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from info where id=?
-4998 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@62fad19]
-4998 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-4998 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-4998 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4998 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-4999 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5284 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.NJoke [OPTIMISTIC_FORCE_INCREMENT]: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=?
+5284 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_MERGE on entity ajax.model.entity.NJoke: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=?
+5284 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_REFRESH on entity ajax.model.entity.NJoke: select njoke0_.joke_id as joke_id1_5_0_, njoke0_.jokeType as jokeType2_5_0_, njoke0_.jokeStatus as jokeStat3_5_0_, njoke0_.title as title4_5_0_, njoke0_.content as content5_5_0_ from joke njoke0_ where njoke0_.joke_id=?
+5284 DEBUG [2016-04-15 00:13:18]  Static SQL for entity: ajax.model.entity.Info
+5284 DEBUG [2016-04-15 00:13:18]   Version select: select id from info where id =?
+5285 DEBUG [2016-04-15 00:13:18]   Snapshot select: select info_.id, info_.akey as akey2_2_, info_.avalue as avalue3_2_ from info info_ where info_.id=?
+5285 DEBUG [2016-04-15 00:13:18]   Insert 0: insert into info (akey, avalue, id) values (?, ?, ?)
+5285 DEBUG [2016-04-15 00:13:18]   Update 0: update info set akey=?, avalue=? where id=?
+5285 DEBUG [2016-04-15 00:13:18]   Delete 0: delete from info where id=?
+5285 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@470a696f]
+5285 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5286 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5286 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5286 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5286 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-4999 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [NONE]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=?
-4999 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@74cadd41]
-4999 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-4999 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-4999 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-4999 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5000 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5287 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [NONE]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=?
+5287 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@292d1c71]
+5287 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5287 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5288 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5288 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5288 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5000 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [READ]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=?
-5000 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@55e8ec2f]
-5000 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5000 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5000 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5001 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5001 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5288 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [READ]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=?
+5289 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3f1c5af9]
+5289 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5289 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5289 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5289 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5289 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5001 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [UPGRADE]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? for update
-5001 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6d24ffa1]
-5001 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5001 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5002 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5002 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5002 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5289 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [UPGRADE]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? for update
+5289 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5ddabb18]
+5290 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5290 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5290 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5302 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5304 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5002 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [UPGRADE_NOWAIT]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? for update
-5002 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@773f7880]
-5003 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5003 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5003 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5003 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5003 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5304 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [UPGRADE_NOWAIT]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? for update
+5304 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@63192798]
+5304 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5304 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5306 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5307 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5307 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5003 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [UPGRADE_SKIPLOCKED]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? for update
-5004 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@426b6a74]
-5004 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5004 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5004 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5004 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5004 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5307 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [UPGRADE_SKIPLOCKED]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? for update
+5307 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@58e6d4b8]
+5307 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5307 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5307 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5309 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5310 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5005 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [FORCE]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? for update
-5005 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@83298d7]
-5005 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5005 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5005 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5005 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5006 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5310 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [FORCE]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? for update
+5310 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@376a312c]
+5310 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5310 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5314 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5315 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5315 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5006 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [PESSIMISTIC_READ]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? lock in share mode
-5006 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5b080f3a]
-5007 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5007 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5007 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5007 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5008 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5315 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [PESSIMISTIC_READ]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? lock in share mode
+5315 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6ca0256d]
+5316 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5316 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5316 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5316 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5316 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5008 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [PESSIMISTIC_WRITE]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? for update
-5008 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@6b54655f]
-5008 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5008 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5008 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5008 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5009 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5316 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [PESSIMISTIC_WRITE]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? for update
+5316 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@38f57b3d]
+5316 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5316 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5316 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5317 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5318 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5009 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [PESSIMISTIC_FORCE_INCREMENT]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=? for update
-5009 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@7d3430a7]
-5009 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5010 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5010 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5010 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5010 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5318 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [PESSIMISTIC_FORCE_INCREMENT]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=? for update
+5318 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3ce3db41]
+5318 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5318 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5319 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5319 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5320 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5010 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [OPTIMISTIC]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=?
-5010 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2756c0a7]
-5011 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : key
-5011 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : value
-5011 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5011 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5011 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Info)
+5320 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [OPTIMISTIC]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=?
+5320 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@77602954]
+5320 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : key
+5321 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : value
+5325 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5325 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5326 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.Info)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.Info, querySpaceUid=<gen:0>, path=ajax.model.entity.Info)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Info)
           - SQL table alias mapping - info0_
           - alias suffix - 0_
-          - suffixed key columns - {id1_1_0_}
+          - suffixed key columns - {id1_2_0_}
 
-5011 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Info [OPTIMISTIC_FORCE_INCREMENT]: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=?
-5012 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.Info: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=?
-5012 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.Info: select info0_.id as id1_1_0_, info0_.akey as akey2_1_0_, info0_.avalue as avalue3_1_0_ from info info0_ where info0_.id=?
-5012 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.ItemsRoll
-5012 DEBUG [2016-04-12 22:20:09]   Version select: select id from itemsRoll where id =?
-5013 DEBUG [2016-04-12 22:20:09]   Snapshot select: select itemsroll_.id, itemsroll_.itemId as itemId2_2_, itemsroll_.rank as rank3_2_, itemsroll_.src as src4_2_, itemsroll_.title as title5_2_, itemsroll_.dateEntered as dateEnte6_2_, itemsroll_.deleted as deleted7_2_ from itemsRoll itemsroll_ where itemsroll_.id=?
-5014 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into itemsRoll (itemId, rank, src, title, dateEntered, deleted, id) values (?, ?, ?, ?, ?, ?, ?)
-5014 DEBUG [2016-04-12 22:20:09]   Update 0: update itemsRoll set itemId=?, rank=?, src=?, title=?, dateEntered=?, deleted=? where id=?
-5014 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from itemsRoll where id=?
-5015 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@69637b10]
-5015 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5015 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5015 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5015 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5015 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5015 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5015 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5015 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5016 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
+5327 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.Info [OPTIMISTIC_FORCE_INCREMENT]: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=?
+5327 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_MERGE on entity ajax.model.entity.Info: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=?
+5327 DEBUG [2016-04-15 00:13:18]  Static select for action ACTION_REFRESH on entity ajax.model.entity.Info: select info0_.id as id1_2_0_, info0_.akey as akey2_2_0_, info0_.avalue as avalue3_2_0_ from info info0_ where info0_.id=?
+5328 DEBUG [2016-04-15 00:13:18]  Static SQL for entity: ajax.model.entity.ItemsRoll
+5328 DEBUG [2016-04-15 00:13:18]   Version select: select id from itemsRoll where id =?
+5328 DEBUG [2016-04-15 00:13:18]   Snapshot select: select itemsroll_.id, itemsroll_.itemId as itemId2_3_, itemsroll_.rank as rank3_3_, itemsroll_.src as src4_3_, itemsroll_.title as title5_3_, itemsroll_.dateEntered as dateEnte6_3_, itemsroll_.deleted as deleted7_3_ from itemsRoll itemsroll_ where itemsroll_.id=?
+5328 DEBUG [2016-04-15 00:13:18]   Insert 0: insert into itemsRoll (itemId, rank, src, title, dateEntered, deleted, id) values (?, ?, ?, ?, ?, ?, ?)
+5329 DEBUG [2016-04-15 00:13:18]   Update 0: update itemsRoll set itemId=?, rank=?, src=?, title=?, dateEntered=?, deleted=? where id=?
+5329 DEBUG [2016-04-15 00:13:18]   Delete 0: delete from itemsRoll where id=?
+5329 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2c3dec30]
+5329 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : itemId
+5329 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : rank
+5329 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : src
+5329 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5329 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5329 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : deleted
+5329 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5329 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5330 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
     - Returns
        - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
     - QuerySpaces
        - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
           - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5016 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [NONE]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
-5016 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@165b2f7f]
-5016 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5016 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5016 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5017 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5017 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5017 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5017 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5017 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5017 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5017 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [READ]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
-5018 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@277f7dd3]
-5018 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5018 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5018 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5018 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5018 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5018 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5018 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5018 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5019 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5019 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [UPGRADE]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
-5019 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2364305a]
-5019 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5019 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5019 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5019 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5019 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5019 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5020 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5020 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5020 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5021 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [UPGRADE_NOWAIT]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
-5021 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1bc715b8]
-5021 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5021 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5021 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5022 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5022 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5022 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5022 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5022 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5022 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5022 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [UPGRADE_SKIPLOCKED]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
-5023 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2b491fee]
-5023 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5023 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5023 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5023 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5023 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5023 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5023 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5023 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5024 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5024 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [FORCE]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
-5024 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1c55f277]
-5024 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5024 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5024 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5024 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5024 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5025 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5025 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5025 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5025 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5025 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [PESSIMISTIC_READ]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? lock in share mode
-5026 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3e8f7922]
-5026 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5026 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5026 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5026 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5026 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5026 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5026 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5026 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5027 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5027 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [PESSIMISTIC_WRITE]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
-5027 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@50eca7c6]
-5027 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5027 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5027 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5027 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5027 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5027 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5028 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5028 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5028 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5028 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [PESSIMISTIC_FORCE_INCREMENT]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
-5028 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@1de5f0ef]
-5029 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5029 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5029 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5029 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5029 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5029 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5029 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5029 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5029 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5030 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [OPTIMISTIC]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
-5030 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@28d6290]
-5030 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itemId
-5030 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rank
-5030 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : src
-5030 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5030 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5030 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : deleted
-5030 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5031 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5031 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
-          - SQL table alias mapping - itemsroll0_
-          - alias suffix - 0_
-          - suffixed key columns - {id1_2_0_}
-
-5031 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.ItemsRoll [OPTIMISTIC_FORCE_INCREMENT]: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
-5032 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_MERGE on entity ajax.model.entity.ItemsRoll: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
-5032 DEBUG [2016-04-12 22:20:09]  Static select for action ACTION_REFRESH on entity ajax.model.entity.ItemsRoll: select itemsroll0_.id as id1_2_0_, itemsroll0_.itemId as itemId2_2_0_, itemsroll0_.rank as rank3_2_0_, itemsroll0_.src as src4_2_0_, itemsroll0_.title as title5_2_0_, itemsroll0_.dateEntered as dateEnte6_2_0_, itemsroll0_.deleted as deleted7_2_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
-5032 DEBUG [2016-04-12 22:20:09]  Static SQL for entity: ajax.model.entity.Item
-5032 DEBUG [2016-04-12 22:20:09]   Version select: select id from ItemTest where id =?
-5032 DEBUG [2016-04-12 22:20:09]   Snapshot select: select item_.id, item_.url as url2_3_, item_.title as title3_3_, item_.summary as summary4_3_, item_.content as content5_3_, item_.stamps as stamps6_3_, item_.likes as likes7_3_, item_.dislikes as dislikes8_3_, item_.hasGetImage as hasGetIm9_3_, item_.itype as itype10_3_, item_.status as status11_3_, item_.username as usernam12_3_, item_.userPersonalPageUrl as userPer13_3_, item_.backgroundInformation as backgro14_3_, item_.dateEntered as dateEnt15_3_, item_.rulesTagId as rulesTa16_3_, item_.previewImage as preview17_3_, item_.page as page18_3_ from ItemTest item_ where item_.id=?
-5032 DEBUG [2016-04-12 22:20:09]   Insert 0: insert into ItemTest (url, title, summary, content, stamps, likes, dislikes, hasGetImage, itype, status, username, userPersonalPageUrl, backgroundInformation, dateEntered, rulesTagId, previewImage, page, id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-5032 DEBUG [2016-04-12 22:20:09]   Update 0: update ItemTest set url=?, title=?, summary=?, content=?, stamps=?, likes=?, dislikes=?, hasGetImage=?, itype=?, status=?, username=?, userPersonalPageUrl=?, backgroundInformation=?, dateEntered=?, rulesTagId=?, previewImage=?, page=? where id=?
-5033 DEBUG [2016-04-12 22:20:09]   Delete 0: delete from ItemTest where id=?
-5033 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@5ef0d29e]
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : stamps
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : likes
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dislikes
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : hasGetImage
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : itype
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : status
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : username
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : userPersonalPageUrl
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : backgroundInformation
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : dateEntered
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : rulesTagId
-5033 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : previewImage
-5034 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : page
-5034 DEBUG [2016-04-12 22:20:09]  Building LoadPlan...
-5034 DEBUG [2016-04-12 22:20:09]  processing queryspace <gen:0>
-5034 DEBUG [2016-04-12 22:20:09]  LoadPlan(entity=ajax.model.entity.Item)
-    - Returns
-       - EntityReturnImpl(entity=ajax.model.entity.Item, querySpaceUid=<gen:0>, path=ajax.model.entity.Item)
-    - QuerySpaces
-       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.Item)
-          - SQL table alias mapping - item0_
           - alias suffix - 0_
           - suffixed key columns - {id1_3_0_}
 
-5034 DEBUG [2016-04-12 22:20:09]  Static select for entity ajax.model.entity.Item [NONE]: select item0_.id as id1_3_0_, item0_.url as url2_3_0_, item0_.title as title3_3_0_, item0_.summary as summary4_3_0_, item0_.content as content5_3_0_, item0_.stamps as stamps6_3_0_, item0_.likes as likes7_3_0_, item0_.dislikes as dislikes8_3_0_, item0_.hasGetImage as hasGetIm9_3_0_, item0_.itype as itype10_3_0_, item0_.status as status11_3_0_, item0_.username as usernam12_3_0_, item0_.userPersonalPageUrl as userPer13_3_0_, item0_.backgroundInformation as backgro14_3_0_, item0_.dateEntered as dateEnt15_3_0_, item0_.rulesTagId as rulesTa16_3_0_, item0_.previewImage as preview17_3_0_, item0_.page as page18_3_0_ from ItemTest item0_ where item0_.id=?
-5035 DEBUG [2016-04-12 22:20:09]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@51850751]
-5035 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : url
-5035 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : title
-5035 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : summary
-5035 DEBUG [2016-04-12 22:20:09]  Visiting attribute path : content
+5330 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.ItemsRoll [NONE]: select itemsroll0_.id as id1_3_0_, itemsroll0_.itemId as itemId2_3_0_, itemsroll0_.rank as rank3_3_0_, itemsroll0_.src as src4_3_0_, itemsroll0_.title as title5_3_0_, itemsroll0_.dateEntered as dateEnte6_3_0_, itemsroll0_.deleted as deleted7_3_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
+5330 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@4275c20c]
+5330 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : itemId
+5330 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : rank
+5331 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : src
+5331 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5331 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5338 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : deleted
+5338 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5339 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5339 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
+          - SQL table alias mapping - itemsroll0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5339 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.ItemsRoll [READ]: select itemsroll0_.id as id1_3_0_, itemsroll0_.itemId as itemId2_3_0_, itemsroll0_.rank as rank3_3_0_, itemsroll0_.src as src4_3_0_, itemsroll0_.title as title5_3_0_, itemsroll0_.dateEntered as dateEnte6_3_0_, itemsroll0_.deleted as deleted7_3_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=?
+5340 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@3fc9dfc5]
+5340 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : itemId
+5340 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : rank
+5340 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : src
+5340 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5340 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5340 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : deleted
+5340 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5340 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5341 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
+          - SQL table alias mapping - itemsroll0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+
+5341 DEBUG [2016-04-15 00:13:18]  Static select for entity ajax.model.entity.ItemsRoll [UPGRADE]: select itemsroll0_.id as id1_3_0_, itemsroll0_.itemId as itemId2_3_0_, itemsroll0_.rank as rank3_3_0_, itemsroll0_.src as src4_3_0_, itemsroll0_.title as title5_3_0_, itemsroll0_.dateEntered as dateEnte6_3_0_, itemsroll0_.deleted as deleted7_3_0_ from itemsRoll itemsroll0_ where itemsroll0_.id=? for update
+5341 DEBUG [2016-04-15 00:13:18]  Adding QuerySpace : uid = <gen:0> -> org.hibernate.loader.plan.build.internal.spaces.EntityQuerySpaceImpl@2cac4385]
+5341 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : itemId
+5341 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : rank
+5341 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : src
+5341 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : title
+5341 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : dateEntered
+5341 DEBUG [2016-04-15 00:13:18]  Visiting attribute path : deleted
+5342 DEBUG [2016-04-15 00:13:18]  Building LoadPlan...
+5343 DEBUG [2016-04-15 00:13:18]  processing queryspace <gen:0>
+5345 DEBUG [2016-04-15 00:13:18]  LoadPlan(entity=ajax.model.entity.ItemsRoll)
+    - Returns
+       - EntityReturnImpl(entity=ajax.model.entity.ItemsRoll, querySpaceUid=<gen:0>, path=ajax.model.entity.ItemsRoll)
+    - QuerySpaces
+       - EntityQuerySpaceImpl(uid=<gen:0>, entity=ajax.model.entity.ItemsRoll)
+          - SQL table alias mapping - itemsroll0_
+          - alias suffix - 0_
+          - suffixed key columns - {id1_3_0_}
+

@@ -1,4 +1,4 @@
-package ajax.controller;
+package ajax.controller.sign;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import ajax.model.safe.User;
 
 @WebServlet("/sign/qq")
 public class QQSign extends HttpServlet {
@@ -56,10 +58,15 @@ public class QQSign extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
-		rd.forward(request, response);
-		
+		String action = request.getParameter("action");
+		if (action == null || action.equals("")) {
+			RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
+			rd.forward(request, response);
+		} else {
+			String openId = request.getParameter("id");
+			String accessToken = request.getParameter("token");
+			User.signWithQQ(openId, accessToken);
+		}
 	}
 
 	/**

@@ -25,7 +25,7 @@ import ajax.model.entity.Entity;
 import ajax.tools.Mysql;
 import ajax.tools.Tools;
 
-public class Topic extends Entity{
+public class Topic extends Entity<Topic>{
 	private int id;
 	private String tname;
 	private int watchIndex;
@@ -149,7 +149,7 @@ public class Topic extends Entity{
 			e.printStackTrace();
 		}
 	}
-	public void save() {
+	public boolean save() {
 		Connection conn = Mysql.getConn();
 		String sql = String.format("INSERT INTO %s (tname, watchIndex, dataId, rank, url, parentId) VALUES(?, ?, ?, ?, ?, ?) ", tableName);
 		try {
@@ -162,12 +162,12 @@ public class Topic extends Entity{
 			ps.setInt(6, this.getParentId());
 			
 			ps.execute();
-			
+			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return false;
 		}
 	}
+	
 	public void readFromResultSet(ResultSet rs) {
 		try {
 			

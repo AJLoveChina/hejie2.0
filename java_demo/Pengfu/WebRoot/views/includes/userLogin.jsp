@@ -1,10 +1,11 @@
+<%@page import="ajax.model.safe.Safe"%>
 <%@page import="ajax.model.safe.User"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-String state = User.getState(request);
+String state = Safe.getState(request);
 %>
 
 <style>
@@ -175,6 +176,11 @@ String state = User.getState(request);
 	$(function() {
 		try {
 			var CSRF_STATE = "<%=state %>";
+			var config = {
+				qq : {
+					url : "/sign/qq"
+				}
+			};
 			$(function(){
 				$(".aj-show-sign-panel").click(function(){
 				  $("#aj-sign-panel").modal("toggle");
@@ -225,7 +231,23 @@ String state = User.getState(request);
 			       
 			       if (from === "qq") {
 			       		QC.Login.getMe(function(openId, accessToken){
-							
+							var data = {
+								id : openId,
+								token : accessToken,
+								action : "sign"
+							};
+							$.ajax({
+								url : config.qq.url,
+								data : data,
+								type : "GET",
+								dataType : "json",
+								success : function (json) {
+									console.log(json);
+								},
+								error : function(e) {
+									console.log(e);
+								}
+							});
 						})
 			       }
 			}
