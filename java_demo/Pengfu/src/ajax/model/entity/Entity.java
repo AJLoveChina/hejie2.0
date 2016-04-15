@@ -128,8 +128,8 @@ public class Entity<T> {
 	 * @return
 	 */
 	public static <T> boolean isExist(String column, String columnValue, Class<T> cls) {
-		List<T> list = (List<T>) getBy(column, columnValue, cls);
-		return list != null;
+		T t = getBy(column, columnValue, cls);
+		return t != null;
 	}
 
 

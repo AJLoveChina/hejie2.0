@@ -28,6 +28,4 @@ java_demo/Pengfu/target
 java_demo/Pengfu/target/Pengfu-0.0.1-SNAPSHOT.war
 *.jar
 *.properties
-java_demo/Pengfu/src/ajax/model/safe/User.java
-java_demo/Pengfu/src/ajax/model/safe
 *.log
