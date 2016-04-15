@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ajax.model.entity.Config;
+import ajax.model.entity.Item;
 import ajax.model.safe.User;
 
 @WebServlet("/sign/qq")
@@ -77,5 +79,6 @@ public class QQSign extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
+
 
 }

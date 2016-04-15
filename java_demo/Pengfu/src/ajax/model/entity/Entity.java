@@ -96,23 +96,43 @@ public class Entity<T> {
 			HibernateUtil.closeSession(session);
 		}
 	}
-
-
 	
-	public static void main(String[] args) {
-//		Item item = new Item();
-//		Item newItem = item.getById(1);
-//		
-//		// newItem 是数据库对应表 id = 1 的那一行
-//		// 但是 我现在不想这么做
-//		// 我想这样
-//		Item item2 = new Item();
-//		item2.setId(1);
-//		
-//		item2.load(); // 就是这个load方法该怎么写 我不会
-//		// item2 也是 数据库对应表 id = 1 的那一行
+	/**
+	 * 根据某个字段的值获取一个实体, 只返回找到的第一个
+	 * @param column
+	 * @param columnValue
+	 * @param cls
+	 * @return
+	 */
+	public static <T> T getBy(String column, String columnValue, Class<T> cls) {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(cls);
 		
+		cr.add(Restrictions.eq(column, columnValue));
+		
+		List<T> list = cr.list();
+		
+		HibernateUtil.closeSession(session);
+		
+		if (list.size() > 0) {
+			return list.get(0);
+		} else {
+			return null;
+		}
 	}
+	/**
+	 * 根据字段查询是否存在该行数据
+	 * @param column
+	 * @param columnValue
+	 * @param cls
+	 * @return
+	 */
+	public static <T> boolean isExist(String column, String columnValue, Class<T> cls) {
+		List<T> list = (List<T>) getBy(column, columnValue, cls);
+		return list != null;
+	}
+
+
 	public String getTableName() {
 		String tableName = HibernateUtil.getTableName(this.getClass());
 		
@@ -120,6 +140,7 @@ public class Entity<T> {
 	}
 	
 	
+	@Deprecated
 	public List<T> getPage(int page, int pageNum) {
 		Session session = HibernateUtil.getSession();
 		
@@ -136,6 +157,24 @@ public class Entity<T> {
 		return lists;
 	}
 	
+	/**
+	 * return list of T, empty list if not found
+	 * @param page
+	 * @param size
+	 * @param cls
+	 * @return
+	 */
+	public static <T> List<T> get(int page, int size, Class<T> cls) {
+		Session session = HibernateUtil.getSession();
+		
+		Criteria  cr = session.createCriteria(cls);
+		List<T> list = cr.list();
+		
+		HibernateUtil.closeSession(session);
+		return list;
+	}
+	
+	@Deprecated
 	public List<T> getList(Criteria criteria) {
 		
 		return criteria.list();
