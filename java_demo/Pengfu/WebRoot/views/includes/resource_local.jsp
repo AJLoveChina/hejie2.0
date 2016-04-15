@@ -7,6 +7,5 @@
 <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.0.0/animate.min.css"/>
 <link rel="stylesheet" href="web/css/index.css"/>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script data-main="main.js" src="bower_components/requirejs/require.js"></script>
 <script type="text/javascript" src="web/js/base.js"></script>
 <script type="text/javascript" src="web/js/main.js"></script>

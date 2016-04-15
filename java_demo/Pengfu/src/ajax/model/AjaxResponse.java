@@ -1,8 +1,13 @@
 package ajax.model;
 
+import com.google.gson.Gson;
+
 public class AjaxResponse<T> {
 	private boolean isok;
 	private T data;
+	
+	
+	
 	public boolean isIsok() {
 		return isok;
 	}
@@ -14,5 +19,10 @@ public class AjaxResponse<T> {
 	}
 	public void setData(T data) {
 		this.data = data;
+	}
+	
+	public String toJson() {
+		Gson gson = new Gson();
+		return gson.toJson(this);
 	}
 }

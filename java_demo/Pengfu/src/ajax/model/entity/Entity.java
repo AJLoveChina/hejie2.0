@@ -26,7 +26,7 @@ public class Entity<T> {
 			HibernateUtil.closeSession(session);
 			return true;
 		}catch(Exception e) {
-			System.out.println("Grab Error : " + e.toString());
+			System.out.println(e.toString());
 			HibernateUtil.closeSession(session);
 			return false;
 		}
@@ -98,7 +98,7 @@ public class Entity<T> {
 	}
 	
 	/**
-	 * 根据某个字段的值获取一个实体, 只返回找到的第一个
+	 * 根据某个字段的值获取一个实体, 只返回找到的第一个. null if not find.
 	 * @param column
 	 * @param columnValue
 	 * @param cls

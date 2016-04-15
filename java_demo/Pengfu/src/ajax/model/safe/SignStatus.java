@@ -6,13 +6,24 @@ package ajax.model.safe;
  *
  */
 public class SignStatus {
-	private boolean isLogin;
+	private boolean success;
 	private User user;
-	public boolean isLogin() {
-		return isLogin;
+	private String info;
+	
+	
+	
+	public String getInfo() {
+		return info;
 	}
-	public void setLogin(boolean isLogin) {
-		this.isLogin = isLogin;
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+	public void setSuccess(boolean success) {
+		this.success = success;
 	}
 	public User getUser() {
 		return user;

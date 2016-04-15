@@ -152,9 +152,7 @@ String state = Safe.getState(request);
 				<h4 class="modal-title">登陆选择</h4>
 			</div>
 			<div class="modal-body" style="text-align: center;">
-				<span id="qqLoginBtn2" ></span>
-				<span id="wb_connect_btn" style="margin-left:20px;"></span>
-				
+			
 				<div class="other-ways">
 					<span>其它登陆方式 : </span>
 					<a href="javascript:;" class="aj-icon github">&#xe615;</a>
@@ -179,7 +177,9 @@ String state = Safe.getState(request);
 			var config = {
 				qq : {
 					url : "/sign/qq"
-				}
+				},
+				SIGN_OUT : "sign/out",
+				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
 			};
 			$(function(){
 				$(".aj-show-sign-panel").click(function(){
@@ -202,22 +202,12 @@ String state = Safe.getState(request);
 				     signout(opts);
 				});
 
-
-				QC.Login({
-					btnId : "qqLoginBtn2",//插入按钮的html标签id
-					size : "A_M",//按钮尺寸
-					scope : "get_user_info",//展示授权，全部可用授权可填 all
-					display : "pc"//应用场景，可选
-				},function(reqData, opts){//登录成功
-				    signin(reqData.figureurl, reqData.nickname, "qq");
-				}, function(opts){//注销成功
-				     signout(opts);
-				});
 				
 			// 登陆成功后做的事情
 			function signin(userimg, nickname, from) {
 					//根据返回数据，更换按钮显示状态方法
 			      
+			      	
 			       $("#aj-user-login-choices").hide();
 			       
 			       var img = $(document.createElement("img"));
@@ -229,34 +219,67 @@ String state = Safe.getState(request);
 			       after.find(".nickname").html(nickname);
 			       after.show();
 			       
+			       // 向服务端注册
+			       /* if (sessionStorage.getItem(config.SIGNIN_ATTR)) {
+			      		return;
+			      	}
+			      	sessionStorage.setItem(config.SIGNIN_ATTR, true); */
 			       if (from === "qq") {
+			       
 			       		QC.Login.getMe(function(openId, accessToken){
 							var data = {
 								id : openId,
 								token : accessToken,
 								action : "sign"
 							};
-							$.ajax({
-								url : config.qq.url,
-								data : data,
-								type : "GET",
-								dataType : "json",
-								success : function (json) {
-									console.log(json);
-								},
-								error : function(e) {
-									console.log(e);
-								}
+							
+							QC.api("get_user_info", {})
+							//指定接口访问成功的接收函数，s为成功返回Response对象
+							.success(function(s){
+								data.nickname = s.data.nickname;
+								data.dataText = s.dataText;
+								
+								$.ajax({
+									url : config.qq.url,
+									data : data,
+									type : "POST",
+									dataType : "json",
+									success : function (json) {
+										console.log(json);
+										
+									},
+									error : function(e) {
+										console.log(e);
+									}
+								});
+							}).error(function(f){ //指定接口访问失败的接收函数，f为失败返回Response对象
+								//失败回调
+							}).complete(function(c){//指定接口完成请求后的接收函数，c为完成请求返回Response对象
+								
 							});
 						})
 			       }
 			}
+			
 			
 			function signout() {
 				$("#aj-user-login-choices").show();
 		        after.hide();
 		        $(".user-login .u-l-photo").find("img").remove();
 		        before.show();
+		        sessionStorage.removeItem(config.SIGNIN_ATTR);
+		        
+		        $.ajax({
+		        	url : config.SIGN_OUT,
+		        	type : "GET",
+		        	dataType : "text/json",
+		        	success : function (json) {
+		        		console.log(json);
+		        	},
+		        	error : function (err) {
+		        		console.log(err);
+		        	}
+		        });
 			}
 			   
 			// QQ 注销   
@@ -266,20 +289,7 @@ String state = Safe.getState(request);
 				}
 			}) 
 			
-			// 微博登陆
-			WB2.anyWhere(function(W){
-			    W.widget.connectButton({
-			        id: "wb_connect_btn",
-			        type:"3,2",
-			        callback : {
-			            login:function(o){	//登录后的回调函数
-			            },	
-			            logout:function(){	//退出后的回调函数
-			            }
-			        }
-			    });
-			});
-			
+			// 微博登陆			
 			WB2.anyWhere(function(W){
 			    W.widget.connectButton({
 			        id: "wb_connect_btn2",	
@@ -315,7 +325,6 @@ String state = Safe.getState(request);
 			})
 			
 			
-
 		}catch(ex) {
 			console.log(ex.message);
 		}

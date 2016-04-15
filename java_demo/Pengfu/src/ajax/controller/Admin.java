@@ -1,4 +1,4 @@
-package ajax.controller.sign;
+package ajax.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,21 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import ajax.model.AjaxResponse;
-import ajax.model.entity.Config;
-import ajax.model.entity.Item;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
 
-@WebServlet("/sign/qq")
-public class QQSign extends HttpServlet {
+
+@WebServlet("/admin")
+public class Admin extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public QQSign() {
+	public Admin() {
 		super();
 	}
 
@@ -49,6 +46,7 @@ public class QQSign extends HttpServlet {
 			throws ServletException, IOException {
 
 		doPost(request, response);
+		
 	}
 
 	/**
@@ -63,35 +61,13 @@ public class QQSign extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-		if (action == null || action.equals("")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
-			rd.forward(request, response);
-		} else {
-			
-			request.setCharacterEncoding("UTF-8");
-			String openId = request.getParameter("id");
-			String accessToken = request.getParameter("token");
-			String nickname = request.getParameter("nickname");
-			openId = User.Source.dealOpenId(openId, User.Source.QQ);
-			
-			User u = new User();
-			u.setOpenId(openId);
-			u.setUsername(nickname);
-			u.setAccessToken(accessToken);
-			u.setFrom(User.Source.QQ.getId());
-			
-			String json = u.signIn(request, response);
-			
-			response.setContentType("text/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			
-			out.println(json);
-			
-			out.flush();
-			out.close();
-		}
+
+		SignStatus ss = User.getSignStatus(request, response);
+		
+		RequestDispatcher  rd = request.getRequestDispatcher("Admin.jsp");
+		
+		request.setAttribute("signStatus", ss);
+		rd.forward(request, response);
 	}
 
 	/**
@@ -102,6 +78,5 @@ public class QQSign extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
-
 
 }

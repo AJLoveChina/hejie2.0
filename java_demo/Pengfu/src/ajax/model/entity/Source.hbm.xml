@@ -153,6 +153,10 @@
 			<column name="dateEntered"></column>
 		</property>
 		
+		<property name="from" type="java.lang.Integer">
+			<column name="afrom"></column>
+		</property>
+		
 	</class>
 	
 	<class name="ajax.model.entity.Config" table="Config">

@@ -4,17 +4,20 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import ajax.model.AjaxResponse;
 import ajax.model.entity.Entity;
 import ajax.tools.HibernateUtil;
 
 public class User extends Entity<User>{
 	
-	enum Sex{
+	public enum Sex{
 		BOY(1),
 		GIRL(2),
 		BUZHIDAO(3);
@@ -33,7 +36,7 @@ public class User extends Entity<User>{
 	}
 	
 	
-	enum UserRights{
+	public enum UserRights{
 		NORMAL(1, "普通用户"),
 		FORMID(4, "黑名单用户"),
 		ADMIN(99, "管理员");
@@ -58,12 +61,14 @@ public class User extends Entity<User>{
 		}
 	}
 	
-	enum Source{
+	public enum Source{
 		QQ(1, "QQ"),
 		WEIBO(2, "WEIBO");
 		
 		private int id;
 		private String prefix;
+		
+		private static final String HEAD = "aj-prefix-";
 		
 		
 		private Source(int id, String prefix) {
@@ -83,6 +88,14 @@ public class User extends Entity<User>{
 			this.prefix = prefix;
 		}
 		
+		public static String dealOpenId(String openId, Source s) {
+			if (openId.startsWith(HEAD)) {
+				return openId;
+			} else {
+				return HEAD + s.getPrefix() + openId;
+			}
+		}
+		
 	}
 	
 	private int id;
@@ -92,10 +105,18 @@ public class User extends Entity<User>{
 	private String accessToken;
 	private int userRights = UserRights.NORMAL.id;
 	private String dateEntered;
+	private int from;
+	
+	public static final String SIGN_SESSION_ATTR = "aj-sign-sess-status";
 	
 	
 	
-	
+	public int getFrom() {
+		return from;
+	}
+	public void setFrom(int from) {
+		this.from = from;
+	}
 	public String getDateEntered() {
 		return dateEntered;
 	}
@@ -143,33 +164,97 @@ public class User extends Entity<User>{
 		return source.getPrefix() + openId;
 	}
 	
-	private static boolean sign(String openId) {
-		User u = User.getBy("openId", openId, User.class);
+	
+	/**
+	 * 第三方登陆, 如果木有注册则注册
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public String signIn(HttpServletRequest request, HttpServletResponse response) {
+		SignStatus ss = null;
 		
-		if (u != null) {
-			SignStatus ss = new SignStatus();
-			ss.setLogin(true);
-			ss.setUser(u);
+		if (User.isLogin(request, response)) {
 			
+			ss = User.getSignStatus(request, response);
 			
-			return true;
 		} else {
+			
+			User u = new User();
+			if (!this.isExist("openId", this.getOpenId(), User.class)) {
+				
+				this.save();
+				u = this;
+				
+			} else {
+				u = User.getBy("openId", this.getOpenId(), User.class);
+				u.setAccessToken(this.getAccessToken());
+			}
+			
+		
+			HttpSession session = request.getSession();
+			
+			ss = new SignStatus();
+			ss.setSuccess(true);
+			ss.setUser(u);			
+			session.setAttribute(SIGN_SESSION_ATTR, ss);
+		}
+		
+		
+		AjaxResponse<SignStatus> ar = new AjaxResponse<SignStatus>();
+		ar.setIsok(true);
+		ar.setData(ss);
+		return ar.toJson();
+	}
+	
+	/**
+	 * @param request
+	 * @param response
+	 * @return null if not set
+	 */
+	public static SignStatus getSignStatus(HttpServletRequest request, HttpServletResponse response) {
+		return (SignStatus)request.getSession().getAttribute(SIGN_SESSION_ATTR);
+	}
+	
+	public static boolean isLogin(HttpServletRequest request, HttpServletResponse response) {
+		SignStatus ss = (SignStatus)request.getSession().getAttribute(SIGN_SESSION_ATTR);
+		
+		if (ss == null) {
 			return false;
+		} else {
+			return ss.isSuccess();
 		}
 	}
 	
-	public static void signWithQQ(String openId, String accessToken) {
-		String finalOpenId = getFinalOpenId(openId, Source.QQ);
+	public static void signout(HttpServletRequest request, HttpServletResponse response) {
 		
-		// 注册
-		if (!User.isExist("openId", finalOpenId, User.class)) {
-			User u = new User();
-			u.setOpenId(finalOpenId);
-			u.save();
+		request.getSession().removeAttribute(SIGN_SESSION_ATTR);
+		
+		
+	}
+	
+	public boolean isAdmin() {
+		return this.getUserRights() == UserRights.ADMIN.getId();
+	}
+	
+	public static boolean isAdmin(HttpServletRequest request, HttpServletResponse response) {
+		SignStatus ss = User.getSignStatus(request, response);
+		
+		if (ss == null) {
+			return false;
+		} else {
+			User u = ss.getUser();
+			
+			if (u != null && u.isAdmin()) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		
-		sign(finalOpenId);
 	}
+	
+	
 	
 	
 }
