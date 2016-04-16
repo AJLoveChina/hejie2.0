@@ -8,7 +8,15 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 boolean isAdmin = User.isAdmin(request, response);
+boolean isLogin = User.isLogin(request, response);
+String nickname = "";
+
+if (isLogin) {
+	nickname = User.getLoginUser(request).getUsername();
+}
+
 request.setAttribute("isAdmin", isAdmin);
+request.setAttribute("isLogin", isLogin);
 
 %>
 
@@ -21,11 +29,15 @@ request.setAttribute("isAdmin", isAdmin);
 <div class="aj-body-left">
 	<c:choose>
 		<c:when test="${isAdmin }">
-			你是admin
+			你是admin<%=nickname %>
+		</c:when>
+		
+		<c:when test="${isLogin }">
+			你已经登陆 <%=nickname %>
 		</c:when>
 		
 		<c:otherwise>
-			你不是admin
+			你不是admin <%=nickname %>
 		</c:otherwise>
 	</c:choose>
 		 

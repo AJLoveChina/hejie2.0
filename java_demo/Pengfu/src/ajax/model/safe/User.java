@@ -106,11 +106,18 @@ public class User extends Entity<User>{
 	private int userRights = UserRights.NORMAL.id;
 	private String dateEntered;
 	private int from;
+	private String img;
 	
 	public static final String SIGN_SESSION_ATTR = "aj-sign-sess-status";
 	
 	
 	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	public int getFrom() {
 		return from;
 	}
@@ -223,6 +230,16 @@ public class User extends Entity<User>{
 			return false;
 		} else {
 			return ss.isSuccess();
+		}
+	}
+	
+	public static User getLoginUser(HttpServletRequest request) {
+		SignStatus ss = (SignStatus)request.getSession().getAttribute(SIGN_SESSION_ATTR);
+		
+		if (ss == null) {
+			return null;
+		} else {
+			return ss.getUser();
 		}
 	}
 	

@@ -1,29 +1,47 @@
 package ajax.controller.sign;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import ajax.model.AjaxResponse;
-import ajax.model.entity.Config;
-import ajax.model.entity.Item;
-import ajax.model.safe.SignStatus;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+
+
+
+
+
+
+
+
+
+
+
 import ajax.model.safe.User;
+import ajax.tools.Tools;
 
-@WebServlet("/sign/qq")
-public class QQSign extends HttpServlet {
+
+@WebServlet("/sign/weibo")
+public class Weibo extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public QQSign() {
+	public Weibo() {
 		super();
 	}
 
@@ -49,6 +67,7 @@ public class QQSign extends HttpServlet {
 			throws ServletException, IOException {
 
 		doPost(request, response);
+		
 	}
 
 	/**
@@ -63,37 +82,34 @@ public class QQSign extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-		if (action == null || action.equals("")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
-			rd.forward(request, response);
-		} else {
-			
-			request.setCharacterEncoding("UTF-8");
-			String openId = request.getParameter("id");
-			String accessToken = request.getParameter("token");
-			String nickname = request.getParameter("nickname");
-			String img = request.getParameter("img");
-			openId = User.Source.dealOpenId(openId, User.Source.QQ);
-			
-			User u = new User();
-			u.setOpenId(openId);
-			u.setUsername(nickname);
-			u.setAccessToken(accessToken);
-			u.setFrom(User.Source.QQ.getId());
-			u.setImg(img);
-			
-			String json = u.signIn(request, response);
-			
-			response.setContentType("text/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			
-			out.println(json);
-			
-			out.flush();
-			out.close();
-		}
+
+		
+		
+		String uid = request.getParameter("uid");
+		String token = request.getParameter("token");
+		String img = request.getParameter("img");
+		String nickname = request.getParameter("nickname");
+		String appkey = Tools.getConfig("weiboAppKey");
+		
+		String openId = User.Source.dealOpenId(token, User.Source.WEIBO);
+		
+		User u = new User();
+		u.setOpenId(openId);
+		u.setUsername(nickname);
+		u.setUserRights(User.UserRights.NORMAL.getId());
+		u.setFrom(User.Source.WEIBO.getId());
+		u.setImg(img);
+		
+		String json = u.signIn(request, response);
+		
+		response.setContentType("text/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		out.println(json);
+		
+		out.flush();
+		out.close();
 	}
 
 	/**
@@ -104,6 +120,5 @@ public class QQSign extends HttpServlet {
 	public void init() throws ServletException {
 		// Put your code here
 	}
-
 
 }

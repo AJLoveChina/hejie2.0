@@ -1,14 +1,27 @@
 <%@page import="ajax.model.safe.Safe"%>
 <%@page import="ajax.model.safe.User"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 String state = Safe.getState(request);
+
+boolean isLogin = User.isLogin(request, response);
+User curUser = User.getLoginUser(request);
+
+request.setAttribute("isLogin", isLogin);
+request.setAttribute("curUser", curUser);
+
 %>
 
 <style>
+	#aj-user-sign-config{
+		display: none;
+		opacity:0;
+	}
+
 	.user-login{
 		position:relative;
 		width:100%;
@@ -121,7 +134,7 @@ String state = Safe.getState(request);
 			</p>
 			<p class="line">
 				二货俱乐部
-				<a href="javascript:;" id="aj-qq-sign-out">注销</a>
+				<a href="javascript:;" id="aj-sign-out">注销</a>
 			</p>
 		</div>
 		
@@ -167,20 +180,53 @@ String state = Safe.getState(request);
 
 
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101305556" data-redirecturi="http://www.nigeerhuo.com/sign/qq" charset="utf-8" ></script>
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=4069769321" type="text/javascript" charset="utf-8"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=4069769321&debug=true" type="text/javascript" charset="utf-8"></script>
 
+<c:choose>
+	<c:when test="${isLogin }">
+		<form id="aj-user-sign-config">
+			<input name="isLogin" value='<c:out value="${isLogin }"></c:out>' />
+			<input name="nickname" value='<c:out value="${curUser.getUsername() }"></c:out>' />
+			<input name="img" value='<c:out value="${curUser.getImg() }"></c:out>' />
+		</form>
+	</c:when>
+	
+	<c:otherwise>
+		<form id="aj-user-sign-config">
+			<input name="isLogin" value='<c:out value="${isLogin }"></c:out>' />
+		</form>
+	</c:otherwise>
+</c:choose>
 
 <script type="text/javascript">
 	$(function() {
 		try {
+		
 			var CSRF_STATE = "<%=state %>";
 			var config = {
 				qq : {
 					url : "/sign/qq"
 				},
+				weibo : {
+					url : "sign/weibo"
+				},
 				SIGN_OUT : "sign/out",
 				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
 			};
+			
+			try {
+				var aj_user_sign_config_form = $("#aj-user-sign-config")[0];
+				
+				if (aj_user_sign_config_form.isLogin.value.toLowerCase() == "true") {
+					signin(aj_user_sign_config_form.img.value, aj_user_sign_config_form.nickname.value);
+				}
+				
+			}catch(ex) {
+				console.log(ex);
+			}
+			
+			
+			
 			$(function(){
 				$(".aj-show-sign-panel").click(function(){
 				  $("#aj-sign-panel").modal("toggle");
@@ -199,14 +245,15 @@ String state = Safe.getState(request);
 				},function(reqData, opts){//登录成功
 				    signin(reqData.figureurl, reqData.nickname, "qq");
 				}, function(opts){//注销成功
-				     signout(opts);
+				     // signout(opts);  这个方法不要在这调用
 				});
 
 				
 			// 登陆成功后做的事情
-			function signin(userimg, nickname, from) {
+			function signin(userimg, nickname, from, moreInfo) {
 					//根据返回数据，更换按钮显示状态方法
-			      
+			     var before = $(".user-login .u-l-sign-before"),
+			    		after = $(".user-login .u-l-sign-after");
 			      	
 			       $("#aj-user-login-choices").hide();
 			       
@@ -220,17 +267,14 @@ String state = Safe.getState(request);
 			       after.show();
 			       
 			       // 向服务端注册
-			       /* if (sessionStorage.getItem(config.SIGNIN_ATTR)) {
-			      		return;
-			      	}
-			      	sessionStorage.setItem(config.SIGNIN_ATTR, true); */
 			       if (from === "qq") {
 			       
 			       		QC.Login.getMe(function(openId, accessToken){
 							var data = {
 								id : openId,
 								token : accessToken,
-								action : "sign"
+								action : "sign",
+								img : userimg
 							};
 							
 							QC.api("get_user_info", {})
@@ -258,10 +302,36 @@ String state = Safe.getState(request);
 								
 							});
 						})
+						
+			       }
+			       
+			       if (from == "weibo") {
+			       		(function () {
+			       			var data = {
+			       				uid : moreInfo.uid,
+			       				token : moreInfo.access_token,
+			       				nickname : nickname,
+			       				img : moreInfo.avatar_hd
+			       			}
+			       			
+			       			$.ajax({
+			       				url : config.weibo.url,
+			       				data : data,
+			       				type : "POST",
+			       				dataType : "json",
+			       				success : function (json) {
+			       					console.log(json);
+			       				},
+			       				error : function (e) {
+			       					console.log(e);
+			       				}
+			       			});
+			       		})();
 			       }
 			}
 			
 			
+			// 注销的样式处理 和服务端吗处理
 			function signout() {
 				$("#aj-user-login-choices").show();
 		        after.hide();
@@ -282,11 +352,17 @@ String state = Safe.getState(request);
 		        });
 			}
 			   
-			// QQ 注销   
-			$("#aj-qq-sign-out").on("click", function() {
+			// 注销   对于 第三方登陆的处理, 第三方登陆会有一个异步函数调用  signout 函数
+			$("#aj-sign-out").on("click", function() {
 				if (QC.Login.check()) {
 					QC.Login.signOut();
 				}
+				
+				if (WB2.checkLogin()) {
+					WB2.logout();
+				}
+				
+				signout()
 			}) 
 			
 			// 微博登陆			
@@ -296,8 +372,11 @@ String state = Safe.getState(request);
 			        type:"3,2",
 			        callback : {
 			            login:function(o){	//登录后的回调函数
-			            },	
+			            	console.log(o);
+			            	signin(o.avatar_hd, o.name, "weibo", o)
+			            },
 			            logout:function(){	//退出后的回调函数
+			            	// signout();
 			            }
 			        }
 			    });

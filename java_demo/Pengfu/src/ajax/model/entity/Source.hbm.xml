@@ -157,6 +157,10 @@
 			<column name="afrom"></column>
 		</property>
 		
+		<property name="img" type="java.lang.String">
+			<column name="img"></column>
+		</property>
+		
 	</class>
 	
 	<class name="ajax.model.entity.Config" table="Config">
