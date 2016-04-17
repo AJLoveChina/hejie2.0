@@ -2,7 +2,10 @@ package ajax.spider.rules;
 
 public enum RulesTag {
 
-	ZHIHU_ANSWER(1, "ajax.spider.rules.ZhihuAnswerRules", "", "zhihu");
+	ZHIHU_ANSWER(1, "ajax.spider.rules.ZhihuAnswerRules", "", "zhihu"),
+	WANGYI_NEWS(2, "ajax.spider.rules.WangyiNewsRules", "", "wangyi"),
+	TOU_TIAO(3, "ajax.spider.rules.ToutiaoRules", "", "toutiao");
+	
 	
 	private int id;
 	private String className;

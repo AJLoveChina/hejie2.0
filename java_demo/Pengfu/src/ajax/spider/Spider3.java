@@ -8,8 +8,6 @@ import org.jsoup.select.Elements;
 import ajax.model.*;
 import ajax.model.entity.Item;
 import ajax.spider.rules.*;
-import ajax.spider.rules.RulesTag;
-import ajax.spider.rules.SpiderWeb;
 
 public abstract class Spider3 {
 
@@ -34,10 +32,34 @@ public abstract class Spider3 {
 		return true;
 	}
 	public void run() {
+		SpiderWeb sw = this.returnSpiderWeb();
+		
 		if (this.checked()) {
 			Item item = this.grabItemFromPage();
+			
+			item = this.generateIType(item);
+			
+			// 抓取图片
+			item.setContent(item.grabImagesFromContent(sw.returnRules().returnImgCallback()));
+			// 生成缩略图
+			item.setPreviewImage(item.generateItemImageAndReturn());
+			// 摘要
+			item.setSummary(item.generateSummaryAndReturn());
+			
 			item.save();
 		}
+	}
+	
+	
+	public Item generateIType(Item item) {
+		JokeType jt = this.returnSpiderWeb().returnJokeType();
+		
+		if (jt == null) {
+			jt = item.generateTypeAndReturn();
+		}
+		
+		item.setItype(jt.getId());
+		return item;
 	}
 	
 	public Item grabItem() {
@@ -61,7 +83,7 @@ public abstract class Spider3 {
 		SpiderWeb sw = this.returnSpiderWeb();
 		Rules rules = sw.returnRules();
 		String url = sw.returnUrl();
-		JokeType jokeType = sw.returnJokeType();
+		//JokeType jokeType = sw.returnJokeType();
 		
 		Item item = new Item();
 		
@@ -70,7 +92,7 @@ public abstract class Spider3 {
 			
 			item.setUrl(url);
 			item.setStatus(ItemStatus.SPIDER.getId());
-			item.setItype(jokeType.getId());
+			//item.setItype(jokeType.getId());
 			item.setHasGetImage(false);
 			item.setRulesTagId(rules.getRulesTag().getId());
 			

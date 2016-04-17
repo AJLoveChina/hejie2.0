@@ -81,8 +81,17 @@ public class FileTools {
 		
 		sb.append(time + "" + random);
 		
-		String[] urlStrArr = urlStr.split("\\.");
-		String fileExtension = urlStrArr[urlStrArr.length - 1];
+		File f =new File(urlStr);
+		String fileName= f.getName();
+		String[] urlStrArr = fileName.split("\\.");
+		String fileExtension;
+		
+		if (urlStrArr.length > 1) {
+			fileExtension = urlStrArr[urlStrArr.length - 1];
+		} else {
+			fileExtension = "jpg";
+		}
+		
 		sb.append("." + fileExtension);
 		
 		return sb.toString();
@@ -150,11 +159,6 @@ public class FileTools {
 
 	
 	public static void main(String[] args) {
-//		String src = getImageByUrl("http://img1.pengfu.cn/big/57/1006057.gif");
-//		System.out.println(src);
 		
-		String src = getSrc("http://img1.pengfu.cn/big/57/1006057.gif");
-		
-		System.out.println(src);
 	}
 }

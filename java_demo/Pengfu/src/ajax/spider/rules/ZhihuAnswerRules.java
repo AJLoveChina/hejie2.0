@@ -84,6 +84,18 @@ public class ZhihuAnswerRules extends Rules{
 	}
 
 
+	@Override
+	public Callback<Element, String> returnImgCallback() {
+		return new Callback<Element, String>() {
+			
+			@Override
+			public String deal(Element in) {
+				return in.attr("data-actualsrc");
+			}
+		};
+	}
+
+
 
 
 	

@@ -91,6 +91,10 @@ public enum JokeType {
 		this.iconClassName = iconClassName;
 	}
 	
+	public String getHref() {
+		return "/type?type=" + this.getId();
+	}
+	
 	
 
 	JokeType(int id, String info) {
@@ -156,9 +160,7 @@ public enum JokeType {
 	
 	
 	public static void main(String[] args) {
-		String s = "你好世界";
-		
-		System.out.println(s.contains("世界2"));
+	
 		
 	}
 	
@@ -224,5 +226,6 @@ public enum JokeType {
 		}
 		return null;
 	}
+	
 	
 }

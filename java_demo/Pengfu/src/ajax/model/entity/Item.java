@@ -19,6 +19,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import ajax.model.Callback;
 import ajax.model.JokeStatus;
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
@@ -32,6 +33,7 @@ import ajax.tools.Tools;
 
 
 public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
+	
 	private int id;
 	private String url;
 	private String title;
@@ -57,11 +59,20 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	
 	private String[] $stampsArr;
 	
+	public static final String STAMPS_DELIMITER = ",";
 	
 	
-	
+	/**
+	 * 如果stamps为null, 返回空数组
+	 * @return
+	 */
 	public String[] get$stampsArr() {
-		return this.getStamps().split(",");
+		if (this.stamps != null) {
+			return this.getStamps().split(",");
+		} else {
+			String[] arr = {};
+			return arr;
+		}
 	}
 	public int getPage() {
 		return page;
@@ -283,12 +294,19 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return criteria.list();
 	}
 	
+	
+	public String grabImagesFromContent() {
+		return grabImagesFromContent(null);
+	}
+	
 	/**
 	 * 根据content获取图片并保存到本地磁盘<br>
 	 * return new Content that contains imgs which src is alright.
 	 * 注意该方法不会在抓取完毕后更新 content 的值, 如果需要抓取后更新实体请使用 grabImagesFromContentAndUpdate
+	 * @param callback 处理图片 Element 的策略(默认直接返回图片的src值作为 图片地址, 你可以自定义这个策略)
+	 * @return 返回图片被处理的content值, 如果发生异常直接返回  处理前的content值
 	 */
-	public String grabImagesFromContent() {
+	public String grabImagesFromContent(Callback callback) {
 		int rulesTagid = this.getRulesTagId();
 		RulesTag rt = RulesTag.getRulesTagById(rulesTagid);
 		String folder = rt.getImageFolder();
@@ -296,7 +314,18 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		String newContent;
 		try {
 			
-			newContent = Tools.grabImagesFromString(new URL(this.getUrl()), this.getContent(), folder);
+			if (callback == null) {
+				callback = new Callback<Element, String>() {
+
+					@Override
+					public String deal(Element in) {
+						return in.attr("src");
+					}
+
+					
+				};
+			}
+			newContent = Tools.grabImagesFromString(new URL(this.getUrl()), this.getContent(), folder, callback);
 			
 			
 		} catch (Exception e) {
@@ -334,17 +363,19 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		return sb.toString();
 	}
+	
 	/**
-	 * 根据content生成summary内容并update实体
+	 * 根据content生成summary内容  返回并不更新实体<br>
+	 * 注意你应该确定已经生成了 item的 缩略图, 因为有木有缩略图的item的summary字数是不一样的
+	 * @return
 	 */
-	public void generateSummary() {
+	public String generateSummaryAndReturn() {
 		Document doc = Jsoup.parse(this.getContent());
-		
+		String summary = "";
 		try {
 			
 			String text = doc.body().text();
 			
-			String summary;
 			int length,random;
 			if (this.getPreviewImage() == null || this.getPreviewImage() == "") {
 				length = 170;
@@ -357,21 +388,28 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 				summary = text.substring(0, length + random);
 			}
 			
-			this.setSummary(summary);
-			
-			this.update();
 			
 		}catch(Exception e) {
-			String summary = doc.body().text();
-			this.setSummary(summary);
-			this.update();
+			summary = doc.body().text();
 		}
 		
+		return summary;
 	}
 	/**
-	 * 根据content获取一张代表图片并update实体
+	 * 根据content生成summary内容并update实体
 	 */
-	public void generateItemImage() {
+	public void generateSummary() {
+		
+		this.setSummary(this.generateSummaryAndReturn());
+		this.update();
+		
+	}
+	
+	/**
+	 *  根据content获取一张代表图片, 但是不更新实体
+	 * @return 返回缩略图的路径, null if not suitable image
+	 */
+	public String generateItemImageAndReturn() {
 		try {
 			Document doc = Jsoup.parse(this.getContent());
 			
@@ -406,15 +444,25 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 						result = key;
 					}
 				}
+//				
+//				this.setPreviewImage(result);
+//				this.update();
 				
-				this.setPreviewImage(result);
-				this.update();
+				return result;
 			}
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+		return null;
+	}
+	
+	/**
+	 * 根据content获取一张代表图片并update实体
+	 */
+	public void generateItemImage() {
+		this.setPreviewImage(this.generateItemImageAndReturn());
+		this.update();
 	}
 	
 	@Override
@@ -539,7 +587,6 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 				ele.removeAttr("src");
 			}
 			ele.attr("src", "web/pic/dot.jpg");
-		
 		}
 		
 		doc.select("noscript").remove();
@@ -593,6 +640,35 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		System.out.println("已将 " + this.getId() + " 替换成  " + item.getId());
 		
 	}
+	
+	
+	/**
+	 * 生成item的jokeType 但是不更新, 而是返回
+	 * @return 不返回null, 找不到时返回 未知类型
+	 */
+	public JokeType generateTypeAndReturn() {
+		String[] stamps = this.get$stampsArr();
+		
+		for (String stamp : stamps) {
+		
+			JokeType jokeType = JokeType.guessType(stamp.trim());
+			
+			if (jokeType != null) {
+				return jokeType;
+			}
+		}
+		
+		for (JokeType type : JokeType.getAllJokeTypes()) {
+			String[] stampArr = type.getInfo().split(",");
+			
+			for (String s : stampArr) {
+				if (this.getContent().contains(s)) {
+					return type;
+				}
+			}
+		}
+		return JokeType.UNKNOWN;
+	}
 	/**
 	 * generate item の jokeType
 	 */
@@ -626,6 +702,13 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		System.out.println("Generate itype fail" + this.getTitle());
 	}
+	
+	public boolean hasBackgroundInformation() {
+		return this.backgroundInformation != null && !this.backgroundInformation.trim().equals("");
+	}
+	
+	
+
 	
 }
 

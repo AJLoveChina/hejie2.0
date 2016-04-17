@@ -1,13 +1,17 @@
 package ajax.spider.rules;
 
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import ajax.model.Callback;
 import ajax.model.JokeType;
 import ajax.tools.Tools;
 
 public abstract class Rules {
 	
 	public abstract RulesTag getRulesTag();
+	public abstract Callback<Element, String> returnImgCallback();
+	
 	
 	public abstract String getTitleSelector();
 	public abstract String getSummarySelector();

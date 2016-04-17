@@ -23,6 +23,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import ajax.model.Callback;
 import ajax.model.Joke;
 import ajax.model.JokeStatus;
 import ajax.model.entity.Config;
@@ -206,12 +207,12 @@ public class Tools {
 	 * @param content 内容
 	 * @param folder 新文件夹
 	 */
-	public static String grabImagesFromString(URL pageUrl, String content, String folder) {
+	public static String grabImagesFromString(URL pageUrl, String content, String folder, Callback<Element, String> dealImgEle) {
 		
 		Document doc = Jsoup.parse(content);
 		
 		Elements images = doc.select("img");
-		String destination = "WebRoot/web";
+		String destination = "WebRoot/images/web";
 		if (folder == null) {
 			folder = "/images/";
 		}
@@ -223,9 +224,27 @@ public class Tools {
 		}
 		destination += folder;
 		
+		// 如果文件夹不存在, 创建文件夹
+		File folderGenerate = new File(destination);
+		if (!folderGenerate.exists()) {
+			folderGenerate.mkdirs();
+		}
+		
+		if (dealImgEle == null) {
+			dealImgEle = new Callback<Element, String>() {
+
+				@Override
+				public String deal(Element in) {
+					return in.attr("src");
+				}
+				
+			};
+		}
+		
 		for (Element img : images) {
 			img.removeAttr("data-origin-image-url");
-			String src = img.attr("data-actualsrc");
+			// String src = img.attr("data-actualsrc");
+			String src = dealImgEle.deal(img);
 			
 			
 			if (src != "") {
@@ -267,7 +286,7 @@ public class Tools {
 	 */
 	public static void grabImagesFromString(URL url, String content) {
 		
-		grabImagesFromString(url, content, null);
+		grabImagesFromString(url, content, null, null);
 		
 	}
 

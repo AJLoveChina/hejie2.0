@@ -11,6 +11,7 @@ public class GenerateItemType {
 	
 	private static void do1() {
 		int maxPage = Page.getNowMaxPage();
+		int limit = 20;
 		
 		int page = 1;
 		List<Item> items = new ArrayList<Item>();
@@ -19,18 +20,17 @@ public class GenerateItemType {
 			items = Page.getPage(page);
 			
 			for (Item item : items) {
-				if (item.getItype() == JokeType.UNKNOWN.getId()) {
-					item.generateType();
-				}
+				
+				item.generateType();
 			}
 			
-		}while(++page < maxPage);
+		}while(++page < limit);
 	}
 	
 	private static void do2() {
 		Item item = new Item();
 		
-		item.load(903);
+		item.load(1471);
 		item.generateType();
 		
 	}

@@ -89,7 +89,8 @@ public class Page extends Entity<Page>{
 	
 	/**
 	 * 获取第page页<br>
-	 * 注意 page = 1, 指的是获取page表的页码最大的一页 
+	 * 注意 page = 1, 指的是获取page表的页码最大的一页 <br>
+	 * 如果给定的页码不存在, 该程序会返回固定的20个item
 	 * @param page
 	 * @return
 	 */
