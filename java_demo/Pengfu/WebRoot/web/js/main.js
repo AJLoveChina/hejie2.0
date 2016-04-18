@@ -26,7 +26,7 @@
 	}
 	
 	
-	// lazy load
+	// lazy load 
 	try {
 		
 		$(function () {
@@ -34,11 +34,12 @@
 			div.each(function(index, item) {
 				var src = $(this).attr("data-lazy");
 				
-				if (src.indexOf("images/") != -1) {
-					$(this).attr("data-lazy", src);
-				} else {
-					$(this).attr("data-lazy", "images/" + src);
+				if (src.indexOf("images/") == -1) {
+					src = "images/" + src;
 				}
+				src = "http://" + location.host + ":8888/" + src;
+				
+				$(this).attr("src", src);
 				
 			});
 			div.lazyload({

@@ -13,7 +13,7 @@
     	<c:choose>
 		  <c:when test="${item.hasPreviewImage() }">
 		    <div class="a-l-image">
-	            <img class="aj-lazy" src="web/pic/dot.jpg" data-lazy="${item.getPreviewImage() }" alt=""/>
+	            <img class="aj-lazy" src="/web/pic/dot.jpg" data-lazy="${item.getPreviewImage() }" alt=""/>
 	        </div>
 	         <div class="a-l-content clearfix">
 		  </c:when>
