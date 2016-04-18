@@ -5,14 +5,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 
-<div ng-controller="pendant-controller" id="aj-pendant" class="aj-pendant clearfix">
+<div ng-controller="pendant-controller" id="aj-pendant" class="aj-pendant clearfix aj-hide-when-phone">
     <div class="aitems">
         <span ng-repeat="item in items">
             <a ng-if="item.link" href="{{item.link}}" class="aitem" >
                 <span class="icon" ng-class="item.icon"></span>
                 <h4 class="title" ng-bind="item.title"></h4>
             </a>
-            <a ng-if="!item.link" href="javascript:;" class="aitem" >
+            <a ng-if="!item.link" href="javascript:;" class="aitem" ng-click="dealATagWithoutHref(item.title)">
                 <span class="icon" ng-class="item.icon"></span>
                 <h4 class="title" ng-bind="item.title"></h4>
             </a>
@@ -47,8 +47,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     "title" : "首页",
                     "link" : "/",
                     "class" : ""
+                },
+                {
+                	"icon" : "glyphicon glyphicon-heart",
+                    "title" : "收藏",
+                    "class" : ""
                 }
             ]
+            
+            // 对于木有href(值为 javascript:;)的a标签, 我们给它自定义click事件
+            $scope.dealATagWithoutHref = function (title) {
+            	if (title == "收藏") {
+            		$scope.shoucang();
+            	}
+            }
+            
+            $scope.shoucang = function() {
+            	
+            }
 
         });
 
@@ -63,6 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         });
         resize();
+        
 
         function resize() {
             var docWidth = $(document).width(),
@@ -93,6 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   width: 50px;
   font-size: 12px;
   color: #666;
+  transition:all 0.3s;
 }
 .aj-pendant a {
   text-decoration: none;

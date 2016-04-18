@@ -2,6 +2,11 @@
 String path = request.getContextPath();
  %>
 
+<script>
+	// 全局变量, 如果要暴露接口请包涵在该作用域内
+	var aj = {};
+</script>
+
 <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
 <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.js"></script>
 <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>

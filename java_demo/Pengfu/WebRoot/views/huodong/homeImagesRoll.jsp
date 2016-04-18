@@ -20,7 +20,7 @@
 		</c:forEach>
 	</div>
 	
-	<div id="aj-home-showcase">
+	<div id="aj-home-showcase" class="aj-hide-when-phone">
 		<a class="atag">
 			<img src="/web/pic/showcase1.png" alt=""/>
 		</a>
@@ -37,12 +37,12 @@
 <div>
 <style>
 	#aj-home-images-roll{
+		width:534px;height:267px;
 		margin-bottom:10px;
-		width:534px;
-		height:267px;
 		position:relative;
 		display: none;
 		float:left;
+		max-width: 100%;
 	}
 	#aj-home-images-roll .aimg{
 		width:100%;
@@ -114,6 +114,18 @@
 				loaded : function () {
 					container.fadeIn();
 					container.css("height" , container.width() / 2);
+					container.find("img.aimg").each(function () {
+						$(this).css({
+							width : container.css('width'),
+							height : container.css('height')
+						});
+					});
+					container.find('.atitle').each(function () {
+						$(this).css({
+							top : container.height() - $(this).height() + "px",
+							bottom : 'auto'
+						});
+					});
 				}
 			}
 	    });

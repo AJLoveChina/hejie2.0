@@ -6,7 +6,8 @@ import ajax.model.entity.Item;
 import ajax.model.entity.Page;
 
 public class LazyImages {
-	public static void main(String[] args) {
+	
+	private static void do1() {
 		int MaxPage = Page.getNowMaxPage();
 		
 		int page = 1;
@@ -19,6 +20,10 @@ public class LazyImages {
 			}
 			
 			System.out.println(page);
-		}while(++page < MaxPage);
+		}while(++page <= 20);
+	}
+	
+	public static void main(String[] args) {
+		do1();
 	}
 }

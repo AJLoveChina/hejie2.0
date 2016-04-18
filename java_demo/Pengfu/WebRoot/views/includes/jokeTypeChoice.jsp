@@ -2,8 +2,10 @@
 <style>
 	#aj-top-type-choice{
 		width:100%;
+		max-height:140px;
+		overflow:hidden;
 		background-color: white;
-		padding:10px 0;
+		margin:10px 0;
 	}
 	#aj-top-type-choice a{
 		text-decoration: none;
@@ -48,33 +50,60 @@
         items.each(function (index, item) {
         	random = Math.floor(Math.random() * colors.length);
         	$(this).css("backgroundColor", colors[random]);
-        })   
+        })
+        
+        var container = $("#aj-top-type-choice");
+        var div = $(document.createElement("div"));
+        var list = $("#aj-top-type-choice .one");
+       	div.addClass("aj-types-collection");
+       		
+       	for (var i = 9; i <= list.length; i++) {
+       		
+       		div.append(list[i]);
+       		
+       		if (i % 8 == 0) {
+       			container.append(div.clone());
+       			div.html("");
+       		}
+       	}
+       	
+       	container.slidesjs({
+       		start : 1,
+			pagination : {
+				active : false
+			},
+			navigation : {
+				active : false
+			},
+			play : {
+				auto : false,
+				interval : 3000
+			}
+       	});
 	
 	})
 </script>
-<div id="aj-top-type-choice" class="clearfix aj-phone-only">
-	<div class="one">
-		<a class="atag" href="<%=Joke.getHrefByJokeType(JokeType.ALL) %>">
-			<span class="icon glyphicon glyphicon-th"></span>
-			<span class="text">全部笑话</span>
-		</a>
+
+<div class="aj-show-when-phone aj-hide-when-pc" style="display: none;">
+
+<div id="aj-top-type-choice" class="clearfix aj-show-when-phone aj-hide-when-pc">
+
+	<div class="aj-types-collection">
+		<%
+			for (JokeType jt : JokeType.getLegalJokeTypes()) {
+			%>
+			
+				<div class="one">
+					<a class="atag" href="<%=jt.getHref() %>">
+						<span class="icon <%=jt.getIconClassName() %>"></span>
+						<span class="text"><%=jt.getRealName() %></span>
+					</a>
+				</div>		
+			
+			<%	
+			}
+		 %>	
 	</div>
-	<div class="one">
-		<a class="atag" href="<%=Joke.getHrefByJokeType(JokeType.ONLY_WORD) %>">
-			<span class="icon glyphicon glyphicon-text-width"></span>
-			<span class="text">文字笑话</span>
-		</a>
-	</div>
-	<div class="one">
-		<a class="atag" href="<%=Joke.getHrefByJokeType(JokeType.STATIC_IMAGE) %>">
-			<span class="icon glyphicon glyphicon-picture"></span>
-			<span class="text">图片笑话</span>
-		</a>
-	</div>
-	<div class="one">
-		<a class="atag" href="<%=Joke.getHrefByJokeType(JokeType.GIF) %>">
-			<span class="icon glyphicon glyphicon-gift"></span>
-			<span class="text">动态图笑话</span>
-		</a>
-	</div>
+</div>
+
 </div>

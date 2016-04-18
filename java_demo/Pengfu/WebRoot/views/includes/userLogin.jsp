@@ -115,7 +115,7 @@ request.setAttribute("curUser", curUser);
 	}
 </style>
 
-<div class="user-login">
+<div class="user-login" data-islogin="0">
 	<div class="u-l-photo glyphicon glyphicon-user"></div>
 	<div class="u-l-right">
 		<div class="u-l-sign-before">
@@ -266,6 +266,9 @@ request.setAttribute("curUser", curUser);
 			       after.find(".nickname").html(nickname);
 			       after.show();
 			       
+			       // 切换登陆状态, 让User类判断是否登陆了
+			       $(".user-login").attr("data-islogin", "1");
+			       
 			       // 向服务端注册
 			       if (from === "qq") {
 			       
@@ -338,6 +341,9 @@ request.setAttribute("curUser", curUser);
 		        $(".user-login .u-l-photo").find("img").remove();
 		        before.show();
 		        sessionStorage.removeItem(config.SIGNIN_ATTR);
+		        
+		        
+		        $(".user-login").attr("data-islogin", "0");
 		        
 		        $.ajax({
 		        	url : config.SIGN_OUT,

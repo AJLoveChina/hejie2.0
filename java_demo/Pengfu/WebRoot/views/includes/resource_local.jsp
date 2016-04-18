@@ -1,3 +1,8 @@
+
+<script>
+	// 全局变量, 如果要暴露接口请包涵在该作用域内
+	var aj = {};
+</script>
 <script src="bower_components/jquery/jquery.js"></script>
 <script src="web/js/includes/jquery.lazyload.js"></script>
 <script src="web/js/includes/angular.min.js"></script>

@@ -51,9 +51,22 @@ body {
 .aj-phone-only{
 	display: none;
 }
-@media(max-width:1050px) {
+@media(min-width: 1050px) {
+	.aj-hide-when-pc{
+		display: none!important;
+	}
+}
+
+
+@media(max-width:900px) {
 	.aj-phone-only{
-		display: block;
+		display: block!important;
+	}
+	.aj-show-when-phone{
+		display: block!important;
+	}
+	.aj-hide-when-phone{
+		display: none!important;
 	}
 	div#aj-body{
 		min-height:450px;
@@ -61,6 +74,7 @@ body {
 	.aj-body-right{
 		display: none;
 	}
+	
 }
 #aj-body{
 	width:100%;
@@ -135,6 +149,17 @@ body {
 }
 
 .aj-joke-list-one{}
+.aj-joke-list-one .backinfo{
+	padding: 10px;border:1px solid #ccc;
+	background-color: #eee;
+	color:#888;
+}
+.aj-joke-list-one .stamps {
+	padding: 10px 0;
+}
+.aj-joke-list-one .stamps .stamp{
+
+}
 .aj-joke-list-one .panel-body{
 	font-size:14px;
 	line-height:26px;
@@ -260,6 +285,7 @@ body {
     line-height: 24px;
     font-size: 14px;
     height:96px;
+    overflow: hidden;
 }
 .aj-list-one .a-l-body .a-l-content .a-l-c-footer .alink:hover{
     filter: alpha(opacity=90);
