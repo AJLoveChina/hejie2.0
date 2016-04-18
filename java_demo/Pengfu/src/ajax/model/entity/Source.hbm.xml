@@ -180,4 +180,25 @@
 	</class>
 	
 	
+	<class name="ajax.model.entity.Collect" table="collect">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="itemid" type="java.lang.Integer">
+			<column name="itemid"></column>
+		</property>
+		
+		<property name="userid" type="java.lang.Integer">
+			<column name="userid"></column>
+		</property>
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+		
+	</class>
+	
+	
 </hibernate-mapping>

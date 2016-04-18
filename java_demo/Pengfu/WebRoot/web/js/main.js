@@ -1,5 +1,5 @@
 (function () {
-	// lazy load
+	// User 类
 	try {
 		
 		function User() {
@@ -25,6 +25,8 @@
 		console.log(ex);
 	}
 	
+	
+	// lazy load
 	try {
 		
 		$(function () {
@@ -80,6 +82,27 @@
 			});	
 			
 		})
+		
+	}catch(ex) {
+		console.log(ex);
+	}
+	
+	try {
+		// 给用户的提示, 全局通用
+		$(function () {
+			
+			var Tishi = function (info) {
+				var container = $("#aj-gobal-tishi-modal");
+				
+				
+				container.find(".modal-body").html(info);
+				
+				container.modal("show");
+			}
+			
+			aj.Tishi = Tishi;
+			
+		});
 		
 	}catch(ex) {
 		console.log(ex);

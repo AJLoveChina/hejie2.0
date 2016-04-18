@@ -34,71 +34,175 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script>
     $(function () {
-        var app = angular.module("pendant", []);
-        var pendant = $("#aj-pendant");
-        var body = $("#aj-body"),
-            bodyWidth = body.width();
+	    	aj.Try(function () {
+	    	var app = angular.module("pendant", []);
+	        var pendant = $("#aj-pendant");
+	        var body = $("#aj-body"),
+	            bodyWidth = body.width();
+	        var collectKey = "aj-collect-id-list";
+	
+	        app.controller("pendant-controller", function ($scope) {
+	
+	            $scope.items = [
+	                {
+	                    "icon" : "glyphicon glyphicon-home",
+	                    "title" : "首页",
+	                    "link" : "/",
+	                    "class" : ""
+	                },
+	                {
+	                	"icon" : "collect glyphicon glyphicon-heart",
+	                    "title" : "收藏",
+	                    "class" : ""
+	                }
+	            ]
+	            $scope.isCollect = false;
+	            
+	            // 对于木有href(值为 javascript:;)的a标签, 我们给它自定义click事件
+	            $scope.dealATagWithoutHref = function (title) {
+	            	if (title == "收藏") {
+	            		$scope.shoucang();
+	            	}
+	            }
+	            
+	            $scope.shoucang = function() {
+	            	var u = new aj.User();
+	            	if (!u.isLogin()) {
+	            		aj.Tishi("亲, 需要先登录才能收藏哦~~");
+	            		return;
+	            	}
+	            	
+	            	$(document).trigger("aj.tellme-item-id", [callback]);
+	            	
+	            	function callback(id) {
+	            		$.ajax({
+	            			url : "/shoucang?id=" + id,
+	            			type : "GET",
+	            			dataType : "json",
+	            			success : function (json) {
+	            				aj.Tishi(json.data);
+	            				
+	            				$scope.$apply(function () {
+	            					$scope.shoucangPush(id);
+	            					
+	            					
+	            					$scope.doSomethingIfCollect();
+	            				});
+	            				
+	            				
+	            			},
+	            			error : function (err) {
+	            				aj.Tishi("服务器罢工了, 无法收藏~~~待会试试看");
+	            			}
+	            		});
+	            	}
+	            }
+	            
 
-        app.controller("pendant-controller", function ($scope) {
+	            
+	            $scope.checkCollect = function (fn) {
+	            	$(document).trigger("aj.tellme-item-id", [callback]);
+	            	
+	            	function callback(id) {
+	            		var collect = getCollectArr();
+	            		var bool = false;
+	            		
+	            		for (var i = 0; i < collect.length; i++) {
+	            			if (collect[i] == id) {
+	            				bool = true;
+	            			}
+	            		}
+	            		
+	            		fn(bool);
+	            	}
+	            }
+	            
+	            $scope.doSomethingIfCollect = function () {
+		            $scope.checkCollect(function (isCollect) {
+		            	//console.log(isCollect);
+		            	if (isCollect) {
+		            		for (var i = 0; i < $scope.items.length; i++) {
+		            			if ($scope.items[i].icon.indexOf("collect") != -1) {
+		            				$scope.items[i].title = "已收藏";
+		            			}
+		            		}
+		            		$scope.isCollect = true;
+		            	}
+		            })	            	
+	            }
 
-            $scope.items = [
-                {
-                    "icon" : "glyphicon glyphicon-home",
-                    "title" : "首页",
-                    "link" : "/",
-                    "class" : ""
-                },
-                {
-                	"icon" : "glyphicon glyphicon-heart",
-                    "title" : "收藏",
-                    "class" : ""
-                }
-            ]
-            
-            // 对于木有href(值为 javascript:;)的a标签, 我们给它自定义click事件
-            $scope.dealATagWithoutHref = function (title) {
-            	if (title == "收藏") {
-            		$scope.shoucang();
-            	}
-            }
-            
-            $scope.shoucang = function() {
-            	
-            }
-
-        });
-
-        var timeout;
-        $(window).on("resize", function () {
-            if (!timeout) {
-                timeout = setTimeout(function () {
-                    resize();
-                    timeout = 0;
-
-                }, 1000 / 24);
-            }
-        });
-        resize();
+	            $scope.doSomethingIfCollect();
+	            
+	            function getCollectArr() {
+	            	var collect = localStorage.getItem(collectKey);
+	            	if (collect == null || collect == "") {
+	            		return [];
+	            	} else {
+	            		return collect.split(",");
+	            	}
+	            }
+	            // 收藏 id 存在到本地
+	            $scope.shoucangPush = function (id) {
+	            	
+	            	var collect = localStorage.getItem(collectKey);
+	            	var list;
+	            	var bool = false;
+	            	
+	            	if (collect == null || collect == "") {
+	            		list = [];
+	            		list.push(id);
+	            	} else {
+	            		list = collect.split(",");
+	            		for (var i = 0; i < list.length; i++) {
+	            			if (list[i] == id) {
+	            				bool = true;
+	            			}
+	            		}
+	            		if (!bool) {
+	            			list.push(id);
+	            		}
+	            	}
+	            	localStorage.setItem(collectKey, list.join(","));
+	            }
+	
+	        	});
+	        	
+		 		var timeout;
+		        $(window).on("resize", function () {
+		            if (!timeout) {
+		                timeout = setTimeout(function () {
+		                    resize();
+		                    timeout = 0;
+		
+		                }, 1000 / 24);
+		            }
+		        });
+		        resize();
+		        
+		
+		        function resize() {
+		            var docWidth = $(document).width(),
+		                winHeight = $(window).height();
+		            pendant.css({
+		                "left" : (docWidth - bodyWidth) / 2 - pendant.width() - 10 + "px",
+		                "top" : (winHeight - pendant.height()) / 2 + "px"
+		            })
+		        }
+		
+		        addBaiduShare();
+		        function addBaiduShare() {
+		            var area = $("#aj-baidu-share-script");
+		            var script = document.createElement("script");
+		
+		            script.innerText = area.val();
+		            $(document.body).append(script)
+		        }
+		        angular.bootstrap(pendant, ["pendant"]);	        	
+    	
+    	});
         
 
-        function resize() {
-            var docWidth = $(document).width(),
-                winHeight = $(window).height();
-            pendant.css({
-                "left" : (docWidth - bodyWidth) / 2 - pendant.width() - 10 + "px",
-                "top" : (winHeight - pendant.height()) / 2 + "px"
-            })
-        }
-
-        addBaiduShare();
-        function addBaiduShare() {
-            var area = $("#aj-baidu-share-script");
-            var script = document.createElement("script");
-
-            script.innerText = area.val();
-            $(document.body).append(script)
-        }
-        angular.bootstrap(pendant, ["pendant"]);
+       
     })
 </script>
 
@@ -156,3 +260,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   filter: alpha(opacity=0);
 }
 </style>
+
+
+
+<!-- 用户提示  -->
+
+<div class="modal" id="aj-gobal-tishi-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">二货提示 : </h4>
+			</div>
+			<div class="modal-body">
+			
+				
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>

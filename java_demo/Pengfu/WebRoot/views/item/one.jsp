@@ -3,6 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+<script>
+	$(document).on("aj.tellme-item-id", function (event, fn) {
+		var container = $(".aj-joke-list-one"),
+	        id = container.attr("data-id");
+	        
+	    fn(id);
+	});
+</script>
 
 <div class="aj-joke-list-one panel panel-default" data-id="${item.getId() }">
     <div class="panel-heading">

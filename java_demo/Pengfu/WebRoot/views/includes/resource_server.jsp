@@ -5,6 +5,13 @@ String path = request.getContextPath();
 <script>
 	// 全局变量, 如果要暴露接口请包涵在该作用域内
 	var aj = {};
+	aj.Try = function (fn) {
+		try {
+			fn();
+		}catch(ex) {
+			console.log(ex);
+		}
+	}
 </script>
 
 <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>

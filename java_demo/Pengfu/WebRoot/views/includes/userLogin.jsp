@@ -293,7 +293,6 @@ request.setAttribute("curUser", curUser);
 									dataType : "json",
 									success : function (json) {
 										console.log(json);
-										
 									},
 									error : function(e) {
 										console.log(e);
