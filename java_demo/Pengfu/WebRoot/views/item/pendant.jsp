@@ -8,11 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div ng-controller="pendant-controller" id="aj-pendant" class="aj-pendant clearfix aj-hide-when-phone">
     <div class="aitems">
         <span ng-repeat="item in items">
-            <a ng-if="item.link" href="{{item.link}}" class="aitem" >
+            <a ng-if="item.link" href="{{item.link}}" class="aitem" ng-class="item.class">
                 <span class="icon" ng-class="item.icon"></span>
                 <h4 class="title" ng-bind="item.title"></h4>
             </a>
-            <a ng-if="!item.link" href="javascript:;" class="aitem" ng-click="dealATagWithoutHref(item.title)">
+            <a ng-if="!item.link" href="javascript:;" class="aitem" ng-click="dealATagWithoutHref(item)"  ng-class="item.class">
                 <span class="icon" ng-class="item.icon"></span>
                 <h4 class="title" ng-bind="item.title"></h4>
             </a>
@@ -43,11 +43,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	        app.controller("pendant-controller", function ($scope) {
 	
+				// class 是应用给 a 标签的 class 值
 	            $scope.items = [
 	                {
 	                    "icon" : "glyphicon glyphicon-home",
 	                    "title" : "首页",
 	                    "link" : "/",
+	                    "class" : ""
+	                },
+	                {
+	                	"icon" : "glyphicon glyphicon-chevron-up gotop",
+	                    "title" : "回顶部",
 	                    "class" : ""
 	                },
 	                {
@@ -59,10 +65,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            $scope.isCollect = false;
 	            
 	            // 对于木有href(值为 javascript:;)的a标签, 我们给它自定义click事件
-	            $scope.dealATagWithoutHref = function (title) {
-	            	if (title == "收藏") {
+	            $scope.dealATagWithoutHref = function (item) {
+	            	// 当title变成已收藏的时候, 点击就不会重新发送请求了
+	            	if (item.title == "收藏") {
 	            		$scope.shoucang();
 	            	}
+	            	
+	            	if (item.icon.indexOf("gotop") != -1) {
+	            		goTop();
+	            	}
+	            }
+	            
+	            function goTop() {
+	            	$(document.body).animate({
+	            		"scrollTop" : 0
+	            	});
 	            }
 	            
 	            $scope.shoucang = function() {

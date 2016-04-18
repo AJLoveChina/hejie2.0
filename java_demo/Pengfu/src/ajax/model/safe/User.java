@@ -1,5 +1,6 @@
 package ajax.model.safe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,7 +13,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.AjaxResponse;
+import ajax.model.entity.Collect;
 import ajax.model.entity.Entity;
+import ajax.model.entity.Item;
 import ajax.tools.HibernateUtil;
 
 public class User extends Entity<User>{
@@ -272,6 +275,53 @@ public class User extends Entity<User>{
 	}
 	
 	
+	public List<Item> getCollections() {
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Collect.class);
+		
+		cr.add(Restrictions.eq("userid", this.getId()));
+		
+		cr.setMaxResults(20);
+		
+		List<Collect> collections = cr.list();
+		
+		
+		List<Integer> itemsid = new ArrayList<Integer>();
+		
+		
+		for (Collect c : collections) {
+			//items.add(Item.getByItemById(c.getItemid()));
+			
+			itemsid.add(c.getItemid());
+			
+		}
+		
+		HibernateUtil.closeSession(session);
+		// ----------------------------------------
+		
+		List<Item> items = new ArrayList<Item>();
+		Session session2 = HibernateUtil.getSession();
+		Criteria cr2 = session2.createCriteria(Item.class);
+		
+		cr2.add(Restrictions.in("id", itemsid));
+		
+		items = cr2.list();
+		
+		HibernateUtil.closeSession(session2);
+		
+		return items;
+	}
+	
+	
+	public static void main(String[] args) {
+		User u = new User();
+		u.load(4);
+		List<Item> items = u.getCollections();
+		
+		System.out.println(items);
+		
+		
+	}
 	
 	
 }

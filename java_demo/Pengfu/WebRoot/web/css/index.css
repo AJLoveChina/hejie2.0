@@ -33,6 +33,9 @@ body {
 	font-style:normal;
 	-webkit-font-smoothing: antialiased;
 }
+.aj-hide{
+	display: none!important;
+}
 
 .font-white{
 	color:white;

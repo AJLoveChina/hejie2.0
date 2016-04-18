@@ -210,6 +210,7 @@ request.setAttribute("curUser", curUser);
 				weibo : {
 					url : "sign/weibo"
 				},
+				USER_HOME : "/userhome",
 				SIGN_OUT : "sign/out",
 				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
 			};
@@ -259,7 +260,11 @@ request.setAttribute("curUser", curUser);
 			       
 			       var img = $(document.createElement("img"));
 			       img.attr("src", userimg);
-			       $(".user-login .u-l-photo").append(img);
+			       
+			       var atag = $(document.createElement("a"));
+			       atag.append(img);
+			       atag.attr("href", config.USER_HOME);
+			       $(".user-login .u-l-photo").append(atag);
 			       
 			       
 			       before.hide();

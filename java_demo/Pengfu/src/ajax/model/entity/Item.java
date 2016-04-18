@@ -240,7 +240,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		Session session = HibernateUtil.getSession();
 		
-		Item entity = (Item)session.get(Item.class, id);
+		Item entity = session.get(Item.class, id);
 		
 		return entity;
 		
