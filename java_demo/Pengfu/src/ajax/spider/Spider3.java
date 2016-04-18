@@ -46,6 +46,10 @@ public abstract class Spider3 {
 			// 摘要
 			item.setSummary(item.generateSummaryAndReturn());
 			
+			// lazyload image
+			item.setContent(item.generateLazyImageContentAndReturn());
+			
+			
 			item.save();
 		}
 	}

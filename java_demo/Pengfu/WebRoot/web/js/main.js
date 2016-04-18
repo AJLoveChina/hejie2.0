@@ -32,7 +32,14 @@
 		$(function () {
 			var div = $("img.aj-lazy");
 			div.each(function(index, item) {
-				$(this).attr("data-lazy", "images/" + $(this).attr("data-lazy"));
+				var src = $(this).attr("data-lazy");
+				
+				if (src.indexOf("images/") != -1) {
+					$(this).attr("data-lazy", src);
+				} else {
+					$(this).attr("data-lazy", "images/" + src);
+				}
+				
 			});
 			div.lazyload({
 			    effect : "fadeIn",

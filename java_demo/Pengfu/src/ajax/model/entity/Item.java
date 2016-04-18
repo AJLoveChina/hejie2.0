@@ -572,10 +572,8 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return jo.toString();
 	}
 	
-	/**
-	 * 将item的content中的图片设置成延时加载的图片
-	 */
-	public void lazyImage() {
+	
+	public String generateLazyImageContentAndReturn() {
 		Document doc = Jsoup.parse(this.getContent());
 		
 		Elements imgs = doc.select("img");
@@ -589,8 +587,14 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			ele.attr("src", "web/pic/dot.jpg");
 		}
 		
-		doc.select("noscript").remove();
-		this.setContent(doc.body().html());
+		return doc.body().html();
+	}
+	/**
+	 * 将item的content中的图片设置成延时加载的图片
+	 */
+	public void lazyImage() {
+		
+		this.setContent(this.generateLazyImageContentAndReturn());
 		this.update();
 		
 	}

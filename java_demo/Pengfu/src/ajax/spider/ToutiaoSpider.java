@@ -15,7 +15,8 @@ public class ToutiaoSpider {
 					
 					@Override
 					public String returnUrl() {
-						return "http://toutiao.com/a6274222106909753601/";
+						//http://toutiao.com/a6274222106909753601/
+						return "http://toutiao.com/a6274789128035516674/";
 					}
 					
 					@Override
