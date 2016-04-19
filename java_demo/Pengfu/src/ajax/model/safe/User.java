@@ -1,22 +1,38 @@
 package ajax.model.safe;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.google.gson.Gson;
+
+import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
+import ajax.model.Callback;
 import ajax.model.entity.Collect;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Item;
 import ajax.tools.HibernateUtil;
+import ajax.tools.Tools;
 
 public class User extends Entity<User>{
 	
@@ -321,6 +337,134 @@ public class User extends Entity<User>{
 		System.out.println(items);
 		
 		
+	}
+	
+	
+	public class WeiboAccess {
+		private String access_token;
+		private String expires_in;
+		private String remind_in;
+		private String uid;
+		public String getAccess_token() {
+			return access_token;
+		}
+		public void setAccess_token(String access_token) {
+			this.access_token = access_token;
+		}
+		public String getExpires_in() {
+			return expires_in;
+		}
+		public void setExpires_in(String expires_in) {
+			this.expires_in = expires_in;
+		}
+		public String getRemind_in() {
+			return remind_in;
+		}
+		public void setRemind_in(String remind_in) {
+			this.remind_in = remind_in;
+		}
+		public String getUid() {
+			return uid;
+		}
+		public void setUid(String uid) {
+			this.uid = uid;
+		}
+		
+		/**
+		 * 如果获取到了access_token 说明请求授权正常, 如果为null说明请求授权失败
+		 * @return
+		 */
+		public boolean isOK() {
+			return this.access_token != null;
+		}
+	}
+	
+	public class WeiboUserSimpleModel {
+		private String id;
+		private String name;
+		private String avatar_large;
+
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public String getAvatar_large() {
+			return avatar_large;
+		}
+		public void setAvatar_large(String avatar_large) {
+			this.avatar_large = avatar_large;
+		}
+	}
+	/**
+	 * 返回的对象中包含用户uid 和 access_token<br>
+	 * 如果出现异常, 返回null
+	 * @param code
+	 * @return
+	 */
+	public static WeiboAccess getWeiboAccess(String code) {
+		
+		HttpClient client = HttpClientBuilder.create().build();
+		
+		HttpPost post = new HttpPost("https://api.weibo.com/oauth2/access_token");
+		
+		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+		pairs.add(new BasicNameValuePair("client_id", Tools.getConfig("weiboAppKey")));
+		pairs.add(new BasicNameValuePair("client_secret", Tools.getConfig("weiboSecret")));
+		pairs.add(new BasicNameValuePair("grant_type", "authorization_code"));
+		pairs.add(new BasicNameValuePair("code", code));
+		pairs.add(new BasicNameValuePair("redirect_uri", "http://www.nigeerhuo.com/sign/weibo"));
+				
+		StringBuffer result = new StringBuffer();
+		
+		try {
+			
+			post.setEntity(new UrlEncodedFormEntity(pairs));
+			HttpResponse back = client.execute(post);
+
+			BufferedReader rd = new BufferedReader(
+			        new InputStreamReader(back.getEntity().getContent()));
+
+			
+			String line = "";
+			while ((line = rd.readLine()) != null) {
+				result.append(line);
+			}
+			
+			Gson gson = new Gson();
+			WeiboAccess wa = gson.fromJson(result.toString(), User.WeiboAccess.class);
+			
+			return wa;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+	}
+	
+	public static WeiboUserSimpleModel getWeiboUserSimpleModel(WeiboAccess wa) {
+		String url = "https://api.weibo.com/2/users/show.json";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("access_token", wa.getAccess_token());
+		map.put("uid", wa.getUid());
+		String method = "GET";
+		
+		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		
+		String response = AjaxRequest.getResponse(config);
+		
+		Gson gson = new Gson();
+		WeiboUserSimpleModel wsm = gson.fromJson(response, User.WeiboUserSimpleModel.class);
+		
+		return wsm;
 	}
 	
 	

@@ -148,10 +148,10 @@ request.setAttribute("curUser", curUser);
 			</a>
 		</div>
 		<div class="ajbtn">
-			<a class="href blue" href="">
+			<a class="href blue aweibo" href="javascript:;">
 				<i class="aj-icon" >&#xe60a;</i>
 				<span>微博登陆</span>
-				<span id="wb_connect_btn2"></span>
+				<!-- <span id="wb_connect_btn2"></span> -->
 			</a>
 		</div>
 	</div>
@@ -209,7 +209,7 @@ request.setAttribute("curUser", curUser);
 					url : "/sign/qq"
 				},
 				weibo : {
-					url : "sign/weibo"
+					url : "/sign/weibo"
 				},
 				USER_HOME : "/userhome",
 				SIGN_OUT : "sign/out",
@@ -433,6 +433,28 @@ request.setAttribute("curUser", curUser);
 				//location.href = url;
 			})
 			
+			$("#aj-user-login-choices .aweibo").on("click", function () {
+				var params = [
+					{
+						key : "client_id",
+						val : "4069769321"
+					},
+					{
+						key : "redirect_uri",
+						val : "http://www.nigeerhuo.com/" + config.weibo.url
+					}
+				];
+				var url = "https://api.weibo.com/oauth2/authorize";
+				var paramsArr = [];
+				for (var i = 0; i < params.length; i++) {
+					paramsArr.push(params[i].key + "=" + params[i].val);
+				}
+				url += "?" + paramsArr.join("&");
+				
+				console.log(url);
+				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
+				
+			});
 			
 		}catch(ex) {
 			console.log(ex.message);

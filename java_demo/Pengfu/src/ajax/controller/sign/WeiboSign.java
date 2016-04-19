@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,17 +32,22 @@ import org.apache.http.message.BasicNameValuePair;
 
 
 
+
+
+
+import ajax.model.AjaxResponse;
+import ajax.model.entity.Info;
 import ajax.model.safe.User;
 import ajax.tools.Tools;
 
 
 @WebServlet("/sign/weibo")
-public class Weibo extends HttpServlet {
+public class WeiboSign extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Weibo() {
+	public WeiboSign() {
 		super();
 	}
 
@@ -83,33 +89,56 @@ public class Weibo extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String code = request.getParameter("code");
+		String responseString = "";
 		
 		
-		//String uid = request.getParameter("uid");
-		String token = request.getParameter("token");
-		String img = request.getParameter("img");
-		String nickname = request.getParameter("nickname");
-		//String appkey = Tools.getConfig("weiboAppKey");
+		if (code != null && !code.equals("")) {
+			User.WeiboAccess wa = User.getWeiboAccess(code);
+			
+			if(wa.isOK()) {
+				User.WeiboUserSimpleModel wsm = User.getWeiboUserSimpleModel(wa);
+				
+				System.out.println(wsm);
+				
+				User u = new User();
+				u.setAccessToken(wa.getAccess_token());
+				u.setFrom(User.Source.WEIBO.getId());
+				u.setOpenId(User.Source.dealOpenId(wa.getUid(), User.Source.WEIBO));
+				u.setImg(wsm.getAvatar_large());
+				u.setUsername(wsm.getName());
+				
+				responseString = u.signIn(request, response);
+			} else {
+				AjaxResponse<String> ar = new AjaxResponse<String>();
+				ar.setIsok(false);
+				ar.setData("请求授权环节失败");
+				responseString = ar.toJson();
+			}
+			
+			
+		} else {
+			//String uid = request.getParameter("uid");
+			String token = request.getParameter("token");
+			String img = request.getParameter("img");
+			String nickname = request.getParameter("nickname");
+			//String appkey = Tools.getConfig("weiboAppKey");
+			
+			String openId = User.Source.dealOpenId(token, User.Source.WEIBO);
+			
+			User u = new User();
+			u.setOpenId(openId);
+			u.setUsername(nickname);
+			u.setUserRights(User.UserRights.NORMAL.getId());
+			u.setFrom(User.Source.WEIBO.getId());
+			u.setImg(img);
+			
+			responseString = u.signIn(request, response);			
+		}
 		
-		String openId = User.Source.dealOpenId(token, User.Source.WEIBO);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/html/weibosign.html");
+		rd.forward(request, response);
 		
-		User u = new User();
-		u.setOpenId(openId);
-		u.setUsername(nickname);
-		u.setUserRights(User.UserRights.NORMAL.getId());
-		u.setFrom(User.Source.WEIBO.getId());
-		u.setImg(img);
-		
-		String json = u.signIn(request, response);
-		
-		response.setContentType("text/json");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
-		
-		out.println(json);
-		
-		out.flush();
-		out.close();
 	}
 
 	/**
