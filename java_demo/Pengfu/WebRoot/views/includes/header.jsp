@@ -37,7 +37,7 @@
         <div class="navbar-header">
             <div style="display: inline-block;height: 50px;overflow: hidden;float:left;">
             	<a href="<%=UrlRoute.HOME%>">
-            		 <img src="web/pic/logo.PNG" height="70px " alt=""/>
+            		 <img src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="web/pic/logo.PNG" class="aj-lazy" height="70px " alt="你个二货"/>
             	</a>
             </div>
            	<div class="navbar-text">你个二货</div>

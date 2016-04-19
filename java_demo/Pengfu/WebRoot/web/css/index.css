@@ -16,6 +16,13 @@ body {
     animation-iteration-count: infinite
 }
 
+.aj-show{
+	display: block!important;
+}
+.aj-hide{
+	display: none!important;
+}
+
 /*ali font*/
 @font-face {
   font-family: 'nigeerhuo';

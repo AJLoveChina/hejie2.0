@@ -9,7 +9,7 @@
     <meta property="qc:admins" content="771240325766175520576375" />
     <title>你个二货</title>
     <base href="http://localhost/"/>
-    <link rel="stylesheet" href="http://localhost:63342/nigeerhuo/test/demo.css"/>
+    <link rel="stylesheet" href="http://localhost:63343/nigeerhuo/test/demo.css"/>
 </head>
 <body>
 
@@ -86,7 +86,7 @@
 
         </div>
 
-        <div class="cover-end">
+        <div class="cover-end" style="display: none;" ng-class="isFinished ? 'aj-show' : 'aj-hide'">
             <div class="logo">
                 <em class="glyphicon glyphicon-tower"></em>
             </div>
@@ -95,9 +95,28 @@
                     你已完成测试 :
                     <span ng-bind="cover.title"></span>
                 </div>
+                <div>
+                    你答对了
+                    <span ng-bind="totalRight" class="label label-info"></span>
+                    题,
+                    用时 :
+                    <span ng-bind="time" class="label label-info"></span>
+                </div>
                 <div class="result">
                     你的得分 :
-                    <span class="score" ng-bind="score"></span>
+                    <span class="score label label-warning" ng-bind="score"></span>
+                </div>
+                <div class="desc">
+                    <p class="line">了解得分规则 : </p>
+                    <p class="line">1、每答对一道题得10分, 答错不扣分</p>
+                    <p class="line">2、在默认答题时间前完成试卷, 每提前交卷一秒多获得
+                        <span class="label label-default">(对题数 / 总题数) * 0.5</span>分</p>
+                    <p class="line">本次测试 :
+                        答题得分 ->
+                        <span ng-bind="scoreFromAnswer" class="label label-success"></span>
+                        时间加成 ->
+                        <span ng-bind="scoreFromTime" class="label label-success"></span>
+                    </p>
                 </div>
                 <div class="share">
                     分享给好友
@@ -110,6 +129,7 @@
             </div>
 
         </div>
+
         <div style="min-height: 450px">
             <div class="timing clearfix">
                 <div class="left">
@@ -146,21 +166,24 @@
                 <a href="javascript:;" class="next abtn" ng-click="next()">下一题</a>
                 <a href="javascript:;" class="submit abtn" ng-click="submit()">提交</a>
 
-            <span class="zhishi2" style="padding-left: 10px;">
-                <span>当前</span>
-                <span ng-bind="cur"></span>
-                <span>/</span>
-                <span>共</span>
-                <span ng-bind="questions.length"></span>
-            </span>
+                <span class="zhishi2" style="padding-left: 10px;">
+                    <span>当前</span>
+                    <span ng-bind="cur"></span>
+                    <span>/</span>
+                    <span>共</span>
+                    <span ng-bind="questions.length"></span>
+                </span>
+                <span>&nbsp;||&nbsp;</span>
+                <input type="checkbox" ng-model="isAutoNext"/> 选择后自动下一题
             </div>
             <div class="zhishi">
                 <div class="btn-group" role="group" aria-label="First group">
-                <span ng-class="cur == ($index + 1) ? 'cur' : ''" ng-repeat="question in questions">
+                <span class="aspan" ng-class="cur == ($index + 1) ? 'cur' : ''" ng-repeat="question in questions">
                     <button
                             ng-click="changeQuestion($index + 1)"
                             ng-class="question.finish ? 'finish' : ''" type="button" class="btn btn-default"
                             ng-bind="$index + 1"></button>
+                    <span class="glyphicon glyphicon-flag aflag"></span>
                 </span>
                 </div>
             </div>
@@ -183,8 +206,14 @@
             $scope.time = "00:00";
             $scope.isStart = false;
             $scope.startTime = null;
+            $scope.endTime = null;
             $scope.questions = [];
-            $scope.score = "计算中..."
+            $scope.score = "计算中...";
+            $scope.isAutoNext = true;
+            $scope.trueAnswers = [];
+            $scope.totalRight;
+            $scope.scoreFromAnswer = 0;
+            $scope.scoreFromTime = 0;
 
 
             $scope.finishPercent = function () {
@@ -209,6 +238,13 @@
                 $scope.questions[$scope.cur - 1].choices[index].checked = true;
                 $scope.questions[$scope.cur - 1].finish = true;
                 $scope.checkFinish();
+
+                if ($scope.isFinished) {
+                    $scope.submit();
+                }
+                if ($scope.isAutoNext) {
+                    $scope.next();
+                }
             };
             
             $scope.next = function () {
@@ -238,25 +274,29 @@
             
             $scope.calculateTime = function () {
                 $timeout(function () {
-                    var interval = ((new Date()).getTime() - ($scope.startTime.getTime())) / 1000;
-                    var seconds = Math.floor(interval % 60);
-                    var minutes = Math.floor(interval / 60);
-                    if (seconds < 10) {
-                        seconds = "0" + seconds;
-                    }
-                    if (minutes < 10) {
-                        minutes = "0" + minutes;
-                    }
+                    if (!$scope.isFinished) {
+                        $scope.endTime = (new Date()).getTime();
+                        var interval = ((new Date()).getTime() - ($scope.startTime.getTime())) / 1000;
+                        var seconds = Math.floor(interval % 60);
+                        var minutes = Math.floor(interval / 60);
+                        if (seconds < 10) {
+                            seconds = "0" + seconds;
+                        }
+                        if (minutes < 10) {
+                            minutes = "0" + minutes;
+                        }
 
-                    $scope.time = minutes + ":" + seconds;
-                    $scope.calculateTime();
+                        $scope.time = minutes + ":" + seconds;
+                        $scope.calculateTime();
+                    }
                 }, 1000);
             };
 
             $scope.loadPaper = function (fn) {
-                $http.get("http://localhost:63342/nigeerhuo/test/data.json").then(function (data) {
+                $http.get("http://localhost:63343/nigeerhuo/test/data.json").then(function (data) {
                     $scope.questions = data.data.data.questions;
                     $scope.cover = data.data.data.cover;
+                    $scope.trueAnswers = data.data.data["answers"];
                     fn && fn();
                 });
             };
@@ -272,6 +312,49 @@
                 $scope.loadPaper();
             };
             $scope.init();
+
+            $scope.test = function() {
+                console.log($scope.isAutoNext);
+            };
+
+            $scope.submit = function () {
+                var i,j;
+                var choices;
+                var answers = [];
+                var isRight;    // 某一题是否正确
+                var trueAnsers = $scope.trueAnswers;
+                var rightChoice;
+                var rightNum = 0;
+                var totalScore = 0;
+
+                for (i = 0; i < $scope.questions.length; i++) {
+                    isRight = false;
+                    choices = $scope.questions[i]["choices"];
+                    rightChoice = trueAnsers[i];
+
+                    for(j = 0; j < choices.length; j++) {
+                        if (choices[j].checked && (j + 1) == rightChoice) {
+                            rightNum ++;
+                            isRight = true;
+                        }
+                    }
+
+                    $scope.questions[i]["isRight"] = isRight;
+
+                }
+
+                $scope.totalRight = rightNum;
+                totalScore += rightNum * 10;
+
+                $scope.scoreFromAnswer = totalScore;
+
+                // 默认5分钟完成题目
+                var leftSconds = 300 - ($scope.endTime - $scope.startTime) / 1000;
+                $scope.scoreFromTime = (leftSconds * (rightNum / $scope.questions.length) * 0.5).toFixed(2);
+
+                totalScore += (leftSconds * (rightNum / $scope.questions.length) * 0.5);
+                $scope.score = totalScore.toFixed(2);
+            }
         });
         angular.bootstrap(container, ["exam"]);
     })

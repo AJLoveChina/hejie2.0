@@ -5,10 +5,14 @@
             "title" : "前端工程师测试题",
             "img" : "http://static.nowcoder.com/images/target.png",
             "type" : "选择题",
-            "time" : "10分钟",
+            "time" : "5分钟",
+            "seconds" : 300,
             "difficulty" : [1, 2, 3],
             "num" : 10
         },
+        "answers" : [
+            1, 3, 2, 4, 1, 3, 2, 4, 1, 1
+        ],
         "questions" : [{"id":1,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]},{"id":2,"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?","finish":false,"choices":[{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"},{"checked":false,"title":"display:none"}]}]
     }
 }

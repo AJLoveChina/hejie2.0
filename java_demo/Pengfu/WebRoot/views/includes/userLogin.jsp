@@ -441,7 +441,7 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com/" + config.weibo.url
+						val : "http://www.nigeerhuo.com:9999/" + config.weibo.url
 					}
 				];
 				var url = "https://api.weibo.com/oauth2/authorize";

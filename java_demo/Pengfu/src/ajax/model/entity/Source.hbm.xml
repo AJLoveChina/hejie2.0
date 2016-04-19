@@ -123,7 +123,7 @@
 	</class>
 	
 	
-	<class name="ajax.model.safe.User" table="Users">
+	<class name="ajax.model.safe.User" table="users">
 		
 		<id name="id" column="id" type="java.lang.Integer">
 			<generator class="increment"></generator>

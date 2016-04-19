@@ -47,7 +47,7 @@
 				if (src.indexOf("images/") == -1) {
 					src = "images/" + src;
 				}
-				src = "http://" + location.host + ":8888/" + src;
+				src = "http://" + location.hostname + ":8888/" + src;
 				
 				//$(this).attr("src", src);
 				$(this).attr("data-lazy", src);

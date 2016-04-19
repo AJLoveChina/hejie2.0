@@ -13,7 +13,7 @@
 		<c:forEach items="${list }" var="item">
 		  <div class="div">
 		  	<a href="${item.getOneItemPageUrl() }">
-		  		<img class="aimg aj-lazy" alt="${item.getTitle() }" data-lazy ="${item.getSrc() }" src="/web/pic/dot.jpg">
+		  		<img class="aimg aj-lazy" alt="${item.getTitle() }" data-lazy ="${item.getSrc() }" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg">
 		  		<h4 class="atitle">${item.getTitle() }</h4>
 		  	</a>
 		  </div>		
@@ -22,13 +22,13 @@
 	
 	<div id="aj-home-showcase" class="aj-hide-when-phone">
 		<a class="atag">
-			<img class="aj-lazy" src="/web/pic/dot.jpg" data-lazy="images/web/pic/showcase1.png" alt=""/>
+			<img class="aj-lazy" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="images/web/pic/showcase1.png" alt=""/>
 		</a>
 		<a class="atag">
-			<img class="aj-lazy" src="/web/pic/dot.jpg" data-lazy="images/web/pic/showcase2.png" alt=""/>
+			<img class="aj-lazy" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="images/web/pic/showcase2.png" alt=""/>
 		</a>
 		<a class="atag">
-			<img class="aj-lazy" src="/web/pic/dot.jpg" data-lazy="images/web/pic/showcase3.png"  alt=""/>
+			<img class="aj-lazy" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="images/web/pic/showcase3.png"  alt=""/>
 		</a>
 	</div>
 

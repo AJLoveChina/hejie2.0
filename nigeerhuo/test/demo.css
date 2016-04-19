@@ -149,10 +149,7 @@
   word-break: break-all;
 }
 .aj-exercise .amid .choices .atag:hover {
-  background: #F3F3F3;
-  border-color: #909090;
-  color: #25bb9b;
-  text-decoration: none;
+  box-shadow: #aaa 0 0 5px;
 }
 .aj-exercise .amid .choices .atag.selected {
   border-color: #1abc9c;
@@ -187,6 +184,9 @@
   padding-top: 10px;
   border-top: 1px solid #ccc;
 }
+.aj-exercise .zhishi .aspan {
+  position: relative;
+}
 .aj-exercise .zhishi .btn {
   background: white;
 }
@@ -196,6 +196,15 @@
 }
 .aj-exercise .zhishi .cur .btn {
   box-shadow: green 0 0 2px;
+}
+.aj-exercise .zhishi .cur .aflag {
+  display: block;
+}
+.aj-exercise .zhishi .aflag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
 }
 .aj-exercise .cover-end {
   position: absolute;
@@ -207,11 +216,11 @@
   z-index: 11;
 }
 .aj-exercise .cover-end .logo {
-  height: 200px;
+  height: 180px;
   text-align: center;
 }
 .aj-exercise .cover-end .logo em {
-  line-height: 200px;
+  line-height: 180px;
   font-size: 80px;
   color: lightblue;
 }
@@ -225,4 +234,16 @@
 }
 .aj-exercise .cover-end .result {
   line-height: 30px;
+}
+.aj-exercise .cover-end .desc {
+  background: #f0f0f0;
+  color: #666!important;
+  padding: 20px;
+  border-radius: 0;
+  border: none;
+  overflow-y: auto;
+  margin-bottom: 30px;
+  z-index: 1;
+  position: relative;
+  font-size: 14px;
 }
