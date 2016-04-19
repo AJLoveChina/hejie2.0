@@ -39,9 +39,11 @@
 				}
 				src = "http://" + location.host + ":8888/" + src;
 				
-				$(this).attr("src", src);
+				//$(this).attr("src", src);
+				$(this).attr("data-lazy", src);
 				
 			});
+			
 			div.lazyload({
 			    effect : "fadeIn",
 			    data_attribute  : "lazy"

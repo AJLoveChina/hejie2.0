@@ -99,7 +99,7 @@ public class QueryParams {
 	public void set(String key, String value) {
 		if (this.isSet(key)) {
 			for (Param p : params) {
-				if (p.key == key) {
+				if (p.key.equals(key)) {
 					p.value = value;
 					break;
 				}
@@ -164,6 +164,7 @@ public class QueryParams {
 		for (Param p : this.getParams()) {
 			if (first) {
 				sb.append(p.key + "=" + p.value);
+				first = false;
 			} else {
 				sb.append("&" + p.key + "=" + p.value);
 			}
