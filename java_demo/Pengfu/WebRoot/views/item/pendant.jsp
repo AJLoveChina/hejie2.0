@@ -121,13 +121,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	$(document).trigger("aj.tellme-item-id", [callback]);
 	            	
 	            	function callback(id) {
+	            		var userid = (new aj.User()).getUserid();
 	            		var collect = getCollectArr();
 	            		var bool = false;
 	            		
-	            		for (var i = 0; i < collect.length; i++) {
-	            			if (collect[i] == id) {
-	            				bool = true;
-	            			}
+	            		var userCollect = collect[userid];
+	            		
+	            		if (userCollect) {
+	            			for (var i = 0; i < userCollect.length; i++) {
+		            			if (userCollect[i] == id) {
+		            				bool = true;
+		            			}
+		            		}
 	            		}
 	            		
 	            		fn(bool);
@@ -153,33 +158,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            function getCollectArr() {
 	            	var collect = localStorage.getItem(collectKey);
 	            	if (collect == null || collect == "") {
-	            		return [];
+	            		return {};
 	            	} else {
-	            		return collect.split(",");
+	            		return JSON.parse(collect);
 	            	}
 	            }
 	            // 收藏 id 存在到本地
 	            $scope.shoucangPush = function (id) {
 	            	
-	            	var collect = localStorage.getItem(collectKey);
-	            	var list;
-	            	var bool = false;
+	            	try {
+						var collect = localStorage.getItem(collectKey);
+		            	var userid = (new aj.User()).getUserid();
+		            	var list;
+		            	var bool = false;
+		            	var collectJson;
+		            	
+		            	
+		            	if (collect == null || collect == "") { // 之前木有任何账户在此浏览器上收藏过item
+		            		list = [];
+		            		list.push(id);
+		            		collectJson = {};
+		            	} else {	
+		            		collectJson = JSON.parse(collect);
+		            		
+		            		if (collectJson[userid]) {
+		            			//list = collectJson[userid].split(",");
+		            			list = collectJson[userid];
+		            			
+		            			for (var i = 0; i < list.length; i++) {
+			            			if (list[i] == id) {
+			            				bool = true;
+			            			}
+			            		}
+			            		if (!bool) {
+			            			list.push(id);
+			            		}
+		            		} else {
+		            			list = [];
+		            			list.push(id);
+		            		}
+		            	}
+		           		collectJson[userid] = list;
+		            	localStorage.setItem(collectKey, JSON.stringify(collectJson));
 	            	
-	            	if (collect == null || collect == "") {
-	            		list = [];
-	            		list.push(id);
-	            	} else {
-	            		list = collect.split(",");
-	            		for (var i = 0; i < list.length; i++) {
-	            			if (list[i] == id) {
-	            				bool = true;
-	            			}
-	            		}
-	            		if (!bool) {
-	            			list.push(id);
-	            		}
+	            	}catch(ex) {
+	            		// 恢复
+	            		localStorage.removeItem(collectKey);
 	            	}
-	            	localStorage.setItem(collectKey, list.join(","));
+	            	
 	            }
 	
 	        	});
@@ -232,6 +258,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   font-size: 12px;
   color: #666;
   transition:all 0.3s;
+  background-color: white;
 }
 .aj-pendant a {
   text-decoration: none;

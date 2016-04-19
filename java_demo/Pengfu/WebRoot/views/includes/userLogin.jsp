@@ -115,7 +115,7 @@ request.setAttribute("curUser", curUser);
 	}
 </style>
 
-<div class="user-login" data-islogin="0">
+<div class="user-login" data-islogin="0" data-userid="0">
 	<div class="u-l-photo glyphicon glyphicon-user"></div>
 	<div class="u-l-right">
 		<div class="u-l-sign-before">
@@ -180,7 +180,7 @@ request.setAttribute("curUser", curUser);
 
 
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101305556" data-redirecturi="http://www.nigeerhuo.com/sign/qq" charset="utf-8" ></script>
-<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=4069769321&debug=true" type="text/javascript" charset="utf-8"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=4069769321" type="text/javascript" charset="utf-8"></script>
 
 <c:choose>
 	<c:when test="${isLogin }">
@@ -188,6 +188,7 @@ request.setAttribute("curUser", curUser);
 			<input name="isLogin" value='<c:out value="${isLogin }"></c:out>' />
 			<input name="nickname" value='<c:out value="${curUser.getUsername() }"></c:out>' />
 			<input name="img" value='<c:out value="${curUser.getImg() }"></c:out>' />
+			<input name="userid" value='<c:out value="${curUser.getId() }"></c:out>' />
 		</form>
 	</c:when>
 	
@@ -201,7 +202,7 @@ request.setAttribute("curUser", curUser);
 <script type="text/javascript">
 	$(function() {
 		try {
-		
+			var container = $(".user-login");
 			var CSRF_STATE = "<%=state %>";
 			var config = {
 				qq : {
@@ -219,7 +220,7 @@ request.setAttribute("curUser", curUser);
 				var aj_user_sign_config_form = $("#aj-user-sign-config")[0];
 				
 				if (aj_user_sign_config_form.isLogin.value.toLowerCase() == "true") {
-					signin(aj_user_sign_config_form.img.value, aj_user_sign_config_form.nickname.value);
+					signin(aj_user_sign_config_form.img.value, aj_user_sign_config_form.nickname.value, "server", aj_user_sign_config_form);
 				}
 				
 			}catch(ex) {
@@ -227,7 +228,7 @@ request.setAttribute("curUser", curUser);
 			}
 			
 			
-			
+			// 更多登陆方式
 			$(function(){
 				$(".aj-show-sign-panel").click(function(){
 				  $("#aj-sign-panel").modal("toggle");
@@ -238,16 +239,7 @@ request.setAttribute("curUser", curUser);
 		 	var before = $(".user-login .u-l-sign-before"),
 			    after = $(".user-login .u-l-sign-after");
 			    
-				QC.Login({
-					btnId : "qqLoginBtn",//插入按钮的html标签id
-					size : "C_S",//按钮尺寸
-					scope : "get_user_info",//展示授权，全部可用授权可填 all
-					display : "pc"//应用场景，可选
-				},function(reqData, opts){//登录成功
-				    signin(reqData.figureurl, reqData.nickname, "qq");
-				}, function(opts){//注销成功
-				     // signout(opts);  这个方法不要在这调用
-				});
+
 
 				
 			// 登陆成功后做的事情
@@ -272,7 +264,7 @@ request.setAttribute("curUser", curUser);
 			       after.show();
 			       
 			       // 切换登陆状态, 让User类判断是否登陆了
-			       $(".user-login").attr("data-islogin", "1");
+			       container.attr("data-islogin", "1");
 			       
 			       // 向服务端注册
 			       if (from === "qq") {
@@ -297,7 +289,13 @@ request.setAttribute("curUser", curUser);
 									type : "POST",
 									dataType : "json",
 									success : function (json) {
-										console.log(json);
+										try {
+											var userid = json.data.user.id;
+											
+											container.attr("data-userid", userid);
+										}catch(ex) {
+											console.log(ex);
+										}
 									},
 									error : function(e) {
 										console.log(e);
@@ -333,6 +331,15 @@ request.setAttribute("curUser", curUser);
 			       					console.log(e);
 			       				}
 			       			});
+			       		})();
+			       }
+			       
+			       
+			       if (from == "server") {
+			       		(function () {
+			       			var userid = moreInfo.userid;
+			       			
+			       			container.attr("data-userid", userid);
 			       		})();
 			       }
 			}
@@ -373,9 +380,22 @@ request.setAttribute("curUser", curUser);
 				}
 				
 				signout()
-			}) 
-			
-			// 微博登陆			
+			})
+
+			// QQ登陆
+			QC.Login({
+				btnId : "qqLoginBtn",//插入按钮的html标签id
+				size : "C_S",//按钮尺寸
+				scope : "get_user_info",//展示授权，全部可用授权可填 all
+				display : "pc"//应用场景，可选
+			},function(reqData, opts){//登录成功
+			    signin(reqData.figureurl, reqData.nickname, "qq");
+			}, function(opts){//注销成功
+			     // signout(opts);  这个方法不要在这调用
+			});
+				
+							
+			// 微博登陆
 			WB2.anyWhere(function(W){
 			    W.widget.connectButton({
 			        id: "wb_connect_btn2",	
@@ -383,7 +403,7 @@ request.setAttribute("curUser", curUser);
 			        callback : {
 			            login:function(o){	//登录后的回调函数
 			            	console.log(o);
-			            	signin(o.avatar_hd, o.name, "weibo", o)
+			            	signin(o.avatar_large, o.name, "weibo", o);
 			            },
 			            logout:function(){	//退出后的回调函数
 			            	// signout();

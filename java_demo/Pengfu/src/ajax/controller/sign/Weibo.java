@@ -85,11 +85,11 @@ public class Weibo extends HttpServlet {
 
 		
 		
-		String uid = request.getParameter("uid");
+		//String uid = request.getParameter("uid");
 		String token = request.getParameter("token");
 		String img = request.getParameter("img");
 		String nickname = request.getParameter("nickname");
-		String appkey = Tools.getConfig("weiboAppKey");
+		//String appkey = Tools.getConfig("weiboAppKey");
 		
 		String openId = User.Source.dealOpenId(token, User.Source.WEIBO);
 		

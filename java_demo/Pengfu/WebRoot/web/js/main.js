@@ -5,6 +5,7 @@
 		function User() {
 			this.conatinerSelector = ".user-login";
 			this.statusAttr = "data-islogin";
+			this.configSelector = "#aj-user-sign-config";
 		}
 		User.prototype = {
 			isLogin : function () {
@@ -15,6 +16,15 @@
 					return true;
 				} else {
 					return false;
+				}
+			},
+			getUserid : function () {
+				var form = $(this.configSelector)[0];
+				
+				if (form.userid) {
+					return form.userid.value;
+				} else {
+					return 0;
 				}
 			}
 		}
