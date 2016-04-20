@@ -131,23 +131,6 @@ public class WeiboSign extends HttpServlet {
 			}
 			
 			
-		} else {
-			//String uid = request.getParameter("uid");
-			String token = request.getParameter("token");
-			String img = request.getParameter("img");
-			String nickname = request.getParameter("nickname");
-			//String appkey = Tools.getConfig("weiboAppKey");
-			
-			String openId = User.Source.dealOpenId(token, User.Source.WEIBO);
-			
-			User u = new User();
-			u.setOpenId(openId);
-			u.setUsername(nickname);
-			u.setUserRights(User.UserRights.NORMAL.getId());
-			u.setFrom(User.Source.WEIBO.getId());
-			u.setImg(img);
-			
-			responseString = u.signIn(request, response);			
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/views/html/weibosign.html");

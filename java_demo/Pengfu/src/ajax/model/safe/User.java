@@ -26,6 +26,7 @@ import org.hibernate.criterion.Restrictions;
 import com.google.gson.Gson;
 
 import ajax.model.AjaxRequest;
+import ajax.model.AjaxRequest.Config;
 import ajax.model.AjaxResponse;
 import ajax.model.Callback;
 import ajax.model.UrlRoute;
@@ -86,7 +87,8 @@ public class User extends Entity<User>{
 	
 	public enum Source{
 		QQ(1, "QQ"),
-		WEIBO(2, "WEIBO");
+		WEIBO(2, "WEIBO"),
+		GITHUB(3, "GITHUB");
 		
 		private int id;
 		private String prefix;
@@ -650,6 +652,98 @@ public class User extends Entity<User>{
 		QQUserSimpleModel qsm = gson.fromJson(response, QQUserSimpleModel.class);
 		
 		return qsm;
+	}
+	
+	
+	public class GithubAccessToken {
+		private String access_token;
+		private String scope;
+		private String token_type;
+		public String getAccess_token() {
+			return access_token;
+		}
+		public void setAccess_token(String access_token) {
+			this.access_token = access_token;
+		}
+		public String getScope() {
+			return scope;
+		}
+		public void setScope(String scope) {
+			this.scope = scope;
+		}
+		public String getToken_type() {
+			return token_type;
+		}
+		public void setToken_type(String token_type) {
+			this.token_type = token_type;
+		}
+		public boolean isOK() {
+			return this.access_token != null;
+		}
+		
+	}
+	
+	public static GithubAccessToken getGithubAccessToken(String code, String state) {
+		String url = "https://github.com/login/oauth/access_token";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("client_id", Tools.getConfig("githubClientId"));
+		map.put("client_secret", Tools.getConfig("githubClientSecret"));
+		map.put("code", code);
+		map.put("state", state);
+		
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Accept", "application/json");
+		
+		String method = "POST";
+		
+		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		config.setHeaders(headers);
+		
+		String response = AjaxRequest.getResponse(config);
+		
+		Gson gson = new Gson();
+		
+		GithubAccessToken gat = gson.fromJson(response, GithubAccessToken.class);
+		
+		return gat;
+	}
+	
+	public class GithubUserSimpleModel {
+		private String id;
+		private String login;
+		private String avatar_url;
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
+		}
+		public String getLogin() {
+			return login;
+		}
+		public void setLogin(String login) {
+			this.login = login;
+		}
+		public String getAvatar_url() {
+			return avatar_url;
+		}
+		public void setAvatar_url(String avatar_url) {
+			this.avatar_url = avatar_url;
+		}
+	}
+	
+	public static GithubUserSimpleModel getGithubUserSimpleModel(GithubAccessToken gat) {
+		String url = "https://api.github.com/user?access_token=" + gat.getAccess_token();
+		
+		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, null, "GET");
+		
+		String response = AjaxRequest.getResponse(config);
+		
+		Gson gson = new Gson();
+		GithubUserSimpleModel gusm = gson.fromJson(response, GithubUserSimpleModel.class);
+		
+		return gusm;
 	}
 	
 	

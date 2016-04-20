@@ -31,6 +31,16 @@ public class AjaxRequest {
 		private String url;
 		private Map<String, String> map;
 		private String method = "POST";
+		private Map<String, String> headers = null;
+		
+		
+		
+		public Map<String, String> getHeaders() {
+			return headers;
+		}
+		public void setHeaders(Map<String, String> headers) {
+			this.headers = headers;
+		}
 		public String getUrl() {
 			return url;
 		}
@@ -77,27 +87,47 @@ public class AjaxRequest {
 			
 			if (method == "POST")  {
 				HttpPost request = new HttpPost(config.getUrl());
-				request.setHeader("Content-Type", "text/json; charset=UTF-8");
+				request.setHeader("Content-Type", "charset=UTF-8");
 				
-				List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-				
-				for (String key : params.keySet()) {
-					pairs.add(new BasicNameValuePair(key, params.get(key)));
+				if (config.getMap() != null) {
+					List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+					for (String key : params.keySet()) {
+						pairs.add(new BasicNameValuePair(key, params.get(key)));
+					}
+					request.setEntity(new UrlEncodedFormEntity(pairs));
 				}
 				
-				request.setEntity(new UrlEncodedFormEntity(pairs));
+			
+				if (config.getHeaders()!= null) {
+					Map<String, String> headers = config.getHeaders();
+					
+					for (String key : headers.keySet()) {
+						request.setHeader(key, headers.get(key));
+					}
+				}
 				back = client.execute(request);
 				
 			} else {
 				String url = config.getUrl();
-				List<String> list = new ArrayList<String>();
-				for (String key : params.keySet()) {
-					list.add(key + "=" + params.get(key));
-				}
-				url += "?" + Tools.join(list, "&");
-				HttpGet request = new HttpGet(url);
-				request.setHeader("Content-Type", "text/json; charset=UTF-8");
 				
+				if (params != null) {
+					List<String> list = new ArrayList<String>();
+					for (String key : params.keySet()) {
+						list.add(key + "=" + params.get(key));
+					}
+					url += "?" + Tools.join(list, "&");
+				}
+				
+				HttpGet request = new HttpGet(url);
+				request.setHeader("Content-Type", "charset=UTF-8");
+				
+				if (config.getHeaders()!= null) {
+					Map<String, String> headers = config.getHeaders();
+					
+					for (String key : headers.keySet()) {
+						request.setHeader(key, headers.get(key));
+					}
+				}
 				
 				back = client.execute(request);
 				

@@ -3,6 +3,7 @@ package ajax.controller.sign;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import ajax.model.AjaxResponse;
+import ajax.model.entity.Info;
 import ajax.model.safe.Github;
+import ajax.model.safe.User;
 
 @WebServlet("/sign/github")
 public class GithubSign extends HttpServlet {
@@ -65,9 +69,31 @@ public class GithubSign extends HttpServlet {
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
 		
-		String token = Github.getToken(code, state);
+		if (code != null && !code.equals("")) {
+			User.GithubAccessToken gat = User.getGithubAccessToken(code, state);
+			
+			
+			if(gat.isOK()) {
+				
+				
+				User.GithubUserSimpleModel gusm = User.getGithubUserSimpleModel(gat);
+				
+				
+				
+				User u = new User();
+				u.setAccessToken(gat.getAccess_token());
+				u.setFrom(User.Source.GITHUB.getId());
+				u.setOpenId(User.Source.dealOpenId(gusm.getId(), User.Source.GITHUB));
+				u.setImg(gusm.getAvatar_url());
+				u.setUsername(gusm.getLogin());
+				
+				u.signIn(request, response);
+				
+			}
+		}
 		
-		System.out.println(token);
+		RequestDispatcher rd = request.getRequestDispatcher("/views/html/close.html");
+		rd.forward(request, response);
 		
 	}
 

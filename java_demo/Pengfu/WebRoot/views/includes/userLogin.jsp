@@ -220,6 +220,9 @@ request.setAttribute("curUser", curUser);
 				weibo : {
 					url : "/sign/weibo"
 				},
+				github : {
+					url : "/sign/github"
+				},
 				USER_HOME : "/userhome",
 				SIGN_OUT : "sign/out",
 				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
@@ -447,7 +450,7 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com" + config.weibo.url
+						val : "http://www.nigeerhuo.com" + config.github.url
 					},
 					{
 						key : "state",
