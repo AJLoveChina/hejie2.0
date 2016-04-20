@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script src="script/bmob-min.js"></script>
+<script>
+    Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
+
+
+//    var GameScore = Bmob.Object.extend("exam_result");
+//    var gameScore = new GameScore();
+//    gameScore.set("user_id", "4");
+//    gameScore.set("user_name", "阿杰");
+//    gameScore.set("user_img", "");
+//    gameScore.set("score_total", "123");
+//    gameScore.set("score_time", "23");
+//    gameScore.set("score_answer", "100");
+//
+//    gameScore.save(null, {
+//        success: function(object) {
+//            alert("create object success, object id:"+object.id);
+//        },
+//        error: function(model, error) {
+//            alert("create object fail");
+//        }
+//    });
+
+</script>
+
+
+<script>
+    var GameScore = Bmob.Object.extend("exam_result");
+    var query = new Bmob.Query(GameScore);
+    // 查询所有数据
+    query.find({
+        success: function(results) {
+            alert("共查询到 " + results.length + " 条记录");
+            // 循环处理查询到的数据
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                console.log(object.get("user_name"));
+            }
+        },
+        error: function(error) {
+            alert("查询失败: " + error.code + " " + error.message);
+        }
+    });
+
+</script>
+
+</body>
+</html>
