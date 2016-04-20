@@ -28,9 +28,13 @@ import com.google.gson.Gson;
 import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
 import ajax.model.Callback;
+import ajax.model.UrlRoute;
 import ajax.model.entity.Collect;
 import ajax.model.entity.Entity;
+import ajax.model.entity.Info;
 import ajax.model.entity.Item;
+import ajax.model.safe.User.QQAccess;
+import ajax.model.safe.User.QQUserSimpleModel;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
@@ -200,6 +204,8 @@ public class User extends Entity<User>{
 	public String signIn(HttpServletRequest request, HttpServletResponse response) {
 		SignStatus ss = null;
 		
+		
+		
 		if (User.isLogin(request, response)) {
 			
 			ss = User.getSignStatus(request, response);
@@ -328,16 +334,7 @@ public class User extends Entity<User>{
 		return items;
 	}
 	
-	
-	public static void main(String[] args) {
-		User u = new User();
-		u.load(4);
-		List<Item> items = u.getCollections();
-		
-		System.out.println(items);
-		
-		
-	}
+
 	
 	
 	public class WeiboAccess {
@@ -379,6 +376,7 @@ public class User extends Entity<User>{
 		}
 	}
 	
+	
 	public class WeiboUserSimpleModel {
 		private String id;
 		private String name;
@@ -403,6 +401,88 @@ public class User extends Entity<User>{
 			this.avatar_large = avatar_large;
 		}
 	}
+	
+
+	public class QQAccess {
+		private String access_token;
+		private String expires_in;
+		private String refresh_token;
+		public String getAccess_token() {
+			return access_token;
+		}
+		public void setAccess_token(String access_token) {
+			this.access_token = access_token;
+		}
+		public String getExpires_in() {
+			return expires_in;
+		}
+		public void setExpires_in(String expires_in) {
+			this.expires_in = expires_in;
+		}
+		public String getRefresh_token() {
+			return refresh_token;
+		}
+		public void setRefresh_token(String refresh_token) {
+			this.refresh_token = refresh_token;
+		}
+		
+		public boolean isOK() {
+			return this.access_token != null;
+		}
+	}
+	
+	public class QQUserSimpleModel {
+		/**
+		 * ret== 0 means alright!
+		 */
+		private int ret;
+		private String nickname;
+		/**
+		 * 大头像
+		 */
+		private String figureurl_qq_2;
+		/**
+		 * 小头像
+		 */
+		private String figureurl_qq_1;
+		public int getRet() {
+			return ret;
+		}
+		public void setRet(int ret) {
+			this.ret = ret;
+		}
+		public String getNickname() {
+			return nickname;
+		}
+		public void setNickname(String nickname) {
+			this.nickname = nickname;
+		}
+		public String getFigureurl_qq_2() {
+			return figureurl_qq_2;
+		}
+		public void setFigureurl_qq_2(String figureurl_qq_2) {
+			this.figureurl_qq_2 = figureurl_qq_2;
+		}
+		public String getFigureurl_qq_1() {
+			return figureurl_qq_1;
+		}
+		public void setFigureurl_qq_1(String figureurl_qq_1) {
+			this.figureurl_qq_1 = figureurl_qq_1;
+		}
+		/**
+		 * 模型中有俩个图片属性, 其中较大的那个可能不存在, 所以需要返回其中一个
+		 * @return
+		 */
+		public String getUserimg() {
+			if (this.figureurl_qq_2 != null && this.figureurl_qq_2 != "") {
+				return this.figureurl_qq_2;
+			} else {
+				return this.figureurl_qq_1;
+			}
+		}
+	}
+	
+	
 	/**
 	 * 返回的对象中包含用户uid 和 access_token<br>
 	 * 如果出现异常, 返回null
@@ -450,6 +530,41 @@ public class User extends Entity<User>{
 		return null;
 	}
 	
+	public static QQAccess getQQAccess(String code) {
+		String url = "https://graph.qq.com/oauth2.0/token";
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("grant_type", "authorization_code");
+		map.put("client_id", Tools.getConfig("qqAppId"));
+		map.put("client_secret", Tools.getConfig("qqAppKey"));
+		map.put("code", code);
+		map.put("redirect_uri", UrlRoute.QQ_REDIRECT.getUrl());
+		
+		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, "GET");
+		
+		String response = AjaxRequest.getResponse(config);
+		// access_token=FE04************************CCE2&expires_in=7776000&refresh_token=88E4************************BE14
+		Gson gson = new Gson();
+		// QQAccess qa = gson.fromJson(response, User.QQAccess.class);
+		
+		String[] params = response.split("&");
+		QQAccess qa = (new User()).new QQAccess();
+		
+		for (String param : params) {
+			String[] arr = param.split("=");
+
+			if (arr[0].equals("access_token")) {
+				qa.setAccess_token(arr[1]);
+			} else if (arr[0].equals("expires_in")) {
+				qa.setExpires_in(arr[1]);
+			} else if (arr[0].equals("refresh_token")) {
+				qa.setRefresh_token(arr[1]);
+			}
+		}
+		
+		return qa;
+	}
+	
 	public static WeiboUserSimpleModel getWeiboUserSimpleModel(WeiboAccess wa) {
 		String url = "https://api.weibo.com/2/users/show.json";
 		Map<String, String> map = new HashMap<String, String>();
@@ -465,6 +580,76 @@ public class User extends Entity<User>{
 		WeiboUserSimpleModel wsm = gson.fromJson(response, User.WeiboUserSimpleModel.class);
 		
 		return wsm;
+	}
+	
+	public class QQOpenIdModel {
+		private String client_id;
+		private String openid;
+		public String getClient_id() {
+			return client_id;
+		}
+		public void setClient_id(String client_id) {
+			this.client_id = client_id;
+		}
+		public String getOpenid() {
+			return openid;
+		}
+		public void setOpenid(String openid) {
+			this.openid = openid;
+		}
+	}
+	
+
+	
+	public static QQOpenIdModel getQQOpenId(QQAccess qa) {
+		String url = "https://graph.qq.com/oauth2.0/me";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("access_token", qa.getAccess_token());
+		String method = "GET";
+		
+		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		
+		String response = AjaxRequest.getResponse(config);
+		
+		
+		response = response.replaceAll("callback\\(", "");
+		response = response.replaceAll("\\)\\W+", "");
+		
+		Gson gson = new Gson();
+		QQOpenIdModel qim = gson.fromJson(response, QQOpenIdModel.class);
+		
+		return qim;
+	}
+	
+	public static void main(String[] args) {
+		String response = "callback( {\"client_id\":\"YOUR_APPID\",\"openid\":\"YOUR_OPENID\"} );";
+		
+		response = response.replaceAll("callback\\(", "");
+		response = response.replaceAll("\\)\\W+", "");
+		//reponse.replaceFirst(")\\$", "");
+		
+		System.out.println(response);
+	}
+	
+	public static QQUserSimpleModel getQQSimpleModel(QQAccess qa, QQOpenIdModel qim) {
+		String url = "https://graph.qq.com/user/get_user_info";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("access_token", qa.getAccess_token());
+		map.put("openid", qim.getOpenid());
+		map.put("format", "json");
+		map.put("oauth_consumer_key", Tools.getConfig("qqAppId"));
+		String method = "GET";
+		
+		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		
+		String response = AjaxRequest.getResponse(config);
+		
+		Gson gson = new Gson();
+		
+		QQUserSimpleModel qsm = gson.fromJson(response, QQUserSimpleModel.class);
+		
+		return qsm;
 	}
 	
 	

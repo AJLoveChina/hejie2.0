@@ -16,6 +16,7 @@ import ajax.model.entity.Config;
 import ajax.model.entity.Item;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
+import ajax.model.safe.User.QQAccess;
 
 @WebServlet("/sign/qq")
 public class QQSign extends HttpServlet {
@@ -64,35 +65,63 @@ public class QQSign extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
-		if (action == null || action.equals("")) {
+		String code = request.getParameter("code");
+		String responseString = "";
+		
+		if (code != null && code != "") {
+			QQAccess qa = User.getQQAccess(code);
+			
+			if (qa.isOK()) {
+				User.QQOpenIdModel qim = User.getQQOpenId(qa);
+				
+				User.QQUserSimpleModel usm = User.getQQSimpleModel(qa, qim);
+				
+				User u = new User();
+				u.setAccessToken(qa.getAccess_token());
+				u.setFrom(User.Source.QQ.getId());
+				u.setOpenId(User.Source.dealOpenId(qim.getOpenid(), User.Source.QQ));
+				u.setImg(usm.getUserimg());
+				u.setUsername(usm.getNickname());
+				
+				responseString = u.signIn(request, response);
+				
+			}
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
 			rd.forward(request, response);
+			
 		} else {
+			if (action == null || action.equals("")) {
+				RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
+				rd.forward(request, response);
+			} else {
+				
+				request.setCharacterEncoding("UTF-8");
+				String openId = request.getParameter("id");
+				String accessToken = request.getParameter("token");
+				String nickname = request.getParameter("nickname");
+				String img = request.getParameter("img");
+				openId = User.Source.dealOpenId(openId, User.Source.QQ);
+				
+				User u = new User();
+				u.setOpenId(openId);
+				u.setUsername(nickname);
+				u.setAccessToken(accessToken);
+				u.setFrom(User.Source.QQ.getId());
+				u.setImg(img);
+				
+				String json = u.signIn(request, response);
+				
+				response.setContentType("text/json");
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter out = response.getWriter();
+				
+				out.println(json);
+				
+				out.flush();
+				out.close();
+			}
 			
-			request.setCharacterEncoding("UTF-8");
-			String openId = request.getParameter("id");
-			String accessToken = request.getParameter("token");
-			String nickname = request.getParameter("nickname");
-			String img = request.getParameter("img");
-			openId = User.Source.dealOpenId(openId, User.Source.QQ);
-			
-			User u = new User();
-			u.setOpenId(openId);
-			u.setUsername(nickname);
-			u.setAccessToken(accessToken);
-			u.setFrom(User.Source.QQ.getId());
-			u.setImg(img);
-			
-			String json = u.signIn(request, response);
-			
-			response.setContentType("text/json");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			
-			out.println(json);
-			
-			out.flush();
-			out.close();
 		}
 	}
 

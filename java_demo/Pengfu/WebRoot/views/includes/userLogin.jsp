@@ -27,7 +27,7 @@ request.setAttribute("curUser", curUser);
 		width:100%;
 		margin-top: 10px;
 	}
-	.user-login .u-l-photo{
+	.user-login .u-l-photo, .user-login .u-l-true-image{
 		position:absolute;
 		top:0;left:0;
 		width:60px;
@@ -39,9 +39,10 @@ request.setAttribute("curUser", curUser);
 		font-size: 30px;
 		background-color: #ccc;
 		overflow: hidden;
+		background-size:60px 60px;
 	}
 	
-	.user-login .u-l-photo img{
+	.user-login .u-l-true-image img{
 	    width: 100%;
 	    height: 100%;
 	    position: absolute;
@@ -107,6 +108,9 @@ request.setAttribute("curUser", curUser);
 		margin-top:20px;
 		text-align: left;
 	}
+	#aj-sign-panel .other-ways .aj-icon{
+		color:#666;
+	}
 	#aj-sign-panel a{
 		text-decoration: none;
 	}
@@ -117,6 +121,8 @@ request.setAttribute("curUser", curUser);
 
 <div class="user-login" data-islogin="0" data-userid="0">
 	<div class="u-l-photo glyphicon glyphicon-user"></div>
+	<a class="u-l-true-image" href="/userhome" style="display: none;"></a>
+	
 	<div class="u-l-right">
 		<div class="u-l-sign-before">
 			<p class="line">Hi 你好</p>
@@ -141,14 +147,14 @@ request.setAttribute("curUser", curUser);
 	</div>
 	<div id="aj-user-login-choices" class="u-l-footer clearfix">
 		<div class="ajbtn">
-			<a class="href" href="javascript:;">
+			<a class="href aqq-sign" href="javascript:;">
 				<i class="aj-icon">&#xe611;</i>
 				<span>QQ登陆</span>
-				<span id="qqLoginBtn"></span>
+				<!-- <span id="qqLoginBtn"></span> -->
 			</a>
 		</div>
 		<div class="ajbtn">
-			<a class="href blue aweibo" href="javascript:;">
+			<a class="href blue aweibo-sign" href="javascript:;">
 				<i class="aj-icon" >&#xe60a;</i>
 				<span>微博登陆</span>
 				<!-- <span id="wb_connect_btn2"></span> -->
@@ -168,7 +174,9 @@ request.setAttribute("curUser", curUser);
 			
 				<div class="other-ways">
 					<span>其它登陆方式 : </span>
-					<a href="javascript:;" class="aj-icon github">&#xe615;</a>
+					<a href="javascript:;" title="QQ登陆" class="aj-icon aqq-sign">&#xe611;</a>
+					<a href="javascript:;" title="新浪微博登陆" class="aj-icon aweibo-sign">&#xe60a;</a>
+					<a href="javascript:;" title="Github登陆"class="aj-icon agithub-sign">&#xe615;</a>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -179,9 +187,10 @@ request.setAttribute("curUser", curUser);
 </div>
 
 
+<!-- 
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101305556" data-redirecturi="http://www.nigeerhuo.com/sign/qq" charset="utf-8" ></script>
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=4069769321" type="text/javascript" charset="utf-8"></script>
-
+ -->
 <c:choose>
 	<c:when test="${isLogin }">
 		<form id="aj-user-sign-config">
@@ -253,10 +262,13 @@ request.setAttribute("curUser", curUser);
 			       var img = $(document.createElement("img"));
 			       img.attr("src", userimg);
 			       
-			       var atag = $(document.createElement("a"));
+			       var atag = $(document.createElement("div"));
 			       atag.append(img);
 			       atag.attr("href", config.USER_HOME);
-			       $(".user-login .u-l-photo").append(atag);
+			       $(".user-login .u-l-photo").hide();
+			       $(".user-login .u-l-true-image").css({
+			       		backgroundImage : "url(" + userimg + ")"
+			       }).show();
 			       
 			       
 			       before.hide();
@@ -349,7 +361,9 @@ request.setAttribute("curUser", curUser);
 			function signout() {
 				$("#aj-user-login-choices").show();
 		        after.hide();
-		        $(".user-login .u-l-photo").find("img").remove();
+		        $(".user-login .u-l-photo").show();
+		        $(".user-login .u-l-true-image").hide();
+		        
 		        before.show();
 		        sessionStorage.removeItem(config.SIGNIN_ATTR);
 		        
@@ -371,18 +385,12 @@ request.setAttribute("curUser", curUser);
 			   
 			// 注销   对于 第三方登陆的处理, 第三方登陆会有一个异步函数调用  signout 函数
 			$("#aj-sign-out").on("click", function() {
-				if (QC.Login.check()) {
-					QC.Login.signOut();
-				}
-				
-				if (WB2.checkLogin()) {
-					WB2.logout();
-				}
 				
 				signout()
+				
 			})
 
-			// QQ登陆
+/* 			// QQ登陆
 			QC.Login({
 				btnId : "qqLoginBtn",//插入按钮的html标签id
 				size : "C_S",//按钮尺寸
@@ -410,30 +418,51 @@ request.setAttribute("curUser", curUser);
 			            }
 			        }
 			    });
-			});
+			}); */
 			
+			
+			function joinParams(url, params) {
+				
+				var paramsArr = [];
+				for (var i = 0; i < params.length; i++) {
+					paramsArr.push(params[i].key + "=" + params[i].val);
+				}
+				url += "?" + paramsArr.join("&");
+				
+				return url;
+			}
+			
+			
+			function openUrl(url) {
+				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
+			}
 			
 			// github登陆
-			$("#aj-sign-panel .other-ways .github").on("click", function () {
-				var params = {
-					client_id : "ab170726816e269ab1ba",
-					redirect_uri : "http://www.nigeerhuo.com/sign/github",
-					//scope : "",
-					state : CSRF_STATE
-				};
+			$(".agithub-sign").on("click", function () {
+				
+				var params = [
+					{
+						key : "client_id",
+						val : "ab170726816e269ab1ba"
+					},
+					{
+						key : "redirect_uri",
+						val : "http://www.nigeerhuo.com" + config.weibo.url
+					},
+					{
+						key : "state",
+						val : CSRF_STATE
+					}
+				];
 				
 				var url = "https://github.com/login/oauth/authorize";
-				var paramsArr = [];
-				for (var key in params) {
-					paramsArr.push(key + "=" + encodeURIComponent(params[key]));
-				}
-				url = url + "?" + paramsArr.join("&");
 				
-				console.log(url);
-				//location.href = url;
+				url = joinParams(url, params);
+				
+				openUrl(url);
 			})
 			
-			$("#aj-user-login-choices .aweibo").on("click", function () {
+			$(".aweibo-sign").on("click", function () {
 				var params = [
 					{
 						key : "client_id",
@@ -441,7 +470,7 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com:9999/" + config.weibo.url
+						val : "http://www.nigeerhuo.com" + config.weibo.url
 					}
 				];
 				var url = "https://api.weibo.com/oauth2/authorize";
@@ -454,6 +483,37 @@ request.setAttribute("curUser", curUser);
 				console.log(url);
 				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
 				
+			});
+			
+			
+			$(".aqq-sign").on("click", function () {
+				var params = [
+					{
+						key : "response_type",
+						val : "code"
+					},
+					{
+						key : "client_id",
+						val : "101305556"
+					},
+					{
+						key : "redirect_uri",
+						val : "http://www.nigeerhuo.com" + config.qq.url
+					},
+					{
+						key : "state",
+						val : CSRF_STATE
+					}
+				];
+				var url = "https://graph.qq.com/oauth2.0/authorize";
+				var paramsArr = [];
+				for (var i = 0; i < params.length; i++) {
+					paramsArr.push(params[i].key + "=" + params[i].val);
+				}
+				url += "?" + paramsArr.join("&");
+				
+				console.log(url);
+				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
 			});
 			
 		}catch(ex) {

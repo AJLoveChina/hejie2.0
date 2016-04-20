@@ -89,6 +89,7 @@ public class WeiboSign extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 		String code = request.getParameter("code");
 		String responseString = "";
 		
@@ -96,10 +97,17 @@ public class WeiboSign extends HttpServlet {
 		if (code != null && !code.equals("")) {
 			User.WeiboAccess wa = User.getWeiboAccess(code);
 			
+			
 			if(wa.isOK()) {
+				
+				
 				User.WeiboUserSimpleModel wsm = User.getWeiboUserSimpleModel(wa);
 				
-				System.out.println(wsm);
+				
+				Info info = new Info();
+				info.setKey("weibosign");
+				info.setValue("可以获取到用户信息" + wsm.getName());
+				info.save();
 				
 				User u = new User();
 				u.setAccessToken(wa.getAccess_token());
@@ -109,6 +117,12 @@ public class WeiboSign extends HttpServlet {
 				u.setUsername(wsm.getName());
 				
 				responseString = u.signIn(request, response);
+				
+				
+				info = new Info();
+				info.setKey("weibosign");
+				info.setValue("sign in 执行成功" + u.getId());
+				info.save();
 			} else {
 				AjaxResponse<String> ar = new AjaxResponse<String>();
 				ar.setIsok(false);
