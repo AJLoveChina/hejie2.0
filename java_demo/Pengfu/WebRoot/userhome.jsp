@@ -54,25 +54,41 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 
 <div class="aj-body-left">
 	
-	
-	<div class="my-collections">
-		<div class="atop">
-			<h3 class="atitle">我的收藏</h3>
-		</div>
-		
-		<div class="amid">
-			<c:forEach items="${items }" var="item">
-			
-				<c:set scope="request" var="item" value="${item }" />
+	<c:choose>
+		<c:when test="${isLogin }">
+			<div class="my-collections">
+				<div class="atop">
+					<h3 class="atitle">我的收藏</h3>
+				</div>
 				
-				<jsp:include page="views/item/oneZdm.jsp"></jsp:include>
-			</c:forEach>
-			
-			<div class='no-collections'>
-				你木有更多的收藏了
+				<div class="amid">
+					<c:forEach items="${items }" var="item">
+					
+						<c:set scope="request" var="item" value="${item }" />
+						
+						<jsp:include page="views/item/oneZdm.jsp"></jsp:include>
+					</c:forEach>
+					
+					<div class='no-collections'>
+						你木有更多的收藏了
+					</div>
+				</div>
+			</div>		
+		</c:when>
+		
+		<c:otherwise>
+			<div class="my-collections">
+				<div class="atop"></div>
+				
+				<div class="amid">
+					<div class='no-collections'>
+						你还木有登陆啊, 亲(づ￣3￣)づ╭❤～
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
+		</c:otherwise>
+	</c:choose>
+
 	
 </div>
 

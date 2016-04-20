@@ -1,6 +1,9 @@
 {
     "isok" : true,
     "data" : {
+        "config" : {
+            "id" : 12
+        },
         "cover" : {
             "title" : "前端工程师测试题",
             "img" : "http://static.nowcoder.com/images/target.png",

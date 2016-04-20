@@ -214,6 +214,7 @@
             $scope.totalRight;
             $scope.scoreFromAnswer = 0;
             $scope.scoreFromTime = 0;
+            $scope.config = null;
 
 
             $scope.finishPercent = function () {
@@ -297,6 +298,8 @@
                     $scope.questions = data.data.data.questions;
                     $scope.cover = data.data.data.cover;
                     $scope.trueAnswers = data.data.data["answers"];
+                    $scope.config = data.data.data["config"];
+
                     fn && fn();
                 });
             };

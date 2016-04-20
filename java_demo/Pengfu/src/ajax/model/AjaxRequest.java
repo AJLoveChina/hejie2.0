@@ -87,7 +87,6 @@ public class AjaxRequest {
 			
 			if (method == "POST")  {
 				HttpPost request = new HttpPost(config.getUrl());
-				request.setHeader("Content-Type", "charset=UTF-8");
 				
 				if (config.getMap() != null) {
 					List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -119,7 +118,6 @@ public class AjaxRequest {
 				}
 				
 				HttpGet request = new HttpGet(url);
-				request.setHeader("Content-Type", "charset=UTF-8");
 				
 				if (config.getHeaders()!= null) {
 					Map<String, String> headers = config.getHeaders();

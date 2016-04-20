@@ -322,16 +322,18 @@ public class User extends Entity<User>{
 		
 		HibernateUtil.closeSession(session);
 		// ----------------------------------------
-		
 		List<Item> items = new ArrayList<Item>();
-		Session session2 = HibernateUtil.getSession();
-		Criteria cr2 = session2.createCriteria(Item.class);
 		
-		cr2.add(Restrictions.in("id", itemsid));
-		
-		items = cr2.list();
-		
-		HibernateUtil.closeSession(session2);
+		if (itemsid.size() > 0) {
+			Session session2 = HibernateUtil.getSession();
+			Criteria cr2 = session2.createCriteria(Item.class);
+			
+			cr2.add(Restrictions.in("id", itemsid));
+			
+			items = cr2.list();
+			
+			HibernateUtil.closeSession(session2);
+		}
 		
 		return items;
 	}

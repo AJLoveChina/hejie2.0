@@ -473,19 +473,14 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com" + config.weibo.url
+						val : "http://www.nigeerhuo.com:9999" + config.weibo.url
 					}
 				];
 				var url = "https://api.weibo.com/oauth2/authorize";
-				var paramsArr = [];
-				for (var i = 0; i < params.length; i++) {
-					paramsArr.push(params[i].key + "=" + params[i].val);
-				}
-				url += "?" + paramsArr.join("&");
 				
-				console.log(url);
-				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
+				url = joinParams(url, params);
 				
+				openUrl(url);
 			});
 			
 			
@@ -509,14 +504,9 @@ request.setAttribute("curUser", curUser);
 					}
 				];
 				var url = "https://graph.qq.com/oauth2.0/authorize";
-				var paramsArr = [];
-				for (var i = 0; i < params.length; i++) {
-					paramsArr.push(params[i].key + "=" + params[i].val);
-				}
-				url += "?" + paramsArr.join("&");
+				url = joinParams(url, params);
 				
-				console.log(url);
-				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
+				openUrl(url);
 			});
 			
 		}catch(ex) {
