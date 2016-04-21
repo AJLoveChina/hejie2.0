@@ -1,4 +1,4 @@
-
+<%@ page language="java" pageEncoding="UTF-8"%>
 <script>
 	// 全局变量, 如果要暴露接口请包涵在该作用域内
 	var aj = {};
