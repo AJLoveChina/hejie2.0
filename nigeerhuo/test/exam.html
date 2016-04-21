@@ -23,6 +23,11 @@
 <link rel="stylesheet" href="/web/css/index.css"/>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+<script src="script/bmob-min.js"></script>
+<script>
+    Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
+</script>
+
 <nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -357,6 +362,34 @@
 
                 totalScore += (leftSconds * (rightNum / $scope.questions.length) * 0.5);
                 $scope.score = totalScore.toFixed(2);
+
+
+                $scope.submitToBmob();
+            };
+
+            $scope.submitToBmob = function () {
+                var GameScore = Bmob.Object.extend("exam_result");
+                var gameScore = new GameScore();
+
+                gameScore.set("user_id", "");
+                gameScore.set("user_name", "");
+                gameScore.set("user_img", "");
+                gameScore.set("score_total", $scope.score);
+                gameScore.set("score_time", $scope.scoreFromTime);
+                gameScore.set("score_answer", $scope.scoreFromAnswer);
+
+
+                gameScore.save(null, {
+                    success: function(object) {
+                        console.log("保存成绩成功");
+                        console.log(object);
+                    },
+                    error: function(model, error) {
+                        console.log(error);
+                    }
+                });
+
+
             }
         });
         angular.bootstrap(container, ["exam"]);

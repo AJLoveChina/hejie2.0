@@ -31,3 +31,4 @@ java_demo/Pengfu/target/Pengfu-0.0.1-SNAPSHOT.war
 *.log
 java_demo/Pengfu/WebRoot/images
 java_demo/Pengfu/qqconnect.log
+java_demo/Pengfu/qqconnect.log.1

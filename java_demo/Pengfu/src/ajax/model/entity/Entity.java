@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.google.gson.Gson;
+
 import ajax.tools.HibernateUtil;
 
 public class Entity<T> {
@@ -88,7 +90,7 @@ public class Entity<T> {
 		Session session = HibernateUtil.getSession();
 		
 		try {
-			session.load(this,id);
+			session.load(this, id);
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -178,6 +180,15 @@ public class Entity<T> {
 	public List<T> getList(Criteria criteria) {
 		
 		return criteria.list();
+		
+	}
+	
+	
+	public String toJson() {
+		
+		Gson gson = new Gson();
+		
+		return gson.toJson(this);
 		
 	}
 

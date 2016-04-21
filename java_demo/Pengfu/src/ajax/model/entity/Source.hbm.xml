@@ -200,5 +200,48 @@
 		
 	</class>
 	
+	<class name="ajax.model.entity.Exam" table="exam">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="userid" type="java.lang.Integer">
+			<column name="userid"></column>
+		</property>
+		<property name="diffuculty" type="java.lang.Integer">
+			<column name="diffuculty"></column>
+		</property>
+		
+		<property name="num" type="java.lang.Integer">
+			<column name="num"></column>
+		</property>
+		
+		<property name="title" type="java.lang.String">
+			<column name="title"></column>
+		</property>
+		
+		<property name="img" type="java.lang.String">
+			<column name="img"></column>
+		</property>
+		
+		<property name="type" type="java.lang.String">
+			<column name="type"></column>
+		</property>
+		
+		<property name="seconds" type="java.lang.String">
+			<column name="seconds"></column>
+		</property>
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+		
+		<property name="url" type="java.lang.String">
+			<column name="url"></column>
+		</property>
+		
+	</class>
+	
 	
 </hibernate-mapping>
