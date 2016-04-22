@@ -229,7 +229,7 @@
 			<column name="type"></column>
 		</property>
 		
-		<property name="seconds" type="java.lang.String">
+		<property name="seconds" type="java.lang.Integer">
 			<column name="seconds"></column>
 		</property>
 		

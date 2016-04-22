@@ -408,7 +408,7 @@ Exam exam = (Exam) request.getAttribute("exam");
 
 </div>
 
-<script src="/web/js/includes/"></script>
+<script src=""></script>
 <script>
     //Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
 
@@ -513,9 +513,9 @@ $(function () {
             $scope.loadPaper = function (fn) {
             	var config = JSON.parse($("#aj-exam-json")[0].value);
             
-            	console.log(config);
             	
-                $http.get("http://localhost:63343/nigeerhuo/test/data.json").then(function (data) {
+            	
+                $http.get(config.url).then(function (data) {
                     $scope.questions = data.data.data.questions;
                     $scope.cover = data.data.data.cover;
                     $scope.trueAnswers = data.data.data["answers"];
