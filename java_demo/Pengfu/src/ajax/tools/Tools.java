@@ -1,5 +1,6 @@
 package ajax.tools;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +14,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -366,11 +371,50 @@ public class Tools {
 		}
 	}
 	
+	public class Image{
+		private float width;
+		private float height;
+		public float getWidth() {
+			return width;
+		}
+		public void setWidth(float width) {
+			this.width = width;
+		}
+		public float getHeight() {
+			return height;
+		}
+		public void setHeight(float height) {
+			this.height = height;
+		}
+	}
 	
+	public static Image getImageInfo(String url) {
+		//File picture = new File(url);
+		
+		Map<String, Float> map = new HashMap<String, Float>();
+		
+		BufferedImage sourceImg;
+		try {
+			URL link = new URL(url);
+			sourceImg = ImageIO.read(link.openStream());
+			
+			Image image = (new Tools()).new Image();
+			image.setHeight(sourceImg.getHeight());
+			image.setWidth(sourceImg.getWidth());
+			
+			return image;
+			
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+	}
 	
 	public static void main(String[] args) {
-		Item item = Item.getByItemById(73769);
-		item.lazyImage();
+		Tools.Image image = Tools.getImageInfo("http://localhost:8888/images/web/itemsroll/library.jpg");
+		
+		System.out.println(image);
 	}
 	
 }

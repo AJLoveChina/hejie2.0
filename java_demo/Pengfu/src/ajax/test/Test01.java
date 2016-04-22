@@ -21,10 +21,10 @@ public class Test01 {
 	
 	public static void main(String[] args) {
 		
-		Exam exam = new Exam();
-		exam.load(1);
+		Item item = new Item();
+		item.load(814);
 		
-		System.out.println(exam);
+		item.removeFromPage();
 		
 	}
 

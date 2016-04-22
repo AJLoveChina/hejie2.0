@@ -1,6 +1,7 @@
 package ajax.spider;
 
 import ajax.model.JokeType;
+import ajax.model.entity.Item;
 import ajax.spider.rules.*;
 
 public class ZhihuAnswerSpider{
@@ -16,7 +17,8 @@ public class ZhihuAnswerSpider{
 					
 					@Override
 					public String returnUrl() {
-						return "https://www.zhihu.com/question/41033519/answer/91130738";
+						// https://www.zhihu.com/question/38783139/answer/92970757
+						return "https://www.zhihu.com/question/38783139/answer/92970757";
 					}
 					
 					@Override
@@ -29,6 +31,12 @@ public class ZhihuAnswerSpider{
 						return JokeType.FILM;
 					}
 				};
+			}
+
+			@Override
+			public Item returnItem() {
+				// TODO Auto-generated method stub
+				return null;
 			}
 		};
 		

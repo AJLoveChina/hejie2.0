@@ -1,6 +1,7 @@
 package ajax.spider;
 
 import ajax.model.JokeType;
+import ajax.model.entity.Item;
 import ajax.spider.rules.Rules;
 import ajax.spider.rules.SpiderWeb;
 import ajax.spider.rules.ToutiaoRules;
@@ -16,7 +17,7 @@ public class ToutiaoSpider {
 					@Override
 					public String returnUrl() {
 						//http://toutiao.com/a6274222106909753601/
-						return "http://toutiao.com/a6264404731760115969/";
+						return "http://toutiao.com/a6276266001240539394/";
 					}
 					
 					@Override
@@ -29,6 +30,12 @@ public class ToutiaoSpider {
 						return null;
 					}
 				};
+			}
+
+			@Override
+			public Item returnItem() {
+				// TODO Auto-generated method stub
+				return null;
 			}
 		};
 		

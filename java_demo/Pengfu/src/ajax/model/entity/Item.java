@@ -196,6 +196,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		final String url = this.getUrl();
 		final JokeType jokeType = JokeType.getJokeType(this.getItype());
 		final RulesTag rulesTag = RulesTag.getRulesTagById(this.getRulesTagId());
+		final Item item = this;
 		
 		Spider3 sp3 = new Spider3() {
 			
@@ -212,7 +213,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 					public Rules returnRules() {
 						try {
 							
-							return (Rules) Class.forName("ajax.spider.rules.ZhihuAnswerRules").newInstance();
+							return (Rules) Class.forName(rulesTag.getClassName()).newInstance();
 							
 						} catch (InstantiationException e) {
 							System.out.println("Error : " + e.getMessage());
@@ -229,6 +230,11 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 						return jokeType;
 					}
 				};
+			}
+
+			@Override
+			public Item returnItem() {
+				return item;
 			}
 		};
 		
@@ -303,7 +309,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 * 根据content获取图片并保存到本地磁盘<br>
 	 * return new Content that contains imgs which src is alright.
 	 * 注意该方法不会在抓取完毕后更新 content 的值, 如果需要抓取后更新实体请使用 grabImagesFromContentAndUpdate
-	 * @param callback 处理图片 Element 的策略(默认直接返回图片的src值作为 图片地址, 你可以自定义这个策略)
+	 * @param callback 处理图片 Element 的策略(默认直接返回图片的src值作为 图片地址, 你可以自定义这个策略, 因为某些图片src值并不是真实的图片地址)
 	 * @return 返回图片被处理的content值, 如果发生异常直接返回  处理前的content值
 	 */
 	public String grabImagesFromContent(Callback callback) {
@@ -590,7 +596,8 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return doc.body().html();
 	}
 	/**
-	 * 将item的content中的图片设置成延时加载的图片
+	 * 将item的content中的图片设置成延时加载的图片<br>
+	 * And udpate item
 	 */
 	public void lazyImage() {
 		
@@ -711,7 +718,13 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return this.backgroundInformation != null && !this.backgroundInformation.trim().equals("");
 	}
 	
-	
+	public static void main(String[] args) {
+		
+		Item item = Item.getByItemById(99);
+		
+		item.updateBySpider();
+		
+	}
 
 	
 }

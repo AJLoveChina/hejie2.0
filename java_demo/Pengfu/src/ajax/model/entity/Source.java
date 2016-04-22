@@ -123,6 +123,12 @@ public class Source extends Entity<Source>{
 					}
 				};
 			}
+
+			@Override
+			public Item returnItem() {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 		
 		Item item = sp.grabItem();

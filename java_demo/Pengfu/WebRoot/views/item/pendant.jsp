@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     <div style="height: 10px"></div>
-    <img src="/web/pic/dot.jpg" data-lazy="web/pic/erweima.png" class="aj-lazy" alt="微信二维码"/>
+    <img src="http://images.nigeerhuo.com/images/web/pic/dot.jpg" data-lazy="web/pic/erweima.png" class="aj-lazy" alt="微信二维码"/>
 </div>
 
 <textarea id="aj-baidu-share-script" style="display: none;">

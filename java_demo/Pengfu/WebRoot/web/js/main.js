@@ -61,6 +61,14 @@
 	try {
 		
 		$(function () {
+			var imgs = $("img");
+			imgs.each(function () {
+				var src = $(this).attr("src");
+				if (/web\/pic\/dot.jpg$/.test(src)) {
+					$(this).attr("src", "http://images.nigeerhuo.com/images/web/pic/dot.jpg");
+				}
+			});
+			
 			var div = $("img.aj-lazy");
 			div.each(function(index, item) {
 				var src = $(this).attr("data-lazy");

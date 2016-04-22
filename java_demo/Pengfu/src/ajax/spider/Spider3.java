@@ -13,6 +13,11 @@ public abstract class Spider3 {
 
 	
 	public abstract SpiderWeb returnSpiderWeb();
+	/**
+	 * 这个只有在update by spider 的时候才会用得上, 其它时候返回 null即可
+	 * @return
+	 */
+	public abstract Item returnItem();
 
 	
 	private boolean checked(){
@@ -54,6 +59,23 @@ public abstract class Spider3 {
 		}
 	}
 	
+	public void update(int id){
+		if (this.checked()) {
+			Item item = this.returnItem();
+			
+			SpiderWeb sw = this.returnSpiderWeb();
+			// 抓取图片
+			item.setContent(item.grabImagesFromContent(sw.returnRules().returnImgCallback()));
+			// 生成缩略图
+			item.setPreviewImage(item.generateItemImageAndReturn());
+			// 摘要
+			item.setSummary(item.generateSummaryAndReturn());
+			
+			// lazyload image
+			item.setContent(item.generateLazyImageContentAndReturn());
+			item.update();
+		}
+	}
 	
 	public Item generateIType(Item item) {
 		JokeType jt = this.returnSpiderWeb().returnJokeType();
@@ -73,15 +95,12 @@ public abstract class Spider3 {
 		return null;
 	}
 	
-	public void update(int id){
-		if (this.checked()) {
-			Item item = this.grabItemFromPage();
-			item.setId(id);
-			item.update();
-		}
-	}
+
 	
-	
+	/**
+	 * 根据rules 规则从一个获取 item实例
+	 * @return
+	 */
 	public Item grabItemFromPage() {
 		Document doc;
 		SpiderWeb sw = this.returnSpiderWeb();
