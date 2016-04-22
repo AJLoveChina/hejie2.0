@@ -29,7 +29,7 @@ public class PageGenerator {
 	}
 	
 	public static void main(String[] args) {
-		int pages =  20;
+		int pages =  2;
 		
 		
 		while(pages-- > 0) {
