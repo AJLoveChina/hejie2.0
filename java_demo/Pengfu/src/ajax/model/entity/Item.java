@@ -3,6 +3,7 @@ package ajax.model.entity;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -19,6 +20,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.aliyun.oss.OSSClient;
+
 import ajax.model.Callback;
 import ajax.model.JokeStatus;
 import ajax.model.JokeType;
@@ -29,6 +32,7 @@ import ajax.spider.rules.Rules;
 import ajax.spider.rules.RulesTag;
 import ajax.spider.rules.SpiderWeb;
 import ajax.tools.HibernateUtil;
+import ajax.tools.OssUtil;
 import ajax.tools.Tools;
 
 
@@ -730,13 +734,60 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return this.backgroundInformation != null && !this.backgroundInformation.trim().equals("");
 	}
 	
-	public static void main(String[] args) {
+
+
+
+	/**
+	 * 注意图片源来自 localhost:8888, 服务端不要运行该程序<br>
+	 * 并设置 是否上传至oss 字段值为true, 同时update实体
+	 */
+	public void uploadImagesToOss() {
+		Document doc = Jsoup.parse(this.getContent());
 		
-		Item item = Item.getByItemById(99);
+		Elements imgs = doc.select("img");
 		
-		item.updateBySpider();
-		
+		for(Element ele : imgs) {
+			String lazySrc = ele.attr("data-lazy");
+			
+			lazySrc = Item.getRightRelativeUrlOfImage(lazySrc);
+			
+			if (!lazySrc.equals("")) {
+				String absUrl = "http://localhost:8888/" + lazySrc;
+				
+				try {
+					URL url = new URL(absUrl);
+					String key = lazySrc;
+					
+					OssUtil.uploadToNigeerhuo(key, url.openStream());
+					
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		this.setHasImageUploadedToOss(true);
+		this.update();
 	}
+
+	/**
+	 * 有的图片相对路径是  images 开头, 有的是web开头, 也有 /images开头 等等<br>
+	 * 现在把它们都转换成  images/web/.... 的形式
+	 * @param lazySrc
+	 * @return
+	 */
+	private static String getRightRelativeUrlOfImage(String src) {
+		if (src.startsWith("images")) {
+			return src;
+		} else if (src.startsWith("/images")) {
+			return src.replaceAll("^/", "");
+		} else if (src.startsWith("/web")) {
+			return "images" + src; 
+		} else {
+			return "images/" + src;
+		}
+	}
+	
+
 
 	
 }

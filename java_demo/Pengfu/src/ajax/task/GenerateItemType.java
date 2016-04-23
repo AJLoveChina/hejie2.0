@@ -6,7 +6,11 @@ import java.util.List;
 import ajax.model.JokeType;
 import ajax.model.entity.Item;
 import ajax.model.entity.Page;
-
+/**
+ * 重新生成一条item的类型
+ * @author ajax
+ *
+ */
 public class GenerateItemType {
 	
 	private static void do1() {
@@ -24,7 +28,7 @@ public class GenerateItemType {
 				item.generateType();
 			}
 			
-		}while(++page < limit);
+		}while(++page <= 2);
 	}
 	
 	private static void do2() {
