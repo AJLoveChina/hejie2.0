@@ -78,6 +78,10 @@
 			<column name="page"></column>
 		</property>
 				
+		<property name="hasImageUploadedToOss" type="java.lang.Boolean">
+			<column name="hasImageUploadedToOss"></column>
+		</property>
+				
 	</class>
 	
 

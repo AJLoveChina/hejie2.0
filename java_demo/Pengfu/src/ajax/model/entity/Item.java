@@ -52,6 +52,10 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	private int rulesTagId;
 	private String previewImage;
 	/**
+	 * 图片是否已经上传Oss
+	 */
+	private boolean hasImageUploadedToOss = false;
+	/**
 	 * 属于哪一页
 	 */
 	private int page;
@@ -73,6 +77,14 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			String[] arr = {};
 			return arr;
 		}
+	}
+	
+	
+	public boolean isHasImageUploadedToOss() {
+		return hasImageUploadedToOss;
+	}
+	public void setHasImageUploadedToOss(boolean hasImageUploadedToOss) {
+		this.hasImageUploadedToOss = hasImageUploadedToOss;
 	}
 	public int getPage() {
 		return page;
