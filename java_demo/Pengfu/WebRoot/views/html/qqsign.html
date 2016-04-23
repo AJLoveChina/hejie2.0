@@ -14,10 +14,10 @@
   <body>
    	<script>
    		try {
-    		window.opener.location.reload(false);
+    		window.opener.location.reload();
     		window.close();
     	}catch(ex) {
-    		location.href = "http://www.nigeerhuo.com";
+    		location.href = "http://" + location.hostname;
     	}
    	</script>
   </body>

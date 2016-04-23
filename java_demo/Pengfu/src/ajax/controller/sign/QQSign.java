@@ -87,7 +87,7 @@ public class QQSign extends HttpServlet {
 				
 			}
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/views/html/qqsign.html");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/html/close.html");
 			rd.forward(request, response);
 			
 		} else {

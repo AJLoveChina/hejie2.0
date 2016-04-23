@@ -13,11 +13,35 @@
   
   <body>
    	<script>
-   		try {
-    		window.opener.location.reload(false);
+   		/* try {
+    		window.opener.location.reload();
     		window.close();
     	}catch(ex) {
-    		location.href = "http://www.nigeerhuo.com";
+    		// location.href = "http://www.nigeerhuo.com";
+    		
+    		var href;
+    		var arr = location.search.replace(/^\?/, "").split("&");
+    		var arr2;
+    		for (var i = 0; i < arr.length; i ++) {
+    			arr2 = arr[i].split("=");
+    			if (arr2[0].toLowerCase() == "url") {
+    				href = arr2[1];
+    				break;
+    			}
+    		}
+    		
+    		if (!href) {
+    			href = location.href;
+    		}
+    		
+    		location.href = href;
+    	} */
+    	
+    	try {
+    		window.opener.location.reload();
+    		window.close();
+    	}catch(ex) {
+    		location.href = "http://" + location.hostname;
     	}
    	</script>
   </body>

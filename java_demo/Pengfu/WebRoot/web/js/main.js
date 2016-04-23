@@ -157,5 +157,19 @@
 		console.log(ex);
 	}
 
+	try {
+		var tools = {
+			isLocal : function () {
+				if (location.hostname.toLowerCase() == "localhost") {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
+		aj.tools = tools;
+	}catch(ex) {
+		console.log(ex);
+	}
 	
 })();

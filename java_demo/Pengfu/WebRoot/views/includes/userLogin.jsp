@@ -227,6 +227,14 @@ request.setAttribute("curUser", curUser);
 				SIGN_OUT : "sign/out",
 				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
 			};
+			var hostname;
+			
+			if (aj.tools.isLocal()) {
+				hostname = "www.nigeerhuo.com";
+			} else {
+				// 注意这里要写 hostname 因为 某些浏览器 弹出的窗口与本来网页不同源的话 无法关闭
+				hostname = location.hostname;
+			}
 			
 			try {
 				var aj_user_sign_config_form = $("#aj-user-sign-config")[0];
@@ -428,7 +436,7 @@ request.setAttribute("curUser", curUser);
 				
 				var paramsArr = [];
 				for (var i = 0; i < params.length; i++) {
-					paramsArr.push(params[i].key + "=" + params[i].val);
+					paramsArr.push(params[i].key + "=" + encodeURIComponent(params[i].val));
 				}
 				url += "?" + paramsArr.join("&");
 				
@@ -450,7 +458,7 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com" + config.github.url
+						val : "http://" + hostname  + config.github.url
 					},
 					{
 						key : "state",
@@ -473,7 +481,7 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com:9999" + config.weibo.url
+						val : "http://" + hostname  + config.weibo.url
 					}
 				];
 				var url = "https://api.weibo.com/oauth2/authorize";
@@ -496,7 +504,7 @@ request.setAttribute("curUser", curUser);
 					},
 					{
 						key : "redirect_uri",
-						val : "http://www.nigeerhuo.com" + config.qq.url
+						val : "http://" + hostname  + config.qq.url
 					},
 					{
 						key : "state",

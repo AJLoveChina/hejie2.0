@@ -133,7 +133,7 @@ public class WeiboSign extends HttpServlet {
 			
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/views/html/weibosign.html");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/html/close.html");
 		rd.forward(request, response);
 		
 	}
