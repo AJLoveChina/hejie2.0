@@ -4,7 +4,8 @@ public enum RulesTag {
 
 	ZHIHU_ANSWER(1, "ajax.spider.rules.ZhihuAnswerRules", "", "zhihu"),
 	WANGYI_NEWS(2, "ajax.spider.rules.WangyiNewsRules", "", "wangyi"),
-	TOU_TIAO(3, "ajax.spider.rules.ToutiaoRules", "", "toutiao");
+	TOU_TIAO(3, "ajax.spider.rules.ToutiaoRules", "", "toutiao"),
+	WEIXIN(4, "ajax.spider.rules.WeixinRules", "", "weixin");
 	
 	
 	private int id;

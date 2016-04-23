@@ -10,6 +10,10 @@ import ajax.tools.Tools;
 public abstract class Rules {
 	
 	public abstract RulesTag getRulesTag();
+	/**
+	 * 决策下载图片的url是什么
+	 * @return
+	 */
 	public abstract Callback<Element, String> returnImgCallback();
 	
 	
