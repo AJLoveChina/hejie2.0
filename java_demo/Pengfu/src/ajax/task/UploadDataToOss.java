@@ -30,6 +30,20 @@ public class UploadDataToOss {
 		
 	}
 	
+	
+	private static void do2() {
+		int max = Page.getNowMaxPage();
+		
+		do {
+			
+			
+			List<Item> items = Page.getPage(max);
+			
+			System.out.println(items);
+			
+		}while(--max > 0);
+	}
+	
 	private static void do1() {
 
 		Item item = new Item();
@@ -41,6 +55,9 @@ public class UploadDataToOss {
 	
 	public static void main(String[] args) {
 		
-		updateImgsOfItemsInPagesToOss();
+		// updateImgsOfItemsInPagesToOss();
+		
+		do2();
+		
 	}
 }

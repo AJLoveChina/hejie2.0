@@ -22,6 +22,29 @@ Exam exam = (Exam) request.getAttribute("exam");
     display: block;
   }
 }
+
+.aj-exercise .cover .amid .img-wrap{
+	position:absolute;
+	width:40%;
+	max-width:200px;
+	height: 170px;
+	text-align: center;
+	font-size: 0;
+}
+.aj-exercise .cover .amid .img-wrap:before{
+	content:"";
+	width:0;
+	height: 100%;
+	vertical-align: middle;
+	position: relative;
+}
+.aj-exercise .cover .amid .img-wrap img{
+	max-width: 100%;
+	max-height: 170px;
+	vertical-align: middle;
+	display: inline-block;
+}
+
 .aj-exercise {
   position: relative;
   border: 1px solid #ccc;
@@ -56,12 +79,7 @@ Exam exam = (Exam) request.getAttribute("exam");
 .aj-exercise .cover .amid {
   position: relative;
 }
-.aj-exercise .cover .amid .img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 170px;
-}
+
 .aj-exercise .cover .amid .info {
   padding-top: 20px;
   padding-left: 200px;
@@ -191,6 +209,21 @@ Exam exam = (Exam) request.getAttribute("exam");
   outline: 0;
   white-space: nowrap;
 }
+.chakan_cuoti{
+  display: inline-block;
+  text-align: center;
+  padding: 10px 0;
+  width: 110px;
+  color: #FFF;
+  font-size: 14px;
+  border-radius: 3px;
+  border: none 0;
+  cursor: pointer;
+  line-height: normal;
+  outline: 0;
+  white-space: nowrap;
+  background-color: #A52A2A;	
+}
 .aj-exercise .zhishi {
   margin-top: 10px;
   padding-top: 10px;
@@ -269,7 +302,9 @@ Exam exam = (Exam) request.getAttribute("exam");
             <span class="title" ng-bind="cover.title"></span>
             <div class="amid">
                 <div style="position:relative;">
-                    <img class="img" src="{{cover.img}}"/>
+                    <div class="img-wrap">
+                    	<img class="img" src="{{cover.img}}"/>
+                    </div>
                     <div class="info">
                         <p class="line">
                             题目类型 :
@@ -333,6 +368,10 @@ Exam exam = (Exam) request.getAttribute("exam");
                     时间加成 ->
                     <span ng-bind="scoreFromTime" class="label label-success"></span>
                 </p>
+            </div>
+            
+            <div style="text-align:center;">
+            	<button class="chakan_cuoti" ng-click="showWrong()">查看错题</button>
             </div>
             <div class="share">
                 分享给好友
@@ -408,7 +447,6 @@ Exam exam = (Exam) request.getAttribute("exam");
 
 </div>
 
-<script src=""></script>
 <script>
     //Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
 
@@ -606,6 +644,10 @@ $(function () {
                 });
 
 
+            }
+            
+            $scope.showWrong = function () {
+            	
             }
         });
         angular.bootstrap(container, ["exam"]);

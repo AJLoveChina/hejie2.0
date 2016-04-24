@@ -79,6 +79,7 @@ body {
 		display: none!important;
 	}
 	div#aj-body{
+		min-width:auto;
 		min-height:450px;
 	}
 	.aj-body-right{
@@ -88,7 +89,7 @@ body {
 }
 #aj-body{
 	width:100%;
-	max-width:1050px;
+	width:1050px;
 	margin:0 auto;
 	min-height:720px;
 }

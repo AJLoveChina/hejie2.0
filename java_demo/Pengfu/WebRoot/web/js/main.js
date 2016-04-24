@@ -70,15 +70,34 @@
 			});
 			
 			var div = $("img.aj-lazy");
+			var urlPrefix;
+			
+			var urlPredixEnum = {
+				ali : "http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/",
+				me : "http://images.nigeerhuo.com/",
+				local : "http://localhost:8888/"
+			};
+			
+			var isLocal = aj.tools.isLocal();
+
 			div.each(function(index, item) {
 				var src = $(this).attr("data-lazy");
+				var picStyle = $(this).attr("data-pic-style");
 				
 				if (src.indexOf("images/") == -1) {
 					src = "images/" + src;
 				}
-				src = "http://" + location.hostname + ":8888/" + src;
 				
-				//$(this).attr("src", src);
+				if (isLocal) {
+					src = urlPredixEnum.local + src;
+				} else {
+					if (picStyle) {
+						src = urlPredixEnum.ali + src +  "@!" + picStyle;
+					} else {
+						src = urlPredixEnum.ali + src;
+					}
+				}
+				
 				$(this).attr("data-lazy", src);
 				
 			});
