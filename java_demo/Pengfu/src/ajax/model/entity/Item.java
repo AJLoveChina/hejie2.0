@@ -606,7 +606,11 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 				ele.attr("data-lazy", ele.attr("src"));
 				ele.removeAttr("src");
 			}
-			ele.attr("src", "web/pic/dot.jpg");
+			if (ele.attr("width").equals("") && ele.attr("height").equals("")) {
+				ele.attr("width", "200");
+				ele.attr("height", "200");
+			}
+			ele.attr("src", UrlRoute.DOT_PIC.getUrl());
 		}
 		
 		return doc.body().html();

@@ -93,7 +93,10 @@
 				} else {
 					if (picStyle) {
 						src = urlPredixEnum.ali + src +  "@!" + picStyle;
-					} else {
+					} else if($(this).parents(".aj-joke-list-one").length > 0) {	
+						//item content中的图片
+						src = urlPredixEnum.ali + src + "@!w670";
+					}else{
 						src = urlPredixEnum.ali + src;
 					}
 				}

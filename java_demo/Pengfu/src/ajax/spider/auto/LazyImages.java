@@ -20,7 +20,7 @@ public class LazyImages {
 			}
 			
 			System.out.println(page);
-		}while(++page <= 20);
+		}while(++page <= MaxPage);
 	}
 	
 	public static void main(String[] args) {
