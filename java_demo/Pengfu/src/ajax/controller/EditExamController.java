@@ -76,23 +76,20 @@ public class EditExamController extends HttpServlet {
 		User user = User.getLoginUser(request);
 		AjaxResponse<String> ar = new AjaxResponse<String>();
 		PrintWriter out = response.getWriter();
-		if (user == null) {
-			ar.setIsok(false);
-			ar.setData("未登录");
-			out.println(ar.toJson());
-			out.flush();
-			out.close();
-			return;
+		
+		boolean isLogin = false;
+		boolean isAdmin = false;
+		if (user != null) {
+			isLogin = true;
+			
+			if (user.isAdmin()) {
+				isAdmin = true;
+			}
 		}
 		
-		if (!user.isAdmin()) {
-			ar.setIsok(false);
-			ar.setData("授权失败");
-			out.println(ar.toJson());
-			out.flush();
-			out.close();
-			return;
-		}
+		
+		request.setAttribute("isLogin", isLogin);
+		request.setAttribute("isAdmin", isAdmin);
 		
 		if (action == null || action.equals("")) {
 			Exam exam = new Exam();
@@ -110,6 +107,15 @@ public class EditExamController extends HttpServlet {
 			
 			rd.forward(request, response);
 		} else {
+			
+			if (!isLogin || !isAdmin) {
+				ar.setIsok(false);
+				ar.setData("未登录, 或者无权限");
+				out.println(ar.toJson());
+				out.flush();
+				out.close();
+				return;
+			}
 			String dataParam = request.getParameter("data");
 			dataParam = URLDecoder.decode(dataParam, "utf-8");
 			Gson gson = new Gson();
@@ -135,11 +141,16 @@ public class EditExamController extends HttpServlet {
 				paper.getData().getConfig().setId(exam.getId());
 				
 				Gson gson2 = new Gson();
-				Tools.writeDataToFile(gson2.toJson(paper), "WebRoot/static/exam/" + filePath);
+				String path = "/static/exam/" + filePath;
+				String fileData = gson2.toJson(paper);
+				
+				
+				path = this.getServletContext().getRealPath(path);
+				Tools.writeDataToFile(fileData, new File(path), "UTF-8");
 				
 				
 				ar.setIsok(true);
-				ar.setData("保存成功");
+				ar.setData(exam.getLink());
 				out.println(ar.toJson());
 				out.flush();
 				out.close();

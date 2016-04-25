@@ -3,12 +3,14 @@ package ajax.model;
 public enum UrlRoute {
 	HOME(1, "/"),
 	ONEJOKE(2, "/OneItem"),
+	ROOT(3, "/"), 
 	type(4, "/type"),
 	QQ_REDIRECT(5, "http://www.nigeerhuo.com/sign/qq"),
 	GITHUB_REDIRECT(6, "http://www.nigeerhuo.com/sign/github"),
-	ROOT(3, "/"), 
-	DOT_PIC(4, "http://images.nigeerhuo.com/images/web/pic/dot.jpg"),
-	PIC_EXAM(5, "http://images.nigeerhuo.com/images/web/pic/exam2.jpg");
+	
+	DOT_PIC(7, "http://images.nigeerhuo.com/images/web/pic/dot.jpg"),
+	PIC_EXAM(8, "http://images.nigeerhuo.com/images/web/pic/exam2.jpg"),
+	EXAM(9, "http://www.nigeerhuo.com/exam");
 	
 	private int id;
 	private String url;

@@ -654,24 +654,9 @@ $(function () {
 				        },
 				        "answers" : $scope.trueAnswers,
 				        "questions" : $scope.questions
-				        
-				        /* [
-				        	{
-				        		"id":1,
-				        		"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?",
-				        		"finish":false,
-				        		"choices":[
-				        			{"checked":false,"title":"display:none"},
-				        			{"checked":false,"title":"display:none"},
-				        			{"checked":false,"title":"display:none"},
-				        			{"checked":false,"title":"display:none"}
-				        		]
-				        	}
-				        ] */
 				    }
 				};
 				
-				console.log(data);
 				
 				$.ajax({
 					url : "/editExam?action=add",
@@ -679,11 +664,16 @@ $(function () {
 					data : {
 						"data" : JSON.stringify(data)
 					},
+					dataType : "json",
 					success : function (response)  {
-						console.log(response);
+						if(response.isok) {
+							aj.Tishi(response.data);
+						} else {
+							aj.Tishi(response.data);
+						}
 					},
 					error : function (err) {
-						console.log(err);
+						aj.Tishi("服务器君今天出了一些故障,我们正在加紧抢救...抱歉");
 					}
 				});
             };

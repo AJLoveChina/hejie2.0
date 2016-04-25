@@ -469,8 +469,9 @@ Exam exam = (Exam) request.getAttribute("exam");
 
 </div>
 
+<script src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static%2Fjs%2Fbmob-min.js"></script>
 <script>
-    //Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
+    Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
 
 $(function () {
         var app = angular.module("exam", []);
@@ -572,7 +573,7 @@ $(function () {
             };
 
             $scope.loadPaper = function (fn) {
-            	var config = JSON.parse($("#aj-exam-json")[0].value);
+            	var config = $.parseJSON($("#aj-exam-json")[0].value);
             
             	
             	
@@ -645,16 +646,28 @@ $(function () {
                 $scope.score = totalScore.toFixed(2);
 
 
-                //$scope.submitToBmob();
+                $scope.submitToBmob();
+                $scope.dealShare();
             };
+            
+            $scope.dealShare = function () {
+           	    window._bd_share_config = {
+			        common : {
+			            bdDesc : "我刚刚参加了" + $scope.title + "测试,获得了" + $scope.score + "分, 你也来试试看.",
+			            bdUrl : location.href,
+			            bdPic : "http://www.nigeerhuo.com:8888/images/web/pic/logo.PNG"
+			        }
+			    };
+            }
 
             $scope.submitToBmob = function () {
                 var GameScore = Bmob.Object.extend("exam_result");
                 var gameScore = new GameScore();
 
-                gameScore.set("user_id", "");
-                gameScore.set("user_name", "");
-                gameScore.set("user_img", "");
+				var user = new aj.User();
+                gameScore.set("user_id", user.getUserid());
+                gameScore.set("user_name", user.getNickname());
+                gameScore.set("user_img", user.getUserimg());
                 gameScore.set("score_total", $scope.score);
                 gameScore.set("score_time", $scope.scoreFromTime);
                 gameScore.set("score_answer", $scope.scoreFromAnswer);
@@ -669,8 +682,6 @@ $(function () {
                         console.log(error);
                     }
                 });
-
-
             }
             
             $scope.showWrong = function () {

@@ -1,14 +1,18 @@
 package ajax.tools;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.*;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -102,32 +106,24 @@ public class Tools {
 			fw.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	/**
-	 * 如果文件名不存在则创建
-	 * @param data
-	 * @param filePath
-	 */
-	public static void writeDataToFile(String data, String filePath) {
-		FileWriter fw;
-		File file = new File(filePath);
-		if (file.exists()) {
-			file.mkdirs();
-		}
+	
+	public static void writeDataToFile(String data, File file, String charset) {
 		try {
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 			
-			fw = new FileWriter(file);
-			fw.write(data);
+			writer.write(data);
+			writer.close();
 			
-			fw.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+	}
+
+	public static void main(String[] args) {
+		writeDataToFile("123", new File("WebRoot/static/exam/xx.txt"), "UTF-8");
 	}
 	
 	public static void appendDataToFile(String data, File file) {
@@ -433,10 +429,5 @@ public class Tools {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		Tools.Image image = Tools.getImageInfo("http://localhost:8888/images/web/itemsroll/library.jpg");
-		
-		System.out.println(image);
-	}
 	
 }

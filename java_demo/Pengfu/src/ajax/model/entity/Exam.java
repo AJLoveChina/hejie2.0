@@ -2,6 +2,8 @@ package ajax.model.entity;
 
 import java.util.List;
 
+import ajax.model.UrlRoute;
+
 public class Exam extends Entity<Exam>{
 	private int id;
 	private int userid;
@@ -246,6 +248,9 @@ public class Exam extends Entity<Exam>{
 		public void setChecked(boolean checked) {
 			this.checked = checked;
 		}
+	}
+	public String getLink() {
+		return UrlRoute.EXAM.getUrl() + "?id=" + this.getId();
 	}
 	
 }

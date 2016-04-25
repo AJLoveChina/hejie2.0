@@ -18,8 +18,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<textarea class="aj-hide" id="aj-exam-json">
 		<c:out value="${exam.toJson() }"></c:out>
 	</textarea>
-
-	<jsp:include page="views/huodong/examEditContainer.jsp"></jsp:include>
+	
+	<c:if test="${isAdmin}">
+		<jsp:include page="views/huodong/examEditContainer.jsp"></jsp:include>
+	</c:if>
 </div>
 
 <div class="aj-body-right">
