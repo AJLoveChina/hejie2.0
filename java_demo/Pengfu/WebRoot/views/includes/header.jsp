@@ -46,6 +46,8 @@
 </nav>
 
 <div style="height: 50px;"></div>
+
+<jsp:include page="/views/item/tishi.jsp"></jsp:include>
 <div id="aj-body" class="clearfix">
 
 

@@ -27,9 +27,6 @@ public class Exam extends Entity<Exam>{
 	 */
 	private int num;
 	private String dateEntered;
-	/**
-	 * 静态文件url
-	 */
 	private String url;
 	
 	
@@ -40,6 +37,7 @@ public class Exam extends Entity<Exam>{
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 	public String getDateEntered() {
 		return dateEntered;
 	}
@@ -96,25 +94,110 @@ public class Exam extends Entity<Exam>{
 	}
 
 	
-
-
-
-
-	public class Choice{
+	/**
+	 * 试卷
+	 * @author ajax
+	 *
+	 */
+	public class Paper{
+		private boolean isok;
+		private Data data;
+		public boolean isIsok() {
+			return isok;
+		}
+		public void setIsok(boolean isok) {
+			this.isok = isok;
+		}
+		public Data getData() {
+			return data;
+		}
+		public void setData(Data data) {
+			this.data = data;
+		}
+	}
+	
+	public class Data {
+		private Config config;
+		private Cover cover;
+		private int[] answers;
+		private List<Question> questions;
+		public Config getConfig() {
+			return config;
+		}
+		public void setConfig(Config config) {
+			this.config = config;
+		}
+		public Cover getCover() {
+			return cover;
+		}
+		public void setCover(Cover cover) {
+			this.cover = cover;
+		}
+		public int[] getAnswers() {
+			return answers;
+		}
+		public void setAnswers(int[] answers) {
+			this.answers = answers;
+		}
+		public List<Question> getQuestions() {
+			return questions;
+		}
+		public void setQuestions(List<Question> questions) {
+			this.questions = questions;
+		}
+	}
+	
+	public class Cover{
 		private String title;
-		private boolean checked;
+		private String img;
+		private String type;
+		private String time;
+		private int seconds;
+		private int[] difficulty;
+		private int num;
 		public String getTitle() {
 			return title;
 		}
 		public void setTitle(String title) {
 			this.title = title;
 		}
-		public boolean isChecked() {
-			return checked;
+		public String getImg() {
+			return img;
 		}
-		public void setChecked(boolean checked) {
-			this.checked = checked;
+		public void setImg(String img) {
+			this.img = img;
 		}
+		public String getType() {
+			return type;
+		}
+		public void setType(String type) {
+			this.type = type;
+		}
+		public String getTime() {
+			return time;
+		}
+		public void setTime(String time) {
+			this.time = time;
+		}
+		public int getSeconds() {
+			return seconds;
+		}
+		public void setSeconds(int seconds) {
+			this.seconds = seconds;
+		}
+		public int[] getDifficulty() {
+			return difficulty;
+		}
+		public void setDifficulty(int[] difficulty) {
+			this.difficulty = difficulty;
+		}
+		public int getNum() {
+			return num;
+		}
+		public void setNum(int num) {
+			this.num = num;
+		}
+		
 	}
 	public class Question {
 		private int id;
@@ -147,8 +230,22 @@ public class Exam extends Entity<Exam>{
 		public void setChoices(List<Choice> choices) {
 			this.choices = choices;
 		}
+	}	
+	public class Choice{
+		private String title;
+		private boolean checked;
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public boolean isChecked() {
+			return checked;
+		}
+		public void setChecked(boolean checked) {
+			this.checked = checked;
+		}
 	}
-	
-	
 	
 }

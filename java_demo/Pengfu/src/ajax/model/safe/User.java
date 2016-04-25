@@ -260,6 +260,10 @@ public class User extends Entity<User>{
 		}
 	}
 	
+	/**
+	 * @param request
+	 * @return null if not login
+	 */
 	public static User getLoginUser(HttpServletRequest request) {
 		SignStatus ss = (SignStatus)request.getSession().getAttribute(SIGN_SESSION_ATTR);
 		

@@ -36,6 +36,7 @@ public class HelloController {
 
         public String hello(){
 
+        	
             System.out.println("spring mvc hello world!");
 
             return "hello";

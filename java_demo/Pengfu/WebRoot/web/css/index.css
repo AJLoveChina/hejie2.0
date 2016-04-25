@@ -65,6 +65,7 @@ body {
 	.aj-hide-when-pc{
 		display: none!important;
 	}
+
 }
 
 
@@ -81,9 +82,13 @@ body {
 	div#aj-body{
 		min-width:auto;
 		min-height:450px;
+		max-width: 100%;
 	}
 	.aj-body-right{
 		display: none;
+	}
+	div.aj-body-left{
+		max-width: 100%;
 	}
 	
 }

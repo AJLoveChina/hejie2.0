@@ -5,20 +5,6 @@
   </welcome-file-list>
 
 
-  <servlet>
-
-    <servlet-name>dispatcherServlet</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-
-  </servlet>
-  <servlet-mapping>
-
-    <servlet-name>dispatcherServlet</servlet-name>
-    <url-pattern>/</url-pattern>
-
-  </servlet-mapping>
-  
   
   <servlet>
     <description></description>
@@ -105,6 +91,13 @@
     <servlet-name>Exam</servlet-name>
     <servlet-class>ajax.controller.Exam</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EditExamController</servlet-name>
+    <servlet-class>ajax.controller.EditExamController</servlet-class>
+  </servlet>
+
 
 
 
@@ -173,5 +166,9 @@
   <servlet-mapping>
     <servlet-name>Exam</servlet-name>
     <url-pattern>/servlet/Exam</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditExamController</servlet-name>
+    <url-pattern>/servlet/EditExamController</url-pattern>
   </servlet-mapping>
 </web-app>

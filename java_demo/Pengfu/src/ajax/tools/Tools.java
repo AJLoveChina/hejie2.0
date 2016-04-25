@@ -106,7 +106,29 @@ public class Tools {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 如果文件名不存在则创建
+	 * @param data
+	 * @param filePath
+	 */
+	public static void writeDataToFile(String data, String filePath) {
+		FileWriter fw;
+		File file = new File(filePath);
+		if (file.exists()) {
+			file.mkdirs();
+		}
+		try {
+			
+			fw = new FileWriter(file);
+			fw.write(data);
+			
+			fw.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	public static void appendDataToFile(String data, File file) {
 		String copy = readFile(file);

@@ -7,7 +7,8 @@ public enum UrlRoute {
 	QQ_REDIRECT(5, "http://www.nigeerhuo.com/sign/qq"),
 	GITHUB_REDIRECT(6, "http://www.nigeerhuo.com/sign/github"),
 	ROOT(3, "/"), 
-	DOT_PIC(4, "http://images.nigeerhuo.com/images/web/pic/dot.jpg");
+	DOT_PIC(4, "http://images.nigeerhuo.com/images/web/pic/dot.jpg"),
+	PIC_EXAM(5, "http://images.nigeerhuo.com/images/web/pic/exam2.jpg");
 	
 	private int id;
 	private String url;

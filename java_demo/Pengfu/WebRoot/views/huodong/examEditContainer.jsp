@@ -50,6 +50,14 @@ Exam exam = (Exam) request.getAttribute("exam");
   border-radius: 3px;
   overflow: hidden;
 }
+.aj-exercise input{
+	width:80%;
+	height: 25px;
+	border:1px solid #ccc;
+}
+.aj-exercise .ttt input {
+	border:none;
+}
 .aj-exercise a {
   color: #666;
   text-decoration: none;
@@ -302,7 +310,7 @@ Exam exam = (Exam) request.getAttribute("exam");
     <div class="cover" ng-hide="isStart">
         <div class="inside">
             <em class="glyphicon glyphicon-th-large"></em>
-            <span class="title" ng-bind="cover.title"></span>
+            <span class="title">试题工厂</span>
             <div class="amid">
                 <div style="position:relative;">
                     <div class="img-wrap">
@@ -310,16 +318,18 @@ Exam exam = (Exam) request.getAttribute("exam");
                     </div>
                     <div class="info">
                         <p class="line">
-                            题目类型 :
-                            <span ng-bind="cover.type"></span>
+                         	试题名称 : 
+                            <input type="text" ng-model="cover.title" />
+                        </p>                    
+                        <p class="line">
+                         	   题目类型 :
+                            <span ng-bind="cover.type"></span>(目前只支持选择题)
                         </p>
                         <p class="line">完成时间 :
-                            <span ng-bind="cover.time"></span>
+                            <input type="text" ng-model="cover.seconds" style="width:50px;"/>秒
                         </p>
                         <p class="line">难度系数 :
-                            <span ng-repeat="diff in cover.difficulty">
-                                <em class="icon glyphicon glyphicon-star"></em>
-                            </span>
+                            <input type="text" ng-model="difficulty" style="width:150px;" placeholder="难度系数1~5"/>
                         </p>
                         <p class="line">题目数量 :
                             <span ng-bind="cover.num"></span>
@@ -327,79 +337,31 @@ Exam exam = (Exam) request.getAttribute("exam");
                     </div>
                 </div>
                 <div class="desc">
-                    <p class="line">1、请在规定时间完成试卷内全部题目，考试时间结束，系统将自动交卷。</p>
-                    <p class="line">2、所有题目可通过答题卡返回修改，点击提前交卷后试卷提交，将无法继续答案，请谨慎提交。</p>
-                    <p class="line">3、请诚信答题，独立完成。</p>
-                    <p class="line">4、祝你好运。</p>
+                    <p class="line">1、请准确填写你的问题</p>
+                    <p class="line">2、确定你给出的答案是正确的</p>
+                    <p class="line">3、你需要制定10道题目</p>
+                    <p class="line">4、谢谢你对试题工厂的贡献, 你可以之后分享给你的好友</p>
                 </div>
             </div>
             <div class="afot">
-                <a class="start" href="javascript:;" ng-click="start()">开始</a>
+                <a class="start" href="javascript:;" ng-click="start()">开始出卷</a>
             </div>
         </div>
 
     </div>
 
-    <div class="cover-end" style="display: none;" ng-class="(isFinished && !isShowWrong) ? 'aj-show' : 'aj-hide'">
-        <div class="logo">
-            <em class="glyphicon glyphicon-tower"></em>
-        </div>
-        <div class="amid">
-            <div class="title">
-                你已完成测试 :
-                <span ng-bind="cover.title"></span>
-            </div>
-            <div>
-                你答对了
-                <span ng-bind="totalRight" class="label label-info"></span>
-                题,
-                用时 :
-                <span ng-bind="time" class="label label-info"></span>
-            </div>
-            <div class="result">
-                你的得分 :
-                <span class="score label label-warning" ng-bind="score"></span>
-            </div>
-            <div class="desc">
-                <p class="line">了解得分规则 : </p>
-                <p class="line">1、每答对一道题得10分, 答错不扣分</p>
-                <p class="line">2、在默认答题时间前完成试卷, 每提前交卷一秒多获得
-                    <span class="label label-default">(对题数 / 总题数) * 0.5</span>分</p>
-                <p class="line">本次测试 :
-                    答题得分 ->
-                    <span ng-bind="scoreFromAnswer" class="label label-success"></span>
-                    时间加成 ->
-                    <span ng-bind="scoreFromTime" class="label label-success"></span>
-                </p>
-            </div>
-            
-            <div style="text-align:center;">
-            	<button class="chakan_cuoti" ng-click="showWrong()">查看错题</button>
-            </div>
-            <div class="share">
-                分享给好友
-                <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
-
-
-                <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-            </div>
-        </div>
-
-    </div>
-
-    <div style="min-height: 480px">
+    <div class="ttt" style="min-height: 480px">
         <div class="timing clearfix">
             <div class="left">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="finishNum()" aria-valuemin="1" aria-valuemax="{{questions.length}}" style="width: {{finishPercent()}};">
-                        {{finishPercent()}}
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="1" aria-valuemax="10" style="width: 100%;">
+                        你个二货
                     </div>
                 </div>
             </div>
             <div class="right">
                 <span>时间 : </span>
-                <span ng-bind="time"></span>
+                <span>xx : xx</span>
             </div>
         </div>
 
@@ -408,17 +370,21 @@ Exam exam = (Exam) request.getAttribute("exam");
             <span class="title" ng-bind="title"></span>
         </div>
         <div class="amid">
-            <span class="question" ng-bind="questions[cur - 1].title"> </span>
+            <input class="question" style="width:100%;" ng-model="questions[cur - 1].title" />
+            
             <ul class="choices" ng-class="{'wrong' : (questions[cur - 1]['isRight'] === false)}">
                 <li class="choice" ng-repeat="choice in questions[cur - 1].choices">
-                    <a ng-class="{'selected' : choice.checked, 'answer' : choice['isAnswer']}"
-                       href="javascript:;" class="atag" ng-click="mkChoice($index)">
-                        <em  class="icon glyphicon glyphicon-record"></em>
-                        <span ng-bind="choice.title"></span>
-                    </a>
+                    <span ng-class="{'selected' : choice.checked, 'answer' : choice['isAnswer']}"
+                       href="javascript:;" class="atag">
+                       <!-- glyphicon glyphicon-check -->
+                       <!-- glyphicon glyphicon-unchecked -->
+                        <a href="javascript:;" ng-class="{'glyphicon glyphicon-unchecked' : !choice['isAnswer'], 'glyphicon glyphicon-check' : choice['isAnswer'] }" ng-click="thisisAnswer($index)" class="icon" title="请在答案选项前勾选我" ></a>
+                        <input ng-model="choice.title" />
+                    </span>
                 </li>
                 
             </ul>
+            
         </div>
         <div class="afot" ng-hide="isFinished">
             <a href="javascript:;" class="prev abtn" ng-click="prev()">上一题</a>
@@ -432,8 +398,6 @@ Exam exam = (Exam) request.getAttribute("exam");
                 <span>共</span>
                 <span ng-bind="questions.length"></span>
             </span>
-            <span>&nbsp;||&nbsp;</span>
-            <input type="checkbox" ng-model="isAutoNext"/> 选择后自动下一题
         </div>
         
         
@@ -477,7 +441,7 @@ $(function () {
         var container = $("#aj-exam");
         app.controller("examController", function ($scope, $timeout, $http) {
             $scope.cover = {};
-            $scope.title = "测试题";
+            $scope.title = "请填写问题,选项,以及在答案选项前勾选";
             $scope.cur = 1;
             $scope.isFinished = false;
             $scope.time = "00:00";
@@ -486,13 +450,17 @@ $(function () {
             $scope.endTime = null;
             $scope.questions = [];
             $scope.score = "计算中...";
-            $scope.isAutoNext = true;
-            $scope.trueAnswers = [];
+            $scope.isAutoNext = false;
+            $scope.trueAnswers = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
             $scope.totalRight;
             $scope.scoreFromAnswer = 0;
             $scope.scoreFromTime = 0;
             $scope.config = null;
             $scope.isShowWrong = false;
+            $scope.difficulty = 3;
+            $scope.oldPaperTitle = null;
+            $scope.autoSaveKey = "aj-exam-edit-status-key";
+            
 
 
             $scope.finishPercent = function () {
@@ -551,25 +519,7 @@ $(function () {
                 $scope.cur = $index;
             };
             
-            $scope.calculateTime = function () {
-                $timeout(function () {
-                    if (!$scope.isFinished) {
-                        $scope.endTime = (new Date()).getTime();
-                        var interval = ((new Date()).getTime() - ($scope.startTime.getTime())) / 1000;
-                        var seconds = Math.floor(interval % 60);
-                        var minutes = Math.floor(interval / 60);
-                        if (seconds < 10) {
-                            seconds = "0" + seconds;
-                        }
-                        if (minutes < 10) {
-                            minutes = "0" + minutes;
-                        }
-
-                        $scope.time = minutes + ":" + seconds;
-                        $scope.calculateTime();
-                    }
-                }, 1000);
-            };
+           
 
             $scope.loadPaper = function (fn) {
             	var config = JSON.parse($("#aj-exam-json")[0].value);
@@ -579,22 +529,88 @@ $(function () {
                 $http.get(config.url).then(function (data) {
                     $scope.questions = data.data.data.questions;
                     $scope.cover = data.data.data.cover;
-                    $scope.trueAnswers = data.data.data["answers"];
                     $scope.config = data.data.data["config"];
-
+					
+					$scope.oldPaperTitle = data.data.data.cover.title;
                     fn && fn();
                 });
             };
+            
+            
+            $scope.autoBack = function () {
+            
+            	var config = $.parseJSON(sessionStorage.getItem($scope.autoSaveKey));
+            	
+            	
+            	console.log(config);
+            	
+            	$scope.cover = config.cover;
+           		$scope.questions  =  config.questions;
+           		$scope.cur  =  config.cur;
+           		$scope.isStart = config.isStart;
+           		$scope.trueAnswers = config.trueAnswers;
+           		$scope.difficulty = config.difficulty;
+           		
+           		
+            }
+            
+            var isFirst = true;
+            $scope.autoSave = function () {
+            	var configFromLocal = sessionStorage.getItem($scope.autoSaveKey);
+            	
+            	if (isFirst && configFromLocal) {
+            		isFirst = false;
+            	} else {
+	            	var config = {};
+	            		
+	           		config.cover = $scope.cover;
+	           		config.questions = $scope.questions;
+	           		config.cur = $scope.cur;
+	           		config.isStart = $scope.isStart;
+	           		config.trueAnswers = $scope.trueAnswers;
+	           		config.difficulty = $scope.difficulty;
+	           		
+	           		sessionStorage.setItem($scope.autoSaveKey, JSON.stringify(config));
+	           		
+	           		console.log("已自动保存...");
+            	}
+            	
+            	
+           		$timeout(function () {
+            		$scope.autoSave();
+           		}, 1000);
+            }
+            
+            //$scope.autoSave();
+           
+            	
+           
 
 
             $scope.start = function () {
+                if (!$scope.checkPaperTitle()) {
+                	console.log(123);
+                	aj.Tishi("请填写试卷的标题!");
+                	return false;
+                }
+                
                 $scope.isStart = true;
                 $scope.startTime = new Date();
-                $scope.calculateTime();
             };
+            
+            $scope.checkPaperTitle = function () {
+            	return $scope.oldPaperTitle != $scope.cover.title;
+            }
 
             $scope.init = function () {
-                $scope.loadPaper();
+            	/* var val = sessionStorage.getItem($scope.autoSaveKey);
+            	
+            	if (val) {
+            		$scope.autoBack();
+            	} else {
+            		
+            	} */
+            	$scope.loadPaper();
             };
             $scope.init();
 
@@ -602,50 +618,74 @@ $(function () {
                 console.log($scope.isAutoNext);
             };
 
+			$scope.checkEveryQuestionHasAnswer = function () {
+				for (var i = 0; i < $scope.trueAnswers.length; i++) {
+					if ($scope.trueAnswers[i] == -1) {
+						return false;
+					}
+				}
+				return true;
+			}
             $scope.submit = function () {
-                var i,j;
-                var choices;
-                var answers = [];
-                var isRight;    // 某一题是否正确
-                var trueAnsers = $scope.trueAnswers;
-                var rightChoice;
-                var rightNum = 0;
-                var totalScore = 0;
-
-                for (i = 0; i < $scope.questions.length; i++) {
-                    isRight = false;
-                    choices = $scope.questions[i]["choices"];
-                    rightChoice = trueAnsers[i];
-
-                    for(j = 0; j < choices.length; j++) {
-                        if (choices[j].checked && (j + 1) == rightChoice) {
-                            rightNum ++;
-                            isRight = true;
-                        }
-                        
-                        if ((j + 1) ==rightChoice) {
-                        	choices[j]["isAnswer"] = true;
-                        }
-                    }
-
-                    $scope.questions[i]["isRight"] = isRight;
-					
+                if (!$scope.checkEveryQuestionHasAnswer()) {
+                	aj.Tishi("有一些选择题你木有填写答案");
+                	return;
                 }
-
-                $scope.totalRight = rightNum;
-                totalScore += rightNum * 10;
-
-                $scope.scoreFromAnswer = totalScore;
-
-                // 默认5分钟完成题目
-                var leftSconds = 300 - ($scope.endTime - $scope.startTime) / 1000;
-                $scope.scoreFromTime = (leftSconds * (rightNum / $scope.questions.length) * 0.5).toFixed(2);
-
-                totalScore += (leftSconds * (rightNum / $scope.questions.length) * 0.5);
-                $scope.score = totalScore.toFixed(2);
-
-
-                //$scope.submitToBmob();
+                
+                var diffculty = $scope.difficulty;
+                var diffcultyArr = [];
+                for (var i = 1; i <= diffculty; i++) {
+                	diffcultyArr.push(i);
+                }
+               	 var data = {
+				    "isok" : true,
+				    "data" : {
+				        "config" : {
+				            "id" : "0"
+				        },
+				        "cover" : {
+				            "title" : $scope.cover.title,
+				            "img" : "http://images.nigeerhuo.com/images/web/pic/exam2.jpg",
+				            "type" : "选择题",
+				            "time" : ($scope.cover.seconds / 60).toFixed(1) + "分钟",
+				            "seconds" : $scope.cover.seconds,
+				            "difficulty" : diffcultyArr,
+				            "num" : 10
+				        },
+				        "answers" : $scope.trueAnswers,
+				        "questions" : $scope.questions
+				        
+				        /* [
+				        	{
+				        		"id":1,
+				        		"title":"下列哪个样式定义后,内联(非块状)元素可以定义宽度和高度?",
+				        		"finish":false,
+				        		"choices":[
+				        			{"checked":false,"title":"display:none"},
+				        			{"checked":false,"title":"display:none"},
+				        			{"checked":false,"title":"display:none"},
+				        			{"checked":false,"title":"display:none"}
+				        		]
+				        	}
+				        ] */
+				    }
+				};
+				
+				console.log(data);
+				
+				$.ajax({
+					url : "/editExam?action=add",
+					method : "POST",
+					data : {
+						"data" : JSON.stringify(data)
+					},
+					success : function (response)  {
+						console.log(response);
+					},
+					error : function (err) {
+						console.log(err);
+					}
+				});
             };
 
             $scope.submitToBmob = function () {
@@ -679,6 +719,18 @@ $(function () {
             
             $scope.showRankPage = function() {
             	$scope.isShowWrong = false;
+            }
+            
+            $scope.thisisAnswer = function ($index) {
+            	var choices = $scope.questions[$scope.cur -  1].choices;
+            	
+            	for (var i = 0; i < choices.length; i++) {
+            		choices[i]["isAnswer"] = false;
+            	}
+            
+            	choices[$index]["isAnswer"] = true
+            	
+            	$scope.trueAnswers[$scope.cur - 1] = $index + 1;
             }
         });
         angular.bootstrap(container, ["exam"]);
