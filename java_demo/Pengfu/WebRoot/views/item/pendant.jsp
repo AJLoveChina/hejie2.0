@@ -258,7 +258,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   font-size: 12px;
   color: #666;
   transition:all 0.3s;
-  background-color: white;
+}
+.aj-pendant .aitems {
+	background-color: white;
 }
 .aj-pendant a {
   text-decoration: none;

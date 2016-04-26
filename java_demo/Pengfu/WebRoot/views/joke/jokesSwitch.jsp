@@ -101,6 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $scope.interval = 3000 * 3;
             $scope.cur = 0;
             $scope.page = 1;
+            $scope.pagesHasGet = [];
 
             $scope.prev = function () {
                 var prev = $scope.cur - 1;
@@ -149,8 +150,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
             
             $scope.getPage = function (page, fn) {
-            	var prefix = "/static/joke/",
-            		path = prefix + page + ".txt";
+            	var min = 1, max = 433;
+            	var random = Math.floor((max - min) * Math.random()) + min;
+            	var tries = 1;
+            	
+            	while($scope.pagesHasGet.indexOf(random) != -1) {
+            		random = Math.floor((max - min) * Math.random()) + min;
+            		tries ++;
+            		if (tries >= 400) {
+            			break;
+            		}
+            	}
+            	var prefix = "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/joke/",
+            		path = prefix + random + ".txt";
+            		
             		
             	$http({
             		url : path,
