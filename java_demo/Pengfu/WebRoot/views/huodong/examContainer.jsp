@@ -265,8 +265,22 @@ Exam exam = (Exam) request.getAttribute("exam");
 }
 .aj-exercise .cover-end .logo {
   height: 180px;
-  text-align: center;
+  overflow: auto;
 }
+
+.aj-exercise .cover-end .logo ul {
+	padding: 20px;
+}
+
+.aj-exercise .cover-end .logo ul li{
+	font-family: 12px;
+}
+
+.aj-exercise .cover-end .logo ul li{
+	font-family: 12px;
+}
+
+
 .aj-exercise .cover-end .logo em {
   line-height: 180px;
   font-size: 80px;
@@ -306,7 +320,7 @@ Exam exam = (Exam) request.getAttribute("exam");
             <div class="amid">
                 <div style="position:relative;">
                     <div class="img-wrap">
-                    	<img class="img" src="{{cover.img}}"/>
+                    	<img class="img" ng-src="{{cover.img}}" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images%2Fweb%2Fpic%2Fdot.jpg"/>
                     </div>
                     <div class="info">
                         <p class="line">
@@ -342,7 +356,24 @@ Exam exam = (Exam) request.getAttribute("exam");
 
     <div class="cover-end" style="display: none;" ng-class="(isFinished && !isShowWrong) ? 'aj-show' : 'aj-hide'">
         <div class="logo">
-            <em class="glyphicon glyphicon-tower"></em>
+        	
+        	<ul class="list-group">
+			  <li class="list-group-item" ng-repeat="rank in ranks" 
+			  	ng-class="{'list-group-item-success' : ($index == 0), 
+			  				'list-group-item-info' : ($index == 1), 
+			  				'list-group-item-warning' : ($index == 2)}">
+			    <span class="badge" ng-bind="rank['score']"></span>
+			    <span ng-bind="$index + 1"></span>
+       			<span>. </span>
+       			<span>
+       				<img width="20" height="20" style="border-radius:50%;overflow: hidden;"
+       				src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images%2Fweb%2Fpic%2Fdot.jpg" 
+       					ng-src="{{rank['img']}}" />
+       			</span>
+       			<span ng-bind="rank['name']"></span>
+			  </li>
+			</ul>
+			
         </div>
         <div class="amid">
             <div class="title">
@@ -494,6 +525,7 @@ $(function () {
             $scope.scoreFromTime = 0;
             $scope.config = null;
             $scope.isShowWrong = false;
+            $scope.ranks = [];
 
 
             $scope.finishPercent = function () {
@@ -589,6 +621,13 @@ $(function () {
 
 
             $scope.start = function () {
+            	var user = new aj.User();
+            	if (!user.isLogin()) {
+            		aj.Tishi("亲, 请先登录一下呗~~");
+            		return;
+            	}
+            
+            
                 $scope.isStart = true;
                 $scope.startTime = new Date();
                 $scope.calculateTime();
@@ -665,18 +704,48 @@ $(function () {
                 var gameScore = new GameScore();
 
 				var user = new aj.User();
-                gameScore.set("user_id", user.getUserid());
-                gameScore.set("user_name", user.getNickname());
-                gameScore.set("user_img", user.getUserimg());
-                gameScore.set("score_total", $scope.score);
-                gameScore.set("score_time", $scope.scoreFromTime);
-                gameScore.set("score_answer", $scope.scoreFromAnswer);
+				
+				if (user.isLogin()) {
+					gameScore.set("user_id", user.getUserid() + "");
+	                gameScore.set("user_name", user.getNickname());
+	                gameScore.set("user_img", user.getUserimg());
+				} else {
+					gameScore.set("user_id", "-1");
+	                gameScore.set("user_name", "匿名用户");
+	                gameScore.set("user_img", "");
+				}
+               
+                gameScore.set("score_total", $scope.score + "");
+                gameScore.set("score", parseFloat($scope.score));
+                gameScore.set("score_time", $scope.scoreFromTime + "");
+                gameScore.set("score_answer", $scope.scoreFromAnswer + "");
+                gameScore.set("paper_id", $scope.id + "");
 
 
                 gameScore.save(null, {
                     success: function(object) {
-                        console.log("保存成绩成功");
-                        console.log(object);
+                        var query = new Bmob.Query(GameScore);
+                        query.limit(100);
+                        query.descending("score");
+                        query.equalTo("paper_id", ($scope.id + ""));
+                        
+                        
+                        query.find({
+						  success: function(results) {
+						    $scope.$apply(function () {
+						    	for (var i = 0; i < results.length; i++) {
+						    		$scope.ranks.push({
+						    			"name" : results[i].get("user_name"),
+						    			"score" : results[i].get("score"),
+						    			"img" : results[i].get("user_img")
+						    		});
+						    	}
+						    });
+						  },
+						  error: function(error) {
+						    	console.log(error);
+						  }
+						});
                     },
                     error: function(model, error) {
                         console.log(error);

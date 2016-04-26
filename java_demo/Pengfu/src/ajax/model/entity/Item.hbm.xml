@@ -82,6 +82,10 @@
 			<column name="hasImageUploadedToOss"></column>
 		</property>
 				
+		<property name="statusForTest" type="java.lang.Integer">
+			<column name="statusForTest"></column>
+		</property>
+				
 	</class>
 	
 

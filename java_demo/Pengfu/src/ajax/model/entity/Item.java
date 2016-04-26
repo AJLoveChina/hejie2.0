@@ -55,6 +55,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	private String dateEntered;
 	private int rulesTagId;
 	private String previewImage;
+	private int statusForTest;
 	/**
 	 * 图片是否已经上传Oss
 	 */
@@ -84,6 +85,16 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	
+	public int getStatusForTest() {
+		return statusForTest;
+	}
+
+
+	public void setStatusForTest(int statusForTest) {
+		this.statusForTest = statusForTest;
+	}
+
+
 	public boolean isHasImageUploadedToOss() {
 		return hasImageUploadedToOss;
 	}
@@ -789,6 +800,46 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		} else {
 			return "images/" + src;
 		}
+	}
+
+	/**
+	 * 不要找了, 如果你对一条item不满意, 就调用这个方法吧.
+	 */
+	public void betterThanBetter() {
+		
+		// 重新生成摘要
+		this.setSummary(this.generateSummaryAndReturn());
+		
+		// 重新计算类型
+		this.setItype(this.generateTypeAndReturn().getId());
+		
+		// lazy img for content
+		this.setContent(this.generateLazyImageContentAndReturn());
+		
+		// move some illegal tags
+		this.setContent(this.generateContentWithoutIlleagalHTMLTags());
+		
+		
+		this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
+		this.update();
+	}
+
+
+	/**
+	 * 删除非法的 html 标签
+	 * @return
+	 */
+	public String generateContentWithoutIlleagalHTMLTags() {
+		Document doc = Jsoup.parse(this.getContent());
+		String[] illegalTags = {
+			"noscript", "script", "object" 
+		};
+		
+		for (String tag : illegalTags) {
+			doc.select(tag).remove();
+		}
+		
+		return doc.body().html();
 	}
 	
 
