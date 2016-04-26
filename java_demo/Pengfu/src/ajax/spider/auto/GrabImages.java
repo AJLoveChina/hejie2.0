@@ -101,8 +101,20 @@ public class GrabImages {
 		
 	}
 	
+	private static void do4() {
+		Item item = new Item();
+		item.load(18570);
+		
+		
+		item.setContent(item.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+		item.setContent(item.generateLazyImageContentAndReturnByForce());
+		item.update();
+		
+		
+	}
+	
 	
 	public static void main(String[] args) {
-		do3();
+		do4();
 	}
 }

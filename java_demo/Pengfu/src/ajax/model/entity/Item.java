@@ -370,6 +370,59 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	/**
+	 * 根据item的rulestagid 获取处理图片下载的策略, 如果获取不到就采用默认的策略(返回src值作为下载地址)
+	 * @return
+	 */
+	public Callback<Element, String> getImgDealCallbackFromRules() {
+		RulesTag rt = RulesTag.getRulesTagById(this.getRulesTagId());
+		
+		
+		try {
+			Rules rules = (Rules)Class.forName(rt.getClassName()).newInstance();
+			
+			return rules.returnImgCallback();
+			
+		} catch (Exception e) {
+			return new Callback<Element, String>() {
+
+				@Override
+				public String deal(Element in) {
+					return in.attr("src");
+				}
+				
+			};
+		}
+	}
+	
+	/**
+	 * save imgs to oss
+	 * @param imgDealCallback
+	 * @return
+	 */
+	public String grabImagesFromContentAndSaveToOssThenReturnContent(Callback<Element, String> imgDealCallback) {
+		int rulesTagid = this.getRulesTagId();
+		RulesTag rt = RulesTag.getRulesTagById(rulesTagid);
+		String folder = rt.getImageFolder();
+		
+		String newContent;
+		try {
+			
+			if (imgDealCallback == null) {
+				imgDealCallback = this.getImgDealCallbackFromRules();
+			}
+			
+			newContent = Tools.grabImagesFromStringThenUploadToOss(new URL(this.getUrl()), this.getContent(), folder, imgDealCallback);
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			newContent = this.getContent();
+		}
+		
+		return newContent;		
+	}
+	
+	/**
 	 * 根据content获取图片并保存到本地磁盘<br>抓取后更新实体
 	 */
 	public void grabImagesFromContentAndUpdate() {
@@ -605,7 +658,10 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return jo.toString();
 	}
 	
-	
+	/**
+	 * 普通 lazy, 区别于强制lazy
+	 * @return
+	 */
 	public String generateLazyImageContentAndReturn() {
 		Document doc = Jsoup.parse(this.getContent());
 		
@@ -617,6 +673,36 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 				ele.attr("data-lazy", ele.attr("src"));
 				ele.removeAttr("src");
 			}
+			if (ele.attr("width").equals("") && ele.attr("height").equals("")) {
+				ele.attr("width", "200");
+				ele.attr("height", "200");
+			}
+			ele.attr("src", UrlRoute.DOT_PIC.getUrl());
+		}
+		
+		return doc.body().html();
+	}
+	
+	/**
+	 * 强制lazy, 因为正常的lazy会在img有 某个class值时不处理<br>
+	 * 记住不能俩次对一个item执行该方法, 因为执行一次后item的src值会变成 dot pic
+	 * @return
+	 */
+	public String generateLazyImageContentAndReturnByForce() {
+		Document doc = Jsoup.parse(this.getContent());
+		
+		Elements imgs = doc.select("img");
+		
+		for (Element ele : imgs) {
+			if (!ele.hasClass("aj-lazy")) {
+				ele.addClass("aj-lazy");
+			}
+			
+			if (!ele.attr("src").equals(UrlRoute.DOT_PIC.getUrl())) {
+				ele.attr("data-lazy", ele.attr("src"));
+				ele.removeAttr("src");
+			}
+			
 			if (ele.attr("width").equals("") && ele.attr("height").equals("")) {
 				ele.attr("width", "200");
 				ele.attr("height", "200");

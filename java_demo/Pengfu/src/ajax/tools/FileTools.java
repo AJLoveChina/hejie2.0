@@ -2,6 +2,7 @@ package ajax.tools;
 
 import java.awt.Image;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
@@ -156,9 +157,54 @@ public class FileTools {
 		return "";
 	}
 	
+	public static String saveImageToOss(String src, String folder) {
+		
+		System.out.println("正在下载图片 : " + src);
+		String newFileName = getRandomFileName(src);
+		if (!folder.endsWith("/")) {
+			folder += "/";
+		}
+		String destination = folder + newFileName;
+		
+		destination = destination.replaceFirst("WebRoot/", "");
+		
+		Image image = null;
+		try {
+			
+			URL url = new URL(src);
+			
+			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("Referer", url.getProtocol() + "://" + url.getHost());
+			
+			connection.setConnectTimeout(20 * 1000); // 20秒超时
+			image = ImageIO.read(url);
+			
+			OssUtil.uploadToNigeerhuo(destination, url.openStream());
+			
+			
+			System.out.println("下载图片完成!");
+			return destination;
+			
+		} catch (Exception e) {
+			System.out.println("下载图片失败 : " + e.getMessage());
+			return "";
+		}
+	}
+	
 
 	
 	public static void main(String[] args) {
+		try {
+			URL url = new URL("http://baidu.com/jsad/daskjf");
+			
+			String xx = url.getProtocol() + "://" + url.getHost();
+			
+			System.out.println(xx);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 }

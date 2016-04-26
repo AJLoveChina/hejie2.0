@@ -284,7 +284,7 @@ public class Tools {
 					
 				} else {
 					path = FileTools.saveImageTo(src, destination);
-					if (path == "") {
+					if (path.equals("")) {
 						path = "web/pic/unknown.png";
 					}
 					//*******
@@ -303,6 +303,79 @@ public class Tools {
 		
 		return doc.body().html();
 	}
+	
+	
+
+	public static String grabImagesFromStringThenUploadToOss(URL pageUrl, String content, String folder, Callback<Element, String> dealImgEle) {
+		
+		Document doc = Jsoup.parse(content);
+		
+		Elements images = doc.select("img");
+		String destination = "WebRoot/images/web";
+		if (folder == null) {
+			folder = "/images/";
+		}
+		if (!folder.startsWith("/")) {
+			folder = "/" + folder;
+		}
+		if (!folder.endsWith("/")) {
+			folder += "/";
+		}
+		destination += folder;
+		
+		
+		if (dealImgEle == null) {
+			dealImgEle = new Callback<Element, String>() {
+				
+				@Override
+				public String deal(Element in) {
+					return in.attr("src");
+				}
+				
+			};
+		}
+		
+		for (Element img : images) {
+			
+			String src = dealImgEle.deal(img);
+			
+			
+			if (!src.equals("")) {
+				
+				// 获取绝对路径
+				src = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(src, pageUrl.toString());
+				
+				ImagesContainer ic = ImagesContainer.existed(src);
+				String path;
+				
+				if (ic != null) {
+					
+					path = ic.getWebPath();
+					System.out.println("图片已存在");
+					
+				} else {
+					path = FileTools.saveImageToOss(src, destination);
+					if (path.equals("")) {
+						path = "/images/web/pic/unknown.png";
+					}
+					//*******
+					ImagesContainer ic2 = new ImagesContainer();
+					ic2.setUrl(src);
+					ic2.setDiskPath("");
+					ic2.setWebPath(path);
+					ic2.save();
+					//********
+				}
+				
+				img.attr("src", path);
+				
+			}
+		}
+		
+		return doc.body().html();
+	}
+	
+	
 	/**
 	 * 获取content内容中的图片 并保存到 webRoot/web/路径下的images文件夹
 	 * @param content
