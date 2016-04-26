@@ -118,6 +118,11 @@ public class Page extends Entity<Page>{
 		
 		return items;
 	}
+	
+	/**
+	 * @param page2 对应表中 的 page字段
+	 * @return
+	 */
 	public static Page getByPage(int page2) {
 		Session sess = HibernateUtil.getSession();
 		Criteria cr = sess.createCriteria(Page.class);

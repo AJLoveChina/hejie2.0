@@ -21,6 +21,8 @@ int next = item.getId() + 1;
 	<div style="height:10px;"></div>
 	
 	<jsp:include page="views/item/one.jsp"></jsp:include>
+	
+	<jsp:include page="views/item/itemsRecommend.jsp"></jsp:include>
 
 </div>
 

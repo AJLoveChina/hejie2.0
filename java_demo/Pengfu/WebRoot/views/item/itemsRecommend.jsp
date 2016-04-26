@@ -1,33 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <!--[if lt IE 9]>
-    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
-    <![endif]-->
-    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
-    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
-</head>
-<body>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        border: none;
-    }
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 
-    ul li {
-        list-style: none;
-    }
-
-    body {
-        font-size: 14px;
-        font-family: Microsoft Yahei, Arial;
-    }
-</style>
 
 <style>
+
+
 .aj-gds-roll-x{
     width:100%;height:100%;
     border:1px solid #e8e8e8;
@@ -131,12 +111,23 @@
     float:left;
     overflow:hidden;
 }
+.aj-gds-roll-x .aj-mid .aj-roll-block .aj-imgs-wrap .aj-img-one .summary{
+	display: block;
+	padding: 0 15px;
+	color:#666;
+	font-size: 12px;
+	text-decoration: none!important;
+	height: 100px;
+	line-height: 20px;
+	overflow: hidden;
+}
 .aj-gds-roll-x .aj-mid .aj-roll-block .aj-imgs-wrap .aj-img-one .item-img-wrap{
     width: 130px;
     height: 130px;
-    display: inline-block;
+    display: block;
     font-size: 0;
     text-align: center;
+    margin: 0 auto;
 }
 .aj-gds-roll-x .aj-mid .aj-roll-block .aj-imgs-wrap .aj-img-one .item-img-wrap:before{
     content: "";
@@ -153,11 +144,7 @@
 .aj-gds-roll-x .aj-mid .aj-roll-block .aj-imgs-wrap .aj-img-one:hover{
     text-decoration:underline;
 }
-.aj-gds-roll-x .aj-mid .aj-roll-block .aj-imgs-wrap .aj-img-one .aj-img{
-    width:130px;height:130px;
-    margin:0 auto;
-    display:block;
-}
+
 .aj-gds-roll-x .aj-mid .aj-roll-block .aj-imgs-wrap .aj-img-one p{
     padding:0 15px;
 }
@@ -171,11 +158,9 @@
     line-height:16px;
     overflow:hidden;
 }
-/*------------------*/
-
 </style>
 
-<div style='width:708px;height:250px;margin:20px;'>
+<div class="aj-gds-roll-x-parent" style='max-width:100%;overflow:hidden;width:708px;height:250px;'>
     <div class='aj-gds-roll-x'>
         <div class='aj-top'>
             <div class='aj-nav'>
@@ -184,7 +169,7 @@
             </div>
             <div class='aj-roll-zhishi'>
                 <div class='aj-small-balls'>
-                    <a href=''>全部&gt;</a>
+                    <a href='' style='display:none;'>全部&gt;</a>
                 </div>
                 <div class='aj-small-balls' style='display:none;'>
                     <a href=''>全部&gt;</a>
@@ -197,15 +182,8 @@
                 <div class='aj-roll-x-hk aj-tran' aj-index='left'>&lt;</div>
                 <div class='aj-roll-x-hk aj-tran' aj-index='right'>&gt;</div>
                 <div class='aj-imgs-wrap'>
-                    <div class='aj-all-imgs-move' aj-index='1' aj-total-pages='2' aj-can-roll='1'>
-                        <a class='aj-img-one'>
-                            <span class="item-img-wrap">
-                                <img class='aj-img' src='1.jpg' />
-                            </span>
-                            <p class='aj-price'>$90包邮</p>
-                            <p class='aj-name'>Nike耐克Air Max Thea 女款运动鞋</p>
-                        </a>
-
+                    <div class='aj-all-imgs-move aj-items-page-container' aj-index='1' aj-total-pages='2' aj-can-roll='1'>
+                        
                     </div>
                 </div>
             </div>
@@ -215,7 +193,7 @@
                 <div class='aj-imgs-wrap'>
                     <div class='aj-all-imgs-move' aj-index='1' aj-total-pages='2' aj-can-roll='1'>
 
-
+                       
                     </div>
                 </div>
             </div>
@@ -225,25 +203,22 @@
 </div>
 
 <script>
-(function(){
-    var timer = setInterval(function(){
-        if( window.jQuery ){
-            $(document).ready(function(){
-                yy.start();
-            });
-            clearInterval(timer);
-        }
-    },1000/12);
-
+$(function () {
+    var c = {
+        ajax : function( prop ){
+            return $( prop.obj ).find( '.'+prop.className );
+        },
+    }
     var yy = {};
-
+    
     yy.start = function(){
         yy.goodsImgBlock();
-        yy.goodsImgTri();
     }
+    
+   	
     yy.goodsImgBlock = function(){
         var prop = {};
-        prop.div = document.querySelector( '.aj-gds-roll-x' );
+        prop.div = $('.aj-gds-roll-x')[0];
         Effect( prop );
     }
     yy.goodsImgTri = function(){
@@ -251,7 +226,8 @@
         prop.div = document.querySelector( '.aj-box-rank' );
         Effect2( prop );
     }
-
+    
+    
     function Effect( prop ){
         if( this instanceof Effect ){
             this.prop = prop;
@@ -448,16 +424,146 @@
 
     };
 
-    var c = {
-        ajax : function( prop ){
-            return $( prop.obj ).find( '.'+prop.className );
-        },
+    function Effect2( prop ){
+        if( this instanceof Effect2 ){
+            this.prop = prop;
+            this.div = prop.div;
+            this.nav = c.ajax({obj:this.div,className:'aj-nav-one'});
+            this.blocks = c.ajax({obj:this.div,className:'aj-imgs-wrap'});
+            this.initial();
+            this.event();
+        }else{
+            return new Effect2( prop );
+        }
     }
-})()
+    Effect2.prototype={
+        initial : function(){
+            this.bianhao();
+            this.setMinHeight();
+        },
+        event : function(){
+            var that = this;
+            $( this.div ).on( 'mouseover', function(ev){
+                var e = ev || window.event,
+                        target = e.target || e.srcElement;
 
+                if( $(target).hasClass('aj-nav-one') ){
+                    that.navStyle( target );
+                }
+            });
+        },
+        navStyle : function( obj ){
+            var index = this.whichNav( obj );
+            if( $(this.nav[index]).hasClass('aj-select') ){
+                return true;
+            }
+            this.showNav( index );
+            this.showBlock( index );
+        },
+        showNav : function( index ){
+            $( this.nav ).removeClass( 'aj-select' );
+            $( this.nav[index] ).addClass( 'aj-select' );
+        },
+        showBlock : function( index ){
+            $( this.blocks ).hide();
+            $( this.blocks[index] ).show();
+        },
+        whichNav : function( obj ){
+            var index;
+            for( var i = 0; i<this.nav.length; i++ ){
+                if( this.nav[i] === obj ){
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        },
+        bianhao : function(){
+            var that =this;
+            $( this.blocks ).each(function(){
+                that.sortBlockInside( this );
+            });
+        },
+        sortBlockInside : function( obj ){
+            var ones = c.ajax({obj:obj,className:'aj-one'}),
+                    index = 1,
+                    zhishi;
+            $( ones ).each(function(){
+                zhishi = c.ajax({obj:this,className:'aj-index'})[0];
+                zhishi.innerHTML = index;
+                index++;
+            });
+        },
+        setMinHeight : function(){
+            var blocks = this.blocks,
+                    arr = [],
+                    num;
+            $( blocks ).each(function(){
+                arr.push( c.ajax({obj:this,className:'aj-one'}).length );
+            });
+            num = arr.sort(function( a, b ){
+                return a-b;
+            }).pop();
+            $( blocks[0].parentNode.parentNode ).css({minHeight:num*100+'px'});
+        },
+    };
 
+	yy.loadPage = function () {
+		var container = $(".aj-gds-roll-x .aj-items-page-container");
+		var min = 1, max = 64;
+		var random = Math.floor((max - min) * Math.random() + min);
+		var tag;
+		
+		var span = $(document.createElement("span"));
+				
+		$.ajax({
+			url : "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/pages/" + random + ".json",
+			type : "GET",
+			dataType : "json",
+			success : function (ar) {
+				var src;
+				for (var i = 0; i < ar.data.length; i++) {
+					tag = $(document.createElement("a"));
+					tag.addClass("aj-img-one");
+					src = ar.data[i]['previewImage'];
+					
+					if (src) {
+						if (/\/?images/i.test(src)) {
+							src = "http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/" + src;
+						} else {
+							src = "http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/images/" + src;
+						}
+						///src += "@!w190"
+						src += "@!w190";
+						
+						tag.html("<span class='item-img-wrap'><img class='aj-img' src='" + src + "' /></span>" +
+									"<p class='aj-price'>" + ar.data[i]['username'] + "</p>" +
+									"<p class='aj-name'>" + ar.data[i]['title']+ "</p>");
+						tag.attr("href", "/OneItem?id=" + ar.data[i]["id"]);						
+					} else {
+					
+						tag.html("<p class='aj-price'>" + ar.data[i]['username'] + "</p>" +
+									"<p class='aj-name'>" + ar.data[i]['title']+ "</p>" + 
+									"<span class='summary'>" + ar.data[i]['summary'] + "</span>");
+						tag.attr("href", "/OneItem?id=" + ar.data[i]["id"]);
+						
+					}
 
+								
+					span.append(tag);
+				}
+				container.html(span.html());
+				
+				yy.start();
+			},
+			error : function () {
+				
+			}
+		});					
+	
+	}
+	
+	yy.loadPage();
+	
+});
 </script>
-
-</body>
-</html>
