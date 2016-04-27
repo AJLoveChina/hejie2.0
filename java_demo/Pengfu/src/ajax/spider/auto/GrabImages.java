@@ -122,6 +122,7 @@ public class GrabImages {
 			for (Item item : items) {
 				item.setContent(item.grabImagesFromContentAndSaveToOssThenReturnContent(null));
 				item.setContent(item.generateLazyImageContentAndReturnByForce());
+				item.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
 				item.update();
 				
 			}
