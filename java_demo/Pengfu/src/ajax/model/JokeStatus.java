@@ -5,7 +5,8 @@ public enum JokeStatus {
 	DELETE(1, "删除"),
 	STATIC(3, "已静态化"),
 	SPIDER(2, "刚刚获取"),
-	BETTER_THAN_BETTER(4, "");
+	BETTER_THAN_BETTER(4, ""),
+	HAS_GRAB_IMAGES(5, "");
 	
 	private int id;
 	private String info;

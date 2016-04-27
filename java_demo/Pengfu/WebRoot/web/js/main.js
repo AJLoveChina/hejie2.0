@@ -95,9 +95,9 @@
 						src = urlPredixEnum.ali + src +  "@!" + picStyle;
 					} else if($(this).parents(".aj-joke-list-one").length > 0) {	
 						//item content中的图片
-						src = urlPredixEnum.ali + src + "@!w670";
+						src = urlPredixEnum.ali + src + "@!w500_low";
 					}else{
-						src = urlPredixEnum.ali + src;
+						src = urlPredixEnum.ali + src + "@!w500_low";
 					}
 				}
 				

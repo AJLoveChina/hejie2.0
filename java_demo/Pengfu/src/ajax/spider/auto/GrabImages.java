@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import ajax.model.JokeStatus;
 import ajax.model.entity.*;
 import ajax.spider.rules.RulesTag;
 import ajax.tools.HibernateUtil;
@@ -102,15 +103,30 @@ public class GrabImages {
 	}
 	
 	private static void do4() {
-		Item item = new Item();
-		item.load(39956);
 		
 		
-		item.setContent(item.grabImagesFromContentAndSaveToOssThenReturnContent(null));
-		item.setContent(item.generateLazyImageContentAndReturnByForce());
-		item.update();
-		
-		
+		List<Item> items = new ArrayList<Item>();
+		Session session = HibernateUtil.getSession();
+		int page = 1;
+		int size = 20;
+		do {
+			Criteria cr = session.createCriteria(Item.class);
+			cr.add(Restrictions.ne("statusForTest", JokeStatus.HAS_GRAB_IMAGES.getId()));
+			cr.add(Restrictions.eq("rulesTagId", RulesTag.ZHIHU_ANSWER.getId()));
+			cr.setFirstResult((page - 1) * size );
+			cr.setMaxResults(size);
+			
+			
+			items = cr.list();
+			
+			for (Item item : items) {
+				item.setContent(item.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+				item.setContent(item.generateLazyImageContentAndReturnByForce());
+				item.update();
+				
+			}
+			page++;
+		}while(items.size() > 0);		
 	}
 	
 	
