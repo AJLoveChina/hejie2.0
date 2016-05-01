@@ -108,7 +108,7 @@ public class GrabImages {
 		List<Item> items = new ArrayList<Item>();
 		Session session = HibernateUtil.getSession();
 		int page = 1;
-		int size = 20;
+		int size = 100;
 		do {
 			Criteria cr = session.createCriteria(Item.class);
 			cr.add(Restrictions.ne("statusForTest", JokeStatus.HAS_GRAB_IMAGES.getId()));
@@ -120,11 +120,14 @@ public class GrabImages {
 			items = cr.list();
 			
 			for (Item item : items) {
-				item.setContent(item.grabImagesFromContentAndSaveToOssThenReturnContent(null));
-				item.setContent(item.generateLazyImageContentAndReturnByForce());
-				item.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
-				item.update();
-				
+				try {
+					item.setContent(item.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+					item.setContent(item.generateLazyImageContentAndReturnByForce());
+					item.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
+					item.update();
+				}catch(Exception ex) {
+					System.out.println(ex.getMessage());
+				}
 			}
 			page++;
 		}while(items.size() > 0);		
