@@ -33,11 +33,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="acfun2.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="acfun2.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/video/acfun2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8797595" vertical-offset="261" max-vertical-offset="860">
+            <state vertical-scroll-proportion="-11.0" vertical-offset="261" max-vertical-offset="860">
               <caret line="29" column="487" selection-start-line="29" selection-start-column="487" selection-end-line="29" selection-end-column="487" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="youku2.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/video/youku2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.75951904" vertical-offset="261" max-vertical-offset="800">
+              <caret line="29" column="222" selection-start-line="29" selection-start-column="222" selection-end-line="29" selection-end-column="222" />
               <folding />
             </state>
           </provider>
@@ -72,12 +82,13 @@
         <option value="$PROJECT_DIR$/video/youku.html" />
         <option value="$PROJECT_DIR$/video/acfun.html" />
         <option value="$PROJECT_DIR$/video/acfun2.html" />
+        <option value="$PROJECT_DIR$/video/youku2.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="681" />
-    <option name="y" value="202" />
+    <option name="x" value="612" />
+    <option name="y" value="113" />
     <option name="width" value="1250" />
     <option name="height" value="688" />
   </component>
@@ -288,7 +299,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="681" y="202" width="1250" height="688" extended-state="1" />
+    <frame x="612" y="113" width="1250" height="688" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -656,8 +667,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/video/acfun2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8797595" vertical-offset="261" max-vertical-offset="860">
+        <state vertical-scroll-proportion="-11.0" vertical-offset="261" max-vertical-offset="860">
           <caret line="29" column="487" selection-start-line="29" selection-start-column="487" selection-end-line="29" selection-end-column="487" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/video/youku2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75951904" vertical-offset="261" max-vertical-offset="800">
+          <caret line="29" column="222" selection-start-line="29" selection-start-column="222" selection-end-line="29" selection-end-column="222" />
           <folding />
         </state>
       </provider>
