@@ -685,7 +685,6 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	
 	/**
 	 * 强制lazy, 因为正常的lazy会在img有 某个class值时不处理<br>
-	 * 记住不能俩次对一个item执行该方法, 因为执行一次后item的src值会变成 dot pic
 	 * @return
 	 */
 	public String generateLazyImageContentAndReturnByForce() {
@@ -899,12 +898,17 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		// 重新计算类型
 		this.setItype(this.generateTypeAndReturn().getId());
 		
-		// lazy img for content
-		this.setContent(this.generateLazyImageContentAndReturn());
+		// 重新获取图片, 如果木有获取图片的话.
+		this.setContent(this.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+		
+		// lazy img for content (强制lazy)
+		this.setContent(this.generateLazyImageContentAndReturnByForce());
+		this.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
+		
+		// this.setContent(this.generateLazyImageContentAndReturn());
 		
 		// move some illegal tags
 		this.setContent(this.generateContentWithoutIlleagalHTMLTags());
-		
 		
 		this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
 		this.update();

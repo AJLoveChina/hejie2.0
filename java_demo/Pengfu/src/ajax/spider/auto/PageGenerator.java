@@ -21,6 +21,8 @@ public class PageGenerator {
 			item.setPage(nextPage);
 			item.update();
 			
+			item.betterThanBetter();
+			
 			num--;
 		}
 		
@@ -29,7 +31,7 @@ public class PageGenerator {
 	}
 	
 	public static void main(String[] args) {
-		int pages =  10;
+		int pages =  1000;
 		
 		
 		while(pages-- > 0) {
