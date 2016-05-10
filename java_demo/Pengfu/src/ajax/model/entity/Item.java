@@ -492,10 +492,14 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	/**
-	 *  根据content获取一张代表图片, 但是不更新实体
+	 *  根据content获取一张代表图片, 但是不更新实体<br>
+	 *  如果已经有previewImage, 不会重新生成了
 	 * @return 返回缩略图的路径, null if not suitable image
 	 */
 	public String generateItemImageAndReturn() {
+		if (this.getPreviewImage() != null && !this.getPreviewImage().trim().equals("") && !this.getPreviewImage().trim().equals("null")) {
+			return this.getPreviewImage();
+		}
 		try {
 			Document doc = Jsoup.parse(this.getContent());
 			
@@ -504,22 +508,24 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			Map<String, Float> map = new HashMap<String, Float>();
 			
 			if (imgs.size() > 0) {
+				Callback<Element, String> imgCallback = this.getImgDealCallbackFromRules();
 				for (Element img : imgs) {
-					String src = img.attr("src");
-					ImagesContainer ic = ImagesContainer.getByWebPath(src);
 					
-					if (ic != null) {
-						try {
-							File picture = new File(ic.getDiskPath());
-							BufferedImage sourceImg =ImageIO.read(new FileInputStream(picture));
-							if (sourceImg.getWidth() > 50) {
-								map.put(ic.getWebPath(), Math.abs((float)sourceImg.getWidth() / sourceImg.getHeight() - 1));
-							}
-						}catch(Exception e) {
-							System.out.println(e.getMessage());
+					// String src = img.attr("src");
+					// 获取图片原来网站的url
+					String src = imgCallback.deal(img);
+					
+					ImagesContainer ic = ImagesContainer.getByUrl(src);
+					
+					try {
+						URL url = new URL(src);
+						BufferedImage sourceImg =ImageIO.read(url.openStream());
+						if (sourceImg.getWidth() > 50) {
+							map.put(ic.getWebPath(), Math.abs((float)sourceImg.getWidth() / sourceImg.getHeight() - 1));
 						}
+					}catch(Exception ex) {
+						System.out.println(ex.getMessage());
 					}
-					
 				}
 				
 				String result = null;
@@ -632,6 +638,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	
+	@Deprecated
 	@Override
 	public String toJSONString() {
 		JSONObject jo = new JSONObject();
@@ -909,6 +916,9 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		// move some illegal tags
 		this.setContent(this.generateContentWithoutIlleagalHTMLTags());
+		
+		// 生成item缩略图
+		this.setPreviewImage(this.generateItemImageAndReturn());
 		
 		this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
 		this.update();

@@ -1,5 +1,7 @@
 package ajax.spider.auto;
 
+import java.util.List;
+
 import ajax.model.entity.Item;
 import ajax.model.entity.Page;
 
@@ -30,12 +32,30 @@ public class PageGenerator {
 		System.out.println("Page " + nextPage + " generated OK!");
 	}
 	
+	public static void deal2() {
+		int maxPage = Page.getNowMaxPage();
+		int nowPage = 1;
+		
+		List<Item> items;
+		do {
+			items = Page.getPage(nowPage);
+			
+			for (Item item : items) {
+				item.betterThanBetter();
+			}
+			nowPage++;
+			System.out.println(nowPage + "/" + maxPage);
+		}while(nowPage < maxPage);
+	}
+	
 	public static void main(String[] args) {
-		int pages =  1000;
+//		int pages =  1000;
+//		
+//		
+//		while(pages-- > 0) {
+//			generate();
+//		}
 		
-		
-		while(pages-- > 0) {
-			generate();
-		}
+		deal2();
 	}
 }

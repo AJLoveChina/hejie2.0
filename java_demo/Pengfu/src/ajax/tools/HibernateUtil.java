@@ -1,5 +1,7 @@
 package ajax.tools;
 
+import java.util.logging.Level;
+
 import org.hibernate.*;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -15,6 +17,8 @@ public class HibernateUtil {
 	private static StandardServiceRegistry registry;
 	
 	static {
+		
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
 		
 		registry = new StandardServiceRegistryBuilder().configure().build();
 		try {

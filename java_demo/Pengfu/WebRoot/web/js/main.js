@@ -194,4 +194,17 @@
 		console.log(ex);
 	}
 	
+	
+	try {
+		// 处理图片加载错误的问题
+		$(function () {
+//			$("img").on("error", function () {
+//				$(this).attr("src", "http://images.nigeerhuo.com/images/web/pic/dot.jpg");
+//			})
+			
+			$("#aj-body > div.aj-body-left > div.aj-joke-list-one > div.panel-body > div.backinfo img").hide();
+		})
+	}catch(ex) {
+		console.log(ex);
+	}
 })();

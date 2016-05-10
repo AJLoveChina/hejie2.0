@@ -510,7 +510,7 @@ $(function () {
 
 	yy.loadPage = function () {
 		var container = $(".aj-gds-roll-x .aj-items-page-container");
-		var min = 1, max = 64;
+		var min = 1, max = 614;
 		var random = Math.floor((max - min) * Math.random() + min);
 		var tag;
 		
