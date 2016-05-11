@@ -77,6 +77,10 @@ public class ItemsRoll extends Entity<ItemsRoll>{
 		return cr.list();
 	}
 	
+	/**
+	 * 列出所有不是删除状态的 itemsRoll
+	 * @return
+	 */
 	public static List<ItemsRoll> getList() {
 		Session session = HibernateUtil.getSession();
 		
@@ -89,6 +93,13 @@ public class ItemsRoll extends Entity<ItemsRoll>{
 	}	
 	public String getOneItemPageUrl() {
 		return Item.getOneItemPageUrl(this.itemId);
+	}
+	
+	
+	@Override
+	public void delete() {
+		this.setDeleted(true);
+		this.update();
 	}
 	
 }
