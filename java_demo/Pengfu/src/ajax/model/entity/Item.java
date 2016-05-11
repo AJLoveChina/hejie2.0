@@ -76,11 +76,20 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 * @return
 	 */
 	public String[] get$stampsArr() {
-		if (this.stamps != null) {
+		if (this.isHasStamps()) {
 			return this.getStamps().split(",");
 		} else {
 			String[] arr = {};
 			return arr;
+		}
+	}
+	
+	
+	public boolean isHasStamps() {
+		if (this.stamps != null && !this.stamps.equals("")) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -958,6 +967,11 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			img.attr("src", src);
 		}
 		return doc.body().html();
+	}
+	
+	public static void main(String[] args) {
+		String[] arr = "".split(",");
+		System.out.println(arr);
 	}
 
 }

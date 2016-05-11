@@ -84,6 +84,9 @@ public class Upload extends HttpServlet {
 						item.update();
 					} else {
 						item.setUrl(null);
+						if (item.getStamps().trim().equals("")) {
+							item.setStamps(null);
+						}
 						item.setContent(item.changeUeditorUploadContentImagesSrcAndReturnContent());
 						item.save();
 					}

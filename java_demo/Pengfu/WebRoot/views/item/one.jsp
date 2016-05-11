@@ -25,12 +25,15 @@
     		</div>
     	</c:if>
     	
-    	<div class="stamps">
-    		标签 :
-	     	<c:forEach var="stamp" items="${item.get$stampsArr() }">
-	    		<span class="stamp  random label label-default">${stamp }</span>
-	    	</c:forEach>   	
-    	</div>
+    	<c:if test="${item.isHasStamps() }">
+	    	<div class="stamps">
+	    		标签 :
+		     	<c:forEach var="stamp" items="${item.get$stampsArr() }">
+		    		<span class="stamp  random label label-default">${stamp }</span>
+		    	</c:forEach>   	
+	    	</div>    	
+    	</c:if>
+
     
     	<c:if test="${item.hasAuthor()}">
     		<div style="font-size:12px;padding:0 0 10px;">

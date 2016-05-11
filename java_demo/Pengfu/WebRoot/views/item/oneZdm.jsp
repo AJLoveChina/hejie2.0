@@ -30,11 +30,14 @@
                 </span>
 	    	</c:if>
                 
-                <span class="a-stamps">标签 : 
-                	<c:forEach items="${item.get$stampsArr() }" var="stamp">
-                		<span class='astamp'>${stamp }</span>
-                	</c:forEach>
-                </span>
+            <c:if test="${item.isHasStamps() }">
+	             <span class="a-stamps">标签 : 
+	             	<c:forEach items="${item.get$stampsArr() }" var="stamp">
+	             		<span class='astamp'>${stamp }</span>
+	             	</c:forEach>
+	             </span>
+            </c:if>
+                
             </div>
             <div class="a-l-c-body">
                 <span>
