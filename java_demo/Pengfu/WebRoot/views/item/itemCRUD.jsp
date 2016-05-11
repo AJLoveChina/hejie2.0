@@ -54,16 +54,16 @@ String json = item.toJson();
 
 	</div>
 	
-	<button class="btn btn-default" ng-click="submit()">提交或更新</button>
+	<button class="btn btn-success" ng-click="submit()">提交或更新</button>
+	<button class="btn btn-danger" ng-click="remove()" ng-if="s.id > 0">删除</button>
 </div>
 
 <h2>内容编辑</h2>
-<script id="content-container" name="content" type="text/plain">
+<script id="content-container" name="content" type="text/plain"></script>
 
-</script>
+<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+<!-- <script type="text/javascript" src="/xxx/ueditor/ueditor.config.js"></script> -->
 
-<script type="text/javascript" src="http://apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.config.js"></script>
-<!-- 编辑器源码文件 -->
 <script type="text/javascript" src="http://apps.bdimg.com/libs/ueditor/1.4.3.1/ueditor.all.min.js"></script>
 
 
@@ -107,6 +107,27 @@ String json = item.toJson();
 							console.log(er);
 						}
 					});
+				}
+				
+				$scope.remove = function () {
+				
+					if (window.confirm("确定删除")) {
+						$.ajax({
+							url : "/upload?action=remove", 
+							data : {
+								item : JSON.stringify($scope.s)
+							},
+							type : "POST",
+							dataType : "json",
+							success : function (data) {
+								console.log(data);
+							},
+							error : function (er) {
+								console.log(er);
+							}
+						});
+					}
+					
 				}
 			})
 			angular.bootstrap(div, ["item-modify-m"]);

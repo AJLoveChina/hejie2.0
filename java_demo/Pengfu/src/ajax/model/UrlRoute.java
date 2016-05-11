@@ -11,7 +11,8 @@ public enum UrlRoute {
 	DOT_PIC(7, "http://images.nigeerhuo.com/images/web/pic/dot.jpg"),
 	PIC_EXAM(8, "http://images.nigeerhuo.com/images/web/pic/exam2.jpg"),
 	EXAM(9, "http://www.nigeerhuo.com/exam"),
-	OSS_STATIC(10, "static/");
+	OSS_STATIC(10, "static/"),
+	OSS_PUBLIC(11, "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/");
 	
 	private int id;
 	private String url;

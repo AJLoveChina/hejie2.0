@@ -6,16 +6,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.38-bin.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpclient-4.5.2.jar" sourcepath="G:/XAMPP/htdocs/Github/sourceCode/httpclient-4.5.x.zip">
-		<attributes>
-			<attribute name="source_encoding" value="UTF-8"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/httpcore-4.4.4.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/Sdk4J.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

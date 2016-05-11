@@ -32,3 +32,5 @@ java_demo/Pengfu/target/Pengfu-0.0.1-SNAPSHOT.war
 java_demo/Pengfu/WebRoot/images
 java_demo/Pengfu/qqconnect.log
 java_demo/Pengfu/qqconnect.log.1
+java_demo/Pengfu/src/com/baidu/ueditor
+java_demo/Pengfu/WebRoot/ueditor

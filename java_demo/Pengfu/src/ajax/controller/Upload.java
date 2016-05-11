@@ -68,22 +68,35 @@ public class Upload extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		
-		if (action != null && action.equals("submit")) {
+		if (action != null) {
+			
 			AjaxResponse<String> ar = new AjaxResponse<String>();
 			
+			// 必须要有权限
 			if(User.isAdmin(request, response)) {
 				String itemJson = request.getParameter("item");
 				Gson gson = new Gson();
 				Item item = gson.fromJson(itemJson, Item.class);
 				
-				if (item.getId() > 0) {
-					item.update();
-				} else {
-					item.save();
+				
+				if (action.equals("submit")) {
+					if (item.getId() > 0) {
+						item.update();
+					} else {
+						item.setUrl(null);
+						item.setContent(item.changeUeditorUploadContentImagesSrcAndReturnContent());
+						item.save();
+					}
+					
+					ar.setIsok(true);
+					ar.setData(item.getOneItemPageUrl());
+				} else if (action.equals("remove")) {
+					item.delete();
+					
+					ar.setIsok(true);
+					ar.setData("删除成功!");
 				}
 				
-				ar.setIsok(true);
-				ar.setData(item.getOneItemPageUrl());
 			} else {
 
 				ar.setIsok(false);

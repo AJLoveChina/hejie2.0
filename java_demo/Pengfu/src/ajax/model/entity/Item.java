@@ -941,10 +941,25 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		return doc.body().html();
 	}
-	
 
+	/**
+	 * 对于ueditor新添加的item, 内容中的图片修改src
+	 */
+	public String changeUeditorUploadContentImagesSrcAndReturnContent() {
+		Document doc = Jsoup.parse(this.getContent());
+		
+		Elements imgs = doc.select("img");
+		
+		for (Element img : imgs) {
+			String src = img.attr("src");
+			if (src.startsWith("/ueditor/jsp/upload")) {
+				src = UrlRoute.OSS_PUBLIC + "images" + src;
+			}
+			img.attr("src", src);
+		}
+		return doc.body().html();
+	}
 
-	
 }
 
 
