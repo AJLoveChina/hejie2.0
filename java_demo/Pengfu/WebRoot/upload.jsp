@@ -19,9 +19,8 @@ request.setAttribute("isAdmin", isAdmin);
 <div class="aj-body-left">
 	<c:choose>
 		<c:when test="${isAdmin }">
-			<jsp:include page="views/item/itemCRUD.jsp">
-				<jsp:param value="<%=item %>" name="model"/>
-			</jsp:include>
+			<c:set var="model" value="${item }" scope="request"></c:set>
+			<jsp:include page="views/item/itemCRUD.jsp" />
 		</c:when>
 		<c:otherwise>
 			你木有权限使用upload功能

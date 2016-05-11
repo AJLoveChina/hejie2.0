@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
+import ajax.model.AjaxResponse;
 import ajax.model.entity.Item;
+import ajax.model.safe.User;
 import ajax.tools.Tools;
 
 @WebServlet("/upload")
@@ -44,18 +48,7 @@ public class Upload extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int id = Tools.parseInt(request.getParameter("id"), -1);
-		
-		Item item = new Item();
-		if (id != -1) {
-			item.load(id);
-		}
-		
-		request.setAttribute("item", item);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("upload.jsp");
-		rd.forward(request, response);
-		
+		doPost(request, response);
 	}
 
 	/**
@@ -71,7 +64,56 @@ public class Upload extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		doGet(request, response);
+		int id = Tools.parseInt(request.getParameter("id"), -1);
+		String action = request.getParameter("action");
+		
+		
+		if (action != null && action.equals("submit")) {
+			AjaxResponse<String> ar = new AjaxResponse<String>();
+			
+			if(User.isAdmin(request, response)) {
+				String itemJson = request.getParameter("item");
+				Gson gson = new Gson();
+				Item item = gson.fromJson(itemJson, Item.class);
+				
+				if (item.getId() > 0) {
+					item.update();
+				} else {
+					item.save();
+				}
+				
+				ar.setIsok(true);
+				ar.setData(item.getOneItemPageUrl());
+			} else {
+
+				ar.setIsok(false);
+				ar.setData("权限不足");
+				
+			}
+			
+			ar.flush(response);
+		} else {
+			Item item = new Item();
+			
+			if (id != -1) {
+				item.load(id);
+			} else {
+				item.setContent("");
+				item.setBackgroundInformation("");
+				item.setPreviewImage("");
+				item.setStamps("");
+				item.setSummary("");
+				item.setTitle("");
+				item.setUrl("");
+				item.setUsername("");
+				item.setUserPersonalPageUrl("");
+			}
+			
+			request.setAttribute("item", item);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("upload.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
