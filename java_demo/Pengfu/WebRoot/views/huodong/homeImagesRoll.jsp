@@ -1,8 +1,16 @@
+<%@page import="ajax.model.entity.Fragment.Type"%>
+<%@page import="ajax.model.UrlRoute"%>
 <%@ page language="java" import="ajax.model.entity.*, java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	List<ItemsRoll> list = ItemsRoll.getList(10);
+	
+	List<Fragment> fragments = Fragment.getFragments(Type.HOME_PAGE_THREE_ADS);
+	String url = UrlRoute.OSS_PUBLIC.getUrl();
+	
+	
+	request.setAttribute("fragments", fragments);
 	request.setAttribute("list", list);
 	
  %>
@@ -13,7 +21,7 @@
 		<c:forEach items="${list }" var="item">
 		  <div class="div">
 		  	<a href="${item.getOneItemPageUrl() }">
-		  		<img class="aimg aj-lazy" alt="${item.getTitle() }" data-lazy ="${item.getSrc() }" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg">
+		  		<img class="aimg aj-lazy" alt="${item.getTitle() }" data-lazy ="${item.getSrc() }" src="<%=url %>images/web/pic/dot.jpg">
 		  		<h4 class="atitle">${item.getTitle() }</h4>
 		  	</a>
 		  </div>		
@@ -21,15 +29,11 @@
 	</div>
 	
 	<div id="aj-home-showcase" class="aj-hide-when-phone">
-		<a class="atag">
-			<img class="aj-lazy" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="images/web/pic/showcase1.png" alt=""/>
-		</a>
-		<a class="atag">
-			<img class="aj-lazy" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="images/web/pic/showcase2.png" alt=""/>
-		</a>
-		<a class="atag">
-			<img class="aj-lazy" src="http://www.nigeerhuo.com:8888/images/web/pic/dot.jpg" data-lazy="images/web/pic/showcase3.png"  alt=""/>
-		</a>
+		<c:forEach begin="0" end="2" items="${fragments }" var="one">
+			<span>
+				${one.getVal() }
+			</span>
+		</c:forEach>
 	</div>
 
 </div>

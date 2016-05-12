@@ -243,5 +243,25 @@
 		
 	</class>
 	
+	<class name="ajax.model.entity.Fragment" table="Fragment">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="type" type="java.lang.Integer">
+			<column name="type"></column>
+		</property>		
+		
+		<property name="val" type="java.lang.String">
+			<column name="val"></column>
+		</property>		
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>		
+		
+	</class>
+	
 	
 </hibernate-mapping>

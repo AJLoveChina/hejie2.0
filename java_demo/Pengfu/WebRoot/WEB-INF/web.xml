@@ -60,8 +60,12 @@
     <servlet-name>EAuth</servlet-name>
     <servlet-class>ajax.controller.EAuth</servlet-class>
   </servlet>
-
-
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CRUD</servlet-name>
+    <servlet-class>ajax.controller.CRUD</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Type</servlet-name>
     <url-pattern>/servlet/Type</url-pattern>
@@ -102,12 +106,23 @@
     <servlet-name>EAuth</servlet-name>
     <url-pattern>/servlet/EAuth</url-pattern>
   </servlet-mapping>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/E404</location>
-    </error-page>
-    <error-page>
-        <exception-type>ajax.model.AuthException</exception-type>
-        <location>/EAuth</location>
-    </error-page>
+  <servlet-mapping>
+    <servlet-name>CRUD</servlet-name>
+    <url-pattern>/servlet/CRUD</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/E404</location>
+  </error-page>
+  <error-page>
+    <exception-type>ajax.model.AuthException</exception-type>
+    <location>/EAuth</location>
+  </error-page>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
 </web-app>

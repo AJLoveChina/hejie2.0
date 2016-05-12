@@ -1,3 +1,5 @@
+<%@page import="ajax.model.entity.Fragment.Type"%>
+<%@page import="ajax.model.entity.Fragment"%>
 <%@page import="ajax.model.safe.User"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="ajax.model.entity.ItemsRoll"%>
@@ -13,12 +15,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Integer pageIndex = (Integer)request.getAttribute("page");
 
 List<ItemsRoll> itemsRolls = ItemsRoll.getList();
+List<Fragment> fragments = Fragment.getFragments(Type.HOME_PAGE_THREE_ADS);
+
 
 Gson gson = new Gson();
 String json = gson.toJson(itemsRolls);
 
 request.setAttribute("json", json);
 request.setAttribute("itemsRolls", itemsRolls);
+request.setAttribute("fragments", fragments);
+
+
 %>
 
 <jsp:include page="views/includes/header.jsp"></jsp:include>
@@ -41,6 +48,10 @@ request.setAttribute("itemsRolls", itemsRolls);
 
 	<textarea id="item-json-data" class="aj-hide">
 		<c:out value="${json }"></c:out>
+	</textarea>
+	
+	<textarea id="fragments-json-data" rows="" cols="" class="aj-hide">
+		<c:out value="${fragments }"></c:out>
 	</textarea>
 	
 	
@@ -85,6 +96,9 @@ request.setAttribute("itemsRolls", itemsRolls);
 			</tr>
 		</table>
 	</div>
+	
+	
+	
 	
 	
 	

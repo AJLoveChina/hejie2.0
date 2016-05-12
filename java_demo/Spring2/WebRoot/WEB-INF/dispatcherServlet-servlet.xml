@@ -24,7 +24,7 @@
 
     <!-- 自动扫描的包名 -->
 
-    <context:component-scan base-package="com.meajax.controller.spring"></context:component-scan>
+    <context:component-scan base-package="com.meajax.controller"></context:component-scan>
 
     <!-- 默认的注解映射的支持 -->
 
@@ -36,7 +36,7 @@
 
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
-        <property name="prefix" value="/views/" />
+        <property name="prefix" value="/WEB-INF/views/" />
 
         <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
 
