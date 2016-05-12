@@ -1,59 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <welcome-file-list>
-    <welcome-file></welcome-file>
-  </welcome-file-list>
-
-
-  
-  <servlet>
-    <description></description>
-    <servlet-name>main</servlet-name>
-    <servlet-class>ajax.controller.DemoController</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>GetByType</servlet-name>
-    <servlet-class>ajax.controller.GetByType</servlet-class>
-  </servlet>
-  
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Item</servlet-name>
-    <servlet-class>ajax.controller.Item</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>QQSign</servlet-name>
-    <servlet-class>ajax.controller.QQSign</servlet-class>
-  </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>Type</servlet-name>
     <servlet-class>ajax.controller.Type</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>QQSign2</servlet-name>
-    <servlet-class>ajax.controller.QQSign2</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Github</servlet-name>
-    <servlet-class>ajax.controller.sign.Github</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>是的</servlet-name>
-    <servlet-class>ajax.controller.sign.是的</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -70,12 +21,6 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>weibo</servlet-name>
-    <servlet-class>ajax.controller.sign.weibo</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>Shoucang</servlet-name>
     <servlet-class>ajax.controller.Shoucang</servlet-class>
   </servlet>
@@ -84,12 +29,6 @@
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>UserHome</servlet-name>
     <servlet-class>ajax.controller.UserHome</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Exam</servlet-name>
-    <servlet-class>ajax.controller.Exam</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -106,63 +45,26 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>as</servlet-name>
-    <servlet-class>ajax.controller.as</servlet-class>
+    <servlet-name>Ads</servlet-name>
+    <servlet-class>ajax.controller.Ads</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Ads</servlet-name>
-    <servlet-class>ajax.controller.Ads</servlet-class>
+    <servlet-name>E404</servlet-name>
+    <servlet-class>ajax.controller.E404</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EAuth</servlet-name>
+    <servlet-class>ajax.controller.EAuth</servlet-class>
   </servlet>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <servlet-mapping>
-    <servlet-name>main</servlet-name>
-    <url-pattern>/main.do</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GetByType</servlet-name>
-    <url-pattern>/servlet/GetByType</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Item</servlet-name>
-    <url-pattern>/servlet/Item</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>QQSign</servlet-name>
-    <url-pattern>/servlet/QQSign</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Type</servlet-name>
     <url-pattern>/servlet/Type</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>QQSign2</servlet-name>
-    <url-pattern>/servlet/QQSign2</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Github</servlet-name>
-    <url-pattern>/servlet/Github</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>是的</servlet-name>
-    <url-pattern>/servlet/是的</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Admin</servlet-name>
@@ -173,20 +75,12 @@
     <url-pattern>/servlet/SignOut</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>weibo</servlet-name>
-    <url-pattern>/servlet/weibo</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>Shoucang</servlet-name>
     <url-pattern>/servlet/Shoucang</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UserHome</servlet-name>
     <url-pattern>/servlet/UserHome</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Exam</servlet-name>
-    <url-pattern>/servlet/Exam</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>EditExamController</servlet-name>
@@ -197,11 +91,23 @@
     <url-pattern>/servlet/Upload</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>as</servlet-name>
-    <url-pattern>/servlet/as</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>Ads</servlet-name>
     <url-pattern>/servlet/Ads</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>E404</servlet-name>
+    <url-pattern>/servlet/E404</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EAuth</servlet-name>
+    <url-pattern>/servlet/EAuth</url-pattern>
+  </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/E404</location>
+    </error-page>
+    <error-page>
+        <exception-type>ajax.model.AuthException</exception-type>
+        <location>/EAuth</location>
+    </error-page>
 </web-app>

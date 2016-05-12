@@ -2,7 +2,6 @@ package ajax.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import ajax.model.AjaxRequest;
-import ajax.model.AjaxResponse;
-import ajax.model.AuthException;
-import ajax.model.entity.ItemsRoll;
-import ajax.model.safe.User;
-
-@WebServlet("/ads")
-public class Ads extends HttpServlet {
+@WebServlet("/EAuth")
+public class EAuth extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public Ads() {
+	public EAuth() {
 		super();
 	}
 
@@ -66,59 +57,14 @@ public class Ads extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("error", "权限不足");
-			
-			RequestDispatcher rd = request.getRequestDispatcher("Error.jsp");
-			
-			rd.forward(request, response);
-			return;
-		}
-		
-		
-		String action = request.getParameter("action");
-		
-		
-		if (action != null && !action.trim().equals("")) {
-			
-			AjaxResponse<String> ar = new AjaxResponse<String>();
-			
-			
-			if (User.isAdmin(request, response)) {
-				String model = request.getParameter("model");
-				Gson gson = new Gson();
-				ItemsRoll itemsRoll = gson.fromJson(model, ItemsRoll.class);
-				
-				if (action.equals("update")) {
-					itemsRoll.update();
-				} else if (action.equals("delete")) {
-					itemsRoll.delete();
-				} else if (action.equals("save")) {
-					itemsRoll.save();
-				}
-				
-				ar.setIsok(true);
-				ar.setData("");
-				
-				
-			} else {
-				
-				ar.setIsok(false);
-				ar.setData("木有权限");
-				
-			}
 
-			ar.flush(response);
-			
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("ads.jsp");
-			
-			rd.forward(request, response);
-		}
+		
+		request.setAttribute("error", "权限不足!");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("Error.jsp");
+		
+		rd.forward(request, response);
+		
 		
 	}
 

@@ -1,3 +1,4 @@
+<%@page import="ajax.model.safe.User"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="ajax.model.entity.ItemsRoll"%>
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
@@ -183,7 +184,7 @@ request.setAttribute("itemsRolls", itemsRolls);
 				console.log(ex);
 			}
 		})
-	</script>	
+	</script>
 	
 </div>
 
