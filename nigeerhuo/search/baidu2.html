@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+</head>
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    body {
+        font-size: 14px;
+        font-family: Microsoft Yahei, Arial;
+    }
+</style>
+
+
+
+<form name="f1" onsubmit="return g(this)" target="_blank">
+    <table bgcolor="#FFFFFF" style="font-size:9pt;">
+        <tr height="60">
+            <td valign="top" width="8%">
+                <a href="https://www.baidu.com/"  target="_blank">
+                    <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" border="0" alt="baidu">
+                </a>
+            </td>
+            <td>
+                <input type="text" name="word" onfocus="checkHttps" size="30" maxlength="100">
+                <input type="submit" value="百度搜索"><br>
+                <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
+                <input name="cl" type="hidden" value="3">
+                <input name="ct" type="hidden">
+                <input name="si" type="hidden" value="www.nigeerhuo.com">
+                <div class="mt10">
+                    <input name="s" type="radio"> 互联网<input name="s" type="radio" checked> www.nigeerhuo.com
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+<script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
+<script>
+    function checkHttps () {
+        BaiduHttps.useHttps();
+    };
+    function g(formname) {
+        var data = BaiduHttps.useHttps();
+        var url = '';
+        url = data.s == 0 ? "http://www.baidu.com/baidu" : 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
+        if (formname.s[1].checked) {
+            formname.ct.value = "2097152";
+        }
+        else {
+            formname.ct.value = "0";
+        }
+        formname.action = url;
+        return true;
+    };
+</script>
+
+
+</body>
+</html>

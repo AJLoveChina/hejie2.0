@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+</head>
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    body {
+        font-size: 14px;
+        font-family: Microsoft Yahei, Arial;
+    }
+</style>
+
+
+<form onsubmit="return baiduWithHttps(this)" action="http://www.baidu.com/baidu" target="_blank">
+    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
+    <a href="https://www.baidu.com/" target="_blank">
+        <img src="https://www.baidu.com/img/baidu_jgylogo3.gif" alt="Baidu" align="bottom" border="0">
+    </a>
+    <input type="text"  onfocus="checkHttps" name="word"  size="30">
+    <input type="submit"value="百度搜索">
+</form>
+<script src="http://s1.bdstatic.com/r/www/cache/global/js/BaiduHttps_20150714_zhanzhang.js"></script>
+<script>
+    function checkHttps () {
+        BaiduHttps.useHttps();
+    };
+    function baiduWithHttps (formname) {
+        var data = BaiduHttps.useHttps();
+        if (data.s === 0) {
+            return true;
+        }
+        else {
+            formname.action = 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
+            return true;
+        }
+    };
+</script>
+
+
+</body>
+</html>
