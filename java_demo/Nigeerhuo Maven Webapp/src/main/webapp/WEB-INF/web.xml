@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_1463197870722">
+  <display-name>Archetype Created Web Application</display-name>
+  
+  
+  
+   <servlet>
+
+    <servlet-name>dispatcherServlet</servlet-name>
+
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+    <load-on-startup>1</load-on-startup>
+
+  </servlet>
+  <servlet>
+    <servlet-name>Test</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.nigeerhuo.controller.Test</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+
+    <servlet-name>dispatcherServlet</servlet-name>
+
+    <url-pattern>/</url-pattern>
+
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/servlet/Test</url-pattern>
+  </servlet-mapping>
+  
+<servlet-mapping>
+	<servlet-name>default</servlet-name>
+	<url-pattern>*.js</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>default</servlet-name>
+	<url-pattern>*.css</url-pattern>
+</servlet-mapping>
+  
+</web-app>
