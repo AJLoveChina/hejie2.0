@@ -20,7 +20,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	<jsp:include page="views/huodong/homeImagesRoll.jsp"></jsp:include>
 	
 	
-	<jsp:include page="views/item/PageChoice_v3.jsp"></jsp:include>
+	<jsp:include page="views/item/PageChoice_v2.jsp"></jsp:include>
 	
 	<div class="aj-rows-wrap">
 		<c:forEach items="${items }" var="item">
@@ -30,7 +30,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	</div>
 	
 	<div style="height:10px;"></div>
-	<jsp:include page="views/item/PageChoice_v3.jsp"></jsp:include>
+	<jsp:include page="views/item/PageChoice_v2.jsp"></jsp:include>
 		 
 </div>
 

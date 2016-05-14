@@ -12,7 +12,9 @@ public enum UrlRoute {
 	PIC_EXAM(8, "http://images.nigeerhuo.com/images/web/pic/exam2.jpg"),
 	EXAM(9, "http://www.nigeerhuo.com/exam"),
 	OSS_STATIC(10, "static/"),
-	OSS_PUBLIC(11, "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/");
+	OSS_PUBLIC(11, "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/"),
+	PAGE(12, "/page"),
+	ONEJOKE_V2(13, "/item");
 	
 	private int id;
 	private String url;

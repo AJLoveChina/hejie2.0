@@ -69,7 +69,7 @@ public class Type extends HttpServlet {
 		request.setAttribute("page", Tools.parseInt(qp.getVal("page"), 1));
 		request.setAttribute("queryParams", qp);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("Type.jsp");
 		
 		rd.forward(request, response);
 	}

@@ -38,7 +38,7 @@ public class QueryParams {
 	}
 
 	private static String[] keys = {
-		"page", "size", "type"	
+		"page", "size", "type"
 	};
 	
 	public QueryParams(HttpServletRequest request) {
@@ -171,6 +171,37 @@ public class QueryParams {
 		}
 		return url + "?" + sb.toString();
 	}
+	
+	/**
+	 * @param url
+	 * @return "/page/" + page + "?" + this.toString()
+	 */
+	public String toStringWithoutPageParam(String url) {
+		StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		
+		sb.append(url);
+		sb.append("/");
+		sb.append(this.getPage());
+		
+		for (Param p : this.getParams()) {
+			if (p.key.toLowerCase().equals("page")) {
+				continue;
+			}
+			if (first) {
+				sb.append("?");
+				sb.append(p.key + "=" + p.value);
+				first = false;
+			} else {
+				sb.append("&" + p.key + "=" + p.value);
+			}
+		}
+	
+		return sb.toString();
+	}
+	
+	
+	
 	/**
 	 * 获取一页周围页面的query string 集合 (例如用于换页)
 	 * @return
@@ -201,6 +232,7 @@ public class QueryParams {
 		
 		return pageParams;
 	}
+	
 
 	
 

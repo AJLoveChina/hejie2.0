@@ -285,12 +285,24 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		Item entity = session.get(Item.class, id);
 		
 		return entity;
-		
 	}
 	
+	/**
+	 * return UrlRoute.ONEJOKE + "?id=" + this.getId(); 
+	 * @return
+	 */
 	public String getOneJokeUrlById() {
 		return UrlRoute.ONEJOKE + "?id=" + this.getId(); 
 	}
+	
+	/**
+	 * return UrlRoute.ONEJOKE_V2 + "/" + this.getId(); 
+	 * @return
+	 */
+	public String getOneJokeUrlByIdV2() {
+		return UrlRoute.ONEJOKE_V2 + "/" + this.getId(); 
+	}
+	
 	
 	public boolean hasAuthor() {
 		return (this.getUsername() != null && this.getUsername().trim() != "");

@@ -2,8 +2,6 @@
 <web-app id="WebApp_1463197870722">
   <display-name>Archetype Created Web Application</display-name>
   
-  
-  
    <servlet>
 
     <servlet-name>dispatcherServlet</servlet-name>
@@ -42,4 +40,22 @@
 	<url-pattern>*.css</url-pattern>
 </servlet-mapping>
   
+  
+
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>E404</servlet-name>
+    <servlet-class>ajax.controller.E404</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>E404</servlet-name>
+    <url-pattern>/servlet/E404</url-pattern>
+  </servlet-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/E404</location>
+  </error-page>
+        
 </web-app>
