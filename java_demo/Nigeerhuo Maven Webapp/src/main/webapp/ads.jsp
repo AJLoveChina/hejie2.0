@@ -108,7 +108,7 @@ request.setAttribute("fragments", fragments);
 				var app = angular.module("ads-itemRoll", []);
 				var container = $("#aj-ads-itemsRoll");
 				var list = JSON.parse($("#item-json-data").val());
-				var url = "/ads";
+				var url = "/admin/ads";
 				
 				app.controller("mainController", function ($scope) {
 					$scope.s = {};
@@ -120,7 +120,7 @@ request.setAttribute("fragments", fragments);
 						one.deleted = true;
 						
 						$.ajax({
-							url : url + "?action=delete",
+							url : url + "/delete",
 							data : {
 								model : JSON.stringify(one)
 							},
@@ -141,7 +141,7 @@ request.setAttribute("fragments", fragments);
 					
 					$scope.update = function (one) {
 						$.ajax({
-							url : url + "?action=update",
+							url : url + "/update",
 							data : {
 								model : JSON.stringify(one)
 							},
@@ -162,7 +162,7 @@ request.setAttribute("fragments", fragments);
 					
 					$scope.save = function (one) {
 						$.ajax({
-							url : url + "?action=save",
+							url : url + "/save",
 							data : {
 								model : JSON.stringify(one)
 							},

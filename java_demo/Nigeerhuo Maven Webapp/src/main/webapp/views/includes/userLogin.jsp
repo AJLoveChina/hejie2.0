@@ -121,7 +121,7 @@ request.setAttribute("curUser", curUser);
 
 <div class="user-login" data-islogin="0" data-userid="0">
 	<div class="u-l-photo glyphicon glyphicon-user"></div>
-	<a class="u-l-true-image" href="/userhome" style="display: none;"></a>
+	<a class="u-l-true-image" href="/user/home" style="display: none;"></a>
 	
 	<div class="u-l-right">
 		<div class="u-l-sign-before">

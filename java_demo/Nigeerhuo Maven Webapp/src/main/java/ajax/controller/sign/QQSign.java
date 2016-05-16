@@ -68,7 +68,7 @@ public class QQSign extends HttpServlet {
 		String code = request.getParameter("code");
 		String responseString = "";
 		
-		if (code != null && code != "") {
+		if (code != null && !code.equals("")) {
 			QQAccess qa = User.getQQAccess(code);
 			
 			if (qa.isOK()) {

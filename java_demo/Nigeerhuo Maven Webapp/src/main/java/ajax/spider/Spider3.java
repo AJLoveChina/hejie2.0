@@ -30,7 +30,7 @@ public abstract class Spider3 {
 			System.out.println("Error : 有一只spider3 木有rules, 无法运行已跳过");
 			return false;
 		}
-		if (url == null || url == "") {
+		if (url == null || url.equals("")) {
 			System.out.println("Error : 有一只spider3 木有url, 无法运行已跳过");
 			return false;
 		}
@@ -42,20 +42,25 @@ public abstract class Spider3 {
 		if (this.checked()) {
 			Item item = this.grabItemFromPage();
 			
-			item = this.generateIType(item);
 			
-			// 抓取图片
-			item.setContent(item.grabImagesFromContent(sw.returnRules().returnImgCallback()));
-			// 生成缩略图
-			item.setPreviewImage(item.generateItemImageAndReturn());
-			// 摘要
-			item.setSummary(item.generateSummaryAndReturn());
+			if (item != null && item.isLegalItem()) {
+				item.save();
+				
+				item.betterThanBetter();
+			}
 			
-			// lazyload image
-			item.setContent(item.generateLazyImageContentAndReturn());
+//			// 抓取图片
+//			item.setContent(item.grabImagesFromContent(sw.returnRules().returnImgCallback()));
+//			// 生成缩略图
+//			item.setPreviewImage(item.generateItemImageAndReturn());
+//			// 摘要
+//			item.setSummary(item.generateSummaryAndReturn());
+//			
+//			// lazyload image
+//			item.setContent(item.generateLazyImageContentAndReturn());
 			
 			
-			item.save();
+			
 		}
 	}
 	

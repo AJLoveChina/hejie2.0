@@ -28,5 +28,23 @@ public class ItemController {
 		return "OneItem";
 	}
 	
+	@RequestMapping(value="/item")
+	public String getItem(HttpServletRequest request) {
+		String idParam = request.getParameter("id");
+		int id = Tools.parseInt(idParam, -1);
+		
+		if (id == -1) {
+			request.setAttribute("error", "您木有指定id");
+			
+			return "Error";
+		} else {
+			Item item = new Item();
+			item.load(id);
+			
+			request.setAttribute("item", item);
 
+			return "Item";			
+		}
+	}
+	
 }

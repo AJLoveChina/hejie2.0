@@ -986,6 +986,20 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		System.out.println(arr);
 	}
 
+
+	/**
+	 * 判断一个item是否合理
+	 * @return true (如果有title 与 content)
+	 */
+	public boolean isLegalItem() {
+		
+		if (this.getTitle().trim().equals("") || this.getContent().trim().equals("")) {
+			return false;
+		}
+		
+		return true;
+	}
+
 }
 
 

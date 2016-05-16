@@ -34,9 +34,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 		 
 </div>
 
-<style>
 
-</style>
 <div class="aj-body-right">
 	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
 	

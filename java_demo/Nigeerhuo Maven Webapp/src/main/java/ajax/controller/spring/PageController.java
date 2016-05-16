@@ -39,4 +39,12 @@ public class PageController {
 		
 		return "Page";
 	}
+	
+	@RequestMapping(value="/pagetest")
+	public String pageTest() {
+		
+		return "views/test/test";
+		
+		
+	}
 }
