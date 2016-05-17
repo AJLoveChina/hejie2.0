@@ -26,6 +26,10 @@ public class AjaxResponse<T> {
 		this.data = data;
 	}
 	
+	/**
+	 * 使用Gson库格式化json字符串
+	 * @return
+	 */
 	public String toJson() {
 		Gson gson = new Gson();
 		return gson.toJson(this);

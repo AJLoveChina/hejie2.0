@@ -1,6 +1,7 @@
 package ajax.controller.spring;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -46,5 +47,17 @@ public class ItemController {
 			return "Item";			
 		}
 	}
+	
+	@RequestMapping(value="/OneItem")
+	public String oneItem(HttpServletRequest request) {
+		int id = Tools.parseInt(request.getParameter("id"), new Random().nextInt(1000) + 100);
+		Item item = new Item();
+		item.load(id);
+		
+		request.setAttribute("item", item);
+		
+		return "OneItem";
+	}
+	
 	
 }

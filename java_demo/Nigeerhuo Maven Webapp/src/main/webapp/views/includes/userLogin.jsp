@@ -224,7 +224,7 @@ request.setAttribute("curUser", curUser);
 					url : "/sign/github"
 				},
 				USER_HOME : "/userhome",
-				SIGN_OUT : "sign/out",
+				SIGN_OUT : "/sign/out",
 				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
 			};
 			var hostname;

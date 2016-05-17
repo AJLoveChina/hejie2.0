@@ -51,6 +51,17 @@
 </servlet-mapping>
   
   
+<servlet-mapping>
+	<servlet-name>default</servlet-name>
+	<url-pattern>*.swf</url-pattern>
+</servlet-mapping>
+  
+<servlet-mapping>
+	<servlet-name>default</servlet-name>
+	<url-pattern>*.png</url-pattern>
+</servlet-mapping>
+  
+  
 
   <servlet>
     <description>This is the description of my J2EE component</description>

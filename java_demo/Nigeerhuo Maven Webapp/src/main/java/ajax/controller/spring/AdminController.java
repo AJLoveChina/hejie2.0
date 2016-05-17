@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
+import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
+import ajax.tools.Tools;
 
 
 
@@ -82,5 +84,75 @@ public class AdminController {
 
 		ar.flush(response);
 		
+	}
+	
+	@RequestMapping(value="/upload")
+	public String uploadItem(HttpServletRequest request, HttpServletResponse response) {
+		int id = Tools.parseInt(request.getParameter("id"), -1);
+		String action = request.getParameter("action");
+		
+		
+		if (action != null) {
+			
+			AjaxResponse<String> ar = new AjaxResponse<String>();
+			
+			// 必须要有权限
+			if(User.isAdmin(request, response)) {
+				String itemJson = request.getParameter("item");
+				Gson gson = new Gson();
+				Item item = gson.fromJson(itemJson, Item.class);
+				
+				
+				if (action.equals("submit")) {
+					if (item.getId() > 0) {
+						item.update();
+					} else {
+						item.setUrl(null);
+						if (item.getStamps().trim().equals("")) {
+							item.setStamps(null);
+						}
+						item.setContent(item.changeUeditorUploadContentImagesSrcAndReturnContent());
+						item.save();
+					}
+					
+					ar.setIsok(true);
+					ar.setData(item.getOneItemPageUrl());
+				} else if (action.equals("remove")) {
+					item.delete();
+					
+					ar.setIsok(true);
+					ar.setData("删除成功!");
+				}
+				
+			} else {
+
+				ar.setIsok(false);
+				ar.setData("权限不足");
+				
+			}
+			
+			request.setAttribute("model", ar.toJson());
+			return "Ajax";
+		} else {
+			Item item = new Item();
+			
+			if (id != -1) {
+				item.load(id);
+			} else {
+				item.setContent("");
+				item.setBackgroundInformation("");
+				item.setPreviewImage("");
+				item.setStamps("");
+				item.setSummary("");
+				item.setTitle("");
+				item.setUrl("");
+				item.setUsername("");
+				item.setUserPersonalPageUrl("");
+			}
+			
+			request.setAttribute("item", item);
+			
+			return "upload";
+		}
 	}
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ajax.model.AjaxResponse;
@@ -26,7 +27,15 @@ import com.google.gson.Gson;
 @RequestMapping(value="/exam")
 public class ExamController extends HttpServlet {
 	
-	
+	@RequestMapping(value="/{id}")
+	public String getExam(@PathVariable("id") int id, HttpServletRequest request) {
+		Exam exam = new Exam();
+		exam.load(id);
+		
+		request.setAttribute("exam", exam);
+		
+		return "exam";
+	}
 	
 	@RequestMapping(value="/edit")
 	public String editExam(HttpServletRequest request, HttpServletResponse response) throws Exception {
