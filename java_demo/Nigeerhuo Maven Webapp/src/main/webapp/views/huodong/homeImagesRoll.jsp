@@ -24,7 +24,7 @@
 		  		<img class="aimg aj-lazy" alt="${item.getTitle() }" data-lazy ="${item.getSrc() }" src="<%=url %>images/web/pic/dot.jpg">
 		  		<h4 class="atitle">${item.getTitle() }</h4>
 		  	</a>
-		  </div>		
+		  </div>
 		</c:forEach>
 	</div>
 	

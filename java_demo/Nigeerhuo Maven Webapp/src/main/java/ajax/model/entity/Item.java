@@ -768,6 +768,13 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			this.removeFromPage(item);
 		}
 	}
+	/**
+	 * 是否属于某个页面
+	 * @return
+	 */
+	public boolean isItemInPage() {
+		return this.getPage() > 0;
+	}
 	
 	private void removeFromPage(Item item) {
 		Page page = Page.getByPage(this.getPage());
@@ -784,6 +791,10 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		page.update(); // 更新 page
 		
 		
+		item.betterThanBetter();
+		if (item.isItemInPage()) {
+			item.removeFromPage();
+		}
 		item.setPage(this.getPage());
 		item.update(); // 更新 要替换的item
 		

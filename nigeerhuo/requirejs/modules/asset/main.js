@@ -1,0 +1,1 @@
+define("main",[],function(){require(["a","b"],function(n,i){n(),i()})});

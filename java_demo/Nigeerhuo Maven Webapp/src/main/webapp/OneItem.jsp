@@ -9,29 +9,31 @@ Item item = (Item)request.getAttribute("item");
 int previous = item.getId() - 1;
 int next = item.getId() + 1;
 
+request.setAttribute("title", item.getTitle());
+
 %>
 
 
 
-<jsp:include page="views/includes/header.jsp"></jsp:include>
+<jsp:include page="/views/includes/header.jsp"></jsp:include>
 
-<jsp:include page="views/item/pendant.jsp"></jsp:include>
+<jsp:include page="/views/item/pendant.jsp"></jsp:include>
 
 <div class="aj-body-left">
 	<div style="height:10px;"></div>
 	
-	<jsp:include page="views/item/one.jsp"></jsp:include>
+	<jsp:include page="/views/item/one.jsp"></jsp:include>
 	
-	<jsp:include page="views/item/itemsRecommend.jsp"></jsp:include>
+	<jsp:include page="/views/item/itemsRecommend.jsp"></jsp:include>
 
 </div>
 
 <div class="aj-body-right">
-	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
+	<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 	
-	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
-	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>
@@ -50,6 +52,4 @@ int next = item.getId() + 1;
 	})
 </script>
 
-<jsp:include page="views/includes/footer.jsp"></jsp:include>
-
-
+<jsp:include page="/views/includes/footer.jsp"></jsp:include>

@@ -24,18 +24,18 @@ import ajax.tools.Tools;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
-	
-	@RequestMapping(value="/home")
-	public String admin(HttpServletRequest request, HttpServletResponse response) {
-		SignStatus ss = User.getSignStatus(request, response);
+	@RequestMapping(value="/list")
+	public String adminList(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
 		
-		RequestDispatcher  rd = request.getRequestDispatcher("Admin.jsp");
-		
-		request.setAttribute("signStatus", ss);
-		
-		
-		return "Admin";
+		return "adminList";
 	}
+	
 	
 	@RequestMapping(value="/ads")
 	public String ads(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -154,5 +154,53 @@ public class AdminController {
 			
 			return "upload";
 		}
+	}
+	@RequestMapping(value="/item/changepage")
+	public String changePageOfItem(HttpServletRequest request, HttpServletResponse response) {
+		
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		return "views/admin/changepage";
+		
+	}
+	
+	@RequestMapping(value="/item/changepage/ajax")
+	public String changePageOfItemAjax(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		int id1 = Tools.parseInt(request.getParameter("id1"), -1);
+		int id2 = Tools.parseInt(request.getParameter("id2"), -1);
+		
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		if (id1 == -1) {
+			ar.setIsok(false);
+			ar.setData("id 解析错误");
+		} else {
+			
+			Item item = new Item();
+			item.load(id1);
+			
+			if (id2 == -1) {
+				item.removeFromPage();
+			} else {
+				item.removeFromPage(id2);
+			}
+			ar.setIsok(true);
+			ar.setData("OK");
+		}
+		
+		request.setAttribute("model", ar.toJson());
+		return "Ajax";
+		
 	}
 }

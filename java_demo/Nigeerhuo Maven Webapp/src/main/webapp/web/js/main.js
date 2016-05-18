@@ -82,6 +82,10 @@
 
 			div.each(function(index, item) {
 				var src = $(this).attr("data-lazy");
+				if (/^http:/.test(src)) {
+					return;
+				}
+				
 				var picStyle = $(this).attr("data-pic-style");
 				
 				if (src.indexOf("images/") == -1) {
