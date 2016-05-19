@@ -203,4 +203,17 @@ public class AdminController {
 		return "Ajax";
 		
 	}
+	
+	@RequestMapping(value="/homeNavThree")
+	public String homeNavThree(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		return "views/admin/homeNavThree";
+
+	}
 }

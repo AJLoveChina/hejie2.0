@@ -12,7 +12,8 @@
 <div class="aj-body-left">
 	
 	<ol>
-		<li><a href="/admin/ads">首页广告管理</a></li>
+		<li><a href="/admin/ads">首页滚动广告管理</a></li>
+		<li><a href="/admin/homeNavThree">首页三个侧栏广告</a></li>
 		<li><a href="/admin/upload">上传新的Item/编辑已有的item</a></li>
 		<li>
 			<a href="/admin/item/changepage">将某一个item从页面中删除, 并用另一个item替换</a>
