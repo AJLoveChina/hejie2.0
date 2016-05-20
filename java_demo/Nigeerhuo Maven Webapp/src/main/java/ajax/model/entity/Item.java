@@ -622,8 +622,21 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	public String getOneItemPageUrl() {
 		return UrlRoute.ONEJOKE.getUrl() + "?id=" + this.id;
 	}
+	/**
+	 * return UrlRoute.ONEJOKE.getUrl() + "?id=" + id;
+	 * @param id
+	 * @return
+	 */
 	public static String getOneItemPageUrl(int id) {
 		return UrlRoute.ONEJOKE.getUrl() + "?id=" + id;
+	}
+	/**
+	 * return UrlRoute.ONEJOKE_V2.getUrl() + "/" + id;
+	 * @param id
+	 * @return
+	 */
+	public static String getOneItemPageUrlV2(int id) {
+		return UrlRoute.ONEJOKE_V2.getUrl() + "/" + id;
 	}
 	
 	/**
@@ -995,6 +1008,8 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	public static void main(String[] args) {
 		String[] arr = "".split(",");
 		System.out.println(arr);
+		
+		Item item = new Item();
 	}
 
 

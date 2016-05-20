@@ -92,7 +92,7 @@ public class ItemsRoll extends Entity<ItemsRoll>{
 		return cr.list();
 	}	
 	public String getOneItemPageUrl() {
-		return Item.getOneItemPageUrl(this.itemId);
+		return Item.getOneItemPageUrlV2(this.itemId);
 	}
 	
 	

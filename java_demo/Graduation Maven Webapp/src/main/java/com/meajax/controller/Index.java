@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,25 +65,29 @@ public class Index extends HttpServlet {
 			throws ServletException, IOException {
 
 		String action = request.getParameter("action");
-		
+		response.setCharacterEncoding("UTF-8");
 		
 		if (action != null && !action.equals("")) { 
-			// 调用示例
+			
 			
 			QueryResult qr = new QueryResult();
 			
 			boolean isok = true;
-			List<QueryResult.Point> points = null;
-			String color = "#000";
-			String info = "1";
-			
-			
-			
-			QueryResult.Line line1 = qr.new Line(points, color, info);
 			
 			List<QueryResult.Line> lines = new ArrayList<QueryResult.Line>();
-			lines.add(line1);
-			// lines.add(line2)...
+			
+			Random rd = new Random();
+			for (int i = 0 ; i < 10; i++) {
+				List<QueryResult.Point> points = new ArrayList<QueryResult.Point>();
+				points.add(qr.new Point(117 + Math.random(),31 + Math.random(), "Point1"));
+				points.add(qr.new Point(117 + Math.random(),31 + Math.random(), "Point2"));
+				String color = "#000";
+				String info = rd.nextInt(10) + "";
+				
+				QueryResult.Line line = qr.new Line(points, color, info);
+				lines.add(line);
+			}
+			
 			
 			QueryResult.Data data = qr.new Data(lines);
 			
@@ -102,7 +107,6 @@ public class Index extends HttpServlet {
 			out.flush();
 			out.close();
 			
-			// 返回json给前端
 			
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
