@@ -141,6 +141,6 @@ public class QueryResult {
 		
 		String json = gson.toJson(qr);
 		
-		// 返回json给前�?
+		// 返回json给前端
 	}
 }

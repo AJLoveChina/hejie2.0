@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.meajax.model.QueryResult;
+import com.meajax.model.Run;
+import com.meajax.model.base2.Point;
+import com.meajax.model.base2.SchemePopulation;
+import com.meajax.model.interfaces.Individual;
+import com.meajax.model.interfaces.Population;
 
 @WebServlet("/index")
 public class Index extends HttpServlet {
@@ -70,40 +75,44 @@ public class Index extends HttpServlet {
 		if (action != null && !action.equals("")) { 
 			
 			
-			QueryResult qr = new QueryResult();
+			// 随机初始化几个资源点
+			List<Point> resourcePoints = new ArrayList<Point>();
 			
-			boolean isok = true;
+			for (int i = 0; i < 5; i++) {
+				resourcePoints.add(new Point(Point.Type.RESOURCE, i));
+			}
 			
-			List<QueryResult.Line> lines = new ArrayList<QueryResult.Line>();
-			
-			Random rd = new Random();
-			for (int i = 0 ; i < 10; i++) {
-				List<QueryResult.Point> points = new ArrayList<QueryResult.Point>();
-				points.add(qr.new Point(117 + Math.random(),31 + Math.random(), "Point1"));
-				points.add(qr.new Point(117 + Math.random(),31 + Math.random(), "Point2"));
-				String color = "#000";
-				String info = rd.nextInt(10) + "";
-				
-				QueryResult.Line line = qr.new Line(points, color, info);
-				lines.add(line);
+			// 随机初始化几个灾害点
+			List<Point> damagePoints = new ArrayList<Point>();
+			for (int i = 0; i < 10; i++) {
+				damagePoints.add(new Point(Point.Type.DAMAGE, i));
 			}
 			
 			
-			QueryResult.Data data = qr.new Data(lines);
+			SchemePopulation pop = new SchemePopulation();
+			pop.setResourcesPoints(resourcePoints);
+			pop.setDamagesPoints(damagePoints);
 			
+			pop.init();
 			
-			qr.setIsok(isok);
-			qr.setData(data);
+			System.out.println("种群初始化完成.");
+			System.out.println("种群第一代进化...");
+			
+			Run run = new Run(pop);
+			Population finalPop = run.start(100);
+			
+			List<SchemePopulation.Front> fronts = finalPop.nonDominatedSort(finalPop.getSchemes());
+			List<Individual> schemes = fronts.get(0).getSchemes();
+			
+			List<QueryResult> qrs = new ArrayList<QueryResult>();
+			for (Individual scheme : schemes) {
+				qrs.add(scheme.toQueryResult());
+			}
 			
 			Gson gson = new Gson();
-			
-			String json = gson.toJson(qr);
-			
-			
 			PrintWriter out = response.getWriter();
 			
-			out.print(json);
-			
+			out.print(gson.toJson(qrs.get(0)));
 			out.flush();
 			out.close();
 			
