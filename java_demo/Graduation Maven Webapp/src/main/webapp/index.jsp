@@ -97,6 +97,10 @@
 				var marker = new BMap.Marker(point);  // 创建标注
 				map.addOverlay(marker);              // 将标注添加到地图中
 				map.centerAndZoom(point, 15);
+				
+				if ("r".indexOf(name.toLowerCase())) {
+					marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+				}
 				var opts = {
 				  width : 200,     // 信息窗口宽度
 				  height: 60,     // 信息窗口高度

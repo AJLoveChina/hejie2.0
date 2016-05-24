@@ -97,8 +97,8 @@ public class Point {
 		int amount;
 		String name;
 		
-		this.setLatitude(117 + Math.random());
-		this.setLongitude(31 + Math.random());
+		this.setLatitude(Math.round((31 + Math.random()) * 1000000) / 1000000.0);
+		this.setLongitude(Math.round((117 + Math.random()) * 1000000) / 1000000.0);
 		this.setId(id);
 		this.setType(type);
 		
@@ -243,6 +243,11 @@ public class Point {
 			total += genes[index][i];
 		}
 		return this.getResourceAmount() - total;
+	}
+	
+	
+	public String getMapInfo() {
+		return this.getName() + "( " + this.getResourceAmount() + " )";
 	}
 	
 }

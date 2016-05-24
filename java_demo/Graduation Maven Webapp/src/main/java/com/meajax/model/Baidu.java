@@ -144,7 +144,7 @@ public class Baidu {
 		try {
 			return res.getResult().getElements().get(0).getDistance().getValue();
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("网络异常, 百度地图API Access 失败");
 			return 0;
 		}
 	}

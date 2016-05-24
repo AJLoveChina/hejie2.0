@@ -436,13 +436,17 @@ public class Scheme implements Individual{
 		
 		for (int i = 0; i < this.genes.length; i++) {
 			for (int j = 0; j < this.genes[i].length; j++) {
+				
+				if (this.genes[i][j] == 0) {
+					continue;
+				}
 				String info = "";
 				List<QueryResult.Point> points = new ArrayList<QueryResult.Point>();
 				Point resource = this.getResourcePoints().get(i);
 				Point damage = this.getDamagePoints().get(j);
 				
-				points.add(qr.new Point(resource.getLongitude(), resource.getLatitude(), resource.getName()));
-				points.add(qr.new Point(damage.getLongitude(), damage.getLatitude(), damage.getName()));
+				points.add(qr.new Point(resource.getLongitude(), resource.getLatitude(), resource.getMapInfo()));
+				points.add(qr.new Point(damage.getLongitude(), damage.getLatitude(), damage.getMapInfo()));
 				
 				QueryResult.Line line = qr.new Line(points, "#000", "" + this.genes[i][j]);
 				
