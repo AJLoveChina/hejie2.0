@@ -73,10 +73,6 @@ public class AjaxRequest {
 		Map<String, String> params = config.getMap();
 		
 		
-		
-		//HttpRequestBase request = null;
-		
-		
 		HttpResponse back = null;
 		
 		StringBuffer result = new StringBuffer();

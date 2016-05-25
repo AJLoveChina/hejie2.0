@@ -41,3 +41,6 @@ java_demo/Nigeerhuo Maven Webapp/src/main/webapp/static/
 java_demo/Nigeerhuo Maven Webapp/src/com/baidu/ueditor
 *.txt
 *.gif
+*.rmvb
+*.mp4
+*.xml

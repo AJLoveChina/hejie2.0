@@ -44,6 +44,7 @@
 		dataType : "json",
 		success : function (json) {
 			console.log(json);
+			dealJson(json);
 			map.enableScrollWheelZoom();
 			var resourcePoints = [];
 			for (var i = 0; i < json.data.lines.length; i++) {
@@ -133,6 +134,29 @@
 		map.addControl(top_left_control);        
 		map.addControl(top_left_navigation);     
 		map.addControl(top_right_navigation);    
+	}
+	
+	function dealJson(json) {
+		var damagePoints = {};
+		for (var i = 0; i < json.data.lines.length; i++) {
+			var name = json.data.lines[i].points[1].name;
+			
+			var get = damagePoints[name];
+			if (get) {
+				damagePoints[name] += parseInt(json.data.lines[i].info, 10);
+			} else {
+				damagePoints[name] = parseInt(json.data.lines[i].info, 10);
+			}
+		}
+		
+		for (var i = 0; i < json.data.lines.length; i++) {
+			var name = json.data.lines[i].points[1].name;
+			
+			if (damagePoints[name]) {
+				json.data.lines[i].points[1].name = name.replace(/\(\s?\d+\s?\)/, "( " + damagePoints[name] + " )");
+			}
+		}
+		
 	}
 </script>  
 
