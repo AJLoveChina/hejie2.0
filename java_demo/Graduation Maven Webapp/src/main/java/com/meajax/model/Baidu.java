@@ -129,8 +129,8 @@ public class Baidu {
 		
 		String url = "http://api.map.baidu.com/direction/v1/routematrix";
 		java.util.Map<String, String> params = new HashMap<String, String>();
-		params.put("origins", start.getLongitude() + "," + start.getLatitude());
-		params.put("destinations", end.getLongitude() + "," + end.getLatitude());
+		params.put("origins", start.getLatitude() + "," + start.getLongitude());
+		params.put("destinations", end.getLatitude() + "," + end.getLongitude());
 		params.put("output", "json");
 		params.put("ak", "hemnsARytfYF7dsYlLCnaZKUeCryW93y");
 		

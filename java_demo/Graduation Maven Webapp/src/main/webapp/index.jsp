@@ -45,7 +45,7 @@
 		success : function (json) {
 			console.log(json);
 			map.enableScrollWheelZoom();
-			
+			var resourcePoints = [];
 			for (var i = 0; i < json.data.lines.length; i++) {
 				drawLine(json.data.lines[i]);
 				addLabel(json.data.lines[i]);
@@ -91,6 +91,8 @@
 				map.addOverlay(label);   
 			}
 			
+			
+			
 			function addPointInfo(point) {
 				var name = point.name;
 				var point = new BMap.Point(point.longitude,point.latitude);
@@ -98,8 +100,11 @@
 				map.addOverlay(marker);              // 将标注添加到地图中
 				map.centerAndZoom(point, 15);
 				
-				if ("r".indexOf(name.toLowerCase())) {
-					marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+				if (name.toLowerCase().indexOf("r") != -1) {
+					if (resourcePoints.indexOf(name) == -1) {
+						resourcePoints.push(name);
+						marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+					}
 				}
 				var opts = {
 				  width : 200,     // 信息窗口宽度
