@@ -694,7 +694,7 @@ $(function () {
 			        common : {
 			            bdDesc : "我刚刚参加了" + $scope.title + "测试,获得了" + $scope.score + "分, 你也来试试看.",
 			            bdUrl : location.href,
-			            bdPic : "http://www.nigeerhuo.com:8888/images/web/pic/logo.PNG"
+			            bdPic : "http://images.nigeerhuo.com/images/web/pic/logo.PNG"
 			        }
 			    };
             }
