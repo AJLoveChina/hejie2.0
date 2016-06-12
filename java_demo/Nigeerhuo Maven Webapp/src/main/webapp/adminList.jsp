@@ -18,6 +18,9 @@
 		<li>
 			<a href="/admin/item/changepage">将某一个item从页面中删除, 并用另一个item替换</a>
 		</li>
+		<li>
+			<a href="/admin/linksToBaidu">提交链接给百度</a>
+		</li>
 	</ol>
 	
 </div>

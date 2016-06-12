@@ -1,6 +1,7 @@
 package ajax.controller.spring;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -216,4 +217,52 @@ public class AdminController {
 		return "views/admin/homeNavThree";
 
 	}
+	
+	@RequestMapping(value="/linksToBaidu")
+	public String uploadLinksToBaidu(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		return "linksToBaidu";
+	}
+	
+	private class LinksArr{
+		List<String> links;
+
+		public List<String> getLinks() {
+			return links;
+		}
+
+		public void setLinks(List<String> links) {
+			this.links = links;
+		}
+	}
+	
+	@RequestMapping(value="/linksToBaidu/submit")
+	public String uploadLinksToBaiduSubmit(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		String data = request.getParameter("data");
+		Gson gson = new Gson();
+		
+		
+		LinksArr arr = gson.fromJson(data, LinksArr.class);
+		
+		List<String> links = arr.getLinks();
+		
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		ar.setIsok(true);
+		ar.setData("OK");
+		request.setAttribute("model", ar.toJson());
+		return "Ajax";
+	}	
 }
