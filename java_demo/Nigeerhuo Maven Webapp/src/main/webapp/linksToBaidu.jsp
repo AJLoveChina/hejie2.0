@@ -62,11 +62,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					return $.trim(val) != "";
 				});
 				
+				var data = {
+					links : []
+				};
+				
+				arr.forEach(function (link) {
+					data.links.push(link);
+				});
+				
+				
+				
 				$.ajax({
 					url : "/admin/linksToBaidu/submit",
 					type : "POST",
 					data : {
-						data : arr
+						"data" : JSON.stringify(data)
 					},
 					dataType : "json",
 					success : function (json) {

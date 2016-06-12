@@ -1,6 +1,7 @@
 package ajax.controller.spring;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
+import ajax.tools.Baidu;
 import ajax.tools.Tools;
 
 
@@ -231,7 +233,7 @@ public class AdminController {
 	}
 	
 	private class LinksArr{
-		List<String> links;
+		List<String> links = new ArrayList<String>();
 
 		public List<String> getLinks() {
 			return links;
@@ -252,17 +254,30 @@ public class AdminController {
 		}
 		
 		String data = request.getParameter("data");
+		String action = request.getParameter("action");
+		
 		Gson gson = new Gson();
 		
 		
 		LinksArr arr = gson.fromJson(data, LinksArr.class);
-		
-		List<String> links = arr.getLinks();
-		
 		AjaxResponse<String> ar = new AjaxResponse<String>();
-		ar.setIsok(true);
-		ar.setData("OK");
-		request.setAttribute("model", ar.toJson());
+		
+		if (arr == null) {
+			ar.setIsok(false);
+			ar.setData("arr is null!");
+		} else {
+			List<String> links = arr.getLinks();
+			
+			for (String link : links) {
+				Baidu.uploadLinkToBaidu(link);
+			}
+			ar.setIsok(true);
+			ar.setData("OK");
+		}
+		
+		request.setAttribute("model", ar.toJson());		
+		
 		return "Ajax";
-	}	
+	}
+
 }
