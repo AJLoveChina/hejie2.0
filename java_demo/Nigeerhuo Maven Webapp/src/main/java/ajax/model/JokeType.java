@@ -160,7 +160,16 @@ public enum JokeType {
 	
 	
 	public static void main(String[] args) {
-	
+		JokeType[] all = JokeType.getAllJokeTypes();
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for(JokeType jt : all) {
+			sb.append(jt.getInfo());
+			sb.append(",");
+		}
+		
+		System.out.println(sb.toString());
 		
 	}
 	

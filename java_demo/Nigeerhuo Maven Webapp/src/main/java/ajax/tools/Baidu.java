@@ -12,6 +12,7 @@ public class Baidu {
 	
 	/**
 	 * 提交链接
+	 * 这个方法有点问题(TODO), 因为提交显示没有错误,但是返回的success码一直为0, 官方文档解释是:success是提交链接成功的数目.
 	 * @param link
 	 */
 	public static void uploadLinkToBaidu(String link) {

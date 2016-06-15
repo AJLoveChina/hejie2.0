@@ -1,11 +1,15 @@
 package ajax.model.safe;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +44,44 @@ import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 public class User extends Entity<User>{
+	
+	
+//	public static  String qqAppId = Tools.getConfig("qqAppId");
+//	public static  String qqAppKey = Tools.getConfig("qqAppKey");
+//	public static  String weiboAppKey = Tools.getConfig("weiboAppKey");
+//	public static  String weiboSecret = Tools.getConfig("weiboSecret");
+//	public static  String githubClientSecret = Tools.getConfig("githubClientSecret");
+//	public static  String githubClientId = Tools.getConfig("githubClientId");
+	
+//	private static String qqAppId;
+//	private static String qqAppKey;
+//	private static String weiboAppKey;
+//	private static String weiboSecret;
+//	private static String githubClientSecret;
+//	private static String githubClientId;
+//	
+//	static {
+//		Properties properties = new Properties();
+//        
+//		try {
+//			properties.load(new FileInputStream("src/main/java/data/user.sign.properties"));
+//			
+//			qqAppId = properties.getProperty("qqAppId");
+//			qqAppKey = properties.getProperty("qqAppKey");
+//			weiboAppKey = properties.getProperty("weiboAppKey");
+//			weiboSecret = properties.getProperty("weiboSecret");
+//			githubClientSecret = properties.getProperty("githubClientSecret");
+//			githubClientId = properties.getProperty("githubClientId");
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
 	
 	public enum Sex{
 		BOY(1),
@@ -504,8 +546,8 @@ public class User extends Entity<User>{
 		HttpPost post = new HttpPost("https://api.weibo.com/oauth2/access_token");
 		
 		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		pairs.add(new BasicNameValuePair("client_id", Tools.getConfig("weiboAppKey")));
-		pairs.add(new BasicNameValuePair("client_secret", Tools.getConfig("weiboSecret")));
+		pairs.add(new BasicNameValuePair("client_id", Tools.weiboAppKey));
+		pairs.add(new BasicNameValuePair("client_secret", Tools.weiboSecret));
 		pairs.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		pairs.add(new BasicNameValuePair("code", code));
 		pairs.add(new BasicNameValuePair("redirect_uri", "http://www.nigeerhuo.com/sign/weibo"));
@@ -543,8 +585,8 @@ public class User extends Entity<User>{
 		Map<String, String> map = new HashMap<String, String>();
 		
 		map.put("grant_type", "authorization_code");
-		map.put("client_id", Tools.getConfig("qqAppId"));
-		map.put("client_secret", Tools.getConfig("qqAppKey"));
+		map.put("client_id", Tools.qqAppId);
+		map.put("client_secret", Tools.qqAppKey);
 		map.put("code", code);
 		map.put("redirect_uri", UrlRoute.QQ_REDIRECT.getUrl());
 		
@@ -630,13 +672,18 @@ public class User extends Entity<User>{
 	}
 	
 	public static void main(String[] args) {
-		String response = "callback( {\"client_id\":\"YOUR_APPID\",\"openid\":\"YOUR_OPENID\"} );";
+//		String response = "callback( {\"client_id\":\"YOUR_APPID\",\"openid\":\"YOUR_OPENID\"} );";
+//		
+//		response = response.replaceAll("callback\\(", "");
+//		response = response.replaceAll("\\)\\W+", "");
+//		//reponse.replaceFirst(")\\$", "");
+//		
+//		System.out.println(response);
 		
-		response = response.replaceAll("callback\\(", "");
-		response = response.replaceAll("\\)\\W+", "");
-		//reponse.replaceFirst(")\\$", "");
 		
-		System.out.println(response);
+//		System.out.println(User.githubClientSecret);
+		
+		System.out.println(Tools.qqAppId);
 	}
 	
 	public static QQUserSimpleModel getQQSimpleModel(QQAccess qa, QQOpenIdModel qim) {
@@ -646,7 +693,7 @@ public class User extends Entity<User>{
 		map.put("access_token", qa.getAccess_token());
 		map.put("openid", qim.getOpenid());
 		map.put("format", "json");
-		map.put("oauth_consumer_key", Tools.getConfig("qqAppId"));
+		map.put("oauth_consumer_key", Tools.qqAppId);
 		String method = "GET";
 		
 		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
@@ -693,8 +740,8 @@ public class User extends Entity<User>{
 		String url = "https://github.com/login/oauth/access_token";
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("client_id", Tools.getConfig("githubClientId"));
-		map.put("client_secret", Tools.getConfig("githubClientSecret"));
+		map.put("client_id", Tools.githubClientId);
+		map.put("client_secret", Tools.githubClientSecret);
 		map.put("code", code);
 		map.put("state", state);
 		

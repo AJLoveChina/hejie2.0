@@ -43,6 +43,13 @@ import ajax.model.entity.Source;
 
 public class Tools {
 	
+	public static  String qqAppId = Tools.getConfig("qqAppId");
+	public static  String qqAppKey = Tools.getConfig("qqAppKey");
+	public static  String weiboAppKey = Tools.getConfig("weiboAppKey");
+	public static  String weiboSecret = Tools.getConfig("weiboSecret");
+	public static  String githubClientSecret = Tools.getConfig("githubClientSecret");
+	public static  String githubClientId = Tools.getConfig("githubClientId");
+	
 	public static void sleep(int seconds) {
 		try {
 			System.out.println("休息" + seconds + "秒");

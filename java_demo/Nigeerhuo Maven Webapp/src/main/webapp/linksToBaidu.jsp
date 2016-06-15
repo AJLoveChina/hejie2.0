@@ -80,10 +80,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					},
 					dataType : "json",
 					success : function (json) {
-						console.log(json);
+						if (json.isok) {
+							aj.Tishi("Success");
+						} else {
+							aj.Tishi("Error : " + json.data);
+						}
 					},
 					error : function (err) {
 						console.log(err);
+						aj.Tishi(err);
 					}
 				});
 			}

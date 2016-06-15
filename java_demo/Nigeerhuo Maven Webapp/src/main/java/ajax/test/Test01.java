@@ -15,16 +15,19 @@ import ajax.model.entity.Item;
 
 
 public class Test01 {
+	
+	public static final int i = count();
+	
+	public static int count() {
+		return 3;
+	}
 	public static void testClass(){
 		
 	}
 	
 	public static void main(String[] args) {
 		
-		Item item = new Item();
-		item.load(814);
-		
-		item.removeFromPage();
+		System.out.println(i);
 		
 	}
 
