@@ -21,6 +21,9 @@
 		<li>
 			<a href="/admin/linksToBaidu">提交链接给百度</a>
 		</li>
+		<li>
+			<a href="/admin/pageGenerator">生成新的页面</a>
+		</li>
 	</ol>
 	
 </div>

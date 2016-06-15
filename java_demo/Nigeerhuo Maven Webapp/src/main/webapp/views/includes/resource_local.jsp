@@ -37,9 +37,11 @@ var _hmt = _hmt || [];
 <script src="/web/js/includes/jquery.lazyload.js"></script>
 <script src="/web/js/includes/angular.min.js"></script>
 <script src="/web/js/includes/angular-sanitize.min.js"></script>
+<script src="/web/js/includes/angular-material.min.js"></script>
 <link rel="stylesheet" href="/web/css/bootstrap/bootstrap.min.css"/>
 <link rel="stylesheet" href="/web/css/bootstrap/bootstrap-theme.min.css"/>
 <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.0.0/animate.min.css"/>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/angular-material/0.9.6/angular-material.min.css"/>
 <link rel="stylesheet" href="/web/css/index.css"/>
 <script src="/web/js/includes/bootstrap.min.js"></script>
 <script type="text/javascript" src="/web/js/base.js"></script>

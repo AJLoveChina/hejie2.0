@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
+import ajax.model.UrlRoute;
 import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
+import ajax.model.entity.Page;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
 import ajax.tools.Baidu;
@@ -278,6 +280,57 @@ public class AdminController {
 		request.setAttribute("model", ar.toJson());		
 		
 		return "Ajax";
+	}
+	@RequestMapping(value="/pageGenerator")
+	public String pageGenerator(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		return "views/admin/pageGenerator";
+	}
+	@RequestMapping(value="/pageGenerator/generate")
+	public String pageGeneratorGenerate(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		
+		int maxPage = Page.getNowMaxPage();
+		int nextPage = maxPage + 1;
+		int num = Page.$num;
+		Page page = new Page();
+		page.setPage(nextPage);
+		
+		
+		while(num > 0) {
+			Item item = Item.getOneItemWhichIsNotInPage();
+			page.addOneItem(item);
+			
+			item.setPage(nextPage);
+			item.update();
+			
+			item.betterThanBetter();
+			
+			num--;
+		}
+		
+		page.save();
+		
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");
+		ar.setIsok(true);
+		
+		request.setAttribute("model", ar.toJson());
+		
+		return "Ajax";
+		
 	}
 
 }

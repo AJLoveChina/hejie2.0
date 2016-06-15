@@ -43,22 +43,19 @@ var _hmt = _hmt || [];
 <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css"/>
 <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
 <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.0.0/animate.min.css"/>
-
-
-
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/angular-material/0.9.6/angular-material.min.css"/>
 <link rel="stylesheet" href="/web/css/index.css"/>
-<!-- <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
-<script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.js"></script>
-<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
-<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular-sanitize.min.js"></script>
-<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
 
-<!-- <script src="http://libs.useso.com/js/jquery/1.10.0/jquery.min.js"></script> -->
+
 <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
 <script src="http://libs.useso.com/js/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 <script src="http://libs.useso.com/js/angular.js/1.2.9/angular.min.js"></script>
+  
 <script src="http://libs.useso.com/js/angular.js/1.2.9/angular-sanitize.min.js"></script>
 <script src="http://libs.useso.com/js/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+  
 
 <script type="text/javascript" src='<c:url value="/web/js/base.js"/>'></script>
 <script type="text/javascript" src="<%=path %>/web/js/main.js"></script>
