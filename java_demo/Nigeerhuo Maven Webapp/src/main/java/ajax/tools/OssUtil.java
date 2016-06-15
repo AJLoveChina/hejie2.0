@@ -7,10 +7,13 @@ import ajax.model.entity.Item;
 import com.aliyun.oss.OSSClient;
 
 public class OssUtil {
+	
+	public static final String accessKeyId = Tools.getConfig("aliyunAccessKey");
+	public static final String accessKeySecret = Tools.getConfig("aliyunAccessSecret");
+	
+	
 	public static OSSClient getOssClient() {
 		String endpoint = "http://images.nigeerhuo.com";
-		String accessKeyId = Tools.getConfig("aliyunAccessKey");
-		String accessKeySecret = Tools.getConfig("aliyunAccessSecret");
 
 		OSSClient client = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 

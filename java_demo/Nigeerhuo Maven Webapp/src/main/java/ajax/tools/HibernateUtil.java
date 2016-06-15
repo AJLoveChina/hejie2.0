@@ -18,7 +18,7 @@ public class HibernateUtil {
 	
 	static {
 		
-		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		
 		registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
