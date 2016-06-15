@@ -1,6 +1,7 @@
 package ajax.controller.spring;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
@@ -301,6 +303,15 @@ public class AdminController {
 			return "Error";
 		}
 		
+		String dataParam = request.getParameter("data");
+		Gson gson = new Gson();
+		Type type = new TypeToken<ArrayList<Integer>>() {}.getType();
+		List<Integer> itemIdList = gson.fromJson(dataParam, type);
+		
+		
+		if (itemIdList.size() > Page.$num) {
+			itemIdList = itemIdList.subList(0, Page.$num);
+		}
 		
 		int maxPage = Page.getNowMaxPage();
 		int nextPage = maxPage + 1;
@@ -308,6 +319,19 @@ public class AdminController {
 		Page page = new Page();
 		page.setPage(nextPage);
 		
+		
+		for(Integer id : itemIdList) {
+			Item item = Item.getByItemById(id);
+			if (!item.isItemInPage()) {
+				page.addOneItem(item);
+				item.setPage(nextPage);
+				item.update();
+				item.betterThanBetter();
+			}
+		}
+		
+		
+		num = num - page.get$items().size();
 		
 		while(num > 0) {
 			Item item = Item.getOneItemWhichIsNotInPage();
@@ -332,5 +356,7 @@ public class AdminController {
 		return "Ajax";
 		
 	}
+	
+
 
 }

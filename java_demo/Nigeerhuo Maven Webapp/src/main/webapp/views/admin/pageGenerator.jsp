@@ -1,3 +1,4 @@
+<%@page import="ajax.model.entity.Page"%>
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -5,6 +6,8 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+int num = Page.$num;
 
 %>
 
@@ -17,16 +20,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="aj-body-left">
 	
 	<div id="aj-generate-new-page-container" ng-controller="mainController">
+		<h2>1.系统随机生成<%=num %>个item组成的页面</h2>
 		<button class="btn btn-default" ng-bind="s.title" ng-click="generate()">Confirm Dialog</button>
 		
-		<div ng-bind="s.response"></div>
-    
+		
+    	<h2>2.手动提供几个item的id, 不足<%=num %>个,系统自动补齐</h2>
+    	<p ng-bind="s.tishi"></p>
+    	<input ng-model="s.textarea" class="form-control" />
+    	<br>
+    	<button class="btn btn-default" ng-click="generate2()">生成新的一页</button>
+    	
+    	
+    	<div ng-bind="s.response"></div>
 	</div>
 	
 	
 	<script type="text/javascript">
 		$(function () {
 		
+			try {
+			
 				var container = $("#aj-generate-new-page-container");
 			
 				var app = angular.module("app", []);
@@ -34,13 +47,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				app.controller("mainController", function ($scope, $http) {
 					$scope.s = {};
 					$scope.s.title = "生成新的一页";
+					$scope.s.tishi = "请以逗号分开";
 					
 					$scope.s.response = "";
 					
 					$scope.generate = function () {
 						$http({
 							"method" : "GET",
-							"url" : "/generate"
+							"url" : "/admin/pageGenerator/generate"
 						}).then(function (response) {
 							
 							$scope.s.response = response.data.data;
@@ -49,14 +63,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$scope.s.response = "Error occurs!";
 						});
 					}
+					
+					$scope.generate2 = function () {
+						var arr = $.trim($scope.s.textarea).split(",");
+						
+						arr.forEach(function (item, index, list) {
+							list[index] =  $.trim(item);
+						});
+						
+						$http({
+							"method" : "GET",
+							"url" : "/admin/pageGenerator/generate",
+							"params" : {
+								data : JSON.stringify(arr)
+							}
+						}).then(function (response) {
+						
+							$scope.s.response = response.data.data;
+							
+						}, function (err) {
+							console.log(err);
+							aj.Tishi("Error!");
+						});
+					}
 					   	
 				});
 		
-				angular.bootstrap(container, ["app"]);
-				
-				
-			try {
-				
+				angular.bootstrap(container, ["app"]);				
 			
 			
 			}catch(e) {
