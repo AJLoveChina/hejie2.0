@@ -29,15 +29,7 @@
 </head>
 <body>
 
-<c:choose>
-	<c:when test="${isLocal }">
-		<jsp:include page="resource_local.jsp"></jsp:include>
-	</c:when>
-	
-	<c:otherwise>
-		<jsp:include page="resource_server.jsp"></jsp:include>
-	</c:otherwise>
-</c:choose>
+<jsp:include page="resource_server.jsp"></jsp:include>
 
 
 

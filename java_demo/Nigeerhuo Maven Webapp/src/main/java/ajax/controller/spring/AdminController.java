@@ -304,14 +304,7 @@ public class AdminController {
 		}
 		
 		String dataParam = request.getParameter("data");
-		Gson gson = new Gson();
-		Type type = new TypeToken<ArrayList<Integer>>() {}.getType();
-		List<Integer> itemIdList = gson.fromJson(dataParam, type);
 		
-		
-		if (itemIdList.size() > Page.$num) {
-			itemIdList = itemIdList.subList(0, Page.$num);
-		}
 		
 		int maxPage = Page.getNowMaxPage();
 		int nextPage = maxPage + 1;
@@ -319,16 +312,28 @@ public class AdminController {
 		Page page = new Page();
 		page.setPage(nextPage);
 		
-		
-		for(Integer id : itemIdList) {
-			Item item = Item.getByItemById(id);
-			if (!item.isItemInPage()) {
-				page.addOneItem(item);
-				item.setPage(nextPage);
-				item.update();
-				item.betterThanBetter();
+		if (dataParam != null) {
+			Gson gson = new Gson();
+			Type type = new TypeToken<ArrayList<Integer>>() {}.getType();
+			List<Integer> itemIdList = gson.fromJson(dataParam, type);
+			
+			
+			if (itemIdList.size() > Page.$num) {
+				itemIdList = itemIdList.subList(0, Page.$num);
 			}
-		}
+			
+			for(Integer id : itemIdList) {
+				Item item = Item.getByItemById(id);
+				if (!item.isItemInPage()) {
+					page.addOneItem(item);
+					item.setPage(nextPage);
+					item.update();
+					item.betterThanBetter();
+				}
+			}
+		}	
+		
+
 		
 		
 		num = num - page.get$items().size();
@@ -348,7 +353,7 @@ public class AdminController {
 		page.save();
 		
 		AjaxResponse<String> ar = new AjaxResponse<String>();
-		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");
+		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + "/" +  nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");
 		ar.setIsok(true);
 		
 		request.setAttribute("model", ar.toJson());

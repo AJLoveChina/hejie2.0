@@ -26,6 +26,10 @@ public class Page extends Entity<Page>{
 	
 	public List<Integer> get$items() {
 		if ($items.size() <= 0) {
+			
+			if (this.items == null) {
+				return new ArrayList<Integer>();
+			}
 			String[] arr = this.items.split(",");
 			
 			for (String s : arr) {
