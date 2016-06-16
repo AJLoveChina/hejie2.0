@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	
 	            	function callback(id) {
 	            		$.ajax({
-	            			url : "/shoucang?id=" + id,
+	            			url : "/collect/shoucang?id=" + id,
 	            			type : "GET",
 	            			dataType : "json",
 	            			success : function (json) {
