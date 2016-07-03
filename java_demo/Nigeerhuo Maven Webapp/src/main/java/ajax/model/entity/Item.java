@@ -540,7 +540,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 					
 					try {
 						URL url = new URL(src);
-						BufferedImage sourceImg =ImageIO.read(url.openStream());
+						BufferedImage sourceImg = ImageIO.read(url.openStream());
 						if (sourceImg.getWidth() > 50) {
 							map.put(ic.getWebPath(), Math.abs((float)sourceImg.getWidth() / sourceImg.getHeight() - 1));
 						}
@@ -644,6 +644,9 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 * @return
 	 */
 	public static Item getOneItemWhichIsNotInPage() {
+		
+		System.out.println("正在获取一个还没有放入page表的item...");
+		
 		Session session = HibernateUtil.getSession();
 		Criteria cr = session.createCriteria(Item.class);
 		cr.add(Restrictions.eq("page", 0));
@@ -658,6 +661,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		HibernateUtil.closeSession(session);
 		
+		System.out.println("已获取id=" + item.getId() + ";title=" + item.getTitle());
 		return item;
 	}
 	public static List<Item> get(List<Integer> itemsId) {
@@ -943,30 +947,38 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 * 不要找了, 如果你对一条item不满意, 就调用这个方法吧.
 	 */
 	public void betterThanBetter() {
+		System.out.println("Now is processing item.betterThanBetter...");
 		
+		System.out.println("set summary..");
 		// 重新生成摘要
 		this.setSummary(this.generateSummaryAndReturn());
 		
+		System.out.println("set itype..");
 		// 重新计算类型
 		this.setItype(this.generateTypeAndReturn().getId());
 		
+		System.out.println("reload images..");
 		// 重新获取图片, 如果木有获取图片的话.
 		this.setContent(this.grabImagesFromContentAndSaveToOssThenReturnContent(null));
 		
+		System.out.println("lazy img..");
 		// lazy img for content (强制lazy)
 		this.setContent(this.generateLazyImageContentAndReturnByForce());
 		this.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
 		
 		// this.setContent(this.generateLazyImageContentAndReturn());
 		
+		System.out.println("remove illegal tags..");
 		// move some illegal tags
 		this.setContent(this.generateContentWithoutIlleagalHTMLTags());
 		
+		System.out.println("generate item shortcut..");
 		// 生成item缩略图
 		this.setPreviewImage(this.generateItemImageAndReturn());
 		
 		this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
 		this.update();
+		System.out.println("item better than better over!");
 	}
 
 

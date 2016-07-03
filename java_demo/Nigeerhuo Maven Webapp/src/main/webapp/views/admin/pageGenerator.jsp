@@ -48,10 +48,19 @@ int num = Page.$num;
 					$scope.s = {};
 					$scope.s.title = "生成新的一页";
 					$scope.s.tishi = "请以逗号分开";
+					$scope.s.isajax = false;
 					
 					$scope.s.response = "";
 					
 					$scope.generate = function () {
+						if ($scope.s.isajax) {
+							aj.Tishi("请求正在执行中,请勿重复点击");
+							return;
+						}
+					
+						$scope.s.isajax = true;
+						
+						
 						$http({
 							"method" : "GET",
 							"url" : "/admin/pageGenerator/generate"
@@ -59,12 +68,23 @@ int num = Page.$num;
 							
 							$scope.s.response = response.data.data;
 							
+							$scope.s.isajax = false;
+							
 						}, function (err) {
 							$scope.s.response = "Error occurs!";
+							$scope.s.isajax = false;
 						});
 					}
 					
 					$scope.generate2 = function () {
+					
+						if ($scope.s.isajax) {
+							aj.Tishi("请求正在执行中,请勿重复点击");
+							return;
+						}
+					
+						$scope.s.isajax = true;
+						
 						var arr = $.trim($scope.s.textarea).split(",");
 						
 						arr.forEach(function (item, index, list) {
@@ -80,9 +100,11 @@ int num = Page.$num;
 						}).then(function (response) {
 						
 							$scope.s.response = response.data.data;
+							$scope.s.isajax = false;
 							
 						}, function (err) {
 							console.log(err);
+							$scope.s.isajax = false;
 							aj.Tishi("Error!");
 						});
 					}

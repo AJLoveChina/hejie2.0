@@ -17,7 +17,9 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
+import ajax.model.CRUDPage;
 import ajax.model.UrlRoute;
+import ajax.model.entity.Fragment;
 import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
@@ -220,7 +222,14 @@ public class AdminController {
 			return "Error";
 		}
 		
-		return "views/admin/homeNavThree";
+		CRUDPage<Fragment> cp = new CRUDPage<Fragment>();
+		
+		List<Fragment> list = Fragment.getFragments(Fragment.Type.HOME_PAGE_THREE_ADS);
+		cp.setList(list);
+		cp.setClassName(Fragment.class.getName());
+		
+		request.setAttribute("model", cp);
+		return "views/auto/crud";
 
 	}
 	
@@ -360,6 +369,34 @@ public class AdminController {
 		
 		return "Ajax";
 		
+	}
+	
+	@RequestMapping(value="/crudForTable")
+	public String crudForTable(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		String data = request.getParameter("data");
+		String className = request.getParameter("className");
+		
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		
+		try {
+			Class cls = Class.forName(className);
+			
+			Gson gson = new Gson();
+			CRUDPage cp = gson.fromJson(data, CRUDPage.class);
+			
+		} catch (ClassNotFoundException e) {
+			ar.setIsok(false);
+			ar.setData(e.getMessage());
+		}
+		
+		request.setAttribute("model", ar.toJson());
+		return "Ajax";
 	}
 	
 
