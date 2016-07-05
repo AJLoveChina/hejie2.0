@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'></script>
+    <![endif]-->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    body {
+        font-size: 14px;
+        font-family: Microsoft Yahei, Arial;
+    }
+</style>
+
+
+<div  id="container" class="" ng-controller="mainController">
+    <h3 ng-bind="title"></h3>
+
+    <p>Time : <span ng-bind="timeShow"></span></p>
+    <p>People : <span ng-bind="num"></span></p>
+    <button class="btn btn-default" ng-click="begin()">Begin Time</button>
+    <button class="btn btn-default" ng-click="end()">End Time</button>
+    <button class="btn btn-default" ng-click="init()">Init Time</button>
+    <button class="btn btn-default" ng-click="plus()">Plus People</button>
+    <button class="btn btn-default" ng-click="minus()">Minus People</button>
+</div>
+
+
+<script>
+    var app = angular.module("app", []);
+    var container = $("#container");
+
+    app.controller("mainController", function ($scope, $timeout) {
+        $scope.title = "People Counter";
+
+        $scope.num = 0;
+        $scope.begin = 0;
+        $scope.isStart = false;
+        $scope.timeShow = "0";
+        $scope.isEnd = true;
+
+
+        $scope.plus = function () {
+            $scope.num ++;
+        };
+        $scope.minus = function () {
+            $scope.num --;
+        };
+        $scope.begin = function () {
+            $scope.begin = + new Date();
+            $scope.isStart = true;
+            $scope.isEnd = false;
+        };
+
+        $scope.end = function () {
+            $scope.isEnd = true;
+        };
+        $scope.init = function () {
+            $scope.timeShow = 0;
+            $scope.isStart = false;
+        };
+
+
+        function deal() {
+            if ($scope.isStart && !$scope.isEnd) {
+                $scope.timeShow = parseInt((+ new Date() - $scope.begin) / 1000);
+            }
+
+            $timeout(function () {
+                console.log(1);
+                deal();
+            }, 1000);
+        }
+
+        deal();
+    });
+
+    angular.bootstrap(container, ["app"]);
+</script>
+
+</body>
+</html>

@@ -23,6 +23,9 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 			font-size:14px;
 			line-height:26px;
 		}
+		.aj-joke-list-one img {
+			display: none;
+		}
 	</style>
 	
 	
@@ -51,6 +54,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 		try {
 			$(".aj-joke-list-one-js").find("img").each(function () {
 				$(this).attr("src","http://images.nigeerhuo.com/images/" + $(this).attr("src"));
+				$(this).fadeIn();
 			});
 		}catch(ex){
 			console.log(ex);
