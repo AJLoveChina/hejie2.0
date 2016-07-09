@@ -262,6 +262,34 @@
 		</property>		
 		
 	</class>
-	
+
+	<class name="ajax.model.entity.Goods" table="Goods">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="name" type="java.lang.String">
+			<column name="name"></column>
+		</property>		
+		
+		<property name="price" type="java.lang.Float">
+			<column name="price"></column>
+		</property>		
+		
+		<property name="homeImg" type="java.lang.String">
+			<column name="homeImg"></column>
+		</property>		
+
+		<property name="desc" type="java.lang.String">
+			<column name="desc"></column>
+		</property>		
+			
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+					
+	</class>
+		
 	
 </hibernate-mapping>
