@@ -1,11 +1,14 @@
 package ajax.model.entity;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.metadata.ClassMetadata;
 
 import com.google.gson.Gson;
 
@@ -13,7 +16,29 @@ import ajax.tools.HibernateUtil;
 
 public class Entity<T> {
 	
-
+	public String getPrimaryKey() {
+		ClassMetadata meta = HibernateUtil.getSessionFactory().getClassMetadata(this.getClass());
+		return meta.getIdentifierPropertyName();
+	}
+	/**
+	 * 是否设置了主键的值<br>
+	 * 用来判断一个entity应该save 还是 update
+	 * @return
+	 */
+	public boolean isSetPrimaryKeyValue() {
+		String key = this.getPrimaryKey();
+		String methodName = "get" + key.substring(0, 1).toUpperCase() + key.substring(1);
+		try {
+			Method method = this.getClass().getDeclaredMethod(methodName);
+			
+			int id = (int) method.invoke(this);
+			
+			return id > 0 ? true : false;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
 	public boolean save() {
 		Session session = HibernateUtil.getSession();
 		try {

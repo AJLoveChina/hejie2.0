@@ -18,7 +18,9 @@ import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
+import ajax.model.Table;
 import ajax.model.UrlRoute;
+import ajax.model.entity.Entity;
 import ajax.model.entity.Fragment;
 import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
@@ -223,10 +225,16 @@ public class AdminController {
 		}
 		
 		CRUDPage<Fragment> cp = new CRUDPage<Fragment>();
+		String entityKeySet = null;
+		Gson gson = new Gson();
+		
+		Fragment f = new Fragment();
+		entityKeySet = gson.toJson(f);
 		
 		List<Fragment> list = Fragment.getFragments(Fragment.Type.HOME_PAGE_THREE_ADS);
 		cp.setList(list);
 		cp.setClassName(Fragment.class.getName());
+		cp.setEntityKeySet(entityKeySet);
 		
 		request.setAttribute("model", cp);
 		return "views/auto/crud";
@@ -390,6 +398,19 @@ public class AdminController {
 			Gson gson = new Gson();
 			CRUDPage cp = gson.fromJson(data, CRUDPage.class);
 			
+			
+			for(Object item : cp.getList()) {
+				String json = gson.toJson(item);
+				Entity entity = (Entity)gson.fromJson(json, cls);
+				
+				if (entity.isSetPrimaryKeyValue()) {
+					entity.update();
+				} else {
+					entity.save();
+				}
+			}
+			
+			System.out.println(cp);
 		} catch (ClassNotFoundException e) {
 			ar.setIsok(false);
 			ar.setData(e.getMessage());

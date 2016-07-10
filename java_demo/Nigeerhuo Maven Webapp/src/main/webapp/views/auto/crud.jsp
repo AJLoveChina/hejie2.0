@@ -25,12 +25,15 @@ String json = gson.toJson(cp);
 	$(function () {
 		try {
 			var json = $("#aj-crud-textarea").val();
+			var entityKeySet = $("#aj-crud-textarea-entityKeySet").val();
+			
 			
 			var container = $("#aj-crud-container");
 			var app = angular.module("app", []);
 			app.controller("mainController", function ($scope, $http) {
 				$scope.s = {};
 				$scope.s = $.parseJSON(json);
+				$scope.keySet = $.parseJSON(entityKeySet);
 			
 			
 				$scope.save = function () {
@@ -50,6 +53,10 @@ String json = gson.toJson(cp);
 							aj.Tishi("Error!");
 						}
 					});
+				}
+				
+				$scope.addNewLine = function () {
+					$scope.s.list.push($scope.keySet);
 				}
 			});
 			
@@ -77,11 +84,15 @@ String json = gson.toJson(cp);
 			</tr>		
 		</table>
 		
+		<button class="btn btn-default" ng-click="addNewLine()">新增一行</button>
 		<button class="btn btn-default" ng-click="save()">Save</button>
 	</div>
 	
 	<textarea id="aj-crud-textarea" style="display: none;">
 		<%=json %>
+	</textarea>
+	<textarea id="aj-crud-textarea-entityKeySet" style="display: none;">
+		<%=cp.getEntityKeySet() %>
 	</textarea>
 
 </div>

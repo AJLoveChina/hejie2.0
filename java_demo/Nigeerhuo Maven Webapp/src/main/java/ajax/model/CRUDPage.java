@@ -14,6 +14,7 @@ import com.google.gson.InstanceCreator;
 public class CRUDPage<T> {
 	private String className;
 	private List<T> list;
+	private String entityKeySet;
 	
 	public String getClassName() {
 		return className;
@@ -27,6 +28,13 @@ public class CRUDPage<T> {
 	public void setList(List<T> list) {
 		this.list = list;
 	}
+	public String getEntityKeySet() {
+		return entityKeySet;
+	}
+	public void setEntityKeySet(String entityKeySet) {
+		this.entityKeySet = entityKeySet;
+	}
+	
 
 }
 

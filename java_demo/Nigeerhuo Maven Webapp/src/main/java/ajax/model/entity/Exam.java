@@ -2,9 +2,10 @@ package ajax.model.entity;
 
 import java.util.List;
 
+import ajax.model.Table;
 import ajax.model.UrlRoute;
 
-public class Exam extends Entity<Exam>{
+public class Exam extends Entity<Exam> implements Table{
 	private int id;
 	private int userid;
 	/**
