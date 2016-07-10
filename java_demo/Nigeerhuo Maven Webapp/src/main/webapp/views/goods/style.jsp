@@ -4,7 +4,7 @@
 
 .aj-grid-list{
 	position:relative;
-	height:400px!important;
+	height:370px!important;
 }
 .aj-grid-list .aj-header{
 	position:relative;
@@ -258,6 +258,7 @@
 	margin-right:0!important;
 	color:white;
 	border-radius:2px;
+	display: none;
 }
 .aj-grid-list .aj-stamps-x .aj-stamp{
 	float:left;
@@ -331,7 +332,7 @@
 }
 .discovery_list a.picBox {
 	display:block;
-	width:190px;
+	width:100%;
 	height:200px;
 	margin:15px auto 12px;
 	text-align:center;
@@ -434,7 +435,9 @@
 .discovery_list .zan_fav_com {
 	height:24px;
 	float:left;
-	padding-top:1px
+	padding-top:1px;
+	color:#f04848;
+	font-weight: bold;
 }
 .discovery_list .zan_fav_com a {
 	padding-left:1px;
@@ -447,5 +450,11 @@
 	text-align:right
 }
 
+@media(max-width:900px) {
+	.discovery_list li.list{
+		width:48%!important;
+		border:0 1% 10px!important;
+	}
+}
 
 </style>

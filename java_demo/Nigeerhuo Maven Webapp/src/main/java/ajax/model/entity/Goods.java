@@ -45,4 +45,17 @@ public class Goods extends Entity<Goods>{
 	}
 
 	
+	public String getGoodsLink() {
+		return "/goods/" + this.id;
+	}
+	
+	@Override
+	public String toString() {
+		return "Goods [id=" + id + ", name=" + name + ", price=" + price
+				+ ", homeImg=" + homeImg + ", desc=" + desc + ", dateEntered="
+				+ dateEntered + "]";
+	}
+	
+	
+	
 }

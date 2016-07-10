@@ -18,16 +18,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <jsp:include page="/views/goods/style.jsp"></jsp:include>
 
-
+<script>
+	$(function () {
+		$(".aj-grid-list").each(function () {
+			$(this).find(".aj-stamps .aj-stamp").each(function () {
+				if (Math.random() < 0.5) {
+					$(this).show();
+				}
+			});
+		});
+	});
+</script>
 <div class="aj-body-left">
 	
 	<ul class="leftWrap discovery_list">
 		<c:forEach var="item" items="${model }">
-			<%-- <c:set var="item" value="${item }"></c:set> --%>
-			<jsp:include page="/views/goods/one.jsp"></jsp:include>
+			<c:set scope="request" var="item" value="${item }" />
+			<c:import url="/views/goods/one.jsp" ></c:import>
 		</c:forEach>
 	</ul>
-	
 	
 </div>
 
