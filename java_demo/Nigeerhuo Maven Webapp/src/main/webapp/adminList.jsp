@@ -24,6 +24,13 @@
 		<li>
 			<a href="/admin/pageGenerator">生成新的页面</a>
 		</li>
+		<li>
+			<a href="http://www.iconfont.cn/users/27262/project?spm=a313x.7781069.0.0.pVMM8tr">font icons图标管理</a>
+			<a href="http://v3.bootcss.com/components/">Bootstrap icon图标管理</a>
+		</li>
+		<li>
+			<a href="/admin/typePages">Type pages generate</a>
+		</li>
 	</ol>
 	
 </div>
@@ -35,6 +42,8 @@
 	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
 	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	
+	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>

@@ -3,7 +3,9 @@ package ajax.controller.spring;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
+import ajax.model.JokeType;
 import ajax.model.Table;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Entity;
@@ -25,6 +28,7 @@ import ajax.model.entity.Fragment;
 import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
+import ajax.model.entity.TypePage;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
 import ajax.tools.Baidu;
@@ -35,6 +39,49 @@ import ajax.tools.Tools;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
+	
+	@RequestMapping(value="/typePages/generate")
+	public String typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		int loop = Tools.parseInt(request.getParameter("loop"), 1);
+		List<JokeType> jokeTypes = JokeType.getLegalJokeTypes();
+		Map<JokeType, Boolean> result = new HashMap<JokeType, Boolean>();
+		
+		while(loop-- > 0) {
+			for (JokeType jokeType : jokeTypes) {
+				boolean isok = TypePage.generateOnePageOf(jokeType);
+				result.put(jokeType, isok);
+			}
+		}
+		
+		AjaxResponse<Map<JokeType, Boolean>> ar = new AjaxResponse<Map<JokeType,Boolean>>();
+		
+		ar.setIsok(true);
+		ar.setData(result);
+		
+		request.setAttribute("model", ar.toJson());
+
+		return "Ajax";
+	}
+	
+	@RequestMapping(value="/typePages")
+	public String typePage(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		return "views/admin/typesPageGenerate";
+	}
+	
 	@RequestMapping(value="/list")
 	public String adminList(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
@@ -99,73 +146,117 @@ public class AdminController {
 	
 	@RequestMapping(value="/upload")
 	public String uploadItem(HttpServletRequest request, HttpServletResponse response) {
+
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		
 		int id = Tools.parseInt(request.getParameter("id"), -1);
 		String action = request.getParameter("action");
+		JokeType[] jokeTypes = JokeType.getAllJokeTypes();
 		
+		Item item = new Item();
 		
-		if (action != null) {
-			
-			AjaxResponse<String> ar = new AjaxResponse<String>();
-			
-			// 必须要有权限
-			if(User.isAdmin(request, response)) {
-				String itemJson = request.getParameter("item");
-				Gson gson = new Gson();
-				Item item = gson.fromJson(itemJson, Item.class);
-				
-				
-				if (action.equals("submit")) {
-					if (item.getId() > 0) {
-						item.update();
-					} else {
-						item.setUrl(null);
-						if (item.getStamps().trim().equals("")) {
-							item.setStamps(null);
-						}
-						item.setContent(item.changeUeditorUploadContentImagesSrcAndReturnContent());
-						item.save();
-					}
-					
-					ar.setIsok(true);
-					ar.setData(item.getOneItemPageUrl());
-				} else if (action.equals("remove")) {
-					item.delete();
-					
-					ar.setIsok(true);
-					ar.setData("删除成功!");
-				}
-				
-			} else {
-
-				ar.setIsok(false);
-				ar.setData("权限不足");
-				
-			}
-			
-			request.setAttribute("model", ar.toJson());
-			return "Ajax";
+		if (id != -1) {
+			item.load(id);
 		} else {
-			Item item = new Item();
-			
-			if (id != -1) {
-				item.load(id);
-			} else {
-				item.setContent("");
-				item.setBackgroundInformation("");
-				item.setPreviewImage("");
-				item.setStamps("");
-				item.setSummary("");
-				item.setTitle("");
-				item.setUrl("");
-				item.setUsername("");
-				item.setUserPersonalPageUrl("");
-			}
-			
-			request.setAttribute("item", item);
-			
-			return "upload";
+			item.setContent("");
+			item.setBackgroundInformation("");
+			item.setPreviewImage("");
+			item.setStamps("");
+			item.setSummary("");
+			item.setTitle("");
+			item.setUrl("");
+			item.setUsername("");
+			item.setUserPersonalPageUrl("");
 		}
+		
+		request.setAttribute("item", item);
+		request.setAttribute("jokeTypes", jokeTypes);
+		
+		return "upload";
 	}
+	
+	/**
+	 * item 保存或者update
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/upload/submit")
+	public String uploadSubmit(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		String action = request.getParameter("action");
+		
+		String itemJson = request.getParameter("item");
+		Gson gson = new Gson();
+		Item item = gson.fromJson(itemJson, Item.class);
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		
+		if (item.getId() > 0) {
+			item.setSummary(item.generateSummaryAndReturn());
+			item.update();
+		} else {
+			item.setUrl(null);
+			if (item.getStamps().trim().equals("")) {
+				item.setStamps(null);
+			}
+			item.setContent(item.changeUeditorUploadContentImagesSrcAndReturnContent());
+			item.setSummary(item.generateSummaryAndReturn());
+			item.save();
+		}
+		
+		ar.setIsok(true);
+		ar.setData(String.format("<a href='%s' target='_blank'>%s</a>", item.getOneItemPageUrlV2(), item.getOneItemPageUrlV2()));
+		
+		
+		request.setAttribute("model", ar.toJson());
+		return "Ajax";
+	}
+	
+	/**
+	 * Item 删除
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/upload/remove")
+	public String uploadRemove(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		String action = request.getParameter("action");
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		String itemJson = request.getParameter("item");
+		Gson gson = new Gson();
+		Item item = gson.fromJson(itemJson, Item.class);
+		
+		item.delete();
+		
+		ar.setIsok(true);
+		ar.setData("删除成功!");
+		
+		
+		request.setAttribute("model", ar.toJson());
+		return "Ajax";
+	}
+	
+	
+	
 	@RequestMapping(value="/item/changepage")
 	public String changePageOfItem(HttpServletRequest request, HttpServletResponse response) {
 		

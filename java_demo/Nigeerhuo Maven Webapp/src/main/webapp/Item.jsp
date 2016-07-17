@@ -56,7 +56,7 @@ int next = item.getId() + 1;
 	
 	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
-	
+	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 
 </div>
 

@@ -30,6 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
 	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	
+	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>

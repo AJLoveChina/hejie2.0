@@ -175,7 +175,7 @@
 				container.modal("show");
 			}
 			
-			aj.Tishi = Tishi;
+			aj.Tishi = aj.tishi = Tishi;
 			
 		});
 		

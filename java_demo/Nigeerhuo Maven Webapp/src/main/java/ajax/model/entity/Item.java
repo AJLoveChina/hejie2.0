@@ -11,6 +11,7 @@ import java.util.*;
 import javax.imageio.ImageIO;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.json.JSONObject;
@@ -23,6 +24,7 @@ import org.jsoup.select.Elements;
 import com.aliyun.oss.OSSClient;
 
 import ajax.model.Callback;
+import ajax.model.ItemStatus;
 import ajax.model.JokeStatus;
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
@@ -56,6 +58,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	private int rulesTagId;
 	private String previewImage;
 	private int statusForTest;
+	private String statusSplitByComma;
 	/**
 	 * 图片是否已经上传Oss
 	 */
@@ -104,6 +107,12 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 
 
+	public String getStatusSplitByComma() {
+		return statusSplitByComma;
+	}
+	public void setStatusSplitByComma(String statusSplitByComma) {
+		this.statusSplitByComma = statusSplitByComma;
+	}
 	public boolean isHasImageUploadedToOss() {
 		return hasImageUploadedToOss;
 	}
@@ -313,7 +322,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 * @return
 	 */
 	public boolean hasPreviewImage() {
-		return this.previewImage != null;
+		return this.previewImage != null && !this.previewImage.equals("");
 	}
 	
 	/**
@@ -640,6 +649,15 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	/**
+	 * return UrlRoute.ONEJOKE_V2.getUrl() + "/" + id;
+	 * @param id
+	 * @return
+	 */
+	public String getOneItemPageUrlV2() {
+		return UrlRoute.ONEJOKE_V2.getUrl() + "/" + this.id;
+	}
+	
+	/**
 	 * 获取一个还没有放入page表的item(未放入page表的item的page字段值为0)
 	 * @return
 	 */
@@ -664,11 +682,38 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		System.out.println("已获取id=" + item.getId() + ";title=" + item.getTitle());
 		return item;
 	}
+	
+	/**
+	 * 获取 itemsId中所有id的item的集合
+	 * @param itemsId 支持String 与Integer俩种形式
+	 * @return
+	 */
 	public static List<Item> get(List<Integer> itemsId) {
 		Session session = HibernateUtil.getSession();
 		Criteria cr = session.createCriteria(Item.class);
 		
 		cr.add(Restrictions.in("id", itemsId));
+		List<Item> items = cr.list();
+		HibernateUtil.closeSession(session);
+		return items;
+		
+	}
+	
+	/**
+	 * 获取 itemsId中所有id的item的集合
+	 * @param itemsId 支持String 与Integer俩种形式
+	 * @return
+	 */
+	public static List<Item> getV2(List<String> itemsId) {
+		List<Integer> list = new ArrayList<Integer>();
+		
+		for (String s : itemsId) {
+			list.add(Integer.parseInt(s));
+		}
+		Session session = HibernateUtil.getSession();
+		Criteria cr = session.createCriteria(Item.class);
+		
+		cr.add(Restrictions.in("id", list));
 		List<Item> items = cr.list();
 		HibernateUtil.closeSession(session);
 		return items;
@@ -1036,6 +1081,62 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		}
 		
 		return true;
+	}
+
+	/**
+	 * 给item添加状态, 支持多状态  <br>
+	 * 每个状态以 b开头, e结尾 . 为了防止  sql查询时出现   2,3,12  contains 1 出现true的情况
+	 * @param itemStatus
+	 */
+	public void addItemStatus(ItemStatus itemStatus) {
+		if (this.statusSplitByComma == null || this.statusSplitByComma.equals("")) {
+			this.setStatusSplitByComma(itemStatus.wrapWithBE());
+		} else if (!this.isInThisItemStatus(itemStatus)){
+			String[] arr = this.statusSplitByComma.split(",");
+			List<String> list = Arrays.asList(arr);
+			list.add(itemStatus.wrapWithBE());
+			this.setStatusSplitByComma(Tools.join(list, ","));
+		}
+	}
+	
+	/**
+	 * item是否处于某种指定状态
+	 * @param itemStatus
+	 * @return
+	 */
+	public boolean isInThisItemStatus(ItemStatus itemStatus) {
+		if (this.statusSplitByComma == null) {
+			return false;
+		}
+		String[] arr = this.statusSplitByComma.split(",");
+		for (String s : arr) {
+			if (s.equals(itemStatus.wrapWithBE())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 根据jokeType 获取相应的还没存储在typePage 的item
+	 * @param jokeType	items的类型
+	 * @param limit 返回多少个item
+	 * @return
+	 */
+	public static List<Item> getItemsOfSpecifiedJokeTypeAndIsNotInTypePage(
+			JokeType jokeType, int limit) {
+		Session session = HibernateUtil.getSession();
+		Criteria criteria = session.createCriteria(Item.class);
+		
+		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + ItemStatus.IS_SAVE_TO_TYPE_PAGE.wrapWithBE() + "%")));
+		criteria.setMaxResults(limit);
+		criteria.add(Restrictions.eq("itype", jokeType.getId()));
+		
+		List<Item> items = criteria.list();
+		
+		
+		HibernateUtil.closeSession(session);
+		return items;
 	}
 
 }

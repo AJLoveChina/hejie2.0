@@ -3,7 +3,8 @@ package ajax.model;
 public enum ItemStatus {
 	NORMAL(0, "正常"),
 	DELETE(1, "删除"),
-	SPIDER(2, "刚刚获取");
+	SPIDER(2, "刚刚获取"),
+	IS_SAVE_TO_TYPE_PAGE(3, "是否已经保存到type page");
 	
 	private int id;
 	private String info;
@@ -40,5 +41,9 @@ public enum ItemStatus {
 			}
 		}
 		return itemStatus;
+	}
+	
+	public String wrapWithBE() {
+		return "b" + this.id + "e";
 	}
 }

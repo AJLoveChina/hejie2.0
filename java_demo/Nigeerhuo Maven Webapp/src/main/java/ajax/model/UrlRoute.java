@@ -4,7 +4,7 @@ public enum UrlRoute {
 	HOME(1, "/"),
 	ONEJOKE(2, "/OneItem"),
 	ROOT(3, "/"), 
-	type(4, "/type"),
+	type(4, "/type/params"),
 	QQ_REDIRECT(5, "http://www.nigeerhuo.com/sign/qq"),
 	GITHUB_REDIRECT(6, "http://www.nigeerhuo.com/sign/github"),
 	

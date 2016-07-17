@@ -4,6 +4,32 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
+
+	<class name="ajax.model.entity.TypePage" table="typePage">
+		
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="items" type="java.lang.String">
+			<column name="items"></column>
+		</property>
+		
+		<property name="type" type="java.lang.Integer">
+			<column name="type"></column>
+		</property>
+		
+		<property name="page" type="java.lang.Integer">
+			<column name="page"></column>
+		</property>
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+		
+	</class>
+	
+	
 	<class name="ajax.model.entity.Source" table="Source">
 		
 		<id name="id" column="id" type="java.lang.Integer">

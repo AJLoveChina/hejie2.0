@@ -206,7 +206,7 @@ public class Tools {
 	 * @return
 	 */
 	public static int parseInt(String str, int defaultValue) {
-		if(str == null || str.trim() == "") {
+		if(str == null || str.trim().equals("")) {
 			return defaultValue;
 		}
 		int radix = 1;
@@ -395,6 +395,9 @@ public class Tools {
 
 	
 	public static <T> String join(List<T> list, String delimeter) {
+		if (list.size() == 0) {
+			return "";
+		}
 		StringBuilder sb = new StringBuilder();
 		sb.append(list.get(0));
 		for (int i = 1; i < list.size(); i++) {
@@ -447,10 +450,17 @@ public class Tools {
 	 * @param value
 	 */
 	public static boolean setConfig(String key, String value) {
-		Config config = new Config(key, value);
-		
-		return config.save();
+		String str = getConfig(key);
+		if (str == null) {
+			Config config = new Config(key, value);
+			
+			return config.save();
+		} else {
+			updateConfig(key, value);
+			return true;
+		}
 	}
+	
 	
 	public static void updateConfig(String key, String newValue) {
 		Session session = HibernateUtil.getSession();

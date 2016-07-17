@@ -5,6 +5,7 @@ import java.util.*;
 public enum JokeType {
 	
 	// id, info, realName, iconClassName, isShowToUser, rank
+	WEISHEZHI(0, "未设置", "未设置", null, false),
 	ONLY_WORD(1, "only words", null, null, false),
 	STATIC_IMAGE(2, "有图片, 不是动态图的笑话", null, null, false),
 	GIF(3, "动态图", null, null, false),
@@ -39,8 +40,9 @@ public enum JokeType {
 	BUSINESS(57, "商业, 金融,职场", "商业", "glyphicon glyphicon-jpy", true, 40),
 	TECH(58, "科技", "科技", "glyphicon glyphicon-apple", true, 40),
 	
-	STORY(101, "故事,清朝历史,考古,AV", "故事", "glyphicon glyphicon-bookmark", true, 30),
+	MIAOPAI(59, "秒拍", "秒拍", "aj-icon aj-icon-video", true, 40),
 	
+	STORY(101, "故事,清朝历史,考古,AV", "故事", "glyphicon glyphicon-bookmark", true, 30),
 	ALL(9, "所有内容", null, null, false),
 	UNKNOWN(99, "未知分类", "未知世界", "glyphicon glyphicon-menu-right", true);
 	
@@ -144,6 +146,11 @@ public enum JokeType {
 		return JokeType.values();
 		
 	}
+	
+	/**
+	 * 返回可以展示给用户的类别
+	 * @return
+	 */
 	public static List<JokeType> getLegalJokeTypes() {
 		List<JokeType> types = new ArrayList<JokeType>();
 		for(JokeType j : JokeType.values()) {
@@ -234,6 +241,11 @@ public enum JokeType {
 			}
 		}
 		return null;
+	}
+	
+	
+	public String wrapWithBE() {
+		return "b" + this.id + "e";
 	}
 	
 	

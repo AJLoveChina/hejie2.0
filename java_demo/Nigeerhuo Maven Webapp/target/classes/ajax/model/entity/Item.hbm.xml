@@ -86,6 +86,10 @@
 			<column name="statusForTest"></column>
 		</property>
 				
+		<property name="statusSplitByComma" type="java.lang.String">
+			<column name="statusSplitByComma"></column>
+		</property>
+				
 	</class>
 	
 

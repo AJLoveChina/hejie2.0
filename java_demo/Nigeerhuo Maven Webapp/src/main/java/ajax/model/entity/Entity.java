@@ -31,7 +31,7 @@ public class Entity<T> {
 		try {
 			Method method = this.getClass().getDeclaredMethod(methodName);
 			
-			int id = (int) method.invoke(this);
+			int id = (Integer) method.invoke(this);
 			
 			return id > 0 ? true : false;
 		} catch (Exception e) {

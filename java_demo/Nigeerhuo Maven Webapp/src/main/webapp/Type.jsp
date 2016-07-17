@@ -22,6 +22,11 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	
 	<jsp:include page="views/item/PageChoice_v2.jsp"></jsp:include>
 	
+	<c:if test="${!hasCurrentPage }">
+		<p style="font-size:14px;text-align: center;line-height: 30px;">
+			亲~二货君很抱歉,你获取的页码不存在,现在展示的是最后一页...对不起,我还爱你(づ￣3￣)づ╭❤～
+		</p>
+	</c:if>
 	<div class="aj-rows-wrap">
 		<c:forEach items="${items }" var="item">
 		 	<c:set scope="request" var="item" value="${item }" />
@@ -31,7 +36,11 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	
 	<div style="height:10px;"></div>
 	<jsp:include page="views/item/PageChoice_v2.jsp"></jsp:include>
-		 
+	<c:if test="${!hasCurrentPage }">
+		<p style="font-size:14px;text-align: center;line-height: 30px;">
+			亲~二货君很抱歉,你获取的页码不存在,现在展示的是最后一页...对不起,我还爱你(づ￣3￣)づ╭❤～
+		</p>
+	</c:if>
 </div>
 
 <style>
@@ -43,6 +52,8 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
 	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	
+	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>

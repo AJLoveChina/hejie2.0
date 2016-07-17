@@ -1,5 +1,6 @@
 <%@page import="ajax.model.entity.Item"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -45,6 +46,19 @@ String json = item.toJson();
 				<textarea rows="" cols="" ng-model="s[key]"></textarea>
 		    </div>
 		    
+		    <div ng-switch-when="itype">
+		    	<div class="title">
+		        	<span ng-bind="key"></span>
+		        </div>
+		    	<select ng-model="s[key]">
+		    		<c:forEach items="${jokeTypes }" var="jokeType">
+		    			<option value="${jokeType.getId() }">
+		    				${jokeType.getRealName() }
+		    			</option>
+		    		</c:forEach>
+		    	</select>
+		    </div>
+		    
 		    
 		    <div ng-switch-default>
 		       	<div class="title" ng-bind="key"></div>
@@ -56,6 +70,7 @@ String json = item.toJson();
 	
 	<button class="btn btn-success" ng-click="submit()">提交或更新</button>
 	<button class="btn btn-danger" ng-click="remove()" ng-if="s.id > 0">删除</button>
+	<span ng-show="isAjax">正在发送请求,请勿重复点击..</span>
 </div>
 
 <h2>内容编辑</h2>
@@ -87,33 +102,51 @@ String json = item.toJson();
 			app.controller("mainController", function ($scope, $http) {
 				$scope.s = {};
 				$scope.s = item;
+				$scope.isAjax = false;
 				
 				
 			
 				$scope.submit = function () {
+					if ($scope.isAjax) {
+						aj.tishi("请勿重复点击");
+						return;
+					}
 					$scope.s.content = ue.getContent();
-					
+					$scope.isAjax = true;
 					$.ajax({
-						url : "/upload?action=submit", 
+						url : "/admin/upload/submit", 
 						data : {
 							item : JSON.stringify($scope.s)
 						},
 						type : "POST",
 						dataType : "json",
 						success : function (data) {
-							console.log(data);
+							if (data.isok) {
+								aj.tishi(data.data);
+							} else {
+								aj.tishi("Error" + data.data);
+							}
 						},
 						error : function (er) {
-							console.log(er);
+							aj.tishi("Http Error" + er);
+						},
+						complete : function () {
+							$scope.$apply(function () {
+								$scope.isAjax = false;
+							});
 						}
 					});
 				}
 				
 				$scope.remove = function () {
-				
+					if ($scope.isAjax) {
+						aj.tishi("请勿重复点击");
+						return;
+					}
 					if (window.confirm("确定删除")) {
+						$scope.isAjax = true;
 						$.ajax({
-							url : "/upload?action=remove", 
+							url : "/admin//upload/remove", 
 							data : {
 								item : JSON.stringify($scope.s)
 							},
@@ -124,6 +157,11 @@ String json = item.toJson();
 							},
 							error : function (er) {
 								console.log(er);
+							},
+							complete : function () {
+								$scope.$apply(function () {
+									$scope.isAjax = false;
+								});
 							}
 						});
 					}

@@ -67,16 +67,21 @@ public class QueryParams {
 	 */
 	public boolean isSet(String key) {
 		for (Param p : this.params) {
-			if (p.key == key) {
+			if (p.key.equals(key)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	/**
+	 * 从reqeust中获取key字段的值, 注意key字段只能是 keys数组中的一个, 否则返回null
+	 * @param key
+	 * @return null if not have value
+	 */
 	public String getVal(String key) {
 		for (Param p : this.params) {
-			if (p.key == key) {
+			if (p.key.equals(key)) {
 				return p.value;
 			}
 		}
