@@ -20,6 +20,8 @@ int num = Page.$num;
 <div class="aj-body-left">
 	
 	<div id="aj-generate-new-page-container" ng-controller="mainController">
+		<span ng-show="s.isajax">正在发送请求,请勿重复点击...</span>
+	
 		<h2>1.系统随机生成<%=num %>个item组成的页面</h2>
 		<button class="btn btn-default" ng-bind="s.title" ng-click="generate()">Confirm Dialog</button>
 		

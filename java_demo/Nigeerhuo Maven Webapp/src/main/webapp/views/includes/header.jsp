@@ -7,7 +7,9 @@
 	String title = (String)request.getAttribute("title");
 	
 	if (title == null || title.equals("")) {
-		title = "你个二货, 二货的俱乐部.电影, 旅行, 美食, 笑话...木有什么不知道";
+		title = "你个二货, 二货的俱乐部.生活不止眼前的苟且,还有电影, 旅行, 美食, 笑话...^_^";
+	} else {
+		title += "-你个二货,快乐你我";
 	}
 	boolean isLocal = Tools.isLocal(path);
 	request.setAttribute("isLocal", isLocal);

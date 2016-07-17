@@ -1,6 +1,6 @@
 package ajax.controller.spring;
 
-import java.io.UnsupportedEncodingException;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,30 @@ import ajax.tools.Tools;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
+	@RequestMapping(value="/meituUpload")
+	public String meituUpload(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		boolean isok = Tools.meituUploadImageToOss(request, response);
+		
+		if (isok) {
+			request.setAttribute("model", "上传成功");
+		} else {
+			request.setAttribute("model", "上传失败");
+		}
+		
+		return "Ajax";
+	}
+	
+	@RequestMapping(value="/meitu")
+	public String meitu() {
+		return "views/tools/meitu";
+	}
 	
 	@RequestMapping(value="/typePages/generate")
 	public String typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
@@ -173,6 +198,7 @@ public class AdminController {
 			item.setUrl("");
 			item.setUsername("");
 			item.setUserPersonalPageUrl("");
+			item.setStatusSplitByComma("");
 		}
 		
 		request.setAttribute("item", item);

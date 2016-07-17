@@ -94,7 +94,7 @@ public enum JokeType {
 	}
 	
 	public String getHref() {
-		return "/type?type=" + this.getId();
+		return UrlRoute.type.getUrl() + "?type=" + this.getId();
 	}
 	
 	

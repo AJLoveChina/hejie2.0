@@ -45,3 +45,6 @@ java_demo/Nigeerhuo Maven Webapp/src/com/baidu/ueditor
 *.mp4
 *.xml
 java_demo/Nigeerhuo Maven Webapp/target
+java_demo/openApiSdk
+*.zip
+nigeerhuo/meituxiuxiu/mt.html

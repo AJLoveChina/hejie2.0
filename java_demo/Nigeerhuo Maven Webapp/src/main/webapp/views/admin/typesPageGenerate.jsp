@@ -20,7 +20,7 @@ int num = Page.$num;
 <div class="aj-body-left">
 	<div ng-controller="mainController" id="container">
 		<p ng-show="info.isAjax">正在查询.. 请勿重复点击</p>
-		1.<button class="btn btn-default" ng-click="generateAll()">全部种类递增一页</button>
+		1.<button class="btn btn-default" ng-click="generateAll()">全部种类递增  <span ng-bind="info.loop"></span> 页</button>
 		<p>你可以选择循环多少次</p>
 		<input type="text" class="form-control" ng-model="info.loop"/>
 		

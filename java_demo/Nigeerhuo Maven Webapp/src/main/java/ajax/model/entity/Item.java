@@ -237,6 +237,21 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return jt.getRealName();
 	}
 	
+	/**
+	 * itype 就是 jokeType
+	 * @return
+	 */
+	public JokeType getJokeType() {
+		return JokeType.getJokeType(this.getItype());
+	}
+	/**
+	 * 返回类型页面url
+	 * @return
+	 */
+	public String getItypeUrl() {
+		return this.getJokeType().getHref();
+	}
+	
 	public void updateBySpider() {
 		final String url = this.getUrl();
 		final JokeType jokeType = JokeType.getJokeType(this.getItype());
@@ -1063,10 +1078,8 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	public static void main(String[] args) {
-		String[] arr = "".split(",");
-		System.out.println(arr);
 		
-		Item item = new Item();
+		
 	}
 
 
