@@ -35,6 +35,18 @@
 	<servlet-name>default</servlet-name>
 	<url-pattern>*.js</url-pattern>
 </servlet-mapping>
+
+<servlet-mapping>
+	<servlet-name>default</servlet-name>
+	<url-pattern>*.txt</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+	<servlet-name>default</servlet-name>
+	<url-pattern>*.xml</url-pattern>
+</servlet-mapping>
+
+
 <servlet-mapping>
 	<servlet-name>default</servlet-name>
 	<url-pattern>*.css</url-pattern>
