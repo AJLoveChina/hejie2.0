@@ -17,7 +17,6 @@ String path = request.getContextPath();
 </script>
 
 <script>
-
 // Baidu Tongji
 var _hmt = _hmt || [];
 (function() {
@@ -40,23 +39,22 @@ var _hmt = _hmt || [];
 </script>
 
 
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css"/>
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.0.0/animate.min.css"/>
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/angular-material/0.9.6/angular-material.min.css"/>
+<!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css"/> -->
+<!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap-theme.min.css"/> -->
+<!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/animate.css/3.0.0/animate.min.css"/> -->
+<!-- <link rel="stylesheet" href="http://apps.bdimg.com/libs/angular-material/0.9.6/angular-material.min.css"/> -->
+
+<link rel="stylesheet" href="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/css/third-party-css-all.min.css" />
+<!-- 下行css不可合并,和icon font相关,需要实时更新 -->
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1468635774_056464.css"/>
 <link rel="stylesheet" href="/web/css/index.css"/>
 
 
-<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
-<script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script>
-<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script>
-  
-<script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular-sanitize.min.js"></script>
-<script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script> -->
+<!-- <script src="http://apps.bdimg.com/libs/jquery-lazyload/1.9.5/jquery.lazyload.min.js"></script> -->
+<!-- <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular.min.js"></script> -->
+<!-- <script src="http://apps.bdimg.com/libs/angular.js/1.2.9/angular-sanitize.min.js"></script> -->
+<!-- <script src="http://apps.bdimg.com/libs/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 
-
-  
-
-<script type="text/javascript" src='<c:url value="/web/js/base.js"/>'></script>
+<script type="text/javascript" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/js/third-party-js-all.min.js"></script>
 <script type="text/javascript" src="<%=path %>/web/js/main.js"></script>

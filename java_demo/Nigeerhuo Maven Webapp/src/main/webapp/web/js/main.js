@@ -1,4 +1,24 @@
 (function () {
+	
+	
+	try {
+		//自定义滚动事件,提高浏览器性能
+		(function () {
+			var timer = 0;
+			$(window).on("scroll", function () {
+				if (!timer) {
+					timer = setTimeout(function () {
+						
+						$(window).trigger("aj.scroll");
+						timer = 0;
+						
+					}, 1000/24);
+				}
+			});
+		})();
+	}catch(ex) {
+		
+	}
 	// User 类
 	try {
 		
@@ -228,5 +248,23 @@
 	    })();
 	}catch(ex) {
 		console.log(ex);
+	}
+	
+	try {
+		
+		$(function () {
+			var div = $("#aj-header");
+			$(window).on("aj.scroll", function () {
+				
+				if ($(window).scrollTop() > 100) {
+					div.addClass("mini");
+				} else {
+					div.removeClass("mini");
+				}
+			});
+			
+		});
+	}catch(ex) {
+		
 	}
 })();

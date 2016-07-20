@@ -43,6 +43,28 @@ body {
 	left:0;top:0;
   height: 50px;
   overflow: hidden;
+  background-color : white;
+  background-image:none;
+  min-height:auto!important;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+#aj-header.mini{
+	height: 35px;
+}
+
+#aj-header.mini .navbar-text{
+	margin-top:8px;
+}
+#aj-header .navbar-text{
+	-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
 }
 .panel {
   font-size: 1.2em;
