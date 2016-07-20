@@ -56,7 +56,7 @@ String json = gson.toJson(cp);
 				}
 				
 				$scope.addNewLine = function () {
-					$scope.s.list.push($scope.keySet);
+					$scope.s.list.push($.parseJSON(entityKeySet));
 				}
 			});
 			

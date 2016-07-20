@@ -45,15 +45,8 @@ public class Fragment extends Entity<Fragment> implements Table{
 	private int type;
 	private String val;
 	private String dateEntered;
-	private String url;
 	
 	
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
 	public int getId() {
 		return id;
 	}

@@ -2,7 +2,9 @@ package ajax.controller.spring;
 
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -346,6 +348,10 @@ public class AdminController {
 		Gson gson = new Gson();
 		
 		Fragment f = new Fragment();
+		f.setDateEntered(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+		f.setId(0);
+		f.setType(0);
+		f.setVal("");
 		entityKeySet = gson.toJson(f);
 		
 		List<Fragment> list = Fragment.getFragments(Fragment.Type.HOME_PAGE_THREE_ADS);
@@ -537,6 +543,10 @@ public class AdminController {
 		return "Ajax";
 	}
 	
+	public static void main(String[] args) {
+		String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		System.out.println(s);
+	}
 
 
 }
