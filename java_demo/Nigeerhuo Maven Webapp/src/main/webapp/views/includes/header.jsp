@@ -13,6 +13,10 @@
 	}
 	boolean isLocal = Tools.isLocal(path);
 	request.setAttribute("isLocal", isLocal);
+	
+	List<PageType> pageTypes = PageType.getPageTypeShowOnNavBar();
+	request.setAttribute("pageTypes", pageTypes);
+	PageType currentPageType = PageType.getCurrentPage(path + "?" + request.getQueryString());
  %>
 <!DOCTYPE html>
 <html>
@@ -37,6 +41,16 @@
 
 <nav id="aj-header" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+    	<!--[if IE 8]>
+    		<style>
+    			#aj-header .container-fluid .navbar-header{
+	    			display:inline-block;float:left;
+	    		}
+	    		#aj-header .aj-one-line{
+	    			float:left;display:inline-block;margin-left:21px;
+	    		}
+    		</style>
+    	<![endif]-->
         <div class="navbar-header">
             <div style="display: inline-block;height: 50px;overflow: hidden;float:left;">
             	<a href="<%=UrlRoute.HOME%>">
@@ -48,10 +62,36 @@
         <div style="float:left;line-height: 50px;padding-top: 11px;margin-left: 10px;display: none;">
         	<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10544642492958301713' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
         </div>
+        
+       <div class="aj-one-line">
+       		<script>
+       			$(function () {
+       				try {
+       					$("#aj-header .line-inside").find(".ali").each(function () {
+	       					if ($(this).attr("page-url-id") == $(this).parents(".aul").attr("cur-page-url-id")) {
+	       						$(this).addClass("select");
+	       					}
+	       				});
+       				}catch(ex){}
+       			});
+       		</script>
+			<div class="line-inside">
+				<ul class="aul" cur-page-url-id="<%=currentPageType.getId() %>">
+					<c:forEach items="${pageTypes }" var="pageType">
+						<li class="ali" page-url-id="${pageType.getId() }">
+							<a href="${pageType.getHref() }">${pageType.getInfo()}</a>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+		</div>
     </div>
 </nav>
 
 <div style="height: 50px;"></div>
 
 <jsp:include page="/views/item/tishi.jsp"></jsp:include>
+	
+
+	
 <div id="aj-body" class="clearfix">

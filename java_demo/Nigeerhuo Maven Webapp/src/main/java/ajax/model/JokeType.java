@@ -92,7 +92,10 @@ public enum JokeType {
 	public void setIconClassName(String iconClassName) {
 		this.iconClassName = iconClassName;
 	}
-	
+	/**
+	 * 获取类型页面的跳转链接
+	 * @return
+	 */
 	public String getHref() {
 		return UrlRoute.type.getUrl() + "?type=" + this.getId();
 	}
@@ -161,24 +164,15 @@ public enum JokeType {
 		return types;
 	}
 	
+	/**
+	 * 获取类型的链接页面
+	 * @return
+	 */
 	public String getTypeHref() {
 		return Joke.getHrefByJokeType(this);
 	}
 	
-	
-	public static void main(String[] args) {
-		JokeType[] all = JokeType.getAllJokeTypes();
-		
-		StringBuilder sb = new StringBuilder();
-		
-		for(JokeType jt : all) {
-			sb.append(jt.getInfo());
-			sb.append(",");
-		}
-		
-		System.out.println(sb.toString());
-		
-	}
+
 	
 	public static JokeType getJokeType(int id) {
 		
@@ -248,5 +242,23 @@ public enum JokeType {
 		return "b" + this.id + "e";
 	}
 	
+	/**
+	 * 生成js枚举对象
+	 * @return
+	 */
+	private static String generateToJSObject() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		for (JokeType jt : JokeType.values()) {
+			sb.append(jt.name() + ":" + jt.getId() + ",");
+		}
+		sb.replace(sb.length() - 1, sb.length(), "");
+		sb.append("}");
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(generateToJSObject());
+	}
 	
 }

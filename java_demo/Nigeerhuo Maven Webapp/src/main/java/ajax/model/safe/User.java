@@ -53,12 +53,13 @@ public class User extends Entity<User>{
 //	public static  String githubClientSecret = Tools.getConfig("githubClientSecret");
 //	public static  String githubClientId = Tools.getConfig("githubClientId");
 	
-//	private static String qqAppId;
-//	private static String qqAppKey;
-//	private static String weiboAppKey;
-//	private static String weiboSecret;
-//	private static String githubClientSecret;
-//	private static String githubClientId;
+	private static String qqAppId = null;
+	private static String qqAppKey = null;
+	private static String weiboAppKey = null;
+	private static String weiboSecret = null;
+	private static String githubClientSecret = null;
+	private static String githubClientId = null;
+	
 //	
 //	static {
 //		Properties properties = new Properties();
@@ -83,6 +84,43 @@ public class User extends Entity<User>{
 //	}
 	
 	
+	public static String getQqAppId() {
+		if (User.qqAppId == null) {
+			User.qqAppId = Tools.getConfig("qqAppId");
+		}
+		return User.qqAppId;
+	}
+	public static String getQqAppKey() {
+		if (User.qqAppKey == null) {
+			User.qqAppKey = Tools.getConfig("qqAppKey");
+		}
+		return User.qqAppKey;
+	}
+	public static String getWeiboAppKey() {
+		if (User.weiboAppKey == null) {
+			User.weiboAppKey = Tools.getConfig("weiboAppKey");
+		}
+		return User.weiboAppKey;
+	}
+	public static String getWeiboSecret() {
+		if (User.weiboSecret == null) {
+			User.weiboSecret = Tools.getConfig("weiboSecret");
+		}
+		return User.weiboSecret;
+	}
+	public static String getGithubClientSecret() {
+		if (User.githubClientSecret == null) {
+			User.githubClientSecret = Tools.getConfig("githubClientSecret");
+		}
+		return User.githubClientSecret;
+	}
+	public static String getGithubClientId() {
+		if (User.githubClientId == null) {
+			User.githubClientId = Tools.getConfig("githubClientId");
+		}
+		return User.githubClientId;
+	}
+
 	public enum Sex{
 		BOY(1),
 		GIRL(2),
@@ -546,8 +584,8 @@ public class User extends Entity<User>{
 		HttpPost post = new HttpPost("https://api.weibo.com/oauth2/access_token");
 		
 		List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-		pairs.add(new BasicNameValuePair("client_id", Tools.weiboAppKey));
-		pairs.add(new BasicNameValuePair("client_secret", Tools.weiboSecret));
+		pairs.add(new BasicNameValuePair("client_id", User.getWeiboAppKey()));
+		pairs.add(new BasicNameValuePair("client_secret", User.getWeiboSecret()));
 		pairs.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		pairs.add(new BasicNameValuePair("code", code));
 		pairs.add(new BasicNameValuePair("redirect_uri", "http://www.nigeerhuo.com/sign/weibo"));
@@ -585,8 +623,8 @@ public class User extends Entity<User>{
 		Map<String, String> map = new HashMap<String, String>();
 		
 		map.put("grant_type", "authorization_code");
-		map.put("client_id", Tools.qqAppId);
-		map.put("client_secret", Tools.qqAppKey);
+		map.put("client_id", User.getQqAppId());
+		map.put("client_secret", User.getQqAppKey());
 		map.put("code", code);
 		map.put("redirect_uri", UrlRoute.QQ_REDIRECT.getUrl());
 		
@@ -683,7 +721,6 @@ public class User extends Entity<User>{
 		
 //		System.out.println(User.githubClientSecret);
 		
-		System.out.println(Tools.qqAppId);
 	}
 	
 	public static QQUserSimpleModel getQQSimpleModel(QQAccess qa, QQOpenIdModel qim) {
@@ -693,7 +730,7 @@ public class User extends Entity<User>{
 		map.put("access_token", qa.getAccess_token());
 		map.put("openid", qim.getOpenid());
 		map.put("format", "json");
-		map.put("oauth_consumer_key", Tools.qqAppId);
+		map.put("oauth_consumer_key", User.getQqAppId());
 		String method = "GET";
 		
 		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
@@ -740,8 +777,8 @@ public class User extends Entity<User>{
 		String url = "https://github.com/login/oauth/access_token";
 		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("client_id", Tools.githubClientId);
-		map.put("client_secret", Tools.githubClientSecret);
+		map.put("client_id", User.getGithubClientId());
+		map.put("client_secret", User.getGithubClientSecret());
 		map.put("code", code);
 		map.put("state", state);
 		

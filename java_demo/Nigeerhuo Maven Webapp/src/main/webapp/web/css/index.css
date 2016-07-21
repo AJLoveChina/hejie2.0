@@ -1,6 +1,7 @@
-*{
-	margin:0;padding:0;
-	border:none;
+blockquote,body,button,div,space,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,input,legend,li,ol,p,pre,td,textarea,th,ul {
+    margin: 0;
+    padding: 0;
+    border:none;
 }
 ul li{
 	list-style: none;
@@ -347,3 +348,45 @@ body {
 	max-height: 500px;
 	overflow: auto;
 }
+
+/*aj-top-nav-line  maybe black*/
+#aj-header.mini .line-inside{
+	margin-top:7px;
+	height: 20px;
+	line-height: 20px;
+}
+.aj-one-line{
+	float:left;
+}
+.aj-one-line .line-inside{
+	height: 30px;
+	line-height:30px;
+	margin: 0 auto;
+	margin-top:10px;
+	border-left:1px solid #ccc;
+	    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.aj-one-line .line-inside .aul{}
+.aj-one-line .line-inside .aul .ali.select a{
+	color:#f04848;
+	font-weight: bold;
+}
+.aj-one-line .line-inside .aul .ali a:hover{
+}
+.aj-one-line .line-inside .aul .ali a{
+	display:inline-block;
+	padding: 0 19px;
+	font-size: 14px;
+	color:#333;
+}
+.aj-one-line .line-inside .aul .ali{
+	float:left;
+}
+
+
+
+/*aj-top-nav-line  maybe black*/

@@ -37,17 +37,38 @@ public class QueryParams {
 		this.params = params;
 	}
 
-	private static String[] keys = {
-		"page", "size", "type"
-	};
+//	private static String[] keys = {
+//		"page", "size", "type"
+//	};
+	
+	public static enum Parameters{
+		PAGE("page"),
+		SIZE("size"),
+		TYPE("type"),
+		PAGE_TYPE("pagetype");
+		
+		private String key;
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+
+		private Parameters(String key) {
+			this.key = key;
+		}
+	}
 	
 	public QueryParams(HttpServletRequest request) {
 		List<Param> list = new ArrayList<QueryParams.Param>();
 		
-		for (String key : keys) {
-			String value = request.getParameter(key);
+		for (Parameters parameter : Parameters.values()) {
+			String value = request.getParameter(parameter.getKey());
 			if (value != null) {
-				list.add(new Param(key, value));
+				list.add(new Param(parameter.getKey(), value));
 			}
 		}
 		// 有几个特殊字段未配置的话, 手动配置

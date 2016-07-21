@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.httpclient.NameValuePair;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -48,13 +52,12 @@ import ajax.model.entity.Source;
 
 public class Tools {
 
-	public static String qqAppId = Tools.getConfig("qqAppId");
-	public static String qqAppKey = Tools.getConfig("qqAppKey");
-	public static String weiboAppKey = Tools.getConfig("weiboAppKey");
-	public static String weiboSecret = Tools.getConfig("weiboSecret");
-	public static String githubClientSecret = Tools
-			.getConfig("githubClientSecret");
-	public static String githubClientId = Tools.getConfig("githubClientId");
+//	public static String qqAppId = Tools.getConfig("qqAppId");
+//	public static String qqAppKey = Tools.getConfig("qqAppKey");
+//	public static String weiboAppKey = Tools.getConfig("weiboAppKey");
+//	public static String weiboSecret = Tools.getConfig("weiboSecret");
+//	public static String githubClientSecret = Tools.getConfig("githubClientSecret");
+//	public static String githubClientId = Tools.getConfig("githubClientId");
 
 	public static void sleep(int seconds) {
 		try {
@@ -610,6 +613,26 @@ public class Tools {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+	
+	/**
+	 * 
+	 * @param url
+	 * @param parameter
+	 * @return null if not find this parameter
+	 * @throws Exception
+	 */
+	public static String getParameterValueFromUrl(String url, String parameter) throws Exception {
+		
+		List<org.apache.http.NameValuePair> nameValuePairs = URLEncodedUtils.parse(new URI(url), "UTF-8");
+	    
+	    
+	    for (org.apache.http.NameValuePair nameValuePair : nameValuePairs) {
+	    	if (nameValuePair.getName().equals(parameter)) {
+	    		return nameValuePair.getValue();
+	    	}
+	    }
+		return null;
 	}
 
 }
