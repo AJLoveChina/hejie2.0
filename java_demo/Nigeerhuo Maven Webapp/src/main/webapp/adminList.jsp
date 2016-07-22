@@ -48,4 +48,4 @@
 
 <div style="height:10px;"></div>
 
-<jsp:include page="views/includes/footer.jsp"></jsp:include>
+<%@ include file="/views/includes/footer.jsp" %>

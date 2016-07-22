@@ -76,6 +76,4 @@ int next = item.getId() + 1;
 	})
 </script>
 
-<jsp:include page="views/includes/footer.jsp"></jsp:include>
-
-
+<%@ include file="/views/includes/footer.jsp" %>

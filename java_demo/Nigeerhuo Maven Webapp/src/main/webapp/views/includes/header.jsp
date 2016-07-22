@@ -1,3 +1,4 @@
+<%@page import="ajax.model.safe.User"%>
 <%@page import="ajax.tools.Tools"%>
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -5,6 +6,7 @@
 <%
 	String path = request.getRequestURL().toString();
 	String title = (String)request.getAttribute("title");
+	boolean isAdmin = User.isAdmin(request, response);
 	
 	if (title == null || title.equals("")) {
 		title = "你个二货, 二货的俱乐部.生活不止眼前的苟且,还有电影, 旅行, 美食, 笑话...^_^";
@@ -34,6 +36,25 @@
     <title><%=title %></title>
 </head>
 <body>
+
+<%
+	if (isAdmin) {
+%>
+	<style>
+		#aj-admin-jump-btn{
+			position: fixed;
+			bottom:200px;
+			left:0;
+		}
+	</style>
+
+	<div id="aj-admin-jump-btn">
+		<span class="glyphicon glyphicon-user"></span>
+		<a href="/admin/list">管理员界面</a>
+	</div>
+<%	
+	}
+ %>
 
 <jsp:include page="resource_server.jsp"></jsp:include>
 
@@ -90,8 +111,6 @@
 
 <div style="height: 50px;"></div>
 
-<jsp:include page="/views/item/tishi.jsp"></jsp:include>
-	
-
+<%@ include  file="/views/includes/backTop.jsp"%>
 	
 <div id="aj-body" class="clearfix">

@@ -10,9 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Integer pageIndex = (Integer)request.getAttribute("page");
 %>
 
-
-
-
 <jsp:include page="views/includes/header.jsp"></jsp:include>
 
 
@@ -24,15 +21,17 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 
 </style>
 <div class="aj-body-right">
-	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
+
 	
-	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 	
-	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	
+	<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
 	
 	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>
 
-<jsp:include page="views/includes/footer.jsp"></jsp:include>
+<%@ include file="/views/includes/footer.jsp" %>

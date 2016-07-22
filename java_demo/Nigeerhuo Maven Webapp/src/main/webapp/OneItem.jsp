@@ -54,4 +54,4 @@ request.setAttribute("title", item.getTitle());
 	})
 </script>
 
-<jsp:include page="/views/includes/footer.jsp"></jsp:include>
+<%@ include file="/views/includes/footer.jsp" %>
