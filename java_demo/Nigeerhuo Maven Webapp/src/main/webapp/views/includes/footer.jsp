@@ -3,7 +3,20 @@
 </div>
 <!-- Close div#aj-body -->
 
+
+<div class="aj-miaobao">
+	<div class="inside-wrap">
+		<div class="logo-huaixiao">
+			<img src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logo-huaixiao.png" alt="你个二货坏笑logo"/>
+		</div>
+		
+		<div class="text-info">
+			生活不该只有眼前的苟且, 向更好的自己致敬! --你个二货
+		</div>
+	</div>
+</div>
 <footer id="aj-footer" role="contentinfo">
+
 	<div class="container">
 		<ul class="bs-docs-footer-links">
 			<li><a href="https://github.com/AJLoveChina">GitHub</a></li>

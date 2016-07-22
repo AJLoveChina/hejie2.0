@@ -16,6 +16,13 @@ body {
 	-webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite
 }
+.aj-transition-all{
+	-webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
 
 .aj-show{
 	display: block!important;
@@ -113,14 +120,14 @@ body {
 }
 
 #aj-footer{
-	margin-top:20px;
+	position:relative;
+	z-index:10;
 	padding-top:50px;
 	padding-bottom:50px;
 	color :#99979c;
 	text-align: center;
 	background-color:#2a2730;
 }
-
 #aj-footer .container{
 	padding:0 15px;
 }
@@ -390,3 +397,27 @@ body {
 
 
 /*aj-top-nav-line  maybe black*/
+.aj-miaobao{
+	width:100%;min-width:1050px;
+	height: 50px;
+}
+.aj-miaobao .inside-wrap  .logo-huaixiao{
+	position: absolute;
+	top:0;left:0;
+}
+.aj-miaobao .inside-wrap  .logo-huaixiao img{
+	position:relative;
+	top:0px;
+}
+.aj-miaobao .inside-wrap .text-info{
+	margin-left:100px;
+	line-height: 70px;
+	color:#333;
+	font-family:楷体;
+}
+.aj-miaobao .inside-wrap{
+	position:relative;
+	width:1050px;
+	margin:0 auto;
+}
+
