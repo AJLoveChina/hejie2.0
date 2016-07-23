@@ -24,7 +24,6 @@ import com.google.gson.Gson;
 import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
 import ajax.model.JokeType;
-import ajax.model.Table;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Fragment;

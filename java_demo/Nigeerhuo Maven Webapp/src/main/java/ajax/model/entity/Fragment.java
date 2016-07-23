@@ -8,7 +8,6 @@ import org.hibernate.criterion.Restrictions;
 
 import com.jayway.jsonpath.Criteria;
 
-import ajax.model.Table;
 import ajax.tools.HibernateUtil;
 
 /**
@@ -16,7 +15,7 @@ import ajax.tools.HibernateUtil;
  * @author ajax
  *
  */
-public class Fragment extends Entity<Fragment> implements Table{
+public class Fragment extends Entity<Fragment>{
 	public enum Type {
 		HOME_PAGE_THREE_ADS(1, "");
 		

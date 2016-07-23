@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ajax.model.entity.Goods;
+import ajax.model.taobao.TbkItem;
+import ajax.tools.HibernateUtil;
 
 
 @Controller
@@ -43,5 +46,14 @@ public class GoodsController {
 		request.setAttribute("model", goods);
 		
 		return "views/goods/info";
+	}
+	
+	@RequestMapping(value="/tbkitems")
+	public String tbkItems(HttpServletRequest request) {
+		
+		List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+		
+		request.setAttribute("model", tbkItems);
+		return "views/goods/tbkitems";
 	}
 }

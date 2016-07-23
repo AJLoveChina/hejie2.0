@@ -49,13 +49,12 @@ public class Entity<T> {
 			
 			session.getTransaction().commit();
 			
-			
-			HibernateUtil.closeSession(session);
 			return true;
 		}catch(Exception e) {
 			System.out.println(e.toString());
-			HibernateUtil.closeSession(session);
 			return false;
+		} finally {
+			HibernateUtil.closeSession(session);
 		}
 	}
 	
@@ -69,9 +68,12 @@ public class Entity<T> {
 			
 			session.getTransaction().commit();
 			
-			HibernateUtil.closeSession(session);
-		}catch(RuntimeException e) {
+		} catch (RuntimeException e) {
+			
 			System.out.println(e.getMessage());
+			
+		} finally {
+			HibernateUtil.closeSession(session);
 		}
 	}
 	
@@ -84,8 +86,6 @@ public class Entity<T> {
 		
 		session.getTransaction().commit();
 		
-//		session.flush();
-//		session.close();
 		HibernateUtil.closeSession(session);
 	}
 	
@@ -115,6 +115,7 @@ public class Entity<T> {
 		Session session = HibernateUtil.getSession();
 		
 		try {
+			
 			session.load(this, id);
 			
 		}catch(Exception e) {
@@ -195,7 +196,10 @@ public class Entity<T> {
 		Session session = HibernateUtil.getSession();
 		
 		Criteria  cr = session.createCriteria(cls);
+		cr.setMaxResults(20);
+		cr.setFirstResult((page - 1) * size);
 		List<T> list = cr.list();
+		
 		
 		HibernateUtil.closeSession(session);
 		return list;

@@ -5,6 +5,62 @@
 
 <hibernate-mapping>
 
+	<class name="ajax.model.taobao.TbkItem" table="TbkItem">
+		
+		<id name="num_iid" column="num_iid" type="java.lang.Long">
+			
+		</id>
+		
+		<property name="title" type="java.lang.String">
+			<column name="title"></column>
+		</property>
+		
+		<property name="pict_url" type="java.lang.String">
+			<column name="pict_url"></column>
+		</property>
+		
+		<property name="small_images_string" type="java.lang.String">
+			<column name="small_images_string"></column>
+		</property>
+		
+		<property name="reserve_price" type="java.lang.String">
+			<column name="reserve_price"></column>
+		</property>
+		
+		<property name="zk_final_price" type="java.lang.String">
+			<column name="zk_final_price"></column>
+		</property>
+		
+		<property name="user_type" type="java.lang.Long">
+			<column name="user_type"></column>
+		</property>
+		
+		<property name="provcity" type="java.lang.String">
+			<column name="provcity"></column>
+		</property>
+		
+		<property name="item_url" type="java.lang.String">
+			<column name="item_url"></column>
+		</property>
+		
+		<property name="nick" type="java.lang.String">
+			<column name="nick"></column>
+		</property>
+		
+		<property name="seller_id" type="java.lang.Long">
+			<column name="seller_id"></column>
+		</property>
+		
+		<property name="volume" type="java.lang.Long">
+			<column name="volume"></column>
+		</property>
+		
+		<property name="dateEntered" type="java.lang.String">
+			<column name="dateEntered"></column>
+		</property>
+		
+	</class>
+
 	<class name="ajax.model.entity.TypePage" table="typePage">
 		
 		<id name="id" column="id" type="java.lang.Integer">

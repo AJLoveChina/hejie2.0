@@ -24,6 +24,7 @@ public enum PageType {
 	CUR(2, "Current Page"),
 	NEXT(3, "Next Page"),
 	
+	UNKNOW(10, "未知", false, null),
 	FILE(11, "电影", true, JokeType.FILM.getTypeHref()),
 	FOOD(12, "美食", true, JokeType.FOOD.getTypeHref()),
 	HOME(99, "首页", true, UrlRoute.HOME.getUrl(), 10);
@@ -135,7 +136,7 @@ public enum PageType {
 			System.out.println(e.getMessage());
 		}
 		
-		return PageType.HOME;
+		return PageType.UNKNOW;
 	}
 	
 	public static void main(String[] args) {

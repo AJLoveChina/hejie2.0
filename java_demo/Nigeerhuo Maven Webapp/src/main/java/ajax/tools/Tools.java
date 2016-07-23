@@ -58,6 +58,21 @@ public class Tools {
 //	public static String weiboSecret = Tools.getConfig("weiboSecret");
 //	public static String githubClientSecret = Tools.getConfig("githubClientSecret");
 //	public static String githubClientId = Tools.getConfig("githubClientId");
+	
+	public static enum EnumString {
+		TABLE_TIME_FORMAT("yyyy-MM-dd HH:mm:ss");
+		private String str;
+
+		public String getStr() {
+			return str;
+		}
+		public void setStr(String str) {
+			this.str = str;
+		}
+		private EnumString(String str) {
+			this.str = str;
+		}
+	}
 
 	public static void sleep(int seconds) {
 		try {

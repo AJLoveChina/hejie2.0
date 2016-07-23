@@ -28,5 +28,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/taobao-sdk-java-auto_1462616566587-20160722-source.jar"/>
+	<classpathentry kind="lib" path="lib/taobao-sdk-java-auto_1462616566587-20160722.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

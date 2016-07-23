@@ -8,7 +8,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
-
 %>
 
 
@@ -18,23 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <%@ include file="/views/goods/style.jsp" %>
 
-<script>
-	$(function () {
-		$(".aj-grid-list").each(function () {
-			$(this).find(".aj-stamps .aj-stamp").each(function () {
-				if (Math.random() < 0.5) {
-					$(this).show();
-				}
-			});
-		});
-	});
-</script>
+
 <div class="aj-body-left">
 	
 	<ul class="leftWrap discovery_list">
 		<c:forEach var="item" items="${model }">
 			<c:set scope="request" var="item" value="${item }" />
-			<c:import url="/views/goods/one.jsp" ></c:import>
+			<c:import url="/views/goods/tbkItemOne.jsp" ></c:import>
 		</c:forEach>
 	</ul>
 	
