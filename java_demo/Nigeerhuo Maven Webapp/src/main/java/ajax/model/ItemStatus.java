@@ -43,6 +43,10 @@ public enum ItemStatus {
 		return itemStatus;
 	}
 	
+	/**
+	 * 
+	 * @return "b" + this.id + "e"
+	 */
 	public String wrapWithBE() {
 		return "b" + this.id + "e";
 	}

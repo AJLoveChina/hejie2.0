@@ -127,6 +127,16 @@ public class Taobao {
 		return itemRecommendGetResponse.tbk_item_recommend_get_response.results.n_tbk_item;
 	}
 	
+	/**
+	 * alibaba.wholesale.category.get (获取类目信息)
+	 */
+	public static void getCategory() {
+		TaobaoClient client = new DefaultTaobaoClient(url, Taobao.getTAOBAO_NIGEERHUO388_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO388_APP_SECRET());
+//		AlibabaWholesaleCategoryGetRequest req = new AlibabaWholesaleCategoryGetRequest();
+//		AlibabaWholesaleCategoryGetResponse rsp = client.execute(req);
+//		System.out.println(rsp.getBody());
+	}
+	
 	private static void do1() {
 		long page = 2;
 		long index = 1;

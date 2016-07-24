@@ -1078,8 +1078,17 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	public static void main(String[] args) {
-		
-		
+//		Item item = new Item();
+//		item.load(11);
+//		
+//		//boolean ok = item.isInThisItemStatus(ItemStatus.SPIDER);
+//		
+//		item.removeIemStatus(ItemStatus.DELETE);
+//		item.removeIemStatus(ItemStatus.SPIDER);
+//		//item.addItemStatus(ItemStatus.SPIDER);
+//		item.update();
+//		//System.out.println(ok);
+//		
 	}
 
 
@@ -1106,10 +1115,30 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			this.setStatusSplitByComma(itemStatus.wrapWithBE());
 		} else if (!this.isInThisItemStatus(itemStatus)){
 			String[] arr = this.statusSplitByComma.split(",");
-			List<String> list = Arrays.asList(arr);
+			List<String> list = new ArrayList<String>();
+			for (String s : arr) {
+				list.add(s.trim());
+			}
 			list.add(itemStatus.wrapWithBE());
 			this.setStatusSplitByComma(Tools.join(list, ","));
 		}
+	}
+	
+	/**
+	 * 删除某个状态
+	 * @param itemStatus
+	 */
+	public void removeIemStatus(ItemStatus itemStatus) {
+		String str = itemStatus.wrapWithBE();
+		this.setStatusSplitByComma(this.getStatusSplitByComma().replaceAll(str, ""));
+		String[] arr = this.statusSplitByComma.split(",");
+		List<String> list = new ArrayList<String>();
+		for(String one : arr) {
+			if (!one.equals("")) {
+				list.add(one);
+			}
+		}
+		this.setStatusSplitByComma(Tools.join(list, ","));
 	}
 	
 	/**

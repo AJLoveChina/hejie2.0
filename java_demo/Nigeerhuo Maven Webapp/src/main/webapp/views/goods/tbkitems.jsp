@@ -16,6 +16,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 <%@ include file="/views/goods/style.jsp" %>
+<script type="text/javascript">
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = {
+            pid: "mm_54818290_15130025_58742815",/*推广单元ID，用于区分不同的推广渠道*/
+            appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
+            unid: "",/*自定义统计字段*/
+            type: "click" /* click 组件的入口标志 （使用click组件必设）*/
+        };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+</script>
 
 
 <div class="aj-body-left">
@@ -36,6 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
 	<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
+	
+	<a biz-itemid="520835064878" isconvert=1 href="http://item.taobao.com/item.htm?id=520835064878">http://item.taobao.com/item.htm?id=520835064878</a>
 </div>
 
 <div style="height:10px;"></div>
