@@ -4,7 +4,8 @@ public enum ItemStatus {
 	NORMAL(0, "正常"),
 	DELETE(1, "删除"),
 	SPIDER(2, "刚刚获取"),
-	IS_SAVE_TO_TYPE_PAGE(3, "是否已经保存到type page");
+	IS_SAVE_TO_TYPE_PAGE(3, "是否已经保存到type page"),
+	TBKITEM_IN_PAGE(4, "");
 	
 	private int id;
 	private String info;

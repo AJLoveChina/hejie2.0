@@ -59,6 +59,10 @@
 			<column name="dateEntered"></column>
 		</property>
 		
+		<property name="statusSplitByComma" type="java.lang.String">
+			<column name="statusSplitByComma"></column>
+		</property>
+		
 	</class>
 
 	<class name="ajax.model.entity.TypePage" table="typePage">
@@ -71,7 +75,7 @@
 			<column name="items"></column>
 		</property>
 		
-		<property name="type" type="java.lang.Integer">
+		<property name="type" type="java.lang.String">
 			<column name="type"></column>
 		</property>
 		

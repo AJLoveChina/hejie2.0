@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import ajax.model.ItemStatus;
 import ajax.model.entity.Entity;
 import ajax.tools.Tools;
 
@@ -174,12 +175,25 @@ public class TbkItem extends Entity<TbkItem>{
 		this.dateEntered = dateEntered;
 	}
 	public static void main(String[] args) {
-		String[] arr = "".split("sd");
-		System.out.println(arr);
+		TbkItem tbkItem = new TbkItem();
+		tbkItem.addItemStatus(ItemStatus.NORMAL);
+		tbkItem.setNum_iid(12345123);
+		tbkItem.setTitle("");
+		tbkItem.setPict_url("");
+		tbkItem.setSmall_images_string("");
+		tbkItem.setReserve_price("");
+		tbkItem.setZk_final_price("");
+		tbkItem.setProvcity("");
+		tbkItem.setItem_url("");
+		tbkItem.setNick("");
+		tbkItem.save();
 	}
 	
 	
 	public String changeSmallImagesToString(SmallImages small_images) {
+		if (small_images == null) {
+			return "";
+		}
 		return Tools.join(small_images.getString(), "~,,~");
 	}
 	public SmallImages changeStringToSmallImages(String small_images_string) {

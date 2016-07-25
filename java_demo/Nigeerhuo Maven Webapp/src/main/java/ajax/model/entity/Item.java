@@ -22,6 +22,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.aliyun.oss.OSSClient;
+import com.google.gson.Gson;
 
 import ajax.model.Callback;
 import ajax.model.ItemStatus;
@@ -58,7 +59,6 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	private int rulesTagId;
 	private String previewImage;
 	private int statusForTest;
-	private String statusSplitByComma;
 	/**
 	 * 图片是否已经上传Oss
 	 */
@@ -106,13 +106,6 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		this.statusForTest = statusForTest;
 	}
 
-
-	public String getStatusSplitByComma() {
-		return statusSplitByComma;
-	}
-	public void setStatusSplitByComma(String statusSplitByComma) {
-		this.statusSplitByComma = statusSplitByComma;
-	}
 	public boolean isHasImageUploadedToOss() {
 		return hasImageUploadedToOss;
 	}
@@ -1078,16 +1071,11 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	public static void main(String[] args) {
-//		Item item = new Item();
-//		item.load(11);
-//		
-//		//boolean ok = item.isInThisItemStatus(ItemStatus.SPIDER);
-//		
-//		item.removeIemStatus(ItemStatus.DELETE);
-//		item.removeIemStatus(ItemStatus.SPIDER);
-//		//item.addItemStatus(ItemStatus.SPIDER);
-//		item.update();
-//		//System.out.println(ok);
+		Item item = new Item();
+		item.load(11);
+		
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(item));
 //		
 	}
 
@@ -1105,59 +1093,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		return true;
 	}
 
-	/**
-	 * 给item添加状态, 支持多状态  <br>
-	 * 每个状态以 b开头, e结尾 . 为了防止  sql查询时出现   2,3,12  contains 1 出现true的情况
-	 * @param itemStatus
-	 */
-	public void addItemStatus(ItemStatus itemStatus) {
-		if (this.statusSplitByComma == null || this.statusSplitByComma.equals("")) {
-			this.setStatusSplitByComma(itemStatus.wrapWithBE());
-		} else if (!this.isInThisItemStatus(itemStatus)){
-			String[] arr = this.statusSplitByComma.split(",");
-			List<String> list = new ArrayList<String>();
-			for (String s : arr) {
-				list.add(s.trim());
-			}
-			list.add(itemStatus.wrapWithBE());
-			this.setStatusSplitByComma(Tools.join(list, ","));
-		}
-	}
 	
-	/**
-	 * 删除某个状态
-	 * @param itemStatus
-	 */
-	public void removeIemStatus(ItemStatus itemStatus) {
-		String str = itemStatus.wrapWithBE();
-		this.setStatusSplitByComma(this.getStatusSplitByComma().replaceAll(str, ""));
-		String[] arr = this.statusSplitByComma.split(",");
-		List<String> list = new ArrayList<String>();
-		for(String one : arr) {
-			if (!one.equals("")) {
-				list.add(one);
-			}
-		}
-		this.setStatusSplitByComma(Tools.join(list, ","));
-	}
-	
-	/**
-	 * item是否处于某种指定状态
-	 * @param itemStatus
-	 * @return
-	 */
-	public boolean isInThisItemStatus(ItemStatus itemStatus) {
-		if (this.statusSplitByComma == null) {
-			return false;
-		}
-		String[] arr = this.statusSplitByComma.split(",");
-		for (String s : arr) {
-			if (s.equals(itemStatus.wrapWithBE())) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	/**
 	 * 根据jokeType 获取相应的还没存储在typePage 的item

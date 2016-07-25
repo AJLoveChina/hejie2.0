@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ajax.model.entity.Goods;
+import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.taobao.TbkItem;
 import ajax.tools.HibernateUtil;
 
@@ -51,7 +52,10 @@ public class GoodsController {
 	@RequestMapping(value="/tbkitems")
 	public String tbkItems(HttpServletRequest request) {
 		
-		List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+		
+		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
+		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1, tbkItemsPagesSeparate);
 		
 		request.setAttribute("model", tbkItems);
 		return "views/goods/tbkitems";

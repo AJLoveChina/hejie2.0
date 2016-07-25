@@ -1,7 +1,7 @@
 package ajax.model.entity;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -12,9 +12,73 @@ import org.hibernate.metadata.ClassMetadata;
 
 import com.google.gson.Gson;
 
+import ajax.model.ItemStatus;
 import ajax.tools.HibernateUtil;
+import ajax.tools.Tools;
 
 public class Entity<T> {
+
+	private String statusSplitByComma;
+	public String getStatusSplitByComma() {
+		return statusSplitByComma;
+	}
+	public void setStatusSplitByComma(String statusSplitByComma) {
+		this.statusSplitByComma = statusSplitByComma;
+	}
+	
+	/**
+	 * 给item添加状态, 支持多状态  <br>
+	 * 每个状态以 b开头, e结尾 . 为了防止  sql查询时出现   2,3,12  contains 1 出现true的情况
+	 * @param itemStatus
+	 */
+	public void addItemStatus(ItemStatus itemStatus) {
+		if (this.statusSplitByComma == null || this.statusSplitByComma.equals("")) {
+			this.setStatusSplitByComma(itemStatus.wrapWithBE());
+		} else if (!this.isInThisItemStatus(itemStatus)){
+			String[] arr = this.statusSplitByComma.split(",");
+			List<String> list = new ArrayList<String>();
+			for (String s : arr) {
+				list.add(s.trim());
+			}
+			list.add(itemStatus.wrapWithBE());
+			this.setStatusSplitByComma(Tools.join(list, ","));
+		}
+	}
+	
+	/**
+	 * 删除某个状态
+	 * @param itemStatus
+	 */
+	public void removeIemStatus(ItemStatus itemStatus) {
+		String str = itemStatus.wrapWithBE();
+		this.setStatusSplitByComma(this.getStatusSplitByComma().replaceAll(str, ""));
+		String[] arr = this.statusSplitByComma.split(",");
+		List<String> list = new ArrayList<String>();
+		for(String one : arr) {
+			if (!one.equals("")) {
+				list.add(one);
+			}
+		}
+		this.setStatusSplitByComma(Tools.join(list, ","));
+	}
+	
+	/**
+	 * item是否处于某种指定状态
+	 * @param itemStatus
+	 * @return
+	 */
+	public boolean isInThisItemStatus(ItemStatus itemStatus) {
+		if (this.statusSplitByComma == null) {
+			return false;
+		}
+		String[] arr = this.statusSplitByComma.split(",");
+		for (String s : arr) {
+			if (s.equals(itemStatus.wrapWithBE())) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public String getPrimaryKey() {
 		ClassMetadata meta = HibernateUtil.getSessionFactory().getClassMetadata(this.getClass());

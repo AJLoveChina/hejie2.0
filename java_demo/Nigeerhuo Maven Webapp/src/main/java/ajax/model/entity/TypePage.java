@@ -19,7 +19,7 @@ public class TypePage extends Entity<TypePage>{
 	
 	private int id;
 	private String items;
-	private int type;
+	private String type;
 	private int page;
 	private String dateEntered;
 	
@@ -35,10 +35,10 @@ public class TypePage extends Entity<TypePage>{
 	public void setItems(String items) {
 		this.items = items;
 	}
-	public int getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public int getPage() {
@@ -78,7 +78,7 @@ public class TypePage extends Entity<TypePage>{
 		TypePage tp = new TypePage();
 		tp.setItems(Tools.join(idList, ","));
 		tp.setPage(maxPage + 1);
-		tp.setType(jokeType.getId());
+		tp.setType(jokeType.getId() + "");
 		
 		if (tp.save()) {
 			// 2. 修改jokeType最大页码
@@ -106,9 +106,30 @@ public class TypePage extends Entity<TypePage>{
 		}
 	}
 	
+	/**
+	 * 针对jokeType类的page保存最大页码,因为需要加上特定前缀
+	 * @param jokeType
+	 * @param maxPage
+	 */
 	public static void setMaxPageOf(JokeType jokeType, int maxPage) {
 		Tools.setConfig(MAX_PAGE_PREFIX + jokeType.getId(), maxPage + "");
 	}
+	
+	/**
+	 * 普通类别页面的最大页面设定
+	 * @param key
+	 * @param maxPage
+	 */
+	public static void setMaxPageOf(String key, int maxPage){
+		Tools.setConfig(key, maxPage + "");
+	}
+	
+	/**
+	 * 根据jokeTYpe的type id 和  page获取List
+	 * @param page
+	 * @param type
+	 * @return
+	 */
 	public static List<Item> getItemsByPageAndType(int page, int type) {
 		Session session = HibernateUtil.getSession();
 		
@@ -119,7 +140,7 @@ public class TypePage extends Entity<TypePage>{
 		
 		Criteria criteria = session.createCriteria(TypePage.class);
 		criteria.add(Restrictions.eq("page", page));
-		criteria.add(Restrictions.eq("type", type));
+		criteria.add(Restrictions.eq("type", type + ""));
 		
 		List<TypePage> typePageList = criteria.list();
 		List<Item> items = new ArrayList<Item>();
