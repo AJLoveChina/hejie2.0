@@ -38,14 +38,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="aj-body-left">
-	
-	<ul class="leftWrap discovery_list">
+	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
+	<ul class="leftWrap discovery_list clearfix">
 		<c:forEach var="item" items="${model }">
 			<c:set scope="request" var="item" value="${item }" />
 			<c:import url="/views/goods/tbkItemOne.jsp" ></c:import>
 		</c:forEach>
 	</ul>
-	
+	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
 </div>
 
 

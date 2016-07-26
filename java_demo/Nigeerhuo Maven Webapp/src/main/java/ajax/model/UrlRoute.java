@@ -14,7 +14,8 @@ public enum UrlRoute {
 	OSS_STATIC(10, "static/"),
 	OSS_PUBLIC(11, "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/"),
 	PAGE(12, "/page"),
-	ONEJOKE_V2(13, "/item");
+	ONEJOKE_V2(13, "/item"),
+	TBK_ITEMS_PAGE_URL_TEMPLATE(14, "/goods/tbkitems/page/{page}");
 	
 	private int id;
 	private String url;

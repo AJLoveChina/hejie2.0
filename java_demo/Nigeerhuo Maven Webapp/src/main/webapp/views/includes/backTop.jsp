@@ -27,6 +27,15 @@
 <script>
 	$(function () {
 		var container = $("#aj-right-side-back-top-fixed-on-bottom");
+		if(aj.isMobile()) {
+			container.css({
+				width : "40px",
+				height : "40px",
+				lineHeight : "45px",
+				bottom : "50px",
+				right : "50px"
+			});
+		}		
 		$(window).on("aj.scroll", function () {
 			if ($(window).scrollTop() > 300) {
 				container.show();

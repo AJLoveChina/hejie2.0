@@ -41,6 +41,7 @@ public enum JokeType {
 	TECH(58, "科技", "科技", "glyphicon glyphicon-apple", true, 40),
 	
 	MIAOPAI(59, "秒拍", "秒拍", "aj-icon aj-icon-video", true, 40),
+	JIUKUAIJIU(60, "九块九", "九块九", "aj-icon aj-icon-iconfontxiexiangbao", true, 90),
 	
 	STORY(101, "故事,清朝历史,考古,AV", "故事", "glyphicon glyphicon-bookmark", true, 30),
 	ALL(9, "所有内容", null, null, false),

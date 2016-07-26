@@ -456,5 +456,10 @@
 		border:0 1% 10px!important;
 	}
 }
+.aj-grid-list .reserev-price{
+	font-size:12px;color:#aaa;
+	text-decoration: line-through;
+	font-weight:normal;
+}
 
 </style>

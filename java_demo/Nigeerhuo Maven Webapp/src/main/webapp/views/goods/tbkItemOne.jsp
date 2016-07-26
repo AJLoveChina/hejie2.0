@@ -32,11 +32,12 @@
     </a>
     <div class="listItem">
         <h2 class="itemName">
-            <a target="_blank" href="${item.getItem_url()}">
+            <a target="_blank" href="${item.getItem_url()}" rel="nofollow me">
                 <span class="black" title="">
                     <c:out value="${item.getTitle() }"></c:out>
                 </span>
             </a>
+            <span class="reserev-price">原价 : ${item.getReserve_price() }元</span>
         </h2>
         <div class="item_buy_mall">
             <div class="zan_fav_com">

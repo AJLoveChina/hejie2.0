@@ -49,16 +49,12 @@ body {
 #aj-header {
 	position:fixed;
 	left:0;top:0;
-  height: 50px;
-  overflow: hidden;
-  background-color : white;
-  background-image:none;
-  min-height:auto!important;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
+	z-index:999;
+	height: 50px;
+	overflow: hidden;
+	background-color : white;
+	border-bottom:1px solid #e7e7e7;
+	width:100%;
 }
 #aj-header.mini{
 	height: 35px;
@@ -90,6 +86,9 @@ body {
 
 
 @media(max-width:900px) {
+	body {
+		overflow-x:hidden;
+	}
 	.aj-phone-only{
 		display: block!important;
 	}
@@ -362,6 +361,17 @@ body {
 	height: 20px;
 	line-height: 20px;
 }
+#aj-header .aj-b-a{
+	float:left;
+}
+#aj-header .logotext {
+	float:left;
+	line-height: 50px;
+	padding:0 10px;
+}
+#aj-header.mini .logotext {
+	line-height: 35px;
+}
 .aj-one-line{
 	float:left;
 }
@@ -397,6 +407,23 @@ body {
 
 
 /*aj-top-nav-line  maybe black*/
+@media(max-width: 900px) {
+	div#aj-header{
+		width:100%;
+		max-width:100%;
+	}
+	div.aj-miaobao{
+		min-width:100%;
+		max-width:100%;
+	}
+	.aj-miaobao .inside-wrap  .logo-huaixiao img{
+		width:65px;
+	}
+	.aj-miaobao .inside-wrap .text-info{
+		margin-left:65px!important;
+	}
+
+}
 .aj-miaobao{
 	width:100%;min-width:1050px;
 	height: 50px;
