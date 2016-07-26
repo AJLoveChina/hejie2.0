@@ -138,12 +138,19 @@ public class Taobao {
 	}
 	
 	private static void do1() {
-		long page = 2;
+		long page = 1000;
 		long index = 1;
 		String fields = "num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick";
+		
+		
 		while (index ++ < page) {
+			
 			ItemQueryParams itemQueryParams = new ItemQueryParams(fields);
 			itemQueryParams.setPage_no(index);
+			itemQueryParams.setStart_price(1L);
+			itemQueryParams.setEnd_price(15L);
+			
+			
 			taobaoTbkItemGet(itemQueryParams);
 		}
 	}
@@ -171,7 +178,7 @@ public class Taobao {
 		
 	}
 	public static void main(String[] args) {
-		do3();
+		do1();
 	}
 	
 }

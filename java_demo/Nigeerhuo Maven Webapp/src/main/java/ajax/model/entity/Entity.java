@@ -18,7 +18,7 @@ import ajax.tools.Tools;
 
 public class Entity<T> {
 
-	private String statusSplitByComma;
+	private String statusSplitByComma = "";
 	public String getStatusSplitByComma() {
 		return statusSplitByComma;
 	}
@@ -104,7 +104,7 @@ public class Entity<T> {
 		}
 	}
 	public boolean save() {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
 		try {
 			
 			session.beginTransaction();
@@ -115,15 +115,14 @@ public class Entity<T> {
 			
 			return true;
 		}catch(Exception e) {
-			System.out.println(e.toString());
+			System.out.println(e.getMessage());
 			return false;
-		} finally {
-			HibernateUtil.closeSession(session);
 		}
+		
 	}
 	
-	public void update() {
-		Session session = HibernateUtil.getSession();
+	public boolean update() {
+		Session session = HibernateUtil.getCurrentSession();
 		
 		try {
 			session.beginTransaction();
@@ -132,25 +131,28 @@ public class Entity<T> {
 			
 			session.getTransaction().commit();
 			
-		} catch (RuntimeException e) {
+			return true;
+		} catch (Exception e) {
 			
 			System.out.println(e.getMessage());
-			
-		} finally {
-			HibernateUtil.closeSession(session);
+			return false;
 		}
 	}
 	
-	public void delete() {
-		Session session = HibernateUtil.getSession();
-		
-		session.beginTransaction();
-		
-		session.delete(this);
-		
-		session.getTransaction().commit();
-		
-		HibernateUtil.closeSession(session);
+	public boolean delete() {
+		try {
+			Session session = HibernateUtil.getCurrentSession();
+			
+			session.beginTransaction();
+			
+			session.delete(this);
+			
+			session.getTransaction().commit();
+			return true;
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 	
 	@Deprecated
@@ -175,17 +177,20 @@ public class Entity<T> {
 	 * 根据主键id值从数据库加载该实体对象
 	 * @param id
 	 */
-	public void load(int id) {
-		Session session = HibernateUtil.getSession();
+	public boolean load(int id) {
+		
 		
 		try {
+			Session session = HibernateUtil.getCurrentSession();
 			
+			session.beginTransaction();
 			session.load(this, id);
+			session.getTransaction().commit();
+			return true;
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
-		}finally {
-			HibernateUtil.closeSession(session);
+			return false;
 		}
 	}
 	
@@ -197,14 +202,18 @@ public class Entity<T> {
 	 * @return
 	 */
 	public static <T> T getBy(String column, String columnValue, Class<T> cls) {
-		Session session = HibernateUtil.getSession();
+		
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(cls);
 		
 		cr.add(Restrictions.eq(column, columnValue));
 		
 		List<T> list = cr.list();
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
 		
 		if (list.size() > 0) {
 			return list.get(0);

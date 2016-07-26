@@ -18,7 +18,7 @@ public class HibernateUtil {
 	
 	static {
 		
-		//java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.INFO);
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		
 		registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
@@ -36,6 +36,15 @@ public class HibernateUtil {
 		
 		return session;
 	}
+	/**
+	 * 适合 multi-user client/server application <br>
+	 * 无需手动关闭session
+	 * @return
+	 */
+	public static Session getCurrentSession() {
+		session = sessionFactory.getCurrentSession();
+		return session;
+	}
 	
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -44,8 +53,8 @@ public class HibernateUtil {
 	public static void closeSession(Session session) {
 		try {
 			if (session != null) {
-				session.flush();
 				session.close();
+				session = null;
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -71,7 +80,5 @@ public class HibernateUtil {
 	public static void main(String[] args) {
 		
 	}
-	
-	
 	
 }

@@ -11,8 +11,10 @@ import ajax.model.UniqueString;
 import ajax.model.taobao.TbkItem;
 import ajax.tools.HibernateUtil;
 
-public class TbkItemsPagesSeparate extends BasePagesSeparateProcessor<TbkItem> implements PagesSeparate<TbkItem>{
+public class TbkItemsPagesSeparate<T> extends BasePagesSeparateProcessor<TbkItem>{
 
+	
+	
 	@Override
 	public UniqueString getPagesTypeKey() {
 		return UniqueString.TBK_ITEM;
@@ -66,7 +68,7 @@ public class TbkItemsPagesSeparate extends BasePagesSeparateProcessor<TbkItem> i
 	public static void main(String[] args) {
 		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
 		
-		while(tbkItemsPagesSeparate.generateNewPage(tbkItemsPagesSeparate)) {
+		while(tbkItemsPagesSeparate.generateNewPage()) {
 			System.out.println("Page generate OK!");
 		}
 		

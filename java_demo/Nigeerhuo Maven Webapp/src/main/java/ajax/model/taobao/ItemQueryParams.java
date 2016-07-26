@@ -57,27 +57,44 @@ public class ItemQueryParams {
 	public void setIs_overseas(boolean is_overseas) {
 		this.is_overseas = is_overseas;
 	}
+	/**
+	 * 折扣价范围下限
+	 * @return
+	 */
 	public Long getStart_price() {
 		return start_price;
 	}
 	public void setStart_price(Long start_price) {
 		this.start_price = start_price;
 	}
+	
 	public Long getEnd_price() {
 		return end_price;
 	}
+	/**
+	 * 折扣价范围上限
+	 * @return
+	 */
 	public void setEnd_price(Long end_price) {
 		this.end_price = end_price;
 	}
 	public Long getStart_tk_rate() {
 		return start_tk_rate;
 	}
+	/**
+	 * 淘客佣金比率上限
+	 * @param start_tk_rate
+	 */
 	public void setStart_tk_rate(Long start_tk_rate) {
 		this.start_tk_rate = start_tk_rate;
 	}
 	public Long getEnd_tk_rate() {
 		return end_tk_rate;
 	}
+	/**
+	 * 	淘客佣金比率下限
+	 * @param end_tk_rate
+	 */
 	public void setEnd_tk_rate(Long end_tk_rate) {
 		this.end_tk_rate = end_tk_rate;
 	}

@@ -31,8 +31,10 @@ import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
 import ajax.model.entity.TypePage;
+import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.SignStatus;
 import ajax.model.safe.User;
+import ajax.model.taobao.TbkItem;
 import ajax.tools.Baidu;
 import ajax.tools.Tools;
 
@@ -41,6 +43,23 @@ import ajax.tools.Tools;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
+	@RequestMapping("/tbkItemsToNormalItem")
+	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
+		
+		List<TbkItem>  tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
+		
+		
+		return null;//TODO
+	}
+	
 	@RequestMapping(value="/meituUpload")
 	public String meituUpload(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
@@ -62,7 +81,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/meitu")
-	public String meitu() {
+	public String meitu(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+
 		return "views/tools/meitu";
 	}
 	

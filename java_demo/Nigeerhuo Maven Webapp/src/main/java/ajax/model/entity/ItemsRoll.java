@@ -97,9 +97,9 @@ public class ItemsRoll extends Entity<ItemsRoll>{
 	
 	
 	@Override
-	public void delete() {
+	public boolean delete() {
 		this.setDeleted(true);
-		this.update();
+		return this.update();
 	}
 	
 }

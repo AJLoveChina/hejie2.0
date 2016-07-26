@@ -12,6 +12,7 @@
         		jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8
         	]]>
         </property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <property name="connection.username">name</property>
         <property name="connection.password">123</property>
         <property name="connection.driver_class">org.gjt.mm.mysql.Driver</property>

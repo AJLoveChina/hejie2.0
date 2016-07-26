@@ -126,7 +126,7 @@ public class Topic extends Entity<Topic>{
 		this.watchIndex = watchIndex;
 	}
 	
-	public void update() {
+	public boolean update() {
 		Connection conn = Mysql.getConn();
 		String sql = String.format("UPDATE %s SET tname = ?, watchIndex = ?, dataId = ?, rank = ?, "
 				+ "url = ?, parentId = ?, isDelete = ? , jokeType = ? WHERE id = ? LIMIT 1", tableName);
@@ -144,9 +144,10 @@ public class Topic extends Entity<Topic>{
 			
 			ps.execute();
 			
+			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 	public boolean save() {

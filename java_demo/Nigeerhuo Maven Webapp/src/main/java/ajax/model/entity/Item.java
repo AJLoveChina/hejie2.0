@@ -1071,11 +1071,9 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	public static void main(String[] args) {
-		Item item = new Item();
-		item.load(11);
+		Item item = Item.getBy("id", "", Item.class);
 		
-		Gson gson = new Gson();
-		System.out.println(gson.toJson(item));
+		System.out.println(item);
 //		
 	}
 
