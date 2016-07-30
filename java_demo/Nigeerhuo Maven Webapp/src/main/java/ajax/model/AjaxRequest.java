@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -14,6 +15,7 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -32,9 +34,16 @@ public class AjaxRequest {
 		private Map<String, String> map;
 		private String method = "POST";
 		private Map<String, String> headers = null;
+		private String body = null;
 		
 		
 		
+		public String getBody() {
+			return body;
+		}
+		public void setBody(String body) {
+			this.body = body;
+		}
 		public Map<String, String> getHeaders() {
 			return headers;
 		}
@@ -85,7 +94,7 @@ public class AjaxRequest {
 		
 		try {
 			
-			if (method == "POST")  {
+			if (method.toUpperCase().equals("POST"))  {
 				HttpPost request = new HttpPost(config.getUrl());
 				
 				if (config.getMap() != null) {
@@ -94,6 +103,12 @@ public class AjaxRequest {
 						pairs.add(new BasicNameValuePair(key, params.get(key)));
 					}
 					request.setEntity(new UrlEncodedFormEntity(pairs));
+				}
+				
+				// 如果有body内容
+				if (config.getBody() != null) {
+					HttpEntity entity = new ByteArrayEntity(config.getBody().getBytes("UTF-8"));
+					request.setEntity(entity);
 				}
 				
 			

@@ -440,9 +440,7 @@ public class AdminController {
 		} else {
 			List<String> links = arr.getLinks();
 			
-			for (String link : links) {
-				Baidu.uploadLinkToBaidu(link);
-			}
+			Baidu.uploadLinkToBaidu(links);
 			ar.setIsok(true);
 			ar.setData("OK");
 		}
