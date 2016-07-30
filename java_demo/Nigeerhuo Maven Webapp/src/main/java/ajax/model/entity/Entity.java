@@ -68,7 +68,7 @@ public class Entity<T> {
 	 * @return
 	 */
 	public boolean isInThisItemStatus(ItemStatus itemStatus) {
-		if (this.statusSplitByComma == null) {
+		if (this.statusSplitByComma == null || itemStatus == null) {
 			return false;
 		}
 		String[] arr = this.statusSplitByComma.split(",");
@@ -157,7 +157,10 @@ public class Entity<T> {
 	
 	@Deprecated
 	public T getById(int id) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		
+		session.beginTransaction();
 		
 		String tableName = this.getTableName();
 		// %s is not real table name , but is Java Type
@@ -168,7 +171,8 @@ public class Entity<T> {
 	
 		T entity = (T)query.uniqueResult();
 		
-		HibernateUtil.closeSession(session);
+		//HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
 		
 		return entity;
 	}
@@ -178,6 +182,26 @@ public class Entity<T> {
 	 * @param id
 	 */
 	public boolean load(int id) {
+		
+		
+		try {
+			Session session = HibernateUtil.getCurrentSession();
+			
+			session.beginTransaction();
+			session.load(this, id);
+			session.getTransaction().commit();
+			return true;
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	/**
+	 * 根据主键id值从数据库加载该实体对象
+	 * @param id
+	 */
+	public boolean load(long id) {
 		
 		
 		try {
@@ -243,7 +267,9 @@ public class Entity<T> {
 	
 	@Deprecated
 	public List<T> getPage(int page, int pageNum) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		String sqlCmd = String.format("from %s", this.getClass().getName());
 		//, (page - 1) * pageNum, pageNum
@@ -254,6 +280,8 @@ public class Entity<T> {
 		
 		
 		List<T> lists = query.list();
+		
+		session.getTransaction().commit();
 		
 		return lists;
 	}
@@ -266,7 +294,9 @@ public class Entity<T> {
 	 * @return
 	 */
 	public static <T> List<T> get(int page, int size, Class<T> cls) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		Criteria  cr = session.createCriteria(cls);
 		cr.setMaxResults(20);
@@ -274,7 +304,9 @@ public class Entity<T> {
 		List<T> list = cr.list();
 		
 		
-		HibernateUtil.closeSession(session);
+		//HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
+		
 		return list;
 	}
 	

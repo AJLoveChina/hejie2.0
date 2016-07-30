@@ -131,28 +131,31 @@ public class TypePage extends Entity<TypePage>{
 	 * @return
 	 */
 	public static List<Item> getItemsByPageAndType(int page, int type) {
-		Session session = HibernateUtil.getSession();
 		
 		int maxPage = TypePage.getMaxPageOf(JokeType.getJokeType(type));
 		page = page > maxPage ? maxPage : page;
 		page = maxPage - page + 1;
 		
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(TypePage.class);
 		criteria.add(Restrictions.eq("page", page));
 		criteria.add(Restrictions.eq("type", type + ""));
 		
 		List<TypePage> typePageList = criteria.list();
+		session.getTransaction().commit();
+		
 		List<Item> items = new ArrayList<Item>();
-		
-		
 		if (typePageList.size() > 0) {
 			TypePage typePage = typePageList.get(0);
 			List<String> idList = Arrays.asList(typePage.getItems().split(","));
 			items = Item.getV2(idList);
 		}
 		
-		HibernateUtil.closeSession(session);
+		
+		
 		return items;
 	}
 	

@@ -102,19 +102,23 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 	
 	
 	public List<T> getItemsByPageAndType(int page) {
-		Session session = HibernateUtil.getSession();
+		
 		
 		int maxPage = this.getMaxPage();
 		page = page > maxPage ? maxPage : page;
 		page = maxPage - page + 1;
 		
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(TypePage.class);
 		criteria.add(Restrictions.eq("page", page));
 		criteria.add(Restrictions.eq("type", this.getPagesTypeKey().getKey()));
 		
 		List<TypePage> typePageList = criteria.list();
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
 		
 		List<T> items = new ArrayList<T>();
 		
@@ -133,12 +137,17 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 		for (String s : idList) {
 			list.add(Long.parseLong(s));
 		}
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(this.getGenericityType().getClass());
 		
 		cr.add(Restrictions.in(this.getPrimaryKey(), list));
 		List<T> items = cr.list();
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
+		
 		return items;
 	}
 }

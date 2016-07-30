@@ -187,6 +187,8 @@ public class TbkItem extends Entity<TbkItem>{
 		tbkItem.setItem_url("");
 		tbkItem.setNick("");
 		tbkItem.save();
+		
+		tbkItem.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
 	}
 	
 	
@@ -213,4 +215,13 @@ public class TbkItem extends Entity<TbkItem>{
 		this.dateEntered = new SimpleDateFormat(Tools.EnumString.TABLE_TIME_FORMAT.getStr()).format(new Date());
 		return super.save();
 	}
+	
+	/**
+	 * return this.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM)
+	 * @return
+	 */
+	public boolean isChangeToItem() {
+		return this.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
+	}
+	
 }

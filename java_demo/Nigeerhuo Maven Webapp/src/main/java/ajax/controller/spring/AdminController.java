@@ -43,7 +43,9 @@ import ajax.tools.Tools;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
-	@RequestMapping("/tbkItemsToNormalItem")
+	
+	
+	@RequestMapping("/tbkitems/changeToItem")
 	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
@@ -52,12 +54,13 @@ public class AdminController {
 			return "Error";
 		}
 		
-		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
+		Long id = Long.parseLong(request.getParameter("id"));
+		TbkItem tbkItem = new TbkItem();
 		
-		List<TbkItem>  tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
+		tbkItem.load(id);
 		
-		
-		return null;//TODO
+		request.setAttribute("item", tbkItem);
+		return "/views/admin/tbkItemToItem";
 	}
 	
 	@RequestMapping(value="/meituUpload")

@@ -297,9 +297,13 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	
 	public static Item getByItemById(int id) {
 		
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		Item entity = session.get(Item.class, id);
+		
+		session.getTransaction().commit();
 		
 		return entity;
 	}
@@ -340,10 +344,11 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 */
 	public static List<Item> query(QueryParams qp) {
 		
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(Item.class);
-		
 		
 		int page = 1;
 		int size = 10;
@@ -362,7 +367,11 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			criteria.add(Restrictions.eq("itype", Tools.parseInt(qp.getVal("type"), JokeType.UNKNOWN.getId())));
 		}
 		
-		return criteria.list();
+		List<Item> items = criteria.list();
+
+		session.getTransaction().commit();
+		
+		return items;
 	}
 	
 	
@@ -605,7 +614,9 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			
 			@Override
 			public Item next() {
-				Session session = HibernateUtil.getSession();
+				Session session = HibernateUtil.getCurrentSession();
+				
+				session.beginTransaction();
 				
 				Criteria cr = session.createCriteria(Item.class);
 				cr.setFirstResult((page - 1) * size);
@@ -613,8 +624,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 				
 				List<Item> items = cr.list();
 				
-				
-				HibernateUtil.closeSession(session);
+				session.getTransaction().commit();
 				
 				if (items.size() > 0) {
 					page ++;
@@ -673,7 +683,10 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		System.out.println("正在获取一个还没有放入page表的item...");
 		
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(Item.class);
 		cr.add(Restrictions.eq("page", 0));
 		cr.add(Restrictions.gt("likes", 500));
@@ -685,7 +698,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		int rand = rd.nextInt(items.size());
 		Item item = items.get(rand);
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
 		
 		System.out.println("已获取id=" + item.getId() + ";title=" + item.getTitle());
 		return item;
@@ -697,12 +710,17 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 * @return
 	 */
 	public static List<Item> get(List<Integer> itemsId) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(Item.class);
 		
 		cr.add(Restrictions.in("id", itemsId));
 		List<Item> items = cr.list();
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
+		
 		return items;
 		
 	}
@@ -718,12 +736,17 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		for (String s : itemsId) {
 			list.add(Integer.parseInt(s));
 		}
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(Item.class);
 		
 		cr.add(Restrictions.in("id", list));
 		List<Item> items = cr.list();
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
+		
 		return items;
 		
 	}
@@ -1101,7 +1124,10 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 */
 	public static List<Item> getItemsOfSpecifiedJokeTypeAndIsNotInTypePage(
 			JokeType jokeType, int limit) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
+		
+		
 		Criteria criteria = session.createCriteria(Item.class);
 		
 		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + ItemStatus.IS_SAVE_TO_TYPE_PAGE.wrapWithBE() + "%")));
@@ -1111,7 +1137,8 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		List<Item> items = criteria.list();
 		
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
+		
 		return items;
 	}
 

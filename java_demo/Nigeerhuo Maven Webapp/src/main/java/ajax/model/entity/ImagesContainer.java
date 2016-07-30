@@ -49,13 +49,18 @@ public class ImagesContainer extends Entity<ImagesContainer>{
 	 * @return null if not found 
 	 */
 	public static ImagesContainer getByWebPath(String src) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(ImagesContainer.class);
 		cr.add(Restrictions.eq("webPath", src));
 		
 		List<ImagesContainer> lists = cr.list();
 		
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
+		
 		if (lists.size() > 0) {
 			return lists.get(0);
 		} else {
@@ -70,12 +75,16 @@ public class ImagesContainer extends Entity<ImagesContainer>{
 	 * @return
 	 */
 	public static ImagesContainer existed(String url) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(ImagesContainer.class);
 		cr.add(Restrictions.eq("url", url));
 		List<ImagesContainer> lists = cr.list();
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
+		
 		if (lists.size() > 0) {
 			return lists.get(0);
 		} else {

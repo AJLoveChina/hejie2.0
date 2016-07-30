@@ -37,6 +37,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 
 
+
+
 <div class="aj-body-left">
 	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
 	<ul class="leftWrap discovery_list clearfix">

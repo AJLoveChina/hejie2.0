@@ -73,7 +73,9 @@ public class Fragment extends Entity<Fragment>{
 	
 	public static List<Fragment> getFragments(Type type) {
 		List<Fragment> fragments;
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		org.hibernate.Criteria cr = session.createCriteria(Fragment.class);
 		
@@ -82,7 +84,9 @@ public class Fragment extends Entity<Fragment>{
 		
 		fragments = cr.list();
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
+		//HibernateUtil.closeSession(session);
+		
 		return fragments;
 	}
 	

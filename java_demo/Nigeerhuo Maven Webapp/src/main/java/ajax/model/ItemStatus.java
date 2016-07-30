@@ -5,7 +5,8 @@ public enum ItemStatus {
 	DELETE(1, "删除"),
 	SPIDER(2, "刚刚获取"),
 	IS_SAVE_TO_TYPE_PAGE(3, "是否已经保存到type page"),
-	TBKITEM_IN_PAGE(4, "");
+	TBKITEM_IN_PAGE(4, ""),
+	IS_TBKITEM_CHANGE_TO_NORMAL_ITEM(5, "该商品已经发布成值得买");
 	
 	private int id;
 	private String info;

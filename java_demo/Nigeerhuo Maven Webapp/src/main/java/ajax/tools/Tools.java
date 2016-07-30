@@ -457,13 +457,18 @@ public class Tools {
 	 * @return
 	 */
 	public static String getConfig(String key) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(Config.class);
 
 		cr.add(Restrictions.eq("key", key));
 		List<Config> configs = cr.list();
 
-		HibernateUtil.closeSession(session);
+		
+		session.getTransaction().commit();
+		
 		if (configs.size() > 0) {
 			return configs.get(0).getValue();
 		} else {
@@ -491,13 +496,17 @@ public class Tools {
 	}
 
 	public static void updateConfig(String key, String newValue) {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(Config.class);
 
 		cr.add(Restrictions.eq("key", key));
 		List<Config> configs = cr.list();
 
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
+		
 		Config config = configs.get(0);
 		if (configs.size() > 0) {
 

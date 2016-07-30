@@ -1,3 +1,4 @@
+<%@page import="ajax.model.UrlRoute"%>
 <%@page import="ajax.model.entity.Goods"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -36,6 +37,12 @@
                 <span class="black" title="">
                     <c:out value="${item.getTitle() }"></c:out>
                 </span>
+                
+                <c:if test="${item.isChangeToItem() }">
+                	<span>
+                		已转换成值得买
+                	</span>
+                </c:if>
             </a>
             <span class="reserev-price">原价 : ${item.getReserve_price() }元</span>
         </h2>
@@ -43,8 +50,8 @@
             <div class="zan_fav_com">
                	 价格: <c:out value="${item.getZk_final_price() }"></c:out> 元
             </div>
-            <a style='float:right;' class="directLink" target="_blank" href='<c:out value="${item.getItem_url() }"></c:out>'>
-                查看详情
+            <a style='float:right;' class="directLink" target="_blank" href='<%=UrlRoute.ADMIN_CHANGE_TBKITEM_URL.getUrl() %>?id=<c:out value="${item.getNum_iid()}"></c:out>'>
+                转换成值得买
             </a>
 			<div style='clear:both;'></div>
         </div>

@@ -63,7 +63,10 @@ public class Page extends Entity<Page>{
 	}
 	
 	public static int getNowMaxPage() {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		
 		Criteria cr = session.createCriteria(Page.class);
 		cr.addOrder(Order.desc("id"));
@@ -71,7 +74,8 @@ public class Page extends Entity<Page>{
 		
 		List<Page> pages = cr.list();
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
+		
 		if (pages.size() <= 0) {
 			return 0;
 		} else {
@@ -104,13 +108,16 @@ public class Page extends Entity<Page>{
 		if (tablePage <= 1) {
 			tablePage = 1;
 		}
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
 		Criteria cr = session.createCriteria(Page.class);
 		
 		cr.add(Restrictions.eq("page", tablePage));
 		List<Page> list = cr.list();
 		
-		HibernateUtil.closeSession(session);
+		session.getTransaction().commit();
 		
 		
 		List<Item> items = new ArrayList<Item>();
@@ -128,13 +135,16 @@ public class Page extends Entity<Page>{
 	 * @return
 	 */
 	public static Page getByPage(int page2) {
-		Session sess = HibernateUtil.getSession();
+		Session sess = HibernateUtil.getCurrentSession();
+		
+		sess.beginTransaction();
+		
 		Criteria cr = sess.createCriteria(Page.class);
 		
 		cr.add(Restrictions.eq("page", page2));
 		List<Page> pages = cr.list();
-		HibernateUtil.closeSession(sess);
 		
+		sess.getTransaction().commit();
 		
 		if (pages.size() > 0) {
 			return pages.get(0);

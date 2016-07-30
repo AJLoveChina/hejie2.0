@@ -37,7 +37,9 @@ public class TbkItemsPagesSeparate<T> extends BasePagesSeparateProcessor<TbkItem
 	
 	@Override
 	public List<TbkItem> getNextPageList() {
-		Session session = HibernateUtil.getSession();
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(TbkItem.class);
 		
@@ -46,6 +48,8 @@ public class TbkItemsPagesSeparate<T> extends BasePagesSeparateProcessor<TbkItem
 		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + this.getItemStatusWhichWillBeSetAfterPutInPage().wrapWithBE() + "%")));
 		
 		List<TbkItem> tbkItems = criteria.list();
+		session.getTransaction().commit();
+		
 		return tbkItems;
 	}
 

@@ -56,9 +56,10 @@ public class GoodsController {
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
-		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
+		TbkItemsPagesSeparate<TbkItem> tbkItemsPagesSeparate = new TbkItemsPagesSeparate<TbkItem>();
 		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
 		
+	
 		PageChoice pageChoice = new PageChoice(1, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
 		request.setAttribute("model", tbkItems);
 		request.setAttribute("pageChoice", pageChoice);

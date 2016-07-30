@@ -15,7 +15,8 @@ public enum UrlRoute {
 	OSS_PUBLIC(11, "http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/"),
 	PAGE(12, "/page"),
 	ONEJOKE_V2(13, "/item"),
-	TBK_ITEMS_PAGE_URL_TEMPLATE(14, "/goods/tbkitems/page/{page}");
+	TBK_ITEMS_PAGE_URL_TEMPLATE(14, "/goods/tbkitems/page/{page}"),
+	ADMIN_CHANGE_TBKITEM_URL(15, "/admin/tbkitems/changeToItem");
 	
 	private int id;
 	private String url;
