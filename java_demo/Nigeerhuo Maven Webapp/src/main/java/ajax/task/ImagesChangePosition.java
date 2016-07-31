@@ -12,7 +12,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import ajax.model.entity.ImagesContainer;
 import ajax.model.entity.Info;
 import ajax.model.entity.Item;
 import ajax.model.entity.Page;

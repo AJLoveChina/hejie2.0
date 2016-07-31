@@ -1,10 +1,10 @@
 package ajax.spider.auto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.event.ListSelectionEvent;
-
-import ajax.model.entity.*;
+import ajax.model.entity.Item;
+import ajax.model.entity.Source;
 
 public class DealWithSource {
 	

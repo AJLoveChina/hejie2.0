@@ -1,7 +1,5 @@
 package ajax.spider.auto;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.JokeStatus;
-import ajax.model.entity.*;
+import ajax.model.entity.Item;
+import ajax.model.entity.Page;
 import ajax.spider.rules.RulesTag;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;

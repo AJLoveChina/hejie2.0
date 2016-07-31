@@ -1,16 +1,11 @@
 package ajax.model.safe;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,21 +22,16 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.google.gson.Gson;
-
 import ajax.model.AjaxRequest;
-import ajax.model.AjaxRequest.Config;
 import ajax.model.AjaxResponse;
-import ajax.model.Callback;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Collect;
 import ajax.model.entity.Entity;
-import ajax.model.entity.Info;
 import ajax.model.entity.Item;
-import ajax.model.safe.User.QQAccess;
-import ajax.model.safe.User.QQUserSimpleModel;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
+
+import com.google.gson.Gson;
 
 public class User extends Entity<User>{
 	

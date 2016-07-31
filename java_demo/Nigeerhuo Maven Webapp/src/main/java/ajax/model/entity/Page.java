@@ -8,7 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import ajax.model.QueryParams;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 

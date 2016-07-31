@@ -5,8 +5,6 @@ import java.net.URL;
 
 import org.jsoup.select.Elements;
 
-import ajax.test.Test01;
-
 @Deprecated
 public class JokeRules {
 	protected String tableName = "joke";

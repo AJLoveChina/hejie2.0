@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ import ajax.model.UrlRoute;
 import ajax.model.entity.Goods;
 import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.taobao.TbkItem;
-import ajax.tools.HibernateUtil;
 
 
 @Controller

@@ -3,7 +3,6 @@ package ajax.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import ajax.model.JokeType;
 import ajax.model.entity.Item;
 import ajax.model.entity.Page;
 /**

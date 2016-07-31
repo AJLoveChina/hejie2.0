@@ -9,10 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.ItemStatus;
-import ajax.model.JokeType;
 import ajax.model.UniqueString;
 import ajax.model.entity.Entity;
-import ajax.model.entity.Item;
 import ajax.model.entity.TypePage;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;

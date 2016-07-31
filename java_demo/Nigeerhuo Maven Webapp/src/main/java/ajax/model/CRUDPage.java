@@ -1,10 +1,6 @@
 package ajax.model;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
-
-import com.google.gson.InstanceCreator;
 
 /**
  * 用于快速生成一个数据表的crud页面

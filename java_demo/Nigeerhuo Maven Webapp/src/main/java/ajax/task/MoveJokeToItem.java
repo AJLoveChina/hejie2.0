@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ajax.model.Joke;
-import ajax.model.JokeType;
 import ajax.model.entity.Item;
 
 public class MoveJokeToItem {

@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
-
 import ajax.model.AjaxRequest;
-import ajax.model.AjaxRequest.Config;
+
+import com.google.gson.Gson;
 
 public class Baidu {
 	

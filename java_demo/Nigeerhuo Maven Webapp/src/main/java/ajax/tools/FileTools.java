@@ -1,18 +1,17 @@
 package ajax.tools;
 
 import java.awt.Image;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Date;
-
-
-import java.util.*;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
-
-import ajax.model.entity.ImagesContainer;
 
 public class FileTools {
 	

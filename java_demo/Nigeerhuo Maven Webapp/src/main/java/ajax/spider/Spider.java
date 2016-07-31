@@ -1,11 +1,15 @@
 package ajax.spider;
 
-import ajax.model.*;
 import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import ajax.model.Joke;
+import ajax.model.JokeRules;
+import ajax.model.JokeStatus;
+import ajax.model.JokeType;
 
 public class Spider{
 	

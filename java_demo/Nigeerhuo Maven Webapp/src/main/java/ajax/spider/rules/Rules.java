@@ -4,7 +4,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import ajax.model.Callback;
-import ajax.model.JokeType;
 import ajax.tools.Tools;
 
 public abstract class Rules {

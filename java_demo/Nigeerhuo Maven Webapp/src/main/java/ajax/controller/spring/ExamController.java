@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ajax.model.AjaxResponse;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Exam;
-import ajax.model.entity.Exam.Paper;
 import ajax.model.safe.User;
 import ajax.tools.Tools;
 

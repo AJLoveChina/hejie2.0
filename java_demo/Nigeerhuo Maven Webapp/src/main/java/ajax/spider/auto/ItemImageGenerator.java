@@ -1,16 +1,13 @@
 package ajax.spider.auto;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import ajax.model.entity.Item;
 import ajax.tools.HibernateUtil;
-import ajax.tools.Tools;
 
 /**
  * 生成一条Item的缩略图, 从content图片中选择一张

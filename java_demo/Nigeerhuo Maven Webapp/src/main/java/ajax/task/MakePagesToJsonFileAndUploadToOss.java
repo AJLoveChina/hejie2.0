@@ -2,11 +2,7 @@ package ajax.task;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
 
 import ajax.model.AjaxResponse;
 import ajax.model.UrlRoute;

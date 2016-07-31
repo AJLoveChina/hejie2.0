@@ -1,13 +1,9 @@
 package ajax.task;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
-
-import com.aliyun.oss.OSSClient;
 
 import ajax.model.entity.Item;
 import ajax.model.entity.Page;
-import ajax.tools.OssUtil;
 
 public class UploadDataToOss {
 	private static void updateImgsOfItemsInPagesToOss() {

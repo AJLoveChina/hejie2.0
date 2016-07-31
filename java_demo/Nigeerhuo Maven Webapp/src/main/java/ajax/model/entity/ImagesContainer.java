@@ -1,6 +1,5 @@
 package ajax.model.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;

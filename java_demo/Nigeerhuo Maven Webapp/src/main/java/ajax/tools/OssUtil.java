@@ -2,8 +2,6 @@ package ajax.tools;
 
 import java.io.InputStream;
 
-import ajax.model.entity.Item;
-
 import com.aliyun.oss.OSSClient;
 
 public class OssUtil {
