@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -50,6 +52,24 @@ public class Tools {
 //	public static String weiboSecret = Tools.getConfig("weiboSecret");
 //	public static String githubClientSecret = Tools.getConfig("githubClientSecret");
 //	public static String githubClientId = Tools.getConfig("githubClientId");
+	
+	public static Object getFieldValue(Field field, Object o) {
+		for (Method method : o.getClass().getDeclaredMethods()) {
+			
+			if (method.getName().startsWith("get") && (method.getName().length() == field.getName().length() + 3)) {
+				
+				if (method.getName().toLowerCase().endsWith(field.getName().toLowerCase())) {
+					try {
+						return method.invoke(o);
+					} catch(Exception ex) {
+						System.out.println(ex.getMessage());
+						return null;
+					}
+				}
+			}
+		}
+		return null;
+	}
 	
 	public static enum EnumString {
 		TABLE_TIME_FORMAT("yyyy-MM-dd HH:mm:ss");

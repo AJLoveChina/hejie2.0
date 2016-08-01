@@ -10,6 +10,8 @@ int previous = item.getId() - 1;
 int next = item.getId() + 1;
 
 request.setAttribute("title", item.getTitle());
+request.setAttribute("description", item.getSummary());
+request.setAttribute("keywords", item.getTitle());
 
 %>
 

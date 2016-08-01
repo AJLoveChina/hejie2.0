@@ -18,7 +18,7 @@ public enum PageType {
 	UNKNOW(10, "未知", false, null),
 	FILE(11, "电影", true, JokeType.FILM.getTypeHref()),
 	FOOD(12, "美食", true, JokeType.FOOD.getTypeHref()),
-	JIUKUAIJIU(13, "九块九", true, "/goods/tbkitems"),
+	JIUKUAIJIU(13, "九块九", false, "/goods/tbkitems"),
 	HOME(99, "首页", true, UrlRoute.HOME.getUrl(), 10);
 	
 	private int id;

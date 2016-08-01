@@ -6,7 +6,7 @@
 
 
 
-<jsp:include page="views/includes/header.jsp"></jsp:include>
+<jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 
 <div class="aj-body-left">
@@ -31,17 +31,19 @@
 		<li>
 			<a href="/admin/typePages">Type pages generate</a>
 		</li>
+		<li>
+			<a href="/admin/tbkitems">Tbk items change to Item</a>
+		</li>
 	</ol>
 	
 </div>
 
 
 <div class="aj-body-right">
-	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
+	<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 	
-	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
-	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
 	
 	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 </div>

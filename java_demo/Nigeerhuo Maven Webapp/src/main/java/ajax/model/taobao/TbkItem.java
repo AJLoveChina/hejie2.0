@@ -1,12 +1,16 @@
 package ajax.model.taobao;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
+import ajax.model.UrlRoute;
+import ajax.model.annotations.FormComponentAnno;
 import ajax.model.entity.Entity;
 import ajax.tools.Tools;
 
@@ -22,8 +26,11 @@ public class TbkItem extends Entity<TbkItem>{
 		}
 	}
 	
+	@FormComponentAnno(desc="序号")
 	private long num_iid;
+	@FormComponentAnno(desc="标题")
 	private String title;
+	@FormComponentAnno(desc="封面图片")
 	private String pict_url;
 	private SmallImages small_images;
 	private String small_images_string;
@@ -223,5 +230,35 @@ public class TbkItem extends Entity<TbkItem>{
 	public boolean isChangeToItem() {
 		return this.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
 	}
+	
+	/**
+	 * 生成对应的表单编辑模型
+	 * @return
+	 */
+	public FormComponents getFormComponents() {
+		String urlSubmit = UrlRoute.TBK_ITEMS_SUBMIT.getUrl();
+		String urlRemove = "";
+		FormComponents formComponents = new FormComponents(urlSubmit, urlRemove);
+		List<FormComponents.Component> components = new ArrayList<FormComponents.Component>();
+		
+		Field[] fields = this.getClass().getDeclaredFields();
+		for (Field field : fields) {
+			
+			FormComponentAnno formComponentAnno = field.getAnnotation(FormComponentAnno.class);
+			String desc = "";
+			FormComponents.ComponentType componentType = FormComponents.ComponentType.TEXT;
+			if (formComponentAnno != null) {
+				desc = formComponentAnno.desc();
+				componentType = formComponentAnno.componentType();
+			}
+			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, componentType));
+			
+		}
+		
+		formComponents.setComponents(components);
+		
+		return formComponents;
+	}
+	
 	
 }

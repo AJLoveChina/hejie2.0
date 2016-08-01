@@ -51,7 +51,7 @@
                	 价格: <c:out value="${item.getZk_final_price() }"></c:out> 元
             </div>
             <a style='float:right;' class="directLink" target="_blank" href='<%=UrlRoute.ADMIN_CHANGE_TBKITEM_URL.getUrl() %>?id=<c:out value="${item.getNum_iid()}"></c:out>'>
-                转换成值得买
+                写文章
             </a>
 			<div style='clear:both;'></div>
         </div>

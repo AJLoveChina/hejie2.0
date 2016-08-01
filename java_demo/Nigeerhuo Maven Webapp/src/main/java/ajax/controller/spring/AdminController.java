@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
+import ajax.model.FormComponents;
 import ajax.model.JokeType;
+import ajax.model.PageChoice;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Fragment;
@@ -26,6 +28,7 @@ import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
 import ajax.model.entity.TypePage;
+import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.User;
 import ajax.model.taobao.TbkItem;
 import ajax.tools.Baidu;
@@ -40,6 +43,44 @@ import com.google.gson.Gson;
 @RequestMapping(value="/admin")
 public class AdminController {
 	
+	@RequestMapping(value="/tbkitems")
+	public String tbkItems(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+		
+		TbkItemsPagesSeparate<TbkItem> tbkItemsPagesSeparate = new TbkItemsPagesSeparate<TbkItem>();
+		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
+		
+	
+		PageChoice pageChoice = new PageChoice(1, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+		request.setAttribute("model", tbkItems);
+		request.setAttribute("pageChoice", pageChoice);
+		return "views/goods/tbkitems";
+	}
+	
+	@RequestMapping(value="/tbkitems/page/{page}")
+	public String tbkItemsPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("error", "权限不足");
+			
+			return "Error";
+		}
+		
+		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+		
+		TbkItemsPagesSeparate<TbkItem> tbkItemsPagesSeparate = new TbkItemsPagesSeparate<TbkItem>();
+		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(page);
+		PageChoice pageChoice = new PageChoice(page, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+		request.setAttribute("model", tbkItems);
+		request.setAttribute("pageChoice", pageChoice);
+		return "views/goods/tbkitems";
+	}
 	
 	@RequestMapping("/tbkitems/changeToItem")
 	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) {
@@ -55,6 +96,7 @@ public class AdminController {
 		
 		tbkItem.load(id);
 		
+		FormComponents formComponents = tbkItem.getFormComponents();
 		request.setAttribute("item", tbkItem);
 		return "/views/admin/tbkItemToItem";
 	}
@@ -142,7 +184,7 @@ public class AdminController {
 			return "Error";
 		}
 		
-		return "adminList";
+		return "views/admin/list";
 	}
 	
 	
@@ -230,7 +272,7 @@ public class AdminController {
 		request.setAttribute("item", item);
 		request.setAttribute("jokeTypes", jokeTypes);
 		
-		return "upload";
+		return "/views/admin/upload";
 	}
 	
 	/**

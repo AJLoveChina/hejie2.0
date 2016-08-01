@@ -6,12 +6,22 @@
 <%
 	String path = request.getRequestURL().toString();
 	String title = (String)request.getAttribute("title");
+	String description = (String) request.getAttribute("description");
+	String keywords = (String) request.getAttribute("keywords");
 	boolean isAdmin = User.isAdmin(request, response);
 	
 	if (title == null || title.equals("")) {
-		title = "你个二货, 二货的俱乐部.生活不止眼前的苟且,还有电影, 旅行, 美食, 笑话...^_^";
+		title = "你个二货, 二货的俱乐部.生活不该只有眼前的苟且-你个二货,礼物の物语";
 	} else {
-		title += "-你个二货,快乐你我";
+		title += "-你个二货,礼物の物语";
+	}
+	
+	if (description == null || description.equals("")) {
+		description = "二货君与上千家店铺合作每天推出物美价廉的礼物,礼物在于情谊不在贵重.我们每天精挑细选生日礼物,情侣礼物,创意礼物,用最低的价格购买最心仪的礼物.对的,生活不会只有眼前的苟且,二货君与你同在.";
+	}
+	
+	if (keywords == null || keywords.equals("")) {
+		keywords = "礼物,生日礼物,情侣礼物,情人节礼物,母亲节礼物,父亲节礼物,生日礼物送什么,生日礼物女生,创意礼物,儿童节礼物,七夕礼物,圣诞节礼物,中秋节礼物,万圣节礼物,平安夜礼物,元旦礼物,春节礼物";
 	}
 	boolean isLocal = Tools.isLocal(path);
 	request.setAttribute("isLocal", isLocal);
@@ -28,8 +38,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="description" content="你个二货, 二货的俱乐部.电影, 旅行, 美食, 笑话...木有什么不知道">
-    <meta name="keywords" content="知乎精选,电影,旅行,美食,健身,体育,运动,互联网,汽车,法律,税务,医疗,音乐,阅读,健康,生活方式,恋爱,社会现象,历史,摄影,文学,游戏,科技,故事">
+    <meta name="description" content="<%=description%>">
+    <meta name="keywords" content="<%=keywords %>">
     <link rel="shortcut icon" type="image/x-icon" href="http://images.nigeerhuo.com/images/web/pic/favicon.ico" />
     <meta property="qc:admins" content="7712403257661755205763757" />
     <meta name="mobile-agent" content="format=html5;url=http://wap.nigeerhuo.com/">

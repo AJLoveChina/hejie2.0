@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
+
 String path = request.getContextPath();
 Item item = (Item)request.getAttribute("item");
 boolean isAdmin = User.isAdmin(request, response);
@@ -13,14 +14,13 @@ request.setAttribute("isAdmin", isAdmin);
 
 %>
 
-<jsp:include page="views/includes/header.jsp"></jsp:include>
-
+<jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 <div class="aj-body-left">
 	<c:choose>
 		<c:when test="${isAdmin }">
 			<c:set var="model" value="${item }" scope="request"></c:set>
-			<jsp:include page="views/item/itemCRUD.jsp" />
+			<jsp:include page="/views/item/itemCRUD.jsp" />
 		</c:when>
 		<c:otherwise>
 			你木有权限使用upload功能
@@ -32,11 +32,11 @@ request.setAttribute("isAdmin", isAdmin);
 
 </style>
 <div class="aj-body-right">
-	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
+	<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 	
-	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
-	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
 </div>
 
 <div style="height:10px;"></div>
