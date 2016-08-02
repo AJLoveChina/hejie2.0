@@ -97,8 +97,10 @@ public class AdminController {
 		tbkItem.load(id);
 		
 		FormComponents formComponents = tbkItem.getFormComponents();
-		request.setAttribute("item", tbkItem);
-		return "/views/admin/tbkItemToItem";
+		Gson gson = new Gson();
+		request.setAttribute("formComponents", formComponents);
+		request.setAttribute("formComponentsJson", gson.toJson(formComponents));
+		return "/views/tools/formComponents";
 	}
 	
 	@RequestMapping(value="/meituUpload")

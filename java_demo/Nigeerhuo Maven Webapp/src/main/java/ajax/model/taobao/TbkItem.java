@@ -26,23 +26,38 @@ public class TbkItem extends Entity<TbkItem>{
 		}
 	}
 	
-	@FormComponentAnno(desc="序号")
+	@FormComponentAnno(desc="序号", isHidden=true)
 	private long num_iid;
 	@FormComponentAnno(desc="标题")
 	private String title;
-	@FormComponentAnno(desc="封面图片")
+	@FormComponentAnno(desc="封面图片", componentType=FormComponents.ComponentType.IMAGE)
 	private String pict_url;
+	@FormComponentAnno(isDiscard=true)
 	private SmallImages small_images;
+	@FormComponentAnno(isHidden=true)
 	private String small_images_string;
+	@FormComponentAnno(desc="商品一口价格", isDisabled=true)
 	private String reserve_price;
+	@FormComponentAnno(desc="商品折扣价格", isDisabled=true)
 	private String zk_final_price;
+	@FormComponentAnno(isHidden=true)
 	private long user_type;
+	@FormComponentAnno(desc="宝贝所在地", isDisabled=true)
 	private String provcity;
+	@FormComponentAnno(desc="商品链接", componentType=FormComponents.ComponentType.LINK)
 	private String item_url;
+	@FormComponentAnno(desc="卖家昵称", isDisabled=true)
 	private String nick;
+	@FormComponentAnno(isDiscard=true)
 	private long seller_id;
+	@FormComponentAnno(desc="30天内交易量(Tip:根据销售量可以判断该商品是否容易转化)", isDisabled=true)
 	private long volume;
+	@FormComponentAnno(desc="二货君收集的日期", isDisabled=true, componentType=FormComponents.ComponentType.DATE)
 	private String dateEntered = null;
+	@FormComponentAnno(desc="简要描述(120字左右),如果不写,系统将默认截取内容的前120字", componentType=FormComponents.ComponentType.TEXTAREA)
+	private String description = "";
+	@FormComponentAnno(desc="编辑内容", componentType=FormComponents.ComponentType.UEDITOR)
+	private String content = "";
 	
 	/**
 	 * 商品ID
@@ -63,6 +78,19 @@ public class TbkItem extends Entity<TbkItem>{
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	/**
 	 * 商品主图
@@ -247,11 +275,20 @@ public class TbkItem extends Entity<TbkItem>{
 			FormComponentAnno formComponentAnno = field.getAnnotation(FormComponentAnno.class);
 			String desc = "";
 			FormComponents.ComponentType componentType = FormComponents.ComponentType.TEXT;
+			boolean isHidden = false;
+			boolean isDisabled = false;
+			boolean isDiscard = false;
 			if (formComponentAnno != null) {
 				desc = formComponentAnno.desc();
 				componentType = formComponentAnno.componentType();
+				isHidden = formComponentAnno.isHidden();
+				isDisabled = formComponentAnno.isDisabled();
+				isDiscard = formComponentAnno.isDiscard();
 			}
-			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, componentType));
+			if (isDiscard) {
+				continue;
+			}
+			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
 			
 		}
 		

@@ -13,7 +13,11 @@ public class FormComponents {
 		String name = "";
 		String value = "";
 		String desc = "";
+		boolean isHidden = false;
+		boolean isDisabled= false;
+		boolean isDiscard = false;
 		ComponentType type = ComponentType.TEXT;
+		
 		public Component(String name, String value, String desc,
 				ComponentType type) {
 			super();
@@ -22,9 +26,32 @@ public class FormComponents {
 			this.desc = desc;
 			this.type = type;
 		}
+
+		public Component(String name, String value, String desc,
+				boolean isHidden, boolean isDisabled, boolean isDiscard,
+				ComponentType type) {
+			super();
+			this.name = name;
+			this.value = value;
+			this.desc = desc;
+			this.isHidden = isHidden;
+			this.isDisabled = isDisabled;
+			this.isDiscard = isDiscard;
+			this.type = type;
+		}
+
+
 	}
-	public enum ComponentType {
-		TEXT,TEXTAREA,DATE;
+	public static enum ComponentType {
+		TEXT,TEXTAREA,DATE,
+		/**
+		 * 百度ueditor
+		 */
+		UEDITOR,
+		/**
+		 * 链接,不能修改只能跳转
+		 */
+		LINK, IMAGE;
 	}
 	
 	private String urlSubmit = "";
