@@ -1,5 +1,6 @@
 package ajax.model.taobao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ajax.tools.Tools;
@@ -8,9 +9,11 @@ import com.google.gson.Gson;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AtbItemsGetRequest;
 import com.taobao.api.request.TbkItemGetRequest;
 import com.taobao.api.request.TbkItemInfoGetRequest;
 import com.taobao.api.request.TbkItemRecommendGetRequest;
+import com.taobao.api.response.AtbItemsGetResponse;
 import com.taobao.api.response.TbkItemGetResponse;
 import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.taobao.api.response.TbkItemRecommendGetResponse;
@@ -19,6 +22,25 @@ public class Taobao {
 	private static String url = "http://gw.api.taobao.com/router/rest";
 	private static String TAOBAO_NIGEERHUO388_APP_KEY = null;
 	private static String TAOBAO_NIGEERHUO388_APP_SECRET = null;
+	
+	public static final String itaobaoUrl = "http://gw.api.taobao.com/router/rest";
+	private static String TAOBAO_NIGEERHUO_APP_KEY = null;
+	private static String TAOBAO_NIGEERHUO_APP_SECRET = null;
+	
+	
+	
+	public static String getTAOBAO_NIGEERHUO_APP_KEY() {
+		if (TAOBAO_NIGEERHUO_APP_KEY == null) {
+			TAOBAO_NIGEERHUO_APP_KEY = Tools.getConfig("TAOBAO_NIGEERHUO_APP_KEY");
+		}
+		return TAOBAO_NIGEERHUO_APP_KEY;
+	}
+	public static String getTAOBAO_NIGEERHUO_APP_SECRET() {
+		if (TAOBAO_NIGEERHUO_APP_SECRET == null) {
+			TAOBAO_NIGEERHUO_APP_SECRET = Tools.getConfig("TAOBAO_NIGEERHUO_APP_SECRET");
+		}
+		return TAOBAO_NIGEERHUO_APP_SECRET;
+	}
 	public static String getTAOBAO_NIGEERHUO388_APP_KEY() {
 		if (Taobao.TAOBAO_NIGEERHUO388_APP_KEY == null) {
 			TAOBAO_NIGEERHUO388_APP_KEY = Tools.getConfig("taobao_nigeerhuo388_app_key");
@@ -41,7 +63,70 @@ public class Taobao {
 	}
 	
 	
-
+	/**
+	 * 获取爱淘宝商品
+	 * @return
+	 */
+	public static List<ITaobao> getITaobaoItems() {
+		List<ITaobao> iTaobaos = new ArrayList<ITaobao>();
+		
+		TaobaoClient client = new DefaultTaobaoClient(Taobao.itaobaoUrl, 
+				Taobao.getTAOBAO_NIGEERHUO_APP_KEY(),
+				Taobao.getTAOBAO_NIGEERHUO_APP_SECRET());
+		AtbItemsGetRequest req = new AtbItemsGetRequest();
+		
+		//req.setArea("杭州");
+		//req.setAutoSend("true");
+		//req.setCid(123L);
+		//req.setEndCommissionNum("10000");
+		//req.setEndCommissionRate("2345");
+		//req.setEndCredit("1heart");
+		//req.setEndPrice("999");
+		//req.setEndTotalnum("10");
+		//req.setGuarantee("true");
+		//req.setRealDescribe("true");
+		req.setKeyword("包邮");
+		//req.setCashCoupon("true");
+		//req.setVipCard("true");
+		req.setFields("open_iid,title,nick,pic_url,price,commission,commission_rate,commission_num,commission_volume,seller_credit_score,item_location,volume,coupon_start_time,coupon_end_time,coupon_rate,promotion_price");
+		req.setPageNo(1L);
+		req.setPageSize(40L);
+		//req.setOverseasItem("true");
+		//req.setOnemonthRepair("true");
+		//req.setSevendaysReturn("true");
+		//req.setSort("price_desc");
+		//req.setStartCommissionNum("1000");
+		//req.setStartCommissionRate("1234");
+		//req.setStartCredit("1heart");
+		//req.setStartPrice("1");
+		//req.setStartTotalnum("1");
+		//req.setSupportCod("true");
+		//req.setMallItem("true");
+		
+		AtbItemsGetResponse rsp;
+		try {
+			rsp = client.execute(req);
+			String json = rsp.getBody();
+			System.out.println(json);
+			
+			Gson gson = new Gson();
+			ITaobaoResponse iTaobaoResponse = gson.fromJson(json, ITaobaoResponse.class);
+			
+			return iTaobaoResponse.atb_items_get_response.items.aitaobao_item;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return iTaobaos;
+	}
+	
+	public static void getITaobaoItemsAndSave() {
+		List<ITaobao> iTaobaos = Taobao.getITaobaoItems();
+		
+		for (ITaobao iTaobao : iTaobaos) {
+			iTaobao.save();
+		}
+		
+	}
 	
 	/**
 	 * taobao.tbk.item.get
@@ -178,7 +263,7 @@ public class Taobao {
 		
 	}
 	public static void main(String[] args) {
-		do1();
+		getITaobaoItemsAndSave();
 	}
 	
 }
