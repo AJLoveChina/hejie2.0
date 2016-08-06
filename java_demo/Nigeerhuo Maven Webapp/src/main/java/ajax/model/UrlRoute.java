@@ -17,7 +17,17 @@ public enum UrlRoute {
 	ONEJOKE_V2(13, "/item"),
 	TBK_ITEMS_PAGE_URL_TEMPLATE(14, "/admin/tbkitems/page/{page}"),
 	ADMIN_CHANGE_TBKITEM_URL(15, "/admin/tbkitems/changeToItem"), 
-	TBK_ITEMS_SUBMIT(16, "/admin/tbkitems/submit");
+	TBK_ITEMS_SUBMIT(16, "/admin/tbkitems/submit"),
+	ITAOBAO_ITEMS_PAGE_URL_TEMPLATE(17, "/admin/itaobao/{page}"),
+	ADMIN_CHANGE_ITAOBAO_URL(18, "/admin/itaobao/changeToItem"),
+	
+	
+	
+	
+	ADMIN_ITAOBAO_MANAGEMENT_URL(19, "/admin/itaobaoitems"),
+	ADMIN_TBKITEMS_MANAGEMENT_URL(20, "/admin/tbkitems"),
+	ADMIN_HOME_ROLLADS_MANAGEMENT_URL(21, "/admin/ads"), 
+	ITAOBAO_ITEM_SUBMIT(22, "/admin/itaobao_item_submit");
 	
 	private int id;
 	private String url;

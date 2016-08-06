@@ -1,5 +1,6 @@
 package ajax.model.entity;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,13 @@ import org.hibernate.metadata.ClassMetadata;
 
 import com.google.gson.Gson;
 
+import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
+import ajax.model.UrlRoute;
+import ajax.model.FormComponents.Component;
+import ajax.model.annotations.FormComponentAnno;
+import ajax.model.annotations.FormComponentUrlAnno;
+import ajax.model.exception.AJRunTimeException;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
@@ -324,6 +331,51 @@ public class Entity<T> {
 		
 		return gson.toJson(this);
 		
+	}
+	
+	public FormComponents getFormComponents(Class<T> cls) throws AJRunTimeException{
+		FormComponentUrlAnno formComponentUrlAnno = cls.getAnnotation(FormComponentUrlAnno.class);
+		
+		if (formComponentUrlAnno == null) {
+			throw new AJRunTimeException("The class should have formComponentAnno with!");
+		}
+		String urlSubmit = formComponentUrlAnno.submitUrl();
+		String urlDelete = formComponentUrlAnno.deleteUrl();
+		
+		if (urlSubmit.equals("") && urlDelete.equals("")) {
+			throw new AJRunTimeException("urlsubmit and urldelete can not be both empty!");
+		}
+		
+		
+		FormComponents formComponents = new FormComponents(urlSubmit, urlDelete);
+		List<FormComponents.Component> components = new ArrayList<FormComponents.Component>();
+		
+		Field[] fields = cls.getDeclaredFields();
+		for (Field field : fields) {
+			
+			FormComponentAnno formComponentAnno = field.getAnnotation(FormComponentAnno.class);
+			String desc = "";
+			FormComponents.ComponentType componentType = FormComponents.ComponentType.TEXT;
+			boolean isHidden = false;
+			boolean isDisabled = false;
+			boolean isDiscard = true;
+			if (formComponentAnno != null) {
+				desc = formComponentAnno.desc();
+				componentType = formComponentAnno.componentType();
+				isHidden = formComponentAnno.isHidden();
+				isDisabled = formComponentAnno.isDisabled();
+				isDiscard = formComponentAnno.isDiscard();
+			}
+			if (isDiscard) {
+				continue;
+			}
+			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
+			
+		}
+		
+		formComponents.setComponents(components);
+		
+		return formComponents;
 	}
 
 }

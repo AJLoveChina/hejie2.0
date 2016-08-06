@@ -1,6 +1,5 @@
 package ajax.model.taobao;
 
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +8,12 @@ import java.util.List;
 
 import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
-import ajax.model.UrlRoute;
 import ajax.model.annotations.FormComponentAnno;
+import ajax.model.annotations.FormComponentUrlAnno;
 import ajax.model.entity.Entity;
 import ajax.tools.Tools;
 
+@FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
 public class TbkItem extends Entity<TbkItem>{
 	class SmallImages{
 		private List<String> string;
@@ -259,43 +259,43 @@ public class TbkItem extends Entity<TbkItem>{
 		return this.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
 	}
 	
-	/**
-	 * 生成对应的表单编辑模型
-	 * @return
-	 */
-	public FormComponents getFormComponents() {
-		String urlSubmit = UrlRoute.TBK_ITEMS_SUBMIT.getUrl();
-		String urlRemove = "";
-		FormComponents formComponents = new FormComponents(urlSubmit, urlRemove);
-		List<FormComponents.Component> components = new ArrayList<FormComponents.Component>();
-		
-		Field[] fields = this.getClass().getDeclaredFields();
-		for (Field field : fields) {
-			
-			FormComponentAnno formComponentAnno = field.getAnnotation(FormComponentAnno.class);
-			String desc = "";
-			FormComponents.ComponentType componentType = FormComponents.ComponentType.TEXT;
-			boolean isHidden = false;
-			boolean isDisabled = false;
-			boolean isDiscard = false;
-			if (formComponentAnno != null) {
-				desc = formComponentAnno.desc();
-				componentType = formComponentAnno.componentType();
-				isHidden = formComponentAnno.isHidden();
-				isDisabled = formComponentAnno.isDisabled();
-				isDiscard = formComponentAnno.isDiscard();
-			}
-			if (isDiscard) {
-				continue;
-			}
-			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
-			
-		}
-		
-		formComponents.setComponents(components);
-		
-		return formComponents;
-	}
+//	/**
+//	 * 生成对应的表单编辑模型
+//	 * @return
+//	 */
+//	public FormComponents getFormComponents() {
+//		String urlSubmit = UrlRoute.TBK_ITEMS_SUBMIT.getUrl();
+//		String urlRemove = "";
+//		FormComponents formComponents = new FormComponents(urlSubmit, urlRemove);
+//		List<FormComponents.Component> components = new ArrayList<FormComponents.Component>();
+//		
+//		Field[] fields = this.getClass().getDeclaredFields();
+//		for (Field field : fields) {
+//			
+//			FormComponentAnno formComponentAnno = field.getAnnotation(FormComponentAnno.class);
+//			String desc = "";
+//			FormComponents.ComponentType componentType = FormComponents.ComponentType.TEXT;
+//			boolean isHidden = false;
+//			boolean isDisabled = false;
+//			boolean isDiscard = false;
+//			if (formComponentAnno != null) {
+//				desc = formComponentAnno.desc();
+//				componentType = formComponentAnno.componentType();
+//				isHidden = formComponentAnno.isHidden();
+//				isDisabled = formComponentAnno.isDisabled();
+//				isDiscard = formComponentAnno.isDiscard();
+//			}
+//			if (isDiscard) {
+//				continue;
+//			}
+//			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
+//			
+//		}
+//		
+//		formComponents.setComponents(components);
+//		
+//		return formComponents;
+//	}
 	
 	
 }

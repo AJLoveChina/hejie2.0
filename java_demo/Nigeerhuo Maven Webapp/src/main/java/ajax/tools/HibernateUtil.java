@@ -18,12 +18,13 @@ public class HibernateUtil {
 	
 	static {
 		
-		java.util.logging.Logger.getLogger("org.hibernate.SQL").setLevel(Level.INFO);
+		//java.util.logging.Logger.getLogger("org.hibernate.SQL").setLevel(Level.INFO);
 		
 		registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
 			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			StandardServiceRegistryBuilder.destroy( registry );
 			e.printStackTrace();
 		}

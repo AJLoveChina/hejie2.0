@@ -6,7 +6,8 @@ public enum ItemStatus {
 	SPIDER(2, "刚刚获取"),
 	IS_SAVE_TO_TYPE_PAGE(3, "是否已经保存到type page"),
 	TBKITEM_IN_PAGE(4, ""),
-	IS_TBKITEM_CHANGE_TO_NORMAL_ITEM(5, "该商品已经发布成值得买");
+	IS_TBKITEM_CHANGE_TO_NORMAL_ITEM(5, "该商品已经发布成值得买"),
+	ITAOBAO_ITEM_IN_PAGE(6, "该爱淘宝商品已经在page了");
 	
 	private int id;
 	private String info;

@@ -28,8 +28,10 @@ import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
 import ajax.model.entity.TypePage;
+import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
 import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.User;
+import ajax.model.taobao.ITaobao;
 import ajax.model.taobao.TbkItem;
 import ajax.tools.Baidu;
 import ajax.tools.Tools;
@@ -43,13 +45,74 @@ import com.google.gson.Gson;
 @RequestMapping(value="/admin")
 public class AdminController {
 	
+	@RequestMapping(value="/itaobao/changeToItem")
+	public String itaobaoChangeToItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("model", "权限不足");
+			
+			return "/views/error/error";
+		}
+		
+		Long id = Long.parseLong(request.getParameter("id"));
+		ITaobao iTaobao = new ITaobao();
+		
+		iTaobao.load(id);
+		
+		FormComponents formComponents;
+		
+		formComponents = iTaobao.getFormComponents(ITaobao.class);
+			
+		Gson gson = new Gson();
+		request.setAttribute("formComponents", formComponents);
+		request.setAttribute("formComponentsJson", gson.toJson(formComponents));
+		return "/views/tools/formComponents";
+		
+	}
+	@RequestMapping(value="/itaobaoitems")
+	public String itaobaoitems(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("model", "权限不足");
+			
+			return "/views/error/error";
+		}
+		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+		
+		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
+		List<ITaobao> list = iTaobaoItemsPagesSeparate.getItemsByPageAndType(1);
+		
+		PageChoice pageChoice = new PageChoice(1, UrlRoute.ITAOBAO_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+		request.setAttribute("model", list);
+		request.setAttribute("pageChoice", pageChoice);
+		return "views/goods/itaobao";
+	}
+	
+	@RequestMapping(value="/itaobao/{page}")
+	public String itaobaoPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("model", "权限不足");
+			
+			return "/views/error/error";
+		}
+		
+		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
+		List<ITaobao> list = iTaobaoItemsPagesSeparate.getItemsByPageAndType(1);
+	
+		PageChoice pageChoice = new PageChoice(1, UrlRoute.ITAOBAO_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+		request.setAttribute("model", list);
+		request.setAttribute("pageChoice", pageChoice);
+		return "views/goods/itaobao";
+	}
+	
 	@RequestMapping(value="/tbkitems")
 	public String tbkItems(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
@@ -67,9 +130,9 @@ public class AdminController {
 	public String tbkItemsPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
@@ -82,13 +145,15 @@ public class AdminController {
 		return "views/goods/tbkitems";
 	}
 	
+
+	
 	@RequestMapping("/tbkitems/changeToItem")
-	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) {
+	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		Long id = Long.parseLong(request.getParameter("id"));
@@ -96,7 +161,7 @@ public class AdminController {
 		
 		tbkItem.load(id);
 		
-		FormComponents formComponents = tbkItem.getFormComponents();
+		FormComponents formComponents = tbkItem.getFormComponents(TbkItem.class);
 		Gson gson = new Gson();
 		request.setAttribute("formComponents", formComponents);
 		request.setAttribute("formComponentsJson", gson.toJson(formComponents));
@@ -107,9 +172,9 @@ public class AdminController {
 	public String meituUpload(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		boolean isok = Tools.meituUploadImageToOss(request, response);
@@ -127,9 +192,9 @@ public class AdminController {
 	public String meitu(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 
 		return "views/tools/meitu";
@@ -139,9 +204,9 @@ public class AdminController {
 	public String typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		int loop = Tools.parseInt(request.getParameter("loop"), 1);
@@ -169,9 +234,9 @@ public class AdminController {
 	public String typePage(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		return "views/admin/typesPageGenerate";
@@ -181,9 +246,9 @@ public class AdminController {
 	public String adminList(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		return "views/admin/list";
@@ -195,9 +260,9 @@ public class AdminController {
 		
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		
@@ -244,9 +309,9 @@ public class AdminController {
 
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		
@@ -287,9 +352,9 @@ public class AdminController {
 	public String uploadSubmit(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		String action = request.getParameter("action");
@@ -330,9 +395,9 @@ public class AdminController {
 	public String uploadRemove(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		String action = request.getParameter("action");
@@ -358,9 +423,9 @@ public class AdminController {
 		
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		return "views/admin/changepage";
@@ -371,9 +436,9 @@ public class AdminController {
 	public String changePageOfItemAjax(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		int id1 = Tools.parseInt(request.getParameter("id1"), -1);
@@ -406,9 +471,9 @@ public class AdminController {
 	public String homeNavThree(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		CRUDPage<Fragment> cp = new CRUDPage<Fragment>();
@@ -436,9 +501,9 @@ public class AdminController {
 	public String uploadLinksToBaidu(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		return "linksToBaidu";
@@ -460,9 +525,9 @@ public class AdminController {
 	public String uploadLinksToBaiduSubmit(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		String data = request.getParameter("data");
@@ -493,9 +558,9 @@ public class AdminController {
 	public String pageGenerator(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		return "views/admin/pageGenerator";
@@ -504,9 +569,9 @@ public class AdminController {
 	public String pageGeneratorGenerate(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		
 		String dataParam = request.getParameter("data");
@@ -572,9 +637,9 @@ public class AdminController {
 	public String crudForTable(HttpServletRequest request, HttpServletResponse response) {
 		if (!User.isAdmin(request, response)) {
 			
-			request.setAttribute("error", "权限不足");
+			request.setAttribute("model", "权限不足");
 			
-			return "Error";
+			return "/views/error/error";
 		}
 		String data = request.getParameter("data");
 		String className = request.getParameter("className");

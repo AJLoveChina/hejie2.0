@@ -128,7 +128,8 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 		}
 		return items;
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	private List<T> getItemsFromIdList(List<String> idList) {
 		List<Long> list = new ArrayList<Long>();
 		
@@ -142,6 +143,7 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 		Criteria cr = session.createCriteria(this.getGenericityType().getClass());
 		
 		cr.add(Restrictions.in(this.getPrimaryKey(), list));
+		
 		List<T> items = cr.list();
 		
 		session.getTransaction().commit();

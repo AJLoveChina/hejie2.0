@@ -4,9 +4,10 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="ajax.model.taobao.ITaobao" table="ITaobao">
+	
+		<class name="ajax.model.taobao.ITaobao" table="itaobao">
 		
-		<id name="id" column="id" type="java.lang.Integer">
+		<id name="id" column="id" type="java.lang.Long">
 			<generator class="increment"></generator>
 		</id>
 		
@@ -34,7 +35,7 @@
 			<column name="item_location"></column>
 		</property>
 		
-		<property name="seller_credit_score" type="java.lang.Integer">
+		<property name="seller_credit_score" type="java.lang.Long">
 			<column name="seller_credit_score"></column>
 		</property>
 		
@@ -74,7 +75,7 @@
 			<column name="commission_volume"></column>
 		</property>
 		
-		<property name="volume" type="java.lang.Integer">
+		<property name="volume" type="java.lang.Long">
 			<column name="volume"></column>
 		</property>
 		
@@ -96,6 +97,10 @@
 		
 		<property name="detail_url" type="java.lang.String">
 			<column name="detail_url"></column>
+		</property>
+		
+		<property name="hasChangeToItem" type="java.lang.Boolean">
+			<column name="hasChangeToItem"></column>
 		</property>
 		
 	</class>
@@ -472,5 +477,7 @@
 					
 	</class>
 		
+
+	
 	
 </hibernate-mapping>

@@ -439,6 +439,10 @@
 	color:#f04848;
 	font-weight: bold;
 }
+.discovery_list .red-price{
+	color:#f04848;
+	font-weight: bold;
+}
 .discovery_list .zan_fav_com a {
 	padding-left:1px;
 	margin-right:10px

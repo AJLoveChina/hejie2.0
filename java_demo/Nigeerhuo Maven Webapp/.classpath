@@ -28,10 +28,10 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/quartz-all-2.1.7.jar"/>
-	<classpathentry kind="lib" path="lib/taobao-sdk-java-auto_1455716734757-20160803-source.jar"/>
-	<classpathentry kind="lib" path="lib/taobao-sdk-java-auto_1455716734757-20160803.jar"/>
-	<classpathentry kind="lib" path="lib/taobao-sdk-java-auto_1462616566587-20160723-source.jar"/>
-	<classpathentry kind="lib" path="lib/taobao-sdk-java-auto_1462616566587-20160723.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/quartz-all-2.1.7.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455716734757-20160803-source.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455716734757-20160803.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1462616566587-20160723-source.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1462616566587-20160723.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

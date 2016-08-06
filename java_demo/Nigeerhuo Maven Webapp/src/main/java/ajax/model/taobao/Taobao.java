@@ -67,7 +67,7 @@ public class Taobao {
 	 * 获取爱淘宝商品
 	 * @return
 	 */
-	public static List<ITaobao> getITaobaoItems() {
+	public static List<ITaobao> getITaobaoItems(ITaobaoItemQueryParams iTaobaoItemQueryParams) {
 		List<ITaobao> iTaobaos = new ArrayList<ITaobao>();
 		
 		TaobaoClient client = new DefaultTaobaoClient(Taobao.itaobaoUrl, 
@@ -85,12 +85,12 @@ public class Taobao {
 		//req.setEndTotalnum("10");
 		//req.setGuarantee("true");
 		//req.setRealDescribe("true");
-		req.setKeyword("包邮");
+		req.setKeyword(iTaobaoItemQueryParams.keyword);
 		//req.setCashCoupon("true");
 		//req.setVipCard("true");
 		req.setFields("open_iid,title,nick,pic_url,price,commission,commission_rate,commission_num,commission_volume,seller_credit_score,item_location,volume,coupon_start_time,coupon_end_time,coupon_rate,promotion_price");
-		req.setPageNo(1L);
-		req.setPageSize(40L);
+		req.setPageNo(iTaobaoItemQueryParams.page_no);
+		req.setPageSize(iTaobaoItemQueryParams.page_size);
 		//req.setOverseasItem("true");
 		//req.setOnemonthRepair("true");
 		//req.setSevendaysReturn("true");
@@ -120,11 +120,22 @@ public class Taobao {
 	}
 	
 	public static void getITaobaoItemsAndSave() {
-		List<ITaobao> iTaobaos = Taobao.getITaobaoItems();
+		int max = 20;
+		int i = 1;
 		
-		for (ITaobao iTaobao : iTaobaos) {
-			iTaobao.save();
-		}
+		do {
+			ITaobaoItemQueryParams iTaobaoItemQueryParams = new ITaobaoItemQueryParams();
+			iTaobaoItemQueryParams.page_no = i;
+			
+			List<ITaobao> iTaobaos = Taobao.getITaobaoItems(iTaobaoItemQueryParams);
+			
+			for (ITaobao iTaobao : iTaobaos) {
+				if (iTaobao.save()) {
+					System.out.println("保存成功 : " + iTaobao.getTitle());
+				}
+			}
+			
+		} while(++i < max);
 		
 	}
 	

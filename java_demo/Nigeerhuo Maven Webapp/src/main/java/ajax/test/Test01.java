@@ -1,5 +1,9 @@
 package ajax.test;
 
+import java.util.List;
+
+import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
+import ajax.model.taobao.ITaobao;
 import ajax.tools.Tools;
 
 
@@ -17,8 +21,12 @@ public class Test01 {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(i);
+//		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
+//		List<ITaobao> iTaobaos = iTaobaoItemsPagesSeparate.getItemsByPageAndType(1);
+//		System.out.println(iTaobaos);
 		
+		ITaobao iTaobao = new ITaobao();
+		iTaobao.load(25L);
 	}
 	public static String getConfigFromTable() {
 		Tools.setConfig("aj-just-a-test", "123");
@@ -30,5 +38,6 @@ public class Test01 {
 		return CONFIG_FROM_TABLE;
 		
 	}
+	
 
 }

@@ -1,10 +1,14 @@
 package ajax.model.taobao;
 
-import java.net.URI;
+import java.math.BigDecimal;
 import java.net.URL;
 
 import org.hibernate.Session;
 
+import ajax.model.FormComponents;
+import ajax.model.UrlRoute;
+import ajax.model.annotations.FormComponentAnno;
+import ajax.model.annotations.FormComponentUrlAnno;
 import ajax.model.entity.Entity;
 import ajax.tools.HibernateUtil;
 
@@ -13,37 +17,71 @@ import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
 import com.taobao.api.request.AtbItemsDetailGetRequest;
-import com.taobao.api.request.AtbItemsGetRequest;
 import com.taobao.api.response.AtbItemsDetailGetResponse;
-import com.taobao.api.response.AtbItemsGetResponse;
 
+@FormComponentUrlAnno(submitUrl="/admin/itaobao_item_submit")
 public class ITaobao extends Entity<ITaobao>{
 	public static final String TABLE_NAME = "ITaobao";
 	
-	private int id;
+	@FormComponentAnno(desc="序号", isHidden=true)
+	private long id;
+	@FormComponentAnno(desc="序号", isHidden=true)
 	private String open_iid;
 	private long seller_id;
 	private String nick = "";
+	@FormComponentAnno(desc="", isHidden=true)
 	private String title = "";
+	@FormComponentAnno(desc="商品原价(单位:元)", isDisabled=true)
 	private float price;
+	@FormComponentAnno(desc="商品折扣后价格(单位:元)", isDisabled=true)
+	private float promotion_price;
+	@FormComponentAnno(desc="佣金(单位:元)", isDisabled=true)
+	private float commission;
 	private String item_location = "";
-	private int seller_credit_score;
+	private long seller_credit_score;
+	@FormComponentAnno(desc="封面图片", componentType=FormComponents.ComponentType.IMAGE)
 	private String pic_url = "";
 	private String coupon_rate = "";
 	private float coupon_price;
 	private String coupon_start_time = "";
 	private String coupon_end_time = "";
 	private String commission_rate = "";
-	private float commission;
 	private String commission_num = "";
 	private float commission_volume;
-	private int volume;
+	private long volume;
 	private String shop_type = "";
-	private float promotion_price;
-	private String dateEntered;
+	private String dateEntered = null;
+	@FormComponentAnno(desc="商品链接", componentType=FormComponents.ComponentType.LINK)
 	private String detail_url;
+	//注意不要使用is开头 否则 hibernate一直报错  ITaobao class not found, cause  there is no getter method for is..
+	private boolean hasChangeToItem = false;
+	@FormComponentAnno(desc="简要描述(120字左右),如果不写,系统将默认截取内容的前120字", componentType=FormComponents.ComponentType.TEXTAREA)
+	private String description = "";
+	@FormComponentAnno(desc="编辑内容", componentType=FormComponents.ComponentType.UEDITOR)
+	private String content = "";
 	
 	
+	
+	
+
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public boolean isHasChangeToItem() {
+		return hasChangeToItem;
+	}
+	public void setHasChangeToItem(boolean hasChangeToItem) {
+		this.hasChangeToItem = hasChangeToItem;
+	}
 	public String getDetail_url() {
 		return detail_url;
 	}
@@ -56,10 +94,10 @@ public class ITaobao extends Entity<ITaobao>{
 	public void setDateEntered(String dateEntered) {
 		this.dateEntered = dateEntered;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getOpen_iid() {
@@ -98,10 +136,10 @@ public class ITaobao extends Entity<ITaobao>{
 	public void setItem_location(String item_location) {
 		this.item_location = item_location;
 	}
-	public int getSeller_credit_score() {
+	public long getSeller_credit_score() {
 		return seller_credit_score;
 	}
-	public void setSeller_credit_score(int seller_credit_score) {
+	public void setSeller_credit_score(long seller_credit_score) {
 		this.seller_credit_score = seller_credit_score;
 	}
 	public String getPic_url() {
@@ -158,10 +196,10 @@ public class ITaobao extends Entity<ITaobao>{
 	public void setCommission_volume(float commission_volume) {
 		this.commission_volume = commission_volume;
 	}
-	public int getVolume() {
+	public long getVolume() {
 		return volume;
 	}
-	public void setVolume(int volume) {
+	public void setVolume(long volume) {
 		this.volume = volume;
 	}
 	public String getShop_type() {
@@ -236,41 +274,19 @@ public class ITaobao extends Entity<ITaobao>{
 		}
 	}
 	
-	public static void main(String[] args) throws ApiException {
-		String url = null;
-		String appkey = null;
-		String secret = null;
-		
-		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-		AtbItemsGetRequest req = new AtbItemsGetRequest();
-		req.setArea("杭州");
-		req.setAutoSend("true");
-		req.setCid(123L);
-		req.setEndCommissionNum("10000");
-		req.setEndCommissionRate("2345");
-		req.setEndCredit("1heart");
-		req.setEndPrice("999");
-		req.setEndTotalnum("10");
-		req.setFields("open_iid");
-		req.setGuarantee("true");
-		req.setRealDescribe("true");
-		req.setKeyword("abc");
-		req.setCashCoupon("true");
-		req.setVipCard("true");
-		req.setPageNo(1L);
-		req.setPageSize(40L);
-		req.setOverseasItem("true");
-		req.setOnemonthRepair("true");
-		req.setSevendaysReturn("true");
-		req.setSort("price_desc");
-		req.setStartCommissionNum("1000");
-		req.setStartCommissionRate("1234");
-		req.setStartCredit("1heart");
-		req.setStartPrice("1");
-		req.setStartTotalnum("1");
-		req.setSupportCod("true");
-		req.setMallItem("true");
-		AtbItemsGetResponse rsp = client.execute(req);
-		System.out.println(rsp.getBody());
+	public float getRewardForUser() {
+		float value = this.getCommission() / 2;
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
+		return bd.floatValue();
 	}
+	
+	public static void main(String[] args) throws ApiException {
+		float value = 12.320f;
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
+		System.out.println(bd.floatValue());
+	}
+	
+	
 }

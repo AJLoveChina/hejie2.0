@@ -100,5 +100,15 @@
     <error-code>404</error-code>
     <location>/error/404</location>
   </error-page>
-        
+  
+   <error-page>			
+        <exception-type>ajax.model.exception.AJRunTimeException</exception-type>
+        <location>/error/runtime</location>
+   </error-page>  
+ 
+    <error-page>			
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error/exception</location>
+   </error-page>  
+         
 </web-app>

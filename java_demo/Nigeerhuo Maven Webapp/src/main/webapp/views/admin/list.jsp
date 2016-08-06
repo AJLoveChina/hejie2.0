@@ -1,3 +1,4 @@
+<%@page import="ajax.model.UrlRoute"%>
 <%@ page language="java"  pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,7 +13,7 @@
 <div class="aj-body-left">
 	
 	<ol>
-		<li><a href="/admin/ads">首页滚动广告管理</a></li>
+		<li><a href="<%=UrlRoute.ADMIN_HOME_ROLLADS_MANAGEMENT_URL.getUrl() %>">首页滚动广告管理</a></li>
 		<li><a href="/admin/homeNavThree">首页三个侧栏广告</a></li>
 		<li><a href="/admin/upload">上传新的Item/编辑已有的item</a></li>
 		<li>
@@ -32,8 +33,13 @@
 			<a href="/admin/typePages">Type pages generate</a>
 		</li>
 		<li>
-			<a href="/admin/tbkitems">Tbk items change to Item</a>
+			<a href="<%=UrlRoute.ADMIN_TBKITEMS_MANAGEMENT_URL.getUrl() %>">Tbk items change to Item</a>
 		</li>
+		
+		<li>
+			<a href="<%=UrlRoute.ADMIN_ITAOBAO_MANAGEMENT_URL.getUrl() %>">ITaobao items change to Item</a>
+		</li>
+		
 	</ol>
 	
 </div>

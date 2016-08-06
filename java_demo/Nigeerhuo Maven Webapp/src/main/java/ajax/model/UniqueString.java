@@ -2,6 +2,8 @@ package ajax.model;
 
 public enum UniqueString {
 	TBK_ITEM,
+	ITAOBAO_ITEM,
+	ITAOBAO_ITEM_MAX_PAGE_KEY,
 	TBK_ITEM_MAX_PAGE_KEY;
 	
 	/**

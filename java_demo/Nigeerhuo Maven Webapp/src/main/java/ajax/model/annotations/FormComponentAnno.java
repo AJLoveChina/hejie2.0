@@ -7,9 +7,10 @@ import java.lang.annotation.Target;
 
 import ajax.model.FormComponents;
 
-@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface FormComponentAnno {
+
 	/**
 	 * 组件提示,用户看到的名称
 	 * @return

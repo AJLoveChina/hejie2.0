@@ -4,17 +4,17 @@
 
 <%
 
-String error = (String) request.getAttribute("error");
+String error = (String) request.getAttribute("model");
 
 if (error == null) {
-	error = "发生错误";
+	error = "对不起, 二货君一时头晕发生了错误, 我们会立刻抢救现场!";
 }
 %>
 
 
 
 
-<jsp:include page="views/includes/header.jsp"></jsp:include>
+<jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 
 <div class="aj-body-left">
@@ -22,11 +22,11 @@ if (error == null) {
 </div>
 
 <div class="aj-body-right">
-	<jsp:include page="views/includes/userLogin.jsp"></jsp:include>
+	<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 	
-	<jsp:include page="views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
 	
-	<jsp:include page="views/joke/jokesSwitch.jsp"></jsp:include>
+	<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
 	
 	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 </div>
