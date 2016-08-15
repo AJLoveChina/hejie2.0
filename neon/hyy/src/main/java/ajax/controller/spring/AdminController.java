@@ -98,7 +98,7 @@ public class AdminController {
 		}
 		
 		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
-		List<ITaobao> list = iTaobaoItemsPagesSeparate.getItemsByPageAndType(1);
+		List<ITaobao> list = iTaobaoItemsPagesSeparate.getItemsByPageAndType(page);
 	
 		PageChoice pageChoice = new PageChoice(1, UrlRoute.ITAOBAO_ITEMS_PAGE_URL_TEMPLATE.getUrl());
 		request.setAttribute("model", list);

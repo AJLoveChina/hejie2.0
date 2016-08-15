@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Good Night</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="../bower_components/slick-carousel/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="../bower_components/slick-carousel/slick/slick-theme.css"/>
+    <meta name="description" content="晚安, 睡个好觉">
+    <style>
+        @font-face {
+            font-family: 'Architects Daughter';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Architects Daughter'), local('ArchitectsDaughter'), url(RXTgOOQ9AAtaVOHxx0IUBLX-17DZ7sxHqV95SKqxd6w.woff) format('woff');
+        }
+
+
+        *{
+            margin:0;padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url(bg.png);
+            background-position: center;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .div{
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+        .dot{
+            position: relative;
+        }
+        .slider,.slick-list,.slick-track{
+            height: 100%;
+        }
+        .slick-list .div{
+            position: relative;
+            height: 100%;
+            padding: 20px;
+        }
+        .slick-dots{
+            bottom:10%;
+        }
+        .slick-dots li.slick-active button:before{
+            color:goldenrod;
+            opacity: 1;
+        }
+        .slick-dots li button:before{
+            color: white;
+        }
+        .bg2{
+            position: fixed;
+            z-index: 99;
+            width: 400px;
+            height: 150px;
+            left: 50%;
+            margin-left: -200px;
+            top: 30px;
+        }
+        .inside{
+            width:80%;
+            height: 80%;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgba(255,255,255,0.7);
+            box-shadow: white 0 0 5px;
+            text-align: center;
+            color: #333;font-family: 'Architects Daughter', cursive;
+            font-size: 20px;
+        }
+        .inside img{
+            display: inline-block;
+        }
+        .inside .text{
+            line-height: 30px;
+            padding: 10px;
+        }
+    </style>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/slick-carousel/slick/slick.min.js"></script>
+</head>
+<body>
+
+
+<div class="slider">
+    <div class="div">
+        <div class="inside">
+            <img class="img" src="dd.png" />
+            <div class="text">
+                One day, Tom ask Kitty: guess how many pieces of sugar in my hand, all 5 pieces to you if you guessed right.
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <img class="img" src="mm.png" />
+            <div class="text">
+                Kitty say : I guess 3 lumps of sugar.
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <img class="img" src="dd.png" />
+            <div class="text">
+                Right, and give you 2 lumps of sugar more as a reward.
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <img class="img" src="zhu.png" />
+            <div class="text">
+                Wait, story is not ending..<br>
+                What if Kitty answers 7 ?
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <img class="img" src="dd.png" />
+            <div class="text">
+                En.., I would say : sorry, I eat two pieces minutes ago,can I buy two more for you?
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <img class="img" src="wanan2.png" />
+            <div class="text" style="font-family:楷体;">
+                改编了一个小笑话,<br>英文好久不写有点差劲<br>
+                晚安&nbsp;&nbsp;董静
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".slider").slick({
+
+        // normal options...
+        infinite: false,
+        slidesToShow : 1,
+        // the magic
+        responsive: [{
+
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 1,
+                infinite: true
+            }
+
+        }, {
+
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 1,
+                dots: true
+            }
+
+        }]
+    });
+</script>
+
+</body>
+</html>
