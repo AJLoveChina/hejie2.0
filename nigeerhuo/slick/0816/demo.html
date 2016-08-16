@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Good Night</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" type="text/css" href="../bower_components/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="../../bower_components/slick-carousel/slick/slick.css"/>
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="../bower_components/slick-carousel/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="../../bower_components/slick-carousel/slick/slick-theme.css"/>
     <meta name="description" content="晚安, 睡个好觉">
     <style>
         @font-face {
@@ -44,6 +44,9 @@
             position: relative;
             height: 100%;
             padding: 20px;
+        }
+        .slick-slide img {
+            max-width: 100%;
         }
         .slick-dots{
             bottom:10%;
@@ -83,9 +86,26 @@
             line-height: 30px;
             padding: 10px;
         }
+        .inside{
+            font-size: 0px;
+        }
+        .inside:before{
+            display: inline-block;
+            content: "";
+            vertical-align: middle;
+            height: 100%;
+            width: 0;
+        }
+        .inside .content{
+            display: inline-block;
+        }
+        .inside .content .text {
+            font-size: 20px;
+            font-family: 'microsoft yahei', simsun, sans-serif;
+        }
     </style>
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../bower_components/slick-carousel/slick/slick.min.js"></script>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/slick-carousel/slick/slick.min.js"></script>
 </head>
 <body>
 
@@ -93,51 +113,53 @@
 <div class="slider">
     <div class="div">
         <div class="inside">
-            <img class="img" src="dd.png" />
-            <div class="text">
-                One day, Tom ask Kitty: guess how many pieces of sugar in my hand, all 5 pieces to you if you guessed right.
+            <div class="content">
+                <img class="img" src="1.jpg" />
+                <div class="text">
+                    一天夜里, 军师站在天台上..
+                </div>
             </div>
         </div>
     </div>
     <div class="div">
         <div class="inside">
-            <img class="img" src="mm.png" />
-            <div class="text">
-                Kitty say : I guess 3 lumps of sugar.
+            <div class="content">
+                <img class="img" src="2.jpg" />
+                <div class="text">
+                    刘备望乎, 军师原来在观星啊. en.. 神人我诸葛
+                </div>
             </div>
         </div>
     </div>
     <div class="div">
         <div class="inside">
-            <img class="img" src="dd.png" />
-            <div class="text">
-                Right, and give you 2 lumps of sugar more as a reward.
+            <div class="content">
+
+                <img class="img" src="3.jpg" />
+                <div class="text">
+                    刘备三兄弟一边偷看军师一边啧啧称叹..
+                </div>
             </div>
         </div>
     </div>
     <div class="div">
         <div class="inside">
-            <img class="img" src="zhu.png" />
-            <div class="text">
-                Wait, story is not ending..<br>
-                What if Kitty answers 7 ?
+            <div class="content">
+
+                <img class="img" src="4.jpg" />
+                <div class="text">
+                    But...
+                </div>
             </div>
         </div>
     </div>
     <div class="div">
         <div class="inside">
-            <img class="img" src="dd.png" />
-            <div class="text">
-                En.., I would say : sorry, I eat two pieces minutes ago,can I buy two more for you?
-            </div>
-        </div>
-    </div>
-    <div class="div">
-        <div class="inside">
-            <img class="img" src="wanan2.png" />
-            <div class="text" style="font-family:楷体;">
-                改编了一个小笑话,<br>英文好久不写有点差劲<br>
-                晚安&nbsp;&nbsp;董静
+            <div class="content">
+                <img class="img" src="wanan2.png" />
+                <div class="text">
+                    诸葛孔明让我和你说, 做个好梦 ^_^ <br>晚安, 董静.
+                </div>
             </div>
         </div>
     </div>
