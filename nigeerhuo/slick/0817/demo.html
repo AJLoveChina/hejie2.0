@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Good Night</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="../../bower_components/slick-carousel/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="../../bower_components/slick-carousel/slick/slick-theme.css"/>
+    <meta name="description" content="晚安, 睡个好觉">
+    <style>
+        @font-face {
+            font-family: 'Architects Daughter';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Architects Daughter'), local('ArchitectsDaughter'), url(RXTgOOQ9AAtaVOHxx0IUBLX-17DZ7sxHqV95SKqxd6w.woff) format('woff');
+        }
+
+
+        *{
+            margin:0;padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url(bg.png);
+            background-position: center;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .div{
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+        .dot{
+            position: relative;
+        }
+        .slider,.slick-list,.slick-track{
+            height: 100%;
+        }
+        .slick-list .div{
+            position: relative;
+            height: 100%;
+            padding: 20px;
+        }
+        .slick-slide img {
+            max-width: 100%;
+        }
+        .slick-dots{
+            bottom:10%;
+        }
+        .slick-dots li.slick-active button:before{
+            color:goldenrod;
+            opacity: 1;
+        }
+        .slick-dots li button:before{
+            color: white;
+        }
+        .bg2{
+            position: fixed;
+            z-index: 99;
+            width: 400px;
+            height: 150px;
+            left: 50%;
+            margin-left: -200px;
+            top: 30px;
+        }
+        .inside{
+            width:80%;
+            height: 80%;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgba(255,255,255,0.7);
+            box-shadow: white 0 0 5px;
+            text-align: center;
+            color: #333;font-family: 'Architects Daughter', cursive;
+            font-size: 20px;
+        }
+        .inside img{
+            display: inline-block;
+        }
+        .inside .text{
+            line-height: 30px;
+            padding: 10px;
+        }
+        .inside{
+            font-size: 0px;
+        }
+        .inside:before{
+            display: inline-block;
+            content: "";
+            vertical-align: middle;
+            height: 100%;
+            width: 0;
+        }
+        .inside .content{
+            display: inline-block;
+        }
+        .inside .content .text {
+            font-size: 20px;
+            font-family: 'microsoft yahei', simsun, sans-serif;
+            font-weight: bold;
+            color:#666;
+        }
+    </style>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/slick-carousel/slick/slick.min.js"></script>
+</head>
+<body>
+
+
+<div class="slider">
+    <div class="div">
+        <div class="inside">
+            <div class="content">
+                <img class="img" src="1.png" />
+                <div class="text">
+                    今晚12点过后就是鬼门开...
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <div class="content">
+                <img class="img" src="2.png" />
+                <div class="text">
+                    民间传说只要在凌晨十二点站在客厅原地自转三圈...
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <div class="content">
+
+                <img class="img" src="3.png" />
+                <div class="text">
+                    然后用尽你的力气大声喊三次 出来 出来 出来!
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <div class="content">
+
+                <img class="img" src="4.png" />
+                <div class="text">
+                    之后.. 你妈就会出来打你 你爸爸也会,全家都会
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div">
+        <div class="inside">
+            <div class="content">
+                <img class="img" src="wanan2.png" />
+                <div class="text">
+                    董静童鞋, 晚安. ^_^
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".slider").slick({
+
+        // normal options...
+        infinite: false,
+        slidesToShow : 1,
+        // the magic
+        responsive: [{
+
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 1,
+                infinite: true
+            }
+
+        }, {
+
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 1,
+                dots: true
+            }
+
+        }]
+    });
+</script>
+
+</body>
+</html>
