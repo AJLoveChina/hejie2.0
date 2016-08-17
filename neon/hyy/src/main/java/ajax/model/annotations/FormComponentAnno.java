@@ -36,4 +36,10 @@ public @interface FormComponentAnno {
 	 * @return
 	 */
 	public boolean isDiscard() default false;
+	
+	/**
+	 * 从方法中获取值
+	 * @return
+	 */
+	public String getValueFromMethod() default "";
 }

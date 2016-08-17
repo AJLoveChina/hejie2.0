@@ -35,7 +35,8 @@ public class ITaobao extends Entity<ITaobao>{
 	private float price;
 	@FormComponentAnno(desc="商品折扣后价格(单位:元)", isDisabled=true)
 	private float promotion_price;
-	@FormComponentAnno(desc="佣金(单位:元)", isDisabled=true)
+	@FormComponentAnno(desc="佣金(单位:元)", isDisabled=true, getValueFromMethod="getRewardForUser")
+	private float commission_for_specific_user;
 	private float commission;
 	private String item_location = "";
 	private long seller_credit_score;
@@ -64,6 +65,12 @@ public class ITaobao extends Entity<ITaobao>{
 	
 	
 
+	public float getCommission_for_specific_user() {
+		return commission_for_specific_user;
+	}
+	public void setCommission_for_specific_user(float commission_for_specific_user) {
+		this.commission_for_specific_user = commission_for_specific_user;
+	}
 	public String getDescription() {
 		return description;
 	}
@@ -274,6 +281,11 @@ public class ITaobao extends Entity<ITaobao>{
 		}
 	}
 	
+	
+	/**
+	 * 获取全部佣金的一半
+	 * @return
+	 */
 	public float getRewardForUser() {
 		float value = this.getCommission() / 2;
 		BigDecimal bd = new BigDecimal(value);

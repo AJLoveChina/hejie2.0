@@ -359,17 +359,24 @@ public class Entity<T> {
 			boolean isHidden = false;
 			boolean isDisabled = false;
 			boolean isDiscard = true;
+			String methodToGetValue = "";
 			if (formComponentAnno != null) {
 				desc = formComponentAnno.desc();
 				componentType = formComponentAnno.componentType();
 				isHidden = formComponentAnno.isHidden();
 				isDisabled = formComponentAnno.isDisabled();
 				isDiscard = formComponentAnno.isDiscard();
+				methodToGetValue = formComponentAnno.getValueFromMethod();
 			}
 			if (isDiscard) {
 				continue;
 			}
-			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
+			
+			if (methodToGetValue.equals("")) {
+				components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
+			} else {
+				components.add(formComponents.new Component(field.getName(), Tools.getMethodValue(methodToGetValue, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
+			}
 			
 		}
 		

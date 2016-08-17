@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -53,6 +54,12 @@ public class Tools {
 //	public static String githubClientSecret = Tools.getConfig("githubClientSecret");
 //	public static String githubClientId = Tools.getConfig("githubClientId");
 	
+	/**
+	 * 反射, 获取对象域值
+	 * @param field
+	 * @param o
+	 * @return
+	 */
 	public static Object getFieldValue(Field field, Object o) {
 		for (Method method : o.getClass().getDeclaredMethods()) {
 			
@@ -65,6 +72,26 @@ public class Tools {
 						System.out.println(ex.getMessage());
 						return null;
 					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 反射, 获取对象方法的返回值
+	 * @param methodToGetValue
+	 * @param o
+	 * @return
+	 */
+	public static Object getMethodValue(String methodToGetValue, Object o) {
+		for (Method method : o.getClass().getDeclaredMethods()) {
+			
+			if (method.getName().equals(methodToGetValue)) {
+				try {
+					return method.invoke(o);
+				} catch (Exception e) {
+					return null;
 				}
 			}
 		}
@@ -670,5 +697,7 @@ public class Tools {
 	    }
 		return null;
 	}
+
+
 
 }
