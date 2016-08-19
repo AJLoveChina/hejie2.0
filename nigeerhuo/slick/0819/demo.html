@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Good Night</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="../../bower_components/slick-carousel/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="../../bower_components/slick-carousel/slick/slick-theme.css"/>
+    <meta name="description" content="晚安, 睡个好觉">
+    <style>
+        @font-face {
+            font-family: 'Architects Daughter';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Architects Daughter'), local('ArchitectsDaughter'), url(RXTgOOQ9AAtaVOHxx0IUBLX-17DZ7sxHqV95SKqxd6w.woff) format('woff');
+        }
+
+
+        *{
+            margin:0;padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url(bg.jpg);
+            background-position-y: center;
+            background-position-x:0px;
+        }
+
+        .page-index {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .div{
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+        .dot{
+            position: relative;
+        }
+        .slider,.slick-list,.slick-track{
+            height: 100%;
+        }
+        .slick-list .div{
+            position: relative;
+            height: 100%;
+            padding: 20px;
+        }
+        .slick-slide img {
+            max-width: 100%;
+        }
+        .slick-dots{
+            bottom:10%;
+        }
+        .slick-dots li.slick-active button:before{
+            color:goldenrod;
+            opacity: 1;
+        }
+        .slick-dots li button:before{
+            color: white;
+        }
+        .bg2{
+            position: fixed;
+            z-index: 99;
+            width: 400px;
+            height: 150px;
+            left: 50%;
+            margin-left: -200px;
+            top: 30px;
+        }
+        .inside{
+            width:80%;
+            height: 80%;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgba(255,255,255,0.7);
+            box-shadow: white 0 0 5px;
+            text-align: center;
+            color: #333;font-family: 'Architects Daughter', cursive;
+            font-size: 20px;
+        }
+        .inside img{
+            display: inline-block;
+        }
+        .inside .text{
+            line-height: 30px;
+            padding: 10px;
+        }
+        .inside{
+            font-size: 0px;
+        }
+        .inside:before{
+            display: inline-block;
+            content: "";
+            vertical-align: middle;
+            height: 100%;
+            width: 0;
+        }
+        .inside .content{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .inside .content .text {
+            font-size: 16px;
+            font-family: 'microsoft yahei', simsun, sans-serif;
+            color:#666;
+        }
+    </style>
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/slick-carousel/slick/slick.min.js"></script>
+</head>
+<body>
+
+
+<div class="slider"></div>
+
+
+
+<script>
+    var data = {
+        list : [
+            {
+                img : "imgs/1.png",
+                text : ""
+            },{
+                img : "imgs/2.png",
+                text : ""
+            },{
+                img : "imgs/3.png",
+                text : ""
+            },{
+                img : "imgs/4.png",
+                text : ""
+            },{
+                img : "imgs/5.png",
+                text : ""
+            },{
+                img : "imgs/6.png",
+                text : ""
+            },{
+                img : "imgs/7.png",
+                text : ""
+            },{
+                img : "imgs/8.png",
+                text : ""
+            },{
+                img : "imgs/9.png",
+                text : ""
+            },{
+                img : "imgs/10.png",
+                text : ""
+            },{
+                img : "imgs/11.png",
+                text : ""
+            },{
+                img : "imgs/12.png",
+                text : ""
+            },{
+                img : "imgs/13.png",
+                text : ""
+            },{
+                img : "imgs/14.png",
+                text : ""
+            },{
+                img : "imgs/15.png",
+                text : ""
+            },{
+                img : "imgs/17.png",
+                text : ""
+            },{
+                img : "imgs/19.png",
+                text : "故事讲述了一位美国母亲,丈夫在女儿四岁时入伍去了越南战场却不幸身亡,后来女儿在整理母亲留下的遗物时" +
+                        "发现了母亲当年写的这首诗,名字是<可是你没有>"
+            },{
+                img : "wanan2.png",
+                text : "我也会保护我心爱的女孩,但我没机会为你那么做了,不过" +
+                        "很高兴认识你<br>晚安,董静."
+            }
+        ]
+    };
+
+    function Div(dom) {
+        this.dom = dom;
+    }
+    Div.prototype = {
+        render : function (data) {
+            var span = $(document.createElement("span"));
+            var total = data.list.length;
+            $.each(data.list, function (index, item) {
+                var div,div2,div3, img, div4,div5;
+                div = $(document.createElement("div"));
+                div2 = $(document.createElement("div"));
+                div3 = $(document.createElement("div"));
+                div4 = $(document.createElement("div"));
+                div5 = $("<div>");
+                img = $(document.createElement("img"));
+
+                div.addClass("div");
+                div2.addClass("inside");
+                div3.addClass("content");
+                div4.addClass("text");
+                div5.html(index + 1 + " / " + total);
+                div5.addClass("page-index");
+                img.addClass("img");
+                img.attr("src", item.img);
+                div4.html(item.text);
+
+
+                div3.append(img);
+                div3.append(div4);
+                div2.append(div5);
+                div2.append(div3);
+                div.append(div2);
+
+                span.append(div);
+            });
+            this.dom.html(span.html());
+        },
+        slick : function () {
+            this.dom.slick({
+                // normal options...
+                infinite: false,
+                slidesToShow : 1,
+
+                // the magic
+                responsive: [{
+
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 1,
+                        infinite: true
+                    }
+
+                }, {
+
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        dots: true
+                    }
+
+                }]
+            });
+        },
+        rollBackground : function () {
+            this.dom.on('swipe', function(event, slick, direction){
+                var xx = $(document.body).css("background-position-x");
+                xx = parseFloat(xx);
+
+                if (direction == "left") {
+                    $(document.body).animate({
+                        "background-position-x" : xx - 20 + "px"
+                    })
+                } else {
+                    $(document.body).animate({
+                        "background-position-x" : ((xx + 20 > 0) ? 0 : (xx + 20))  + "px"
+                    })
+                }
+            });
+        }
+    };
+
+
+    var div = new Div($(".slider"));
+    div.render(data);
+    div.slick();
+    div.rollBackground();
+
+
+
+</script>
+
+<style>
+    #music{
+        display: none;
+    }
+    img#music-logo {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+
+    }
+    .animate{
+        animation: 9.5s linear 0s normal none infinite rotate;
+        -webkit-animation:9.5s linear 0s normal none infinite rotate;
+    }
+    @-webkit-keyframes rotate{
+        from{-webkit-transform:rotate(0deg)}
+        to{-webkit-transform:rotate(360deg)}
+    }
+    @-moz-keyframes rotate{
+        from{-moz-transform:rotate(0deg)}
+        to{-moz-transform:rotate(360deg)}
+    }
+    @-ms-keyframes rotate{
+        from{-ms-transform:rotate(0deg)}
+        to{-ms-transform:rotate(360deg)}
+    }
+    @-o-keyframes rotate{
+        from{-o-transform:rotate(0deg)}
+        to{-o-transform:rotate(360deg)}
+    }
+</style>
+<img src="music.png" id="music-logo" class="animate"/>
+<audio id="music" controls preload="auto" autoplay="autoplay">
+    <source src="music.mp3">
+</audio>
+
+<script>
+    $(function () {
+        $("#music-logo").on("click", function () {
+
+            $(this).removeClass("animate");
+            document.getElementById("music").pause();
+        })  
+    })
+</script>
+
+</body>
+</html>
