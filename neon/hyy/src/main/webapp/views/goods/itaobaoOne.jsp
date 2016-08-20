@@ -50,9 +50,23 @@
             <div class="zan_fav_com">
                	 价格: <c:out value="${item.getPromotion_price() }"></c:out> 元
             </div>
-            <a style='float:right;' class="directLink" target="_blank" href='<%=UrlRoute.ADMIN_CHANGE_ITAOBAO_URL.getUrl() %>?id=<c:out value="${item.getId()}"></c:out>'>
-                写文章
-            </a>
+            <c:choose>
+            	<c:when test="${item.isHasChangeToItem() }">
+	        		<a style='float:right;' class="directLink disabled" target="_blank" href='javascript:;'>
+				              已被占用
+				    </a>
+            	</c:when>
+            	<c:when test="${item.isLock() }">
+	        		<a style='float:right;' class="directLink disabled" target="_blank" href='javascript:;'>
+				               已被占用
+				    </a>
+            	</c:when>
+            	<c:otherwise>
+	        		<a style='float:right;' class="directLink" target="_blank" href='<%=UrlRoute.ADMIN_CHANGE_ITAOBAO_URL.getUrl() %>?id=<c:out value="${item.getId()}"></c:out>'>
+				                写软文
+				    </a>
+            	</c:otherwise>
+            </c:choose>
 			<div style='clear:both;'></div>
         </div>
         <div>

@@ -20,6 +20,7 @@ import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
 import ajax.model.FormComponents;
 import ajax.model.JokeType;
+import ajax.model.Lock;
 import ajax.model.PageChoice;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Entity;
@@ -55,9 +56,20 @@ public class AdminController {
 		}
 		
 		Long id = Long.parseLong(request.getParameter("id"));
-		ITaobao iTaobao = new ITaobao();
+		if (!Lock.lock(id + "")) {
+			request.setAttribute("model", "就在刚刚已经有一个小伙伴锁定了该商品, 请换一个呗~~");
+			
+			return "/views/error/error";
+		}
 		
+		ITaobao iTaobao = new ITaobao();
 		iTaobao.load(id);
+		
+		if (iTaobao.isHasChangeToItem()) {
+			request.setAttribute("model", "这个商品已经被写文章了, 请换一个呗~~");
+			
+			return "/views/error/error";
+		}
 		
 		FormComponents formComponents;
 		
@@ -100,7 +112,7 @@ public class AdminController {
 		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
 		List<ITaobao> list = iTaobaoItemsPagesSeparate.getItemsByPageAndType(page);
 	
-		PageChoice pageChoice = new PageChoice(1, UrlRoute.ITAOBAO_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+		PageChoice pageChoice = new PageChoice(page, UrlRoute.ITAOBAO_ITEMS_PAGE_URL_TEMPLATE.getUrl());
 		request.setAttribute("model", list);
 		request.setAttribute("pageChoice", pageChoice);
 		return "views/goods/itaobao";

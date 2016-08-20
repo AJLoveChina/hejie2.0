@@ -231,7 +231,10 @@
 .aj-grid-list .item_buy_mall .directLink{
 	position:absolute;top:3px;right:0;
 }
-
+.aj-grid-list .item_buy_mall .directLink.disabled{
+	background-color: gray;
+	color:white;
+}
 .aj-grid-list .aj-stamps{
 	float:right;
 	display:block;

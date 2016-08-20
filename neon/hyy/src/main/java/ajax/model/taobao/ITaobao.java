@@ -6,6 +6,7 @@ import java.net.URL;
 import org.hibernate.Session;
 
 import ajax.model.FormComponents;
+import ajax.model.Lock;
 import ajax.model.UrlRoute;
 import ajax.model.annotations.FormComponentAnno;
 import ajax.model.annotations.FormComponentUrlAnno;
@@ -281,6 +282,13 @@ public class ITaobao extends Entity<ITaobao>{
 		}
 	}
 	
+	/**
+	 * 编辑商品前判断是否在内存中已被其它同一时段用户占用
+	 * @return
+	 */
+	public boolean isLock() {
+		return Lock.isLock(this.getId() + "");
+	}
 	
 	/**
 	 * 获取全部佣金的一半
@@ -294,10 +302,11 @@ public class ITaobao extends Entity<ITaobao>{
 	}
 	
 	public static void main(String[] args) throws ApiException {
-		float value = 12.320f;
-		BigDecimal bd = new BigDecimal(value);
-		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
-		System.out.println(bd.floatValue());
+//		float value = 12.320f;
+//		BigDecimal bd = new BigDecimal(value);
+//		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
+//		System.out.println(bd.floatValue());
+		
 	}
 	
 	
