@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <!-- 用户提示  -->
 
 <div class="modal" id="aj-gobal-tishi-modal">

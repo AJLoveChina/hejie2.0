@@ -87,6 +87,7 @@ public class Entity<T> {
 		return false;
 	}
 	
+	
 	public String getPrimaryKey() {
 		ClassMetadata meta = HibernateUtil.getSessionFactory().getClassMetadata(this.getClass());
 		return meta.getIdentifierPropertyName();
@@ -126,6 +127,16 @@ public class Entity<T> {
 			return false;
 		}
 		
+	}
+	
+	public void save(Session session) {
+		session.save(this);
+	}
+	public void update(Session session) {
+		session.update(this);
+	}
+	public void delete(Session session) {
+		session.delete(this);
 	}
 	
 	public boolean update() {
@@ -262,6 +273,25 @@ public class Entity<T> {
 	public static <T> boolean isExist(String column, String columnValue, Class<T> cls) {
 		T t = getBy(column, columnValue, cls);
 		return t != null;
+	}
+	
+	
+	public static boolean isExist(String column, Object value, Class<?> cls) {
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(cls);
+		criteria.add(Restrictions.eq(column, value));
+		
+		try {
+			int size = criteria.list().size();
+			
+			session.getTransaction().commit();
+			return size > 0;
+		} catch (Exception ex) {
+			return false;
+		}
+		
 	}
 
 

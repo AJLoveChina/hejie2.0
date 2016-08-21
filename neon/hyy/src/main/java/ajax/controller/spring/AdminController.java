@@ -29,6 +29,7 @@ import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
 import ajax.model.entity.TypePage;
+import ajax.model.exception.AJRunTimeException;
 import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
 import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.User;
@@ -45,6 +46,42 @@ import com.google.gson.Gson;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
+
+	@RequestMapping(value="/itaobao_item_submit")
+	public String itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("model", "权限不足");
+			
+			return "/views/error/error";
+		}
+		
+		String entity = request.getParameter("entity");
+		Gson gson = new Gson();
+		ITaobao iTaobaoFromClientInput = gson.fromJson(entity, ITaobao.class);
+		AjaxResponse<String> ajaxResponse = new AjaxResponse<String>();
+		
+		try {
+			if (iTaobaoFromClientInput.changeToItemAndSave()) {
+				
+				ajaxResponse.setIsok(true);
+				ajaxResponse.setData("提交成功!");
+				
+			} else {
+				ajaxResponse.setIsok(false);
+				ajaxResponse.setData("提交失败");
+			}
+		} catch(AJRunTimeException ex) {
+			
+			ajaxResponse.setIsok(false);
+			ajaxResponse.setData(ex.getMessage());
+			
+		}
+		
+		request.setAttribute("model", ajaxResponse.toJson());
+		return "Ajax";
+		
+	}
 	
 	@RequestMapping(value="/itaobao/changeToItem")
 	public String itaobaoChangeToItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -57,7 +94,7 @@ public class AdminController {
 		
 		Long id = Long.parseLong(request.getParameter("id"));
 		if (!Lock.lock(id + "")) {
-			request.setAttribute("model", "就在刚刚已经有一个小伙伴锁定了该商品, 请换一个呗~~");
+			request.setAttribute("model", "就在刚刚已经有一个小伙伴锁定了该商品, 请换一个呗~~<br>如果是你不小心刷新了网页,可以在个人中心, 我编辑的商品中找到该条目.");
 			
 			return "/views/error/error";
 		}

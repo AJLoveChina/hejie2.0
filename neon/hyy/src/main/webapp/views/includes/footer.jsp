@@ -54,6 +54,6 @@ var _hmt = _hmt || [];
 	</div>
 </footer>
 
-
+<%@ include file="/views/tools/tishi.jsp" %>
 </body>
 </html>
