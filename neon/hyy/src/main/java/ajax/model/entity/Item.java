@@ -507,7 +507,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			String text = doc.body().text();
 			
 			int length,random;
-			if (this.getPreviewImage() == null || this.getPreviewImage() == "") {
+			if (this.getPreviewImage() == null || this.getPreviewImage().trim().equals("")) {
 				length = 170;
 				random = (new Random()).nextInt(40);
 				

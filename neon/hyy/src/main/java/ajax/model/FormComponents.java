@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class FormComponents {
 	public class Component {
-		String name = "";
-		String value = "";
-		String desc = "";
-		boolean isHidden = false;
-		boolean isDisabled= false;
-		boolean isDiscard = false;
-		ComponentType type = ComponentType.TEXT;
+		public String name = "";
+		public String value = "";
+		public String desc = "";
+		public boolean isHidden = false;
+		public boolean isDisabled= false;
+		public boolean isDiscard = false;
+		public ComponentType type = ComponentType.TEXT;
 		
 		public Component(String name, String value, String desc,
 				ComponentType type) {

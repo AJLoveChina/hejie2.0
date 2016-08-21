@@ -6,12 +6,16 @@ import java.net.URL;
 import org.hibernate.Session;
 
 import ajax.model.FormComponents;
+import ajax.model.ItemStatus;
 import ajax.model.Lock;
 import ajax.model.UrlRoute;
 import ajax.model.annotations.FormComponentAnno;
 import ajax.model.annotations.FormComponentUrlAnno;
 import ajax.model.entity.Entity;
+import ajax.model.entity.Item;
+import ajax.model.exception.AJRunTimeException;
 import ajax.tools.HibernateUtil;
+import ajax.tools.Tools;
 
 import com.google.gson.Gson;
 import com.taobao.api.ApiException;
@@ -23,6 +27,7 @@ import com.taobao.api.response.AtbItemsDetailGetResponse;
 @FormComponentUrlAnno(submitUrl="/admin/itaobao_item_submit")
 public class ITaobao extends Entity<ITaobao>{
 	public static final String TABLE_NAME = "ITaobao";
+	public static final ITaobao ITAOBAO_LOCK = new ITaobao();
 	
 	@FormComponentAnno(desc="序号", isHidden=true)
 	private long id;
@@ -309,5 +314,57 @@ public class ITaobao extends Entity<ITaobao>{
 		
 	}
 	
+	/**
+	 * 把用户输入的ITaobao item 转换成 item并且保存
+	 * @return
+	 * @throws AJRunTimeException 
+	 */
+	public boolean changeToItemAndSave() throws AJRunTimeException {
+		synchronized (ITAOBAO_LOCK) {
+			// 不要调换下面代码的顺序
+			
+			if (!ITaobao.isExist("id", this.getId(), ITaobao.class)) {
+				throw new AJRunTimeException("不存在相应的商品~");
+			}
+			
+			ITaobao iTaobao = new ITaobao();
+			iTaobao.load(this.getId());
+			
+			if (iTaobao.hasChangeToItem) {
+				throw new AJRunTimeException("已经被写成文章了,不可以重复编写");
+			}
+			
+			
+			Item item = new Item();
+			item.setTitle(this.getTitle());
+			item.setContent(Tools.makeContentSafeOfUEditor(this.getContent()));
+			item.setPreviewImage(iTaobao.getPic_url());
+			
+			if (this.getDescription() != null && !this.getDescription().trim().equals("")) {
+				item.setSummary(Tools.removeHTML(this.getDescription()));
+			} else {
+				item.setSummary(item.generateSummaryAndReturn());
+			}
+			item.addItemStatus(ItemStatus.HAVE_NOT_CHANGE_SLICK_URL);
+			
+			
+			iTaobao.setHasChangeToItem(true);
+			
+			
+			try {
+				Session session = HibernateUtil.getCurrentSession();
+				session.beginTransaction();
+				
+				item.save(session);
+				iTaobao.update(session);
+				
+				session.getTransaction().commit();
+				
+				return true;
+			} catch(Exception ex) {
+				return false;
+			}
+		}
+	}
 	
 }

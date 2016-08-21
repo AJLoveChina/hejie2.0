@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.log4j.chainsaw.Main;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -194,9 +195,7 @@ public class Tools {
 		}
 	}
 
-	public static void main(String[] args) {
-		writeDataToFile("123", new File("WebRoot/static/exam/xx.txt"), "UTF-8");
-	}
+	
 
 	public static void appendDataToFile(String data, File file) {
 		String copy = readFile(file);
@@ -698,6 +697,26 @@ public class Tools {
 		return null;
 	}
 
+	/**
+	 * 安全处理用户从ueditor编辑并上传的内容
+	 * @param content
+	 * @return
+	 */
+	public static String makeContentSafeOfUEditor(String content) {
+		// TODO AJ
+		return content;
+	}
 
+	public static String removeHTML(String description) {
+		Document doc = Jsoup.parse(description);
+		
+		return doc.body().text();
+	}
+
+	public static void main(String[] args) {
+		String text = "<p>123</p><img /><script><a>aa</a>";
+		
+		System.out.println(Tools.removeHTML(text));
+	}
 
 }

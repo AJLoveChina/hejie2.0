@@ -190,11 +190,19 @@ String json  = (String) request.getAttribute("formComponentsJson");
 						aj.tishi("请勿重复点击");
 						return;
 					}
-					$scope.s.content = ue.getContent();
+					
+					var entity = {};
+					
+					for (var i = 0; i < $scope.s.components.length; i++) {
+						entity[$scope.s.components[i].name] = $scope.s.components[i].value;
+					}
+					
+					// $scope.s.content = ue.getContent();
 					$scope.isAjax = true;
 					$.ajax({
-						url : "/admin/upload/submit", 
+						url : $scope.s.urlSubmit, 
 						data : {
+							entity :  JSON.stringify(entity),
 							item : JSON.stringify($scope.s)
 						},
 						type : "POST",
@@ -225,17 +233,17 @@ String json  = (String) request.getAttribute("formComponentsJson");
 					if (window.confirm("确定删除")) {
 						$scope.isAjax = true;
 						$.ajax({
-							url : "/admin//upload/remove", 
+							url : $scope.s.urlRemove, 
 							data : {
 								item : JSON.stringify($scope.s)
 							},
 							type : "POST",
 							dataType : "json",
 							success : function (data) {
-								console.log(data);
+								aj.tishi(data.data);
 							},
 							error : function (er) {
-								console.log(er);
+								aj.tishi("服务端异常~~");
 							},
 							complete : function () {
 								$scope.$apply(function () {

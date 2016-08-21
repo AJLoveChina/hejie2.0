@@ -43,7 +43,7 @@ String json = gson.toJson(cp);
 						url  : "/admin/crudForTable",
 						data : {
 							data : JSON.stringify($scope.s),
-							"className" : $.trim($scope.s.className)
+							className : $.trim($scope.s.className)
 						},
 						dataType : "json",
 						success : function  (json) {
