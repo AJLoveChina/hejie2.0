@@ -3,6 +3,7 @@ package ajax.model.entity;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -23,7 +24,7 @@ import ajax.model.exception.AJRunTimeException;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
-public class Entity<T> {
+public class Entity<T> implements Iterable<T>,Iterator<T>{
 
 	private String statusSplitByComma = "";
 	public String getStatusSplitByComma() {
@@ -243,7 +244,7 @@ public class Entity<T> {
 	 * @param cls
 	 * @return
 	 */
-	public static <T> T getBy(String column, String columnValue, Class<T> cls) {
+	public static <T> T getBy(String column, Object columnValue, Class<T> cls) {
 		
 		Session session = HibernateUtil.getCurrentSession();
 		
@@ -263,6 +264,41 @@ public class Entity<T> {
 			return null;
 		}
 	}
+	
+	/**
+	 * 多条件限制查询
+	 * @param cls
+	 * @param keyValue  必须是 一个String类型接一个Object类型, 等等同理...
+	 * @return null if no result or keyValue format error
+	 */
+	public static <T> T getBy(Class<T> cls, Object ... keyValue ) {
+		if (keyValue.length < 2 || keyValue.length % 2 != 0) {
+			return null;
+		}
+		
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
+		Criteria cr = session.createCriteria(cls);
+		
+		int i = 0;
+		while(i < keyValue.length) {
+			cr.add(Restrictions.eq((String)keyValue[i], keyValue[i+1]));
+			i += 2;
+		}
+		
+		List<T> list = cr.list();
+		
+		session.getTransaction().commit();
+		
+		if (list.size() > 0) {
+			return list.get(0);
+		} else {
+			return null;
+		}
+	}	
+	
 	/**
 	 * 根据字段查询是否存在该行数据
 	 * @param column
@@ -413,6 +449,38 @@ public class Entity<T> {
 		formComponents.setComponents(components);
 		
 		return formComponents;
+	}
+	
+	/**
+	 * 一个个迭代数据表中的所有元素
+	 */
+	@Override
+	public Iterator<T> iterator() {
+		
+		return new Entity<T>();
+
+	}
+	
+	private int iterator_page = 1;
+	private int iterator_size = 1;
+	private List<T> iterator_list;
+	@Override
+	public boolean hasNext() {
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(this.getClass());
+		
+		criteria.setFirstResult((iterator_page - 1) * iterator_size);
+		criteria.setMaxResults(iterator_size);
+		iterator_list = criteria.list();
+		
+		iterator_page ++;
+		session.getTransaction().commit();
+		return iterator_list.size() > 0;
+	}
+	@Override
+	public T next() {
+		return iterator_list.get(0);
 	}
 
 }

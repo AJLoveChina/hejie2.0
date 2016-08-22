@@ -11,7 +11,7 @@ import ajax.model.UniqueString;
 import ajax.model.taobao.TbkItem;
 import ajax.tools.HibernateUtil;
 
-public class TbkItemsPagesSeparate<T> extends BasePagesSeparateProcessor<TbkItem>{
+public class TbkItemsPagesSeparate extends BasePagesSeparateProcessor<TbkItem>{
 
 	
 	
@@ -36,14 +36,14 @@ public class TbkItemsPagesSeparate<T> extends BasePagesSeparateProcessor<TbkItem
 	}
 	
 	@Override
-	public List<TbkItem> getNextPageList() {
+	public List<TbkItem> getNextPageList(int listSize) {
 		Session session = HibernateUtil.getCurrentSession();
 		
 		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(TbkItem.class);
 		
-		criteria.setMaxResults(20);
+		criteria.setMaxResults(listSize);
 		criteria.setFirstResult(0);
 		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + this.getItemStatusWhichWillBeSetAfterPutInPage().wrapWithBE() + "%")));
 		
@@ -79,6 +79,7 @@ public class TbkItemsPagesSeparate<T> extends BasePagesSeparateProcessor<TbkItem
 //		List<TbkItem> list = tbkItemsPagesSeparate.getItemsByPageAndType(1, tbkItemsPagesSeparate);
 //		System.out.println(list);
 	}
+
 	
 	
 }

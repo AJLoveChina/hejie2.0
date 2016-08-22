@@ -165,7 +165,7 @@ public class AdminController {
 		}
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
-		TbkItemsPagesSeparate<TbkItem> tbkItemsPagesSeparate = new TbkItemsPagesSeparate<TbkItem>();
+		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
 		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
 		
 	
@@ -186,7 +186,7 @@ public class AdminController {
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
-		TbkItemsPagesSeparate<TbkItem> tbkItemsPagesSeparate = new TbkItemsPagesSeparate<TbkItem>();
+		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
 		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(page);
 		PageChoice pageChoice = new PageChoice(page, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
 		request.setAttribute("model", tbkItems);

@@ -8,7 +8,8 @@ public enum ItemStatus {
 	TBKITEM_IN_PAGE(4, ""),
 	IS_TBKITEM_CHANGE_TO_NORMAL_ITEM(5, "该商品已经发布成值得买"),
 	ITAOBAO_ITEM_IN_PAGE(6, "该爱淘宝商品已经在page了"), 
-	HAVE_NOT_CHANGE_SLICK_URL(7, "该商品的链接还不是返利链接");
+	HAVE_NOT_CHANGE_SLICK_URL(7, "该商品的链接还不是返利链接"), 
+	ZHIDEMAI_ITEM_IN_PAGE(8, "值得买已经加入到页面");
 	
 	private int id;
 	private String info;

@@ -24,14 +24,14 @@ public class ITaobaoItemsPagesSeparate extends BasePagesSeparateProcessor<ITaoba
 	}
 
 	@Override
-	public List<ITaobao> getNextPageList() {
+	public List<ITaobao> getNextPageList(int listSize) {
 		Session session = HibernateUtil.getCurrentSession();
 		
 		session.beginTransaction();
 		
 		Criteria criteria = session.createCriteria(ITaobao.class);
 		
-		criteria.setMaxResults(20);
+		criteria.setMaxResults(listSize);
 		criteria.setFirstResult(0);
 		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + this.getItemStatusWhichWillBeSetAfterPutInPage().wrapWithBE() + "%")));
 		
@@ -73,4 +73,7 @@ public class ITaobaoItemsPagesSeparate extends BasePagesSeparateProcessor<ITaoba
 			System.out.println("生成新的一页成功!");
 		}
 	}
+
+
+
 }

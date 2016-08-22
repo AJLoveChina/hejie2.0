@@ -21,8 +21,16 @@ public class TypePage extends Entity<TypePage>{
 	private String items;
 	private String type;
 	private int page;
+	private int size;
 	private String dateEntered;
 	
+	
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
 	public int getId() {
 		return id;
 	}
@@ -55,19 +63,26 @@ public class TypePage extends Entity<TypePage>{
 	}
 	
 	/**
-	 * 根据jokeType 类型生成对应新的一页
+	 * 根据jokeType 类型生成对应新的一页, 默认 size=20
 	 * @param jokeType
 	 * @return 
 	 */
 	public static boolean generateOnePageOf(JokeType jokeType) {
+		
+		return generateOnePageOf(jokeType, 20);
+		
+	}
+	
+	public static boolean generateOnePageOf(JokeType jokeType, int size) {
 		int maxPage = getMaxPageOf(jokeType);
-		List<Item> items = Item.getItemsOfSpecifiedJokeTypeAndIsNotInTypePage(jokeType, 20);
+		List<Item> items = Item.getItemsOfSpecifiedJokeTypeAndIsNotInTypePage(jokeType, size);
 		
 		
-		if (items.size() < 20) {
+		if (items.size() < size) {
 			System.out.println("JokeTYpe =" + jokeType.getId() + ", 不足20个item");
 			return false;
 		}
+		
 		List<Integer> idList = new ArrayList<Integer>();
 		
 		for(Item item : items) {
@@ -79,6 +94,7 @@ public class TypePage extends Entity<TypePage>{
 		tp.setItems(Tools.join(idList, ","));
 		tp.setPage(maxPage + 1);
 		tp.setType(jokeType.getId() + "");
+		tp.setSize(items.size());
 		
 		if (tp.save()) {
 			// 2. 修改jokeType最大页码
@@ -93,7 +109,6 @@ public class TypePage extends Entity<TypePage>{
 		} else {
 			return false;
 		}
-		
 	}
 	
 	public static int getMaxPageOf(JokeType jokeType) {
@@ -154,10 +169,24 @@ public class TypePage extends Entity<TypePage>{
 			items = Item.getV2(idList);
 		}
 		
-		
-		
 		return items;
 	}
 	
+	
+	public static void main(String[] args) {
+		TypePage.maintainSize();
+	}
+	
+	/**
+	 * 重新计算每个页面的item数目
+	 */
+	private static void maintainSize() {
+		TypePage typePage = new TypePage();
+		while(typePage.hasNext()) {
+			TypePage typePage2 = typePage.next();
+			typePage2.setSize(typePage2.getItems().split(",").length);
+			typePage2.update();
+		}
+	}
 	
 }
