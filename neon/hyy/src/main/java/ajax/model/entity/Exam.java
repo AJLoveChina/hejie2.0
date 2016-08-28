@@ -6,7 +6,7 @@ import ajax.model.UrlRoute;
 
 public class Exam extends Entity<Exam>{
 	private int id;
-	private int userid;
+	private long userid;
 	/**
 	 * 标题
 	 */
@@ -52,10 +52,10 @@ public class Exam extends Entity<Exam>{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserid() {
+	public long getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(long userid) {
 		this.userid = userid;
 	}
 	public String getTitle() {

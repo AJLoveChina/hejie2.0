@@ -81,11 +81,11 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 		if (previousTypePage != null) {
 			int lessNum = this.getPageSize() - previousTypePage.getSize();
 			
-			if (lessNum > 0) {
+			if (lessNum >= 0) {
 				
 				// 如果待添加的items 正好只够上一个页面填满
 				if (items.size() <= lessNum) {
-					itemsLeft = items.subList(0, lessNum);
+					itemsLeft = items;
 					itemsRight = new ArrayList<T>();
 				} else {
 					itemsLeft = items.subList(0, lessNum);
@@ -102,6 +102,7 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 		}
 		
 		boolean isSuccess = true;
+		boolean isNewPage = false;
 		Session session = HibernateUtil.getCurrentSession();
 		session.beginTransaction();
 		
@@ -117,6 +118,7 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 			currentTypePage.setType(this.getPagesTypeKey().getKey());
 			
 			currentTypePage.save(session);
+			isNewPage = true;
 		}
 		
 		try {
@@ -126,8 +128,12 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 		}
 		
 		if (isSuccess) {
-			// 2. 修改最大页码
-			TypePage.setMaxPageOf(this.getMaxPageKey().getKey(), maxPage + 1);
+			
+			if (isNewPage) {
+				// 2. 修改最大页码
+				TypePage.setMaxPageOf(this.getMaxPageKey().getKey(), maxPage + 1);
+			}
+			
 			
 			// 3.依次为item添加状态
 			for(T item : items) {
@@ -163,9 +169,9 @@ public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 			typePage.setSize(idList.size());
 			
 		} else {
-			TypePage tp = new TypePage();
-			tp.setItems(Tools.join(idList, ","));
-			tp.setSize(idList.size());
+			typePage = new TypePage();
+			typePage.setItems(Tools.join(idList, ","));
+			typePage.setSize(idList.size());
 		}
 		
 		return typePage;

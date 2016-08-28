@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
+import ajax.model.JokeType;
 import ajax.model.Lock;
 import ajax.model.UrlRoute;
 import ajax.model.annotations.FormComponentAnno;
@@ -14,6 +15,7 @@ import ajax.model.annotations.FormComponentUrlAnno;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Item;
 import ajax.model.exception.AJRunTimeException;
+import ajax.model.safe.User;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
@@ -27,7 +29,7 @@ import com.taobao.api.response.AtbItemsDetailGetResponse;
 @FormComponentUrlAnno(submitUrl="/admin/itaobao_item_submit")
 public class ITaobao extends Entity<ITaobao>{
 	public static final String TABLE_NAME = "ITaobao";
-	public static final ITaobao ITAOBAO_LOCK = new ITaobao();
+	private static final ITaobao ITAOBAO_LOCK = new ITaobao();
 	
 	@FormComponentAnno(desc="序号", isHidden=true)
 	private long id;
@@ -300,6 +302,9 @@ public class ITaobao extends Entity<ITaobao>{
 	 * @return
 	 */
 	public float getRewardForUser() {
+		if (this.getCommission() <= 0.1) {
+			return this.getCommission();
+		}
 		float value = this.getCommission() / 2;
 		BigDecimal bd = new BigDecimal(value);
 		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
@@ -319,7 +324,7 @@ public class ITaobao extends Entity<ITaobao>{
 	 * @return
 	 * @throws AJRunTimeException 
 	 */
-	public boolean changeToItemAndSave() throws AJRunTimeException {
+	public boolean changeToItemAndSave(User user) throws AJRunTimeException {
 		synchronized (ITAOBAO_LOCK) {
 			// 不要调换下面代码的顺序
 			
@@ -339,6 +344,18 @@ public class ITaobao extends Entity<ITaobao>{
 			item.setTitle(this.getTitle());
 			item.setContent(Tools.makeContentSafeOfUEditor(this.getContent()));
 			item.setPreviewImage(iTaobao.getPic_url());
+			item.setItype(JokeType.ZHIDEMAI_AITAO.getId());
+			
+			if (user.isAdmin()) {
+				User editor = User.getAEditorByRandom();
+				//TODO AJ
+				item.setUserid(editor.getId());
+				item.setUsername(editor.getNickname());
+			} else {
+				item.setUserid(user.getId());
+				item.setUsername(user.getNickname());
+			}
+			
 			
 			if (this.getDescription() != null && !this.getDescription().trim().equals("")) {
 				item.setSummary(Tools.removeHTML(this.getDescription()));

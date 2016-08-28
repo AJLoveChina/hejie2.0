@@ -49,7 +49,8 @@ public class AdminController {
 
 	@RequestMapping(value="/itaobao_item_submit")
 	public String itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
+		User user = User.getLoginUser(request);
+		if (!user.isAdmin()) {
 			
 			request.setAttribute("model", "权限不足");
 			
@@ -62,7 +63,7 @@ public class AdminController {
 		AjaxResponse<String> ajaxResponse = new AjaxResponse<String>();
 		
 		try {
-			if (iTaobaoFromClientInput.changeToItemAndSave()) {
+			if (iTaobaoFromClientInput.changeToItemAndSave(user)) {
 				
 				ajaxResponse.setIsok(true);
 				ajaxResponse.setData("提交成功!");

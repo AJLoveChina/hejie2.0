@@ -15,7 +15,7 @@ import ajax.tools.Tools;
 
 public class TypePage extends Entity<TypePage>{
 	public static final String MAX_PAGE_PREFIX = "aj-type-page-maxpage-of-joketype-id-";
-	
+	public static final int PAGE_SIZE_OF_ITEM = 20;
 	
 	private int id;
 	private String items;
@@ -75,40 +75,153 @@ public class TypePage extends Entity<TypePage>{
 	
 	public static boolean generateOnePageOf(JokeType jokeType, int size) {
 		int maxPage = getMaxPageOf(jokeType);
-		List<Item> items = Item.getItemsOfSpecifiedJokeTypeAndIsNotInTypePage(jokeType, size);
+		int finalNeededSize = PAGE_SIZE_OF_ITEM;
+		TypePage previousTypePage = null;
+		TypePage currentTypePage = null;
 		
+		if (maxPage >= 1) {
+			previousTypePage = TypePage.getBy(TypePage.class, "page", maxPage, "type", jokeType.getId() + "");
+		}
 		
-		if (items.size() < size) {
-			System.out.println("JokeTYpe =" + jokeType.getId() + ", 不足20个item");
+
+		List<Item> itemsLeft;
+		List<Item> itemsRight;
+		
+		if (previousTypePage != null) {
+			finalNeededSize = (PAGE_SIZE_OF_ITEM - previousTypePage.getSize()) + PAGE_SIZE_OF_ITEM;
+		}
+		
+		List<Item> items = Item.getItemsOfSpecifiedJokeTypeAndIsNotInTypePage(jokeType, finalNeededSize);
+		
+		// items.size() == 0 直接返回false
+		if (items.size() == 0) {
+			System.out.println("items 数目==0");
 			return false;
 		}
-		
-		List<Integer> idList = new ArrayList<Integer>();
-		
-		for(Item item : items) {
-			idList.add(item.getId());
+
+		// 计算 itemsLeft 和 itemsRight
+		if (previousTypePage != null) {
+			int lessNum = PAGE_SIZE_OF_ITEM - previousTypePage.getSize();
+			
+			if (lessNum > 0) {
+				
+				// 如果待添加的items 正好只够上一个页面填满
+				if (items.size() <= lessNum) {
+					itemsLeft = items;
+					itemsRight = new ArrayList<Item>();
+				} else {
+					itemsLeft = items.subList(0, lessNum);
+					itemsRight = items.subList(lessNum, items.size());
+				}
+				
+			} else {
+				itemsLeft = new ArrayList<Item>();
+				itemsRight = items;
+			}
+		} else {
+			itemsLeft = new ArrayList<Item>();
+			itemsRight = items;
 		}
 		
-		// 1. 保存 tp对象
-		TypePage tp = new TypePage();
-		tp.setItems(Tools.join(idList, ","));
-		tp.setPage(maxPage + 1);
-		tp.setType(jokeType.getId() + "");
-		tp.setSize(items.size());
+		boolean isSuccess = true;
+		boolean isNewPage = false;
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
 		
-		if (tp.save()) {
-			// 2. 修改jokeType最大页码
-			TypePage.setMaxPageOf(jokeType, maxPage + 1);
+		if (itemsLeft.size() > 0) {
+			previousTypePage = TypePage.generateNewPageType(previousTypePage, itemsLeft);
 			
+			previousTypePage.update(session);
+		}
+		
+		if (itemsRight.size() > 0) {
+			currentTypePage = TypePage.generateNewPageType(currentTypePage, itemsRight);
+			currentTypePage.setPage(maxPage + 1);
+			currentTypePage.setType(jokeType.getId() + "");
+			
+			currentTypePage.save(session);
+			isNewPage = true;
+		}
+		
+		try {
+			session.getTransaction().commit();
+		}catch(Exception ex) {
+			isSuccess = false;
+		}
+		
+		if (isSuccess) {
+			
+			if (isNewPage) {
+				// 2. 修改最大页码
+				TypePage.setMaxPageOf(jokeType, maxPage + 1);
+			}
+			
+			
+			// 3.依次为item添加状态
 			for(Item item : items) {
-				// 3.依次为item添加状态
 				item.addItemStatus(ItemStatus.IS_SAVE_TO_TYPE_PAGE);
 				item.update();
 			}
-			return true;
-		} else {
-			return false;
 		}
+		
+		return isSuccess;
+		
+//		if (items.size() < size) {
+//			System.out.println("JokeTYpe =" + jokeType.getId() + ", 不足20个item");
+//			return false;
+//		}
+//		
+//		List<Integer> idList = new ArrayList<Integer>();
+//		
+//		for(Item item : items) {
+//			idList.add(item.getId());
+//		}
+//		
+//		// 1. 保存 tp对象
+//		TypePage tp = new TypePage();
+//		tp.setItems(Tools.join(idList, ","));
+//		tp.setPage(maxPage + 1);
+//		tp.setType(jokeType.getId() + "");
+//		tp.setSize(items.size());
+//		
+//		if (tp.save()) {
+//			// 2. 修改jokeType最大页码
+//			TypePage.setMaxPageOf(jokeType, maxPage + 1);
+//			
+//			for(Item item : items) {
+//				// 3.依次为item添加状态
+//				item.addItemStatus(ItemStatus.IS_SAVE_TO_TYPE_PAGE);
+//				item.update();
+//			}
+//			return true;
+//		} else {
+//			return false;
+//		}
+	}
+	
+	private static TypePage generateNewPageType(TypePage typePage, List<Item> itemsPart) {
+		List<String> idList = new ArrayList<String>();
+		for(Item item : itemsPart) {
+			idList.add(item.getId() + "");
+		}
+		
+		if (typePage != null) {
+			String[] arr = typePage.getItems().split(",");
+			
+			for (String s : arr) {
+				idList.add(0, s);
+			}
+			
+			typePage.setItems(Tools.join(idList, ","));
+			typePage.setSize(idList.size());
+			
+		} else {
+			typePage = new TypePage();
+			typePage.setItems(Tools.join(idList, ","));
+			typePage.setSize(idList.size());
+		}
+		
+		return typePage;
 	}
 	
 	public static int getMaxPageOf(JokeType jokeType) {
@@ -174,7 +287,7 @@ public class TypePage extends Entity<TypePage>{
 	
 	
 	public static void main(String[] args) {
-		TypePage.maintainSize();
+		TypePage.generateOnePageOf(JokeType.ZHIDEMAI_AITAO);
 	}
 	
 	/**

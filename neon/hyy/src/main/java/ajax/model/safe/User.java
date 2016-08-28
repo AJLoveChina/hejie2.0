@@ -34,14 +34,7 @@ import ajax.tools.Tools;
 import com.google.gson.Gson;
 
 public class User extends Entity<User>{
-	
-	
-//	public static  String qqAppId = Tools.getConfig("qqAppId");
-//	public static  String qqAppKey = Tools.getConfig("qqAppKey");
-//	public static  String weiboAppKey = Tools.getConfig("weiboAppKey");
-//	public static  String weiboSecret = Tools.getConfig("weiboSecret");
-//	public static  String githubClientSecret = Tools.getConfig("githubClientSecret");
-//	public static  String githubClientId = Tools.getConfig("githubClientId");
+
 	
 	private static String qqAppId = null;
 	private static String qqAppKey = null;
@@ -50,29 +43,7 @@ public class User extends Entity<User>{
 	private static String githubClientSecret = null;
 	private static String githubClientId = null;
 	
-//	
-//	static {
-//		Properties properties = new Properties();
-//        
-//		try {
-//			properties.load(new FileInputStream("src/main/java/data/user.sign.properties"));
-//			
-//			qqAppId = properties.getProperty("qqAppId");
-//			qqAppKey = properties.getProperty("qqAppKey");
-//			weiboAppKey = properties.getProperty("weiboAppKey");
-//			weiboSecret = properties.getProperty("weiboSecret");
-//			githubClientSecret = properties.getProperty("githubClientSecret");
-//			githubClientId = properties.getProperty("githubClientId");
-//			
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-	
+
 	
 	public static String getQqAppId() {
 		if (User.qqAppId == null) {
@@ -133,7 +104,8 @@ public class User extends Entity<User>{
 	public enum UserRights{
 		NORMAL(1, "普通用户"),
 		FORMID(4, "黑名单用户"),
-		ADMIN(99, "管理员");
+		ADMIN(99, "管理员"),
+		BOSS(9999, "AJ");
 		
 		private int id;
 		private String info;
@@ -193,8 +165,9 @@ public class User extends Entity<User>{
 		
 	}
 	
-	private int id;
+	private long id;
 	private String username;
+	private String nickname;
 	private int sex;
 	private String openId;
 	private String accessToken;
@@ -207,6 +180,12 @@ public class User extends Entity<User>{
 	
 	
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getImg() {
 		return img;
 	}
@@ -231,10 +210,10 @@ public class User extends Entity<User>{
 	public void setUserRights(int userRights) {
 		this.userRights = userRights;
 	}
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -264,6 +243,16 @@ public class User extends Entity<User>{
 	
 	private static String getFinalOpenId(String openId, Source source) {
 		return source.getPrefix() + openId;
+	}
+	
+	/**
+	 * 获取用户的昵称, 如果用户没有自己设定,则返回默认的登陆名
+	 */
+	public String getFinalName() {
+		if (this.nickname != null && !this.nickname.trim().equals("")) {
+			return this.nickname;
+		}
+		return this.username;
 	}
 	
 	
@@ -824,6 +813,15 @@ public class User extends Entity<User>{
 		GithubUserSimpleModel gusm = gson.fromJson(response, GithubUserSimpleModel.class);
 		
 		return gusm;
+	}
+	
+	/**
+	 * 随机获取一个二货官方小编
+	 * @return
+	 */
+	public static User getAEditorByRandom() {
+		// TODO AJ
+		return null;
 	}
 	
 	

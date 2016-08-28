@@ -45,7 +45,10 @@ public enum JokeType {
 	
 	STORY(101, "故事,清朝历史,考古,AV", "故事", "glyphicon glyphicon-bookmark", true, 30),
 	ALL(9, "所有内容", null, null, false),
-	UNKNOWN(99, "未知分类", "未知世界", "glyphicon glyphicon-menu-right", true), 
+	UNKNOWN(99, "未知分类", "未知世界", "glyphicon glyphicon-menu-right", true),
+	/**
+	 * 爱淘宝值得买
+	 */
 	ZHIDEMAI_AITAO(200, "爱淘", "爱淘", "aj-icon aj-icon-iconfontxiexiangbao", true, 30);
 	
 	

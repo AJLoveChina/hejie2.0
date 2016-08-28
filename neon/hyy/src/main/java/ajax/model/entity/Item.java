@@ -56,6 +56,14 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	private int rulesTagId;
 	private String previewImage;
 	private int statusForTest;
+	private long userid;
+	
+	public long getUserid() {
+		return userid;
+	}
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
 	/**
 	 * 图片是否已经上传Oss
 	 */

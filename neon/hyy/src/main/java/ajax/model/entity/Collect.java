@@ -11,7 +11,7 @@ import ajax.tools.HibernateUtil;
 public class Collect extends Entity<Collect>{
 	private int id;
 	private int itemid;
-	private int userid;
+	private long userid;
 	private String dateEntered;
 	public int getId() {
 		return id;
@@ -25,10 +25,10 @@ public class Collect extends Entity<Collect>{
 	public void setItemid(int itemid) {
 		this.itemid = itemid;
 	}
-	public int getUserid() {
+	public long getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(long userid) {
 		this.userid = userid;
 	}
 	public String getDateEntered() {
