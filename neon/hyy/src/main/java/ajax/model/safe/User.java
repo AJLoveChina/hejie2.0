@@ -2,10 +2,13 @@ package ajax.model.safe;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +22,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -104,8 +108,10 @@ public class User extends Entity<User>{
 	public enum UserRights{
 		NORMAL(1, "普通用户"),
 		FORMID(4, "黑名单用户"),
-		ADMIN(99, "管理员"),
+		ADMIN(99, "管理员"), 
+		OFFICIAL_EDITOR(98, "官方小编"),
 		BOSS(9999, "AJ");
+		
 		
 		private int id;
 		private String info;
@@ -688,19 +694,7 @@ public class User extends Entity<User>{
 		return qim;
 	}
 	
-	public static void main(String[] args) {
-//		String response = "callback( {\"client_id\":\"YOUR_APPID\",\"openid\":\"YOUR_OPENID\"} );";
-//		
-//		response = response.replaceAll("callback\\(", "");
-//		response = response.replaceAll("\\)\\W+", "");
-//		//reponse.replaceFirst(")\\$", "");
-//		
-//		System.out.println(response);
-		
-		
-//		System.out.println(User.githubClientSecret);
-		
-	}
+
 	
 	public static QQUserSimpleModel getQQSimpleModel(QQAccess qa, QQOpenIdModel qim) {
 		String url = "https://graph.qq.com/user/get_user_info";
@@ -820,9 +814,38 @@ public class User extends Entity<User>{
 	 * @return
 	 */
 	public static User getAEditorByRandom() {
-		// TODO AJ
-		return null;
+		try {
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			
+			Query query = session.createSQLQuery(String.format("SELECT MAX(id) as max, MIN(id) as min FROM %s WHERE userRights = %d", new User().getTableName(), User.UserRights.OFFICIAL_EDITOR.getId()));
+			
+			List<Object> list = query.list();
+			session.getTransaction().commit();
+			User user = new User();
+			
+			if (list.size() >= 1) {
+				Object[] arr = (Object[])list.get(0);
+				long id1 = ((BigInteger)arr[0]).longValue();
+				long id2 = ((BigInteger)arr[1]).longValue();
+				
+				long max = Math.max(id1, id2);
+				long random = max - new Random().nextInt((int)Math.abs(id1 - id2));
+		
+				
+				user.load(random);
+				
+			}
+			
+			return user;
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 	
+	public static void main(String[] args) {
+		User user = User.getAEditorByRandom();
+		System.out.println(user);
+	}
 	
 }
