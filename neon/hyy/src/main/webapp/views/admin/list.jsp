@@ -40,6 +40,10 @@
 			<a href="<%=UrlRoute.ADMIN_ITAOBAO_MANAGEMENT_URL.getUrl() %>">ITaobao items change to Item</a>
 		</li>
 		
+		<li>
+			<a href="<%=UrlRoute.ADMIN_GAME_TEAM_GENERATE_URL.getUrl() %>">ADMIN_GAME_TEAM_GENERATE_URL</a>
+		</li>
+		
 	</ol>
 	
 </div>

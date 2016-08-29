@@ -27,7 +27,8 @@ public enum UrlRoute {
 	ADMIN_ITAOBAO_MANAGEMENT_URL(19, "/admin/itaobaoitems"),
 	ADMIN_TBKITEMS_MANAGEMENT_URL(20, "/admin/tbkitems"),
 	ADMIN_HOME_ROLLADS_MANAGEMENT_URL(21, "/admin/ads"), 
-	ITAOBAO_ITEM_SUBMIT(22, "/admin/itaobao_item_submit");
+	ITAOBAO_ITEM_SUBMIT(22, "/admin/itaobao_item_submit"),
+	ADMIN_GAME_TEAM_GENERATE_URL(23, "/admin/gameTeamGenerate");;
 	
 	private int id;
 	private String url;

@@ -25,6 +25,7 @@ import ajax.model.PageChoice;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Fragment;
+import ajax.model.entity.GameTeamFun;
 import ajax.model.entity.Item;
 import ajax.model.entity.ItemsRoll;
 import ajax.model.entity.Page;
@@ -46,7 +47,22 @@ import com.google.gson.Gson;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
-
+	@RequestMapping(value="/gameTeamGenerate")
+	public String gameTeamGenerate(HttpServletRequest request, HttpServletResponse response) {
+		
+		if (!User.isAdmin(request, response)) {
+			
+			request.setAttribute("model", "权限不足");
+			
+			return "/views/error/error";
+		}
+		
+		GameTeamFun fun = new  GameTeamFun();
+		String json = fun.getGenerateJson();
+		
+		request.setAttribute("model", json);
+		return "/views/huodong/gameTeam";
+	}
 	@RequestMapping(value="/itaobao_item_submit")
 	public String itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
 		User user = User.getLoginUser(request);

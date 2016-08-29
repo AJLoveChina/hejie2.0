@@ -348,7 +348,7 @@ public class ITaobao extends Entity<ITaobao>{
 			
 			if (user.isAdmin()) {
 				User editor = User.getAEditorByRandom();
-				//TODO AJ
+				
 				item.setUserid(editor.getId());
 				item.setUsername(editor.getNickname());
 			} else {
@@ -363,8 +363,6 @@ public class ITaobao extends Entity<ITaobao>{
 				item.setSummary(item.generateSummaryAndReturn());
 			}
 			item.addItemStatus(ItemStatus.HAVE_NOT_CHANGE_SLICK_URL);
-			
-			
 			iTaobao.setHasChangeToItem(true);
 			
 			

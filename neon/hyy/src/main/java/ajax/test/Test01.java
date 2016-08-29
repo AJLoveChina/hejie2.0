@@ -1,7 +1,10 @@
 package ajax.test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import ajax.model.AjaxRequest;
 import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
 import ajax.model.taobao.ITaobao;
 import ajax.tools.Tools;
@@ -20,13 +23,23 @@ public class Test01 {
 	}
 	
 	public static void main(String[] args) {
+		do2();
+	}
+	
+	private static void do2() {
+		//http://api2.juheapi.com/xiecheng/hotel/staticdetail
+		AjaxRequest ar = new AjaxRequest();
+		String url = "http://api2.juheapi.com/xiecheng/hotel/staticdetail";
+		String key = "";
 		
-//		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
-//		List<ITaobao> iTaobaos = iTaobaoItemsPagesSeparate.getItemsByPageAndType(1);
-//		System.out.println(iTaobaos);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Key", key);
+		map.put("HotelCodes", "[123]");
+		String method = "POST";
 		
-		ITaobao iTaobao = new ITaobao();
-		iTaobao.load(25L);
+		AjaxRequest.Config config = ar.new Config(url, map, method);
+		String response = ar.getResponse(config);
+		System.out.println(response);
 	}
 	public static String getConfigFromTable() {
 		Tools.setConfig("aj-just-a-test", "123");

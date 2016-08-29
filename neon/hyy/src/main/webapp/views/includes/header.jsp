@@ -54,8 +54,9 @@
 	<style>
 		#aj-admin-jump-btn{
 			position: fixed;
-			bottom:200px;
+			bottom:0;
 			left:0;
+			z-index:1001;
 		}
 	</style>
 
