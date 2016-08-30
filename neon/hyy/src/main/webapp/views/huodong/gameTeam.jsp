@@ -107,32 +107,10 @@ String json = (String)request.getAttribute("model");
 			
 			
 			$scope.bindEvent = function () {
-				$("#game-team-editarea .one-card").slick({
-	                // normal options...
-	                infinite: false,
-	                slidesToShow : 1,
-
-	                // the magic
-	                responsive: [{
-
-	                    breakpoint: 1024,
-	                    settings: {
-	                        slidesToShow: 1,
-	                        infinite: true
-	                    }
-
-	                }, {
-
-	                    breakpoint: 600,
-	                    settings: {
-	                        slidesToShow: 1,
-	                        dots: true
-	                    }
-
-	                }]
-	            });
+				$("#game-team-editarea .in-wrap").slidesjs();
 			}
-			
+			$scope.bindEvent();
+			// AJ TODO
 		});
 		
 		angular.bootstrap(container, ["gameTeam"]);
