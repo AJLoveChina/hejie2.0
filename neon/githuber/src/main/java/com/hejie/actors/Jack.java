@@ -2,11 +2,14 @@ package com.hejie.actors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hejie.instruments.Instrument;
 
 public class Jack implements Actor{
 	@Autowired
+	@Qualifier("Piano")
 	private Instrument instrument;
 	
 	@Override
@@ -19,6 +22,8 @@ public class Jack implements Actor{
 	}
 	
 	public static void main(String[] args) {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("com/hejie/actors/bean.xml");
+		
 		Actor actor = new Jack();
 		
 		actor.act();

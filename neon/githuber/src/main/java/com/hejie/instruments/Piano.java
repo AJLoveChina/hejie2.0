@@ -1,5 +1,8 @@
 package com.hejie.instruments;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Piano implements Instrument{
 
 	@Override
