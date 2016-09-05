@@ -1,23 +1,25 @@
-package soundsystem;
+package com.hejie.people;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.hejie.actors.Jack;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = CDPlayerConfig.class)
-public class CDPlayerTest {
+@ContextConfiguration(classes=AppConfig.class)
+public class AspectTest {
 
 	@Autowired
-	private CompactDisc cd;
-
-	@Test
-	public void cdShouldNotBeNull() {
-		assertNotNull(cd);
-	}
+	private Jack jack;
 	
+	
+	@Test
+	public void test() {
+		this.jack.act();
+		System.out.println(123);
+	}
 	
 }

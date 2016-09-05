@@ -1,4 +1,4 @@
-package soundsystem;
+package com.hejie.wiring;
 
 import org.springframework.stereotype.Component;
 
