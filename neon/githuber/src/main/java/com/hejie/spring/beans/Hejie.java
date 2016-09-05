@@ -13,6 +13,8 @@ public class Hejie implements Actor{
 	public Hejie(Ticket ticket) {
 		this.ticket = ticket;
 	}
+	
+	
 	@Override
 	public void act() {
 		System.out.println("Hejie is acting now...");
