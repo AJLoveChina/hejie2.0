@@ -47,15 +47,10 @@ import com.google.gson.Gson;
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
+	
+	
 	@RequestMapping(value="/gameTeamGenerate")
 	public String gameTeamGenerate(HttpServletRequest request, HttpServletResponse response) {
-		
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		GameTeamFun fun = new  GameTeamFun();
 		String json = fun.getGenerateJson();
@@ -66,12 +61,6 @@ public class AdminController {
 	@RequestMapping(value="/itaobao_item_submit")
 	public String itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
 		User user = User.getLoginUser(request);
-		if (!user.isAdmin()) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		String entity = request.getParameter("entity");
 		Gson gson = new Gson();
@@ -102,12 +91,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/itaobao/changeToItem")
 	public String itaobaoChangeToItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		Long id = Long.parseLong(request.getParameter("id"));
 		if (!Lock.lock(id + "")) {
@@ -137,12 +120,7 @@ public class AdminController {
 	}
 	@RequestMapping(value="/itaobaoitems")
 	public String itaobaoitems(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
+		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
 		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
@@ -156,12 +134,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/itaobao/{page}")
 	public String itaobaoPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
+		
 		
 		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
 		List<ITaobao> list = iTaobaoItemsPagesSeparate.getItemsByPageAndType(page);
@@ -174,12 +147,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/tbkitems")
 	public String tbkItems(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
+		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
 		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
@@ -194,12 +162,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/tbkitems/page/{page}")
 	public String tbkItemsPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
+		
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
@@ -215,12 +178,6 @@ public class AdminController {
 	
 	@RequestMapping("/tbkitems/changeToItem")
 	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		Long id = Long.parseLong(request.getParameter("id"));
 		TbkItem tbkItem = new TbkItem();
@@ -236,12 +193,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/meituUpload")
 	public String meituUpload(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		boolean isok = Tools.meituUploadImageToOss(request, response);
 		
@@ -256,24 +207,12 @@ public class AdminController {
 	
 	@RequestMapping(value="/meitu")
 	public String meitu(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
-
+		
 		return "views/tools/meitu";
 	}
 	
 	@RequestMapping(value="/typePages/generate")
 	public String typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		int loop = Tools.parseInt(request.getParameter("loop"), 1);
 		List<JokeType> jokeTypes = JokeType.getLegalJokeTypes();
@@ -298,39 +237,20 @@ public class AdminController {
 	
 	@RequestMapping(value="/typePages")
 	public String typePage(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		return "views/admin/typesPageGenerate";
 	}
 	
 	@RequestMapping(value="/list")
 	public String adminList(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		return "views/admin/list";
+		
 	}
 	
 	
 	@RequestMapping(value="/ads")
 	public String ads(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
-		
 		
 		return "ads";
 		
@@ -342,29 +262,20 @@ public class AdminController {
 		AjaxResponse<String> ar = new AjaxResponse<String>();
 		
 		
-		if (User.isAdmin(request, response)) {
-			String model = request.getParameter("model");
-			Gson gson = new Gson();
-			ItemsRoll itemsRoll = gson.fromJson(model, ItemsRoll.class);
-			
-			if (action.equals("update")) {
-				itemsRoll.update();
-			} else if (action.equals("delete")) {
-				itemsRoll.delete();
-			} else if (action.equals("save")) {
-				itemsRoll.save();
-			}
-			
-			ar.setIsok(true);
-			ar.setData("");
-			
-			
-		} else {
-			
-			ar.setIsok(false);
-			ar.setData("木有权限");
-			
+		String model = request.getParameter("model");
+		Gson gson = new Gson();
+		ItemsRoll itemsRoll = gson.fromJson(model, ItemsRoll.class);
+		
+		if (action.equals("update")) {
+			itemsRoll.update();
+		} else if (action.equals("delete")) {
+			itemsRoll.delete();
+		} else if (action.equals("save")) {
+			itemsRoll.save();
 		}
+		
+		ar.setIsok(true);
+		ar.setData("");
 
 		ar.flush(response);
 		
@@ -373,14 +284,6 @@ public class AdminController {
 	@RequestMapping(value="/upload")
 	public String uploadItem(HttpServletRequest request, HttpServletResponse response) {
 
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
-		
-		
 		int id = Tools.parseInt(request.getParameter("id"), -1);
 		String action = request.getParameter("action");
 		JokeType[] jokeTypes = JokeType.getAllJokeTypes();
@@ -416,12 +319,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/upload/submit")
 	public String uploadSubmit(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
+		
 		
 		String action = request.getParameter("action");
 		
@@ -459,12 +357,6 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/upload/remove")
 	public String uploadRemove(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		String action = request.getParameter("action");
 		AjaxResponse<String> ar = new AjaxResponse<String>();
@@ -487,25 +379,12 @@ public class AdminController {
 	@RequestMapping(value="/item/changepage")
 	public String changePageOfItem(HttpServletRequest request, HttpServletResponse response) {
 		
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
-		
 		return "views/admin/changepage";
 		
 	}
 	
 	@RequestMapping(value="/item/changepage/ajax")
 	public String changePageOfItemAjax(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		int id1 = Tools.parseInt(request.getParameter("id1"), -1);
 		int id2 = Tools.parseInt(request.getParameter("id2"), -1);
@@ -535,12 +414,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/homeNavThree")
 	public String homeNavThree(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		CRUDPage<Fragment> cp = new CRUDPage<Fragment>();
 		String entityKeySet = null;
@@ -565,12 +438,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/linksToBaidu")
 	public String uploadLinksToBaidu(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		return "linksToBaidu";
 	}
@@ -589,12 +456,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/linksToBaidu/submit")
 	public String uploadLinksToBaiduSubmit(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		String data = request.getParameter("data");
 		String action = request.getParameter("action");
@@ -622,23 +483,11 @@ public class AdminController {
 	}
 	@RequestMapping(value="/pageGenerator")
 	public String pageGenerator(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		return "views/admin/pageGenerator";
 	}
 	@RequestMapping(value="/pageGenerator/generate")
 	public String pageGeneratorGenerate(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
 		
 		String dataParam = request.getParameter("data");
 		
@@ -701,12 +550,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/crudForTable")
 	public String crudForTable(HttpServletRequest request, HttpServletResponse response) {
-		if (!User.isAdmin(request, response)) {
-			
-			request.setAttribute("model", "权限不足");
-			
-			return "/views/error/error";
-		}
+		
 		String data = request.getParameter("data");
 		String className = request.getParameter("className");
 		
@@ -740,10 +584,4 @@ public class AdminController {
 		return "Ajax";
 	}
 	
-	public static void main(String[] args) {
-		String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-		System.out.println(s);
-	}
-
-
 }

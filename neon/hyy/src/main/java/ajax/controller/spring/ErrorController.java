@@ -2,8 +2,12 @@ package ajax.controller.spring;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ajax.model.exception.LimitsOfAuthorityException;
 
 
 @Controller
@@ -28,6 +32,22 @@ public class ErrorController {
 	public String justAnException(HttpServletRequest request) {
 		request.setAttribute("model", "发生了一个小小的错误, 二货君会立刻修复! (Exception)");
 		return "/views/error/error";
-	}	
+	}
+	
+	
+	@RequestMapping("/LimitsOfAuthorityException")
+	public String LimitsOfAuthorityExceptionEx(HttpServletRequest request) {
+		request.setAttribute("model", "权限不足 (LimitsOfAuthorityException)");
+		return "/views/error/error";
+	}
+	
+	@ExceptionHandler(LimitsOfAuthorityException.class)
+	public String LimitsOfAuthorityException2(HttpServletRequest request, LimitsOfAuthorityException limitsOfAuthorityException) {
+		
+		request.setAttribute("model", "权限不足 (LimitsOfAuthorityException)");
+		return "/views/error/error";
+	}
+	
+
 	
 }

@@ -155,6 +155,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $scope.roll = function () {
 
                 $timeout(function () {
+                	if ($scope.page >= 1) {
+                		$scope.stop = true;
+                	}
                     if (!$scope.stop) {
                         $scope.next();
                     }
