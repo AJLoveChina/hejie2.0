@@ -24,7 +24,6 @@ public class SafeAspect {
 	public void AdmintCut(){};
 	
 	
-	
 	@Around("AdmintCut()")
 	public Object beforeTest(ProceedingJoinPoint proceedingJoinPoint) throws LimitsOfAuthorityException,Throwable {
 		if(!User.isAdmin(request, response)) {

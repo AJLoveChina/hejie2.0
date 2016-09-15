@@ -49,8 +49,17 @@ public class FileTools {
 			
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("images/2011/");
+			sb.append("G:\\XAMPP\\htdocs\\Github\\meAjax\\java_demo\\ImagesGrab\\images\\");
+			sb.append(fileName.substring(0,4) + "\\");
+			
+			File file = new File(sb.toString());
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			
 			sb.append(fileName);
+			
+			
 			
 			FileOutputStream fos = new FileOutputStream(sb.toString());
 			fos.write(response);
@@ -59,7 +68,7 @@ public class FileTools {
 			
 			
 		} catch (Exception e) {
-			//e.printStackTrace();
+			System.out.println(e.getMessage());
 			fileName = "";
 		}
 		
