@@ -177,6 +177,7 @@ request.setAttribute("curUser", curUser);
 					<a href="javascript:;" title="QQ登陆" class="aj-icon aqq-sign">&#xe611;</a>
 					<a href="javascript:;" title="新浪微博登陆" class="aj-icon aweibo-sign">&#xe60a;</a>
 					<a href="javascript:;" title="Github登陆"class="aj-icon agithub-sign">&#xe615;</a>
+					<div class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -209,7 +210,25 @@ request.setAttribute("curUser", curUser);
 </c:choose>
 
 <script type="text/javascript">
+	function onGoogleSignIn(data) {
+		if ((new aj.User()).isLogin()) {
+			console.log("已经登录!Not Sign in Google again");
+			return;
+		}
+		$(window).trigger("onGoogleSignIn", data);
+	}
 	$(function() {
+		
+		$(window).on("onGoogleSignIn", function (ev, google) {
+			var profile = google.getBasicProfile();
+			var id = profile.getId(),
+				name = profile.getName(),
+				image = profile.getImageUrl(),
+				email = profile.getEmail();
+			
+			signin(image, name, "google", google);
+		});
+		
 		try {
 			var container = $(".user-login");
 			var CSRF_STATE = "<%=state %>";
@@ -222,6 +241,9 @@ request.setAttribute("curUser", curUser);
 				},
 				github : {
 					url : "/sign/github"
+				},
+				google : {
+					url : "/sign/google"
 				},
 				USER_HOME : "/userhome",
 				SIGN_OUT : "/sign/out",
@@ -264,7 +286,8 @@ request.setAttribute("curUser", curUser);
 				
 			// 登陆成功后做的事情
 			function signin(userimg, nickname, from, moreInfo) {
-					//根据返回数据，更换按钮显示状态方法
+				$("#aj-sign-panel").modal("hide");
+				//根据返回数据，更换按钮显示状态方法
 			     var before = $(".user-login .u-l-sign-before"),
 			    		after = $(".user-login .u-l-sign-after");
 			      	
@@ -357,6 +380,25 @@ request.setAttribute("curUser", curUser);
 			       		})();
 			       }
 			       
+			       if (from == "google") {
+			    	   (function () {
+			    		  var id_token = moreInfo.getAuthResponse().id_token;
+			    		  
+			    		  $.ajax({
+			    			  url : config.google.url,
+			    			  type : "GET",
+			    			  data : {
+			    				  id_token : id_token
+			    			  },
+			    			  success : function (json) {
+			    				  console.log(json);
+			    			  },
+			    			  error : function (e) {
+			    				  console.log(e);
+			    			  }
+			    		  });
+			    	   })();
+			       }
 			       
 			       if (from == "server") {
 			       		(function () {
@@ -370,6 +412,19 @@ request.setAttribute("curUser", curUser);
 			
 			// 注销的样式处理 和服务端吗处理
 			function signout() {
+				// Google logoutの前端处理
+				try {
+		        	(function () {
+		        		var auth2 = gapi.auth2.getAuthInstance();
+			            auth2.signOut().then(function () {
+			              console.log('Google User signed out.');
+			            });
+		        	})()
+		        }catch(ex){
+		        	console.log("Google logout fail");
+		        }
+		        
+		        
 				$("#aj-user-login-choices").show();
 		        after.hide();
 		        $(".user-login .u-l-photo").show();
@@ -380,7 +435,9 @@ request.setAttribute("curUser", curUser);
 		        
 		        
 		        $(".user-login").attr("data-islogin", "0");
-		        
+		       	var userLoginInfoForm =  $("#aj-user-sign-config")[0];
+		       	userLoginInfoForm["isLogin"].value = "false";
+		       	
 		        $.ajax({
 		        	url : config.SIGN_OUT,
 		        	type : "GET",
@@ -392,6 +449,7 @@ request.setAttribute("curUser", curUser);
 		        		console.log(err);
 		        	}
 		        });
+		        
 			}
 			   
 			// 注销   对于 第三方登陆的处理, 第三方登陆会有一个异步函数调用  signout 函数

@@ -448,3 +448,26 @@ body {
 	margin:0 auto;
 }
 
+/* Google sign in style*/
+.g-signin2 {
+    display: inline-block;
+    height: 25px;
+    /* overflow: hidden; */
+    box-sizing: border-box;
+    position: relative;
+    top: 9px;
+    margin-left:3px;
+}
+.abcRioButton.abcRioButtonLightBlue {
+    width: 25px!important;
+    height: 25px!important;
+    /* padding-top: 8px; */
+    box-shadow: none;
+}
+.abcRioButtonIcon {
+    padding: 0px!important;
+}
+.abcRioButton.abcRioButtonLightBlue:hover{
+	box-shadow:none;
+}
+/* Google sign in style END*/

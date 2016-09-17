@@ -2,7 +2,6 @@
 <%@page import="ajax.tools.Tools"%>
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%
 	String path = request.getRequestURL().toString();
 	String title = (String)request.getAttribute("title");
@@ -42,6 +41,7 @@
     <meta name="keywords" content="<%=keywords %>">
     <link rel="shortcut icon" type="image/x-icon" href="http://images.nigeerhuo.com/images/web/pic/favicon.ico" />
     <meta property="qc:admins" content="7712403257661755205763757" />
+    <meta name="google-signin-client_id" content="724523861492-9q9uh77mcrajedcgggb90qva3u3j7sm8.apps.googleusercontent.com">
     <meta name="mobile-agent" content="format=html5;url=http://wap.nigeerhuo.com/">
     <title><%=title %></title>
     <%@ include file="/views/includes/resource_server.jsp" %>

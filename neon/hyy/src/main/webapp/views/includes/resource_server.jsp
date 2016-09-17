@@ -47,8 +47,9 @@
 
 <link rel="stylesheet" href="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/css/third-party-css-all.min.css?ts=20160725" />
 <!-- 下行css不可合并,和icon font相关,需要实时更新 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1468635774_056464.css?ts=20160725"/>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1474116528_4631057.css"/>
 <link rel="stylesheet" href="/web/css/index.css?ts=20160725"/>
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/js/third-party-js-all.min.js?ts=20160725"></script>
 <script type="text/javascript" src="/web/js/main.js?ts=20160725"></script>

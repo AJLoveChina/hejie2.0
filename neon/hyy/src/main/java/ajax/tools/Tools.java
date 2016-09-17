@@ -48,13 +48,6 @@ import ajax.model.entity.ImagesContainer;
 
 public class Tools {
 
-//	public static String qqAppId = Tools.getConfig("qqAppId");
-//	public static String qqAppKey = Tools.getConfig("qqAppKey");
-//	public static String weiboAppKey = Tools.getConfig("weiboAppKey");
-//	public static String weiboSecret = Tools.getConfig("weiboSecret");
-//	public static String githubClientSecret = Tools.getConfig("githubClientSecret");
-//	public static String githubClientId = Tools.getConfig("githubClientId");
-	
 	/**
 	 * 反射, 获取对象域值
 	 * @param field

@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ import org.hibernate.criterion.Restrictions;
 
 import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
+import ajax.model.ConfigFromProperties;
+import ajax.model.UniqueString;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Collect;
 import ajax.model.entity.Entity;
@@ -136,7 +140,8 @@ public class User extends Entity<User>{
 	public enum Source{
 		QQ(1, "QQ"),
 		WEIBO(2, "WEIBO"),
-		GITHUB(3, "GITHUB");
+		GITHUB(3, "GITHUB"), 
+		GOOGLE(4, "GOOGLE");
 		
 		private int id;
 		private String prefix;
@@ -270,8 +275,6 @@ public class User extends Entity<User>{
 	 */
 	public String signIn(HttpServletRequest request, HttpServletResponse response) {
 		SignStatus ss = null;
-		
-		
 		
 		if (User.isLogin(request, response)) {
 			
@@ -843,9 +846,12 @@ public class User extends Entity<User>{
 		}
 	}
 	
-	public static void main(String[] args) {
-		User user = User.getAEditorByRandom();
-		System.out.println(user);
+	@Override
+	public boolean save() {
+		if (this.nickname == null) this.nickname = "";
+		if (this.dateEntered == null) this.dateEntered = new SimpleDateFormat(ConfigFromProperties.TABLE_TIME_FORMAT).format(new Date());
+		
+		return super.save();
 	}
 	
 }
