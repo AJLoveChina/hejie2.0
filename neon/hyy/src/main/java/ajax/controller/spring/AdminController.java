@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
@@ -58,8 +59,10 @@ public class AdminController {
 		request.setAttribute("model", json);
 		return "/views/huodong/gameTeam";
 	}
+	
 	@RequestMapping(value="/itaobao_item_submit")
-	public String itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
 		User user = User.getLoginUser(request);
 		
 		String entity = request.getParameter("entity");
@@ -84,8 +87,8 @@ public class AdminController {
 			
 		}
 		
-		request.setAttribute("model", ajaxResponse.toJson());
-		return "Ajax";
+		//request.setAttribute("model", ajaxResponse.toJson());
+		return ajaxResponse;
 		
 	}
 	
@@ -192,17 +195,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/meituUpload")
+	@ResponseBody
 	public String meituUpload(HttpServletRequest request, HttpServletResponse response) {
 		
 		boolean isok = Tools.meituUploadImageToOss(request, response);
 		
 		if (isok) {
-			request.setAttribute("model", "上传成功");
+			return "上传成功";
 		} else {
-			request.setAttribute("model", "上传失败");
+			return "上传失败";
 		}
 		
-		return "Ajax";
 	}
 	
 	@RequestMapping(value="/meitu")
@@ -212,7 +215,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/typePages/generate")
-	public String typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<Map<JokeType, Boolean>> typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
 		
 		int loop = Tools.parseInt(request.getParameter("loop"), 1);
 		List<JokeType> jokeTypes = JokeType.getLegalJokeTypes();
@@ -230,9 +234,7 @@ public class AdminController {
 		ar.setIsok(true);
 		ar.setData(result);
 		
-		request.setAttribute("model", ar.toJson());
-
-		return "Ajax";
+		return ar;
 	}
 	
 	@RequestMapping(value="/typePages")
@@ -318,7 +320,8 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/upload/submit")
-	public String uploadSubmit(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> uploadSubmit(HttpServletRequest request, HttpServletResponse response) {
 		
 		
 		String action = request.getParameter("action");
@@ -344,9 +347,7 @@ public class AdminController {
 		ar.setIsok(true);
 		ar.setData(String.format("<a href='%s' target='_blank'>%s</a>", item.getOneItemPageUrlV2(), item.getOneItemPageUrlV2()));
 		
-		
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 	}
 	
 	/**
@@ -356,7 +357,8 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping(value="/upload/remove")
-	public String uploadRemove(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> uploadRemove(HttpServletRequest request, HttpServletResponse response) {
 		
 		String action = request.getParameter("action");
 		AjaxResponse<String> ar = new AjaxResponse<String>();
@@ -369,9 +371,7 @@ public class AdminController {
 		ar.setIsok(true);
 		ar.setData("删除成功!");
 		
-		
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 	}
 	
 	
@@ -384,7 +384,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/item/changepage/ajax")
-	public String changePageOfItemAjax(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> changePageOfItemAjax(HttpServletRequest request, HttpServletResponse response) {
 		
 		int id1 = Tools.parseInt(request.getParameter("id1"), -1);
 		int id2 = Tools.parseInt(request.getParameter("id2"), -1);
@@ -407,8 +408,7 @@ public class AdminController {
 			ar.setData("OK");
 		}
 		
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 		
 	}
 	
@@ -455,7 +455,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/linksToBaidu/submit")
-	public String uploadLinksToBaiduSubmit(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> uploadLinksToBaiduSubmit(HttpServletRequest request, HttpServletResponse response) {
 		
 		String data = request.getParameter("data");
 		String action = request.getParameter("action");
@@ -477,9 +478,7 @@ public class AdminController {
 			ar.setData("OK");
 		}
 		
-		request.setAttribute("model", ar.toJson());		
-		
-		return "Ajax";
+		return ar;
 	}
 	@RequestMapping(value="/pageGenerator")
 	public String pageGenerator(HttpServletRequest request, HttpServletResponse response) {
@@ -487,7 +486,8 @@ public class AdminController {
 		return "views/admin/pageGenerator";
 	}
 	@RequestMapping(value="/pageGenerator/generate")
-	public String pageGeneratorGenerate(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> pageGeneratorGenerate(HttpServletRequest request, HttpServletResponse response) {
 		
 		String dataParam = request.getParameter("data");
 		
@@ -542,14 +542,13 @@ public class AdminController {
 		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + "/" +  nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");
 		ar.setIsok(true);
 		
-		request.setAttribute("model", ar.toJson());
-		
-		return "Ajax";
+		return ar;
 		
 	}
 	
 	@RequestMapping(value="/crudForTable")
-	public String crudForTable(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> crudForTable(HttpServletRequest request, HttpServletResponse response) {
 		
 		String data = request.getParameter("data");
 		String className = request.getParameter("className");
@@ -557,7 +556,7 @@ public class AdminController {
 		AjaxResponse<String> ar = new AjaxResponse<String>();
 		
 		try {
-			Class cls = Class.forName(className);
+			Class<?> cls = Class.forName(className);
 			
 			Gson gson = new Gson();
 			CRUDPage cp = gson.fromJson(data, CRUDPage.class);
@@ -580,8 +579,7 @@ public class AdminController {
 			ar.setData(e.getMessage());
 		}
 		
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 	}
 	
 }

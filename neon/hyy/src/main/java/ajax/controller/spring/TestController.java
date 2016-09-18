@@ -1,31 +1,29 @@
 package ajax.controller.spring;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import ajax.test.Test01;
+import ajax.model.AjaxResponse;
 
 
 @Controller
 @RequestMapping(value="/test")
 public class TestController {
 
-	@RequestMapping(value="/testFinalProperty")
-	public void testFinalProperty(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String test = Test01.getConfigFromTable();
+	@RequestMapping(value="/test1")
+	@ResponseBody
+	public AjaxResponse<List<String>> testFinalProperty(){
 		
-		PrintWriter out = response.getWriter();
+		String[] arr = {"Hello", "I", "Love", "You"};
 		
-		out.println(test);
-		
-		out.flush();
-		out.close();
+		AjaxResponse<List<String>> ar = new AjaxResponse<>();
+		ar.setData(Arrays.asList(arr));
+		ar.setIsok(true);
+		return ar;
 		
 	}
 }

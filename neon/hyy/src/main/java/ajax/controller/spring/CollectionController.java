@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ajax.model.AjaxResponse;
 import ajax.model.entity.Collect;
@@ -17,7 +18,8 @@ public class CollectionController {
 	
 	
 	@RequestMapping(value="/shoucang")
-	public String shoucang(HttpServletRequest request, HttpServletResponse response) {
+	@ResponseBody
+	public AjaxResponse<String> shoucang(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/json");
 		response.setCharacterEncoding("utf-8");
 		
@@ -51,9 +53,7 @@ public class CollectionController {
 				ar.setData("已收藏");
 			}
 		}
-		
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 		
 	}
 }

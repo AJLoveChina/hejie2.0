@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
@@ -163,11 +164,13 @@ public class SignController {
 	}
 
 	@RequestMapping(value = "/google")
-	public String signGoogle() {
+	@ResponseBody
+	public AjaxResponse<String> signGoogle() {
 
 		if (User.isLogin(request, response)) {
-			return "Ajax";
+			return null;
 		}
+		
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
 				JacksonFactory.getDefaultInstance())
 						.setAudience(Arrays.asList(ConfigFromProperties.getGoogle_nigeerhuo_oauth_id()))
@@ -215,12 +218,12 @@ public class SignController {
 			ar.setData("Google sign in fail!" + e.getMessage());
 		}
 		
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 	}
 
 	@RequestMapping(value = "/out")
-	public String signOut() {
+	@ResponseBody
+	public AjaxResponse<String> signOut() {
 		User.signout(request, response);
 
 		AjaxResponse<String> ar = new AjaxResponse<String>();
@@ -228,8 +231,7 @@ public class SignController {
 		ar.setIsok(true);
 		ar.setData("sign out ok");
 
-		request.setAttribute("model", ar.toJson());
-		return "Ajax";
+		return ar;
 
 	}
 }
