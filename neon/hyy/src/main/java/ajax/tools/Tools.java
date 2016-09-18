@@ -92,6 +92,7 @@ public class Tools {
 		return null;
 	}
 	
+	@Deprecated
 	public static enum EnumString {
 		TABLE_TIME_FORMAT("yyyy-MM-dd HH:mm:ss");
 		private String str;

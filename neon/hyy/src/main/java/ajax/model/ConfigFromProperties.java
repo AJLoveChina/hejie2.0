@@ -5,10 +5,22 @@ import java.lang.reflect.Field;
 import java.util.Properties;
 
 public class ConfigFromProperties {
-	public static String google_nigeerhuo_oauth_id = null;
-	public static String google_nigeerhuo_oauth_key = null;
-	public static String TABLE_TIME_FORMAT = null;
+	private static  String google_nigeerhuo_oauth_id = null;
+	private static  String google_nigeerhuo_oauth_key = null;
+	private static  String TABLE_TIME_FORMAT = null;
 	
+	
+	public static String getGoogle_nigeerhuo_oauth_id() {
+		return google_nigeerhuo_oauth_id;
+	}
+	public static String getGoogle_nigeerhuo_oauth_key() {
+		return google_nigeerhuo_oauth_key;
+	}
+	public static String getTABLE_TIME_FORMAT() {
+		return TABLE_TIME_FORMAT;
+	}
+
+
 	static {
 		Properties properties = new Properties();
 		try {

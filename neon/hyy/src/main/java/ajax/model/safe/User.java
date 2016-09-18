@@ -849,7 +849,7 @@ public class User extends Entity<User>{
 	@Override
 	public boolean save() {
 		if (this.nickname == null) this.nickname = "";
-		if (this.dateEntered == null) this.dateEntered = new SimpleDateFormat(ConfigFromProperties.TABLE_TIME_FORMAT).format(new Date());
+		if (this.dateEntered == null) this.dateEntered = new SimpleDateFormat(ConfigFromProperties.getTABLE_TIME_FORMAT()).format(new Date());
 		
 		return super.save();
 	}

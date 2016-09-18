@@ -170,7 +170,7 @@ public class SignController {
 		}
 		GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
 				JacksonFactory.getDefaultInstance())
-						.setAudience(Arrays.asList(ConfigFromProperties.google_nigeerhuo_oauth_id))
+						.setAudience(Arrays.asList(ConfigFromProperties.getGoogle_nigeerhuo_oauth_id()))
 						// If you retrieved the token on Android using the Play
 						// Services 8.3 API or newer, set
 						// the issuer to "https://accounts.google.com".
