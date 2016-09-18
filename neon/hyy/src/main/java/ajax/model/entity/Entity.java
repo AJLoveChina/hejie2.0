@@ -2,7 +2,10 @@ package ajax.model.entity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import org.hibernate.metadata.ClassMetadata;
 
 import com.google.gson.Gson;
 
+import ajax.model.ConfigFromProperties;
 import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
 import ajax.model.UrlRoute;
@@ -27,6 +31,44 @@ import ajax.tools.Tools;
 public class Entity<T> implements Iterable<T>,Iterator<T>{
 
 	private String statusSplitByComma = "";
+	
+	private String dateEnteredOfSave = null;
+	private String dateEnteredOfUpdate = null;
+	private String dateEnteredOfDelete = null;
+	
+	/**
+	 * 这是为实体类准备的公用字段, 由于历史遗留问题, 有些类的这些值可能为null<br>
+	 * 如果实体类自定义类似的字段, 比如 dateEntered, 您应当使用实体类(子类)自定义的字段.因为有这些字段的类基本都是2016.9.18之前何杰写的, 而且它们对应的数据表中往往不存在如下的几个字段<br>
+	 * 我们约定9.18之后, 所有的类如果在数据表中定义了 保存, 修改, 删除时间字段, 请使用如下的字段名称.不要重新在子类中定义相关时间字段.谢谢
+	 */
+	public String getDateEnteredOfSave() {
+		return dateEnteredOfSave;
+	}
+	public void setDateEnteredOfSave(String dateEnteredOfSave) {
+		this.dateEnteredOfSave = dateEnteredOfSave;
+	}
+	/**
+	 * 这是为实体类准备的公用字段, 由于历史遗留问题, 有些类的这些值可能为null<br>
+	 * 如果实体类自定义类似的字段, 比如 dateEntered, 您应当使用实体类(子类)自定义的字段.因为有这些字段的类基本都是2016.9.18之前何杰写的, 而且它们对应的数据表中往往不存在如下的几个字段<br>
+	 * 我们约定9.18之后, 所有的类如果在数据表中定义了 保存, 修改, 删除时间字段, 请使用如下的字段名称.不要重新在子类中定义相关时间字段.谢谢
+	 */
+	public String getDateEnteredOfUpdate() {
+		return dateEnteredOfUpdate;
+	}
+	public void setDateEnteredOfUpdate(String dateEnteredOfUpdate) {
+		this.dateEnteredOfUpdate = dateEnteredOfUpdate;
+	}
+	/**
+	 * 这是为实体类准备的公用字段, 由于历史遗留问题, 有些类的这些值可能为null<br>
+	 * 如果实体类自定义类似的字段, 比如 dateEntered, 您应当使用实体类(子类)自定义的字段.因为有这些字段的类基本都是2016.9.18之前何杰写的, 而且它们对应的数据表中往往不存在如下的几个字段<br>
+	 * 我们约定9.18之后, 所有的类如果在数据表中定义了 保存, 修改, 删除时间字段, 请使用如下的字段名称.不要重新在子类中定义相关时间字段.谢谢
+	 */
+	public String getDateEnteredOfDelete() {
+		return dateEnteredOfDelete;
+	}
+	public void setDateEnteredOfDelete(String dateEnteredOfDelete) {
+		this.dateEnteredOfDelete = dateEnteredOfDelete;
+	}
 	public String getStatusSplitByComma() {
 		return statusSplitByComma;
 	}
@@ -112,12 +154,35 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 			return false;
 		}
 	}
+	
+	/**
+	 * 给实体类一些公用的字段赋值, 例如保存, 修改, 删除等时间
+	 */
+	private void modifySomeCommonFields(ModifyType type) {
+		String date = new SimpleDateFormat(ConfigFromProperties.getTABLE_TIME_FORMAT()).format(new Date());
+		
+		switch(type) {
+		case SAVE:
+			this.dateEnteredOfSave = date;
+			break;
+		case DELETE:
+			this.dateEnteredOfDelete = date;
+			break;
+		case UPDATE:
+			this.dateEnteredOfUpdate = date;
+			break;
+		}
+	}
+	private enum ModifyType {
+		SAVE, DELETE, UPDATE;
+	}
 	public boolean save() {
 		Session session = HibernateUtil.getCurrentSession();
 		try {
 			
 			session.beginTransaction();
 			
+			this.modifySomeCommonFields(ModifyType.SAVE);
 			session.save(this);
 			
 			session.getTransaction().commit();
@@ -131,12 +196,15 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	}
 	
 	public void save(Session session) {
+		this.modifySomeCommonFields(ModifyType.SAVE);
 		session.save(this);
 	}
 	public void update(Session session) {
+		this.modifySomeCommonFields(ModifyType.UPDATE);
 		session.update(this);
 	}
 	public void delete(Session session) {
+		this.modifySomeCommonFields(ModifyType.DELETE);
 		session.delete(this);
 	}
 	
@@ -146,6 +214,7 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		try {
 			session.beginTransaction();
 			
+			this.modifySomeCommonFields(ModifyType.UPDATE);
 			session.update(this);
 			
 			session.getTransaction().commit();
@@ -164,6 +233,7 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 			
 			session.beginTransaction();
 			
+			this.modifySomeCommonFields(ModifyType.DELETE);
 			session.delete(this);
 			
 			session.getTransaction().commit();

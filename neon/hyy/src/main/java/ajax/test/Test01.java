@@ -1,12 +1,10 @@
 package ajax.test;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import ajax.model.AjaxRequest;
-import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
-import ajax.model.taobao.ITaobao;
 import ajax.tools.Tools;
 
 
@@ -23,7 +21,12 @@ public class Test01 {
 	}
 	
 	public static void main(String[] args) {
-		do2();
+		
+		DecimalFormat formatter = new DecimalFormat("###,###,###.00");
+		String s = formatter.format(4864.0245);
+		System.out.println(s);
+		
+		
 	}
 	
 	private static void do2() {
