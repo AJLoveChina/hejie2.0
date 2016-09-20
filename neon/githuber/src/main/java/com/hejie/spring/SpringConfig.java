@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.hejie.spring.aspect.Safe;
+import com.hejie.spring.beans.Cities;
 import com.hejie.spring.beans.Dandan;
 import com.hejie.spring.beans.Hejie;
 import com.hejie.spring.beans.MusicTicket;
@@ -39,6 +40,11 @@ public class SpringConfig {
 	@Bean(name="dandan")
 	public Dandan dandan(MusicTicket musicTicket) {
 		return new Dandan(musicTicket);
+	}
+	
+	@Bean
+	public Cities cities() {
+		return new Cities();
 	}
 	
 	@Bean

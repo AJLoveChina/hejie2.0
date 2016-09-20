@@ -3,11 +3,18 @@ package ajax.model.entity;
 public class Comment extends Entity<Comment>{
 	
 	private long id;
-	private long userid;
+	private long parentid;
 	private int commentsGroupId;
+	private long userid;
 	private String content;
 	
 	
+	public long getParentid() {
+		return parentid;
+	}
+	public void setParentid(long parentid) {
+		this.parentid = parentid;
+	}
 	public long getId() {
 		return id;
 	}

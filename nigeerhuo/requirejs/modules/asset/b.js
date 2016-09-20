@@ -1,1 +1,0 @@
-define([],function(){function n(){console.log("B")}return n});
