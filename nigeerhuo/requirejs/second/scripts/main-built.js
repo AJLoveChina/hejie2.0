@@ -1,0 +1,1 @@
+define("one",[],function(){return{"do":function(){console.log("one")}}}),define("two",[],function(){return{"do":function(){console.log("two")}}}),define("three",[],function(){return{"do":function(){console.log("three")}}}),require(["one","two","three"],function(n,o,e){n["do"](),o["do"](),e["do"]()}),define("main",function(){});
