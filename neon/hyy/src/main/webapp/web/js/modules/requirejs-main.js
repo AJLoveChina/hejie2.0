@@ -1,0 +1,3 @@
+require(["ui/comment"], function () {
+	
+});
