@@ -3,9 +3,52 @@
 <head>
     <title>My App</title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script data-main="scripts/main-built.js" src="scripts/require.js"></script>
+    <script src="scripts/require.js"></script>
 </head>
 <body>
 <h1>My App</h1>
+
+<script>
+    require.config({
+        baseDir : ".",
+        paths : {
+            main : "scripts/main-built"
+        }
+    });
+
+    require(["main"], function () {
+
+
+        require(["one"], function (a) {
+            a.do();
+        });
+
+
+    });
+
+
+
+    require(["main"], function () {
+
+
+        require(["two"], function (a) {
+            a.do();
+        });
+
+
+    });
+
+    require(["main"], function () {
+
+
+        require(["model/user"], function (user) {
+            console.log(user.name);
+        });
+
+
+    });
+
+
+</script>
 </body>
 </html>

@@ -1,8 +1,6 @@
 /**
  * Created by ajax on 2016/9/20.
  */
-require(["one", "two", "three"], function (one, two, three) {
-    one.do();
-    two.do();
-    three.do();
+require(["one", "two", "three", "model/user"], function (one, two, three, user) {
+
 });
