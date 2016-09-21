@@ -28,6 +28,7 @@ request.setAttribute("keywords", item.getTitle());
 	
 	<jsp:include page="/views/item/itemsRecommend.jsp"></jsp:include>
 
+	<div class="aj-comment-ui-area" data-grounp-id="ajax.model.item.<%=item.getId() %>"></div>
 </div>
 
 <div class="aj-body-right">
