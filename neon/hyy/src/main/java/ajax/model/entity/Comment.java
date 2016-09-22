@@ -4,7 +4,7 @@ public class Comment extends Entity<Comment>{
 	
 	private long id;
 	private long parentid;
-	private int commentsGroupId;
+	private String commentsGroupId;
 	private long userid;
 	private String content;
 	
@@ -27,10 +27,11 @@ public class Comment extends Entity<Comment>{
 	public void setUserid(long userid) {
 		this.userid = userid;
 	}
-	public int getCommentsGroupId() {
+
+	public String getCommentsGroupId() {
 		return commentsGroupId;
 	}
-	public void setCommentsGroupId(int commentsGroupId) {
+	public void setCommentsGroupId(String commentsGroupId) {
 		this.commentsGroupId = commentsGroupId;
 	}
 	public String getContent() {
@@ -40,7 +41,19 @@ public class Comment extends Entity<Comment>{
 		this.content = content;
 	}
 	
+
 	
+	public Comment(long id, long parentid, String commentsGroupId, long userid, String content) {
+		super();
+		this.id = id;
+		this.parentid = parentid;
+		this.commentsGroupId = commentsGroupId;
+		this.userid = userid;
+		this.content = content;
+	}
+	public Comment() {
+		super();
+	}
 	public static void main(String[] args) {
 //		Comment comment = new Comment();
 ////		comment.setCommentsGroupId(1);
