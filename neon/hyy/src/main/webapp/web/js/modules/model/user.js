@@ -4,6 +4,8 @@ define(function () {
 		this.conatinerSelector = ".user-login";
 		this.statusAttr = "data-islogin";
 		this.configSelector = "#aj-user-sign-config";
+		this.loginSuccessEventName= "aj.userLoginSuccess";
+		this.logoutSuccessEventName = "aj.userLogoutSuccess";
 	}
 	User.prototype = {
 		isLogin : function () {
@@ -45,6 +47,22 @@ define(function () {
 			} else {
 				return "";
 			}
+		},
+		/**
+		 * 因为有些第三方登陆成功后是不刷新网页的, 所以触发登陆成功事件, 以让程序以外的
+		 * 部分响应用户登录的情况
+		 */
+		triggerLoginEvent : function () {
+			$(window).trigger(this.loginSuccessEventName);
+		},
+		triggerLogoutEvent : function () {
+			$(window).trigger(this.logoutSuccessEventName);
+		},
+		onLogin : function (fn) {
+			$(window).on(this.loginSuccessEventName, fn);
+		},
+		onLogout : function (fn) {
+			$(window).on(this.logoutSuccessEventName, fn);
 		}
 	}
 	

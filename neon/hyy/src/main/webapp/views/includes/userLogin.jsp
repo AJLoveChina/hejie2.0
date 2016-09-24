@@ -210,373 +210,338 @@ request.setAttribute("curUser", curUser);
 </c:choose>
 
 <script type="text/javascript">
+
 	function onGoogleSignIn(data) {
-		if ((new aj.User()).isLogin()) {
-			console.log("已经登录!Not Sign in Google again");
-			return;
-		}
 		$(window).trigger("onGoogleSignIn", data);
 	}
-	$(function() {
-		
-		$(window).on("onGoogleSignIn", function (ev, google) {
-			var profile = google.getBasicProfile();
-			var id = profile.getId(),
-				name = profile.getName(),
-				image = profile.getImageUrl(),
-				email = profile.getEmail();
+
+	require(["main"], function () {
+		require(["model/user", "tools/tools"], function (user, tools) {
 			
-			signin(image, name, "google", google);
-		});
-		
-		try {
-			var container = $(".user-login");
-			var CSRF_STATE = "<%=state %>";
-			var config = {
-				qq : {
-					url : "/sign/qq"
-				},
-				weibo : {
-					url : "/sign/weibo"
-				},
-				github : {
-					url : "/sign/github"
-				},
-				google : {
-					url : "/sign/google"
-				},
-				USER_HOME : "/userhome",
-				SIGN_OUT : "/sign/out",
-				SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
-			};
-			var hostname;
-			
-			if (aj.tools.isLocal()) {
-				hostname = "www.nigeerhuo.com";
-			} else {
-				// 注意这里要写 hostname 因为 某些浏览器 弹出的窗口与本来网页不同源的话 无法关闭
-				hostname = location.hostname;
-			}
+			$(window).on("onGoogleSignIn", function (ev, google) {
+				
+				if (user.isLogin()) {
+					console.log("已经登录!Not Sign in Google again");
+					return;
+				}
+				
+				var profile = google.getBasicProfile();
+				var id = profile.getId(),
+					name = profile.getName(),
+					image = profile.getImageUrl(),
+					email = profile.getEmail();
+				
+				signin(image, name, "google", google);
+			});
 			
 			try {
-				var aj_user_sign_config_form = $("#aj-user-sign-config")[0];
+				var container = $(".user-login");
+				var CSRF_STATE = "<%=state %>";
+				var config = {
+					qq : {
+						url : "/sign/qq"
+					},
+					weibo : {
+						url : "/sign/weibo"
+					},
+					github : {
+						url : "/sign/github"
+					},
+					google : {
+						url : "/sign/google"
+					},
+					USER_HOME : "/userhome",
+					SIGN_OUT : "/sign/out",
+					SIGNIN_ATTR : "aj-is-query-server-for-sign-now"
+				};
+				var hostname;
 				
-				if (aj_user_sign_config_form.isLogin.value.toLowerCase() == "true") {
-					signin(aj_user_sign_config_form.img.value, aj_user_sign_config_form.nickname.value, "server", aj_user_sign_config_form);
+				if (tools.isLocal()) {
+					hostname = "www.nigeerhuo.com";
+				} else {
+					// 注意这里要写 hostname 因为 某些浏览器 弹出的窗口与本来网页不同源的话 无法关闭
+					hostname = location.hostname;
 				}
+				
+				try {
+					var aj_user_sign_config_form = $("#aj-user-sign-config")[0];
+					
+					if (aj_user_sign_config_form.isLogin.value.toLowerCase() == "true") {
+						signin(aj_user_sign_config_form.img.value, aj_user_sign_config_form.nickname.value, "server", aj_user_sign_config_form);
+					}
+					
+				}catch(ex) {
+					console.log(ex);
+				}
+				
+				
+				// 更多登陆方式
+				$(function(){
+					$(".aj-show-sign-panel").click(function(){
+					  $("#aj-sign-panel").modal("toggle");
+					});
+				});	
+				
+					
+			 	var before = $(".user-login .u-l-sign-before"),
+				    after = $(".user-login .u-l-sign-after");
+				    
+				// 登陆成功后做的事情
+				function signin(userimg, nickname, from, moreInfo) {
+					
+					user.triggerLoginEvent();
+					
+					$("#aj-sign-panel").modal("hide");
+					//根据返回数据，更换按钮显示状态方法
+				     var before = $(".user-login .u-l-sign-before"),
+				    		after = $(".user-login .u-l-sign-after");
+				      	
+				       $("#aj-user-login-choices").hide();
+				       
+				       var img = $(document.createElement("img"));
+				       img.attr("src", userimg);
+				       
+				       var atag = $(document.createElement("div"));
+				       atag.append(img);
+				       atag.attr("href", config.USER_HOME);
+				       $(".user-login .u-l-photo").hide();
+				       $(".user-login .u-l-true-image").css({
+				       		backgroundImage : "url(" + userimg + ")"
+				       }).show();
+				       
+				       
+				       before.hide();
+				       after.find(".nickname").html(nickname);
+				       after.show();
+				       
+				       // 切换登陆状态, 让User类判断是否登陆了
+				       container.attr("data-islogin", "1");
+				       
+				       // 向服务端注册
+				       if (from === "qq") {
+				       
+				       		QC.Login.getMe(function(openId, accessToken){
+								var data = {
+									id : openId,
+									token : accessToken,
+									action : "sign",
+									img : userimg
+								};
+								
+								QC.api("get_user_info", {})
+								//指定接口访问成功的接收函数，s为成功返回Response对象
+								.success(function(s){
+									data.nickname = s.data.nickname;
+									data.dataText = s.dataText;
+									
+									$.ajax({
+										url : config.qq.url,
+										data : data,
+										type : "POST",
+										dataType : "json",
+										success : function (json) {
+											try {
+												var userid = json.data.user.id;
+												
+												container.attr("data-userid", userid);
+											}catch(ex) {
+												console.log(ex);
+											}
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									});
+								}).error(function(f){ //指定接口访问失败的接收函数，f为失败返回Response对象
+									//失败回调
+								}).complete(function(c){//指定接口完成请求后的接收函数，c为完成请求返回Response对象
+									
+								});
+							})
+							
+				       }
+				       
+				       if (from == "weibo") {
+				       		(function () {
+				       			var data = {
+				       				uid : moreInfo.uid,
+				       				token : moreInfo.access_token,
+				       				nickname : nickname,
+				       				img : moreInfo.avatar_hd
+				       			}
+				       			
+				       			$.ajax({
+				       				url : config.weibo.url,
+				       				data : data,
+				       				type : "POST",
+				       				dataType : "json",
+				       				success : function (json) {
+				       					console.log(json);
+				       				},
+				       				error : function (e) {
+				       					console.log(e);
+				       				}
+				       			});
+				       		})();
+				       }
+				       
+				       if (from == "google") {
+				    	   (function () {
+				    		  var id_token = moreInfo.getAuthResponse().id_token;
+				    		  
+				    		  $.ajax({
+				    			  url : config.google.url,
+				    			  type : "GET",
+				    			  data : {
+				    				  id_token : id_token
+				    			  },
+				    			  success : function (json) {
+				    				  console.log(json);
+				    			  },
+				    			  error : function (e) {
+				    				  console.log(e);
+				    			  }
+				    		  });
+				    	   })();
+				       }
+				       
+				       if (from == "server") {
+				       		(function () {
+				       			var userid = moreInfo.userid;
+				       			
+				       			container.attr("data-userid", userid);
+				       		})();
+				       }
+				}
+				
+				
+				// 注销的样式处理 和服务端吗处理
+				function signout() {
+					
+					user.triggerLogoutEvent();
+					
+					// Google logoutの前端处理
+					try {
+			        	(function () {
+			        		var auth2 = gapi.auth2.getAuthInstance();
+				            auth2.signOut().then(function () {
+				              console.log('Google User signed out.');
+				            });
+			        	})()
+			        }catch(ex){
+			        	console.log("Google logout fail");
+			        }
+			        
+			        
+					$("#aj-user-login-choices").show();
+			        after.hide();
+			        $(".user-login .u-l-photo").show();
+			        $(".user-login .u-l-true-image").hide();
+			        
+			        before.show();
+			        sessionStorage.removeItem(config.SIGNIN_ATTR);
+			        
+			        
+			        $(".user-login").attr("data-islogin", "0");
+			       	var userLoginInfoForm =  $("#aj-user-sign-config")[0];
+			       	userLoginInfoForm["isLogin"].value = "false";
+			       	
+			        $.ajax({
+			        	url : config.SIGN_OUT,
+			        	type : "GET",
+			        	dataType : "text/json",
+			        	success : function (json) {
+			        		console.log(json);
+			        	},
+			        	error : function (err) {
+			        		console.log(err);
+			        	}
+			        });
+			        
+				}
+				   
+				// 注销   对于 第三方登陆的处理, 第三方登陆会有一个异步函数调用  signout 函数
+				$("#aj-sign-out").on("click", function() {
+					
+					signout();
+					
+				})
+
+				// github登陆
+				$(".agithub-sign").on("click", function () {
+					
+					var params = [
+						{
+							key : "client_id",
+							val : "ab170726816e269ab1ba"
+						},
+						{
+							key : "redirect_uri",
+							val : "http://" + hostname  + config.github.url
+						},
+						{
+							key : "state",
+							val : CSRF_STATE
+						}
+					];
+					
+					var url = "https://github.com/login/oauth/authorize";
+					
+					url = tools.joinParams(url, params);
+					
+					tools.openUrl(url);
+				})
+				
+				$(".aweibo-sign").on("click", function () {
+					var params = [
+						{
+							key : "client_id",
+							val : "4069769321"
+						},
+						{
+							key : "redirect_uri",
+							val : "http://" + hostname  + config.weibo.url
+						}
+					];
+					var url = "https://api.weibo.com/oauth2/authorize";
+					
+					url = tools.joinParams(url, params);
+					
+					tools.openUrl(url);
+				});
+				
+				
+				$(".aqq-sign").on("click", function () {
+					var params = [
+						{
+							key : "response_type",
+							val : "code"
+						},
+						{
+							key : "client_id",
+							val : "101305556"
+						},
+						{
+							key : "redirect_uri",
+							val : "http://" + hostname  + config.qq.url
+						},
+						{
+							key : "state",
+							val : CSRF_STATE
+						}
+					];
+					var url = "https://graph.qq.com/oauth2.0/authorize";
+					url = tools.joinParams(url, params);
+					
+					tools.openUrl(url);
+				});
 				
 			}catch(ex) {
-				console.log(ex);
+				tools.logException(ex);
 			}
 			
-			
-			// 更多登陆方式
-			$(function(){
-				$(".aj-show-sign-panel").click(function(){
-				  $("#aj-sign-panel").modal("toggle");
-				});
-			});	
-			
-				
-		 	var before = $(".user-login .u-l-sign-before"),
-			    after = $(".user-login .u-l-sign-after");
-			    
-
-
-				
-			// 登陆成功后做的事情
-			function signin(userimg, nickname, from, moreInfo) {
-				$("#aj-sign-panel").modal("hide");
-				//根据返回数据，更换按钮显示状态方法
-			     var before = $(".user-login .u-l-sign-before"),
-			    		after = $(".user-login .u-l-sign-after");
-			      	
-			       $("#aj-user-login-choices").hide();
-			       
-			       var img = $(document.createElement("img"));
-			       img.attr("src", userimg);
-			       
-			       var atag = $(document.createElement("div"));
-			       atag.append(img);
-			       atag.attr("href", config.USER_HOME);
-			       $(".user-login .u-l-photo").hide();
-			       $(".user-login .u-l-true-image").css({
-			       		backgroundImage : "url(" + userimg + ")"
-			       }).show();
-			       
-			       
-			       before.hide();
-			       after.find(".nickname").html(nickname);
-			       after.show();
-			       
-			       // 切换登陆状态, 让User类判断是否登陆了
-			       container.attr("data-islogin", "1");
-			       
-			       // 向服务端注册
-			       if (from === "qq") {
-			       
-			       		QC.Login.getMe(function(openId, accessToken){
-							var data = {
-								id : openId,
-								token : accessToken,
-								action : "sign",
-								img : userimg
-							};
-							
-							QC.api("get_user_info", {})
-							//指定接口访问成功的接收函数，s为成功返回Response对象
-							.success(function(s){
-								data.nickname = s.data.nickname;
-								data.dataText = s.dataText;
-								
-								$.ajax({
-									url : config.qq.url,
-									data : data,
-									type : "POST",
-									dataType : "json",
-									success : function (json) {
-										try {
-											var userid = json.data.user.id;
-											
-											container.attr("data-userid", userid);
-										}catch(ex) {
-											console.log(ex);
-										}
-									},
-									error : function(e) {
-										console.log(e);
-									}
-								});
-							}).error(function(f){ //指定接口访问失败的接收函数，f为失败返回Response对象
-								//失败回调
-							}).complete(function(c){//指定接口完成请求后的接收函数，c为完成请求返回Response对象
-								
-							});
-						})
-						
-			       }
-			       
-			       if (from == "weibo") {
-			       		(function () {
-			       			var data = {
-			       				uid : moreInfo.uid,
-			       				token : moreInfo.access_token,
-			       				nickname : nickname,
-			       				img : moreInfo.avatar_hd
-			       			}
-			       			
-			       			$.ajax({
-			       				url : config.weibo.url,
-			       				data : data,
-			       				type : "POST",
-			       				dataType : "json",
-			       				success : function (json) {
-			       					console.log(json);
-			       				},
-			       				error : function (e) {
-			       					console.log(e);
-			       				}
-			       			});
-			       		})();
-			       }
-			       
-			       if (from == "google") {
-			    	   (function () {
-			    		  var id_token = moreInfo.getAuthResponse().id_token;
-			    		  
-			    		  $.ajax({
-			    			  url : config.google.url,
-			    			  type : "GET",
-			    			  data : {
-			    				  id_token : id_token
-			    			  },
-			    			  success : function (json) {
-			    				  console.log(json);
-			    			  },
-			    			  error : function (e) {
-			    				  console.log(e);
-			    			  }
-			    		  });
-			    	   })();
-			       }
-			       
-			       if (from == "server") {
-			       		(function () {
-			       			var userid = moreInfo.userid;
-			       			
-			       			container.attr("data-userid", userid);
-			       		})();
-			       }
-			}
-			
-			
-			// 注销的样式处理 和服务端吗处理
-			function signout() {
-				// Google logoutの前端处理
-				try {
-		        	(function () {
-		        		var auth2 = gapi.auth2.getAuthInstance();
-			            auth2.signOut().then(function () {
-			              console.log('Google User signed out.');
-			            });
-		        	})()
-		        }catch(ex){
-		        	console.log("Google logout fail");
-		        }
-		        
-		        
-				$("#aj-user-login-choices").show();
-		        after.hide();
-		        $(".user-login .u-l-photo").show();
-		        $(".user-login .u-l-true-image").hide();
-		        
-		        before.show();
-		        sessionStorage.removeItem(config.SIGNIN_ATTR);
-		        
-		        
-		        $(".user-login").attr("data-islogin", "0");
-		       	var userLoginInfoForm =  $("#aj-user-sign-config")[0];
-		       	userLoginInfoForm["isLogin"].value = "false";
-		       	
-		        $.ajax({
-		        	url : config.SIGN_OUT,
-		        	type : "GET",
-		        	dataType : "text/json",
-		        	success : function (json) {
-		        		console.log(json);
-		        	},
-		        	error : function (err) {
-		        		console.log(err);
-		        	}
-		        });
-		        
-			}
-			   
-			// 注销   对于 第三方登陆的处理, 第三方登陆会有一个异步函数调用  signout 函数
-			$("#aj-sign-out").on("click", function() {
-				
-				signout()
-				
-			})
-
-/* 			// QQ登陆
-			QC.Login({
-				btnId : "qqLoginBtn",//插入按钮的html标签id
-				size : "C_S",//按钮尺寸
-				scope : "get_user_info",//展示授权，全部可用授权可填 all
-				display : "pc"//应用场景，可选
-			},function(reqData, opts){//登录成功
-			    signin(reqData.figureurl, reqData.nickname, "qq");
-			}, function(opts){//注销成功
-			     // signout(opts);  这个方法不要在这调用
-			});
-				
-							
-			// 微博登陆
-			WB2.anyWhere(function(W){
-			    W.widget.connectButton({
-			        id: "wb_connect_btn2",	
-			        type:"3,2",
-			        callback : {
-			            login:function(o){	//登录后的回调函数
-			            	console.log(o);
-			            	signin(o.avatar_large, o.name, "weibo", o);
-			            },
-			            logout:function(){	//退出后的回调函数
-			            	// signout();
-			            }
-			        }
-			    });
-			}); */
-			
-			
-			function joinParams(url, params) {
-				
-				var paramsArr = [];
-				for (var i = 0; i < params.length; i++) {
-					paramsArr.push(params[i].key + "=" + encodeURIComponent(params[i].val));
-				}
-				url += "?" + paramsArr.join("&");
-				
-				return url;
-			}
-			
-			
-			function openUrl(url) {
-				window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
-			}
-			
-			// github登陆
-			$(".agithub-sign").on("click", function () {
-				
-				var params = [
-					{
-						key : "client_id",
-						val : "ab170726816e269ab1ba"
-					},
-					{
-						key : "redirect_uri",
-						val : "http://" + hostname  + config.github.url
-					},
-					{
-						key : "state",
-						val : CSRF_STATE
-					}
-				];
-				
-				var url = "https://github.com/login/oauth/authorize";
-				
-				url = joinParams(url, params);
-				
-				openUrl(url);
-			})
-			
-			$(".aweibo-sign").on("click", function () {
-				var params = [
-					{
-						key : "client_id",
-						val : "4069769321"
-					},
-					{
-						key : "redirect_uri",
-						val : "http://" + hostname  + config.weibo.url
-					}
-				];
-				var url = "https://api.weibo.com/oauth2/authorize";
-				
-				url = joinParams(url, params);
-				
-				openUrl(url);
-			});
-			
-			
-			$(".aqq-sign").on("click", function () {
-				var params = [
-					{
-						key : "response_type",
-						val : "code"
-					},
-					{
-						key : "client_id",
-						val : "101305556"
-					},
-					{
-						key : "redirect_uri",
-						val : "http://" + hostname  + config.qq.url
-					},
-					{
-						key : "state",
-						val : CSRF_STATE
-					}
-				];
-				var url = "https://graph.qq.com/oauth2.0/authorize";
-				url = joinParams(url, params);
-				
-				openUrl(url);
-			});
-			
-		}catch(ex) {
-			console.log(ex.message);
-		}
+		})
 	});
+	
+	
 </script>

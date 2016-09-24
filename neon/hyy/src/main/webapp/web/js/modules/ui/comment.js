@@ -4,6 +4,9 @@ define(["model/user"], function (user) {
 		this.groupIdAttr = "data-grounp-id";
 		this.hasRenderClassName = "aj-comment-ui-area-has-rendered";
 		this.commentsLoadUrl = "/comment/get";
+		this.textareaClassName = "user-comment-area";
+		this.placeHolderWhenLogin = "亲, 说点什么吧~";
+		this.placeHolderWhenLogout = "登陆才可以评论哦~";
 	}
 	Comment.prototype = {
 			getGroupId : function (jDom) {
@@ -22,6 +25,25 @@ define(["model/user"], function (user) {
 				
 				this.renderHeader(dom);
 				this.renderComments(dom);
+				this.bindEvents(dom);
+			},
+			bindEvents : function (dom) {
+				var that = this;
+				user.onLogin(function () {
+					that.enableComment(dom);
+				});
+				user.onLogout(function () {
+					that.disableComment(dom);
+				})
+			},
+			disableComment : function (dom) {
+				$(dom).find("." + this.textareaClassName).attr({
+					"disabled" : "true",
+					placeholder : this.placeHolderWhenLogout
+				});
+			},
+			enableComment : function (dom) {
+				$(dom).find("." + this.textareaClassName).removeAttr("disabled").attr("placeholder", this.placeHolderWhenLogin);
 			},
 			renderHeader : function (dom) {
 				var div = $("<div>"),
@@ -36,9 +58,9 @@ define(["model/user"], function (user) {
 				} else {
 					textarea.attr("placeholder", "您未登录, 无法评论");
 					textarea.attr("disabled", "true");
-					
 				}
 				textarea.addClass("form-control");
+				textarea.addClass(this.textareaClassName);
 				div.append(textarea);
 
 				btn.html("提交");

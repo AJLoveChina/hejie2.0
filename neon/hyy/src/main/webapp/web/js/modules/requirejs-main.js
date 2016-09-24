@@ -1,3 +1,3 @@
-require(["ui/comment", "model/user"], function () {
+require(["ui/comment", "model/user", "tools/tools"], function () {
 	
 });

@@ -6,9 +6,30 @@ public class Comment extends Entity<Comment>{
 	private long parentid;
 	private String commentsGroupId;
 	private long userid;
+	private String nickname;
+	private String userimg;
+	private String userInfoJson;
 	private String content;
 	
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getUserimg() {
+		return userimg;
+	}
+	public void setUserimg(String userimg) {
+		this.userimg = userimg;
+	}
+	public String getUserInfoJson() {
+		return userInfoJson;
+	}
+	public void setUserInfoJson(String userInfoJson) {
+		this.userInfoJson = userInfoJson;
+	}
 	public long getParentid() {
 		return parentid;
 	}
