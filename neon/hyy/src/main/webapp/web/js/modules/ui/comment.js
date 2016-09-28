@@ -1,16 +1,25 @@
-define(["model/user"], function (user) {
+define(["model/user", "tools/tools", "model/comment"], function (user, tools, CModel) {
 	function Comment() {
 		this.className = "aj-comment-ui-area";
 		this.groupIdAttr = "data-grounp-id";
 		this.hasRenderClassName = "aj-comment-ui-area-has-rendered";
 		this.commentsLoadUrl = "/comment/get";
+		this.submitUrl = "/comment/submit";
 		this.textareaClassName = "user-comment-area";
 		this.placeHolderWhenLogin = "亲, 说点什么吧~";
 		this.placeHolderWhenLogout = "登陆才可以评论哦~";
+		this.submitBtnClassName = "aj-submit-btn";
+		this.submitErrorInfo = "服务器君出现异常,请待会再试试吧~~";
+		this.oneCommentClassName = "one-comment";
+		this.commentsWrapClassName = "comments-wrap-className";
+		this.lastCommentTimestampAttribute = "data-last-comment-timestamp";
 	}
 	Comment.prototype = {
 			getGroupId : function (jDom) {
 				return jDom.attr(this.groupIdAttr);
+			},
+			getContentFromDom : function (jDom) {
+				return jDom.find("." + this.textareaClassName).val();
 			},
 			render : function () {
 				var divs = $("." + this.className);
@@ -35,6 +44,82 @@ define(["model/user"], function (user) {
 				user.onLogout(function () {
 					that.disableComment(dom);
 				})
+				$(dom).on("click", "." + this.submitBtnClassName, function () {
+					var validate = that.validate(dom);
+					if (validate !== true) {
+						tools.tishi(validate);
+						return;
+					}
+					var comment = that.getCommentFromDom(dom);
+					that.submit(comment, dom);
+				});
+			},
+			/**
+			 * 如果通过返回true, 否则返回错误消息
+			 */
+			validate : function (dom) {
+				var bool = true;
+				var msg = "";
+				if (!user.isLogin()) {
+					msg = "登陆后才可以评论哦~";
+				} else if ($.trim($(dom).find("." + this.textareaClassName).val()) === "") {
+					bool = false;
+					msg = "内容不能为空的~~";
+				}
+				
+				return bool === true ? bool : msg;
+			},
+			submit : function (comment, dom) {
+				var that = this;
+				var cls = "aj-is-ajax-now";
+				var jDom = $(dom);
+				if (jDom.hasClass(cls)) {
+					return;
+				}
+				jDom.addClass(cls);
+				$.ajax({
+					url : this.submitUrl,
+					type : "POST",
+					data : {
+						data : JSON.stringify(comment)
+					},
+					dataType : "JSON",
+					success : function (ar) {
+						if (ar.isok) {
+							that.renderCommentPrependDom(comment, dom);
+							that.clearAfterComment(dom);
+						} else {
+							aj.tishi(ar.data);
+						}
+					},
+					error : function () {
+						tools.tishi(that.submitErrorInfo);
+					},
+					complete : function () {
+						jDom.removeClass(cls);
+					}
+				});
+			},
+			clearAfterComment : function (dom) {
+				$(dom).find("." + this.textareaClassName).val("");
+			},
+			/**
+			 * 把用户刚刚的评论显示在页面上
+			 */
+			renderCommentPrependDom : function (comment, dom) {
+				comment["dateEnteredOfSave"] = new Date();
+				comment["userimg"] = user.getUserimg();
+				comment["nickname"] = user.getNickname();
+				
+				var div = this.renderCommentJsonToDom(comment);
+				$(dom).find("." + this.commentsWrapClassName).prepend(div);
+			},
+			getCommentFromDom : function (dom) {
+				var comment = new CModel();
+				comment.commentsGroupId = this.getGroupId($(dom));
+				comment.content = this.getContentFromDom($(dom));;
+				
+				return comment;
 			},
 			disableComment : function (dom) {
 				$(dom).find("." + this.textareaClassName).attr({
@@ -64,7 +149,7 @@ define(["model/user"], function (user) {
 				div.append(textarea);
 
 				btn.html("提交");
-				btn.addClass("form-control");
+				btn.addClass("form-control " + this.submitBtnClassName);
 				btn.css({
 					"width" : "80px"
 				})
@@ -77,6 +162,7 @@ define(["model/user"], function (user) {
 				jDom = $(dom);
 				var div = $("<div>"),
 					that = this;
+				div.addClass(this.commentsWrapClassName);
 				$.ajax({
 					url : this.commentsLoadUrl + "?commentsGroupId=" + this.getGroupId(jDom),
 					type : "GET",
@@ -103,7 +189,21 @@ define(["model/user"], function (user) {
 			},
 			renderCommentJsonToDom : function (map) {
 				var div = $("<div>");
-				div.html(map["userid"] + ":" + map["content"]);
+				div.addClass(this.oneCommentClassName);
+				div.css({
+					marginTop : "10px"
+				})
+				div.html('<div class="c-header">' +
+						'<img class="header-img" src="' +
+						map["userimg"] +
+						'"/><span class="name">' +
+						map["nickname"] +
+						'</span><span class="c-time">' +
+						map["dateEnteredOfSave"] +
+						'</span></div>' +
+						'<div class="c-content">' +
+						map["content"] +
+						'</div>');
 				return div;
 			},
 			hasRendered : function (dom) {

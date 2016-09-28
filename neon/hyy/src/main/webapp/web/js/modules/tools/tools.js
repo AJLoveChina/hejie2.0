@@ -23,6 +23,14 @@ define(function () {
 			} else {
 				return false;
 			}
+		},
+		tishi : function (info) {
+			var container = $("#aj-gobal-tishi-modal");
+			
+			
+			container.find(".modal-body").html(info);
+			
+			container.modal("show");
 		}
 	};
 	

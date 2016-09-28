@@ -471,3 +471,40 @@ body {
 	box-shadow:none;
 }
 /* Google sign in style END*/
+
+/* Comment css*/
+.aj-comment-ui-area{margin-top:10px;margin-bottom:10px;}
+.aj-comment-ui-area h3{font-size:16px;line-height: 30px;}
+.aj-comment-ui-area .one-comment {
+    border-bottom: 1px solid #ccc;
+}
+
+.aj-comment-ui-area  img.header-img {}
+
+.aj-comment-ui-area  img.header-img {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 0;
+    left: 5px;
+}
+
+.aj-comment-ui-area .c-header {
+    padding-left: 50px;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+}
+
+.aj-comment-ui-area span.c-time {
+    position: absolute;
+    right: 10px;
+}
+.aj-comment-ui-area .c-content {
+    padding-left: 50px;
+    margin: 5px 0;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+/* Comment css ENd*/

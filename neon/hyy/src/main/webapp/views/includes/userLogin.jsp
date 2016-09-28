@@ -301,6 +301,9 @@ request.setAttribute("curUser", curUser);
 				       var img = $(document.createElement("img"));
 				       img.attr("src", userimg);
 				       
+				   	var userLoginInfoForm =  $("#aj-user-sign-config")[0];
+			       	userLoginInfoForm["isLogin"].value = "true";
+			       	
 				       var atag = $(document.createElement("div"));
 				       atag.append(img);
 				       atag.attr("href", config.USER_HOME);

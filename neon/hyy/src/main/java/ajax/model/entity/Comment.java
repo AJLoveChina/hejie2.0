@@ -1,9 +1,20 @@
 package ajax.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import ajax.model.safe.User;
+import ajax.tools.HibernateUtil;
+
 public class Comment extends Entity<Comment>{
 	
 	private long id;
-	private long parentid;
+	private long parentid = 0;
 	private String commentsGroupId;
 	private long userid;
 	private String nickname;
@@ -84,6 +95,33 @@ public class Comment extends Entity<Comment>{
 //		comment.load(2L);
 //		comment.setContent("Hi~7777~");
 //		comment.update();
+	}
+	
+	/**
+	 * 从用户实体中获取相应字段的信息
+	 * @param user
+	 */
+	public void configFromUser(User user) {
+		this.setNickname(user.getFinalName());
+		this.setUserid(user.getId());
+		this.setUserimg(user.getImg());
+		this.setUserInfoJson("");
+	}
+	public static List<Comment> getListByGroupIdAndPage(String commentsGroupId2, Integer page, int size) {
+		Session session = HibernateUtil.getCurrentSession();
+		try {
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(Comment.class);
+			criteria.add(Restrictions.eq("commentsGroupId", commentsGroupId2));
+			criteria.addOrder(Order.desc("id"));
+			criteria.setFirstResult((page - 1) * size);
+			criteria.setMaxResults(size);
+			return criteria.list();
+		} catch(Exception ex) {
+			return new ArrayList<Comment>();
+		} finally {
+			session.getTransaction().commit();
+		}
 	}
 	
 	
