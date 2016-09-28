@@ -13,6 +13,9 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 		this.oneCommentClassName = "one-comment";
 		this.commentsWrapClassName = "comments-wrap-className";
 		this.lastCommentTimestampAttribute = "data-last-comment-timestamp";
+		this.pageSize = 20;
+		this.classNameOfBtnForNextPageComments = "btn-get-next-page-comments";
+		this.btnForNextPageCommentsPageAttribute = "data-next-page";
 	}
 	Comment.prototype = {
 			getGroupId : function (jDom) {
@@ -53,6 +56,11 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 					var comment = that.getCommentFromDom(dom);
 					that.submit(comment, dom);
 				});
+				$(dom).on("click", "." + this.classNameOfBtnForNextPageComments, function () {
+					var page = parseInt($(this).attr(that.btnForNextPageCommentsPageAttribute));
+					$(this).hide();
+					that.renderComments(dom, page);
+				})
 			},
 			/**
 			 * 如果通过返回true, 否则返回错误消息
@@ -158,18 +166,21 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 				$(dom).append(div);
 			},
 			
-			renderComments : function (dom) {
+			renderComments : function (dom, page) {
+				if (page === undefined) page = 1;
 				jDom = $(dom);
 				var div = $("<div>"),
 					that = this;
+				var len = 0;
 				div.addClass(this.commentsWrapClassName);
 				$.ajax({
-					url : this.commentsLoadUrl + "?commentsGroupId=" + this.getGroupId(jDom),
+					url : this.commentsLoadUrl + "?commentsGroupId=" + this.getGroupId(jDom) + "&page=" + page,
 					type : "GET",
 					dataType : "json",
 					success : function(ar) {
 						var i;
 						if (ar.isok) {
+							len = ar.data.length;
 							for (i = 0; i < ar.data.length; i++) {
 								div.append(that.renderCommentJsonToDom(ar.data[i]));
 							}
@@ -183,7 +194,25 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 						});
 					},
 					complete : function () {
+						//jDom.find("." + this.commentsWrapClassName).remove();
+						var awrap = $("<div>");
+						awrap.css({
+							textAlign:"center",
+							padding:"10px"
+						});
+						var more = $("<a>");
+						more.attr("href", "javascript:;");
+						if (len === that.pageSize) {
+							more.html("下一页");
+							more.addClass(that.classNameOfBtnForNextPageComments);
+							more.attr(that.btnForNextPageCommentsPageAttribute, page + 1);
+						} else {
+							more.html("木有更多了");
+						}
+						awrap.append(more);
+						
 						jDom.append(div);
+						jDom.append(awrap);
 					}
 				});
 			},
@@ -199,7 +228,7 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 						'"/><span class="name">' +
 						map["nickname"] +
 						'</span><span class="c-time">' +
-						map["dateEnteredOfSave"] +
+						tools.timeago(map["dateEnteredOfSave"]) +
 						'</span></div>' +
 						'<div class="c-content">' +
 						map["content"] +

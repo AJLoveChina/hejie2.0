@@ -31,6 +31,10 @@ define(function () {
 			container.find(".modal-body").html(info);
 			
 			container.modal("show");
+		},
+		timeago : function (timeString) {
+			// This method depends on a third js library
+		    return (new timeago()).format(timeString, 'zh_CN');
 		}
 	};
 	
