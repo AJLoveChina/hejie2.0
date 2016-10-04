@@ -3,6 +3,9 @@ blockquote,body,button,div,space,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,inp
     padding: 0;
     border:none;
 }
+textarea.form-control{
+	max-width:100%;
+}
 ul li{
 	list-style: none;
 }

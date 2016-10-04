@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
 import ajax.model.entity.Comment;
+import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.safe.User;
 import ajax.tools.HibernateUtil;
 
@@ -43,7 +44,10 @@ public class CommentController {
 		int size = 20;
 		AjaxResponse<List<Comment>> ar = new AjaxResponse<>();
 		
-		List<Comment> list = Comment.getListByGroupIdAndPage(commentsGroupId, page, size);
+		RealTimePagination<Comment> pagination = new RealTimePagination<>();
+		
+		//List<Comment> list = Comment.getListByGroupIdAndPage(commentsGroupId, page, size);
+		List<Comment> list = pagination.get(commentsGroupId, page, new Comment());
 		
 		ar.setIsok(true);
 		ar.setData(list);
@@ -63,7 +67,10 @@ public class CommentController {
 		Comment comment = gson.fromJson(data, Comment.class);
 		comment.configFromUser(user);
 		
-		if (comment.save()) {
+		
+		RealTimePagination<Comment> pagination = new RealTimePagination<>();
+		
+		if (pagination.save(comment.getCommentsGroupId(), comment)) {
 			ar.setIsok(true);
 			ar.setData("保存成功!");
 		} else {

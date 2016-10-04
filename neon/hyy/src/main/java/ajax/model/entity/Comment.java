@@ -8,10 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import ajax.model.UniqueString;
+import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 import ajax.model.safe.User;
 import ajax.tools.HibernateUtil;
 
-public class Comment extends Entity<Comment>{
+public class Comment extends RealTimePaginationConfiguration<Comment>{
 	
 	private long id;
 	private long parentid = 0;
@@ -122,6 +124,28 @@ public class Comment extends Entity<Comment>{
 		} finally {
 			session.getTransaction().commit();
 		}
+	}
+	
+	
+	@Override
+	public UniqueString getMaxPageKey() {
+		return UniqueString.COMMENT_MAX_PAGE_KEY;
+	}
+	@Override
+	public int getPaginationPageSize() {
+		return 20;
+	}
+	@Override
+	public String getPrimaryKeyValue() {
+		return this.getId() + "";
+	}
+	@Override
+	public String getPaginationPrimaryKey() {
+		return "id";
+	}
+	@Override
+	public ajax.model.pagesSeparate.RealTimePaginationConfiguration.PK_TYPE getPaginationPrimaryKeyType() {
+		return PK_TYPE.LONG;
 	}
 	
 	

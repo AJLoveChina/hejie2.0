@@ -299,7 +299,10 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		sp3.update(this.getId());
 	}
 	
-	
+	/**
+	 * @param id
+	 * @return null if not found
+	 */
 	public static Item getByItemById(int id) {
 		
 		Session session = HibernateUtil.getCurrentSession();

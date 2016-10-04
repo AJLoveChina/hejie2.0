@@ -24,7 +24,10 @@ public class TypePage extends Entity<TypePage>{
 	private int size;
 	private String dateEntered;
 	
-	
+	/**
+	 * 返回目前该页面item的个数(不是指页面item指定的最大个数)
+	 * @return
+	 */
 	public int getSize() {
 		return size;
 	}
@@ -199,6 +202,13 @@ public class TypePage extends Entity<TypePage>{
 //		}
 	}
 	
+	/**
+	 * 只对Item类有效<br>
+	 * 根据itemsPart生成 typePage, 如果typePage == null, 生成新的typePage对象; 否则修改typePage的参数(items 和  size)
+	 * @param typePage
+	 * @param itemsPart
+	 * @return
+	 */
 	private static TypePage generateNewPageType(TypePage typePage, List<Item> itemsPart) {
 		List<String> idList = new ArrayList<String>();
 		for(Item item : itemsPart) {
@@ -223,6 +233,36 @@ public class TypePage extends Entity<TypePage>{
 		
 		return typePage;
 	}
+	
+	
+	public TypePage(List<String> list, String type, int page) {
+		super();
+		this.type = type;
+		this.page = page;
+		this.items = Tools.join(list, ",");
+		this.size = list.size();
+	}
+	
+	
+	public TypePage() {
+		super();
+	}
+	/**
+	 * 对该页添加一个实体id, 并修改相应的属性值<br>
+	 * 注意:并不更新数据库.
+	 * @param id
+	 */
+	public void addIdToItems(String id) {
+		String[] arr = this.items.split(",");
+		List<String> list  = new ArrayList<>();
+		list.add(id);
+		for (String s : arr) {
+			list.add(s);
+		}
+		this.items = Tools.join(list, ",");
+		this.size = this.size + 1;
+	}
+	
 	
 	public static int getMaxPageOf(JokeType jokeType) {
 		String maxPage = Tools.getConfig(MAX_PAGE_PREFIX + jokeType.getId());
@@ -286,10 +326,6 @@ public class TypePage extends Entity<TypePage>{
 	}
 	
 	
-	public static void main(String[] args) {
-		TypePage.generateOnePageOf(JokeType.ZHIDEMAI_AITAO);
-	}
-	
 	/**
 	 * 重新计算每个页面的item数目
 	 */
@@ -301,5 +337,7 @@ public class TypePage extends Entity<TypePage>{
 			typePage2.update();
 		}
 	}
+	
+
 	
 }

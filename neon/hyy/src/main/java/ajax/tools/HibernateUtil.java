@@ -11,7 +11,7 @@ import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
 
 
-public class HibernateUtil {
+public class  HibernateUtil{
 	private static SessionFactory sessionFactory;
 	private static Session session;
 	private static StandardServiceRegistry registry;

@@ -16,7 +16,14 @@ import ajax.model.taobao.ITaobao;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
-
+/**
+ * BasePagesSeparateProcessor 解决的是数据已经存储在表中了, 这时候后台一个任务每隔一段时间处理一次分页<br>
+ * 但是对于实时插入需要分页的系统,该类有性能问题.<br>
+ * 因为在寻找下一组可以插入的items时会因为 items所在表大小产生性能问题
+ * @author ajax
+ *
+ * @param <T>
+ */
 public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 	
 	public abstract UniqueString getPagesTypeKey();

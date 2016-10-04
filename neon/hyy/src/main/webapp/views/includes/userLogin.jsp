@@ -205,6 +205,9 @@ request.setAttribute("curUser", curUser);
 	<c:otherwise>
 		<form id="aj-user-sign-config">
 			<input name="isLogin" value='<c:out value="${isLogin }"></c:out>' />
+			<input name="nickname" value='' />
+			<input name="img" value='' />
+			<input name="userid" value='' />
 		</form>
 	</c:otherwise>
 </c:choose>
@@ -303,6 +306,11 @@ request.setAttribute("curUser", curUser);
 				       
 				   	var userLoginInfoForm =  $("#aj-user-sign-config")[0];
 			       	userLoginInfoForm["isLogin"].value = "true";
+			       	try {
+			       		userLoginInfoForm["img"].value = userimg;
+				       	userLoginInfoForm["nickname"].value = nickname;
+			       	}catch(ex){}
+			       	
 			       	
 				       var atag = $(document.createElement("div"));
 				       atag.append(img);
@@ -448,6 +456,10 @@ request.setAttribute("curUser", curUser);
 			        $(".user-login").attr("data-islogin", "0");
 			       	var userLoginInfoForm =  $("#aj-user-sign-config")[0];
 			       	userLoginInfoForm["isLogin"].value = "false";
+			       	try {
+			       		userLoginInfoForm["nickname"].value = "";
+				       	userLoginInfoForm["img"].value = "";
+			       	}catch(ex){}
 			       	
 			        $.ajax({
 			        	url : config.SIGN_OUT,

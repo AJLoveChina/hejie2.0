@@ -181,6 +181,13 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 						var i;
 						if (ar.isok) {
 							len = ar.data.length;
+							ar.data.sort(function (a, b) {
+								if ( + new Date(a["dateEnteredOfSave"]) > (+ new Date(b["dateEnteredOfSave"]))) {
+									return -1;
+								} else {
+									return 1;
+								}
+							});
 							for (i = 0; i < ar.data.length; i++) {
 								div.append(that.renderCommentJsonToDom(ar.data[i]));
 							}
@@ -206,6 +213,10 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 							more.html("下一页");
 							more.addClass(that.classNameOfBtnForNextPageComments);
 							more.attr(that.btnForNextPageCommentsPageAttribute, page + 1);
+						} else if (len > that.pageSize) {
+							more.html("下一页");
+							more.addClass(that.classNameOfBtnForNextPageComments);
+							more.attr(that.btnForNextPageCommentsPageAttribute, page + 2);
 						} else {
 							more.html("木有更多了");
 						}

@@ -436,6 +436,7 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	 * @param cls
 	 * @return
 	 */
+	@Deprecated
 	public static <T> List<T> get(int page, int size, Class<T> cls) {
 		Session session = HibernateUtil.getCurrentSession();
 		
