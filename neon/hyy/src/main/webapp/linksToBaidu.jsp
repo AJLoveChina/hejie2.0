@@ -34,69 +34,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 	<script>
-		var app = angular.module("linksToBaidu", []);
-		var container = $("#container");
-		
-		app.controller("mainController", function ($scope) {
-			$scope.s = {};
-			$scope.s.title = "提交链接给百度";
-			$scope.s.content = "";
-			$scope.s.backup = "";
-			
-			$scope.parse = function () {
-				var val = $scope.s.content;
-				
-				$scope.s.backup = val;
-				$scope.s.content = eval(val);
-				
-			}
-			
-			$scope.back = function () {
-				$scope.s.content = $scope.s.backup;
-			}
-			
-			$scope.submit = function () {
-				var arr = $scope.s.content.split("\n");
-				
-				arr = arr.filter(function (val) {
-					return $.trim(val) != "";
-				});
-				
-				var data = {
-					links : []
-				};
-				
-				arr.forEach(function (link) {
-					data.links.push(link);
-				});
-				
-				
-				
-				$.ajax({
-					url : "/admin/linksToBaidu/submit",
-					type : "POST",
-					data : {
-						"data" : JSON.stringify(data)
-					},
-					dataType : "json",
-					success : function (json) {
-						if (json.isok) {
-							aj.Tishi("Success");
-						} else {
-							aj.Tishi("Error : " + json.data);
+		$(function () {
+			require(["main"], function () {
+				require(["tools/tools"], function (tools) {
+					var app = angular.module("linksToBaidu", []);
+					var container = $("#container");
+					
+					app.controller("mainController", function ($scope) {
+						$scope.s = {};
+						$scope.s.title = "提交链接给百度";
+						$scope.s.content = "";
+						$scope.s.backup = "";
+						
+						$scope.parse = function () {
+							var val = $scope.s.content;
+							
+							$scope.s.backup = val;
+							$scope.s.content = eval(val);
+							
 						}
-					},
-					error : function (err) {
-						console.log(err);
-						aj.Tishi(err);
-					}
+						
+						$scope.back = function () {
+							$scope.s.content = $scope.s.backup;
+						}
+						
+						$scope.submit = function () {
+							var arr = $scope.s.content.split("\n");
+							
+							arr = arr.filter(function (val) {
+								return $.trim(val) != "";
+							});
+							
+							var data = {
+								links : []
+							};
+							
+							arr.forEach(function (link) {
+								data.links.push(link);
+							});
+							
+							
+							
+							$.ajax({
+								url : "/admin/linksToBaidu/submit",
+								type : "POST",
+								data : {
+									"data" : JSON.stringify(data)
+								},
+								dataType : "json",
+								success : function (json) {
+									if (json.isok) {
+										tools.tishi("Success");
+									} else {
+										tools.tishi("Error : " + json.data);
+									}
+								},
+								error : function (err) {
+									console.log(err);
+									tools.tishi(err);
+								}
+							});
+						}
+						
+						
+					});
+					
+					angular.bootstrap(container, ["linksToBaidu"]);
 				});
-			}
-			
-			
-		});
-		
-		angular.bootstrap(container, ["linksToBaidu"]);
+			});
+		})
 	</script>
 	
 </div>

@@ -411,6 +411,10 @@ body {
 
 /*aj-top-nav-line  maybe black*/
 @media(max-width: 900px) {
+	html,body{
+		position:relative;
+		width:100%;
+	}
 	div#aj-header{
 		width:100%;
 		max-width:100%;
@@ -447,7 +451,6 @@ body {
 }
 .aj-miaobao .inside-wrap{
 	position:relative;
-	width:1050px;
 	margin:0 auto;
 }
 

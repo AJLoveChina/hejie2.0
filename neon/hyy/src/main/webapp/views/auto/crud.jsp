@@ -24,43 +24,48 @@ String json = gson.toJson(cp);
 <script type="text/javascript">
 	$(function () {
 		try {
-			var json = $("#aj-crud-textarea").val();
-			var entityKeySet = $("#aj-crud-textarea-entityKeySet").val();
-			
-			
-			var container = $("#aj-crud-container");
-			var app = angular.module("app", []);
-			app.controller("mainController", function ($scope, $http) {
-				$scope.s = {};
-				$scope.s = $.parseJSON(json);
-				$scope.keySet = $.parseJSON(entityKeySet);
-			
-			
-				$scope.save = function () {
+			require(["main"], function () {
+				require(["tools/tools"], function (tools) {
+					var json = $("#aj-crud-textarea").val();
+					var entityKeySet = $("#aj-crud-textarea-entityKeySet").val();
 					
-					$.ajax({
-						type : "POST",
-						url  : "/admin/crudForTable",
-						data : {
-							data : JSON.stringify($scope.s),
-							className : $.trim($scope.s.className)
-						},
-						dataType : "json",
-						success : function  (json) {
-							aj.Tishi("Success");
-						},
-						error : function () {
-							aj.Tishi("Error!");
+					
+					var container = $("#aj-crud-container");
+					var app = angular.module("app", []);
+					app.controller("mainController", function ($scope, $http) {
+						$scope.s = {};
+						$scope.s = $.parseJSON(json);
+						$scope.keySet = $.parseJSON(entityKeySet);
+					
+					
+						$scope.save = function () {
+							
+							$.ajax({
+								type : "POST",
+								url  : "/admin/crudForTable",
+								data : {
+									data : JSON.stringify($scope.s),
+									className : $.trim($scope.s.className)
+								},
+								dataType : "json",
+								success : function  (json) {
+									tools.tishi("Success");
+								},
+								error : function () {
+									tools.tishi("Error!");
+								}
+							});
+						}
+						
+						$scope.addNewLine = function () {
+							$scope.s.list.push($.parseJSON(entityKeySet));
 						}
 					});
-				}
-				
-				$scope.addNewLine = function () {
-					$scope.s.list.push($.parseJSON(entityKeySet));
-				}
-			});
+					
+					angular.bootstrap(container, ["app"]);
+				})
+			})
 			
-			angular.bootstrap(container, ["app"]);
 		
 		}catch(ex) {}
 	

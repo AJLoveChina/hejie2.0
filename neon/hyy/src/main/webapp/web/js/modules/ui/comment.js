@@ -97,7 +97,7 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 							that.renderCommentPrependDom(comment, dom);
 							that.clearAfterComment(dom);
 						} else {
-							aj.tishi(ar.data);
+							tools.tishi(ar.data);
 						}
 					},
 					error : function () {

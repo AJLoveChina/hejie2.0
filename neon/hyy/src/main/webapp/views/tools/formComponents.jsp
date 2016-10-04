@@ -96,154 +96,127 @@ String json  = (String) request.getAttribute("formComponentsJson");
 
 <script>
 	$(function () {
-		try {
-			var item = JSON.parse($("#item-json").val());
-			
-			console.log(item);
-			var app = angular.module("item-modify-m", []);
-			var div = $("#aj-item-modify");
-			//var ue = UE.getEditor('content-container');
-			
-			
-			/* ue.ready(function() {
-			    ue.setContent(item.content);
-			    var html = ue.getContent();
-			    var txt = ue.getContentTxt();
-			}); */
+		require(["main"], function () {
+			require(["tools/tools"], function (tools) {
+				var item = JSON.parse($("#item-json").val());
+				
+				console.log(item);
+				var app = angular.module("item-modify-m", []);
+				var div = $("#aj-item-modify");
+				//var ue = UE.getEditor('content-container');
+				
+				
+				/* ue.ready(function() {
+				    ue.setContent(item.content);
+				    var html = ue.getContent();
+				    var txt = ue.getContentTxt();
+				}); */
 
-			app.controller("mainController", function ($scope, $http) {
-				$scope.s = {};
-				$scope.s = item;
-				$scope.isAjax = false;
-				
-				
-				$scope.getUeditorIDValueByName = function (name) {
-					return "content-container-" + name;
-				}
-				
-				$scope.dealUEDITORComponent = function () {
-					for (var i = 0; i < $scope.s.components.length; i++) {
-						if ($scope.s.components[i].type.toUpperCase() === "UEDITOR") {
-							(function (index) {
-								var id = $scope.getUeditorIDValueByName($scope.s.components[i].name);
-								var ue = UE.getEditor(id, {
-									toolbars: [
-									    [
-									        'anchor', //锚点
-									        'undo', //撤销
-									        'redo', //重做
-									        'bold', //加粗
-									        'indent', //首行缩进
-									        'italic', //斜体
-									        'underline', //下划线
-									        'strikethrough', //删除线
-									        'subscript', //下标
-									        'superscript', //上标
-									        'formatmatch', //格式刷
-									        'source', //源代码
-									        'blockquote', //引用
-									        'pasteplain', //纯文本粘贴模式
-									        'selectall', //全选
-									        'horizontal', //分隔线
-									        'removeformat', //清除格式
-									        'insertcode', //代码语言
-									        'simpleupload' //单图上传
-									    ],
-									    [
-									    	'emotion', //表情
-									        'spechars', //特殊字符
-									        'justifyleft', //居左对齐
-									        'justifyright', //居右对齐
-									        'justifycenter', //居中对齐
-									        'justifyjustify', //两端对齐
-									        'forecolor', //字体颜色
-									        'insertorderedlist', //有序列表
-									        'insertunorderedlist', //无序列表
-									        'fullscreen', //全屏
-									        'directionalityltr', //从左向右输入
-									        'directionalityrtl', //从右向左输入
-									        'insertvideo' //视频
-									    ]
-									]
-								});
-								var value = $scope.s.components[i].value;
-								ue.ready(function () {
-									$scope.$apply(function () {
-										$scope.s.components[index].hasLoaded = true;
+				app.controller("mainController", function ($scope, $http) {
+					$scope.s = {};
+					$scope.s = item;
+					$scope.isAjax = false;
+					
+					
+					$scope.getUeditorIDValueByName = function (name) {
+						return "content-container-" + name;
+					}
+					
+					$scope.dealUEDITORComponent = function () {
+						for (var i = 0; i < $scope.s.components.length; i++) {
+							if ($scope.s.components[i].type.toUpperCase() === "UEDITOR") {
+								(function (index) {
+									var id = $scope.getUeditorIDValueByName($scope.s.components[i].name);
+									var ue = UE.getEditor(id, {
+										toolbars: [
+										    [
+										        'anchor', //锚点
+										        'undo', //撤销
+										        'redo', //重做
+										        'bold', //加粗
+										        'indent', //首行缩进
+										        'italic', //斜体
+										        'underline', //下划线
+										        'strikethrough', //删除线
+										        'subscript', //下标
+										        'superscript', //上标
+										        'formatmatch', //格式刷
+										        'source', //源代码
+										        'blockquote', //引用
+										        'pasteplain', //纯文本粘贴模式
+										        'selectall', //全选
+										        'horizontal', //分隔线
+										        'removeformat', //清除格式
+										        'insertcode', //代码语言
+										        'simpleupload' //单图上传
+										    ],
+										    [
+										    	'emotion', //表情
+										        'spechars', //特殊字符
+										        'justifyleft', //居左对齐
+										        'justifyright', //居右对齐
+										        'justifycenter', //居中对齐
+										        'justifyjustify', //两端对齐
+										        'forecolor', //字体颜色
+										        'insertorderedlist', //有序列表
+										        'insertunorderedlist', //无序列表
+										        'fullscreen', //全屏
+										        'directionalityltr', //从左向右输入
+										        'directionalityrtl', //从右向左输入
+										        'insertvideo' //视频
+										    ]
+										]
 									});
-									ue.setContent(value);
-								});
-								
-								ue.addListener("selectionchange", function(){
-									$scope.$apply(function () {
-										$scope.s.components[index].value = ue.getContent();
+									var value = $scope.s.components[i].value;
+									ue.ready(function () {
+										$scope.$apply(function () {
+											$scope.s.components[index].hasLoaded = true;
+										});
+										ue.setContent(value);
 									});
-								})
-							})(i);
-						}
-					}
-				}
-				$scope.dealUEDITORComponent();
-				
-				$scope.submit = function () {
-					if ($scope.isAjax) {
-						aj.tishi("请勿重复点击");
-						return;
-					}
-					
-					var entity = {};
-					
-					for (var i = 0; i < $scope.s.components.length; i++) {
-						entity[$scope.s.components[i].name] = $scope.s.components[i].value;
-					}
-					
-					// $scope.s.content = ue.getContent();
-					$scope.isAjax = true;
-					$.ajax({
-						url : $scope.s.urlSubmit, 
-						data : {
-							entity :  JSON.stringify(entity),
-							item : JSON.stringify($scope.s)
-						},
-						type : "POST",
-						dataType : "json",
-						success : function (data) {
-							if (data.isok) {
-								aj.tishi(data.data);
-							} else {
-								aj.tishi("Error" + data.data);
+									
+									ue.addListener("selectionchange", function(){
+										$scope.$apply(function () {
+											$scope.s.components[index].value = ue.getContent();
+										});
+									})
+								})(i);
 							}
-						},
-						error : function (er) {
-							aj.tishi("Http Error" + er);
-						},
-						complete : function () {
-							$scope.$apply(function () {
-								$scope.isAjax = false;
-							});
 						}
-					});
-				}
-				
-				$scope.remove = function () {
-					if ($scope.isAjax) {
-						aj.tishi("请勿重复点击");
-						return;
 					}
-					if (window.confirm("确定删除")) {
+					$scope.dealUEDITORComponent();
+					
+					$scope.submit = function () {
+						if ($scope.isAjax) {
+							tools.tishi("请勿重复点击");
+							return;
+						}
+						
+						var entity = {};
+						
+						for (var i = 0; i < $scope.s.components.length; i++) {
+							entity[$scope.s.components[i].name] = $scope.s.components[i].value;
+						}
+						
+						// $scope.s.content = ue.getContent();
 						$scope.isAjax = true;
 						$.ajax({
-							url : $scope.s.urlRemove, 
+							url : $scope.s.urlSubmit, 
 							data : {
+								entity :  JSON.stringify(entity),
 								item : JSON.stringify($scope.s)
 							},
 							type : "POST",
 							dataType : "json",
 							success : function (data) {
-								aj.tishi(data.data);
+								if (data.isok) {
+									tools.tishi(data.data);
+								} else {
+									tools.tishi("Error" + data.data);
+								}
 							},
 							error : function (er) {
-								aj.tishi("服务端异常~~");
+								tools.tishi("Http Error" + er);
 							},
 							complete : function () {
 								$scope.$apply(function () {
@@ -253,12 +226,40 @@ String json  = (String) request.getAttribute("formComponentsJson");
 						});
 					}
 					
-				}
-			})
-			angular.bootstrap(div, ["item-modify-m"]);
-		}catch(ex) {
-			console.log(ex);
-		}
+					$scope.remove = function () {
+						if ($scope.isAjax) {
+							tools.tishi("请勿重复点击");
+							return;
+						}
+						if (window.confirm("确定删除")) {
+							$scope.isAjax = true;
+							$.ajax({
+								url : $scope.s.urlRemove, 
+								data : {
+									item : JSON.stringify($scope.s)
+								},
+								type : "POST",
+								dataType : "json",
+								success : function (data) {
+									tools.tishi(data.data);
+								},
+								error : function (er) {
+									tools.tishi("服务端异常~~");
+								},
+								complete : function () {
+									$scope.$apply(function () {
+										$scope.isAjax = false;
+									});
+								}
+							});
+						}
+						
+					}
+				})
+				angular.bootstrap(div, ["item-modify-m"]);
+			});
+		});
+		
 	})
 </script>
 

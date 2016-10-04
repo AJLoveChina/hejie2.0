@@ -40,86 +40,83 @@ int num = Page.$num;
 	<script type="text/javascript">
 		$(function () {
 		
-			try {
-			
-				var container = $("#aj-generate-new-page-container");
-			
-				var app = angular.module("app", []);
-				
-				app.controller("mainController", function ($scope, $http) {
-					$scope.s = {};
-					$scope.s.title = "生成新的一页";
-					$scope.s.tishi = "请以逗号分开";
-					$scope.s.isajax = false;
+			require(["main"], function () {
+				require(["tools/tools"], function (tools) {
+					var container = $("#aj-generate-new-page-container");
 					
-					$scope.s.response = "";
+					var app = angular.module("app", []);
 					
-					$scope.generate = function () {
-						if ($scope.s.isajax) {
-							aj.Tishi("请求正在执行中,请勿重复点击");
-							return;
-						}
-					
-						$scope.s.isajax = true;
+					app.controller("mainController", function ($scope, $http) {
+						$scope.s = {};
+						$scope.s.title = "生成新的一页";
+						$scope.s.tishi = "请以逗号分开";
+						$scope.s.isajax = false;
 						
+						$scope.s.response = "";
 						
-						$http({
-							"method" : "GET",
-							"url" : "/admin/pageGenerator/generate"
-						}).then(function (response) {
-							
-							$scope.s.response = response.data.data;
-							
-							$scope.s.isajax = false;
-							
-						}, function (err) {
-							$scope.s.response = "Error occurs!";
-							$scope.s.isajax = false;
-						});
-					}
-					
-					$scope.generate2 = function () {
-					
-						if ($scope.s.isajax) {
-							aj.Tishi("请求正在执行中,请勿重复点击");
-							return;
-						}
-					
-						$scope.s.isajax = true;
-						
-						var arr = $.trim($scope.s.textarea).split(",");
-						
-						arr.forEach(function (item, index, list) {
-							list[index] =  $.trim(item);
-						});
-						
-						$http({
-							"method" : "GET",
-							"url" : "/admin/pageGenerator/generate",
-							"params" : {
-								data : JSON.stringify(arr)
+						$scope.generate = function () {
+							if ($scope.s.isajax) {
+								tools.tishi("请求正在执行中,请勿重复点击");
+								return;
 							}
-						}).then(function (response) {
 						
-							$scope.s.response = response.data.data;
-							$scope.s.isajax = false;
+							$scope.s.isajax = true;
 							
-						}, function (err) {
-							console.log(err);
-							$scope.s.isajax = false;
-							aj.Tishi("Error!");
-						});
-					}
-					   	
-				});
-		
-				angular.bootstrap(container, ["app"]);				
+							
+							$http({
+								"method" : "GET",
+								"url" : "/admin/pageGenerator/generate"
+							}).then(function (response) {
+								
+								$scope.s.response = response.data.data;
+								
+								$scope.s.isajax = false;
+								
+							}, function (err) {
+								$scope.s.response = "Error occurs!";
+								$scope.s.isajax = false;
+							});
+						}
+						
+						$scope.generate2 = function () {
+						
+							if ($scope.s.isajax) {
+								tools.tishi("请求正在执行中,请勿重复点击");
+								return;
+							}
+						
+							$scope.s.isajax = true;
+							
+							var arr = $.trim($scope.s.textarea).split(",");
+							
+							arr.forEach(function (item, index, list) {
+								list[index] =  $.trim(item);
+							});
+							
+							$http({
+								"method" : "GET",
+								"url" : "/admin/pageGenerator/generate",
+								"params" : {
+									data : JSON.stringify(arr)
+								}
+							}).then(function (response) {
+							
+								$scope.s.response = response.data.data;
+								$scope.s.isajax = false;
+								
+							}, function (err) {
+								console.log(err);
+								$scope.s.isajax = false;
+								tools.tishi("Error!");
+							});
+						}
+						   	
+					});
 			
+					angular.bootstrap(container, ["app"]);	
+				})
+			});
 			
-			}catch(e) {
-				console.log(e);
-			
-			}
 		});
 		
 	</script>

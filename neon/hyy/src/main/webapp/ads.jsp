@@ -104,99 +104,101 @@ request.setAttribute("fragments", fragments);
 	
 	<script>
 		$(function () {
-			try {
-				var app = angular.module("ads-itemRoll", []);
-				var container = $("#aj-ads-itemsRoll");
-				var list = JSON.parse($("#item-json-data").val());
-				var url = "/admin/ads";
-				
-				app.controller("mainController", function ($scope) {
-					$scope.s = {};
-					$scope.s.title = "Hello World!";
-					$scope.s.list = list;
+			require(["main"], function () {
+				require(["tools/tools"], function (tools) {
 					
+					var app = angular.module("ads-itemRoll", []);
+					var container = $("#aj-ads-itemsRoll");
+					var list = JSON.parse($("#item-json-data").val());
+					var url = "/admin/ads";
 					
-					$scope.remove = function (one) {
-						one.deleted = true;
+					app.controller("mainController", function ($scope) {
+						$scope.s = {};
+						$scope.s.title = "Hello World!";
+						$scope.s.list = list;
 						
-						$.ajax({
-							url : url + "/delete",
-							data : {
-								model : JSON.stringify(one)
-							},
-							dataType : "json",
-							type : "POST",
-							success : function (data) {
-								if(data.isok) {
-									location.reload();
-								} else {
-									aj.Tishi(data.data);
+						
+						$scope.remove = function (one) {
+							one.deleted = true;
+							
+							$.ajax({
+								url : url + "/delete",
+								data : {
+									model : JSON.stringify(one)
+								},
+								dataType : "json",
+								type : "POST",
+								success : function (data) {
+									if(data.isok) {
+										location.reload();
+									} else {
+										tools.tishi(data.data);
+									}
+								},
+								error : function (err) {
+									console.log(err);
 								}
-							},
-							error : function (err) {
-								console.log(err);
-							}
-						});
-					}
-					
-					$scope.update = function (one) {
-						$.ajax({
-							url : url + "/update",
-							data : {
-								model : JSON.stringify(one)
-							},
-							type : "POST",
-							dataType : "json",
-							success : function (data) {
-								if(data.isok) {
-									location.reload();
-								} else {
-									aj.Tishi(data.data);
+							});
+						}
+						
+						$scope.update = function (one) {
+							$.ajax({
+								url : url + "/update",
+								data : {
+									model : JSON.stringify(one)
+								},
+								type : "POST",
+								dataType : "json",
+								success : function (data) {
+									if(data.isok) {
+										location.reload();
+									} else {
+										tools.tishi(data.data);
+									}
+								},
+								error : function (err) {
+									console.log(err);
 								}
-							},
-							error : function (err) {
-								console.log(err);
-							}
-						});
-					}
-					
-					$scope.save = function (one) {
-						$.ajax({
-							url : url + "/save",
-							data : {
-								model : JSON.stringify(one)
-							},
-							type : "POST",
-							dataType : "json",
-							success : function (data) {
-								if(data.isok) {
-									location.reload();
-								} else {
-									aj.Tishi(data.data);
+							});
+						}
+						
+						$scope.save = function (one) {
+							$.ajax({
+								url : url + "/save",
+								data : {
+									model : JSON.stringify(one)
+								},
+								type : "POST",
+								dataType : "json",
+								success : function (data) {
+									if(data.isok) {
+										location.reload();
+									} else {
+										tools.tishi(data.data);
+									}
+								},
+								error : function (err) {
+									console.log(err);
 								}
-							},
-							error : function (err) {
-								console.log(err);
-							}
-						});
-					}
+							});
+						}
+						
+						$scope.add = function () {
+							$scope.s.list.unshift({
+								id : 0,
+								title : "",
+								src : "",
+								itemId : "",
+								deleted : false,
+								rank : 1
+							});
+						}
+					});
 					
-					$scope.add = function () {
-						$scope.s.list.unshift({
-							id : 0,
-							title : "",
-							src : "",
-							itemId : "",
-							deleted : false,
-							rank : 1
-						});
-					}
+					angular.bootstrap(container, ["ads-itemRoll"]);
+					
 				});
-				
-				angular.bootstrap(container, ["ads-itemRoll"]);
-			}catch(ex) {
-				console.log(ex);
-			}
+			});
 		})
 	</script>
 	

@@ -505,263 +505,268 @@ Exam exam = (Exam) request.getAttribute("exam");
     Bmob.initialize("4b182edd98c2877e7d57a98b70099f63", "40adce0b07b6a03c1bb6c9b57e22ed2b");
 
 $(function () {
-        var app = angular.module("exam", []);
-        var container = $("#aj-exam");
-        app.controller("examController", function ($scope, $timeout, $http) {
-            $scope.cover = {};
-            $scope.title = "测试题";
-            $scope.cur = 1;
-            $scope.isFinished = false;
-            $scope.time = "00:00";
-            $scope.isStart = false;
-            $scope.startTime = null;
-            $scope.endTime = null;
-            $scope.questions = [];
-            $scope.score = "计算中...";
-            $scope.isAutoNext = true;
-            $scope.trueAnswers = [];
-            $scope.totalRight;
-            $scope.scoreFromAnswer = 0;
-            $scope.scoreFromTime = 0;
-            $scope.config = null;
-            $scope.isShowWrong = false;
-            $scope.ranks = [];
+		require(["main"], function () {
+			require(["tools/tools"], function (tools) {
+				var app = angular.module("exam", []);
+		        var container = $("#aj-exam");
+		        app.controller("examController", function ($scope, $timeout, $http) {
+		            $scope.cover = {};
+		            $scope.title = "测试题";
+		            $scope.cur = 1;
+		            $scope.isFinished = false;
+		            $scope.time = "00:00";
+		            $scope.isStart = false;
+		            $scope.startTime = null;
+		            $scope.endTime = null;
+		            $scope.questions = [];
+		            $scope.score = "计算中...";
+		            $scope.isAutoNext = true;
+		            $scope.trueAnswers = [];
+		            $scope.totalRight;
+		            $scope.scoreFromAnswer = 0;
+		            $scope.scoreFromTime = 0;
+		            $scope.config = null;
+		            $scope.isShowWrong = false;
+		            $scope.ranks = [];
 
 
-            $scope.finishPercent = function () {
-                return ($scope.finishNum() / $scope.questions.length) * 100 + "%";
-            };
+		            $scope.finishPercent = function () {
+		                return ($scope.finishNum() / $scope.questions.length) * 100 + "%";
+		            };
 
-            $scope.finishNum = function () {
-                var num = 0;
-                angular.forEach($scope.questions, function (key) {
-                    if (key.finish) {
-                        num++;
-                    }
-                });
-                return num;
-            };
-            
-            $scope.mkChoice = function (index) {
-                // index starts from 0
-                angular.forEach($scope.questions[$scope.cur - 1].choices, function (key) {
-                    key.checked = false;
-                });
-                $scope.questions[$scope.cur - 1].choices[index].checked = true;
-                $scope.questions[$scope.cur - 1].finish = true;
-                $scope.checkFinish();
+		            $scope.finishNum = function () {
+		                var num = 0;
+		                angular.forEach($scope.questions, function (key) {
+		                    if (key.finish) {
+		                        num++;
+		                    }
+		                });
+		                return num;
+		            };
+		            
+		            $scope.mkChoice = function (index) {
+		                // index starts from 0
+		                angular.forEach($scope.questions[$scope.cur - 1].choices, function (key) {
+		                    key.checked = false;
+		                });
+		                $scope.questions[$scope.cur - 1].choices[index].checked = true;
+		                $scope.questions[$scope.cur - 1].finish = true;
+		                $scope.checkFinish();
 
-                if ($scope.isFinished) {
-                    $scope.submit();
-                }
-                if ($scope.isAutoNext) {
-                    $scope.next();
-                }
-            };
-            
-            $scope.next = function () {
-                if ($scope.cur + 1 <= $scope.questions.length) {
-                    $scope.cur ++;
-                }
-            };
-            $scope.prev = function () {
-                if ($scope.cur - 1 > 0) {
-                    $scope.cur--;
-                }
-            };
+		                if ($scope.isFinished) {
+		                    $scope.submit();
+		                }
+		                if ($scope.isAutoNext) {
+		                    $scope.next();
+		                }
+		            };
+		            
+		            $scope.next = function () {
+		                if ($scope.cur + 1 <= $scope.questions.length) {
+		                    $scope.cur ++;
+		                }
+		            };
+		            $scope.prev = function () {
+		                if ($scope.cur - 1 > 0) {
+		                    $scope.cur--;
+		                }
+		            };
 
-            $scope.checkFinish = function () {
-                var bool = true;
-                angular.forEach($scope.questions, function (key) {
-                    if (!key.finish) {
-                        bool = false;
-                    }
-                });
-                $scope.isFinished = bool;
-            };
+		            $scope.checkFinish = function () {
+		                var bool = true;
+		                angular.forEach($scope.questions, function (key) {
+		                    if (!key.finish) {
+		                        bool = false;
+		                    }
+		                });
+		                $scope.isFinished = bool;
+		            };
 
-            $scope.changeQuestion = function ($index) {
-                $scope.cur = $index;
-            };
-            
-            $scope.calculateTime = function () {
-                $timeout(function () {
-                    if (!$scope.isFinished) {
-                        $scope.endTime = (new Date()).getTime();
-                        var interval = ((new Date()).getTime() - ($scope.startTime.getTime())) / 1000;
-                        var seconds = Math.floor(interval % 60);
-                        var minutes = Math.floor(interval / 60);
-                        if (seconds < 10) {
-                            seconds = "0" + seconds;
-                        }
-                        if (minutes < 10) {
-                            minutes = "0" + minutes;
-                        }
+		            $scope.changeQuestion = function ($index) {
+		                $scope.cur = $index;
+		            };
+		            
+		            $scope.calculateTime = function () {
+		                $timeout(function () {
+		                    if (!$scope.isFinished) {
+		                        $scope.endTime = (new Date()).getTime();
+		                        var interval = ((new Date()).getTime() - ($scope.startTime.getTime())) / 1000;
+		                        var seconds = Math.floor(interval % 60);
+		                        var minutes = Math.floor(interval / 60);
+		                        if (seconds < 10) {
+		                            seconds = "0" + seconds;
+		                        }
+		                        if (minutes < 10) {
+		                            minutes = "0" + minutes;
+		                        }
 
-                        $scope.time = minutes + ":" + seconds;
-                        $scope.calculateTime();
-                    }
-                }, 1000);
-            };
+		                        $scope.time = minutes + ":" + seconds;
+		                        $scope.calculateTime();
+		                    }
+		                }, 1000);
+		            };
 
-            $scope.loadPaper = function (fn) {
-            	var config = $.parseJSON($("#aj-exam-json")[0].value);
-            
-            	
-            	
-                $http.get(config.url).then(function (data) {
-                    $scope.questions = data.data.data.questions;
-                    $scope.cover = data.data.data.cover;
-                    $scope.trueAnswers = data.data.data["answers"];
-                    $scope.config = data.data.data["config"];
+		            $scope.loadPaper = function (fn) {
+		            	var config = $.parseJSON($("#aj-exam-json")[0].value);
+		            
+		            	
+		            	
+		                $http.get(config.url).then(function (data) {
+		                    $scope.questions = data.data.data.questions;
+		                    $scope.cover = data.data.data.cover;
+		                    $scope.trueAnswers = data.data.data["answers"];
+		                    $scope.config = data.data.data["config"];
 
-                    fn && fn();
-                });
-            };
-
-
-            $scope.start = function () {
-            	var user = new aj.User();
-            	if (!user.isLogin()) {
-            		aj.Tishi("亲, 请先登录一下呗~~");
-            		return;
-            	}
-            
-            
-                $scope.isStart = true;
-                $scope.startTime = new Date();
-                $scope.calculateTime();
-            };
-
-            $scope.init = function () {
-                $scope.loadPaper();
-            };
-            $scope.init();
-
-            $scope.test = function() {
-                console.log($scope.isAutoNext);
-            };
-
-            $scope.submit = function () {
-                var i,j;
-                var choices;
-                var answers = [];
-                var isRight;    // 某一题是否正确
-                var trueAnsers = $scope.trueAnswers;
-                var rightChoice;
-                var rightNum = 0;
-                var totalScore = 0;
-
-                for (i = 0; i < $scope.questions.length; i++) {
-                    isRight = false;
-                    choices = $scope.questions[i]["choices"];
-                    rightChoice = trueAnsers[i];
-
-                    for(j = 0; j < choices.length; j++) {
-                        if (choices[j].checked && (j + 1) == rightChoice) {
-                            rightNum ++;
-                            isRight = true;
-                        }
-                        
-                        if ((j + 1) ==rightChoice) {
-                        	choices[j]["isAnswer"] = true;
-                        }
-                    }
-
-                    $scope.questions[i]["isRight"] = isRight;
-					
-                }
-
-                $scope.totalRight = rightNum;
-                totalScore += rightNum * 10;
-
-                $scope.scoreFromAnswer = totalScore;
-
-                // 默认5分钟完成题目
-                var leftSconds = 300 - ($scope.endTime - $scope.startTime) / 1000;
-                $scope.scoreFromTime = (leftSconds * (rightNum / $scope.questions.length) * 0.5).toFixed(2);
-
-                totalScore += (leftSconds * (rightNum / $scope.questions.length) * 0.5);
-                $scope.score = totalScore.toFixed(2);
+		                    fn && fn();
+		                });
+		            };
 
 
-                $scope.submitToBmob();
-                $scope.dealShare();
-            };
-            
-            $scope.dealShare = function () {
-           	    window._bd_share_config = {
-			        common : {
-			            bdDesc : "我刚刚参加了" + $scope.title + "测试,获得了" + $scope.score + "分, 你也来试试看.",
-			            bdUrl : location.href,
-			            bdPic : "http://images.nigeerhuo.com/images/web/pic/logo.PNG"
-			        }
-			    };
-            }
+		            $scope.start = function () {
+		            	var user = new aj.User();
+		            	if (!user.isLogin()) {
+		            		tools.tishi("亲, 请先登录一下呗~~");
+		            		return;
+		            	}
+		            
+		            
+		                $scope.isStart = true;
+		                $scope.startTime = new Date();
+		                $scope.calculateTime();
+		            };
 
-            $scope.submitToBmob = function () {
-                var GameScore = Bmob.Object.extend("exam_result");
-                var gameScore = new GameScore();
+		            $scope.init = function () {
+		                $scope.loadPaper();
+		            };
+		            $scope.init();
 
-				var user = new aj.User();
+		            $scope.test = function() {
+		                console.log($scope.isAutoNext);
+		            };
+
+		            $scope.submit = function () {
+		                var i,j;
+		                var choices;
+		                var answers = [];
+		                var isRight;    // 某一题是否正确
+		                var trueAnsers = $scope.trueAnswers;
+		                var rightChoice;
+		                var rightNum = 0;
+		                var totalScore = 0;
+
+		                for (i = 0; i < $scope.questions.length; i++) {
+		                    isRight = false;
+		                    choices = $scope.questions[i]["choices"];
+		                    rightChoice = trueAnsers[i];
+
+		                    for(j = 0; j < choices.length; j++) {
+		                        if (choices[j].checked && (j + 1) == rightChoice) {
+		                            rightNum ++;
+		                            isRight = true;
+		                        }
+		                        
+		                        if ((j + 1) ==rightChoice) {
+		                        	choices[j]["isAnswer"] = true;
+		                        }
+		                    }
+
+		                    $scope.questions[i]["isRight"] = isRight;
+							
+		                }
+
+		                $scope.totalRight = rightNum;
+		                totalScore += rightNum * 10;
+
+		                $scope.scoreFromAnswer = totalScore;
+
+		                // 默认5分钟完成题目
+		                var leftSconds = 300 - ($scope.endTime - $scope.startTime) / 1000;
+		                $scope.scoreFromTime = (leftSconds * (rightNum / $scope.questions.length) * 0.5).toFixed(2);
+
+		                totalScore += (leftSconds * (rightNum / $scope.questions.length) * 0.5);
+		                $scope.score = totalScore.toFixed(2);
+
+
+		                $scope.submitToBmob();
+		                $scope.dealShare();
+		            };
+		            
+		            $scope.dealShare = function () {
+		           	    window._bd_share_config = {
+					        common : {
+					            bdDesc : "我刚刚参加了" + $scope.title + "测试,获得了" + $scope.score + "分, 你也来试试看.",
+					            bdUrl : location.href,
+					            bdPic : "http://images.nigeerhuo.com/images/web/pic/logo.PNG"
+					        }
+					    };
+		            }
+
+		            $scope.submitToBmob = function () {
+		                var GameScore = Bmob.Object.extend("exam_result");
+		                var gameScore = new GameScore();
+
+						var user = new aj.User();
+						
+						if (user.isLogin()) {
+							gameScore.set("user_id", user.getUserid() + "");
+			                gameScore.set("user_name", user.getNickname());
+			                gameScore.set("user_img", user.getUserimg());
+						} else {
+							gameScore.set("user_id", "-1");
+			                gameScore.set("user_name", "匿名用户");
+			                gameScore.set("user_img", "");
+						}
+		               
+		                gameScore.set("score_total", $scope.score + "");
+		                gameScore.set("score", parseFloat($scope.score));
+		                gameScore.set("score_time", $scope.scoreFromTime + "");
+		                gameScore.set("score_answer", $scope.scoreFromAnswer + "");
+		                gameScore.set("paper_id", $scope.id + "");
+
+
+		                gameScore.save(null, {
+		                    success: function(object) {
+		                        var query = new Bmob.Query(GameScore);
+		                        query.limit(100);
+		                        query.descending("score");
+		                        query.equalTo("paper_id", ($scope.id + ""));
+		                        
+		                        
+		                        query.find({
+								  success: function(results) {
+								    $scope.$apply(function () {
+								    	for (var i = 0; i < results.length; i++) {
+								    		$scope.ranks.push({
+								    			"name" : results[i].get("user_name"),
+								    			"score" : results[i].get("score"),
+								    			"img" : results[i].get("user_img")
+								    		});
+								    	}
+								    });
+								  },
+								  error: function(error) {
+								    	console.log(error);
+								  }
+								});
+		                    },
+		                    error: function(model, error) {
+		                        console.log(error);
+		                    }
+		                });
+		            }
+		            
+		            $scope.showWrong = function () {
+		            	$scope.isShowWrong = true;
+		            }
+		            
+		            $scope.showRankPage = function() {
+		            	$scope.isShowWrong = false;
+		            }
+		        });
+		        angular.bootstrap(container, ["exam"]);
 				
-				if (user.isLogin()) {
-					gameScore.set("user_id", user.getUserid() + "");
-	                gameScore.set("user_name", user.getNickname());
-	                gameScore.set("user_img", user.getUserimg());
-				} else {
-					gameScore.set("user_id", "-1");
-	                gameScore.set("user_name", "匿名用户");
-	                gameScore.set("user_img", "");
-				}
-               
-                gameScore.set("score_total", $scope.score + "");
-                gameScore.set("score", parseFloat($scope.score));
-                gameScore.set("score_time", $scope.scoreFromTime + "");
-                gameScore.set("score_answer", $scope.scoreFromAnswer + "");
-                gameScore.set("paper_id", $scope.id + "");
-
-
-                gameScore.save(null, {
-                    success: function(object) {
-                        var query = new Bmob.Query(GameScore);
-                        query.limit(100);
-                        query.descending("score");
-                        query.equalTo("paper_id", ($scope.id + ""));
-                        
-                        
-                        query.find({
-						  success: function(results) {
-						    $scope.$apply(function () {
-						    	for (var i = 0; i < results.length; i++) {
-						    		$scope.ranks.push({
-						    			"name" : results[i].get("user_name"),
-						    			"score" : results[i].get("score"),
-						    			"img" : results[i].get("user_img")
-						    		});
-						    	}
-						    });
-						  },
-						  error: function(error) {
-						    	console.log(error);
-						  }
-						});
-                    },
-                    error: function(model, error) {
-                        console.log(error);
-                    }
-                });
-            }
-            
-            $scope.showWrong = function () {
-            	$scope.isShowWrong = true;
-            }
-            
-            $scope.showRankPage = function() {
-            	$scope.isShowWrong = false;
-            }
-        });
-        angular.bootstrap(container, ["exam"]);
+			});
+		});
     })
 
 </script>

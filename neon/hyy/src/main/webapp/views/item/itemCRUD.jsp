@@ -85,78 +85,51 @@ String json = item.toJson();
 
 <script>
 	$(function () {
-		try {
-			var item = JSON.parse($("#item-json").val());
-			
-			var app = angular.module("item-modify-m", []);
-			var div = $("#aj-item-modify");
-			var ue = UE.getEditor('content-container');
-			
-			
-			ue.ready(function() {
-			    ue.setContent(item.content);
-			    var html = ue.getContent();
-			    var txt = ue.getContentTxt();
-			});
+		require(["main"], function () {
+			require(["tools/tools"], function (tools) {
+				var item = JSON.parse($("#item-json").val());
+				
+				var app = angular.module("item-modify-m", []);
+				var div = $("#aj-item-modify");
+				var ue = UE.getEditor('content-container');
+				
+				
+				ue.ready(function() {
+				    ue.setContent(item.content);
+				    var html = ue.getContent();
+				    var txt = ue.getContentTxt();
+				});
 
-			app.controller("mainController", function ($scope, $http) {
-				$scope.s = {};
-				$scope.s = item;
-				$scope.isAjax = false;
+				app.controller("mainController", function ($scope, $http) {
+					$scope.s = {};
+					$scope.s = item;
+					$scope.isAjax = false;
+					
+					
 				
-				
-			
-				$scope.submit = function () {
-					if ($scope.isAjax) {
-						aj.tishi("请勿重复点击");
-						return;
-					}
-					$scope.s.content = ue.getContent();
-					$scope.isAjax = true;
-					$.ajax({
-						url : "/admin/upload/submit", 
-						data : {
-							item : JSON.stringify($scope.s)
-						},
-						type : "POST",
-						dataType : "json",
-						success : function (data) {
-							if (data.isok) {
-								aj.tishi(data.data);
-							} else {
-								aj.tishi("Error" + data.data);
-							}
-						},
-						error : function (er) {
-							aj.tishi("Http Error" + er);
-						},
-						complete : function () {
-							$scope.$apply(function () {
-								$scope.isAjax = false;
-							});
+					$scope.submit = function () {
+						if ($scope.isAjax) {
+							tools.tishi("请勿重复点击");
+							return;
 						}
-					});
-				}
-				
-				$scope.remove = function () {
-					if ($scope.isAjax) {
-						aj.tishi("请勿重复点击");
-						return;
-					}
-					if (window.confirm("确定删除")) {
+						$scope.s.content = ue.getContent();
 						$scope.isAjax = true;
 						$.ajax({
-							url : "/admin//upload/remove", 
+							url : "/admin/upload/submit", 
 							data : {
 								item : JSON.stringify($scope.s)
 							},
 							type : "POST",
 							dataType : "json",
 							success : function (data) {
-								console.log(data);
+								if (data.isok) {
+									tools.tishi(data.data);
+								} else {
+									tools.tishi("Error" + data.data);
+								}
 							},
 							error : function (er) {
-								console.log(er);
+								tools.tishi("Http Error" + er);
 							},
 							complete : function () {
 								$scope.$apply(function () {
@@ -166,11 +139,38 @@ String json = item.toJson();
 						});
 					}
 					
-				}
+					$scope.remove = function () {
+						if ($scope.isAjax) {
+							tools.tishi("请勿重复点击");
+							return;
+						}
+						if (window.confirm("确定删除")) {
+							$scope.isAjax = true;
+							$.ajax({
+								url : "/admin//upload/remove", 
+								data : {
+									item : JSON.stringify($scope.s)
+								},
+								type : "POST",
+								dataType : "json",
+								success : function (data) {
+									console.log(data);
+								},
+								error : function (er) {
+									console.log(er);
+								},
+								complete : function () {
+									$scope.$apply(function () {
+										$scope.isAjax = false;
+									});
+								}
+							});
+						}
+						
+					}
+				})
+				angular.bootstrap(div, ["item-modify-m"]);
 			})
-			angular.bootstrap(div, ["item-modify-m"]);
-		}catch(ex) {
-			console.log(ex);
-		}
+		});
 	})
 </script>

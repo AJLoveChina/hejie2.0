@@ -28,45 +28,49 @@ int num = Page.$num;
 	
 	<script>
 		$(function () {
-			var app = angular.module("typesPageGenerate", []);
-			var container = $("#container");
-			
-			app.controller("mainController", function ($scope, $http) {
-				$scope.info = {};
-				$scope.info.isAjax = false;
-				$scope.info.loop = 1;
-			
-				$scope.generateAll = function () {
-					$scope.info.isAjax = true;
-					$http({
-						method : "post",
-						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-						data : $.param({
-							loop : $scope.info.loop
-						}),
-						url : "/admin/typePages/generate"
-					}).then(function (res) {
-							var props = res.data.data;
-							var strArr = [];
-							for (var key in props) {
-								if (props[key]) {
-									strArr.push(key + "=" + props[key]);
-								} else {
-									strArr.push(key + "=" + "<span style='color:red'>" + props[key] + "</span>");
-								}
-							}
-							
-							aj.tishi(strArr.join("<br>"));
-							$scope.info.isAjax = false;
-					}, function (res) {
-						console.log(res);
-						aj.tishi("ERROR");
+			require(["main"], function () {
+				require(["tools/tools"], function (tools) {
+					var app = angular.module("typesPageGenerate", []);
+					var container = $("#container");
+					
+					app.controller("mainController", function ($scope, $http) {
+						$scope.info = {};
 						$scope.info.isAjax = false;
+						$scope.info.loop = 1;
+					
+						$scope.generateAll = function () {
+							$scope.info.isAjax = true;
+							$http({
+								method : "post",
+								headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+								data : $.param({
+									loop : $scope.info.loop
+								}),
+								url : "/admin/typePages/generate"
+							}).then(function (res) {
+									var props = res.data.data;
+									var strArr = [];
+									for (var key in props) {
+										if (props[key]) {
+											strArr.push(key + "=" + props[key]);
+										} else {
+											strArr.push(key + "=" + "<span style='color:red'>" + props[key] + "</span>");
+										}
+									}
+									
+									tools.tishi(strArr.join("<br>"));
+									$scope.info.isAjax = false;
+							}, function (res) {
+								console.log(res);
+								tools.tishi("ERROR");
+								$scope.info.isAjax = false;
+							});
+						}
 					});
-				}
+					
+					angular.bootstrap(container, ["typesPageGenerate"]);
+				});
 			});
-			
-			angular.bootstrap(container, ["typesPageGenerate"]);
 		});
 	</script>
 </div>

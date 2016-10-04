@@ -27,42 +27,44 @@
 	</div>
 	
 	<script>
-		var container = $("#changepage-container");
-		
-		var app = angular.module("app", []);
-		
-		app.controller("mainController", function ($scope) {
-			$scope.s = {};
-			$scope.s.title = "将一个item从它现在的页面删除, 并用另一个item替换它";
-			$scope.s.id1 = "";
-			$scope.s.id2 = "";
-			
-			$scope.submit = function () {
-				$.ajax({
-					url : "/admin/item/changepage/ajax",
-					type : "POST",
-					data : {
-						id1 : $scope.s.id1,
-						id2 : $scope.s.id2
-					},
-					success : function (json) {
-						try {
-							aj.Tishi(json.data);
-						}catch(ex) {
-							aj.Tishi("JSON 解析错误.");	
-						}
-					},
-					error : function (err) {
-						aj.Tishi(err);
+		require(["main"], function () {
+			require(["tools/tools"], function (tools) {
+				var container = $("#changepage-container");
+				
+				var app = angular.module("app", []);
+				
+				app.controller("mainController", function ($scope) {
+					$scope.s = {};
+					$scope.s.title = "将一个item从它现在的页面删除, 并用另一个item替换它";
+					$scope.s.id1 = "";
+					$scope.s.id2 = "";
+					
+					$scope.submit = function () {
+						$.ajax({
+							url : "/admin/item/changepage/ajax",
+							type : "POST",
+							data : {
+								id1 : $scope.s.id1,
+								id2 : $scope.s.id2
+							},
+							success : function (json) {
+								try {
+									tools.tishi(json.data);
+								}catch(ex) {
+									tools.tishi("JSON 解析错误.");	
+								}
+							},
+							error : function (err) {
+								tools.tishi(err);
+							}
+						})
 					}
+				
 				})
-			}
-		
-		})
-		angular.bootstrap(container, ["app"]);
+				angular.bootstrap(container, ["app"]);
+			})
+		});
 	</script>
-	
-	
 </div>
 
 

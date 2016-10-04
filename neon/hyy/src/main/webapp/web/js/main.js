@@ -22,24 +22,7 @@
 		
 	}
 	
-	try {
-		//自定义滚动事件,提高浏览器性能
-		(function () {
-			var timer = 0;
-			$(window).on("scroll", function () {
-				if (!timer) {
-					timer = setTimeout(function () {
-						
-						$(window).trigger("aj.scroll");
-						timer = 0;
-						
-					}, 1000/24);
-				}
-			});
-		})();
-	}catch(ex) {
-		
-	}
+	
 	// User 类
 	try {
 		
@@ -160,25 +143,8 @@
 	}catch(ex) {
 		console.log(ex);
 	}
-
 	
-	try {
-		
-		// jquery plugin animate css
-		$.fn.extend({
-		    animateCss: function (animationName) {
-		        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-		        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
-		            $(this).removeClass('animated ' + animationName);
-		        });
-		    }
-		});	
-		
-	}catch(ex) {
-		console.log(ex);
-	}
 	
-
 
 	try {
 		
@@ -203,27 +169,6 @@
 		console.log(ex);
 	}
 	
-	try {
-		// 给用户的提示, 全局通用
-		$(function () {
-			
-			var Tishi = function (info) {
-				var container = $("#aj-gobal-tishi-modal");
-				
-				
-				container.find(".modal-body").html(info);
-				
-				container.modal("show");
-			}
-			
-			aj.Tishi = aj.tishi = Tishi;
-			
-		});
-		
-	}catch(ex) {
-		console.log(ex);
-	}
-
 	try {
 		var tools = {
 			isLocal : function () {
@@ -253,23 +198,7 @@
 		console.log(ex);
 	}
 	
-	try {
-		// 百度自动提交
-	    (function () {
-	    	var bp = document.createElement('script');
-		    var curProtocol = window.location.protocol.split(':')[0];
-		    if (curProtocol === 'https') {
-		        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-		    }
-		    else {
-		        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-		    }
-		    var s = document.getElementsByTagName("script")[0];
-		    s.parentNode.insertBefore(bp, s);
-	    })();
-	}catch(ex) {
-		console.log(ex);
-	}
+	
 	
 	try {
 		

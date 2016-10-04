@@ -1,3 +1,19 @@
+define('tools/customEvent',[],function () {	// 自定义事件模块
+	
+	//自定义滚动事件,提高浏览器性能
+	var scrollTimer = 0;
+	$(window).on("scroll", function () {
+		if (!scrollTimer) {
+			scrollTimer = setTimeout(function () {
+				
+				$(window).trigger("aj.scroll");
+				scrollTimer = 0;
+				
+			}, 1000/24);
+		}
+	});
+
+});
 define('model/user',[],function () {
 	
 	function User() {
@@ -224,7 +240,7 @@ define('ui/comment',["model/user", "tools/tools", "model/comment"], function (us
 							that.renderCommentPrependDom(comment, dom);
 							that.clearAfterComment(dom);
 						} else {
-							aj.tishi(ar.data);
+							tools.tishi(ar.data);
 						}
 					},
 					error : function () {
@@ -380,7 +396,21 @@ define('ui/comment',["model/user", "tools/tools", "model/comment"], function (us
 	
 	return new Comment();
 });
-require(["ui/comment", "model/user", "tools/tools"], function () {
+define('tools/seo',[],function () {
+	var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+    
+    
+});
+require(["tools/customEvent", "ui/comment", "model/user", "tools/tools", "tools/seo"], function () {
 	
 });
 define("requirejs-main", function(){});
