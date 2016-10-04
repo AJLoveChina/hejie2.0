@@ -452,6 +452,7 @@ body {
 .aj-miaobao .inside-wrap{
 	position:relative;
 	margin:0 auto;
+	max-width:1050px;
 }
 
 /* Google sign in style*/

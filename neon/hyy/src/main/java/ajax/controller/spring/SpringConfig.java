@@ -1,5 +1,7 @@
 package ajax.controller.spring;
 
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -22,4 +24,8 @@ public class SpringConfig {
 		return new Gson();
 	}
 	
+	@Bean
+	public SchedulerFactory getSchedulerFactory() {
+		return new StdSchedulerFactory();
+	}
 }
