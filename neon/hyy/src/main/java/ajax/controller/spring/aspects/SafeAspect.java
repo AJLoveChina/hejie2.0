@@ -23,6 +23,9 @@ public class SafeAspect {
 	@Pointcut("execution(** ajax.controller.spring.AdminController.*(..))")
 	public void AdmintCut(){};
 	
+	@Pointcut("execution(** ajax.controller.spring.JobController.*(..))")
+	public void JobsCut(){};
+	
 	
 	@Around("AdmintCut()")
 	public Object beforeTest(ProceedingJoinPoint proceedingJoinPoint) throws LimitsOfAuthorityException,Throwable {
@@ -36,6 +39,15 @@ public class SafeAspect {
 		}
 	}
 	
+	@Around("JobsCut()")
+	public Object jobsCutAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		if (!User.isAdmin(request, response)) {
+			request.setAttribute("model", "权限不足 (LimitsOfAuthorityException)");
+			return "/views/error/error";
+		} else {
+			return proceedingJoinPoint.proceed();
+		}
+	}
 	
 	
 	
