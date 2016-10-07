@@ -11,6 +11,11 @@ import org.hibernate.criterion.Restrictions;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
+/**
+ * 历史遗留问题, 这个Page当初设计成只为 Item类服务的
+ * @author ajax
+ *
+ */
 public class Page extends Entity<Page>{
 	private int id;
 	private int page;

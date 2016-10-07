@@ -13,6 +13,7 @@ import ajax.model.Topic;
 import ajax.spider.rules.RulesTag;
 import ajax.tools.Tools;
 
+@Deprecated
 public class ZhihuAnswerSource{
 	
 	private static void grabPageof(Topic t, int page) {
@@ -83,9 +84,9 @@ public class ZhihuAnswerSource{
 		}
 		
 	}
-	public static void main(String[] args) {
-		
-		grabPages(30);
-		
-	}
+//	public static void main(String[] args) {
+//		
+//		grabPages(1);
+//		
+//	}
 }

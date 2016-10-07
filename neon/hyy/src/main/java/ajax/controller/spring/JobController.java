@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,7 @@ import ajax.jobs.JobsList.AJob;
 import ajax.jobs.JobsList.JobInfo;
 import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
+import ajax.tools.Tools;
 
 @Controller
 @RequestMapping(value="/jobs")
@@ -51,7 +54,7 @@ public class JobController {
 	
 	@RequestMapping(value="/jobsInfo/list")
 	@ResponseBody
-	public AjaxResponse<List<JobsList.JobInfo>> getJobsInfoList() throws SchedulerException {
+	public AjaxResponse<List<JobsList.JobInfo>> getJobsInfoList() throws SchedulerException, InstantiationException, IllegalAccessException {
 		JobsList jobsList = new JobsList();
 		
 		AjaxResponse<List<JobsList.JobInfo>> ar = new AjaxResponse<>();
@@ -65,30 +68,31 @@ public class JobController {
 	public AjaxResponse<String> resumeJob(@RequestParam("data") String data) throws SchedulerException, InstantiationException, IllegalAccessException {
 		JobInfo jobInfo = gson.fromJson(data, JobInfo.class);
 		
-		JobsList jobsList = new JobsList();
-		List<JobInfo> list = jobsList.getJobs();
+		jobInfo = JobsList.getJobInfoByJobInfoFromClient(jobInfo);
 		
-		for (JobInfo info : list) {
-			if (info.name.equals(jobInfo.name) && info.group.equals(jobInfo.group)) {
-				jobInfo = info;
-				break;
-			}
-		}
 		AjaxResponse<String> ar = new AjaxResponse<>();
-		if (jobInfo.cls == null) {
+		if (jobInfo == null) {
 			ar.setIsok(false);
 			ar.setData("no cls");
 			return ar;
 		}
 		
+		
 		Scheduler scheduler = SchedulerUtil.getInstance();
 
 		scheduler.start();
-
-		JobDetail job = newJob(jobInfo.cls).withIdentity(jobInfo.name, jobInfo.group).build();
-
-		scheduler.scheduleJob(job, jobInfo.cls.newInstance().returnTrigger());
+		JobKey jobKey = SchedulerUtil.getJobKey(scheduler, jobInfo);
 		
+		if (scheduler.checkExists(jobKey)) {
+			
+			scheduler.resumeJob(jobKey);
+			
+		} else {
+			JobDetail job = newJob(jobInfo.cls).withIdentity(jobInfo.name, jobInfo.group).build();
+
+			scheduler.scheduleJob(job, jobInfo.cls.newInstance().returnTrigger());
+		}
+
 		ar.setIsok(true);
 		ar.setData("OK");
 		return ar;
@@ -96,9 +100,24 @@ public class JobController {
 	
 	@RequestMapping(value="/pause")
 	@ResponseBody
-	public AjaxResponse<String> pauseJob() {
+	public AjaxResponse<String> pauseJob(@RequestParam("data") String data) throws SchedulerException, InstantiationException, IllegalAccessException {
+		JobInfo jobInfo = gson.fromJson(data, JobInfo.class);
 		
-		return null;
+		jobInfo = JobsList.getJobInfoByJobInfoFromClient(jobInfo);
+		AjaxResponse<String> ar = new AjaxResponse<>();
+		
+		try {
+			JobsList.pauseJobByJobInfo(jobInfo);
+			
+			ar.setIsok(true);
+			ar.setData("pause ok");
+			
+		} catch (Exception e) {
+			ar.setIsok(false);
+			ar.setData(e.getMessage());
+		}
+		
+		return ar;
 	}
 	
 }

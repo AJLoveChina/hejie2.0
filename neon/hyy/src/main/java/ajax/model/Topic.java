@@ -33,6 +33,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import ajax.model.entity.Entity;
+import ajax.model.entity.Source;
+import ajax.spider.rules.RulesTag;
 import ajax.tools.Mysql;
 import ajax.tools.Tools;
 
@@ -528,6 +530,11 @@ public class Topic extends Entity<Topic>{
 	
 	
 	
+	/**
+	 * 根据关注度从高到低排序, 获取前limit个二级话题
+	 * @param limit
+	 * @return
+	 */
 	public static List<Topic> getSecondTopics(int limit) {
 		// 获取 limit 个一级主题
 		
@@ -703,7 +710,77 @@ public class Topic extends Entity<Topic>{
 		calculateJokeTypeForSecondTopicRank();
 		
 	}
-	//END
+	
+	/**
+	 * 获取该话题下(top-answers), 第page页面的全部问题
+	 * @param i
+	 * @return null if exception occurs
+	 */
+	public List<Source> getSourcesOfPage(int page) {
+		String url = this.getUrl() + "/top-answers?page=" + page;
+		List<Source> list = new ArrayList<>();
+		
+		try {
+			Document doc = Jsoup.connect(url).get();
+			
+			Elements questions = doc.select("#zh-topic-top-page-list > div.feed-item");
+			
+			for (Element ele : questions) {
+				ajax.model.entity.Source s = new ajax.model.entity.Source();
+				
+				String href = ele.select(".entry-body .zm-item-rich-text").get(0).attr("data-entry-url");
+				
+				href = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, "http://www.zhihu.com/topic");
+				
+				s.setItype(JokeType.getJokeTypeByInfo(this.getTname()).getId());
+				s.setRulestagid(RulesTag.ZHIHU_ANSWER.getId());
+				s.setUrl(href);
+				s.setLikes(Tools.parseInt(ele.select(".entry-body .zm-item-vote-count").get(0).attr("data-votecount")));
+				
+				list.add(s);
+			}
+			
+			return list;
+		} catch (IOException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * 抓取该话题下, hot answers
+	 * @return
+	 */
+	public List<Source> getHotSourcesOfPage() {
+		String url = this.getUrl() + "/hot";
+		List<Source> list = new ArrayList<>();
+		
+		try {
+			Document doc = Jsoup.connect(url).get();
+			
+			Elements questions = doc.select("#zh-topic-feed-list > div.feed-item");
+			
+			for (Element ele : questions) {
+				Source s = new ajax.model.entity.Source();
+				
+				String href = ele.select(".zm-item-rich-text").get(0).attr("data-entry-url");
+				
+				href = Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, "http://www.zhihu.com/topic");
+				
+				s.setItype(JokeType.getJokeTypeByInfo(this.getTname()).getId());
+				s.setRulestagid(RulesTag.ZHIHU_ANSWER.getId());
+				s.setUrl(href);
+				s.setLikes(Tools.parseInt(ele.select("a.zm-item-vote-count").text()));
+				
+				list.add(s);
+			}
+			
+			return list;
+		} catch (IOException e) {
+			return null;
+		}
+	}
+	
+	
 }
 
 

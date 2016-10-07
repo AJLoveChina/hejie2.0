@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +50,16 @@ import com.google.gson.Gson;
 @RequestMapping(value="/admin")
 public class AdminController {
 	
+	@Autowired
+	private HttpServletRequest request;
+	@Autowired
+	private HttpServletResponse response;
+	@Autowired
+	private Gson gson;
+	
 	
 	@RequestMapping(value="/gameTeamGenerate")
-	public String gameTeamGenerate(HttpServletRequest request, HttpServletResponse response) {
+	public String gameTeamGenerate() {
 		
 		GameTeamFun fun = new  GameTeamFun();
 		String json = fun.getGenerateJson();
@@ -62,7 +70,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/itaobao_item_submit")
 	@ResponseBody
-	public AjaxResponse<String> itaobao_item_submit(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> itaobao_item_submit() {
 		User user = User.getLoginUser(request);
 		
 		String entity = request.getParameter("entity");
@@ -93,7 +101,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/itaobao/changeToItem")
-	public String itaobaoChangeToItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String itaobaoChangeToItem() throws Exception {
 		
 		Long id = Long.parseLong(request.getParameter("id"));
 		if (!Lock.lock(id + "")) {
@@ -122,7 +130,7 @@ public class AdminController {
 		
 	}
 	@RequestMapping(value="/itaobaoitems")
-	public String itaobaoitems(HttpServletRequest request, HttpServletResponse response) {
+	public String itaobaoitems() {
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
@@ -136,7 +144,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/itaobao/{page}")
-	public String itaobaoPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
+	public String itaobaoPage(@PathVariable("page") int page) {
 		
 		
 		ITaobaoItemsPagesSeparate iTaobaoItemsPagesSeparate = new ITaobaoItemsPagesSeparate();
@@ -149,7 +157,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/tbkitems")
-	public String tbkItems(HttpServletRequest request, HttpServletResponse response) {
+	public String tbkItems() {
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
 		
@@ -164,7 +172,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/tbkitems/page/{page}")
-	public String tbkItemsPage(@PathVariable("page") int page, HttpServletRequest request, HttpServletResponse response) {
+	public String tbkItemsPage(@PathVariable("page") int page) {
 		
 		
 		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
@@ -180,7 +188,7 @@ public class AdminController {
 
 	
 	@RequestMapping("/tbkitems/changeToItem")
-	public String tbkItemsToNormalItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String tbkItemsToNormalItem() throws Exception {
 		
 		Long id = Long.parseLong(request.getParameter("id"));
 		TbkItem tbkItem = new TbkItem();
@@ -196,7 +204,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/meituUpload")
 	@ResponseBody
-	public String meituUpload(HttpServletRequest request, HttpServletResponse response) {
+	public String meituUpload() {
 		
 		boolean isok = Tools.meituUploadImageToOss(request, response);
 		
@@ -209,14 +217,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/meitu")
-	public String meitu(HttpServletRequest request, HttpServletResponse response) {
+	public String meitu() {
 		
 		return "views/tools/meitu";
 	}
 	
 	@RequestMapping(value="/typePages/generate")
 	@ResponseBody
-	public AjaxResponse<Map<JokeType, Boolean>> typePagesGenerate(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<Map<JokeType, Boolean>> typePagesGenerate() {
 		
 		int loop = Tools.parseInt(request.getParameter("loop"), 1);
 		List<JokeType> jokeTypes = JokeType.getLegalJokeTypes();
@@ -238,13 +246,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/typePages")
-	public String typePage(HttpServletRequest request, HttpServletResponse response) {
+	public String typePage() {
 		
 		return "views/admin/typesPageGenerate";
 	}
 	
 	@RequestMapping(value="/list")
-	public String adminList(HttpServletRequest request, HttpServletResponse response) {
+	public String adminList() {
 		
 		return "views/admin/list";
 		
@@ -252,7 +260,7 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/ads")
-	public String ads(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String ads() throws Exception {
 		
 		return "ads";
 		
@@ -260,7 +268,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/ads/{action}")
-	public void adsAction(@PathVariable("action") String action, HttpServletRequest request, HttpServletResponse response) {
+	public void adsAction(@PathVariable("action") String action) {
 		AjaxResponse<String> ar = new AjaxResponse<String>();
 		
 		
@@ -284,7 +292,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/upload")
-	public String uploadItem(HttpServletRequest request, HttpServletResponse response) {
+	public String uploadItem() {
 
 		int id = Tools.parseInt(request.getParameter("id"), -1);
 		String action = request.getParameter("action");
@@ -321,7 +329,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/upload/submit")
 	@ResponseBody
-	public AjaxResponse<String> uploadSubmit(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> uploadSubmit() {
 		
 		
 		String action = request.getParameter("action");
@@ -358,7 +366,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/upload/remove")
 	@ResponseBody
-	public AjaxResponse<String> uploadRemove(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> uploadRemove() {
 		
 		String action = request.getParameter("action");
 		AjaxResponse<String> ar = new AjaxResponse<String>();
@@ -377,7 +385,7 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="/item/changepage")
-	public String changePageOfItem(HttpServletRequest request, HttpServletResponse response) {
+	public String changePageOfItem() {
 		
 		return "views/admin/changepage";
 		
@@ -385,7 +393,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/item/changepage/ajax")
 	@ResponseBody
-	public AjaxResponse<String> changePageOfItemAjax(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> changePageOfItemAjax() {
 		
 		int id1 = Tools.parseInt(request.getParameter("id1"), -1);
 		int id2 = Tools.parseInt(request.getParameter("id2"), -1);
@@ -413,7 +421,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/homeNavThree")
-	public String homeNavThree(HttpServletRequest request, HttpServletResponse response) {
+	public String homeNavThree() {
 		
 		CRUDPage<Fragment> cp = new CRUDPage<Fragment>();
 		String entityKeySet = null;
@@ -437,7 +445,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/linksToBaidu")
-	public String uploadLinksToBaidu(HttpServletRequest request, HttpServletResponse response) {
+	public String uploadLinksToBaidu() {
 		
 		return "linksToBaidu";
 	}
@@ -456,7 +464,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/linksToBaidu/submit")
 	@ResponseBody
-	public AjaxResponse<String> uploadLinksToBaiduSubmit(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> uploadLinksToBaiduSubmit() {
 		
 		String data = request.getParameter("data");
 		String action = request.getParameter("action");
@@ -481,25 +489,19 @@ public class AdminController {
 		return ar;
 	}
 	@RequestMapping(value="/pageGenerator")
-	public String pageGenerator(HttpServletRequest request, HttpServletResponse response) {
+	public String pageGenerator() {
 		
 		return "views/admin/pageGenerator";
 	}
+	
 	@RequestMapping(value="/pageGenerator/generate")
 	@ResponseBody
-	public AjaxResponse<String> pageGeneratorGenerate(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> pageGeneratorGenerate() throws AJRunTimeException {
 		
 		String dataParam = request.getParameter("data");
 		
 		
-		int maxPage = Page.getNowMaxPage();
-		int nextPage = maxPage + 1;
-		int num = Page.$num;
-		Page page = new Page();
-		page.setPage(nextPage);
-		
 		if (dataParam != null) {
-			Gson gson = new Gson();
 			Type type = new TypeToken<ArrayList<Integer>>() {}.getType();
 			List<Integer> itemIdList = gson.fromJson(dataParam, type);
 			
@@ -508,47 +510,16 @@ public class AdminController {
 				itemIdList = itemIdList.subList(0, Page.$num);
 			}
 			
-			for(Integer id : itemIdList) {
-				Item item = Item.getByItemById(id);
-				if (!item.isItemInPage()) {
-					page.addOneItem(item);
-					item.setPage(nextPage);
-					item.update();
-					item.betterThanBetter();
-				}
-			}
-		}	
-		
-
-		
-		
-		num = num - page.get$items().size();
-		
-		while(num > 0) {
-			Item item = Item.getOneItemWhichIsNotInPage();
-			page.addOneItem(item);
-			
-			item.setPage(nextPage);
-			item.update();
-			
-			item.betterThanBetter();
-			
-			num--;
+			return Item.generateNewPageItems(itemIdList);
+		} else {
+			return Item.generateNewPageItems();
 		}
-		
-		page.save();
-		
-		AjaxResponse<String> ar = new AjaxResponse<String>();
-		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + "/" +  nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");
-		ar.setIsok(true);
-		
-		return ar;
 		
 	}
 	
 	@RequestMapping(value="/crudForTable")
 	@ResponseBody
-	public AjaxResponse<String> crudForTable(HttpServletRequest request, HttpServletResponse response) {
+	public AjaxResponse<String> crudForTable() {
 		
 		String data = request.getParameter("data");
 		String className = request.getParameter("className");

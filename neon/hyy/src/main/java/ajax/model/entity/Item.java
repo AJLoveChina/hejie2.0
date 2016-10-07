@@ -1,6 +1,7 @@
 package ajax.model.entity;
 
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,12 +22,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
+import ajax.model.AjaxResponse;
 import ajax.model.Callback;
 import ajax.model.ItemStatus;
 import ajax.model.JokeStatus;
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
 import ajax.model.UrlRoute;
+import ajax.model.exception.AJRunTimeException;
 import ajax.spider.Spider3;
 import ajax.spider.rules.Rules;
 import ajax.spider.rules.RulesTag;
@@ -677,7 +683,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	/**
 	 * return UrlRoute.ONEJOKE_V2.getUrl() + "/" + id;
 	 * @param id
-	 * @return
+	 * @return null if not found
 	 */
 	public String getOneItemPageUrlV2() {
 		return UrlRoute.ONEJOKE_V2.getUrl() + "/" + this.id;
@@ -702,14 +708,19 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		cr.setMaxResults(200);
 		
 		List<Item> items = cr.list();
-		Random rd = new Random();
-		int rand = rd.nextInt(items.size());
-		Item item = items.get(rand);
 		
-		session.getTransaction().commit();
-		
-		System.out.println("已获取id=" + item.getId() + ";title=" + item.getTitle());
-		return item;
+		if (items.size() == 0) {
+			return null;
+		} else {
+			Random rd = new Random();
+			int rand = rd.nextInt(items.size());
+			Item item = items.get(rand);
+			
+			session.getTransaction().commit();
+			
+			System.out.println("已获取id=" + item.getId() + ";title=" + item.getTitle());
+			return item;
+		}
 	}
 	
 	/**
@@ -1028,41 +1039,46 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 
 	/**
-	 * 不要找了, 如果你对一条item不满意, 就调用这个方法吧.
+	 * 不要找了, 如果你对一条item不满意, 就调用这个方法吧.<br>
+	 * 该方法会close session, 注意不要放在其他session事务之间
 	 */
 	public void betterThanBetter() {
-		System.out.println("Now is processing item.betterThanBetter...");
-		
-		System.out.println("set summary..");
-		// 重新生成摘要
-		this.setSummary(this.generateSummaryAndReturn());
-		
-		System.out.println("set itype..");
-		// 重新计算类型
-		this.setItype(this.generateTypeAndReturn().getId());
-		
-		System.out.println("reload images..");
-		// 重新获取图片, 如果木有获取图片的话.
-		this.setContent(this.grabImagesFromContentAndSaveToOssThenReturnContent(null));
-		
-		System.out.println("lazy img..");
-		// lazy img for content (强制lazy)
-		this.setContent(this.generateLazyImageContentAndReturnByForce());
-		this.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
-		
-		// this.setContent(this.generateLazyImageContentAndReturn());
-		
-		System.out.println("remove illegal tags..");
-		// move some illegal tags
-		this.setContent(this.generateContentWithoutIlleagalHTMLTags());
-		
-		System.out.println("generate item shortcut..");
-		// 生成item缩略图
-		this.setPreviewImage(this.generateItemImageAndReturn());
-		
-		this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
-		this.update();
-		System.out.println("item better than better over!");
+		try {
+			System.out.println("Now is processing item.betterThanBetter...");
+			
+			System.out.println("set summary..");
+			// 重新生成摘要
+			this.setSummary(this.generateSummaryAndReturn());
+			
+			System.out.println("set itype..");
+			// 重新计算类型
+			this.setItype(this.generateTypeAndReturn().getId());
+			
+			System.out.println("reload images..");
+			// 重新获取图片, 如果木有获取图片的话.
+			this.setContent(this.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+			
+			System.out.println("lazy img..");
+			// lazy img for content (强制lazy)
+			this.setContent(this.generateLazyImageContentAndReturnByForce());
+			this.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
+			
+			// this.setContent(this.generateLazyImageContentAndReturn());
+			
+			System.out.println("remove illegal tags..");
+			// move some illegal tags
+			this.setContent(this.generateContentWithoutIlleagalHTMLTags());
+			
+			System.out.println("generate item shortcut..");
+			// 生成item缩略图
+			this.setPreviewImage(this.generateItemImageAndReturn());
+			
+			this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
+			this.update();
+			System.out.println("item better than better over!");
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 	}
 
 
@@ -1149,6 +1165,80 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		return items;
 	}
+	
+	/**
+	 * 生成Item的新的一页 
+	 * @param itemIdList
+	 * @return
+	 * @throws AJRunTimeException
+	 */
+	public static AjaxResponse<String> generateNewPageItems(List<Integer> itemIdList) throws AJRunTimeException {
+		int maxPage = Page.getNowMaxPage();
+		int nextPage = maxPage + 1;
+		int num = Page.$num;
+		List<Item> itemsWaitingForUpdate = new ArrayList<>();
+		
+		
+		Page page = new Page();
+		page.setPage(nextPage);
+		
+		for(Integer id : itemIdList) {
+			Item item = Item.getByItemById(id);
+			if (item != null && !item.isItemInPage()) {
+				page.addOneItem(item);
+				item.setPage(nextPage);
+				itemsWaitingForUpdate.add(item);
+			}
+		}
+
+		num = num - page.get$items().size();
+		
+		while(num > 0) {
+			Item item = Item.getOneItemWhichIsNotInPage();
+			
+			if (item == null) {
+				throw new AJRunTimeException("no more item for page generator!");
+			}
+			
+			page.addOneItem(item);
+			item.setPage(nextPage);
+			itemsWaitingForUpdate.add(item);
+			
+			num--;
+		}
+		
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
+		
+		for (Item item : itemsWaitingForUpdate) {
+			item.update(session);
+		}
+		page.save(session);
+		
+		session.getTransaction().commit();
+		
+		for (Item item : itemsWaitingForUpdate) {
+			item.betterThanBetter();
+		}
+		
+		AjaxResponse<String> ar = new AjaxResponse<String>();
+		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + "/" +  nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");
+		ar.setIsok(true);
+		
+		return ar;
+	}
+	
+	/**
+	 * 生成Item的新的一页 
+	 * @param itemIdList
+	 * @return
+	 * @throws AJRunTimeException
+	 */
+	public static AjaxResponse<String> generateNewPageItems() throws AJRunTimeException {
+		return generateNewPageItems(new ArrayList<>());
+	}
+	
+	
 
 }
 

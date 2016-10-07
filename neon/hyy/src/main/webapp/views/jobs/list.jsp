@@ -26,7 +26,7 @@
 				<td>{{item["status"]}}</td>
 				<td>
 					<a class="btn" ng-click="startJob($index)">Start</a>
-					<a class="btn">pause</a>
+					<a class="btn" ng-click="pauseJob($index)">pause</a>
 				</td>
 			</tr>
 		</table>
@@ -34,43 +34,74 @@
 	
 	<script>
 		$(function () {
-			var container = $("#jobs-list-container");
-			var app = angular.module("jobs-app", []);
-			
-			app.controller("mainController", function ($scope, $http) {
-				$scope.s = {};
-				$scope.s.title = "Jobs List";
-				$scope.s.list = [];
-				
-				$scope.refreshList = function () {
-					$http({
-						method : "GET",
-						url : "/jobs/jobsInfo/list"
-					}).then(function (response) {
-						if (response.data.isok) {
-							$scope.s.list = response.data.data;
-						}
-					});
-				}
-				$scope.refreshList();
-				
-				$scope.startJob = function (i) {
+			require(["main"], function () {
+				require(["tools/tools"], function (tools) {
+					var container = $("#jobs-list-container");
+					var app = angular.module("jobs-app", []);
 					
-					$.ajax({
-						type : "POST",
-						url : "/jobs/resume",
-						data : {
-							data : JSON.stringify($scope.s.list[i])
-						},
-						success : function () {
-							
+					app.controller("mainController", function ($scope, $http) {
+						$scope.s = {};
+						$scope.s.title = "Jobs List";
+						$scope.s.list = [];
+						
+						$scope.refreshList = function () {
+							$http({
+								method : "GET",
+								url : "/jobs/jobsInfo/list"
+							}).then(function (response) {
+								if (response.data.isok) {
+									$scope.s.list = response.data.data;
+								}
+							});
 						}
+						$scope.refreshList();
+						
+						$scope.startJob = function (i) {
+							
+							$.ajax({
+								type : "POST",
+								url : "/jobs/resume",
+								data : {
+									data : JSON.stringify($scope.s.list[i])
+								},
+								success : function (ar) {
+									if (ar.isok) {
+										tools.tishi("ok");
+									} else {
+										tools.tishi(ar.data);
+									}
+								},
+								complete : function () {
+									$scope.refreshList();
+								}
+							});
+						}
+						
+						$scope.pauseJob = function (i) {
+							$.ajax({
+								type : "POST",
+								url : "/jobs/pause",
+								data : {
+									data : JSON.stringify($scope.s.list[i])
+								},
+								success : function (ar) {
+									if (ar.isok) {
+										tools.tishi("OK");
+									} else {
+										tools.tishi(ar.data);
+									}
+								},
+								complete : function () {
+									$scope.refreshList();
+								}
+							});
+						}
+						
 					});
-				}
-				
+					
+					angular.bootstrap(container, ["jobs-app"]);
+				});
 			});
-			
-			angular.bootstrap(container, ["jobs-app"]);
 			
 		});
 	</script>

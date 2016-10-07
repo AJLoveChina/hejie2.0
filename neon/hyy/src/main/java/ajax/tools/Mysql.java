@@ -14,8 +14,8 @@ public class Mysql {
 		}
 		
 		String url = "jdbc:mysql://127.0.0.1:3306/meajax?useUnicode=true&characterEncoding=utf8";
-		String name = "root";
-		String pass = "";
+		String name = "name";
+		String pass = "123";
 		
 		Connection conn = null;
 		
