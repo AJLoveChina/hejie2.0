@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -15,8 +17,10 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.junit.Test;
 
 import ajax.tools.Tools;
+import junit.framework.Assert;
 
 
 public class AjaxRequest {
@@ -67,14 +71,22 @@ public class AjaxRequest {
 		}
 	}
 	
+	/**
+	 * @param config
+	 * @return return null if exception occurs
+	 */
 	public static String getResponse(Config config) {
+		
 		
 		HttpClient client = HttpClientBuilder.create().build();
 		
+		HttpHost proxy = new HttpHost("127.0.0.1", 9999, "http");
+		RequestConfig requestConfig = RequestConfig.custom().setProxy(proxy).build();
+		
+		
+		
 		String method = config.getMethod().toLowerCase();
 		Map<String, String> params = config.getMap();
-		
-		
 		
 		//HttpRequestBase request = null;
 		
@@ -87,6 +99,7 @@ public class AjaxRequest {
 			
 			if (method.toUpperCase().equals("POST"))  {
 				HttpPost request = new HttpPost(config.getUrl());
+				request.setConfig(requestConfig);
 				
 				if (config.getMap() != null) {
 					List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -124,6 +137,7 @@ public class AjaxRequest {
 				}
 				
 				HttpGet request = new HttpGet(url);
+				request.setConfig(requestConfig);
 				
 				if (config.getHeaders()!= null) {
 					Map<String, String> headers = config.getHeaders();
@@ -154,6 +168,15 @@ public class AjaxRequest {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+	@Test
+	public void test() {
+		AjaxRequest ar = new AjaxRequest();
+		AjaxRequest.Config config = ar.new Config("http://www.baidu.com", null, "GET");
+		String data = AjaxRequest.getResponse(config);
+
+		Assert.assertNotNull(data);
 	}
 	
 }

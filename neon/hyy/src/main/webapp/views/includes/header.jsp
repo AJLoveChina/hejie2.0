@@ -67,11 +67,6 @@
 <%	
 	}
  %>
-
-
-
-
-
 <div id="aj-header">
     <div class="clearfix">
     	<!--[if IE 8]>
@@ -122,6 +117,13 @@
 				</ul>
 			</div>
 		</div>
+    </div>
+    
+    <div id="aj-mobile-sign-area">
+    	<a href="javascript:;" class="aj-show-sign-panel">登陆</a>
+    	<a href="javascript:;" class="aj-u-img-show">
+    		<img src="" />
+    	</a>
     </div>
 </div>
 

@@ -162,32 +162,6 @@ request.setAttribute("curUser", curUser);
 		</div>
 	</div>
 </div>
-
-<div class="modal" id="aj-sign-panel">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">登陆选择</h4>
-			</div>
-			<div class="modal-body" style="text-align: center;">
-			
-				<div class="other-ways">
-					<span>其它登陆方式 : </span>
-					<a href="javascript:;" title="QQ登陆" class="aj-icon aqq-sign">&#xe611;</a>
-					<a href="javascript:;" title="新浪微博登陆" class="aj-icon aweibo-sign">&#xe60a;</a>
-					<a href="javascript:;" title="Github登陆"class="aj-icon agithub-sign">&#xe615;</a>
-					<div class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			</div>
-		</div>
-	</div>
-</div>
-
-
 <!-- 
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101305556" data-redirecturi="http://www.nigeerhuo.com/sign/qq" charset="utf-8" ></script>
 <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=4069769321" type="text/javascript" charset="utf-8"></script>
@@ -213,7 +187,29 @@ request.setAttribute("curUser", curUser);
 </c:choose>
 
 <script type="text/javascript">
-
+	$(document.body).append(["<div class=\"modal\" id=\"aj-sign-panel\">",
+	                         "    <div class=\"modal-dialog\">",
+	                         "        <div class=\"modal-content\">",
+	                         "            <div class=\"modal-header\">",
+	                         "				<button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">×</span><span class=\"sr-only\">Close</span></button>",
+	                         "				<h4 class=\"modal-title\">登陆选择</h4>",
+	                         "			</div>",
+	                         "			<div class=\"modal-body\" style=\"text-align: center;\">",
+	                         "			",
+	                         "				<div class=\"other-ways\">",
+	                         "					<span>其它登陆方式 : </span>",
+	                         "					<a href=\"javascript:;\" title=\"QQ登陆\" class=\"aj-icon aqq-sign\">&#xe611;</a>",
+	                         "					<a href=\"javascript:;\" title=\"新浪微博登陆\" class=\"aj-icon aweibo-sign\">&#xe60a;</a>",
+	                         "					<a href=\"javascript:;\" title=\"Github登陆\"class=\"aj-icon agithub-sign\">&#xe615;</a>",
+	                         "					<div class=\"g-signin2\" data-onsuccess=\"onGoogleSignIn\"></div>",
+	                         "				</div>",
+	                         "			</div>",
+	                         "			<div class=\"modal-footer\">",
+	                         "				<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>",
+	                         "			</div>",
+	                         "		</div>",
+	                         "	</div>",
+	                         "</div>"].join(""));
 	function onGoogleSignIn(data) {
 		$(window).trigger("onGoogleSignIn", data);
 	}
@@ -237,6 +233,21 @@ request.setAttribute("curUser", curUser);
 				signin(image, name, "google", google);
 			});
 			
+			user.onLogin(function () {
+				var container = $("#aj-mobile-sign-area");
+				container.addClass("aj-has-login");
+				container.find("a").attr("href", "/user/home");
+				container.find("img").attr("src", user.getUserimg());
+			});
+			user.onLogout(function () {
+				var container = $("#aj-mobile-sign-area");
+				container.removeClass("aj-has-login");
+				container.find("img").attr("src", "");
+			});
+			
+			if (user.isLogin()) {
+				user.triggerLoginEvent();
+			}
 			try {
 				var container = $(".user-login");
 				var CSRF_STATE = "<%=state %>";
@@ -291,8 +302,6 @@ request.setAttribute("curUser", curUser);
 				    
 				// 登陆成功后做的事情
 				function signin(userimg, nickname, from, moreInfo) {
-					
-					user.triggerLoginEvent();
 					
 					$("#aj-sign-panel").modal("hide");
 					//根据返回数据，更换按钮显示状态方法
@@ -423,6 +432,8 @@ request.setAttribute("curUser", curUser);
 				       			container.attr("data-userid", userid);
 				       		})();
 				       }
+				       
+				       user.triggerLoginEvent();
 				}
 				
 				
@@ -481,6 +492,9 @@ request.setAttribute("curUser", curUser);
 					signout();
 					
 				})
+				$(".aj-sign-out-btn").on("click", function () {
+					signout();
+				});
 
 				// github登陆
 				$(".agithub-sign").on("click", function () {

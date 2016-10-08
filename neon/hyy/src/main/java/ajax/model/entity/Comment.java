@@ -128,10 +128,6 @@ public class Comment extends RealTimePaginationConfiguration<Comment>{
 	
 	
 	@Override
-	public UniqueString getMaxPageKey() {
-		return UniqueString.COMMENT_MAX_PAGE_KEY;
-	}
-	@Override
 	public int getPaginationPageSize() {
 		return 20;
 	}

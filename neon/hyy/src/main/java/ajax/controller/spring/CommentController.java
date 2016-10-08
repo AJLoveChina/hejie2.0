@@ -74,7 +74,7 @@ public class CommentController {
 			ar.setIsok(true);
 			ar.setData("保存成功!");
 		} else {
-			ar.setIsok(true);
+			ar.setIsok(false);
 			ar.setData("评论失败, 二货君犯了一些小错误, 请待会再试试吧~~");
 		}
 		

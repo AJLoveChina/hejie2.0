@@ -89,7 +89,9 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 		</c:otherwise>
 	</c:choose>
 
-	
+	<div>
+		<a href="javascript:;" class="btn btn-default aj-sign-out-btn hidden-lg-up">退出登录</a>
+	</div>
 </div>
 
 <div class="aj-body-right">

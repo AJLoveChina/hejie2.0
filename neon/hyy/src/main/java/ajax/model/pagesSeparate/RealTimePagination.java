@@ -13,7 +13,17 @@ import ajax.model.entity.TypePage;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
+/**
+ * 实时分页保存实体, 查询实体
+ * @author ajax
+ *
+ * @param <T>
+ */
 public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
+	
+	private String generateMaxPageKeyByGroupId(String groupId) {
+		return groupId + "-max-page-key";
+	}
 	
 	/*
 	 * 1. create typePage or update typePage
@@ -24,7 +34,7 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 	 * @return
 	 */
 	public boolean save(String groupId, T t) {
-		Config config = Config.getBy(Config.class, "key", t.getMaxPageKey().getKeyV2());
+		Config config = Config.getBy(Config.class, "key", this.generateMaxPageKeyByGroupId(groupId));
 		/*
 		 * 1. create typePage or update typePage
 		 * 2. update maxPage config or not update
@@ -36,7 +46,7 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 		int finalNeededSize = t.getPaginationPageSize();
 		TypePage typePage = null;
 		
-		if (maxPage > 1) {
+		if (maxPage >= 1) {
 			typePage = TypePage.getBy(TypePage.class, "page", maxPage, "type", groupId);
 		}
 		
@@ -53,7 +63,7 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 
 			if (config == null) {
 				config = new Config();
-				config.setKey(t.getMaxPageKey().getKeyV2());
+				config.setKey(this.generateMaxPageKeyByGroupId(groupId));
 				config.setValue(maxPage + 1 + "");
 				config.save(session);
 			} else {
@@ -97,10 +107,12 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 	 * @return
 	 */
 	public List<T> get(String groupId, int page, T t) {
-		Config config = Config.getBy(Config.class, "key", t.getMaxPageKey().getKeyV2());
+		Config config = Config.getBy(Config.class, "key", this.generateMaxPageKeyByGroupId(groupId));
 		int maxPage = this.getMaxPage(config);
 		
-		int queryPage = page > maxPage ? maxPage : maxPage - page + 1;
+		// 这里不要改, 因为前端会根据返回的数目与size比较判断有木有下一页了
+		if (page <= 0 || page > maxPage) return new ArrayList<>();
+		int queryPage = maxPage - page + 1;
 		
 		if (maxPage == 0) {
 			return new ArrayList<>();
