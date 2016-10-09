@@ -186,11 +186,24 @@ public class User extends Entity<User>{
 	private String dateEntered;
 	private int from;
 	private String img;
+	private String pencilName;// unique index
+	private boolean canWriteBlogs = false;
 	
 	public static final String SIGN_SESSION_ATTR = "aj-sign-sess-status";
 	
 	
-	
+	public String getPencilName() {
+		return pencilName;
+	}
+	public void setPencilName(String pencilName) {
+		this.pencilName = pencilName;
+	}
+	public boolean isCanWriteBlogs() {
+		return canWriteBlogs;
+	}
+	public void setCanWriteBlogs(boolean canWriteBlogs) {
+		this.canWriteBlogs = canWriteBlogs;
+	}
 	public String getNickname() {
 		return nickname;
 	}
@@ -852,6 +865,10 @@ public class User extends Entity<User>{
 		if (this.dateEntered == null) this.dateEntered = new SimpleDateFormat(ConfigFromProperties.getTABLE_TIME_FORMAT()).format(new Date());
 		
 		return super.save();
+	}
+	
+	public boolean isCanSubmitBlog() {
+		return this.isAdmin();
 	}
 	
 }

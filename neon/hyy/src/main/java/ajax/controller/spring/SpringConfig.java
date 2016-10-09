@@ -1,5 +1,7 @@
 package ajax.controller.spring;
 
+import java.lang.annotation.Annotation;
+
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import com.google.gson.Gson;
 
 import ajax.controller.spring.aspects.SafeAspect;
+import ajax.model.annotations.EditorPointcut;
 
 @Configuration
 @EnableAspectJAutoProxy
@@ -18,6 +21,7 @@ public class SpringConfig {
 	public SafeAspect safeAspect() {
 		return new SafeAspect();
 	}
+	
 	
 	@Bean
 	public Gson gson() {

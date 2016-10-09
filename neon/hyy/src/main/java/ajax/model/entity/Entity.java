@@ -470,6 +470,12 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		
 	}
 	
+	/**
+	 * 快速得到表单组件, 在相应的jsp页面中渲染
+	 * @param cls
+	 * @return
+	 * @throws AJRunTimeException
+	 */
 	public FormComponents getFormComponents(Class<T> cls) throws AJRunTimeException{
 		FormComponentUrlAnno formComponentUrlAnno = cls.getAnnotation(FormComponentUrlAnno.class);
 		
