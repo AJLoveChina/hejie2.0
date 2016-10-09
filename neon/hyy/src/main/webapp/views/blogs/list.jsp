@@ -15,16 +15,22 @@ System.out.println(blogs.size());
 
 <jsp:include page="/views/includes/header.jsp"></jsp:include>
 
-<<jsp:include page="/views/blogs/style.jsp"></jsp:include>
+<jsp:include page="/views/blogs/style.jsp"></jsp:include>
 <div class="aj-body-left">
+	
+	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
 	<div class="blogs-list">
 		
+		<c:if test="${blogs.size() == 0 }">
+			<p style="text-align:center;">亲, 木有更多了...</p>
+		</c:if>
 		<c:forEach var="blog" items="${blogs }">
 			<c:set scope="request" var="item" value="${blog }" />
 			<c:import url="/views/blogs/blog_iterator.jsp"></c:import>
 		</c:forEach>
 		
 	</div>
+	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
 </div>
 
 

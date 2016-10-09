@@ -1,11 +1,13 @@
 package ajax.model.pagesSeparate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.entity.Config;
@@ -162,4 +164,83 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 		}
 	}
 	
+	/**
+	 * 一页只返回指定的数目items, 第一页往往不够则由后一页补上. 最后一页往往要去除第一页不足的条数
+	 * @param groupId
+	 * @param page
+	 * @param t
+	 * @return
+	 */
+	public List<T> getV2(String groupId, int page, T t) {
+		Config config = Config.getBy(Config.class, "key", this.generateMaxPageKeyByGroupId(groupId));
+		int maxPage = this.getMaxPage(config);
+		
+		// 这里不要改, 因为前端会根据返回的数目与size比较判断有木有下一页了
+		if (page <= 0 || page > maxPage) return new ArrayList<>();
+		int queryPage = maxPage - page + 1;
+		
+		if (maxPage == 0) {
+			return new ArrayList<>();
+		} else {
+			String[] arr = {};
+			String[] arr2 = {};
+			TypePage maxTypePage = TypePage.getBy(TypePage.class, "page", maxPage, "type", groupId);
+			TypePage curTypePage = null;
+			int maxPageLessItemsSize = t.getPaginationPageSize() - maxTypePage.getSize();
+			if (maxPage == queryPage) {
+				curTypePage = maxTypePage;
+			} else {
+				curTypePage = TypePage.getBy(TypePage.class, "page", queryPage, "type", groupId);
+			}
+			
+			if (queryPage == 1) {
+				arr = new String[maxTypePage.getSize()];
+				System.arraycopy(curTypePage.getItems().split(","), maxPageLessItemsSize, arr, 0, maxTypePage.getSize());
+			} else if (queryPage == maxPage) {
+				
+				arr = curTypePage.getItems().split(",");
+				TypePage tp2 = TypePage.getBy(TypePage.class, "page", queryPage - 1, "type", groupId);
+				arr2 = new String[maxPageLessItemsSize];
+				System.arraycopy(tp2.getItems().split(","), 0, arr2, 0, maxPageLessItemsSize);
+				
+			} else {
+				arr = new String[maxTypePage.getSize()];
+				arr2 = new String[maxPageLessItemsSize];
+				System.arraycopy(curTypePage.getItems().split(","), maxPageLessItemsSize, arr, 0, maxTypePage.getSize());
+				TypePage tp2 = TypePage.getBy(TypePage.class, "page", queryPage - 1, "type", groupId);
+				System.arraycopy(tp2.getItems().split(","), 0, arr2, 0, maxPageLessItemsSize);
+			}
+			
+			String[] both = (String[]) ArrayUtils.addAll(arr, arr2);
+			
+			//ArrayUtils.reverse(both);
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			
+			Criteria criteria = session.createCriteria(t.getClass());
+			
+			switch(t.getPaginationPrimaryKeyType()) {
+			case INTEGER:
+				List<Integer> list = new ArrayList<>();
+				for (String s : both) {
+					list.add(Integer.parseInt(s));
+				}
+				criteria.add(Restrictions.in(t.getPaginationPrimaryKey(), list));
+				break;
+			case LONG:
+			default:
+				List<Long> list2 = new ArrayList<>();
+				for (String s : both) {
+					list2.add(Long.parseLong(s));
+				}
+				criteria.add(Restrictions.in(t.getPaginationPrimaryKey(), list2));
+				criteria.addOrder(Order.desc(t.getPaginationPrimaryKey()));
+				break;
+			}
+			
+			List<T> items = criteria.list();
+			session.getTransaction().commit();
+			return items;
+		}
+	}
 }

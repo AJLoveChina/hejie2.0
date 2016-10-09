@@ -5,6 +5,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">${item.getTitle() }</div>
   <div class="panel-body">
-    <p>${item.getDesc() }</p>
+    <div style="padding:0 10px;">${item.getDesc() }</div>
   </div>
 </div>

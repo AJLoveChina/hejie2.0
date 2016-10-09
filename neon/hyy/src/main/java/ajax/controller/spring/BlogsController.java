@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
 import ajax.model.FormComponents;
+import ajax.model.PageChoice;
 import ajax.model.annotations.EditorPointcut;
 import ajax.model.annotations.EditorPointcutForAjax;
 import ajax.model.entity.Blog;
@@ -49,9 +50,14 @@ public class BlogsController {
 		}
 		
 		RealTimePagination<Blog> pagination = new RealTimePagination<>();
-		List<Blog> blogs = pagination.get(Blog.getGroupIdOfUser(user), page, new Blog());
+		List<Blog> blogs = pagination.getV2(Blog.getGroupIdOfUser(user), page, new Blog());
+		
+		
+		PageChoice pageChoice = new PageChoice(page, "/blog/user/" + name + "/{page}");
 		
 		request.setAttribute("blogs", blogs);
+		request.setAttribute("pageChoice", pageChoice);
+		
 		return "views/blogs/list";
 	}
 	

@@ -12,8 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 
-
-
 <jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 <%@ include file="/views/goods/style.jsp" %>

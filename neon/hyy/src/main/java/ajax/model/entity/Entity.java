@@ -443,7 +443,7 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		session.beginTransaction();
 		
 		Criteria  cr = session.createCriteria(cls);
-		cr.setMaxResults(20);
+		cr.setMaxResults(size);
 		cr.setFirstResult((page - 1) * size);
 		List<T> list = cr.list();
 		
