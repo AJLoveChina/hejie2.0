@@ -38,5 +38,8 @@ define(function () {
 		}
 	};
 	
+	var timeagoInstance = new timeago();
+	timeagoInstance.render($(".time_need_to_be_rendered"), 'zh_CN'); 
+	
 	return tools;
 });

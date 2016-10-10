@@ -11,6 +11,7 @@
 	$(function () {
 			$(".ajs-page-choices").each(function () {
 				var cur = parseInt($(this).attr("data-curPage")),
+					maxPage = parseInt($(this).attr("data-maxPage")),
 					liCls = $(this).attr("data-li-cls"),
 					urlTemplate = $(this).attr("data-urlTemplate"),
 					aCurCls = $(this).attr("data-a-cur-cls"),
@@ -21,11 +22,16 @@
 						return false;
 					}
 					$(this).addClass(uniCls);
+				
 				var arr = [],
 					urls = [],
 					curCopy = cur,
 					i;
 				i = 2;
+				
+				var isMaxLimit = false;
+				if (maxPage != -1) isMaxLimit = true;
+				
 				while(i-- > 0 && curCopy > 1) {
 					curCopy --;	
 				}	
@@ -34,6 +40,7 @@
 				}
 				
 				for (i = 0; i < arr.length; i++) {
+					if(isMaxLimit && arr[i] > maxPage) continue;
 					urls.push({
 						page : arr[i],
 						url : changeTemplateToUrl(arr[i])
@@ -44,6 +51,7 @@
 					domLi,
 					domA;
 				for (i = 0; i < urls.length; i++) {
+					
 					domA = $(document.createElement("a"));
 					domA.attr("class", "atag");
 					if (cur === urls[i].page) {
@@ -73,7 +81,8 @@
 <div class="aj-page-choices-v2">
 	<ul class="aul clearfix ajs-page-choices" 
 		data-curPage="<%=pageChoice.getCurPage() %>" 
-		data-urlTemplate="<%=pageChoice.getUrlTemplate() %>" 
+		data-maxPage="<%=pageChoice.getMaxPage() %>"
+		data-urlTemplate="<%=pageChoice.getUrlTemplate() %>"
 		data-li-cls="ali"
 		data-a-cur-cls="cur"
 		data-a-cls="atag" >

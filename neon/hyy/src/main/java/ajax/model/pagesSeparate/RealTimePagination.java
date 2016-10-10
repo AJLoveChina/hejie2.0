@@ -243,4 +243,9 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 			return items;
 		}
 	}
+	
+	public static int getMaxPage() {
+		//TODO
+		return 0;
+	}
 }

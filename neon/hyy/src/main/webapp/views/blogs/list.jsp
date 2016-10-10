@@ -9,40 +9,89 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 List<Blog> blogs = (List<Blog>)request.getAttribute("blogs");
-System.out.println(blogs.size());
 
 %>
+
 
 <jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 <jsp:include page="/views/blogs/style.jsp"></jsp:include>
-<div class="aj-body-left">
-	
-	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
-	<div class="blogs-list">
+
+<div class="row">
+	<div class="col-md-8 col-xs-12">
 		
-		<c:if test="${blogs.size() == 0 }">
-			<p style="text-align:center;">亲, 木有更多了...</p>
-		</c:if>
-		<c:forEach var="blog" items="${blogs }">
-			<c:set scope="request" var="item" value="${blog }" />
-			<c:import url="/views/blogs/blog_iterator.jsp"></c:import>
-		</c:forEach>
+		<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
+		<div class="blogs-list">
+			
+			<c:if test="${blogs.size() == 0 }">
+				<p style="text-align:center;">亲, 木有更多了...</p>
+			</c:if>
+			<c:forEach var="blog" items="${blogs }">
+				<c:set scope="request" var="item" value="${blog }" />
+				<c:import url="/views/blogs/blog_iterator.jsp"></c:import>
+			</c:forEach>
+				
+		</div>
+		<script>
+			$(function () {
+				$(".blogs-list").on("click", ".show-detail", function () {
+					if ($(this).siblings(".content").is(":hidden")) {
+						$(this).find(".d-info").text("Hide Detail");
+					} else {
+						$(this).find(".d-info").text("Show Detail");
+					}
+					$(this).siblings(".content").toggle();
+				})
+			});
+		</script>
+		<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
+	</div>
+	
+	
+	<div class="col-md-4 col-xs-12">
+		<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
+		
+		<div class="aj-bloger-info">
+		
+			<div class="panel panel-default">
+			  <div class="panel-heading">关于我:</div>
+			  <div class="panel-body">
+			  	<img src="http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/images/blogs/hejie.jpg@!w190" />
+			  	<div style="text-align:center;font-size:12px;padding:5px 0;">
+			  		北冥有鱼, 其名为鲲. 鲲之大, 不知其千里.
+			  	</div>
+			   	<div class="icons">
+					<a href="https://github.com/AJLoveChina" target="_blank" title="我的Github">
+						<span class="aj-icon aj-icon-github"></span>
+					</a>
+					
+					<a href="https://www.zhihu.com/people/he-jie-37-25" target="_blank" title="我的知乎">
+						<span class="aj-icon aj-icon-zhihu" style="position:relative;top:2px;"></span>
+					</a>
+				</div>
+			  </div>
+			</div>
+					
+			<div class="panel panel-default">
+			  <div class="panel-heading">项目经历:</div>
+			  <div class="panel-body">
+			   <ul class="list-group my-projects">
+				  <li class="list-group-item list-group-item-success">
+				  	<a href="http://nigeerhuo.com" target="_blank">你个二货(业余时间和同学合作开发, 我负责前端架构与服务端爬虫模块)</a>
+				  </li>
+				  <li class="list-group-item list-group-item-info">
+				  	<a href="http://oshjf.com" target="_blank">老爸店铺的网站(独立开发)</a>
+				  </li>
+				</ul>
+			  </div>
+			</div>
+			
+		</div>
+		
+		
+		<div class="aj-comment-ui-area" data-grounp-id="ajax.model.entity.Blog-comments-of-hejie" data-title-value="说点什么吧:"></div>
 		
 	</div>
-	<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
-</div>
-
-
-<div class="aj-body-right">
-	<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
-	
-	<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
-	
-	<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
-	
-	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
-	
 </div>
 
 <div style="height:10px;"></div>

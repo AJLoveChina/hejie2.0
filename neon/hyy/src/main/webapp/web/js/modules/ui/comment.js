@@ -2,6 +2,7 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 	function Comment() {
 		this.className = "aj-comment-ui-area";
 		this.groupIdAttr = "data-grounp-id";
+		this.commentAreaTitleAttr = "data-title-value";
 		this.hasRenderClassName = "aj-comment-ui-area-has-rendered";
 		this.commentsLoadUrl = "/comment/get";
 		this.submitUrl = "/comment/submit";
@@ -33,6 +34,7 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 			},
 			renderDom : function (dom) {
 				if (this.hasRendered(dom)) return;
+				
 				$(dom).addClass(this.hasRenderClassName);
 				
 				this.renderHeader(dom);
@@ -142,8 +144,14 @@ define(["model/user", "tools/tools", "model/comment"], function (user, tools, CM
 				var div = $("<div>"),
 					h3 = $("<h3>")
 					textarea = $("<textarea>"),
-					btn = $("<button>")
-				h3.html("用户评论:");
+					btn = $("<button>"),
+					titleValue = $(dom).attr(this.commentAreaTitleAttr);
+				if (titleValue) {
+					h3.html(titleValue);
+				} else {
+					h3.html("用户评论:");
+				}
+				
 				div.append(h3);
 				
 				if (user.isLogin()) {

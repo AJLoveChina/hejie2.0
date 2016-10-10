@@ -81,6 +81,24 @@ public class Blog extends RealTimePaginationConfiguration<Blog>{
 		this.view = view;
 	}
 
+	/**
+	 * get stamps array
+	 * @return
+	 */
+	public String[] getStampsArr() {
+		if (this.stamps == null || this.stamps.equals("")) return new String[]{};
+		
+		return this.stamps.split(",");
+	}
+	
+	/**
+	 * 是否有content
+	 * @return
+	 */
+	public boolean hasContent() {
+		if (this.content == null || this.content.trim().equals("")) return false;
+		return true;
+	}
 	
 	@Override
 	public int getPaginationPageSize() {

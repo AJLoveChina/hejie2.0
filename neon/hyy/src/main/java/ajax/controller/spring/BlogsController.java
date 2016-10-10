@@ -1,5 +1,6 @@
 package ajax.controller.spring;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,9 @@ public class BlogsController {
 	private HttpServletRequest request;
 	
 	@RequestMapping(value="/user/{name}")
-	public String whosBlog(@PathVariable("name") String name) throws AJRunTimeException {
+	public String whosBlog(@PathVariable("name") String name, @RequestParam(name="page", defaultValue="1") int page) throws AJRunTimeException {
 		
-		return whosBlog2(name, 1);
+		return whosBlog2(name, page);
 		
 	}
 	
@@ -53,13 +54,39 @@ public class BlogsController {
 		List<Blog> blogs = pagination.getV2(Blog.getGroupIdOfUser(user), page, new Blog());
 		
 		
-		PageChoice pageChoice = new PageChoice(page, "/blog/user/" + name + "/{page}");
+		PageChoice pageChoice = new PageChoice(page, 3, "./{page}");
 		
 		request.setAttribute("blogs", blogs);
 		request.setAttribute("pageChoice", pageChoice);
 		
 		return "views/blogs/list";
 	}
+	
+	@RequestMapping(value="/user/{name}/{page}/ajax")
+	@ResponseBody
+	public AjaxResponse<List<Blog>> whosBlog2Ajax(@PathVariable("name") String name, @PathVariable("page") Integer page) throws AJRunTimeException {
+		AjaxResponse<List<Blog>> ar = new AjaxResponse<>();
+		if (page == null || page == 0)  page = 1;
+		if (name == null || name.equals("")) {
+			ar.setIsok(false);
+			ar.setData(new ArrayList<>());
+		}
+		
+		User user = User.getBy(User.class, "pencilName", name);
+		if (user == null || !user.isCanWriteBlogs()) {
+			throw new AJRunTimeException("您所查看的用户不是博客写手..");
+		}
+		
+		RealTimePagination<Blog> pagination = new RealTimePagination<>();
+		List<Blog> blogs = pagination.getV2(Blog.getGroupIdOfUser(user), page, new Blog());
+		
+		
+		ar.setIsok(true);
+		ar.setData(blogs);
+		
+		return ar;
+	}
+	
 	
 	@RequestMapping(value="/edit")
 	public String edit() throws AJRunTimeException {

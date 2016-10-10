@@ -48,7 +48,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/css/third-party-css-all.min.css?ts=20160921" />
 <!-- 下行css不可合并,和icon font相关,需要实时更新 -->
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1474116528_4631057.css"/>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1476099802_7251217.css"/>
 <link rel="stylesheet" href="/web/css/index.css?ts=20160725"/>
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
