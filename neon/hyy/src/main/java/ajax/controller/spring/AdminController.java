@@ -26,6 +26,8 @@ import ajax.model.JokeType;
 import ajax.model.Lock;
 import ajax.model.PageChoice;
 import ajax.model.UrlRoute;
+import ajax.model.annotations.AdminPointcut;
+import ajax.model.annotations.AdminPointcutForAjax;
 import ajax.model.entity.Comment;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Fragment;
@@ -50,6 +52,7 @@ import com.google.gson.Gson;
 
 
 @Controller
+@AdminPointcut
 @RequestMapping(value="/admin")
 public class AdminController {
 	
@@ -62,6 +65,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/ajAddComment")
 	@ResponseBody
+	@AdminPointcutForAjax
 	public AjaxResponse<String> ajAddComment(@RequestParam(name="groupid") String groupid, @RequestParam(name="userid") Long userid, @RequestParam(name="content") String content){
 		AjaxResponse<String> ar = new AjaxResponse<>();
 		

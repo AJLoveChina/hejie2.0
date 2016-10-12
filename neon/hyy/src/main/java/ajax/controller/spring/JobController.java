@@ -32,9 +32,11 @@ import ajax.jobs.JobsList.AJob;
 import ajax.jobs.JobsList.JobInfo;
 import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
+import ajax.model.annotations.AdminPointcut;
 import ajax.tools.Tools;
 
 @Controller
+@AdminPointcut
 @RequestMapping(value="/jobs")
 public class JobController {
 	
