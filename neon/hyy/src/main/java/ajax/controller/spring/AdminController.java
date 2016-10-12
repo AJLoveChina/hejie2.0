@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ajax.model.AjaxResponse;
@@ -25,6 +26,7 @@ import ajax.model.JokeType;
 import ajax.model.Lock;
 import ajax.model.PageChoice;
 import ajax.model.UrlRoute;
+import ajax.model.entity.Comment;
 import ajax.model.entity.Entity;
 import ajax.model.entity.Fragment;
 import ajax.model.entity.GameTeamFun;
@@ -34,6 +36,7 @@ import ajax.model.entity.Page;
 import ajax.model.entity.TypePage;
 import ajax.model.exception.AJRunTimeException;
 import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
+import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.User;
 import ajax.model.taobao.ITaobao;
@@ -56,6 +59,37 @@ public class AdminController {
 	private HttpServletResponse response;
 	@Autowired
 	private Gson gson;
+	
+	@RequestMapping(value="/ajAddComment")
+	@ResponseBody
+	public AjaxResponse<String> ajAddComment(@RequestParam(name="groupid") String groupid, @RequestParam(name="userid") Long userid, @RequestParam(name="content") String content){
+		AjaxResponse<String> ar = new AjaxResponse<>();
+		
+		Comment comment;
+		try {
+			
+			comment = new Comment(groupid, userid, content);
+			
+			RealTimePagination<Comment> pagination = new RealTimePagination<>();
+			if (pagination.save(groupid, comment)) {
+				ar.setIsok(true);
+				ar.setData("保存成功!");
+			} else {
+				ar.setIsok(false);
+				ar.setData("评论失败, 二货君犯了一些小错误, 请待会再试试吧~~");
+			}
+			
+		} catch (AJRunTimeException e) {
+			ar.setIsok(false);
+			ar.setData("no such user");
+		}
+		return ar;
+	}
+	
+	@RequestMapping(value="/views/auto/{viewName}")
+	public String viewsAuto(@PathVariable("viewName") String viewName) {
+		return "/views/admin/" + viewName;
+	}
 	
 	
 	@RequestMapping(value="/gameTeamGenerate")

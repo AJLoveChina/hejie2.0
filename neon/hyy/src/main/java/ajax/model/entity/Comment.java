@@ -9,6 +9,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.UniqueString;
+import ajax.model.exception.AJRunTimeException;
 import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 import ajax.model.safe.User;
 import ajax.tools.HibernateUtil;
@@ -23,7 +24,6 @@ public class Comment extends RealTimePaginationConfiguration<Comment>{
 	private String userimg;
 	private String userInfoJson;
 	private String content;
-	
 	
 	public String getNickname() {
 		return nickname;
@@ -76,7 +76,29 @@ public class Comment extends RealTimePaginationConfiguration<Comment>{
 	}
 	
 
-	
+	/**
+	 * aj add comment
+	 * @param commentsGroupId
+	 * @param userid
+	 * @param content
+	 * @throws AJRunTimeException
+	 */
+	public Comment(String commentsGroupId, long userid, String content) throws AJRunTimeException {
+		super();
+		this.commentsGroupId = commentsGroupId;
+		this.userid = userid;
+		this.content = content;
+		
+		User user = new User();
+		user.load(userid);
+		
+		if (user.getId() == 0) {
+			throw new AJRunTimeException("no such user");
+		}
+		
+		this.configFromUser(user);
+		
+	}
 	public Comment(long id, long parentid, String commentsGroupId, long userid, String content) {
 		super();
 		this.id = id;
@@ -142,6 +164,16 @@ public class Comment extends RealTimePaginationConfiguration<Comment>{
 	@Override
 	public ajax.model.pagesSeparate.RealTimePaginationConfiguration.PK_TYPE getPaginationPrimaryKeyType() {
 		return PK_TYPE.LONG;
+	}
+	
+	
+	@Override
+	public boolean save() {
+		if (this.content == null || "".equals(this.content.trim())) {
+			System.out.println("comment content can not be empty!");
+			return false;
+		}
+		return super.save();
 	}
 	
 	

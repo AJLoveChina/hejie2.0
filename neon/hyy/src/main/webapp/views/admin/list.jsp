@@ -75,6 +75,9 @@
 					}, {
 						href : "/jobs/list",
 						text : "jobs/list"
+					}, {
+						href : "/admin/views/auto/ajAddComment",
+						text : "aj add comment"
 					}];
 				});
 				

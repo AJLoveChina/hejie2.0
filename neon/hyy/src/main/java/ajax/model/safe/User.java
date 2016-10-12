@@ -210,7 +210,12 @@ public class User extends Entity<User>{
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	/**
+	 * return default user image if not set img value.
+	 * @return
+	 */
 	public String getImg() {
+		if (this.img == null || this.img.equals("")) return UrlRoute.NIGEERHUO_DEFAULT_USER_IMAGE_URL.getUrl();
 		return img;
 	}
 	public void setImg(String img) {
