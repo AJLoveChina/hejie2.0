@@ -16,8 +16,52 @@ List<Blog> blogs = (List<Blog>)request.getAttribute("blogs");
 <jsp:include page="/views/includes/header.jsp"></jsp:include>
 
 <jsp:include page="/views/blogs/style.jsp"></jsp:include>
-
-<div class="row">
+<script>
+$(function () {
+	$(".blogs-list").on("click", ".show-detail", function () {
+		if ($(this).siblings(".content").is(":hidden")) {
+			$(this).find(".d-info").text("Hide Detail");
+		} else {
+			$(this).find(".d-info").text("Show Detail");
+		}
+		$(this).siblings(".content").toggle();
+	})
+	
+	/* var container = $(document.body);
+	var app = angular.module("blogModule", ["ngRoute"]);
+	var path = location.pathname;
+	if (path === "/") {
+		path = "";
+	}
+	app.constant("prePath", path);
+	app.config(function ($routeProvider, $locationProvider, prePath) {
+		$locationProvider.html5Mode(true);
+		
+		$routeProvider.when(prePath + "/#/page/:page",{
+			templateUrl : "/views/blogs/blog-one.html"
+		})
+		$routeProvider.otherwise({
+			templateUrl : "/views/blogs/blog-one.html"
+		});
+		
+	}).controller("listController", function ($scope, $location, $routeParams) {
+		$scope.s = {};
+		$scope.s.title = "Hello";
+		$scope.changePage = function (page) {
+			$location.path("/#/page/" + page);
+		}
+		$scope.$on("$routeChangeSuccess", function () {
+			if ($location.path().indexOf("/#/page/") == 0) {
+				var page = $routeParams["page"];
+				console.log(page);
+			}
+		});
+	}); */
+	//angular.bootstrap(container, ["blogModule"]);
+	
+});
+</script>
+<div class="row" ng-controller="listController">
 	<div class="col-md-8 col-xs-12">
 		
 		<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
@@ -30,20 +74,10 @@ List<Blog> blogs = (List<Blog>)request.getAttribute("blogs");
 				<c:set scope="request" var="item" value="${blog }" />
 				<c:import url="/views/blogs/blog_iterator.jsp"></c:import>
 			</c:forEach>
-				
+			
+			<div ng-view></div>
 		</div>
-		<script>
-			$(function () {
-				$(".blogs-list").on("click", ".show-detail", function () {
-					if ($(this).siblings(".content").is(":hidden")) {
-						$(this).find(".d-info").text("Hide Detail");
-					} else {
-						$(this).find(".d-info").text("Show Detail");
-					}
-					$(this).siblings(".content").toggle();
-				})
-			});
-		</script>
+		
 		<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
 	</div>
 	

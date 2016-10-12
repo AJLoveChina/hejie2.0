@@ -54,7 +54,7 @@ public class BlogsController {
 		List<Blog> blogs = pagination.getV2(Blog.getGroupIdOfUser(user), page, new Blog());
 		
 		
-		PageChoice pageChoice = new PageChoice(page, 3, "./{page}");
+		PageChoice pageChoice = new PageChoice(page, 3, "/blog/user/" + name + "/{page}");
 		
 		request.setAttribute("blogs", blogs);
 		request.setAttribute("pageChoice", pageChoice);

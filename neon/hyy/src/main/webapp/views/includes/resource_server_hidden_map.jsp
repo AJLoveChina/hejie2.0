@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+
 <script>
 	if (!Array.prototype.indexOf) {
 	    Array.prototype.indexOf = function (searchElement) {

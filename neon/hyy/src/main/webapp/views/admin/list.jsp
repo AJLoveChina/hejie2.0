@@ -34,6 +34,7 @@
 				var app = angular.module("admin-list", []);
 				
 				app.controller("listController", function ($scope) {
+					
 					$scope.s = {};
 					$scope.s.list = [{
 						href : "<%=UrlRoute.ADMIN_HOME_ROLLADS_MANAGEMENT_URL.getUrl() %>",
