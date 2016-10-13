@@ -534,6 +534,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/pageGenerator/generate")
 	@ResponseBody
+	@AdminPointcutForAjax
 	public AjaxResponse<String> pageGeneratorGenerate() throws AJRunTimeException {
 		
 		String dataParam = request.getParameter("data");

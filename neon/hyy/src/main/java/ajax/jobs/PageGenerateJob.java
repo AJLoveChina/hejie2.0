@@ -5,6 +5,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 import java.util.Date;
 
+import org.junit.Test;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.Trigger;
@@ -22,16 +23,23 @@ public class PageGenerateJob implements AJob {
 		try {
 			Item.generateNewPageItems();
 		} catch (AJRunTimeException e) {
-			System.out.println("page generate fail..");
+			System.out.println("page generate fail.." + e.getMessage());
 		}
 	}
+	
+
+	@Test
+	public void do1() throws AJRunTimeException {
+		Item.generateNewPageItems();
+	}
+	
 
 	@Override
 	public Trigger returnTrigger() {
 		Date date = new Date();
-		int seconds = 3600 * 12;
+		int seconds = 3600 * 3;
 		date.setTime(date.getTime() + seconds * 1000);
-		return newTrigger().withIdentity(this.returnTriggerKey().getName(), this.returnTriggerKey().getGroup()).startAt(date)
+		return newTrigger().withIdentity(this.returnTriggerKey().getName(), this.returnTriggerKey().getGroup()).startNow()
 				.withSchedule(simpleSchedule().withIntervalInSeconds(seconds).repeatForever()).build();
 	}
 

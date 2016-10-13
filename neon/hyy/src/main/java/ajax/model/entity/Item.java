@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.json.JSONObject;
 import org.json.JSONString;
@@ -21,16 +22,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Assert;
+import org.junit.Test;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import ajax.model.AjaxResponse;
 import ajax.model.Callback;
+import ajax.model.ConfigFromSQL;
 import ajax.model.ItemStatus;
 import ajax.model.JokeStatus;
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
+import ajax.model.Topic;
 import ajax.model.UrlRoute;
 import ajax.model.exception.AJRunTimeException;
 import ajax.spider.Spider3;
@@ -311,16 +316,16 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 */
 	public static Item getByItemById(int id) {
 		
-		Session session = HibernateUtil.getCurrentSession();
+		return Item.get(Item.class, id);
 		
-		session.beginTransaction();
-		
-		Item entity = session.get(Item.class, id);
-		
-		session.getTransaction().commit();
-		
-		return entity;
 	}
+	
+//	@Test
+//	public void test() {
+//		Item item = Item.get(Item.class, 99);
+//		
+//		Assert.assertNotNull(item);
+//	}
 	
 	/**
 	 * return UrlRoute.ONEJOKE + "?id=" + this.getId(); 
@@ -586,6 +591,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 						}
 					}catch(Exception ex) {
 						System.out.println(ex.getMessage());
+						System.out.println("This error occurs when imagescontainer doese not contain particular image url, so ic == null, then error!");
 					}
 				}
 				
@@ -705,7 +711,8 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		cr.add(Restrictions.eq("page", 0));
 		cr.add(Restrictions.gt("likes", 500));
 		cr.add(Restrictions.ne("status", JokeStatus.DELETE.getId()));
-		cr.setMaxResults(200);
+		cr.addOrder(Order.desc("id"));
+		cr.setMaxResults(100);
 		
 		List<Item> items = cr.list();
 		
@@ -721,6 +728,39 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			System.out.println("已获取id=" + item.getId() + ";title=" + item.getTitle());
 			return item;
 		}
+	}
+	
+	public static List<Item> getItemsThatNotInPage(int len) {
+		return getItemsThatNotInPage(len, new ArrayList<Integer>(){});
+	}
+	
+	/**
+	 *	
+	 * @param len
+	 * @param excludeItemsList 排除的item 的id集合
+	 * @return
+	 */
+	public static List<Item> getItemsThatNotInPage(int len, List<Integer> excludeItemsList) {
+		System.out.println("正在获取" + len + "个还没有放入page表的item...");
+		
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
+		Criteria cr = session.createCriteria(Item.class);
+		cr.add(Restrictions.eq("page", 0));
+		cr.add(Restrictions.gt("likes", 500));
+		cr.add(Restrictions.ne("status", JokeStatus.DELETE.getId()));
+		cr.addOrder(Order.desc("id"));
+		if (excludeItemsList.size() > 0) {
+			cr.add(Restrictions.not(Restrictions.in("id", excludeItemsList)));
+		}
+		cr.setMaxResults(len);
+		
+		List<Item> items = cr.list();
+		session.getTransaction().commit();
+		
+		return items;
 	}
 	
 	/**
@@ -1054,14 +1094,22 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			// 重新计算类型
 			this.setItype(this.generateTypeAndReturn().getId());
 			
-			System.out.println("reload images..");
-			// 重新获取图片, 如果木有获取图片的话.
-			this.setContent(this.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+			// if local mode, do not save images to oss.
+			if (!ConfigFromSQL.isNIGEERHUO_IS_LOCAL_MODE()) {
+				System.out.println("reload images..");
+				// 重新获取图片, 如果木有获取图片的话.
+				this.setContent(this.grabImagesFromContentAndSaveToOssThenReturnContent(null));
+				
+				System.out.println("lazy img..");
+				// lazy img for content (强制lazy)
+				this.setContent(this.generateLazyImageContentAndReturnByForce());
+				this.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
+				
+				System.out.println("generate item shortcut..");
+				// 生成item缩略图
+				this.setPreviewImage(this.generateItemImageAndReturn());
+			}
 			
-			System.out.println("lazy img..");
-			// lazy img for content (强制lazy)
-			this.setContent(this.generateLazyImageContentAndReturnByForce());
-			this.setStatusForTest(JokeStatus.HAS_GRAB_IMAGES.getId());
 			
 			// this.setContent(this.generateLazyImageContentAndReturn());
 			
@@ -1069,9 +1117,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			// move some illegal tags
 			this.setContent(this.generateContentWithoutIlleagalHTMLTags());
 			
-			System.out.println("generate item shortcut..");
-			// 生成item缩略图
-			this.setPreviewImage(this.generateItemImageAndReturn());
+			
 			
 			this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
 			this.update();
@@ -1126,12 +1172,12 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 
 
 	/**
-	 * 判断一个item是否合理
+	 * 判断一个item是否合理(有title,有content)
 	 * @return true (如果有title 与 content)
 	 */
 	public boolean isLegalItem() {
 		
-		if (this.getTitle().trim().equals("") || this.getContent().trim().equals("")) {
+		if ("".equals(this.title) || "".equals(this.content)) {
 			return false;
 		}
 		
@@ -1176,6 +1222,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		int maxPage = Page.getNowMaxPage();
 		int nextPage = maxPage + 1;
 		int num = Page.$num;
+		int retry_times = 100;
 		List<Item> itemsWaitingForUpdate = new ArrayList<>();
 		
 		
@@ -1185,34 +1232,33 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		for(Integer id : itemIdList) {
 			Item item = Item.getByItemById(id);
 			if (item != null && !item.isItemInPage()) {
-				page.addOneItem(item);
-				item.setPage(nextPage);
 				itemsWaitingForUpdate.add(item);
 			}
 		}
 
 		num = num - page.get$items().size();
 		
-		while(num > 0) {
-			Item item = Item.getOneItemWhichIsNotInPage();
+		
+		if (num > 0) {
+			System.out.println("还差" + num + "个item!");
+			List<Item> items = Item.getItemsThatNotInPage(num, page.get$items());
 			
-			if (item == null) {
-				throw new AJRunTimeException("no more item for page generator!");
+			itemsWaitingForUpdate.addAll(items);
+			if (items.size() < num) {
+				System.out.println("items 不够" + num + "个 :" + items.size());
+				throw new AJRunTimeException("items 不够" + num + "个 :" + items.size());
 			}
-			
-			page.addOneItem(item);
-			item.setPage(nextPage);
-			itemsWaitingForUpdate.add(item);
-			
-			num--;
 		}
 		
 		Session session = HibernateUtil.getCurrentSession();
 		session.beginTransaction();
 		
 		for (Item item : itemsWaitingForUpdate) {
+			page.addOneItem(item);
+			item.setPage(nextPage);
 			item.update(session);
 		}
+		
 		page.save(session);
 		
 		session.getTransaction().commit();
@@ -1236,6 +1282,54 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 */
 	public static AjaxResponse<String> generateNewPageItems() throws AJRunTimeException {
 		return generateNewPageItems(new ArrayList<>());
+	}
+	
+	
+	/**
+	 * 根据Topic从知乎获取更多的智慧
+	 */
+	public static void grabMoreItemsByTopicFromZhihu() {
+		List<Topic> topics = Topic.getSecondTopics(40);
+		List<Item> items = new ArrayList<>();
+		
+		for (Topic topic : topics) {
+			
+			try {
+				List<Source> sources = topic.getHotSourcesOfPage();
+				
+				if (sources != null && sources.size() > 0) {
+					
+					for (int i = 0; i < sources.size() && i < 4; i++) {
+						Source source = sources.get(i);
+						
+						Item item = source.grabSelf();
+						if (item != null) {
+							items.add(item);
+						}
+					}
+					
+				}
+			} catch(Exception ex){
+				System.out.println(ex.getMessage());
+			}
+			
+		}
+		
+		List<Integer> itemsFilter = new ArrayList<>();
+		
+		for (Item item : items) {
+			if (item.isLegalItem()) {
+				try {
+					if (item.save()) {
+						System.out.println("Save one item : " + item.getId() + "-" + item.getTitle());
+					}
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+			} else {
+				System.out.println("Item is not a legal item.");
+			}
+		}
 	}
 	
 	

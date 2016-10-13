@@ -33,7 +33,10 @@ public class Index extends HttpServlet {
     public void init() throws ServletException {
     	
     	try {
+    		
 			Class.forName("ajax.model.ConfigFromProperties");
+			
+			Class.forName("ajax.model.ConfigFromSQL");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

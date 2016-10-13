@@ -73,7 +73,7 @@ public class ZhihuAnswerRules extends Rules{
 			
 			return Tools.getRelativeUrlToAbsoluteUrlByCurrentAbsoluteUrl(href, "https://www.zhihu.com/");
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("知乎用户个人主页url获取失败.");
 		}
 		return "";
 	};

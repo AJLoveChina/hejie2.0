@@ -50,7 +50,7 @@ public class JobsList {
 			
 			list.add(new HelloJob().returnJobInfo());
 			list.add(new PageGenerateJob().returnJobInfo());
-			list.add(new GrabZhihu().returnJobInfo());
+			list.add(new GrabZhihuJob().returnJobInfo());
 			
 			JobsList.jobs = list;
 		}

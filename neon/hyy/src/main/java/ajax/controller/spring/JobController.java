@@ -33,62 +33,66 @@ import ajax.jobs.JobsList.JobInfo;
 import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
 import ajax.model.annotations.AdminPointcut;
+import ajax.model.annotations.AdminPointcutForAjax;
 import ajax.tools.Tools;
 
 @Controller
 @AdminPointcut
-@RequestMapping(value="/jobs")
+@RequestMapping(value = "/jobs")
 public class JobController {
-	
+
 	@Autowired
 	private HttpServletRequest request;
 	@Autowired
 	private HttpServletResponse response;
 	@Autowired
 	private Gson gson;
-	
-	@RequestMapping(value="/list")
+
+	@RequestMapping(value = "/list")
 	public String listJobs() {
-		
+
 		return "views/jobs/list";
-		
+
 	}
-	
-	@RequestMapping(value="/jobsInfo/list")
+
+	@RequestMapping(value = "/jobsInfo/list")
 	@ResponseBody
-	public AjaxResponse<List<JobsList.JobInfo>> getJobsInfoList() throws SchedulerException, InstantiationException, IllegalAccessException {
+	@AdminPointcutForAjax
+	public AjaxResponse<List<JobsList.JobInfo>> getJobsInfoList()
+			throws SchedulerException, InstantiationException, IllegalAccessException {
 		JobsList jobsList = new JobsList();
-		
+
 		AjaxResponse<List<JobsList.JobInfo>> ar = new AjaxResponse<>();
 		ar.setIsok(true);
 		ar.setData(jobsList.getJobs());
 		return ar;
 	}
-	
-	@RequestMapping(value="/resume")
+
+	@RequestMapping(value = "/resume")
 	@ResponseBody
-	public AjaxResponse<String> resumeJob(@RequestParam("data") String data) throws SchedulerException, InstantiationException, IllegalAccessException {
+	@AdminPointcutForAjax
+	public AjaxResponse<String> resumeJob(@RequestParam("data") String data)
+			throws SchedulerException, InstantiationException, IllegalAccessException {
 		JobInfo jobInfo = gson.fromJson(data, JobInfo.class);
-		
+
 		jobInfo = JobsList.getJobInfoByJobInfoFromClient(jobInfo);
-		
+
 		AjaxResponse<String> ar = new AjaxResponse<>();
 		if (jobInfo == null) {
 			ar.setIsok(false);
 			ar.setData("no cls");
 			return ar;
 		}
-		
-		
+
 		Scheduler scheduler = SchedulerUtil.getInstance();
 
 		scheduler.start();
 		JobKey jobKey = SchedulerUtil.getJobKey(scheduler, jobInfo);
-		
+
 		if (scheduler.checkExists(jobKey)) {
-			
+
 			scheduler.resumeJob(jobKey);
-			
+
 		} else {
 			JobDetail job = newJob(jobInfo.cls).withIdentity(jobInfo.name, jobInfo.group).build();
 
@@ -99,27 +103,29 @@ public class JobController {
 		ar.setData("OK");
 		return ar;
 	}
-	
-	@RequestMapping(value="/pause")
+
+	@RequestMapping(value = "/pause")
 	@ResponseBody
-	public AjaxResponse<String> pauseJob(@RequestParam("data") String data) throws SchedulerException, InstantiationException, IllegalAccessException {
+	@AdminPointcutForAjax
+	public AjaxResponse<String> pauseJob(@RequestParam("data") String data)
+			throws SchedulerException, InstantiationException, IllegalAccessException {
 		JobInfo jobInfo = gson.fromJson(data, JobInfo.class);
-		
+
 		jobInfo = JobsList.getJobInfoByJobInfoFromClient(jobInfo);
 		AjaxResponse<String> ar = new AjaxResponse<>();
-		
+
 		try {
 			JobsList.pauseJobByJobInfo(jobInfo);
-			
+
 			ar.setIsok(true);
 			ar.setData("pause ok");
-			
+
 		} catch (Exception e) {
 			ar.setIsok(false);
 			ar.setData(e.getMessage());
 		}
-		
+
 		return ar;
 	}
-	
+
 }

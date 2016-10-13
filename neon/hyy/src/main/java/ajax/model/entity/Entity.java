@@ -559,5 +559,40 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	public T next() {
 		return iterator_list.get(0);
 	}
+	
+	/**
+	 * @param cls
+	 * @param id
+	 * @return null if not found
+	 */
+	public static <T> T get(Class<T> cls, int id) {
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
+		T t = session.get(cls, id);
+		
+		session.getTransaction().commit();
+		
+		return t;
+	}
+	
+	/**
+	 * 
+	 * @param cls
+	 * @param id
+	 * @return null if not found
+	 */
+	public static <T> T get(Class<T> cls, long id) {
+		Session session = HibernateUtil.getCurrentSession();
+		
+		session.beginTransaction();
+		
+		T t = session.get(cls, id);
+		
+		session.getTransaction().commit();
+		
+		return t;
+	}
 
 }
