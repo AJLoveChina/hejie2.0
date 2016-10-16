@@ -32,31 +32,6 @@ public class GrabZhihuJob implements AJob{
 		
 		Item.grabMoreItemsByTopicFromZhihu();
 		
-//		if (itemsFilter.size() < 40) {
-//			System.out.println("Grab all topics get less than 40 items finally, so return.");
-//			return;
-//		}
-//
-//		
-//		List<Integer> idList = new ArrayList<>();
-//		Random rd = new Random();
-//		while(idList.size() < 40 && itemsFilter.size() > 40) {
-//			int id = itemsFilter.get(rd.nextInt(itemsFilter.size()));
-//			if (!idList.contains(id)) {
-//				idList.add(id);
-//			}
-//		}
-//		
-//		if (idList.size() != 40) {
-//			System.out.println("Grab all topics job, items != 40 return.");
-//		}
-//		
-//		try {
-//			Item.generateNewPageItems(idList.subList(0, 20));
-//			Item.generateNewPageItems(idList.subList(20, 40));
-//		} catch (Exception e) {
-//			System.out.println("Grab all topics job, Item.generateNewPageItems Error!");
-//		}
 	}
 	
 	@Test

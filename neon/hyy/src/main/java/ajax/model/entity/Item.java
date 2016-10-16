@@ -1088,6 +1088,18 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	 */
 	public void betterThanBetter() {
 		try {
+			this.betterThanBetterNotUpdate();
+			this.update();
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	/**
+	 * 不要找了, 如果你对一条item不满意, 就调用这个方法吧.<br>
+	 * not update entity
+	 */
+	public void betterThanBetterNotUpdate() {
+		try {
 			System.out.println("Now is processing item.betterThanBetter...");
 			
 			System.out.println("set summary..");
@@ -1121,10 +1133,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 			// move some illegal tags
 			this.setContent(this.generateContentWithoutIlleagalHTMLTags());
 			
-			
-			
 			this.setStatusForTest(JokeStatus.BETTER_THAN_BETTER.getId());
-			this.update();
 			System.out.println("item better than better over!");
 		} catch(Exception ex) {
 			System.out.println(ex.getMessage());
@@ -1260,6 +1269,7 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		for (Item item : itemsWaitingForUpdate) {
 			page.addOneItem(item);
 			item.setPage(nextPage);
+			item.betterThanBetterNotUpdate();
 			item.update(session);
 		}
 		
@@ -1267,9 +1277,6 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		
 		session.getTransaction().commit();
 		
-		for (Item item : itemsWaitingForUpdate) {
-			item.betterThanBetter();
-		}
 		
 		AjaxResponse<String> ar = new AjaxResponse<String>();
 		ar.setData("OK<a href='" + UrlRoute.PAGE.getUrl() + "/" +  nextPage + "'>查看新生成的页面 第  " + nextPage +  "页</a>");

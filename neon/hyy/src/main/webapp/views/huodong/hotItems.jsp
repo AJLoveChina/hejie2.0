@@ -1,10 +1,7 @@
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-request.setAttribute("arr", new int[]{1,2,3,4,5});
-%>
-
+<c:if test="${hotItems.size() > 0 }">
 <style>
 	.aj-hotitems{
 		position:relative;
@@ -47,7 +44,15 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 		overflow: hidden;
 		text-align:center;
 		vertical-align:middle;
-		display:table-cell;
+		display:block;
+		font-size:0;
+	}
+	.aj-hotitems .inside-wrap .h80-img:before{
+		content:"";
+		width:0;
+		height:100%;
+		display: inline-block;
+		vertical-align: middle;
 	}
 	.aj-hotitems .inside-wrap .h80-img img{
 		max-width:100%;
@@ -94,7 +99,7 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 </style>
 
 <div class="row aj-hotitems" id="aj-hotitems">
-	<c:if test="${hotItems.size() > 0 }">
+	
 		<c:forEach items="${hotItems }" var="item" varStatus="status">
 			<c:choose>
 				<c:when test="${item.hasPreviewImage() }">
@@ -105,7 +110,7 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 								<div class="h80-img">
 									<img class="aj-lazy" data-pic-style="w190" src="http://images.nigeerhuo.com/images/web/pic/dot.jpg" data-lazy="${item.getPreviewImage() }" alt="${item.getTitle() }"/>
 								</div>
-								<p class="h40">${item.getTitle() }</p>
+								<p class="h40"  title="${item.getTitle() }">${item.getTitle() }</p>
 								<p class="index">${status.index + 1 }</p>
 							</div>
 						</a>
@@ -116,7 +121,7 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 					<div class="col-sm-3 col-xs-4 item" data-item-id="${item.getId() }">
 						<a href="${item.getOneItemPageUrlV2() }">
 							<div class="inside-wrap">
-								<p class="h40">${item.getTitle() }</p>
+								<p class="h40" title="${item.getTitle() }">${item.getTitle() }</p>
 								<p class="h80">${item.getSummary() }</p>
 								<p class="index">${status.index + 1 }</p>
 							</div>
@@ -126,8 +131,6 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 			</c:choose>
 			
 		</c:forEach>
-	</c:if>
-	
 </div>
 
 <script>
@@ -146,3 +149,4 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 		});
 	})
 </script>
+</c:if>
