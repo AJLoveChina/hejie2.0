@@ -88,9 +88,6 @@
            	<div class="logotext aj-transition-all">你个二货</div>
         </div>
         
-        <div  style="float:left;line-height: 50px;padding-top: 11px;margin-left: 10px;display: none;">
-        	<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=10544642492958301713' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
-        </div>
         
        <div class="aj-b-a aj-one-line">
        		<script>

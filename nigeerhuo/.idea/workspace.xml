@@ -98,8 +98,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="458" />
-    <option name="y" value="162" />
+    <option name="x" value="441" />
+    <option name="y" value="199" />
     <option name="width" value="1364" />
     <option name="height" value="729" />
   </component>
@@ -220,7 +220,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../watchers.xml" />
+    <property name="last_opened_file_path" value="G:/QQFile/MobileFile/draw2d_GPL_6.1.52-dev(1)" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="options.lastSelected" value="reference.settings.ide.settings.web.browsers" />
@@ -322,7 +322,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="458" y="162" width="1364" height="729" extended-state="0" />
+    <frame x="441" y="199" width="1364" height="729" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />

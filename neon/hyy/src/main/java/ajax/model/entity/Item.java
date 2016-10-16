@@ -1333,6 +1333,12 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	
+	
+	public static void GenerateHotItems() {
+		
+	}
+	
+	
 
 }
 

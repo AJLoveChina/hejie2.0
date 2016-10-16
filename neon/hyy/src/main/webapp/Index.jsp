@@ -19,7 +19,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 <div class="aj-body-left">
 	<jsp:include page="/views/includes/jokeTypeChoice.jsp"></jsp:include>
 	<jsp:include page="/views/huodong/homeImagesRoll.jsp"></jsp:include>
-	
+	<c:import url="/views/huodong/hotItems.jsp"></c:import>
 	
 	<jsp:include page="/views/item/PageChoice_v3.jsp"></jsp:include>
 	
@@ -45,6 +45,7 @@ Integer pageIndex = (Integer)request.getAttribute("page");
 	
 	<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
 	
+	<gcse:search></gcse:search>
 </div>
 
 <div style="height:10px;"></div>

@@ -78,7 +78,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	
 	/**
 	 * 给item添加状态, 支持多状态  <br>
-	 * 每个状态以 b开头, e结尾 . 为了防止  sql查询时出现   2,3,12  contains 1 出现true的情况
+	 * 每个状态以 b开头, e结尾 . 为了防止  sql查询时出现   2,3,12  contains 1 出现true的情况<br>
+	 * this method not do update
 	 * @param itemStatus
 	 */
 	public void addItemStatus(ItemStatus itemStatus) {

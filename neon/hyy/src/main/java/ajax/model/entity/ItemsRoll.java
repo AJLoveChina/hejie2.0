@@ -9,10 +9,18 @@ import org.hibernate.criterion.Restrictions;
 
 import ajax.tools.HibernateUtil;
 
+/**
+ * 首页滚动
+ * @author ajax
+ *
+ */
 public class ItemsRoll extends Entity<ItemsRoll>{
 	private int id;
 	private int itemId;
 	private String title;
+	/**
+	 * 背景图片地址
+	 */
 	private String src;
 	private String dateEntered;
 	private boolean deleted;
@@ -90,7 +98,8 @@ public class ItemsRoll extends Entity<ItemsRoll>{
 		cr.addOrder(Order.desc("rank"));
 		
 		return cr.list();
-	}	
+	}
+	
 	public String getOneItemPageUrl() {
 		return Item.getOneItemPageUrlV2(this.itemId);
 	}

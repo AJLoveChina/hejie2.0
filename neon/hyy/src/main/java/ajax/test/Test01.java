@@ -1,10 +1,16 @@
 package ajax.test;
 
 import java.text.DecimalFormat;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+import org.junit.Test;
+
 import ajax.model.AjaxRequest;
+import ajax.model.ItemStatus;
+import ajax.model.entity.Item;
 import ajax.tools.Tools;
 
 
@@ -22,10 +28,13 @@ public class Test01 {
 	
 	public static void main(String[] args) {
 		
-		DecimalFormat formatter = new DecimalFormat("###,###,###.00");
-		String s = formatter.format(4864.0245);
-		System.out.println(s);
-		
+		Logger LOGGER = Logger.getLogger(Test01.class);
+		Enumeration enum1 = LOGGER.getAllAppenders();
+
+		if(!enum1.hasMoreElements())
+		{
+		        System.out.println(123);
+		}
 		
 	}
 	
@@ -54,6 +63,8 @@ public class Test01 {
 		return CONFIG_FROM_TABLE;
 		
 	}
+	
+	
 	
 
 }

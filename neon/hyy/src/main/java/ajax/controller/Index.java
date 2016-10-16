@@ -3,6 +3,7 @@ package ajax.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.PropertyConfigurator;
 
 import ajax.model.*;
 import ajax.tools.*;
@@ -37,6 +40,8 @@ public class Index extends HttpServlet {
 			Class.forName("ajax.model.ConfigFromProperties");
 			
 			Class.forName("ajax.model.ConfigFromSQL");
+			
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

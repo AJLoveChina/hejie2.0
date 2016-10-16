@@ -27,7 +27,6 @@
 		  </div>
 		</c:forEach>
 	</div>
-	
 	<div id="aj-home-showcase" class="aj-hide-when-phone">
 		<c:forEach begin="0" end="2" items="${fragments }" var="one">
 			<span>
@@ -35,7 +34,6 @@
 			</span>
 		</c:forEach>
 	</div>
-
 </div>
 
 <div>
