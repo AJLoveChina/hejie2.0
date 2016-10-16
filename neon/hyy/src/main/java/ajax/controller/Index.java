@@ -71,6 +71,9 @@ public class Index extends HttpServlet {
 //		items = Item.query(qp);
 		items = Page.getPage(qp.getPage());
 		
+		List<Item> hotItems = Item.getHotItems();
+		
+		request.setAttribute("hotItems", hotItems);
 		request.setAttribute("items", items);
 		request.setAttribute("page", Tools.parseInt(qp.getVal("page"), 1));
 		request.setAttribute("queryParams", qp);

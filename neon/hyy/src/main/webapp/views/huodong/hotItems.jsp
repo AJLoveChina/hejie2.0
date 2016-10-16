@@ -12,7 +12,15 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 		height:144px;
 		overflow:hidden;
 	}
+	.aj-hotitems .index{
+		position:absolute;
+		top : 5px;
+		right : 5px;
+		color:#ccc;
+		font-size:12px;
+	}
 	.aj-hotitems .inside-wrap{
+		position:relative;
 		padding:10px 5px;
 		border-color: #c7c7c7;
 	    border-style: solid;
@@ -49,11 +57,9 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 	.aj-hotitems .slick-arrow{
 		font-size: 0;
 	    line-height: 0;
-	
 	    position: absolute;
 	    top: 50%;
 	    display: block;
-	
 	    width: 30px;
 	    height: 30px;
 	    margin-top: -15px;
@@ -85,27 +91,43 @@ request.setAttribute("arr", new int[]{1,2,3,4,5});
 		content:">";
 	}
 	
-	
-	
 </style>
 
 <div class="row aj-hotitems" id="aj-hotitems">
-	<div class="col-sm-3 col-xs-4">
-		<div class="inside-wrap item">
-			<div class="h80-img">
-				<img src="http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/images/web/zhihu/14613132256911952.jpg@!w190" />
-			</div>
-			<p class="h40">This is content</p>
-		</div>
-	</div>
-	<c:forEach items="${arr }" var="item">
-		<div class="col-sm-3 col-xs-4 item">
-			<div class="inside-wrap">
-				<p class="h40">This is title</p>
-				<p class="h80">This is content</p>
-			</div>
-		</div>
-	</c:forEach>
+	<c:if test="${hotItems.size() > 0 }">
+		<c:forEach items="${hotItems }" var="item" varStatus="status">
+			<c:choose>
+				<c:when test="${item.hasPreviewImage() }">
+				
+					<div class="col-sm-3 col-xs-4 item" data-item-id="${item.getId() }">
+						<a href="${item.getOneItemPageUrlV2() }">
+							<div class="inside-wrap">
+								<div class="h80-img">
+									<img class="aj-lazy" data-pic-style="w190" src="http://images.nigeerhuo.com/images/web/pic/dot.jpg" data-lazy="${item.getPreviewImage() }" alt="${item.getTitle() }"/>
+								</div>
+								<p class="h40">${item.getTitle() }</p>
+								<p class="index">${status.index + 1 }</p>
+							</div>
+						</a>
+					</div>
+					
+				</c:when>
+				<c:otherwise>
+					<div class="col-sm-3 col-xs-4 item" data-item-id="${item.getId() }">
+						<a href="${item.getOneItemPageUrlV2() }">
+							<div class="inside-wrap">
+								<p class="h40">${item.getTitle() }</p>
+								<p class="h80">${item.getSummary() }</p>
+								<p class="index">${status.index + 1 }</p>
+							</div>
+						</a>
+					</div>
+				</c:otherwise>
+			</c:choose>
+			
+		</c:forEach>
+	</c:if>
+	
 </div>
 
 <script>

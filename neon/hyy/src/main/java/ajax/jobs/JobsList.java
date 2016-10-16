@@ -51,6 +51,7 @@ public class JobsList {
 			list.add(new HelloJob().returnJobInfo());
 			list.add(new PageGenerateJob().returnJobInfo());
 			list.add(new GrabZhihuJob().returnJobInfo());
+			list.add(new GenerateHomeRollImagesAreaJob().returnJobInfo());
 			
 			JobsList.jobs = list;
 		}

@@ -3,9 +3,12 @@ package ajax.model.entity;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -36,6 +39,7 @@ import ajax.model.JokeStatus;
 import ajax.model.JokeType;
 import ajax.model.QueryParams;
 import ajax.model.Topic;
+import ajax.model.UniqueString;
 import ajax.model.UrlRoute;
 import ajax.model.exception.AJRunTimeException;
 import ajax.spider.Spider3;
@@ -1333,10 +1337,103 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 	}
 	
 	
-	
+	public static final int HOT_ITEMS_MAX_LIMIT = 12;
+	/**
+	 * generate hot items, Save in config table
+	 */
 	public static void GenerateHotItems() {
+		Config config = Config.getBy(Config.class, "key", UniqueString.HOT_ITEMS_KEY.getKeyV2());
 		
+		if (config == null) {
+			initHotItems();
+		} else {
+			String[] strs = config.getValue().split(",");
+			LinkedList<Integer> list = new LinkedList<>();
+			for (String s : strs) {
+				list.add(Integer.parseInt(s));
+			}
+			
+			Item item = Item.getOneHotItem(list);
+			
+			if (item != null) {
+				list.poll();
+				list.offer(item.getId());
+			}
+			
+			config.setValue(Tools.join(list, ","));
+			config.update();
+		}
 	}
+	/**
+	 * 获取一个hot item
+	 * @return null if not found or exception
+	 */
+	private static Item getOneHotItem(List<Integer> exclude) {
+		try {
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(Item.class);
+			criteria.addOrder(Order.desc("id"));
+			
+			criteria.add(Restrictions.gt("likes", 1000));
+			if (exclude != null && exclude.size() > 0) {
+				criteria.add(Restrictions.not(Restrictions.in("id", exclude)));
+			}
+			criteria.setFirstResult(0);
+			criteria.setMaxResults(1);
+			Item item = (Item)criteria.list().get(0);
+			session.getTransaction().commit();
+			return item;
+		} catch(Exception ex) {
+			return null;
+		}
+	}
+	
+	private static void initHotItems() {
+		try {
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(Item.class);
+			criteria.addOrder(Order.desc("id"));
+			
+			criteria.add(Restrictions.gt("likes", 1000));
+			criteria.setMaxResults(Item.HOT_ITEMS_MAX_LIMIT);
+			criteria.setFirstResult(0);
+			
+			List<Item> items = criteria.list();
+			List<Integer> list = new ArrayList<>();
+			for (Item item : items) {
+				list.add(item.getId());
+			}
+			Config config = new Config();
+			config.setKey(UniqueString.HOT_ITEMS_KEY.getKeyV2());
+			config.setValue(Tools.join(list, ","));
+			config.save();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	/**
+	 * null if not configured
+	 * @return
+	 */
+	public static List<Item> getHotItems() {
+		Config config = Config.getBy(Config.class, "key", UniqueString.HOT_ITEMS_KEY.getKeyV2());
+		
+		if (config == null) {
+			return new ArrayList<>();
+		} else {
+			String[] arr = config.getValue().split(",");
+			List<Integer> list = new ArrayList<>();
+			for (String s : arr) {
+				list.add(Integer.parseInt(s));
+			}
+			List<Item> items = Item.get(list);
+			return items;
+		}
+	}
+	
+	
 	
 	
 
