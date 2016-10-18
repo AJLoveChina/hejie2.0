@@ -3,28 +3,47 @@ package ajax.model.taobao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 import ajax.tools.Tools;
 
 import com.google.gson.Gson;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AtbItemsDetailGetRequest;
 import com.taobao.api.request.AtbItemsGetRequest;
 import com.taobao.api.request.TbkItemGetRequest;
 import com.taobao.api.request.TbkItemInfoGetRequest;
 import com.taobao.api.request.TbkItemRecommendGetRequest;
+import com.taobao.api.response.AtbItemsDetailGetResponse;
 import com.taobao.api.response.AtbItemsGetResponse;
 import com.taobao.api.response.TbkItemGetResponse;
 import com.taobao.api.response.TbkItemInfoGetResponse;
 import com.taobao.api.response.TbkItemRecommendGetResponse;
 
 public class Taobao {
-	private static String url = "http://gw.api.taobao.com/router/rest";
+	/**
+	 * 正式环境url
+	 */
+	public static final String url = "http://gw.api.taobao.com/router/rest";
+	/**
+	 * 联盟合作网站
+	 */
 	private static String TAOBAO_NIGEERHUO388_APP_KEY = null;
+	/**
+	 * 联盟合作网站
+	 */
 	private static String TAOBAO_NIGEERHUO388_APP_SECRET = null;
 	
 	public static final String itaobaoUrl = "http://gw.api.taobao.com/router/rest";
+	/**
+	 * 	百川无线应用
+	 */
 	private static String TAOBAO_NIGEERHUO_APP_KEY = null;
+	/**
+	 * 	百川无线应用
+	 */
 	private static String TAOBAO_NIGEERHUO_APP_SECRET = null;
 	
 	
@@ -275,6 +294,20 @@ public class Taobao {
 	}
 	public static void main(String[] args) {
 		getITaobaoItemsAndSave();
+	}
+	
+	public static String getITaobao() throws ApiException {
+		TaobaoClient client = new DefaultTaobaoClient(url, Taobao.getTAOBAO_NIGEERHUO_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO_APP_SECRET());
+		AtbItemsDetailGetRequest req = new AtbItemsDetailGetRequest();
+		req.setFields("open_iid,title");
+		req.setOpenIids("AAGR3e_NAClMYSXsyD_PHpLF");
+		AtbItemsDetailGetResponse rsp = client.execute(req);
+		return rsp.getBody();
+	}
+	
+	@Test
+	public void do5() throws ApiException {
+		System.out.println(Taobao.getITaobao());;
 	}
 	
 }

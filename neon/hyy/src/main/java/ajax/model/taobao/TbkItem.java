@@ -1,5 +1,6 @@
 package ajax.model.taobao;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +28,8 @@ public class TbkItem extends Entity<TbkItem>{
 	}
 	
 	@FormComponentAnno(desc="序号", isHidden=true)
+	private long id;
+	@FormComponentAnno(desc="序号", isHidden=true)
 	private long num_iid;
 	@FormComponentAnno(desc="标题")
 	private String title;
@@ -46,19 +49,56 @@ public class TbkItem extends Entity<TbkItem>{
 	private String provcity;
 	@FormComponentAnno(desc="商品链接", componentType=FormComponents.ComponentType.LINK)
 	private String item_url;
+	@FormComponentAnno(desc="商品slick链接", componentType = FormComponents.ComponentType.LINK)
+	private String click_url;
 	@FormComponentAnno(desc="卖家昵称", isDisabled=true)
 	private String nick;
 	@FormComponentAnno(isDiscard=true)
 	private long seller_id;
 	@FormComponentAnno(desc="30天内交易量(Tip:根据销售量可以判断该商品是否容易转化)", isDisabled=true)
 	private long volume;
-	@FormComponentAnno(desc="二货君收集的日期", isDisabled=true, componentType=FormComponents.ComponentType.DATE)
-	private String dateEntered = null;
+	@FormComponentAnno(desc="无线折扣价，即宝贝在无线上的实际售卖价格。", componentType = FormComponents.ComponentType.TEXT, isDisabled=true)
+	private double zk_final_price_wap;
+	@FormComponentAnno(desc="招商活动开始时间； 如果该宝贝取自普通选品组，则取值为1970-01-01 00:00:00；",  componentType = FormComponents.ComponentType.TEXT, isDisabled=true)
+	private String event_start_time;
+	@FormComponentAnno(desc="招行活动的结束时间； 如果该宝贝取自普通的选品组，则取值为1970-01-01 00:00:00",  componentType = FormComponents.ComponentType.TEXT, isDisabled=true)
+	private String event_end_time;
 	@FormComponentAnno(desc="简要描述(120字左右),如果不写,系统将默认截取内容的前120字", componentType=FormComponents.ComponentType.TEXTAREA)
 	private String description = "";
 	@FormComponentAnno(desc="编辑内容", componentType=FormComponents.ComponentType.UEDITOR)
 	private String content = "";
 	
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getClick_url() {
+		return click_url;
+	}
+	public void setClick_url(String click_url) {
+		this.click_url = click_url;
+	}
+	public double getZk_final_price_wap() {
+		return zk_final_price_wap;
+	}
+	public void setZk_final_price_wap(double zk_final_price_wap) {
+		this.zk_final_price_wap = zk_final_price_wap;
+	}
+	public String getEvent_start_time() {
+		return event_start_time;
+	}
+	public void setEvent_start_time(String event_start_time) {
+		this.event_start_time = event_start_time;
+	}
+	public String getEvent_end_time() {
+		return event_end_time;
+	}
+	public void setEvent_end_time(String event_end_time) {
+		this.event_end_time = event_end_time;
+	}
 	/**
 	 * 商品ID
 	 * @return
@@ -203,12 +243,6 @@ public class TbkItem extends Entity<TbkItem>{
 		this.volume = volume;
 	}
 	
-	public String getDateEntered() {
-		return dateEntered;
-	}
-	public void setDateEntered(String dateEntered) {
-		this.dateEntered = dateEntered;
-	}
 	public static void main(String[] args) {
 		TbkItem tbkItem = new TbkItem();
 		tbkItem.addItemStatus(ItemStatus.NORMAL);
@@ -247,7 +281,6 @@ public class TbkItem extends Entity<TbkItem>{
 	@Override
 	public boolean save() {
 		this.small_images_string = this.changeSmallImagesToString(this.small_images);
-		this.dateEntered = new SimpleDateFormat(Tools.EnumString.TABLE_TIME_FORMAT.getStr()).format(new Date());
 		return super.save();
 	}
 	
@@ -259,43 +292,29 @@ public class TbkItem extends Entity<TbkItem>{
 		return this.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
 	}
 	
-//	/**
-//	 * 生成对应的表单编辑模型
-//	 * @return
-//	 */
-//	public FormComponents getFormComponents() {
-//		String urlSubmit = UrlRoute.TBK_ITEMS_SUBMIT.getUrl();
-//		String urlRemove = "";
-//		FormComponents formComponents = new FormComponents(urlSubmit, urlRemove);
-//		List<FormComponents.Component> components = new ArrayList<FormComponents.Component>();
-//		
-//		Field[] fields = this.getClass().getDeclaredFields();
-//		for (Field field : fields) {
-//			
-//			FormComponentAnno formComponentAnno = field.getAnnotation(FormComponentAnno.class);
-//			String desc = "";
-//			FormComponents.ComponentType componentType = FormComponents.ComponentType.TEXT;
-//			boolean isHidden = false;
-//			boolean isDisabled = false;
-//			boolean isDiscard = false;
-//			if (formComponentAnno != null) {
-//				desc = formComponentAnno.desc();
-//				componentType = formComponentAnno.componentType();
-//				isHidden = formComponentAnno.isHidden();
-//				isDisabled = formComponentAnno.isDisabled();
-//				isDiscard = formComponentAnno.isDiscard();
-//			}
-//			if (isDiscard) {
-//				continue;
-//			}
-//			components.add(formComponents.new Component(field.getName(), Tools.getFieldValue(field, this) + "", desc, isHidden, isDisabled, isDiscard, componentType));
-//			
-//		}
-//		
-//		formComponents.setComponents(components);
-//		
-//		return formComponents;
-//	}
+	/**
+	 * 比较field之间的不同
+	 * @param tbkItem
+	 */
+	public void compareDifferenceWith(TbkItem tbkItem) {
+		Field[] fields = this.getClass().getDeclaredFields();
+		
+		for (Field field : fields) {
+			Object val1;
+			try {
+				val1 = field.get(this);
+				Object val2 = field.get(tbkItem);
+				if (!val1.equals(val2)) {
+					System.out.println(field.getName());
+					System.out.println(val1);
+					System.out.println(val2);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+	
 	
 	
 }
