@@ -1269,13 +1269,17 @@ public class Item extends Entity<Item> implements Iterable<Item>, JSONString{
 		for (Item item : itemsWaitingForUpdate) {
 			page.addOneItem(item);
 			item.setPage(nextPage);
-			item.betterThanBetterNotUpdate();
 			item.update(session);
 		}
 		
-		page.save(session);
-		
 		session.getTransaction().commit();
+		
+		
+		for (Item item : itemsWaitingForUpdate) {
+			item.betterThanBetter();
+		}
+		
+		page.save();
 		
 		
 		AjaxResponse<String> ar = new AjaxResponse<String>();

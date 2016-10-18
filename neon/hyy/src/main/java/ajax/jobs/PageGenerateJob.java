@@ -37,7 +37,7 @@ public class PageGenerateJob implements AJob {
 	@Override
 	public Trigger returnTrigger() {
 		Date date = new Date();
-		int seconds = 3600 * 3;
+		int seconds = 3600 * 4;
 		date.setTime(date.getTime() + seconds * 1000);
 		return newTrigger().withIdentity(this.returnTriggerKey().getName(), this.returnTriggerKey().getGroup()).startNow()
 				.withSchedule(simpleSchedule().withIntervalInSeconds(seconds).repeatForever()).build();
