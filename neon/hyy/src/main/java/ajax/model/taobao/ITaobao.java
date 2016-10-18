@@ -317,6 +317,7 @@ public class ITaobao extends Entity<ITaobao>{
 //		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
 //		System.out.println(bd.floatValue());
 		
+		
 	}
 	
 	/**
