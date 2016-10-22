@@ -1,5 +1,7 @@
 package ajax.model.taobao;
 
+import ajax.model.taobao.model.Platform;
+
 public class ItemQueryParams {
 	private String fields;
 	private String q = null;

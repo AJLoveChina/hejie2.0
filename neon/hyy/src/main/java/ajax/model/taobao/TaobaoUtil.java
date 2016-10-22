@@ -18,6 +18,13 @@ import com.taobao.api.response.AtbItemsDetailGetResponse;
 import com.taobao.api.response.TbkUatmFavoritesGetResponse;
 import com.taobao.api.response.TbkUatmFavoritesItemGetResponse;
 
+import ajax.model.exception.AJRunTimeException;
+import ajax.model.taobao.model.Platform;
+import ajax.model.taobao.model.TbkItem;
+import ajax.model.taobao.model.TbkItemPC;
+import ajax.model.taobao.model.TbkItemWap;
+import ajax.model.taobao.model.XuanPinKu;
+
 
 public class TaobaoUtil {
 	private static String url = Taobao.url;
@@ -99,16 +106,40 @@ public class TaobaoUtil {
 		return rsp.getBody();
 	}
 	
-	private class D{
-		E tbk_uatm_favorites_item_get_response;
-	}
-	private class E{
-		F results;
-	}
-	private class F{
-		List<TbkItem> uatm_tbk_item;
+	private interface ReturnTbkItems<T>{
+		List<T> returnTbkItems();
 	}
 	
+	private class D_PC implements ReturnTbkItems<TbkItemPC>{
+		E_PC tbk_uatm_favorites_item_get_response;
+
+		@Override
+		public List<TbkItemPC> returnTbkItems() {
+			return this.tbk_uatm_favorites_item_get_response.results.uatm_tbk_item;
+		}
+	}
+	private class E_PC{
+		F_PC results;
+	}
+	private class F_PC{
+		List<TbkItemPC> uatm_tbk_item;
+	}
+	
+	
+	private class D_Wap implements ReturnTbkItems<TbkItemWap>{
+		E_Wap tbk_uatm_favorites_item_get_response;
+		
+		@Override
+		public List<TbkItemWap> returnTbkItems() {
+			return this.tbk_uatm_favorites_item_get_response.results.uatm_tbk_item;
+		}
+	}
+	private class E_Wap{
+		F_Wap results;
+	}
+	private class F_Wap{
+		List<TbkItemWap> uatm_tbk_item;
+	}
 	/**
 	 * 获取items推广位的某个选品库的tbkitem列表<br>
 	 * 注意千万不要弄错, 推广位弄错会不计算收益!!<br>
@@ -116,8 +147,9 @@ public class TaobaoUtil {
 	 * return empty list if exception occurs
 	 * @param xuanPinKu
 	 * @return
+	 * @throws AJRunTimeException 
 	 */
-	public static List<TbkItem> getTbkItemsFromXPKInItemsTuikuangwei(XuanPinKu xuanPinKu) {
+	public static List<TbkItem> getTbkItemsFromXPKInItemsTuikuangwei(XuanPinKu xuanPinKu) throws AJRunTimeException {
 		return getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.PC);
 	}
 	/**
@@ -126,34 +158,58 @@ public class TaobaoUtil {
 	 * return empty list if exception occurs
 	 * @param xuanPinKu
 	 * @return
+	 * @throws AJRunTimeException 
 	 */
-	public static List<TbkItem> getTbkItemsFromXPKInItemsTuikuangwei(XuanPinKu xuanPinKu, Platform platform) {
+	public static List<TbkItem> getTbkItemsFromXPKInItemsTuikuangwei(XuanPinKu xuanPinKu, Platform platform) throws AJRunTimeException {
 		String res = TaobaoUtil.taobaoTbkUatmFavoritesItemGet(AdZONE_Id_OF_ITEMS, xuanPinKu.getFavorites_id(), platform);
 		
 		System.out.println(res);
-		D d = new Gson().fromJson(res, D.class);
+		
+		ReturnTbkItems returnTbkItems = null;
+		switch(platform){
+		case PC:
+			returnTbkItems = new Gson().fromJson(res, D_PC.class);
+			break;
+		case WAP:
+			returnTbkItems = new Gson().fromJson(res, D_Wap.class);
+			break;
+		default :
+			throw new AJRunTimeException("no given platform");
+			
+		}
+		
 		
 		try {
-			return d.tbk_uatm_favorites_item_get_response.results.uatm_tbk_item;
+			return returnTbkItems.returnTbkItems();
 		} catch (Exception ex) {
 			return new ArrayList<>();
 		}
 	}
 	
+	/**
+	 * 从taobao获取选品库信息并保存到数据库
+	 * @throws AJRunTimeException
+	 */
+	public void grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable() throws AJRunTimeException {
+		List<XuanPinKu> xuanPinKus = TaobaoUtil.getXPKList();
+		
+		for (XuanPinKu xuanPinKu : xuanPinKus) {
+			
+			if (xuanPinKu.isGrab()) continue;
+			xuanPinKu.setIsGrab();
+			
+			List<TbkItem> tbkItemPCs = TaobaoUtil.getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.PC);
+			List<TbkItem> tbkItemWaps = TaobaoUtil.getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.WAP);
+			
+			
+			for (TbkItem item : tbkItemPCs) {
+				item.save();
+			}
+			
+			for (TbkItem item : tbkItemWaps) {
+				item.save();
+			}
+		}
+	}
 	
-	
-//	@Test
-//	public void do1() {
-//		List<XuanPinKu> list = getXPKList();
-//		
-//		for (XuanPinKu xuanPinKu : list) {
-//			List<TbkItem> tbkItems = TaobaoUtil.getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.WAP);
-//			
-//			List<TbkItem> tbkItems2 = TaobaoUtil.getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.PC);
-//			
-//			for (int i = 0; i < tbkItems.size(); i++) {
-//				tbkItems.get(i).compareDifferenceWith(tbkItems2.get(i));
-//			}
-//		}
-//	}
 }

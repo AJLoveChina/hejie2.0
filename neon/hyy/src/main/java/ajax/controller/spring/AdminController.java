@@ -41,8 +41,8 @@ import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
 import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.User;
-import ajax.model.taobao.ITaobao;
-import ajax.model.taobao.TbkItem;
+import ajax.model.taobao.model.ITaobao;
+import ajax.model.taobao.model.TbkItem;
 import ajax.tools.Baidu;
 import ajax.tools.Tools;
 

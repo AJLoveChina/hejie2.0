@@ -1,4 +1,4 @@
-package ajax.model.taobao;
+package ajax.model.taobao.model;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import ajax.model.entity.Entity;
 import ajax.tools.Tools;
 
 @FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
-public class TbkItemWap extends Entity<TbkItemWap>{
+public class TbkItem extends Entity<TbkItem>{
 	class SmallImages{
 		private List<String> string;
 
@@ -27,9 +27,9 @@ public class TbkItemWap extends Entity<TbkItemWap>{
 		}
 	}
 	
-	@FormComponentAnno(desc="序号", isHidden=true)
+	@FormComponentAnno(desc="自增序号", isHidden=true)
 	private long id;
-	@FormComponentAnno(desc="序号", isHidden=true)
+	@FormComponentAnno(desc="淘宝序号", isHidden=true)
 	private long num_iid;
 	@FormComponentAnno(desc="标题")
 	private String title;
@@ -244,7 +244,7 @@ public class TbkItemWap extends Entity<TbkItemWap>{
 	}
 	
 	public static void main(String[] args) {
-		TbkItemWap tbkItem = new TbkItemWap();
+		TbkItem tbkItem = new TbkItem();
 		tbkItem.addItemStatus(ItemStatus.NORMAL);
 		tbkItem.setNum_iid(12345123);
 		tbkItem.setTitle("");
@@ -296,7 +296,7 @@ public class TbkItemWap extends Entity<TbkItemWap>{
 	 * 比较field之间的不同
 	 * @param tbkItem
 	 */
-	public void compareDifferenceWith(TbkItemWap tbkItem) {
+	public void compareDifferenceWith(TbkItem tbkItem) {
 		Field[] fields = this.getClass().getDeclaredFields();
 		
 		for (Field field : fields) {
@@ -314,7 +314,10 @@ public class TbkItemWap extends Entity<TbkItemWap>{
 			}
 		}
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "TbkItem [num_iid=" + num_iid + ", title=" + title + ", pict_url=" + pict_url + ", item_url=" + item_url
+				+ ", click_url=" + click_url + "]";
+	}
 	
 }

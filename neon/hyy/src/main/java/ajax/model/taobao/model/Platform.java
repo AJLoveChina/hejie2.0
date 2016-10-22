@@ -1,4 +1,4 @@
-package ajax.model.taobao;
+package ajax.model.taobao.model;
 
 public enum Platform {
 	PC(1, "PC"),

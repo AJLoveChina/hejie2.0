@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import ajax.model.taobao.model.ITaobao;
+import ajax.model.taobao.model.ITaobaoItemQueryParams;
+import ajax.model.taobao.model.ITaobaoResponse;
+import ajax.model.taobao.model.TbkItem;
 import ajax.tools.Tools;
 
 import com.google.gson.Gson;

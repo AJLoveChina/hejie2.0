@@ -2,6 +2,8 @@ package ajax.model.taobao;
 
 import java.util.List;
 
+import ajax.model.taobao.model.TbkItem;
+
 public class ItemGetResponse {
 
 	class Results {

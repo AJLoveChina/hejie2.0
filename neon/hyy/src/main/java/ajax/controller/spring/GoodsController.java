@@ -12,7 +12,7 @@ import ajax.model.PageChoice;
 import ajax.model.UrlRoute;
 import ajax.model.entity.Goods;
 import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
-import ajax.model.taobao.TbkItem;
+import ajax.model.taobao.model.TbkItem;
 
 
 @Controller
