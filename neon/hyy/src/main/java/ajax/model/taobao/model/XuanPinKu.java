@@ -1,8 +1,27 @@
 package ajax.model.taobao.model;
 
-import ajax.model.entity.Config;
+import java.util.List;
 
+import org.junit.Test;
+
+import ajax.model.entity.Config;
+import ajax.model.taobao.TaobaoUtil;
+
+/**
+ * 选品库格式 : 
+ * 1.类目-日期-编号
+ * 2.类目-日期
+ * 其中编号可选, 例如:
+ *   
+ * 9k9-20161020-3
+ * 9k9-20161020
+ * 
+ * 
+ * @author ajax
+ *
+ */
 public class XuanPinKu {
+	
 	private long type;
 	private long favorites_id;
 	private String favorites_title;
@@ -49,5 +68,16 @@ public class XuanPinKu {
 		return "xuanpinku-type-" + this.type + "-favorites_id-" + this.favorites_id;
 	}
 	
+	
+	public List<XuanPinKu> getXPKListFromTaobao() {
+		return TaobaoUtil.getXPKList();
+	}
+	
+	
+	@Test
+	public void test1() {
+		List<XuanPinKu>  kus = this.getXPKListFromTaobao();
+		
+	}
 	
 }

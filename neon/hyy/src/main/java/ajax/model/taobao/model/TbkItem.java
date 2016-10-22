@@ -67,8 +67,15 @@ public class TbkItem extends Entity<TbkItem>{
 	private String description = "";
 	@FormComponentAnno(desc="编辑内容", componentType=FormComponents.ComponentType.UEDITOR)
 	private String content = "";
+	private int goodsTypeId = 140;	// 140 means all type
 	
 	
+	public int getGoodsTypeId() {
+		return goodsTypeId;
+	}
+	public void setGoodsTypeId(int goodsTypeId) {
+		this.goodsTypeId = goodsTypeId;
+	}
 	public long getId() {
 		return id;
 	}

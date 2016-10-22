@@ -1,0 +1,86 @@
+{
+	"GoodsType" : [
+		{
+			"id" : 10,
+			"key" : "jiadian",
+			"name" : "家用电器"
+		},
+		{
+			"id" : 20,
+			"key" : "shuma",
+			"name" : "手机,数码"
+		},
+		
+		{
+			"id" : 30,
+			"key" : "jiaju",
+			"name" : "办公,家居,家具"
+		},
+		
+		{
+			"id" : 50,
+			"key" : "huli",
+			"name" : "个护,美妆,清洁,宠物"
+		},
+		
+		{
+			"id" : 60,
+			"key" : "yifu",
+			"name" : "服装,箱包,首饰"
+		},
+		
+		{
+			"id" : 70,
+			"key" : "qiche",
+			"name" : "汽车用品"
+		},
+		
+		{
+			"id" : 80,
+			"key" : "muyin",
+			"name" : "母婴,玩具"
+		},
+		
+		{
+			"id" : 90,
+			"key" : "food",
+			"name" : "食品,饮料"
+		},
+		
+		
+		{
+			"id" : 100,
+			"key" : "books",
+			"name" : "图书,音像"
+		},
+		
+		{
+			"id" : 110,
+			"key" : "stars",
+			"name" : "精选",
+			"rank" : 999
+		},
+		
+		{
+			"id" : 120,
+			"key" : "9k9",
+			"name" : "9块9,20封顶",
+			"rank" : 990
+		},
+		
+		{
+			"id" : 130,
+			"key" : "roll",
+			"name" : "滚动图片展示",
+			"show" : false
+		},
+		
+		{
+			"id" : 140,
+			"key" : "all",
+			"name" : "全部",
+			"show" : false
+		}
+		
+	]
+}
