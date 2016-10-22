@@ -12,7 +12,7 @@ import ajax.model.ItemStatus;
 import ajax.model.UniqueString;
 import ajax.model.entity.Entity;
 import ajax.model.entity.TypePage;
-import ajax.model.taobao.ITaobao;
+import ajax.model.taobao.model.ITaobao;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 

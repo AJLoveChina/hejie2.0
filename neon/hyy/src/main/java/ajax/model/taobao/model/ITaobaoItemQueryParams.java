@@ -1,4 +1,4 @@
-package ajax.model.taobao;
+package ajax.model.taobao.model;
 
 public class ITaobaoItemQueryParams {
 	public String end_price = "999";

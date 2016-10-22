@@ -8,7 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import ajax.model.ItemStatus;
 import ajax.model.UniqueString;
-import ajax.model.taobao.ITaobao;
+import ajax.model.taobao.model.ITaobao;
 import ajax.tools.HibernateUtil;
 
 public class ITaobaoItemsPagesSeparate extends BasePagesSeparateProcessor<ITaobao> {

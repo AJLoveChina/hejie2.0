@@ -1,4 +1,4 @@
-package ajax.model.taobao;
+package ajax.model.taobao.model;
 
 import java.math.BigDecimal;
 import java.net.URL;
@@ -16,6 +16,7 @@ import ajax.model.entity.Entity;
 import ajax.model.entity.Item;
 import ajax.model.exception.AJRunTimeException;
 import ajax.model.safe.User;
+import ajax.model.taobao.Taobao;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 

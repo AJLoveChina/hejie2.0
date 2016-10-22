@@ -1,13 +1,13 @@
-package ajax.model.taobao;
+package ajax.model.taobao.model;
 
 import java.util.List;
 
 public class ITaobaoResponse {
 	
-	class Items {
+	public class Items {
 		public List<ITaobao> aitaobao_item;
 	}
-	class Atb_items_get_response{
+	public class Atb_items_get_response{
 		public Items items;
 		public int total_results;
 	}
