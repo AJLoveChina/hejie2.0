@@ -1,6 +1,8 @@
 package ajax.model.taobao.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +20,22 @@ public class GoodsType {
 	private String name;
 	private int rank = 0;
 	private boolean show = true;
+	private String shortName =  "";
+	private String icon = "";
 	
 	
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	public boolean isShow() {
 		return show;
 	}
@@ -98,5 +114,26 @@ public class GoodsType {
 		GoodsType goodsType = gtMap.get(key);
 		
 		return goodsType == null ? GoodsType_ALL : goodsType;
+	}
+	
+	private static List<GoodsType> goodsTypeListShowToUser = null;
+	public static List<GoodsType> getShowGoodsType() {
+		if (goodsTypeListShowToUser == null) {
+			List<GoodsType> list = new ArrayList<>();
+			for (GoodsType goodsType : goodsTypesList) {
+				if (goodsType.isShow()) {
+					list.add(goodsType);
+				}
+			}
+			Collections.sort(list, new Comparator<GoodsType>() {
+
+				@Override
+				public int compare(GoodsType o1, GoodsType o2) {
+					return o2.getRank() - o1.getRank();
+				}
+			});
+			GoodsType.goodsTypeListShowToUser = list;
+		}
+		return goodsTypeListShowToUser;
 	}
 }

@@ -3,58 +3,76 @@
 		{
 			"id" : 10,
 			"key" : "jiadian",
-			"name" : "家用电器"
+			"name" : "家用电器,小电器",
+			"shortName" : "家用电器",
+			"icon" : "aj-icon-xiyiji"
 		},
 		
 		{
 			"id" : 30,
 			"key" : "jiaju",
-			"name" : "办公,家居,家具,手机,数码,汽车配件"
+			"name" : "办公,家居,家具,手机,数码,汽车配件",
+			"shortName" : "办公数码",
+			"icon" : "aj-icon-chuangyi"
 		},
 		
 		{
 			"id" : 50,
 			"key" : "huli",
-			"name" : "个护,美妆,清洁,宠物"
+			"name" : "个护,美妆,清洁,宠物",
+			"shortName" : "个护美妆",
+			"icon" : "aj-icon-renxiang"
 		},
 		
 		{
 			"id" : 60,
 			"key" : "yifu",
-			"name" : "服装,箱包,首饰"
+			"name" : "服装,箱包,首饰",
+			"shortName" : "服装箱包",
+			"icon" : "aj-icon-gaogenxie"
 		},
 		
 		{
 			"id" : 80,
 			"key" : "muyin",
-			"name" : "母婴,玩具"
+			"name" : "母婴,玩具",
+			"shortName" : "母婴玩具",
+			"icon" : "aj-icon-naiping"
 		},
 		
 		{
 			"id" : 90,
 			"key" : "food",
-			"name" : "食品,饮料"
+			"name" : "食品,饮料",
+			"shortName" : "食品饮料",
+			"icon" : "aj-icon-iconfontshipin"
 		},
 		
 		
 		{
 			"id" : 100,
 			"key" : "books",
-			"name" : "图书,音像"
+			"name" : "图书,音像",
+			"shortName" : "图书音像",
+			"icon" : "aj-icon-tushu"
 		},
 		
 		{
 			"id" : 110,
 			"key" : "stars",
 			"name" : "精选",
-			"rank" : 999
+			"shortName" : "二货精选",
+			"rank" : 999,
+			"icon" : "aj-icon-iconfontxiexiangbao"
 		},
 		
 		{
 			"id" : 120,
 			"key" : "9k9",
-			"name" : "9块9,20封顶",
-			"rank" : 990
+			"name" : "9块9,20封顶,超值包邮",
+			"shortName" : "九块九",
+			"rank" : 990,
+			"icon" : "aj-icon-biaoqian"
 		},
 		
 		{

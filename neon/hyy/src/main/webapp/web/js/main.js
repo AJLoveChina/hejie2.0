@@ -199,25 +199,6 @@
 	}
 	
 	
-	
-	try {
-		
-		$(function () {
-			var div = $("#aj-header");
-			$(window).on("aj.scroll", function () {
-				
-				if ($(window).scrollTop() > 100) {
-					div.addClass("mini");
-				} else {
-					div.removeClass("mini");
-				}
-			});
-			
-		});
-	}catch(ex) {
-		console.log(ex);
-	}
-	
 	// comments
 	
 })();
