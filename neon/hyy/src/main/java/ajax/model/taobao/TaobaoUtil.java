@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -19,6 +20,9 @@ import com.taobao.api.response.TbkUatmFavoritesGetResponse;
 import com.taobao.api.response.TbkUatmFavoritesItemGetResponse;
 
 import ajax.model.exception.AJRunTimeException;
+import ajax.model.taobao.model.GoodsType;
+import ajax.model.taobao.model.ITaobao;
+import ajax.model.taobao.model.ITaobaoItemQueryParams;
 import ajax.model.taobao.model.Platform;
 import ajax.model.taobao.model.TbkItem;
 import ajax.model.taobao.model.TbkItemPC;
@@ -187,7 +191,10 @@ public class TaobaoUtil {
 	}
 	
 	/**
-	 * 从taobao获取选品库信息并保存到数据库
+	 * 从taobao
+	 * 1.获取选品库列表
+	 * 2.获取每个选品库对应的tbkitem, 并标记类目
+	 * 3.保存所有tbkitem到数据库(PC和wap)
 	 * @throws AJRunTimeException
 	 */
 	public void grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable() throws AJRunTimeException {
@@ -198,9 +205,18 @@ public class TaobaoUtil {
 			if (xuanPinKu.isGrab()) continue;
 			xuanPinKu.setIsGrab();
 			
+			GoodsType goodsType = xuanPinKu.returnGoodsType();
+			
 			List<TbkItem> tbkItemPCs = TaobaoUtil.getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.PC);
 			List<TbkItem> tbkItemWaps = TaobaoUtil.getTbkItemsFromXPKInItemsTuikuangwei(xuanPinKu, Platform.WAP);
 			
+			for (TbkItem tbkItem : tbkItemPCs) {
+				tbkItem.setGoodsTypeId(goodsType.getId());
+			}
+			
+			for (TbkItem tbkItem : tbkItemWaps) {
+				tbkItem.setGoodsTypeId(goodsType.getId());
+			}
 			
 			for (TbkItem item : tbkItemPCs) {
 				item.save();
@@ -210,6 +226,24 @@ public class TaobaoUtil {
 				item.save();
 			}
 		}
+	}
+	
+	public List<ITaobao> getITaobaoByKeyWords() throws JsonSyntaxException, ApiException {
+		TbkItem tbkItem = TbkItemPC.get(TbkItemPC.class, 115L);
+		
+		ITaobaoItemQueryParams iTaobaoItemQueryParams = new ITaobaoItemQueryParams();
+		iTaobaoItemQueryParams.keyword = tbkItem.getTitle();
+		List<ITaobao> iTaobaos = Taobao.getITaobaoItems(iTaobaoItemQueryParams);
+		
+		for (ITaobao iTaobao : iTaobaos) {
+			iTaobao.grabDetail();
+		}
+		return iTaobaos;
+	}
+	
+	@Test
+	public void do1() throws JsonSyntaxException, ApiException {
+		this.getITaobaoByKeyWords();
 	}
 	
 }

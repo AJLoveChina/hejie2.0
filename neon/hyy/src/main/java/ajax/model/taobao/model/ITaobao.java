@@ -2,6 +2,7 @@ package ajax.model.taobao.model;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 
 import org.hibernate.Session;
 
@@ -21,6 +22,7 @@ import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
@@ -383,5 +385,60 @@ public class ITaobao extends Entity<ITaobao>{
 			}
 		}
 	}
+	
+	private String grabDetailString() throws ApiException {
+		TaobaoClient client = new DefaultTaobaoClient(Taobao.url, Taobao.getTAOBAO_NIGEERHUO_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO_APP_SECRET());
+		AtbItemsDetailGetRequest req = new AtbItemsDetailGetRequest();
+		req.setFields("AitaobaoItemDetail,desc,nick,title,detail_url");
+		req.setOpenIids(this.getOpen_iid());
+		AtbItemsDetailGetResponse rsp = client.execute(req);
+		return rsp.getBody();
+	}
+	
+	private class A{
+		B atb_items_detail_get_response;
+	}
+	private class B {
+		C atb_item_details;
+	}
+	private class C{
+		List<D> aitaobao_item_detail;
+	}
+	private class D {
+		E item;
+	}
+	private class E {
+		String title;
+		String nick;
+		String desc;
+		String detail_url;
+	}
+	
+	private E e;
+	/**
+	 * 根据当前信息不完整的ITaobao实体 查询 (爱淘宝商品详细信息查询) 
+	 * @throws JsonSyntaxException
+	 * @throws ApiException
+	 */
+	public void grabDetail() throws JsonSyntaxException, ApiException {
+		String json = this.grabDetailString();
+		A a = new Gson().fromJson(json, A.class);
+		try {
+			
+			E e = a.atb_items_detail_get_response.atb_item_details.aitaobao_item_detail.get(0).item;
+			this.e = e;
+			this.setDetail_url(e.detail_url);
+			this.setDescription(e.desc);
+			
+		} catch (Exception ex) {
+			
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "ITaobao [nick=" + nick + ", title=" + title + ", volume=" + volume + ", detail_url=" + detail_url + "]";
+	}
+	
 	
 }

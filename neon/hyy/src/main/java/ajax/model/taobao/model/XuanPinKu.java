@@ -80,4 +80,18 @@ public class XuanPinKu {
 		
 	}
 	
+	/**
+	 * 根据选品库的格式, 返回其类目
+	 * @return
+	 */
+	public GoodsType returnGoodsType() {
+		//类目-日期-编号
+		try {
+			String[] arr = this.favorites_title.split("-");
+			return GoodsType.getByKey(arr[0]);
+		} catch(Exception ex) {
+			return GoodsType.GoodsType_ALL;
+		}
+	}
+	
 }

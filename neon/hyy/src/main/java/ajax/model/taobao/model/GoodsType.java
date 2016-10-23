@@ -5,6 +5,9 @@ import java.util.Map;
 
 public class GoodsType {
 	private int id;
+	/**
+	 * 对应选品库的类目
+	 */
 	private String key;
 	private String name;
 	private int rank = 0;
@@ -43,7 +46,8 @@ public class GoodsType {
 	}
 	
 	
-	private Map<String, GoodsType> gtMap = new HashMap<>();
+	private static Map<String, GoodsType> gtMap = new HashMap<>();
+	public static final GoodsType GoodsType_ALL = new GoodsType(140, "all", "全部", 1, false);
 	
 	public Map<String, GoodsType> getGtMap() {
 		return gtMap;
@@ -56,7 +60,25 @@ public class GoodsType {
 		
 	}
 	
-	private GoodsType(){
+	private GoodsType(){}
+	
+	private GoodsType(int id, String key, String name, int rank, boolean show) {
+		super();
+		this.id = id;
+		this.key = key;
+		this.name = name;
+		this.rank = rank;
+		this.show = show;
+	}
+	
+	/**
+	 * 根据选品库类目获取对应的GoodsType
+	 * @param key
+	 * @return
+	 */
+	public static GoodsType getByKey(String key) {
+		GoodsType goodsType = gtMap.get(key);
 		
+		return goodsType == null ? GoodsType_ALL : goodsType;
 	}
 }
