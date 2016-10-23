@@ -1,7 +1,13 @@
 package ajax.model.taobao.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.google.gson.Gson;
+
+import ajax.tools.Tools;
 
 public class GoodsType {
 	private int id;
@@ -47,17 +53,29 @@ public class GoodsType {
 	
 	
 	private static Map<String, GoodsType> gtMap = new HashMap<>();
+	private static List<GoodsType> goodsTypesList = new ArrayList<>();
 	public static final GoodsType GoodsType_ALL = new GoodsType(140, "all", "全部", 1, false);
 	
 	public Map<String, GoodsType> getGtMap() {
 		return gtMap;
 	}
 	public void setGtMap(Map<String, GoodsType> gtMap) {
-		this.gtMap = gtMap;
+		GoodsType.gtMap = gtMap;
 	}
 
-	{
-		
+	private class A {
+		List<GoodsType> GoodsType;
+	}
+	
+	static {
+		String GoodsTypeJsonData = Tools.readInputStream(GoodsType.class.getResourceAsStream("GoodsType.json"));
+		A a = new Gson().fromJson(GoodsTypeJsonData, A.class);
+		goodsTypesList = a.GoodsType;
+		Map<String,GoodsType> gtMap = new HashMap<>();
+		for (GoodsType goodsType : goodsTypesList) {
+			gtMap.put(goodsType.getKey(), goodsType);
+		}
+		GoodsType.gtMap = gtMap;
 	}
 	
 	private GoodsType(){}

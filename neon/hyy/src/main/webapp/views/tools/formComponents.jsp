@@ -1,4 +1,4 @@
-<%@page import="ajax.model.taobao.TbkItem"%>
+<%@page import="ajax.model.taobao.model.TbkItem"%>
 <%@page import="ajax.model.entity.Item"%>
 <%@page import="ajax.model.safe.User"%>
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>

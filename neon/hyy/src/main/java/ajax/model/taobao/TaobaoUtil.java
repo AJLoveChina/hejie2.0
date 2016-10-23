@@ -242,8 +242,8 @@ public class TaobaoUtil {
 	}
 	
 	@Test
-	public void do1() throws JsonSyntaxException, ApiException {
-		this.getITaobaoByKeyWords();
+	public void do1() throws JsonSyntaxException, ApiException, AJRunTimeException {
+		this.grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable();
 	}
 	
 }
