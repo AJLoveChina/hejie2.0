@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
 import ajax.model.AjaxResponse;
 import ajax.model.CRUDPage;
 import ajax.model.FormComponents;
@@ -39,15 +42,11 @@ import ajax.model.entity.TypePage;
 import ajax.model.exception.AJRunTimeException;
 import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
 import ajax.model.pagesSeparate.RealTimePagination;
-import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
 import ajax.model.safe.User;
 import ajax.model.taobao.model.ITaobao;
 import ajax.model.taobao.model.TbkItem;
 import ajax.tools.Baidu;
 import ajax.tools.Tools;
-
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
 
 
 
@@ -194,34 +193,34 @@ public class AdminController {
 		return "views/goods/itaobao";
 	}
 	
-	@RequestMapping(value="/tbkitems")
-	public String tbkItems() {
-		
-		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
-		
-		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
-		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
-		
+//	@RequestMapping(value="/tbkitems")
+//	public String tbkItems() {
+//		
+//		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+//		
+//		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
+//		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(1);
+//		
+//	
+//		PageChoice pageChoice = new PageChoice(1, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+//		request.setAttribute("model", tbkItems);
+//		request.setAttribute("pageChoice", pageChoice);
+//		return "views/goods/tbkitems";
+//	}
 	
-		PageChoice pageChoice = new PageChoice(1, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
-		request.setAttribute("model", tbkItems);
-		request.setAttribute("pageChoice", pageChoice);
-		return "views/goods/tbkitems";
-	}
-	
-	@RequestMapping(value="/tbkitems/page/{page}")
-	public String tbkItemsPage(@PathVariable("page") int page) {
-		
-		
-		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
-		
-		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
-		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(page);
-		PageChoice pageChoice = new PageChoice(page, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
-		request.setAttribute("model", tbkItems);
-		request.setAttribute("pageChoice", pageChoice);
-		return "views/goods/tbkitems";
-	}
+//	@RequestMapping(value="/tbkitems/page/{page}")
+//	public String tbkItemsPage(@PathVariable("page") int page) {
+//		
+//		
+//		//List<TbkItem> tbkItems = TbkItem.get(1, 20, TbkItem.class);
+//		
+//		TbkItemsPagesSeparate tbkItemsPagesSeparate = new TbkItemsPagesSeparate();
+//		List<TbkItem> tbkItems = tbkItemsPagesSeparate.getItemsByPageAndType(page);
+//		PageChoice pageChoice = new PageChoice(page, UrlRoute.TBK_ITEMS_PAGE_URL_TEMPLATE.getUrl());
+//		request.setAttribute("model", tbkItems);
+//		request.setAttribute("pageChoice", pageChoice);
+//		return "views/goods/tbkitems";
+//	}
 	
 
 	

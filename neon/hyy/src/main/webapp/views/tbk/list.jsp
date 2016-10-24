@@ -125,6 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$scope.$apply(function () {
 								$scope.s.goodsTypeList = res.data;
 							})
+
+							$scope.calculateWhichIndexNowWhenScroll();
 						});
 						
 						$scope.changeTo = function (index) {
@@ -149,6 +151,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							})
 						}
 						$scope.reCalculatePositionOfFixedBar();
+						
+						$scope.calculateWhichIndexNowWhenScroll = function () {
+							var gtOneList = $("#gt-list-content .gt-one"),
+								scrollTop = 0,
+								i,
+								offsetTop;
+							$(window).on("aj.scroll", function () {
+								scrollTop = $(window).scrollTop();
+								
+								for (i = 0; i < gtOneList.length; i++) {
+									offsetTop = gtOneList.eq(i).offset().top;
+									if ((offsetTop < (scrollTop + $(window).height() / 2)) && (offsetTop + gtOneList.eq(i).height() > (scrollTop + $(window).height() / 2))) {
+										$scope.$apply(function () {
+											$scope.s.index = i + 0;
+										})
+										break;
+									}
+								}
+							})
+						}
+						
+						$scope.loadTbkItems = function (index) {
+							
+							var data = {
+									platForm : 
+							}
+						}
 						
 						$(window).on("aj.resize", function () {
 							$scope.reCalculatePositionOfFixedBar();

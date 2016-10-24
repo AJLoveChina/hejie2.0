@@ -12,10 +12,11 @@ import ajax.model.ItemStatus;
 import ajax.model.annotations.FormComponentAnno;
 import ajax.model.annotations.FormComponentUrlAnno;
 import ajax.model.entity.Entity;
+import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 import ajax.tools.Tools;
 
 @FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
-public class TbkItem extends Entity<TbkItem>{
+public class TbkItem<T> extends RealTimePaginationConfiguration<T>{
 	class SmallImages{
 		private List<String> string;
 
@@ -325,6 +326,23 @@ public class TbkItem extends Entity<TbkItem>{
 	public String toString() {
 		return "TbkItem [num_iid=" + num_iid + ", title=" + title + ", pict_url=" + pict_url + ", item_url=" + item_url
 				+ ", click_url=" + click_url + "]";
+	}
+	
+	@Override
+	public int getPaginationPageSize() {
+		return 20;
+	}
+	@Override
+	public String getPrimaryKeyValue() {
+		return this.getId() + "";
+	}
+	@Override
+	public String getPaginationPrimaryKey() {
+		return "id";
+	}
+	@Override
+	public ajax.model.pagesSeparate.RealTimePaginationConfiguration.PK_TYPE getPaginationPrimaryKeyType() {
+		return PK_TYPE.LONG;
 	}
 	
 }

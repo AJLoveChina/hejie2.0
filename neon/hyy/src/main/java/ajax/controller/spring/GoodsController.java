@@ -8,11 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ajax.model.PageChoice;
-import ajax.model.UrlRoute;
 import ajax.model.entity.Goods;
-import ajax.model.pagesSeparate.TbkItemsPagesSeparate;
-import ajax.model.taobao.model.TbkItem;
 
 
 @Controller

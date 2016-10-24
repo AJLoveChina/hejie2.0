@@ -1,13 +1,25 @@
 package ajax.controller.spring;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import ajax.model.AjaxResponse;
+import ajax.model.pagesSeparate.RealTimePagination;
+import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 import ajax.model.taobao.model.GoodsType;
+import ajax.model.taobao.model.Platform;
+import ajax.model.taobao.model.TbkItem;
+import ajax.model.taobao.model.TbkItemPC;
+import ajax.model.taobao.model.TbkItemWap;
+import ajax.model.taobao.model.TbkQuery;
 
 @Controller
 @RequestMapping(value="/t")
@@ -20,12 +32,48 @@ public class TController {
 	
 	@RequestMapping(value="/goodsTypeList")
 	@ResponseBody
-	public AjaxResponse<List<GoodsType>> getGoodsTypeList() {
+	public AjaxResponse<List<GoodsType>> getGoodsTypeListPage() {
 		AjaxResponse<List<GoodsType>> ajaxResponse = new AjaxResponse<>();
 		ajaxResponse.setIsok(true);
 		ajaxResponse.setData(GoodsType.getShowGoodsType());
 		
 		return ajaxResponse;
+	}
+	
+	@Autowired
+	private Gson gson;
+	
+	@RequestMapping(value="/tbkQuery")
+	public AjaxResponse<List<TbkItem>> tbkQuery(@RequestParam(name="data", defaultValue="") String data) {
+		
+		TbkQuery tbkQuery = gson.fromJson(data, TbkQuery.class);
+		
+		AjaxResponse ar = new AjaxResponse<>();
+		
+		switch(tbkQuery.getPlatForm()) {
+		case PC:
+			List<TbkItemPC> tbkItems = null;
+			RealTimePagination<TbkItemPC> realTimePaginationPC = new RealTimePagination<TbkItemPC>();
+			tbkItems = realTimePaginationPC.getV2(TbkItemPC.getGroupId(tbkQuery.goodsTypeId), tbkQuery.page, new TbkItemPC());
+			ar.setData(tbkItems);
+			ar.setIsok(true);
+			break;
+		case WAP:
+			
+			List<TbkItemWap> tbkItems2 = null;
+			RealTimePagination<TbkItemWap> realTimePaginationWap = new RealTimePagination<>();
+			tbkItems2 = realTimePaginationWap.getV2(TbkItemWap.getGroupId(tbkQuery.goodsTypeId), tbkQuery.page, new TbkItemWap());
+			ar.setData(tbkItems2);
+			ar.setIsok(true);
+			break;
+		case UNKNOW:
+		default :
+			ar.setData(null);
+			ar.setIsok(false);
+			break;
+		}
+		
+		return ar;
 	}
 	
 }

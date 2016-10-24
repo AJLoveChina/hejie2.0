@@ -24,6 +24,7 @@ import ajax.tools.Tools;
  *
  * @param <T>
  */
+@Deprecated
 public abstract class BasePagesSeparateProcessor<T extends Entity<T>> {
 	
 	public abstract UniqueString getPagesTypeKey();

@@ -36,6 +36,7 @@ define(function () {
 			// This method depends on a third js library
 		    return (new timeago()).format(timeString, 'zh_CN');
 		}
+		
 	};
 	
 	var timeagoInstance = new timeago();

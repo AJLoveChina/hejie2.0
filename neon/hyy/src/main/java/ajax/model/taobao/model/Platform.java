@@ -2,7 +2,8 @@ package ajax.model.taobao.model;
 
 public enum Platform {
 	PC(1, "PC"),
-	WAP(2, "无线");
+	WAP(2, "无线"),
+	UNKNOW(9, "unknown");
 	
 	private long id;
 	private String info;
