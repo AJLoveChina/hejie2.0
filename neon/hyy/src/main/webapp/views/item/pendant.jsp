@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
     $(function () {
     	require(["main"], function () {
-    		require(["tools/tools"], function (tools) {
+    		require(["tools/tools", "model/user"], function (tools, user) {
     			var app = angular.module("pendant", []);
     	        var pendant = $("#aj-pendant");
     	        var body = $("#aj-body"),
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	            }
     	            
     	            $scope.shoucang = function() {
-    	            	var u = new aj.User();
+    	            	var u = user;
     	            	if (!u.isLogin()) {
     	            		tools.tishi("亲, 需要先登录才能收藏哦~~");
     	            		return;
@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	            	$(document).trigger("aj.tellme-item-id", [callback]);
     	            	
     	            	function callback(id) {
-    	            		var userid = (new aj.User()).getUserid();
+    	            		var userid = user.getUserid();
     	            		var collect = getCollectArr();
     	            		var bool = false;
     	            		
@@ -169,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	            	
     	            	try {
     						var collect = localStorage.getItem(collectKey);
-    		            	var userid = (new aj.User()).getUserid();
+    		            	var userid = user.getUserid();
     		            	var list;
     		            	var bool = false;
     		            	var collectJson;

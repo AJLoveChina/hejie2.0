@@ -506,7 +506,7 @@ Exam exam = (Exam) request.getAttribute("exam");
 
 $(function () {
 		require(["main"], function () {
-			require(["tools/tools"], function (tools) {
+			require(["tools/tools", "model/user"], function (tools, user) {
 				var app = angular.module("exam", []);
 		        var container = $("#aj-exam");
 		        app.controller("examController", function ($scope, $timeout, $http) {
@@ -623,7 +623,6 @@ $(function () {
 
 
 		            $scope.start = function () {
-		            	var user = new aj.User();
 		            	if (!user.isLogin()) {
 		            		tools.tishi("亲, 请先登录一下呗~~");
 		            		return;
@@ -705,7 +704,6 @@ $(function () {
 		                var GameScore = Bmob.Object.extend("exam_result");
 		                var gameScore = new GameScore();
 
-						var user = new aj.User();
 						
 						if (user.isLogin()) {
 							gameScore.set("user_id", user.getUserid() + "");
