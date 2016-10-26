@@ -44,6 +44,7 @@ public class TController {
 	private Gson gson;
 	
 	@RequestMapping(value="/tbkQuery")
+	@ResponseBody
 	public AjaxResponse<List<TbkItem>> tbkQuery(@RequestParam(name="data", defaultValue="") String data) {
 		
 		TbkQuery tbkQuery = gson.fromJson(data, TbkQuery.class);

@@ -345,4 +345,34 @@ public class TbkItem<T> extends RealTimePaginationConfiguration<T>{
 		return PK_TYPE.LONG;
 	}
 	
+	/**
+	 * 生成PC和Wap的TbkItems分页
+	 */
+	public static void generateTbkItemsPCAndWapPages() {
+		
+		List<GoodsType> list = GoodsType.getAllGoodsType();
+		
+		for (GoodsType goodsType : list) {
+			generateTbkItemsPCAndWapPages(goodsType);
+		}
+		
+	}
+	/**
+	 * 生成特定的goodsType =の=> PC和Wap的TbkItems分页
+	 */
+	private static void generateTbkItemsPCAndWapPages(GoodsType goodsType) {
+		
+		int limit = 100;
+		//List<TbkItemPC> tbkITems = getTbkItemsNotInPage(goodsType, Platform.PC);
+		
+		
+	}
+	
+	private static List<TbkItem> getTbkItemsNotInPage(GoodsType goodsType, Platform pc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
 }

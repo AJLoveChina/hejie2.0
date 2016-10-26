@@ -117,6 +117,10 @@ public class GoodsType {
 	}
 	
 	private static List<GoodsType> goodsTypeListShowToUser = null;
+	/**
+	 * 只返回在首页滚动页面加载的goodsType
+	 * @return
+	 */
 	public static List<GoodsType> getShowGoodsType() {
 		if (goodsTypeListShowToUser == null) {
 			List<GoodsType> list = new ArrayList<>();
@@ -135,5 +139,13 @@ public class GoodsType {
 			GoodsType.goodsTypeListShowToUser = list;
 		}
 		return goodsTypeListShowToUser;
+	}
+	
+	/**
+	 * 返回所有的goodsType
+	 * @return
+	 */
+	public static List<GoodsType> getAllGoodsType() {
+		return goodsTypesList;
 	}
 }
