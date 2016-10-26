@@ -11,6 +11,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.entity.Config;
+import ajax.model.entity.EntityInterface;
 import ajax.model.entity.TypePage;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
@@ -21,7 +22,7 @@ import ajax.tools.Tools;
  *
  * @param <T>
  */
-public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
+public class RealTimePagination<T extends EntityInterface<T> & RealTimePaginationConfiguration> {
 	
 	private String generateMaxPageKeyByGroupId(String groupId) {
 		return groupId + "-max-page-key";
@@ -36,6 +37,20 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 	 * @return
 	 */
 	public boolean save(String groupId, T t) {
+		return this.save(groupId, t, true);
+	}
+	/*
+	 * 1. create typePage or update typePage
+	 * 2. update maxPage config or not update
+	 * 一系列操作, 保存到数据库;
+	 * 该方法t来自数据库, 所以不要保存. 不同于方法 save
+	 * @param t
+	 * @return
+	 */
+	public boolean saveWithoutSaveT(String groupId, T t) {
+		return this.save(groupId, t, false);
+	}
+	private boolean save(String groupId, T t, boolean isNeedSaveEntity) {
 		Config config = Config.getBy(Config.class, "key", this.generateMaxPageKeyByGroupId(groupId));
 		/*
 		 * 1. create typePage or update typePage
@@ -55,14 +70,16 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 		Session session = HibernateUtil.getCurrentSession();
 		session.beginTransaction();
 		
-		t.save(session);
+		if (isNeedSaveEntity) {
+			t.save(session);
+		}
 		if (typePage == null || t.getPaginationPageSize() - typePage.getSize() <= 0) {	// 要生成新的一页了
 			List<String> list = new ArrayList<>();
 			list.add(t.getPrimaryKeyValue());
 			typePage = new TypePage(list, groupId, maxPage + 1);
 			
 			typePage.save(session);
-
+			
 			if (config == null) {
 				config = new Config();
 				config.setKey(this.generateMaxPageKeyByGroupId(groupId));
@@ -86,6 +103,8 @@ public class RealTimePagination<T extends RealTimePaginationConfiguration<T>> {
 		
 		return isSuccess;
 	}
+	
+	
 	
 	/**
 	 * real page value or 0

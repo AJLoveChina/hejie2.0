@@ -3,7 +3,7 @@ package ajax.model.pagesSeparate;
 import ajax.model.UniqueString;
 import ajax.model.entity.Entity;
 
-public abstract class RealTimePaginationConfiguration<T> extends Entity<T>{
+public interface RealTimePaginationConfiguration{
 	
 	/**
 	 * 一页展示多少条数据

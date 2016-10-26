@@ -14,7 +14,7 @@ import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 import ajax.model.safe.User;
 import ajax.tools.HibernateUtil;
 
-public class Comment extends RealTimePaginationConfiguration<Comment>{
+public class Comment extends Entity<Comment> implements RealTimePaginationConfiguration{
 	
 	private long id;
 	private long parentid = 0;

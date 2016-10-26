@@ -28,7 +28,7 @@ import ajax.model.exception.AJRunTimeException;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
-public class Entity<T> implements Iterable<T>,Iterator<T>{
+public class Entity<T> implements Iterable<T>,Iterator<T>, EntityInterface<T>{
 
 	private String statusSplitByComma = "";
 	
@@ -36,51 +36,60 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	private String dateEnteredOfUpdate = null;
 	private String dateEnteredOfDelete = null;
 	
-	/**
-	 * 这是为实体类准备的公用字段, 由于历史遗留问题, 有些类的这些值可能为null<br>
-	 * 如果实体类自定义类似的字段, 比如 dateEntered, 您应当使用实体类(子类)自定义的字段.因为有这些字段的类基本都是2016.9.18之前何杰写的, 而且它们对应的数据表中往往不存在如下的几个字段<br>
-	 * 我们约定9.18之后, 所有的类如果在数据表中定义了 保存, 修改, 删除时间字段, 请使用如下的字段名称.不要重新在子类中定义相关时间字段.谢谢
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getDateEnteredOfSave()
 	 */
 	public String getDateEnteredOfSave() {
 		return dateEnteredOfSave;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#setDateEnteredOfSave(java.lang.String)
+	 */
 	public void setDateEnteredOfSave(String dateEnteredOfSave) {
 		this.dateEnteredOfSave = dateEnteredOfSave;
 	}
-	/**
-	 * 这是为实体类准备的公用字段, 由于历史遗留问题, 有些类的这些值可能为null<br>
-	 * 如果实体类自定义类似的字段, 比如 dateEntered, 您应当使用实体类(子类)自定义的字段.因为有这些字段的类基本都是2016.9.18之前何杰写的, 而且它们对应的数据表中往往不存在如下的几个字段<br>
-	 * 我们约定9.18之后, 所有的类如果在数据表中定义了 保存, 修改, 删除时间字段, 请使用如下的字段名称.不要重新在子类中定义相关时间字段.谢谢
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getDateEnteredOfUpdate()
 	 */
 	public String getDateEnteredOfUpdate() {
 		return dateEnteredOfUpdate;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#setDateEnteredOfUpdate(java.lang.String)
+	 */
 	public void setDateEnteredOfUpdate(String dateEnteredOfUpdate) {
 		this.dateEnteredOfUpdate = dateEnteredOfUpdate;
 	}
-	/**
-	 * 这是为实体类准备的公用字段, 由于历史遗留问题, 有些类的这些值可能为null<br>
-	 * 如果实体类自定义类似的字段, 比如 dateEntered, 您应当使用实体类(子类)自定义的字段.因为有这些字段的类基本都是2016.9.18之前何杰写的, 而且它们对应的数据表中往往不存在如下的几个字段<br>
-	 * 我们约定9.18之后, 所有的类如果在数据表中定义了 保存, 修改, 删除时间字段, 请使用如下的字段名称.不要重新在子类中定义相关时间字段.谢谢
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getDateEnteredOfDelete()
 	 */
 	public String getDateEnteredOfDelete() {
 		return dateEnteredOfDelete;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#setDateEnteredOfDelete(java.lang.String)
+	 */
 	public void setDateEnteredOfDelete(String dateEnteredOfDelete) {
 		this.dateEnteredOfDelete = dateEnteredOfDelete;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getStatusSplitByComma()
+	 */
 	public String getStatusSplitByComma() {
 		return statusSplitByComma;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#setStatusSplitByComma(java.lang.String)
+	 */
 	public void setStatusSplitByComma(String statusSplitByComma) {
 		this.statusSplitByComma = statusSplitByComma;
 	}
 	
-	/**
-	 * 给item添加状态, 支持多状态  <br>
-	 * 每个状态以 b开头, e结尾 . 为了防止  sql查询时出现   2,3,12  contains 1 出现true的情况<br>
-	 * this method not do update
-	 * @param itemStatus
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#addItemStatus(ajax.model.ItemStatus)
+	 */
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#addItemStatus(ajax.model.ItemStatus)
 	 */
 	public void addItemStatus(ItemStatus itemStatus) {
 		if (this.statusSplitByComma == null || this.statusSplitByComma.equals("")) {
@@ -96,9 +105,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		}
 	}
 	
-	/**
-	 * 删除某个状态
-	 * @param itemStatus
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#removeIemStatus(ajax.model.ItemStatus)
 	 */
 	public void removeIemStatus(ItemStatus itemStatus) {
 		String str = itemStatus.wrapWithBE();
@@ -113,10 +121,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		this.setStatusSplitByComma(Tools.join(list, ","));
 	}
 	
-	/**
-	 * item是否处于某种指定状态
-	 * @param itemStatus
-	 * @return
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#isInThisItemStatus(ajax.model.ItemStatus)
 	 */
 	public boolean isInThisItemStatus(ItemStatus itemStatus) {
 		if (this.statusSplitByComma == null || itemStatus == null) {
@@ -132,14 +138,15 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getPrimaryKey()
+	 */
 	public String getPrimaryKey() {
-		ClassMetadata meta = HibernateUtil.getSessionFactory().getClassMetadata(this.getClass());
-		return meta.getIdentifierPropertyName();
+		return HibernateUtil.getPrimaryKey(this.getClass());
 	}
-	/**
-	 * 是否设置了主键的值<br>
-	 * 用来判断一个entity应该save 还是 update
-	 * @return
+	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#isSetPrimaryKeyValue()
 	 */
 	public boolean isSetPrimaryKeyValue() {
 		String key = this.getPrimaryKey();
@@ -177,6 +184,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	private enum ModifyType {
 		SAVE, DELETE, UPDATE;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#save()
+	 */
 	public boolean save() {
 		Session session = HibernateUtil.getCurrentSession();
 		try {
@@ -196,19 +206,31 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#save(org.hibernate.Session)
+	 */
 	public void save(Session session) {
 		this.modifySomeCommonFields(ModifyType.SAVE);
 		session.save(this);
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#update(org.hibernate.Session)
+	 */
 	public void update(Session session) {
 		this.modifySomeCommonFields(ModifyType.UPDATE);
 		session.update(this);
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#delete(org.hibernate.Session)
+	 */
 	public void delete(Session session) {
 		this.modifySomeCommonFields(ModifyType.DELETE);
 		session.delete(this);
 	}
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#update()
+	 */
 	public boolean update() {
 		Session session = HibernateUtil.getCurrentSession();
 		
@@ -228,6 +250,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#delete()
+	 */
 	public boolean delete() {
 		try {
 			Session session = HibernateUtil.getCurrentSession();
@@ -245,6 +270,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getById(int)
+	 */
 	@Deprecated
 	public T getById(int id) {
 		Session session = HibernateUtil.getCurrentSession();
@@ -267,9 +295,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		return entity;
 	}
 	
-	/**
-	 * 根据主键id值从数据库加载该实体对象
-	 * @param id
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#load(int)
 	 */
 	public boolean load(int id) {
 		
@@ -287,9 +314,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 			return false;
 		}
 	}
-	/**
-	 * 根据主键id值从数据库加载该实体对象
-	 * @param id
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#load(long)
 	 */
 	public boolean load(long id) {
 		
@@ -402,6 +428,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getTableName()
+	 */
 	public String getTableName() {
 		String tableName = HibernateUtil.getTableName(this.getClass());
 		
@@ -409,6 +438,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getPage(int, int)
+	 */
 	@Deprecated
 	public List<T> getPage(int page, int pageNum) {
 		Session session = HibernateUtil.getCurrentSession();
@@ -455,6 +487,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		return list;
 	}
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getList(org.hibernate.Criteria)
+	 */
 	@Deprecated
 	public List<T> getList(Criteria criteria) {
 		
@@ -463,6 +498,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#toJson()
+	 */
 	public String toJson() {
 		
 		Gson gson = new Gson();
@@ -471,11 +509,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		
 	}
 	
-	/**
-	 * 快速得到表单组件, 在相应的jsp页面中渲染
-	 * @param cls
-	 * @return
-	 * @throws AJRunTimeException
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#getFormComponents(java.lang.Class)
 	 */
 	public FormComponents getFormComponents(Class<T> cls) throws AJRunTimeException{
 		FormComponentUrlAnno formComponentUrlAnno = cls.getAnnotation(FormComponentUrlAnno.class);
@@ -529,8 +564,8 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		return formComponents;
 	}
 	
-	/**
-	 * 一个个迭代数据表中的所有元素
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#iterator()
 	 */
 	@Override
 	public Iterator<T> iterator() {
@@ -542,6 +577,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 	private int iterator_page = 1;
 	private int iterator_size = 1;
 	private List<T> iterator_list;
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#hasNext()
+	 */
 	@Override
 	public boolean hasNext() {
 		Session session = HibernateUtil.getCurrentSession();
@@ -556,6 +594,9 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		session.getTransaction().commit();
 		return iterator_list.size() > 0;
 	}
+	/* (non-Javadoc)
+	 * @see ajax.model.entity.EntityInterface#next()
+	 */
 	@Override
 	public T next() {
 		return iterator_list.get(0);
@@ -594,6 +635,11 @@ public class Entity<T> implements Iterable<T>,Iterator<T>{
 		session.getTransaction().commit();
 		
 		return t;
+	}
+	
+	
+	public static void notThisStatus(Criteria criteria, ItemStatus itemStatus) {
+		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + itemStatus.wrapWithBE() + "%")));
 	}
 
 }

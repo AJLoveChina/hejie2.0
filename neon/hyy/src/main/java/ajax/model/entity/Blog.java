@@ -8,7 +8,7 @@ import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 import ajax.model.safe.User;
 
 @FormComponentUrlAnno(submitUrl="/blog/submit")
-public class Blog extends RealTimePaginationConfiguration<Blog>{
+public class Blog extends Entity<Blog> implements RealTimePaginationConfiguration{
 
 	@FormComponentAnno(isHidden=true)
 	private Long id = 0L;

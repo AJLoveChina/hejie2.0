@@ -7,16 +7,24 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
 import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
 import ajax.model.annotations.FormComponentAnno;
 import ajax.model.annotations.FormComponentUrlAnno;
 import ajax.model.entity.Entity;
+import ajax.model.entity.EntityInterface;
+import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
+import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 @FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
-public class TbkItem<T> extends RealTimePaginationConfiguration<T>{
+public class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTimePaginationConfiguration{
 	class SmallImages{
 		private List<String> string;
 
@@ -251,22 +259,22 @@ public class TbkItem<T> extends RealTimePaginationConfiguration<T>{
 		this.volume = volume;
 	}
 	
-	public static void main(String[] args) {
-		TbkItem tbkItem = new TbkItem();
-		tbkItem.addItemStatus(ItemStatus.NORMAL);
-		tbkItem.setNum_iid(12345123);
-		tbkItem.setTitle("");
-		tbkItem.setPict_url("");
-		tbkItem.setSmall_images_string("");
-		tbkItem.setReserve_price("");
-		tbkItem.setZk_final_price("");
-		tbkItem.setProvcity("");
-		tbkItem.setItem_url("");
-		tbkItem.setNick("");
-		tbkItem.save();
-		
-		tbkItem.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
-	}
+//	public static void main(String[] args) {
+//		TbkItem tbkItem = new TbkItem();
+//		tbkItem.addItemStatus(ItemStatus.NORMAL);
+//		tbkItem.setNum_iid(12345123);
+//		tbkItem.setTitle("");
+//		tbkItem.setPict_url("");
+//		tbkItem.setSmall_images_string("");
+//		tbkItem.setReserve_price("");
+//		tbkItem.setZk_final_price("");
+//		tbkItem.setProvcity("");
+//		tbkItem.setItem_url("");
+//		tbkItem.setNick("");
+//		tbkItem.save();
+//		
+//		tbkItem.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM);
+//	}
 	
 	
 	public String changeSmallImagesToString(SmallImages small_images) {
@@ -363,16 +371,65 @@ public class TbkItem<T> extends RealTimePaginationConfiguration<T>{
 	private static void generateTbkItemsPCAndWapPages(GoodsType goodsType) {
 		
 		int limit = 100;
-		//List<TbkItemPC> tbkITems = getTbkItemsNotInPage(goodsType, Platform.PC);
+		List<TbkItem> tbkItemPCs = getTbkItemsNotInPage(goodsType, Platform.PC, limit);
+		
+		RealTimePagination<TbkItemPC> pagination = new RealTimePagination<>();
+		
+		for (TbkItem tbkItem : tbkItemPCs) {
+			TbkItemPC tbkItemPC = (TbkItemPC)tbkItem;
+			pagination.saveWithoutSaveT(TbkItemPC.getGroupId(goodsType.getId()), tbkItemPC);
+			tbkItemPC.addItemStatus(ItemStatus.TBKITEM_IN_PAGE);
+			tbkItemPC.update();
+		}
+		
+		
+		List<TbkItem> tbkItemWaps = getTbkItemsNotInPage(goodsType, Platform.WAP, limit);
+		
+		RealTimePagination<TbkItemWap> pagination2 = new RealTimePagination<>();
+		
+		for (TbkItem tbkItem : tbkItemWaps) {
+			TbkItemWap tbkItemWap = (TbkItemWap)tbkItem;
+			pagination2.saveWithoutSaveT(TbkItemWap.getGroupId(goodsType.getId()), tbkItemWap);
+			tbkItemWap.addItemStatus(ItemStatus.TBKITEM_IN_PAGE);
+			tbkItemWap.update();
+		}
+		
 		
 		
 	}
 	
-	private static List<TbkItem> getTbkItemsNotInPage(GoodsType goodsType, Platform pc) {
-		// TODO Auto-generated method stub
-		return null;
+	private static List<TbkItem> getTbkItemsNotInPage(GoodsType goodsType, Platform pf, int limit) {
+		
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
+		
+		Criteria criteria = null;
+		Class<?> cls = null;
+		switch(pf) {
+		case PC:
+			cls = TbkItemPC.class;
+			break;
+		case WAP:
+			cls = TbkItemWap.class;
+			break;
+		case UNKNOW:
+			return new ArrayList<>();
+		}
+
+		criteria = session.createCriteria(cls);
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(limit);
+		criteria.addOrder(Order.desc(HibernateUtil.getPrimaryKey(cls)));
+		criteria.add(Restrictions.eq("goodsTypeId", goodsType.getId()));
+		Entity.notThisStatus(criteria, ItemStatus.TBKITEM_IN_PAGE);
+		
+		List<TbkItem> items = criteria.list();
+		session.getTransaction().commit();
+		return items;
 	}
 	
-	
+	public static void main(String[] args) {
+		generateTbkItemsPCAndWapPages();
+	}
 	
 }

@@ -78,8 +78,10 @@ public class  HibernateUtil{
 		
 	}
 	
-	public static void main(String[] args) {
-		
+	public static String getPrimaryKey(Class<?> cls) {
+		ClassMetadata meta = HibernateUtil.getSessionFactory().getClassMetadata(cls);
+		return meta.getIdentifierPropertyName();
 	}
+	
 	
 }
