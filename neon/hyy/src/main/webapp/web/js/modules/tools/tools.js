@@ -47,7 +47,7 @@ define(function () {
 			timeagoInstance.render(dom, 'zh_CN'); 
 		},
 		isWap : function () {
-		
+			return isMobile.phone;
 		}
 		
 		
