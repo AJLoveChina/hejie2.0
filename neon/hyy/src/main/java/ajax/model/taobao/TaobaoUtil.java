@@ -197,7 +197,7 @@ public class TaobaoUtil {
 	 * 3.保存所有tbkitem到数据库(PC和wap)
 	 * @throws AJRunTimeException
 	 */
-	public void grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable() throws AJRunTimeException {
+	public static void grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable() throws AJRunTimeException {
 		List<XuanPinKu> xuanPinKus = TaobaoUtil.getXPKList();
 		
 		for (XuanPinKu xuanPinKu : xuanPinKus) {
@@ -243,7 +243,7 @@ public class TaobaoUtil {
 	
 	@Test
 	public void do1() throws JsonSyntaxException, ApiException, AJRunTimeException {
-		this.grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable();
+		TaobaoUtil.grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable();
 	}
 	
 }

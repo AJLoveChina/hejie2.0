@@ -20,12 +20,23 @@ import ajax.model.entity.Entity;
 import ajax.model.entity.EntityInterface;
 import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
+import ajax.model.taobao.TaobaoUtil;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
-
+/**
+ * 
+ * 关于TbkItem的几个任务
+ * 1. TaobaoUtil.grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable();
+ * 	  自动抓取淘宝客选品库商品并保存到数据库中
+ * 2. TbkItem.generateTbkItemsPCAndWapPages();
+ *    从淘宝客商品数据库中生成页面
+ * @author ajax
+ *
+ * @param <T>
+ */
 @FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
 public class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTimePaginationConfiguration{
-	class SmallImages{
+	public class SmallImages{
 		private List<String> string;
 
 		public List<String> getString() {
@@ -163,7 +174,7 @@ public class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTime
 	 * @return
 	 */
 	public SmallImages getSmall_images() {
-		if (small_images.getString().size() == 0 && !this.small_images_string.equals("")) {
+		if (small_images == null || small_images.getString().size() == 0 && !this.small_images_string.equals("")) {
 			this.small_images = this.changeStringToSmallImages(this.small_images_string);
 		}
 		return small_images;
@@ -428,8 +439,11 @@ public class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTime
 		return items;
 	}
 	
+	
+	
+	
 	public static void main(String[] args) {
-		generateTbkItemsPCAndWapPages();
+		TbkItem.generateTbkItemsPCAndWapPages();
 	}
 	
 }
