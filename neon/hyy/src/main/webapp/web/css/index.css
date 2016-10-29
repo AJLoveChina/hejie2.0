@@ -580,3 +580,78 @@ body {
 .aj-mobile-sign-area.aj-has-login .aj-u-img-show{
 	display:block;
 }
+/* header v2 css*/
+#aj-headerV2{}
+	.aj-hd-v2{}
+	.aj-hd-v2 .input-wrap{
+		position:relative;
+	}
+	.aj-hd-v2 .search-area{
+		padding-top:15px;
+		padding-bottom:10px;
+	}
+	.aj-hd-v2 .search-area ul{
+		height:20px;overflow:hidden;
+	}
+	.aj-hd-v2 .search-area .li{
+		float:left;
+		font-size:12px;
+		padding-right:10px;
+	}
+	.aj-hd-v2 .search-area .li a {
+		color:#ccc;
+	}
+	.aj-hd-v2 .icon{
+		position:absolute;
+		font-size:20px;
+		top:0;left:0;
+		color:#aaa;
+	}
+	.aj-hd-v2 .search-input{
+		padding-left:40px;
+		width:100%;
+		outline:none;
+		border:none;
+	}
+	.aj-hd-v2 .keyword-line{
+		border-bottom:1px solid #ccc;
+		margin-top:5px;
+	}
+	.aj-hd-v2 .img{
+		height:70px;
+		padding:10px 0;
+	}
+	.aj-hd-v2 .nav-bar{
+		background-color:#db4437;
+		height:34px;
+	}
+	.aj-hd-v2 .nav-bar .container{
+		position:relative;
+	}
+	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area{
+		display:block!important;
+		height:35px!important;
+		line-height:35px;
+	}
+	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area a {
+		color:white;
+		font-size:12px;
+	}
+	.aj-hd-v2 .nav-bar.affix{
+		top:0;left:0;
+		width:100%;
+		z-index:999;
+	}
+.nav-bar .li {
+    float: left;
+    height: 35px;
+    line-height: 35px;
+    color: white;
+    padding-right: 20px;
+    font-size: 12px;
+} 	
+.nav-bar .li a{
+	color:white;
+}
+
+/* header v2 css*/

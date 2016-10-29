@@ -4,8 +4,13 @@ public class TbkQuery {
 	public int plateForm;
 	public int page;
 	public int goodsTypeId;
+	public String keyword = null;
 	
 	private Platform platformObj = null;
+	
+	public boolean isSetKeyword() {
+		return this.keyword != null && !"".equals(this.keyword.trim());
+	}
 	
 	public Platform getPlatForm() {
 		if (this.platformObj == null) {

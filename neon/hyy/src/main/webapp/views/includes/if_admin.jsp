@@ -1,0 +1,23 @@
+<%@page import="ajax.model.safe.User"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	boolean isAdmin = User.isAdmin(request, response);
+	if (isAdmin) {
+%>
+	<style>
+		#aj-admin-jump-btn{
+			position: fixed;
+			bottom:0;
+			left:0;
+			z-index:1001;
+		}
+	</style>
+
+	<div id="aj-admin-jump-btn">
+		<span class="glyphicon glyphicon-user"></span>
+		<a href="/admin/list">管理员界面</a>
+	</div>
+<%	
+	}
+ %>

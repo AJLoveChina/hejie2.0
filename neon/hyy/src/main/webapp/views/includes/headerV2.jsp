@@ -7,7 +7,6 @@
 	String title = (String)request.getAttribute("title");
 	String description = (String) request.getAttribute("description");
 	String keywords = (String) request.getAttribute("keywords");
-	boolean isAdmin = User.isAdmin(request, response);
 	
 	if (title == null || title.equals("")) {
 		title = "你个二货, 二货的俱乐部.生活不该只有眼前的苟且-你个二货,礼物の物语";
@@ -42,101 +41,8 @@
 </head>
 <body>
 
-<%
-	if (isAdmin) {
-%>
-	<style>
-		#aj-admin-jump-btn{
-			position: fixed;
-			bottom:0;
-			left:0;
-			z-index:1001;
-		}
-	</style>
+<%@ include file="/views/includes/if_admin.jsp" %>
 
-	<div id="aj-admin-jump-btn">
-		<span class="glyphicon glyphicon-user"></span>
-		<a href="/admin/list">管理员界面</a>
-	</div>
-<%	
-	}
- %>
- 
- <style>
- 	#aj-headerV2{}
- 	.aj-hd-v2{}
- 	.aj-hd-v2 .input-wrap{
- 		position:relative;
- 	}
- 	.aj-hd-v2 .search-area{
- 		padding-top:15px;
- 		padding-bottom:10px;
- 	}
- 	.aj-hd-v2 .search-area ul{
- 		height:20px;overflow:hidden;
- 	}
- 	.aj-hd-v2 .search-area .li{
- 		float:left;
- 		font-size:12px;
- 		padding-right:10px;
- 	}
- 	.aj-hd-v2 .search-area .li a {
- 		color:#ccc;
- 	}
- 	.aj-hd-v2 .icon{
- 		position:absolute;
- 		font-size:20px;
- 		top:0;left:0;
- 		color:#aaa;
- 	}
- 	.aj-hd-v2 .search-input{
- 		padding-left:40px;
- 		width:100%;
- 		outline:none;
- 		border:none;
- 	}
- 	.aj-hd-v2 .keyword-line{
- 		border-bottom:1px solid #ccc;
- 		margin-top:5px;
- 	}
- 	.aj-hd-v2 .img{
- 		height:70px;
- 		padding:10px 0;
- 	}
- 	.aj-hd-v2 .nav-bar{
- 		background-color:#db4437;
- 		height:34px;
- 	}
- 	.aj-hd-v2 .nav-bar .container{
- 		position:relative;
- 	}
- 	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area{
- 		display:block!important;
- 		height:35px!important;
- 		line-height:35px;
- 	}
- 	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area a {
- 		color:white;
- 		font-size:12px;
- 	}
- 	.aj-hd-v2 .nav-bar.affix{
- 		top:0;left:0;
- 		width:100%;
- 		z-index:999;
- 	}
-	.nav-bar .li {
-	    float: left;
-	    height: 35px;
-	    line-height: 35px;
-	    color: white;
-	    padding-right: 20px;
-	    font-size: 12px;
-	} 	
-	.nav-bar .li a{
-		color:white;
-	}
-	
- </style>
 <div id="aj-headerV2" class="aj-hd-v2">
     <div id="aj-hd-v2-top" class="top">
     	<div class="container" style="width:1050px;">
@@ -159,15 +65,6 @@
     		</div>
     	</div>
     </div>
-    <script>
-    	$(function () {
-    		$("#aj-hd-v2-fixednav").affix({
-    			offset : {
-    				top : 0
-    			}
-    		})
-    	})
-    </script>
     <div id="aj-hd-v2-fixednav" class="nav-bar" ng-controller="listGoodsTypeController">
     	<div class="container" style="width:1050px;">
     		<ul ng-cloak>
@@ -189,6 +86,13 @@
 	$(function () {
 		require(["main"], function () {
 			require([], function () {
+				
+				$("#aj-hd-v2-fixednav").affix({
+	    			offset : {
+	    				top : 0
+	    			}
+	    		})
+	    		
 				var container = $("#aj-headerV2"),
 					app = angular.module("header-app", []);
 				app.controller("listGoodsTypeController", function ($scope) {
@@ -222,7 +126,6 @@
 					
 					$scope.s.list = ["英雄联盟", "玩偶", "男生礼物", "万圣节搞怪", "双11", "冬季大衣", "埃菲尔铁塔"];
 					
-					
 				})
 				
 				angular.bootstrap(container, ["header-app"]);
@@ -230,7 +133,4 @@
 		})
 	})
 </script>
-
-<div style="height: 50px;"></div>
-
 <div id="aj-body" class="clearfix">
