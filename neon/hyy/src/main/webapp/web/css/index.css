@@ -27,6 +27,38 @@ body {
     transition: all 0.3s;
 }
 
+.max-height-20{
+	max-height:20px;
+}
+.max-height-30{
+	max-height:20px;
+}
+.max-height-40{
+	max-height:20px;
+}
+.max-height-50{
+	max-height:20px;
+}
+.max-height-60{
+	max-height:20px;
+}
+.max-height-70{
+	max-height:20px;
+}
+.max-height-80{
+	max-height:20px;
+}
+.max-height-90{
+	max-height:20px;
+}
+.max-height-100{
+	max-height:20px;
+}
+.overflow-hidden{
+	overflow:hidden;
+}
+
+
 .aj-show{
 	display: block!important;
 }
@@ -112,7 +144,7 @@ body {
 	div.aj-body-left{
 		max-width: 100%;
 	}
-	div#aj-mobile-sign-area{
+	div.aj-mobile-sign-area{
 		display:block;
 	}
 	div.aj-one-line .line-inside .aul .ali a{
@@ -522,29 +554,29 @@ body {
 }
 /* Comment css ENd*/
 
-#aj-header.mini #aj-mobile-sign-area{
+#aj-header.mini .aj-mobile-sign-area{
 	line-height:35px;
 }
-#aj-mobile-sign-area{
+.aj-mobile-sign-area{
 	position:absolute;
 	top:0;right:10px;
 	line-height:50px;
 	display:none;
 }
-#aj-mobile-sign-area .aj-show-sign-panel{
+.aj-mobile-sign-area .aj-show-sign-panel{
 	display:block;
 }
-#aj-mobile-sign-area .aj-u-img-show{
+.aj-mobile-sign-area .aj-u-img-show{
 	display:none;
 }
-#aj-mobile-sign-area .aj-u-img-show img{
+.aj-mobile-sign-area .aj-u-img-show img{
 	max-width:30px;max-height:30px;
 	border-radius:50%;
 	overflow: hidden;
 }
-#aj-mobile-sign-area.aj-has-login .aj-show-sign-panel{
+.aj-mobile-sign-area.aj-has-login .aj-show-sign-panel{
 	display:none;
 }
-#aj-mobile-sign-area.aj-has-login .aj-u-img-show{
+.aj-mobile-sign-area.aj-has-login .aj-u-img-show{
 	display:block;
 }

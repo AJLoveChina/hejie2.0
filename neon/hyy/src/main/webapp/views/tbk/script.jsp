@@ -54,7 +54,7 @@ $(function () {
 					$scope.s.isAnimateNow = true;
 					
 					$("html,body").animate({
-						scrollTop : one.offset().top - $(window).height() / 2 + one.height() / 2
+						scrollTop : one.offset().top - $(window).height() / 5
 					}, function () {
 						$scope.$apply(function () {
 							$scope.s.isAnimateNow = false;
@@ -79,20 +79,38 @@ $(function () {
 					var gtOneList = $("#gt-list-content .gt-one"),
 						scrollTop = 0,
 						i,
-						offsetTop;
+						offsetTop,
+						winHeight,
+						bool1 = false,
+						bool2 = false;
+					
 					$(window).on("aj.scroll", function () {
 						calculate();
 					})
 					calculate();
 					function calculate() {
 						scrollTop = $(window).scrollTop();
+						winHeight = $(window).height();
+						bool1 = false;
+						bool2 = false;
 						
 						for (i = 0; i < gtOneList.length; i++) {
 							offsetTop = gtOneList.eq(i).offset().top;
-							if ((offsetTop < (scrollTop + $(window).height() / 2)) && (offsetTop + gtOneList.eq(i).height() > (scrollTop + $(window).height() / 2))) {
+							if ((offsetTop < (scrollTop + winHeight / 2)) && 
+									(offsetTop + gtOneList.eq(i).height() > (scrollTop + winHeight / 2))) {
 								$scope.$apply(function () {
 									$scope.s.index = i + 0;
-									$(window).trigger("aj.tbkitems.list.calculatePageOK");
+									
+								})
+								break;
+							}
+						}
+						for (i = 0; i < gtOneList.length; i++) {
+							offsetTop = gtOneList.eq(i).offset().top;
+							if ( (offsetTop < scrollTop + winHeight) && 
+									(offsetTop > scrollTop) ) {
+								$scope.$apply(function () {
+									$scope.initBlock(i + 0);
 								})
 								break;
 							}

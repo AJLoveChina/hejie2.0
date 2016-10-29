@@ -20,8 +20,6 @@
 	        return -1;
 	    };
 	}
-	// 全局变量, 如果要暴露接口请包涵在该作用域内
-	var aj = {};
 </script>
 
 <!-- 新 Bootstrap 核心 CSS 文件 -->

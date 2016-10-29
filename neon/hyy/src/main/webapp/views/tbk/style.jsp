@@ -103,4 +103,10 @@
 	.tbkitem-one .center{
 		text-align:center;
 	}
+	.tbkitem-one .shop-line{
+		font-size:12px;
+		color:#999;
+		height:30px;
+		overflow:hidden;
+	}
 </style>

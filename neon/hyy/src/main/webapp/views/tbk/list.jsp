@@ -7,13 +7,11 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
-
 %>
 
-<jsp:include page="/views/includes/header.jsp"></jsp:include>
-<jsp:include page="/views/tbk/style.jsp"></jsp:include>
-<jsp:include page="/views/tbk/script.jsp"></jsp:include>
+<jsp:include page="/views/includes/headerV2.jsp"></jsp:include>
+<%@ include file="/views/tbk/style.jsp" %>
+<%@ include file="/views/tbk/script.jsp" %>
 
 <div style="height:20px;"></div>
 <div class="container-fluid">
@@ -25,8 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 			
 			<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
-			
-			<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
 		</div>
 	</div>
 	<div class="row">
@@ -56,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="more" href="">更多>></a>
 						</div>
 						<!-- content -->
-						<div class="gt-o-content">
+						<div class="gt-o-content clearfix">
 							<div ng-switch="getStatus($index)">
 								<div ng-switch-when="1">
 									<p class="text-center">正在初始化...</p>
@@ -78,6 +74,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<a href="{{tbkitem.js_detail_url}}">
 													{{tbkitem.title}}
 												</a>
+											</div>
+											<div class="row shop-line">
+												<span class="col-sm-8 col-xs-8 max-height-20 overflow-hidden">{{tbkitem.nick}}</span>
+												<span class="col-sm-4 col-xs-4 text-right max-height-20 overflow-hidden">{{tbkitem.js_time}}</span>
 											</div>
 											<div class="row">
 												<div class="old-price col-sm-12">原价 : {{tbkitem.reserve_price}}</div>

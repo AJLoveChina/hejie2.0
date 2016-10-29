@@ -126,6 +126,4 @@
 
 <div style="height: 50px;"></div>
 
-<%@ include  file="/views/includes/backTop.jsp"%>
-	
 <div id="aj-body" class="clearfix">
