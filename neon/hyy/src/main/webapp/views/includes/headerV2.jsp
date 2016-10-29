@@ -41,8 +41,6 @@
 </head>
 <body>
 
-<%@ include file="/views/includes/if_admin.jsp" %>
-
 <div id="aj-headerV2" class="aj-hd-v2">
     <div id="aj-hd-v2-top" class="top">
     	<div class="container" style="width:1050px;">
@@ -53,12 +51,12 @@
     			<div class="col-sm-4 search-area" ng-controller="searchController">
     				<div class="input-wrap">
     					<span class="glyphicon glyphicon-search icon"></span>
-    					<input class="search-input" ng-model="s.keyWord" placeholder="二货在手,好货我有">
+    					<input ng-keyup="keyup($event)" class="search-input" ng-model="s.keyWord" placeholder="二货在手 好货我有">
     				</div>
     				<div class="keyword-line"></div>
     				<ul ng-cloak>
     					<li class="li" ng-repeat="item in s.list">
-    						<a href="">{{item}}</a>
+    						<a href="javascript:;" ng-click="search(item)">{{item}}</a>
     					</li>
     				</ul>
     			</div>
@@ -85,7 +83,7 @@
 <script>
 	$(function () {
 		require(["main"], function () {
-			require([], function () {
+			require(["model/Goods"], function (goods) {
 				
 				$("#aj-hd-v2-fixednav").affix({
 	    			offset : {
@@ -126,6 +124,33 @@
 					
 					$scope.s.list = ["英雄联盟", "玩偶", "男生礼物", "万圣节搞怪", "双11", "冬季大衣", "埃菲尔铁塔"];
 					
+					$scope.search = function (keyword) {
+						var data = {
+								page : 1,
+								size : 40,
+								keyword : keyword,
+								plateForm : goods.getPlatForm()
+						}
+						var newForm = $('<form>', {
+					        'action': '/t/tbkSearch',
+					        'target': '_blank'
+					    }).append(jQuery('<input>', {
+					        'name': 'data',
+					        'value': encodeURIComponent(JSON.stringify(data)),
+					        'type': 'hidden'
+					    }));
+					    newForm.submit();
+					}
+					$scope.searchV2 = function () {
+						if ($.trim($scope.s.keyWord) === "") return;
+						$scope.search($scope.s.keyWord);
+					}
+					
+					$scope.keyup = function (ev) {
+						if (event.keyCode === 13) {
+							$scope.searchV2();
+						}
+					}
 				})
 				
 				angular.bootstrap(container, ["header-app"]);

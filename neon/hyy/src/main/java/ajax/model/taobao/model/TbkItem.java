@@ -35,7 +35,7 @@ import ajax.tools.Tools;
  * @param <T>
  */
 @FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
-public class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTimePaginationConfiguration{
+public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTimePaginationConfiguration{
 	public class SmallImages{
 		private List<String> string;
 
@@ -440,7 +440,12 @@ public class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTime
 	}
 	
 	
-	
+	/**
+	 * 获取商品在你个二货详情页面的url
+	 * @return
+	 */
+	public abstract String getDetailUrl();
+	public static final String DETAIL_URL_PREFIX = "/t/one/";
 	
 	public static void main(String[] args) {
 		TbkItem.generateTbkItemsPCAndWapPages();

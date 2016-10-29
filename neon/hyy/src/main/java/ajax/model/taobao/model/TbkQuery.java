@@ -2,11 +2,12 @@ package ajax.model.taobao.model;
 
 public class TbkQuery {
 	public int plateForm;
-	public int page;
+	public int page = 1;
 	public int goodsTypeId;
+	public int size = 20;
 	public String keyword = null;
 	
-	private Platform platformObj = null;
+	private transient Platform platformObj = null;
 	
 	public boolean isSetKeyword() {
 		return this.keyword != null && !"".equals(this.keyword.trim());

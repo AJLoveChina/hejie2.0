@@ -45,6 +45,7 @@ import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.safe.User;
 import ajax.model.taobao.model.ITaobao;
 import ajax.model.taobao.model.TbkItem;
+import ajax.model.taobao.model.TbkItemPC;
 import ajax.tools.Baidu;
 import ajax.tools.Tools;
 
@@ -228,7 +229,7 @@ public class AdminController {
 	public String tbkItemsToNormalItem() throws Exception {
 		
 		Long id = Long.parseLong(request.getParameter("id"));
-		TbkItem tbkItem = new TbkItem();
+		TbkItem tbkItem = new TbkItemPC();
 		
 		tbkItem.load(id);
 		

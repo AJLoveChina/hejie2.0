@@ -18,6 +18,6 @@
 		<span class="glyphicon glyphicon-user"></span>
 		<a href="/admin/list">管理员界面</a>
 	</div>
-<%	
+<%
 	}
  %>

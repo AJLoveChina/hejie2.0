@@ -655,3 +655,49 @@ body {
 }
 
 /* header v2 css*/
+
+/*page choice*/
+.aj-page-choices-v2{
+	text-align: center;
+}
+.aj-page-choices-v2 a{
+	text-decoration: none;
+}
+.aj-page-choices-v2 .aul{
+    text-align: center;
+    margin: 20px 0;
+    overflow: hidden;	
+}
+.aj-page-choices-v2 .aul .ali{
+    display: inline-block;
+}
+
+.aj-page-choices-v2 .aul .ali .atag{
+    display: inline-block;
+    color: #5188a6;	
+    text-align: center;
+    min-height: 24px;
+    min-width: 24px;
+    line-height: 24px;
+}
+.aj-page-choices-v2 .aul .ali .atag.cur{
+    background-color: #f04848;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold	
+}	
+.aj-page-choices-v2 .aul .ali .atag:hover{
+    background-color: #f04848;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold
+}
+/*page choice*/

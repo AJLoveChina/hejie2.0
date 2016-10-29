@@ -51,7 +51,6 @@ define(function () {
 		}
 		
 		
-		
 	};
 	
 	
@@ -141,6 +140,76 @@ define(function () {
 		$("#aj-body > div.aj-body-left > div.aj-joke-list-one > div.panel-body > div.backinfo img").hide();
 	})
 			
+
+	$(function () {
+		$(".ajs-page-choices-v4-ul").each(function () {
+			var cur = parseInt($(this).attr("data-curPage")),
+				maxPage = parseInt($(this).attr("data-maxPage")),
+				liCls = $(this).attr("data-li-cls"),
+				urlTemplate = $(this).attr("data-urlTemplate"),
+				aCurCls = $(this).attr("data-a-cur-cls"),
+				aCls = $(this).attr("data-a-cls")
+				uniCls = "aj-parsed";
+				
+				if ($(this).hasClass(uniCls)) {
+					return false;
+				}
+				$(this).addClass(uniCls);
+			
+			var arr = [],
+				urls = [],
+				curCopy = cur,
+				i;
+			i = 2;
+			
+			var isMaxLimit = false;
+			if (maxPage != -1) isMaxLimit = true;
+			
+			while(i-- > 0 && curCopy > 1) {
+				curCopy --;	
+			}	
+			for (i = curCopy; i < curCopy + 6; i++) {
+				arr.push(i);
+			}
+			
+			for (i = 0; i < arr.length; i++) {
+				if(isMaxLimit && arr[i] > maxPage) continue;
+				urls.push({
+					page : arr[i],
+					url : changeTemplateToUrl(arr[i])
+				});
+			}
+			
+			var span = $(document.createElement("span")),
+				domLi,
+				domA;
+			for (i = 0; i < urls.length; i++) {
+				
+				domA = $(document.createElement("a"));
+				domA.attr("class", "atag");
+				if (cur === urls[i].page) {
+					domA.addClass("cur");
+				}
+				domA.attr("href", urls[i].url);
+				domA.text(urls[i].page);
+				
+				domLi = $(document.createElement("li"));
+				domLi.addClass("ali");
+				domLi.append(domA);
+				span.append(domLi);
+			}
+			$(this).prepend(span);	
+			
+			function changeTemplateToUrl(page) {
+				var copy = urlTemplate;
+				copy = copy.replace(/\{page}/, page);
+				var encode = encodeURIComponent("{page}");
+				var regExp = new RegExp(encode, "ig");
+				copy = copy.replace(regExp, page);
+				return encodeURI(copy);
+			}
+		});
+	})
 			
 	return tools;
 });

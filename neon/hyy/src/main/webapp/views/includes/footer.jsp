@@ -55,6 +55,7 @@ $(function () {
 	</div>
 </footer>
 
+<jsp:include page="/views/includes/if_admin.jsp"></jsp:include>
 <%@ include file="/views/tools/tishi.jsp" %>
 </body>
 </html>

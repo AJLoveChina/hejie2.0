@@ -1,4 +1,4 @@
-define(function() {
+define(["tools/tools"], function(tools) {
 	var Goods = {
 		
 		getGoodsTypeList : function (fn, errFn) {
@@ -13,7 +13,19 @@ define(function() {
 					errFn && errFn(err);
 				}
 			});
+		},
+		
+		/**
+		*	1.PC 2.Wap
+		*/
+		getPlatForm : function () {
+			if (tools.isWap()) {
+				return 2;
+			} else {
+				return 1;
+			}
 		}
+
 	};
 	
 	return Goods;
