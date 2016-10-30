@@ -60,6 +60,8 @@ public class TController {
 		
 		return ajaxResponse;
 	}
+
+	
 	
 	@Autowired
 	private Gson gson;
@@ -96,6 +98,47 @@ public class TController {
 		}
 		
 		return ar;
+	}
+	
+	@RequestMapping(value="/tbkQuery/view")
+	public String tbkQueryReturnView(@RequestParam(name="data", defaultValue="") String data) throws UnsupportedEncodingException {
+		
+		data = URLDecoder.decode(data, "UTF8");
+		TbkQuery tbkQuery = gson.fromJson(data, TbkQuery.class);
+		boolean isfind = false;
+		switch(tbkQuery.getPlatForm()) {
+		case WAP:
+			
+			List<TbkItemWap> tbkItems2 = null;
+			RealTimePagination<TbkItemWap> realTimePaginationWap = new RealTimePagination<>();
+			tbkItems2 = realTimePaginationWap.getV2(TbkItemWap.getGroupId(tbkQuery.goodsTypeId), tbkQuery.page, new TbkItemWap());
+			request.setAttribute("list", tbkItems2);
+			isfind = tbkItems2.size() > 0;
+			break;
+		case PC:
+		case UNKNOW:
+		default :
+			List<TbkItemPC> tbkItems = null;
+			RealTimePagination<TbkItemPC> realTimePaginationPC = new RealTimePagination<TbkItemPC>();
+			tbkItems = realTimePaginationPC.getV2(TbkItemPC.getGroupId(tbkQuery.goodsTypeId), tbkQuery.page, new TbkItemPC());
+			request.setAttribute("list", tbkItems);
+			isfind = tbkItems.size() > 0;
+			break;
+		}
+		
+		int curPage = tbkQuery.page;
+		tbkQuery.page = -1;
+		String params = gson.toJson(tbkQuery);
+		params = params.replace("\"page\":-1", "\"page\":{page}");
+		String url = "/t/tbkQuery/view?data=" + URLEncoder.encode(params, "UTF8");
+		
+		PageChoice choice = new PageChoice(curPage, url);
+		
+		
+		request.setAttribute("isfind", isfind);
+		request.setAttribute("pageChoice", choice);
+		
+		return "/views/tbk/query";
 	}
 	
 	

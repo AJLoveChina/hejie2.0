@@ -46,11 +46,13 @@
     	<div class="container" style="width:1050px;">
     		<div class="row clearfix">
     			<div class="col-sm-2">
-    				<img class="img-responsive img" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logoV2200x80.png" />
+    				<a href="/">
+    					<img class="img-responsive img" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logoV2200x80.png" />
+    				</a>
     			</div>
     			<div class="col-sm-4 search-area" ng-controller="searchController">
     				<div class="input-wrap">
-    					<span class="glyphicon glyphicon-search icon"></span>
+    					<span class="glyphicon glyphicon-search icon" ng-click="searchV2()"></span>
     					<input ng-keyup="keyup($event)" class="search-input" ng-model="s.keyWord" placeholder="二货在手 好货我有">
     				</div>
     				<div class="keyword-line"></div>
@@ -67,7 +69,7 @@
     	<div class="container" style="width:1050px;">
     		<ul ng-cloak>
 	    		<li class="li" ng-repeat="item in s.list">
-	    			<a href="">{{item.name}}</a>
+	    			<a href="{{getHref(item)}}">{{item.name}}</a>
 	    		</li>
 	    	</ul>
 	    	<div id="aj-mobile-sign-area" class="aj-mobile-sign-area">
@@ -96,25 +98,44 @@
 				app.controller("listGoodsTypeController", function ($scope) {
 					$scope.s = {};
 					$scope.s.list = [{
-						name : "精选"
+						name : "精选",
+						id : 110
 					}, {
-						name : "九块九"
+						name : "九块九",
+						id : 120
 					}, {
-						name : "家用电器"
+						name : "家用电器",
+						id : 10
 					}, {
-						name : "办公数码"
+						name : "办公数码",
+						id : 30
 					}, {
-						name : "个护美妆"
+						name : "个护美妆",
+						id : 50
 					}, {
-						name : "服饰箱包"
+						name : "服饰箱包",
+						id : 60
 					}, {
-						name : "母婴玩具"
+						name : "母婴玩具",
+						id : 80
 					}, {
-						name : "食品饮料"
+						name : "食品饮料",
+						id : 90
 					}, {
-						name : "图书音像"
+						name : "图书音像",
+						id : 100
 					}];
 					
+					
+					$scope.getHref = function (item) {
+						var params = {
+								plateForm : goods.getPlatForm(),
+								page : 1,
+								goodsTypeId : item.id
+						};
+						var url = "/t/tbkQuery/view?data=" + encodeURIComponent(JSON.stringify(params));
+						return encodeURI(url);
+					}
 					
 				})
 				
@@ -133,7 +154,7 @@
 						}
 						var newForm = $('<form>', {
 					        'action': '/t/tbkSearch',
-					        'target': '_blank'
+					        'target': '_self'
 					    }).append(jQuery('<input>', {
 					        'name': 'data',
 					        'value': encodeURIComponent(JSON.stringify(data)),
