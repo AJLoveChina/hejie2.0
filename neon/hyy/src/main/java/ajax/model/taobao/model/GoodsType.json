@@ -11,7 +11,7 @@
 		{
 			"id" : 30,
 			"key" : "jiaju",
-			"name" : "办公,家居,家具,手机,数码,汽车配件",
+			"name" : "办公,装饰,家居,家具,手机,数码,汽车配件",
 			"shortName" : "办公数码",
 			"icon" : "aj-icon-chuangyi"
 		},
@@ -19,7 +19,7 @@
 		{
 			"id" : 50,
 			"key" : "huli",
-			"name" : "个护,美妆,清洁,宠物",
+			"name" : "护肤,美妆,个护,美妆,清洁,宠物",
 			"shortName" : "个护美妆",
 			"icon" : "aj-icon-renxiang"
 		},
@@ -27,7 +27,7 @@
 		{
 			"id" : 60,
 			"key" : "yifu",
-			"name" : "服装,箱包,首饰",
+			"name" : "服装,季节,包包",
 			"shortName" : "服装箱包",
 			"icon" : "aj-icon-gaogenxie"
 		},
@@ -35,7 +35,7 @@
 		{
 			"id" : 80,
 			"key" : "muyin",
-			"name" : "母婴,玩具",
+			"name" : "母婴包外出妈妈包,母婴,玩具",
 			"shortName" : "母婴玩具",
 			"icon" : "aj-icon-naiping"
 		},

@@ -55,7 +55,7 @@ public class TaobaoUtil {
 		TaobaoClient client = new DefaultTaobaoClient(Taobao.url, Taobao.getTAOBAO_NIGEERHUO388_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO388_APP_SECRET());
 		TbkUatmFavoritesGetRequest req = new TbkUatmFavoritesGetRequest();
 		req.setPageNo(1L);
-		req.setPageSize(20L);
+		req.setPageSize(100L);
 		req.setFields("favorites_title,favorites_id,type");
 		req.setType(1L);
 		TbkUatmFavoritesGetResponse rsp;
@@ -226,6 +226,7 @@ public class TaobaoUtil {
 				item.save();
 			}
 		}
+		System.out.println("OVER!!!!!!!!!!");
 	}
 	
 	public List<ITaobao> getITaobaoByKeyWords() throws JsonSyntaxException, ApiException {
@@ -241,8 +242,7 @@ public class TaobaoUtil {
 		return iTaobaos;
 	}
 	
-	@Test
-	public void do1() throws JsonSyntaxException, ApiException, AJRunTimeException {
+	public static void main(String[] args) throws AJRunTimeException {
 		TaobaoUtil.grabTbkItemsFromXuanpinkuAndSaveToPcAndWapTable();
 	}
 	

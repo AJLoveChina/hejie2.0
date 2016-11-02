@@ -7,8 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
 import com.google.gson.Gson;
 
+import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 public class GoodsType {
@@ -147,5 +153,50 @@ public class GoodsType {
 	 */
 	public static List<GoodsType> getAllGoodsType() {
 		return goodsTypesList;
+	}
+	
+	private static List<TbkItem> tbkItemsRollForPC;
+	private static List<TbkItem> tbkITemsRollForWap;
+	/**
+	 * 返回tbkitem 首页滚动图 (容量20)
+	 * @param platform
+	 * @return
+	 */
+	public static List<TbkItem> getTBKItemsOfRoll(Platform platform) {
+		
+		switch(platform) {
+		case WAP:
+			if (tbkITemsRollForWap == null) {
+				synchronized (GoodsType.class) {
+					Session session = HibernateUtil.getCurrentSession();
+					session.beginTransaction();
+					Criteria criteria = session.createCriteria(TbkItemWap.class);
+					criteria.add(Restrictions.eq("goodsTypeId", 130));
+					criteria.setFirstResult(0);
+					criteria.setMaxResults(20);
+					criteria.addOrder(Order.desc("id"));
+					tbkITemsRollForWap = criteria.list();
+					session.getTransaction().commit();
+				}
+			}
+			return tbkITemsRollForWap;
+		case PC:
+		default:
+			if (tbkItemsRollForPC == null) {
+				synchronized(GoodsType.class) {
+					Session session = HibernateUtil.getCurrentSession();
+					session.beginTransaction();
+					Criteria criteria = session.createCriteria(TbkItemPC.class);
+					criteria.add(Restrictions.eq("goodsTypeId", 130));
+					criteria.setFirstResult(0);
+					criteria.setMaxResults(20);
+					criteria.addOrder(Order.desc("id"));
+					tbkItemsRollForPC = criteria.list();
+					session.getTransaction().commit();
+				}
+			}
+			return tbkItemsRollForPC;
+		}
+		
 	}
 }

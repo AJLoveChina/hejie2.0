@@ -2,8 +2,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	boolean isAdmin = User.isAdmin(request, response);
-	if (isAdmin) {
+	boolean isAdmin2 = User.isAdmin(request, response);
+	if (isAdmin2) {
 %>
 	<style>
 		#aj-admin-jump-btn{

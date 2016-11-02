@@ -17,6 +17,8 @@ import org.apache.log4j.PropertyConfigurator;
 import ajax.model.*;
 import ajax.tools.*;
 import ajax.model.entity.*;
+import ajax.model.taobao.model.GoodsType;
+import ajax.model.taobao.model.Platform;
 /**
  * Servlet implementation class Index
  */
@@ -40,6 +42,9 @@ public class Index extends HttpServlet {
 			Class.forName("ajax.model.ConfigFromProperties");
 			
 			Class.forName("ajax.model.ConfigFromSQL");
+			
+			GoodsType.getTBKItemsOfRoll(Platform.PC);
+			GoodsType.getTBKItemsOfRoll(Platform.WAP);
 			
 			
 		} catch (ClassNotFoundException e) {

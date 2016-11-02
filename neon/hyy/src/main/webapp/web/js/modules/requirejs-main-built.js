@@ -201,6 +201,7 @@ define('tools/tools',[],function () {
 
 		lazyImages.each(function(index, item) {
 			var src = $(this).attr("data-lazy");
+			if (src === undefined) return;
 			if (/^http:/.test(src)) {
 				return;
 			}

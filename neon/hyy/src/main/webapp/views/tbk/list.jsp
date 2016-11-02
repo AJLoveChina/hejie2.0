@@ -17,7 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-8 col-xs-12">
-			<div style="height:500px;"></div>
+			<jsp:include page="/views/tbk/homeRoll.jsp"></jsp:include>
+			
 		</div>
 		<div class="col-sm-4 col-xs-12">
 			<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>

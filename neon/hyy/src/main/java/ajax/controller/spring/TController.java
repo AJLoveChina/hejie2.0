@@ -48,6 +48,9 @@ public class TController {
 	
 	@RequestMapping(value="/list")
 	public String tList() {
+		List<TbkItem> tbkItemsRoll = GoodsType.getTBKItemsOfRoll(Platform.PC);
+		
+		request.setAttribute("itemsRoll", tbkItemsRoll);
 		return "/views/tbk/list";
 	}
 	
