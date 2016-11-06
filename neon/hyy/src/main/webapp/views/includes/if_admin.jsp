@@ -1,6 +1,5 @@
 <%@page import="ajax.model.safe.User"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	boolean isAdmin2 = User.isAdmin(request, response);
 	if (isAdmin2) {

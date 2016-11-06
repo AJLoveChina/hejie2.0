@@ -1,6 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <!-- 用户提示  -->
-
 <div class="modal" id="aj-gobal-tishi-modal">
     <div class="modal-dialog">
         <div class="modal-content">

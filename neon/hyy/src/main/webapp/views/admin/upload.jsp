@@ -41,4 +41,4 @@ request.setAttribute("isAdmin", isAdmin);
 
 <div style="height:10px;"></div>
 
-<%@ include file="/views/includes/footer.jsp" %>
+<jsp:include page="/views/includes/footer.jsp"></jsp:include>
