@@ -1,6 +1,10 @@
 package ajax.model;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -87,6 +91,19 @@ public class Weixin {
 	@Test
 	public void test2() {
 		Assert.assertNotNull(Weixin.getJsApiTicket());
+	}
+	
+	public static void main(String[] args) {
+		String[] strs = {"a", "v", "d", "a", "rr", "ab", "zyy", "zv"};
+		List<String> list = Arrays.asList(strs);
+		Collections.sort(list, new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				return o1.compareTo(o2);
+			}
+		});
+		System.out.println(list);
 	}
 	
 }
