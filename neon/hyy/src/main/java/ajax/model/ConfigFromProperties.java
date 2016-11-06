@@ -8,6 +8,8 @@ public class ConfigFromProperties {
 	private static  String google_nigeerhuo_oauth_id = null;
 	private static  String google_nigeerhuo_oauth_key = null;
 	private static  String TABLE_TIME_FORMAT = null;
+	private static  String WEIXIN_NIGEERHUO_APPID = null;
+	private static  String WEIXIN_NIGEERHUO_APPSECRET = null;
 	
 	
 	public static String getGoogle_nigeerhuo_oauth_id() {
@@ -19,6 +21,13 @@ public class ConfigFromProperties {
 	public static String getTABLE_TIME_FORMAT() {
 		return TABLE_TIME_FORMAT;
 	}
+	public static String getWEIXIN_NIGEERHUO_APPID() {
+		return WEIXIN_NIGEERHUO_APPID;
+	}
+	public static String getWEIXIN_NIGEERHUO_APPSECRET() {
+		return WEIXIN_NIGEERHUO_APPSECRET;
+	}
+
 
 
 	static {
