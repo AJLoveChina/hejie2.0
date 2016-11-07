@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -30,8 +29,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.log4j.chainsaw.Main;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -39,6 +38,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import com.google.common.base.Charsets;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
+import com.google.common.io.BaseEncoding;
 
 import ajax.model.Callback;
 import ajax.model.Joke;
@@ -48,6 +53,24 @@ import ajax.model.entity.ImagesContainer;
 
 public class Tools {
 
+	/**
+	 * sha1 hex
+	 * @param data
+	 * @return
+	 */
+	public static String sha1(String data) {
+		HashFunction hashFunction = Hashing.sha1();            
+		HashCode hashCode = hashFunction.newHasher()
+		   .putString(data, Charsets.UTF_8)
+		   .hash();            
+
+		return BaseEncoding.base16().lowerCase().encode(hashCode.asBytes());
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(sha1("123"));
+	}
+	
 	/**
 	 * 反射, 获取对象域值
 	 * @param field
@@ -707,10 +730,5 @@ public class Tools {
 		return doc.body().text();
 	}
 
-	public static void main(String[] args) {
-		String text = "<p>123</p><img /><script><a>aa</a>";
-		
-		System.out.println(Tools.removeHTML(text));
-	}
 
 }

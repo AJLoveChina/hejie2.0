@@ -95,6 +95,26 @@ public class Weixin {
 		Assert.assertNotNull(Weixin.getJsApiTicket());
 	}
 	
+	public static String getAppId() {
+		return ConfigFromProperties.getWEIXIN_NIGEERHUO_APPID();
+	}
+	
+	public static String getAppSecret() {
+		return ConfigFromProperties.getWEIXIN_NIGEERHUO_APPSECRET();
+	}
+	
+	public static WeixinJsConfig generateWeixinJSConfig(String url) {
+		
+		String appId = Weixin.getAppId();
+		String timestamp = new Date().getTime() + "";
+		String nonceStr = Math.random() + "";
+		String jsApiList = "['getLocation']";
+		
+		WeixinJsConfig config = new WeixinJsConfig(appId, timestamp, nonceStr, jsApiList, url);
+		
+		return config;
+	}
+	
 	public static void main(String[] args) {
 		String[] strs = {"a", "v", "d", "a", "rr", "ab", "zyy", "zv"};
 		List<String> list = Arrays.asList(strs);
@@ -107,5 +127,8 @@ public class Weixin {
 		});
 		System.out.println(list);
 	}
+	
+	
+	
 	
 }
