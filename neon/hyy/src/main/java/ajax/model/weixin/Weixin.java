@@ -1,4 +1,4 @@
-package ajax.model;
+package ajax.model.weixin;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +12,9 @@ import org.junit.Test;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import ajax.model.AjaxRequest;
 import ajax.model.AjaxRequest.Config;
+import ajax.model.ConfigFromProperties;
 
 public class Weixin {
 	private static final Object LOCK = Weixin.class;
