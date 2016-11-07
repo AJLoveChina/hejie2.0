@@ -1,1 +1,668 @@
-define("tools/customEvent",[],function(){var t=0;$(window).on("scroll",function(){t||(t=setTimeout(function(){$(window).trigger("aj.scroll"),t=0},1e3/24))}),function(){function t(){new Date-e<a?setTimeout(t,a):(n=!1,$(window).trigger("aj.resize"))}var e,n=!1,a=200;$(window).resize(function(){e=new Date,n===!1&&(n=!0,setTimeout(t,a))})}()}),define("model/user",[],function(){function t(){this.conatinerSelector=".user-login",this.statusAttr="data-islogin",this.configSelector="#aj-user-sign-config",this.loginSuccessEventName="aj.userLoginSuccess",this.logoutSuccessEventName="aj.userLogoutSuccess"}return t.prototype={isLogin:function(){var t=$(this.configSelector)[0];if(!t.isLogin)return!1;try{return JSON.parse(t.isLogin.value)}catch(e){return!1}},getUserid:function(){var t=$(this.configSelector)[0];return t.userid?t.userid.value:0},getUserimg:function(){var t=$(this.configSelector)[0];return t.img?t.img.value:""},getNickname:function(){var t=$(this.configSelector)[0];return t.nickname?t.nickname.value:""},triggerLoginEvent:function(){$(window).trigger(this.loginSuccessEventName)},triggerLogoutEvent:function(){$(window).trigger(this.logoutSuccessEventName)},onLogin:function(t){$(window).on(this.loginSuccessEventName,t)},onLogout:function(t){$(window).on(this.logoutSuccessEventName,t)}},new t}),define("tools/tools",[],function(){var t=new timeago;t.render($(".time_need_to_be_rendered"),"zh_CN");var e={joinParams:function(t,e){for(var n=[],a=0;a<e.length;a++)n.push(e[a].key+"="+encodeURIComponent(e[a].val));return t+="?"+n.join("&")},openUrl:function(t){window.open(t,"oauth2Login_10914","height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes")},logException:function(t){console.log("An error happen.."),console.log(t)},isLocal:function(){return"localhost"==location.hostname.toLowerCase()?!0:!1},tishi:function(t){var e=$("#aj-gobal-tishi-modal");e.find(".modal-body").html(t),e.modal("show")},timeago:function(t){return(new timeago).format(t,"zh_CN")},renderTime:function(e){t.render(dom,"zh_CN")},isWap:function(){return isMobile.phone}},n=$("#aj-header");return $(window).on("aj.scroll",function(){$(window).scrollTop()>100?n.addClass("mini"):n.removeClass("mini")}),$(function(){var t=$("img");t.each(function(){var t=$(this).attr("src");/web\/pic\/dot.jpg$/.test(t)&&$(this).attr("src","http://images.nigeerhuo.com/images/web/pic/dot.jpg")});var n=$("img.aj-lazy"),a={ali:"http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/",me:"http://images.nigeerhuo.com/",local:"http://localhost:8888/"};e.isLocal();n.each(function(t,e){var n=$(this).attr("data-lazy");if(void 0!==n&&!/^http:/.test(n)){var o=$(this).attr("data-pic-style");-1==n.indexOf("images/")&&(n="images/"+n),n=o?a.ali+n+"@!"+o:$(this).parents(".aj-joke-list-one").length>0?a.ali+n+"@!w500_low":a.ali+n+"@!w500_low",$(this).attr("data-lazy",n)}}),n.lazyload({effect:"fadeIn",data_attribute:"lazy"})}),$(".label.random").each(function(){var t=["label-default","label-primary","label-success","label-info","label-warning","label-danger"],e=this,n=Math.floor(Math.random()*t.length);$.each(t,function(){$(e).removeClass(this)}),$(this).addClass(t[n])}),$(function(){$("#aj-body > div.aj-body-left > div.aj-joke-list-one > div.panel-body > div.backinfo img").hide()}),$(function(){$(".ajs-page-choices-v4-ul").each(function(){function t(t){var e=a;e=e.replace(/\{page}/,t);var n=encodeURIComponent("{page}"),o=new RegExp(n,"ig");return e=e.replace(o,t),encodeURI(e)}var e=parseInt($(this).attr("data-curPage")),n=parseInt($(this).attr("data-maxPage")),a=($(this).attr("data-li-cls"),$(this).attr("data-urlTemplate"));$(this).attr("data-a-cur-cls"),$(this).attr("data-a-cls");if(uniCls="aj-parsed",$(this).hasClass(uniCls))return!1;$(this).addClass(uniCls);var o,s=[],i=[],r=e;o=2;var l=!1;for(-1!=n&&(l=!0);o-- >0&&r>1;)r--;for(o=r;r+6>o;o++)s.push(o);for(o=0;o<s.length;o++)l&&s[o]>n||i.push({page:s[o],url:t(s[o])});var m,c,d=$(document.createElement("span"));for(o=0;o<i.length;o++)c=$(document.createElement("a")),c.attr("class","atag"),e===i[o].page&&c.addClass("cur"),c.attr("href",i[o].url),c.text(i[o].page),m=$(document.createElement("li")),m.addClass("ali"),m.append(c),d.append(m);$(this).prepend(d)})}),e}),define("model/comment",[],function(){function t(){this.id=null,this.parentid=null,this.commentsGroupId=null,this.userid=null,this.content=null}return t.prototype={},t}),define("ui/comment",["model/user","tools/tools","model/comment"],function(t,e,n){function a(){this.className="aj-comment-ui-area",this.groupIdAttr="data-grounp-id",this.commentAreaTitleAttr="data-title-value",this.hasRenderClassName="aj-comment-ui-area-has-rendered",this.commentsLoadUrl="/comment/get",this.submitUrl="/comment/submit",this.textareaClassName="user-comment-area",this.placeHolderWhenLogin="亲, 说点什么吧~",this.placeHolderWhenLogout="登陆才可以评论哦~",this.submitBtnClassName="aj-submit-btn",this.submitErrorInfo="服务器君出现异常,请待会再试试吧~~",this.oneCommentClassName="one-comment",this.commentsWrapClassName="comments-wrap-className",this.lastCommentTimestampAttribute="data-last-comment-timestamp",this.pageSize=20,this.classNameOfBtnForNextPageComments="btn-get-next-page-comments",this.btnForNextPageCommentsPageAttribute="data-next-page"}return a.prototype={getGroupId:function(t){return t.attr(this.groupIdAttr)},getContentFromDom:function(t){return t.find("."+this.textareaClassName).val()},render:function(){var t=$("."+this.className),e=this;t.each(function(){e.renderDom(this)})},renderDom:function(t){this.hasRendered(t)||($(t).addClass(this.hasRenderClassName),this.renderHeader(t),this.renderComments(t),this.bindEvents(t))},bindEvents:function(n){var a=this;t.onLogin(function(){a.enableComment(n)}),t.onLogout(function(){a.disableComment(n)}),$(n).on("click","."+this.submitBtnClassName,function(){var t=a.validate(n);if(t!==!0)return void e.tishi(t);var o=a.getCommentFromDom(n);a.submit(o,n)}),$(n).on("click","."+this.classNameOfBtnForNextPageComments,function(){var t=parseInt($(this).attr(a.btnForNextPageCommentsPageAttribute));$(this).hide(),a.renderComments(n,t)})},validate:function(e){var n=!0,a="";return t.isLogin()?""===$.trim($(e).find("."+this.textareaClassName).val())&&(n=!1,a="内容不能为空的~~"):a="登陆后才可以评论哦~",n===!0?n:a},submit:function(t,n){var a=this,o="aj-is-ajax-now",s=$(n);s.hasClass(o)||(s.addClass(o),$.ajax({url:this.submitUrl,type:"POST",data:{data:JSON.stringify(t)},dataType:"JSON",success:function(o){o.isok?(a.renderCommentPrependDom(t,n),a.clearAfterComment(n)):e.tishi(o.data)},error:function(){e.tishi(a.submitErrorInfo)},complete:function(){s.removeClass(o)}}))},clearAfterComment:function(t){$(t).find("."+this.textareaClassName).val("")},renderCommentPrependDom:function(e,n){e.dateEnteredOfSave=new Date,e.userimg=t.getUserimg(),e.nickname=t.getNickname();var a=this.renderCommentJsonToDom(e);$(n).find("."+this.commentsWrapClassName).prepend(a)},getCommentFromDom:function(t){var e=new n;return e.commentsGroupId=this.getGroupId($(t)),e.content=this.getContentFromDom($(t)),e},disableComment:function(t){$(t).find("."+this.textareaClassName).attr({disabled:"true",placeholder:this.placeHolderWhenLogout})},enableComment:function(t){$(t).find("."+this.textareaClassName).removeAttr("disabled").attr("placeholder",this.placeHolderWhenLogin)},renderHeader:function(e){var n=$("<div>"),a=$("<h3>");textarea=$("<textarea>"),btn=$("<button>"),titleValue=$(e).attr(this.commentAreaTitleAttr),titleValue?a.html(titleValue):a.html("用户评论:"),n.append(a),t.isLogin()?textarea.attr("placeholder","说点什么呗~"):(textarea.attr("placeholder","您未登录, 无法评论"),textarea.attr("disabled","true")),textarea.addClass("form-control"),textarea.addClass(this.textareaClassName),n.append(textarea),btn.html("提交"),btn.addClass("form-control "+this.submitBtnClassName),btn.css({width:"80px"}),n.append(btn),$(e).append(n)},renderComments:function(t,e){void 0===e&&(e=1),jDom=$(t);var n=$("<div>"),a=this,o=0;n.addClass(this.commentsWrapClassName),$.ajax({url:this.commentsLoadUrl+"?commentsGroupId="+this.getGroupId(jDom)+"&page="+e,type:"GET",dataType:"json",success:function(t){var e;if(t.isok)for(o=t.data.length,t.data.sort(function(t,e){return+new Date(t.dateEnteredOfSave)>+new Date(e.dateEnteredOfSave)?-1:1}),e=0;e<t.data.length;e++)n.append(a.renderCommentJsonToDom(t.data[e]))},error:function(){n.html("加载失败"),n.css({padding:"20px",textAlign:"center"})},complete:function(){var t=$("<div>");t.css({textAlign:"center",padding:"10px"});var s=$("<a>");s.attr("href","javascript:;"),o===a.pageSize?(s.html("下一页"),s.addClass(a.classNameOfBtnForNextPageComments),s.attr(a.btnForNextPageCommentsPageAttribute,e+1)):o>a.pageSize?(s.html("下一页"),s.addClass(a.classNameOfBtnForNextPageComments),s.attr(a.btnForNextPageCommentsPageAttribute,e+2)):s.html("木有更多了"),t.append(s),jDom.append(n),jDom.append(t)}})},renderCommentJsonToDom:function(t){var n=$("<div>");return n.addClass(this.oneCommentClassName),n.css({marginTop:"10px"}),n.html('<div class="c-header"><img class="header-img" src="'+t.userimg+'"/><span class="name">'+t.nickname+'</span><span class="c-time">'+e.timeago(t.dateEnteredOfSave)+'</span></div><div class="c-content">'+t.content+"</div>"),n},hasRendered:function(t){return $(t).hasClass(this.hasRenderClassName)}},new a}),define("tools/seo",[],function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];"https"===e?t.src="https://zz.bdstatic.com/linksubmit/push.js":t.src="http://push.zhanzhang.baidu.com/push.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)}),define("tools/googleCustomSearch",[],function(){$(function(){setTimeout(function(){var t="004921646225264859102:l38ugphmwgg",e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://cse.google.com/cse.js?cx="+t;var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)},2e3)})}),define("model/Goods",["tools/tools"],function(t){var e={getGoodsTypeList:function(t,e){$.ajax({url:"/t/goodsTypeList",type:"GET",dataType:"json",success:function(e){t(e)},error:function(t){e&&e(t)}})},getPlatForm:function(){return t.isWap()?2:1}};return e}),require(["tools/customEvent","ui/comment","model/user","tools/tools","tools/seo","tools/googleCustomSearch","model/Goods"],function(){}),define("requirejs-main",function(){});
+define('tools/customEvent',[],function () {	// 自定义事件模块
+	
+	//自定义滚动事件,提高浏览器性能
+	var scrollTimer = 0;
+	$(window).on("scroll", function () {
+		if (!scrollTimer) {
+			scrollTimer = setTimeout(function () {
+				
+				$(window).trigger("aj.scroll");
+				scrollTimer = 0;
+				
+			}, 1000/24);
+		}
+	});
+	
+	(function () {
+		var rtime;
+		var timeout = false;
+		var delta = 200;
+		$(window).resize(function() {
+		    rtime = new Date();
+		    if (timeout === false) {
+		        timeout = true;
+		        setTimeout(resizeend, delta);
+		    }
+		});
+		
+		function resizeend() {
+		    if (new Date() - rtime < delta) {
+		        setTimeout(resizeend, delta);
+		    } else {
+		        timeout = false;
+		        $(window).trigger("aj.resize");
+		    }               
+		}
+	})();
+
+});
+define('model/user',[],function () {
+	
+	function User() {
+		this.conatinerSelector = ".user-login";
+		this.statusAttr = "data-islogin";
+		this.configSelector = "#aj-user-sign-config";
+		this.loginSuccessEventName= "aj.userLoginSuccess";
+		this.logoutSuccessEventName = "aj.userLogoutSuccess";
+	}
+	User.prototype = {
+		isLogin : function () {
+			var form = $(this.configSelector)[0];
+			
+			if (form["isLogin"]) {
+				try {
+					return JSON.parse(form["isLogin"].value);
+				}catch(ex) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		},
+		getUserid : function () {
+			var form = $(this.configSelector)[0];
+			
+			if (form["userid"]) {
+				return form.userid.value;
+			} else {
+				return 0;
+			}
+		},
+		getUserimg : function () {
+			var form = $(this.configSelector)[0];
+			
+			if (form["img"]) {
+				return form["img"].value;
+			} else {
+				return "";
+			}
+		},
+		getNickname : function () {
+			var form = $(this.configSelector)[0];
+			
+			if (form["nickname"]) {
+				return form["nickname"].value;
+			} else {
+				return "";
+			}
+		},
+		/**
+		 * 因为有些第三方登陆成功后是不刷新网页的, 所以触发登陆成功事件, 以让程序以外的
+		 * 部分响应用户登录的情况
+		 */
+		triggerLoginEvent : function () {
+			$(window).trigger(this.loginSuccessEventName);
+		},
+		triggerLogoutEvent : function () {
+			$(window).trigger(this.logoutSuccessEventName);
+		},
+		onLogin : function (fn) {
+			$(window).on(this.loginSuccessEventName, fn);
+		},
+		onLogout : function (fn) {
+			$(window).on(this.logoutSuccessEventName, fn);
+		}
+	}
+	
+	
+	return new User();
+});
+define('tools/tools',[],function () {
+	var timeagoInstance = new timeago();
+	timeagoInstance.render($(".time_need_to_be_rendered"), 'zh_CN'); 
+	
+	
+	var tools = {
+		joinParams : function (url, params) {
+			
+			var paramsArr = [];
+			for (var i = 0; i < params.length; i++) {
+				paramsArr.push(params[i].key + "=" + encodeURIComponent(params[i].val));
+			}
+			url += "?" + paramsArr.join("&");
+			
+			return url;
+		},
+		openUrl : function (url) {
+			window.open(url, 'oauth2Login_10914' ,'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes');
+		},
+		logException : function (e) {
+			console.log("An error happen..");
+			console.log(e);
+		},
+		isLocal : function () {
+			if (location.hostname.toLowerCase() == "localhost") {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		tishi : function (info) {
+			var container = $("#aj-gobal-tishi-modal");
+			
+			container.find(".modal-body").html(info);
+			
+			container.modal("show");
+		},
+		timeago : function (timeString) {
+			// This method depends on a third js library
+		    return (new timeago()).format(timeString, 'zh_CN');
+		},
+		/**
+		 * render time to good format such as 
+		 * one day ago
+		 */
+		renderTime : function (jDom) {
+			timeagoInstance.render(dom, 'zh_CN'); 
+		},
+		isWap : function () {
+			return isMobile.phone;
+		}
+		
+		
+	};
+	
+	
+	
+	
+
+	
+	var div = $("#aj-header");
+	$(window).on("aj.scroll", function () {
+		
+		if ($(window).scrollTop() > 100) {
+			div.addClass("mini");
+		} else {
+			div.removeClass("mini");
+		}
+	});
+	
+	
+	// lazy load
+	$(function () {
+		var imgs = $("img");
+		imgs.each(function () {
+			var src = $(this).attr("src");
+			if (/web\/pic\/dot.jpg$/.test(src)) {
+				$(this).attr("src", "http://images.nigeerhuo.com/images/web/pic/dot.jpg");
+			}
+		});
+		
+		var lazyImages = $("img.aj-lazy");
+		var urlPrefix;
+		
+		var urlPredixEnum = {
+			ali : "http://nigeerhuo-public.img-cn-shanghai.aliyuncs.com/",
+			me : "http://images.nigeerhuo.com/",
+			local : "http://localhost:8888/"
+		};
+		
+		var isLocal = tools.isLocal();
+
+		lazyImages.each(function(index, item) {
+			var src = $(this).attr("data-lazy");
+			if (src === undefined) return;
+			if (/^http:/.test(src)) {
+				return;
+			}
+			
+			var picStyle = $(this).attr("data-pic-style");
+			
+			if (src.indexOf("images/") == -1) {
+				src = "images/" + src;
+			}
+			
+			if (picStyle) {
+				src = urlPredixEnum.ali + src +  "@!" + picStyle;
+			} else if($(this).parents(".aj-joke-list-one").length > 0) {	
+				//item content中的图片
+				src = urlPredixEnum.ali + src + "@!w500_low";
+			}else{
+				src = urlPredixEnum.ali + src + "@!w500_low";
+			}
+			
+			$(this).attr("data-lazy", src);
+			
+		});
+		
+		lazyImages.lazyload({
+		    effect : "fadeIn",
+		    data_attribute  : "lazy"
+		});
+	})
+	
+	// label random
+	$(".label.random").each(function () {
+		var arr = ["label-default", "label-primary", "label-success", "label-info", "label-warning", "label-danger"];
+		
+		var that = this;
+		var random = Math.floor(Math.random() * arr.length);
+		$.each(arr, function () {
+			$(that).removeClass(this);
+		})
+		
+		
+		$(this).addClass(arr[random]);
+	});	
+	
+	//// 处理图片加载错误的问题
+	$(function () {
+		$("#aj-body > div.aj-body-left > div.aj-joke-list-one > div.panel-body > div.backinfo img").hide();
+	})
+			
+
+	$(function () {
+		$(".ajs-page-choices-v4-ul").each(function () {
+			var cur = parseInt($(this).attr("data-curPage")),
+				maxPage = parseInt($(this).attr("data-maxPage")),
+				liCls = $(this).attr("data-li-cls"),
+				urlTemplate = $(this).attr("data-urlTemplate"),
+				aCurCls = $(this).attr("data-a-cur-cls"),
+				aCls = $(this).attr("data-a-cls")
+				uniCls = "aj-parsed";
+				
+				if ($(this).hasClass(uniCls)) {
+					return false;
+				}
+				$(this).addClass(uniCls);
+			
+			var arr = [],
+				urls = [],
+				curCopy = cur,
+				i;
+			i = 2;
+			
+			var isMaxLimit = false;
+			if (maxPage != -1) isMaxLimit = true;
+			
+			while(i-- > 0 && curCopy > 1) {
+				curCopy --;	
+			}	
+			for (i = curCopy; i < curCopy + 6; i++) {
+				arr.push(i);
+			}
+			
+			for (i = 0; i < arr.length; i++) {
+				if(isMaxLimit && arr[i] > maxPage) continue;
+				urls.push({
+					page : arr[i],
+					url : changeTemplateToUrl(arr[i])
+				});
+			}
+			
+			var span = $(document.createElement("span")),
+				domLi,
+				domA;
+			for (i = 0; i < urls.length; i++) {
+				
+				domA = $(document.createElement("a"));
+				domA.attr("class", "atag");
+				if (cur === urls[i].page) {
+					domA.addClass("cur");
+				}
+				domA.attr("href", urls[i].url);
+				domA.text(urls[i].page);
+				
+				domLi = $(document.createElement("li"));
+				domLi.addClass("ali");
+				domLi.append(domA);
+				span.append(domLi);
+			}
+			$(this).prepend(span);	
+			
+			function changeTemplateToUrl(page) {
+				var copy = urlTemplate;
+				copy = copy.replace(/\{page}/, page);
+				var encode = encodeURIComponent("{page}");
+				var regExp = new RegExp(encode, "ig");
+				copy = copy.replace(regExp, page);
+				return encodeURI(copy);
+			}
+		});
+	})
+			
+	return tools;
+});
+
+define('model/comment',[],function () {
+	function Comment() {
+		this.id = null;
+		this.parentid = null;
+		this.commentsGroupId = null;
+		this.userid = null;
+		this.content = null;
+	}
+	Comment.prototype = {
+			
+	};
+	return Comment;
+});
+define('ui/comment',["model/user", "tools/tools", "model/comment"], function (user, tools, CModel) {
+	function Comment() {
+		this.className = "aj-comment-ui-area";
+		this.groupIdAttr = "data-grounp-id";
+		this.commentAreaTitleAttr = "data-title-value";
+		this.hasRenderClassName = "aj-comment-ui-area-has-rendered";
+		this.commentsLoadUrl = "/comment/get";
+		this.submitUrl = "/comment/submit";
+		this.textareaClassName = "user-comment-area";
+		this.placeHolderWhenLogin = "亲, 说点什么吧~";
+		this.placeHolderWhenLogout = "登陆才可以评论哦~";
+		this.submitBtnClassName = "aj-submit-btn";
+		this.submitErrorInfo = "服务器君出现异常,请待会再试试吧~~";
+		this.oneCommentClassName = "one-comment";
+		this.commentsWrapClassName = "comments-wrap-className";
+		this.lastCommentTimestampAttribute = "data-last-comment-timestamp";
+		this.pageSize = 20;
+		this.classNameOfBtnForNextPageComments = "btn-get-next-page-comments";
+		this.btnForNextPageCommentsPageAttribute = "data-next-page";
+	}
+	Comment.prototype = {
+			getGroupId : function (jDom) {
+				return jDom.attr(this.groupIdAttr);
+			},
+			getContentFromDom : function (jDom) {
+				return jDom.find("." + this.textareaClassName).val();
+			},
+			render : function () {
+				var divs = $("." + this.className);
+				var that = this;
+				divs.each(function () {
+					that.renderDom(this);
+				});
+			},
+			renderDom : function (dom) {
+				if (this.hasRendered(dom)) return;
+				
+				$(dom).addClass(this.hasRenderClassName);
+				
+				this.renderHeader(dom);
+				this.renderComments(dom);
+				this.bindEvents(dom);
+			},
+			bindEvents : function (dom) {
+				var that = this;
+				user.onLogin(function () {
+					that.enableComment(dom);
+				});
+				user.onLogout(function () {
+					that.disableComment(dom);
+				})
+				$(dom).on("click", "." + this.submitBtnClassName, function () {
+					var validate = that.validate(dom);
+					if (validate !== true) {
+						tools.tishi(validate);
+						return;
+					}
+					var comment = that.getCommentFromDom(dom);
+					that.submit(comment, dom);
+				});
+				$(dom).on("click", "." + this.classNameOfBtnForNextPageComments, function () {
+					var page = parseInt($(this).attr(that.btnForNextPageCommentsPageAttribute));
+					$(this).hide();
+					that.renderComments(dom, page);
+				})
+			},
+			/**
+			 * 如果通过返回true, 否则返回错误消息
+			 */
+			validate : function (dom) {
+				var bool = true;
+				var msg = "";
+				if (!user.isLogin()) {
+					msg = "登陆后才可以评论哦~";
+				} else if ($.trim($(dom).find("." + this.textareaClassName).val()) === "") {
+					bool = false;
+					msg = "内容不能为空的~~";
+				}
+				
+				return bool === true ? bool : msg;
+			},
+			submit : function (comment, dom) {
+				var that = this;
+				var cls = "aj-is-ajax-now";
+				var jDom = $(dom);
+				if (jDom.hasClass(cls)) {
+					return;
+				}
+				jDom.addClass(cls);
+				$.ajax({
+					url : this.submitUrl,
+					type : "POST",
+					data : {
+						data : JSON.stringify(comment)
+					},
+					dataType : "JSON",
+					success : function (ar) {
+						if (ar.isok) {
+							that.renderCommentPrependDom(comment, dom);
+							that.clearAfterComment(dom);
+						} else {
+							tools.tishi(ar.data);
+						}
+					},
+					error : function () {
+						tools.tishi(that.submitErrorInfo);
+					},
+					complete : function () {
+						jDom.removeClass(cls);
+					}
+				});
+			},
+			clearAfterComment : function (dom) {
+				$(dom).find("." + this.textareaClassName).val("");
+			},
+			/**
+			 * 把用户刚刚的评论显示在页面上
+			 */
+			renderCommentPrependDom : function (comment, dom) {
+				comment["dateEnteredOfSave"] = new Date();
+				comment["userimg"] = user.getUserimg();
+				comment["nickname"] = user.getNickname();
+				
+				var div = this.renderCommentJsonToDom(comment);
+				$(dom).find("." + this.commentsWrapClassName).prepend(div);
+			},
+			getCommentFromDom : function (dom) {
+				var comment = new CModel();
+				comment.commentsGroupId = this.getGroupId($(dom));
+				comment.content = this.getContentFromDom($(dom));;
+				
+				return comment;
+			},
+			disableComment : function (dom) {
+				$(dom).find("." + this.textareaClassName).attr({
+					"disabled" : "true",
+					placeholder : this.placeHolderWhenLogout
+				});
+			},
+			enableComment : function (dom) {
+				$(dom).find("." + this.textareaClassName).removeAttr("disabled").attr("placeholder", this.placeHolderWhenLogin);
+			},
+			renderHeader : function (dom) {
+				var div = $("<div>"),
+					h3 = $("<h3>")
+					textarea = $("<textarea>"),
+					btn = $("<button>"),
+					titleValue = $(dom).attr(this.commentAreaTitleAttr);
+				if (titleValue) {
+					h3.html(titleValue);
+				} else {
+					h3.html("用户评论:");
+				}
+				
+				div.append(h3);
+				
+				if (user.isLogin()) {
+					textarea.attr("placeholder", "说点什么呗~");
+				} else {
+					textarea.attr("placeholder", "您未登录, 无法评论");
+					textarea.attr("disabled", "true");
+				}
+				textarea.addClass("form-control");
+				textarea.addClass(this.textareaClassName);
+				div.append(textarea);
+
+				btn.html("提交");
+				btn.addClass("form-control " + this.submitBtnClassName);
+				btn.css({
+					"width" : "80px"
+				})
+				div.append(btn);
+				
+				$(dom).append(div);
+			},
+			
+			renderComments : function (dom, page) {
+				if (page === undefined) page = 1;
+				jDom = $(dom);
+				var div = $("<div>"),
+					that = this;
+				var len = 0;
+				div.addClass(this.commentsWrapClassName);
+				$.ajax({
+					url : this.commentsLoadUrl + "?commentsGroupId=" + this.getGroupId(jDom) + "&page=" + page,
+					type : "GET",
+					dataType : "json",
+					success : function(ar) {
+						var i;
+						if (ar.isok) {
+							len = ar.data.length;
+							ar.data.sort(function (a, b) {
+								if ( + new Date(a["dateEnteredOfSave"]) > (+ new Date(b["dateEnteredOfSave"]))) {
+									return -1;
+								} else {
+									return 1;
+								}
+							});
+							for (i = 0; i < ar.data.length; i++) {
+								div.append(that.renderCommentJsonToDom(ar.data[i]));
+							}
+						}
+					},
+					error : function () {
+						div.html("加载失败");
+						div.css({
+							padding : "20px",
+							textAlign : "center"
+						});
+					},
+					complete : function () {
+						//jDom.find("." + this.commentsWrapClassName).remove();
+						var awrap = $("<div>");
+						awrap.css({
+							textAlign:"center",
+							padding:"10px"
+						});
+						var more = $("<a>");
+						more.attr("href", "javascript:;");
+						if (len === that.pageSize) {
+							more.html("下一页");
+							more.addClass(that.classNameOfBtnForNextPageComments);
+							more.attr(that.btnForNextPageCommentsPageAttribute, page + 1);
+						} else if (len > that.pageSize) {
+							more.html("下一页");
+							more.addClass(that.classNameOfBtnForNextPageComments);
+							more.attr(that.btnForNextPageCommentsPageAttribute, page + 2);
+						} else {
+							more.html("木有更多了");
+						}
+						awrap.append(more);
+						
+						jDom.append(div);
+						jDom.append(awrap);
+					}
+				});
+			},
+			renderCommentJsonToDom : function (map) {
+				var div = $("<div>");
+				div.addClass(this.oneCommentClassName);
+				div.css({
+					marginTop : "10px"
+				})
+				div.html('<div class="c-header">' +
+						'<img class="header-img" src="' +
+						map["userimg"] +
+						'"/><span class="name">' +
+						map["nickname"] +
+						'</span><span class="c-time">' +
+						tools.timeago(map["dateEnteredOfSave"]) +
+						'</span></div>' +
+						'<div class="c-content">' +
+						map["content"] +
+						'</div>');
+				return div;
+			},
+			hasRendered : function (dom) {
+				return $(dom).hasClass(this.hasRenderClassName);
+			}
+	}
+	
+	return new Comment();
+});
+define('tools/seo',[],function () {
+	var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+    
+    
+});
+define('tools/googleCustomSearch',[],function () {
+	
+	$(function () {
+		setTimeout(function () {
+			var cx = '004921646225264859102:l38ugphmwgg';
+		    var gcse = document.createElement('script');
+		    gcse.type = 'text/javascript';
+		    gcse.async = true;
+		    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+		    var s = document.getElementsByTagName('script')[0];
+		    s.parentNode.insertBefore(gcse, s);
+		}, 2000);
+ 	})
+
+});
+define('model/Goods',["tools/tools"], function(tools) {
+	var Goods = {
+		
+		getGoodsTypeList : function (fn, errFn) {
+			$.ajax({
+				url : "/t/goodsTypeList",
+				type : "GET",
+				dataType : "json",
+				success : function (res) {
+					fn(res);
+				},
+				error : function (err) {
+					errFn && errFn(err);
+				}
+			});
+		},
+		
+		/**
+		*	1.PC 2.Wap
+		*/
+		getPlatForm : function () {
+			if (tools.isWap()) {
+				return 2;
+			} else {
+				return 1;
+			}
+		}
+
+	};
+	
+	return Goods;
+});
+require(["tools/customEvent", "ui/comment", "model/user", "tools/tools", "tools/seo", "tools/googleCustomSearch", "model/Goods"], function () {
+	
+});
+define("requirejs-main", function(){});
+
