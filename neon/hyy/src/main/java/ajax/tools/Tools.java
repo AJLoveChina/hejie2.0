@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -48,11 +54,72 @@ import com.google.common.io.BaseEncoding;
 import ajax.model.Callback;
 import ajax.model.Joke;
 import ajax.model.JokeStatus;
+import ajax.model.annotations.ExcelColumnName;
 import ajax.model.entity.Config;
 import ajax.model.entity.ImagesContainer;
+import ajax.model.taobao.TaobaoExcelItem;
 
 public class Tools {
 
+	/**
+	 * 只适合读取第一行是表头的excel文件, 且只能读取第一个sheet
+	 * @param file
+	 * @param t
+	 * @return
+	 * @throws Exception
+	 */
+	public static <T> List<T> readExcel(File file, T t) throws Exception {
+		
+		POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
+		HSSFWorkbook wb = new HSSFWorkbook(fs);
+		HSSFSheet sheet = wb.getSheetAt(0);
+		
+		int rows;
+		rows = sheet.getPhysicalNumberOfRows();
+		return Tools.readExcelRows(sheet, rows, t);
+	}
+	
+	private static <T> List<T> readExcelRows(HSSFSheet sheet, int rows, T t) throws InstantiationException, IllegalAccessException {
+		HSSFRow row;
+		HSSFCell cell;
+		int cols = sheet.getRow(0).getPhysicalNumberOfCells();
+		ExcelColumnName excelColumnName = null;
+		
+		Field[] fields = t.getClass().getDeclaredFields();
+		List<T> list = new ArrayList<>();
+		
+		Map<String, Integer> map = new HashMap<>();
+		row = sheet.getRow(0);
+		if (row != null) {
+			for (int c = 0; c < cols; c++) {
+				cell = row.getCell(c);
+				if (cell != null) {
+					map.put(cell.getStringCellValue(), cell.getColumnIndex());
+				}
+			}
+		}
+		
+		for(int r = 1; r < rows; r++) {
+	        row = sheet.getRow(r);
+	        if(row != null) {
+	        	T newT = (T) t.getClass().newInstance();
+	        	
+	        	for (Field field : fields) {
+	        		excelColumnName = field.getAnnotation(ExcelColumnName.class);
+	        		if (excelColumnName != null) {
+	        			cell = row.getCell(map.get(excelColumnName.value()));
+	        			
+	        			if (cell != null) {
+	        				field.setAccessible(true);
+	        				field.set(newT, cell.getStringCellValue());
+	        			}
+	        		}
+	        	}
+	        	list.add(newT);
+	        }
+	    }
+		return list;
+	}
 	/**
 	 * sha1 hex
 	 * @param data
@@ -67,8 +134,9 @@ public class Tools {
 		return BaseEncoding.base16().lowerCase().encode(hashCode.asBytes());
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(sha1("123"));
+	public static void main(String[] args) throws Exception {
+		List<TaobaoExcelItem> excelItems = readExcel(new File("C:\\Users\\ajax\\Downloads\\data.xls"), new TaobaoExcelItem());
+		System.out.println(excelItems.size());
 	}
 	
 	/**

@@ -1,8 +1,7 @@
 <%@page import="ajax.model.weixin.Weixin"%>
 <%@page import="ajax.model.weixin.WeixinJsConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
+    pageEncoding="UTF-8"%><%
 	String path = (String)request.getAttribute("javax.servlet.forward.request_uri");
 	String url = request.getScheme()+"://"+request.getServerName()+path;
 	WeixinJsConfig weixinJsConfig = Weixin.generateWeixinJSConfig(url);
@@ -32,7 +31,10 @@
 		        var speed = res.speed; // 速度，以米/每秒计
 		        var accuracy = res.accuracy; // 位置精度
 		        
-		        
+		        console.log("latitude:" + latitude);
+		        console.log("longitude:" + longitude);
+		        console.log("speed:" + speed);
+		        console.log("accuracy:" + accuracy);
 		    }
 		});
 		
