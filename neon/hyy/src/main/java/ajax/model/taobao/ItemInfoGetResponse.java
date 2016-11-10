@@ -4,10 +4,10 @@ import java.util.List;
 
 import ajax.model.taobao.model.TbkItem;
 
-public class ItemInfoGetResponse {
+public class ItemInfoGetResponse<X> {
 	
 	class R {
-		public List<TbkItem> n_tbk_item;
+		public List<X> n_tbk_item;
 	}
 	class T {
 		public R results;

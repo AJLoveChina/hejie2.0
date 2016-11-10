@@ -68,7 +68,7 @@ public class Tools {
 	 * @return
 	 * @throws Exception
 	 */
-	public static <T> List<T> readExcel(File file, T t) throws Exception {
+	public static <T> List<T> readExcel(File file, Class<T> cls) throws Exception {
 		
 		POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
 		HSSFWorkbook wb = new HSSFWorkbook(fs);
@@ -76,16 +76,16 @@ public class Tools {
 		
 		int rows;
 		rows = sheet.getPhysicalNumberOfRows();
-		return Tools.readExcelRows(sheet, rows, t);
+		return Tools.readExcelRows(sheet, rows, cls);
 	}
 	
-	private static <T> List<T> readExcelRows(HSSFSheet sheet, int rows, T t) throws InstantiationException, IllegalAccessException {
+	private static <T> List<T> readExcelRows(HSSFSheet sheet, int rows, Class<T> cls) throws InstantiationException, IllegalAccessException {
 		HSSFRow row;
 		HSSFCell cell;
 		int cols = sheet.getRow(0).getPhysicalNumberOfCells();
 		ExcelColumnName excelColumnName = null;
 		
-		Field[] fields = t.getClass().getDeclaredFields();
+		Field[] fields = cls.getDeclaredFields();
 		List<T> list = new ArrayList<>();
 		
 		Map<String, Integer> map = new HashMap<>();
@@ -102,7 +102,7 @@ public class Tools {
 		for(int r = 1; r < rows; r++) {
 	        row = sheet.getRow(r);
 	        if(row != null) {
-	        	T newT = (T) t.getClass().newInstance();
+	        	T newT = cls.newInstance();
 	        	
 	        	for (Field field : fields) {
 	        		excelColumnName = field.getAnnotation(ExcelColumnName.class);
@@ -135,8 +135,7 @@ public class Tools {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		List<TaobaoExcelItem> excelItems = readExcel(new File("C:\\Users\\ajax\\Downloads\\data.xls"), new TaobaoExcelItem());
-		System.out.println(excelItems.size());
+		
 	}
 	
 	/**

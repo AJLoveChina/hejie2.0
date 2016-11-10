@@ -1,8 +1,20 @@
 package ajax.model.taobao;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
+import com.taobao.api.ApiException;
+
 import ajax.model.annotations.ExcelColumnName;
 import ajax.model.entity.Entity;
 import ajax.model.entity.EntityInterface;
+import ajax.model.taobao.model.GoodsType;
+import ajax.model.taobao.model.Platform;
+import ajax.model.taobao.model.TbkItem;
+import ajax.model.taobao.model.TbkItemPC;
+import ajax.model.taobao.model.TbkItemWap;
 
 public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityInterface<TaobaoExcelItem>{
 	private long id;
@@ -51,7 +63,15 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 	@ExcelColumnName("商品优惠券推广链接")
 	private String coupon_link_slick;
 	
+	private Coupon coupon = null;
 	
+	
+	public Coupon getCoupon() {
+		return coupon;
+	}
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
+	}
 	public String getNick_id() {
 		return nick_id;
 	}
@@ -190,4 +210,62 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 	public void setCoupon_link_slick(String coupon_link_slick) {
 		this.coupon_link_slick = coupon_link_slick;
 	}
+	
+	/**
+	 * 生成优惠券实体对象
+	 * @return
+	 */
+	public Coupon toCoupon() {
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(this);
+		Coupon coupon = gson.fromJson(json, Coupon.class);
+		
+		return coupon;
+	}
+	
+	public TbkItemPC toTbkItemPC() throws ApiException {
+		TbkItemPC tbkItem = Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.PC, TbkItemPC.class);
+		
+		tbkItemGetFieldInfoFromTaobaoExcelItem(tbkItem);
+		return tbkItem;
+	}
+	
+	
+	public TbkItemWap toTbkItemWap() {
+		TbkItemWap tbkItem = Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.WAP, TbkItemWap.class);
+		tbkItemGetFieldInfoFromTaobaoExcelItem(tbkItem);
+		return tbkItem;
+	}
+	/**
+	 * 从taobaoExcelITem 获取tbkitem的信息并且填充字段
+	 * @param tbkItem
+	 * @param taobaoExcelItem
+	 */
+	private void tbkItemGetFieldInfoFromTaobaoExcelItem(TbkItem tbkItem) {
+
+		tbkItem.setGoodsTypeId(TbkItem.getGoodsTypeIdByKeyWord(this.goods_type));
+		tbkItem.setClick_url(this.click_url);
+		tbkItem.setCommission_rate(this.commission_rate);
+		tbkItem.setCommission(Double.parseDouble(this.commission));
+		tbkItem.setShopName(this.shopName);
+		tbkItem.setWebsite(this.website);
+		
+		if (this.coupon != null && this.coupon.getId() >  0) {
+			tbkItem.setHasCoupon(true);
+			tbkItem.setCoupon_id(this.coupon.getId());
+			tbkItem.setCoupon_denomination(this.coupon.getCoupon_denomination());
+		}
+
+		// 对十分之一的商品的goodsTypeId做特殊处理
+		if (Math.random() < 0.1) {
+			if (tbkItem.getVolume() > 10000) {
+				tbkItem.setGoodsTypeId(GoodsType.All.STARS.id);
+			} else if (Double.parseDouble(tbkItem.getZk_final_price()) < 10) {
+				tbkItem.setGoodsTypeId(GoodsType.All.JKJ.id);
+			}
+		}
+		
+	}
+	
 }

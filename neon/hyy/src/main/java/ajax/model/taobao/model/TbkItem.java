@@ -88,8 +88,59 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	@FormComponentAnno(desc="编辑内容", componentType=FormComponents.ComponentType.UEDITOR)
 	private String content = "";
 	private int goodsTypeId = 140;	// 140 means all type
+	private String commission_rate;
+	//佣金
+	private double commission;
+	private String website;
+	private String shopName;
+	private boolean hasCoupon = false;
+	private long coupon_id = 0;
+	private String coupon_denomination;
 	
 	
+	
+	public String getCoupon_denomination() {
+		return coupon_denomination;
+	}
+	public void setCoupon_denomination(String coupon_denomination) {
+		this.coupon_denomination = coupon_denomination;
+	}
+	public boolean isHasCoupon() {
+		return hasCoupon;
+	}
+	public void setHasCoupon(boolean hasCoupon) {
+		this.hasCoupon = hasCoupon;
+	}
+	public long getCoupon_id() {
+		return coupon_id;
+	}
+	public void setCoupon_id(long coupon_id) {
+		this.coupon_id = coupon_id;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	public String getCommission_rate() {
+		return commission_rate;
+	}
+	public void setCommission_rate(String commission_rate) {
+		this.commission_rate = commission_rate;
+	}
+	public double getCommission() {
+		return commission;
+	}
+	public void setCommission(double commission) {
+		this.commission = commission;
+	}
 	public int getGoodsTypeId() {
 		return goodsTypeId;
 	}
@@ -449,6 +500,15 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	
 	public static void main(String[] args) {
 		TbkItem.generateTbkItemsPCAndWapPages();
+	}
+	
+	/**
+	 * 根据关键词获取商品的goodsTypeId
+	 * @param goods_type
+	 * @return
+	 */
+	public static int getGoodsTypeIdByKeyWord(String keyword) {
+		return GoodsType.getGOodsTypeIdByKeyWord(keyword);
 	}
 	
 }

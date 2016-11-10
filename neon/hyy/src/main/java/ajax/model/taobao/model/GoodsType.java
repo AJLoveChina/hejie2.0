@@ -1,6 +1,7 @@
 package ajax.model.taobao.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,6 +19,26 @@ import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
 public class GoodsType {
+	public static enum All{
+		DIANQI(10),
+		JIAJU(30),
+		HULI(50),
+		YIFU(60),
+		MUYIN(80),
+		FOOD(90),
+		BOOKS(100),
+		STARS(110),
+		JKJ(120),
+		ROLL(130),
+		ALL(140);
+		
+		public final int id;
+		private All(int id) {
+			this.id = id;
+		}
+		
+	}
+	
 	private int id;
 	/**
 	 * 对应选品库的类目
@@ -28,8 +49,22 @@ public class GoodsType {
 	private boolean show = true;
 	private String shortName =  "";
 	private String icon = "";
+	private String keys = "";
+	private List<String> keysList;
 	
 	
+	public List<String> getKeysList() {
+		return keysList;
+	}
+	public void setKeysList(List<String> keysList) {
+		this.keysList = keysList;
+	}
+	public String getKeys() {
+		return keys;
+	}
+	public void setKeys(String keys) {
+		this.keys = keys;
+	}
 	public String getShortName() {
 		return shortName;
 	}
@@ -93,6 +128,11 @@ public class GoodsType {
 		String GoodsTypeJsonData = Tools.readInputStream(GoodsType.class.getResourceAsStream("GoodsType.json"));
 		A a = new Gson().fromJson(GoodsTypeJsonData, A.class);
 		goodsTypesList = a.GoodsType;
+		
+		for (GoodsType goodsType : goodsTypesList) {
+			goodsType.keysList = Arrays.asList(goodsType.keys.split(","));
+		}
+		
 		Map<String,GoodsType> gtMap = new HashMap<>();
 		for (GoodsType goodsType : goodsTypesList) {
 			gtMap.put(goodsType.getKey(), goodsType);
@@ -198,5 +238,52 @@ public class GoodsType {
 			return tbkItemsRollForPC;
 		}
 		
+	}
+	
+	private static class Hit {
+		int id;
+		int num = 0;
+		public Hit(int id, int num) {
+			super();
+			this.id = id;
+			this.num = num;
+		}
+		
+	}
+	/**
+	 * 根据关键词获取商品的goodsTypeId, 如果木有匹配返回  "全部类型 " 的id
+	 * @param keyword
+	 * @return
+	 */
+	public static int getGOodsTypeIdByKeyWord(String keyword) {
+		List<GoodsType> list = GoodsType.getAllGoodsType();
+		
+		List<Hit> hits = new ArrayList<>();
+		for (GoodsType goodsType : list) {
+			int num = 0;
+			for (String s : goodsType.keysList) {
+				if (keyword.toLowerCase().contains(s.toLowerCase())) {
+					num ++;
+				}
+			}
+			if (num > 0) {
+				hits.add(new Hit(goodsType.id, num));
+			}
+		}
+		
+		if (hits.size() > 0) {
+			// 有匹配
+			Collections.sort(hits, new Comparator<Hit>() {
+
+				@Override
+				public int compare(Hit o1, Hit o2) {
+					return o2.num - o1.num;
+				}
+				
+			});
+			return hits.get(0).id;
+		} else {
+			return 140;
+		}
 	}
 }

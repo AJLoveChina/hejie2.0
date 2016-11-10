@@ -1,16 +1,24 @@
 package ajax.model.taobao;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.junit.Test;
 
+import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.taobao.model.ITaobao;
 import ajax.model.taobao.model.ITaobaoItemQueryParams;
 import ajax.model.taobao.model.ITaobaoResponse;
+import ajax.model.taobao.model.Platform;
 import ajax.model.taobao.model.TbkItem;
+import ajax.model.taobao.model.TbkItemPC;
+import ajax.model.taobao.model.TbkItemWap;
+import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.taobao.api.ApiException;
 import com.taobao.api.DefaultTaobaoClient;
@@ -208,23 +216,54 @@ public class Taobao {
 		}
 	}
 	
+//	/**
+//	 * 根据 商品id从淘宝获取一件商品的详细信息
+//	 * @return
+//	 * @throws ApiException
+//	 */
+//	public static TbkItem getTbkItemByIDFromTaobao(String num_iid) throws ApiException{
+//		TaobaoClient client = new DefaultTaobaoClient(url, Taobao.getTAOBAO_NIGEERHUO388_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO388_APP_SECRET());
+//		TbkItemInfoGetRequest req = new TbkItemInfoGetRequest();
+//		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,nick,seller_id,volume");
+//		req.setPlatform(1L);
+//		req.setNumIids(num_iid);
+//		TbkItemInfoGetResponse rsp = client.execute(req);
+//		System.out.println(rsp.getBody());
+//		Gson gson = new Gson();
+//		ItemInfoGetResponse itemInfoGetResponse = gson.fromJson(rsp.getBody(), ItemInfoGetResponse.class);
+//		
+//		return itemInfoGetResponse.tbk_item_info_get_response.results.n_tbk_item.get(0);
+//	}
+	
 	/**
 	 * 根据 商品id从淘宝获取一件商品的详细信息
-	 * @return
-	 * @throws ApiException
+	 * @return null if error
 	 */
-	public static TbkItem getTbkItemByIDFromTaobao(String num_iid) throws ApiException{
+	public static <T extends TbkItem<T>> T getTbkItemByIDFromTaobao(String num_iid, Platform platform, Class<T> cls) {
 		TaobaoClient client = new DefaultTaobaoClient(url, Taobao.getTAOBAO_NIGEERHUO388_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO388_APP_SECRET());
 		TbkItemInfoGetRequest req = new TbkItemInfoGetRequest();
-		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url");
-		req.setPlatform(1L);
+		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,nick,seller_id,volume");
+		req.setPlatform(platform.getId());
 		req.setNumIids(num_iid);
-		TbkItemInfoGetResponse rsp = client.execute(req);
-		System.out.println(rsp.getBody());
-		Gson gson = new Gson();
-		ItemInfoGetResponse itemInfoGetResponse = gson.fromJson(rsp.getBody(), ItemInfoGetResponse.class);
+		TbkItemInfoGetResponse rsp;
+		try {
+			rsp = client.execute(req);
+		} catch (ApiException e) {
+			return null;
+		}
 		
-		return itemInfoGetResponse.tbk_item_info_get_response.results.n_tbk_item.get(0);
+		Gson gson = new Gson();
+		
+		switch(platform) {
+		case WAP:
+			ItemInfoGetResponse<T> itemInfoGetResponse2 = gson.fromJson(rsp.getBody(), new TypeToken<ItemInfoGetResponse<T>>(){}.getType());
+			return itemInfoGetResponse2.tbk_item_info_get_response.results.n_tbk_item.get(0);
+			
+		case PC:
+		default:
+			ItemInfoGetResponse<T> itemInfoGetResponse = gson.fromJson(rsp.getBody(), new TypeToken<ItemInfoGetResponse<T>>(){}.getType());
+			return itemInfoGetResponse.tbk_item_info_get_response.results.n_tbk_item.get(0);
+		}
 	}
 	
 	/**
@@ -274,15 +313,15 @@ public class Taobao {
 		}
 	}
 	
-	private static void do2() {
-		try {
-			TbkItem tbkItem = getTbkItemByIDFromTaobao("530160087783");
-			
-			System.out.println(tbkItem);
-		} catch (ApiException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+//	private static void do2() {
+//		try {
+//			TbkItem tbkItem = getTbkItemByIDFromTaobao("530160087783");
+//			
+//			System.out.println(tbkItem);
+//		} catch (ApiException e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 	
 	private static void do3() {
 		List<TbkItem> tbkItems;
@@ -307,6 +346,45 @@ public class Taobao {
 		req.setOpenIids("AAGR3e_NAClMYSXsyD_PHpLF");
 		AtbItemsDetailGetResponse rsp = client.execute(req);
 		return rsp.getBody();
+	}
+	
+	
+	public static void getItemsFromExcel() throws Exception {
+		List<TaobaoExcelItem> excelItems = Tools.readExcel(new File("C:\\Users\\ajax\\Downloads\\data.xls"), TaobaoExcelItem.class);
+		for (TaobaoExcelItem taobaoExcelItem : excelItems) {
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			
+			//1.save taobao excel item, it is not important and not used now, just for log
+			taobaoExcelItem.save(session);
+			
+			//2.taobaoExcelItem change to Coupon and save
+			Coupon coupon = taobaoExcelItem.toCoupon();
+			coupon.save(session);
+			
+			
+			try {
+				session.getTransaction().commit();
+				taobaoExcelItem.setCoupon(coupon);
+			} catch(Exception ex) {
+				System.out.println(ex.getMessage());
+			}
+			
+			//3.taobaoExcelItem change to tbkitem pc and wap
+			TbkItemPC tbkItemPC = taobaoExcelItem.toTbkItemPC();
+			TbkItemWap tbkItemWap = taobaoExcelItem.toTbkItemWap();
+			
+			//4.save tbkitem pc
+			RealTimePagination<TbkItemPC> pagination = new RealTimePagination<>();
+			pagination.save(TbkItemPC.getGroupId(tbkItemPC.getGoodsTypeId()), tbkItemPC);
+			
+			//5.save tbkitem wap
+			RealTimePagination<TbkItemWap> pagination2 = new RealTimePagination<>();
+			pagination2.save(TbkItemWap.getGroupId(tbkItemWap.getGoodsTypeId()), tbkItemWap);
+			
+		}
+		
+		
 	}
 	
 	@Test
