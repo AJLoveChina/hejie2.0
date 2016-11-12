@@ -225,7 +225,7 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 	}
 	
 	public TbkItemPC toTbkItemPC() throws ApiException {
-		TbkItemPC tbkItem = Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.PC, TbkItemPC.class);
+		TbkItemPC tbkItem = (TbkItemPC)Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.PC);
 		
 		tbkItemGetFieldInfoFromTaobaoExcelItem(tbkItem);
 		return tbkItem;
@@ -233,7 +233,7 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 	
 	
 	public TbkItemWap toTbkItemWap() {
-		TbkItemWap tbkItem = Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.WAP, TbkItemWap.class);
+		TbkItemWap tbkItem = (TbkItemWap)Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.WAP);
 		tbkItemGetFieldInfoFromTaobaoExcelItem(tbkItem);
 		return tbkItem;
 	}
@@ -257,11 +257,14 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 			tbkItem.setCoupon_denomination(this.coupon.getCoupon_denomination());
 		}
 
-		// 对十分之一的商品的goodsTypeId做特殊处理
-		if (Math.random() < 0.1) {
-			if (tbkItem.getVolume() > 10000) {
+		// 对特殊的商品以随机概率对goodsTypeId做特殊处理
+		boolean isSpecial = false;
+		if (tbkItem.getVolume() > 10000) {
+			if (Math.random() < 0.1) {
 				tbkItem.setGoodsTypeId(GoodsType.All.STARS.id);
-			} else if (Double.parseDouble(tbkItem.getZk_final_price()) < 10) {
+			}
+		} else if (Double.parseDouble(tbkItem.getZk_final_price()) < 10) {
+			if (Math.random() < 0.1) {
 				tbkItem.setGoodsTypeId(GoodsType.All.JKJ.id);
 			}
 		}

@@ -9,8 +9,8 @@ public class ItemInfoGetResponse<X> {
 	class R {
 		public List<X> n_tbk_item;
 	}
-	class T {
+	class Z {
 		public R results;
 	}
-	public T tbk_item_info_get_response;
+	public Z tbk_item_info_get_response;
 }

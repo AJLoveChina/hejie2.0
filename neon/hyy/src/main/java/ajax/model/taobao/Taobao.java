@@ -239,7 +239,7 @@ public class Taobao {
 	 * 根据 商品id从淘宝获取一件商品的详细信息
 	 * @return null if error
 	 */
-	public static <T extends TbkItem<T>> T getTbkItemByIDFromTaobao(String num_iid, Platform platform, Class<T> cls) {
+	public static Object getTbkItemByIDFromTaobao(String num_iid, Platform platform) {
 		TaobaoClient client = new DefaultTaobaoClient(url, Taobao.getTAOBAO_NIGEERHUO388_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO388_APP_SECRET());
 		TbkItemInfoGetRequest req = new TbkItemInfoGetRequest();
 		req.setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,nick,seller_id,volume");
@@ -256,12 +256,13 @@ public class Taobao {
 		
 		switch(platform) {
 		case WAP:
-			ItemInfoGetResponse<T> itemInfoGetResponse2 = gson.fromJson(rsp.getBody(), new TypeToken<ItemInfoGetResponse<T>>(){}.getType());
+			ItemInfoGetResponse<TbkItemWap> itemInfoGetResponse2 = gson.fromJson(rsp.getBody(), new TypeToken<ItemInfoGetResponse<TbkItemWap>>(){}.getType());
 			return itemInfoGetResponse2.tbk_item_info_get_response.results.n_tbk_item.get(0);
 			
 		case PC:
 		default:
-			ItemInfoGetResponse<T> itemInfoGetResponse = gson.fromJson(rsp.getBody(), new TypeToken<ItemInfoGetResponse<T>>(){}.getType());
+			ItemInfoGetResponse<TbkItemPC> itemInfoGetResponse = gson.fromJson(rsp.getBody(), new TypeToken<ItemInfoGetResponse<TbkItemPC>>() {
+			}.getType());
 			return itemInfoGetResponse.tbk_item_info_get_response.results.n_tbk_item.get(0);
 		}
 	}
@@ -335,8 +336,8 @@ public class Taobao {
 		}
 		
 	}
-	public static void main(String[] args) {
-		getITaobaoItemsAndSave();
+	public static void main(String[] args) throws Exception {
+		getItemsFromExcel();
 	}
 	
 	public static String getITaobao() throws ApiException {
@@ -348,7 +349,10 @@ public class Taobao {
 		return rsp.getBody();
 	}
 	
-	
+	/**
+	 * 从Excel读取tbkitem 和coupon 商品
+	 * @throws Exception
+	 */
 	public static void getItemsFromExcel() throws Exception {
 		List<TaobaoExcelItem> excelItems = Tools.readExcel(new File("C:\\Users\\ajax\\Downloads\\data.xls"), TaobaoExcelItem.class);
 		for (TaobaoExcelItem taobaoExcelItem : excelItems) {
