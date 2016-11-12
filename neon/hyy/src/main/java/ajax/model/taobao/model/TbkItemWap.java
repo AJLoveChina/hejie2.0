@@ -1,5 +1,7 @@
 package ajax.model.taobao.model;
 
+import org.hibernate.Session;
+
 import ajax.model.entity.Entity;
 
 public class TbkItemWap extends TbkItem<TbkItemWap>{
@@ -14,4 +16,16 @@ public class TbkItemWap extends TbkItem<TbkItemWap>{
 		
 		return TbkItem.DETAIL_URL_PREFIX + this.getId() + "?platform=" + platform.getId();
 	}
+	
+	@Override
+	public void save(Session session) {
+		super.save(session);
+	}
+	
+	@Override
+	public boolean save() {
+		return super.save();
+	}
+	
+	
 }

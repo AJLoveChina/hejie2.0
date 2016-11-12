@@ -225,7 +225,7 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 	}
 	
 	public TbkItemPC toTbkItemPC() throws ApiException {
-		TbkItemPC tbkItem = (TbkItemPC)Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.PC);
+		TbkItemPC tbkItem = (TbkItemPC)Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.PC, TbkItemPC.class);
 		
 		tbkItemGetFieldInfoFromTaobaoExcelItem(tbkItem);
 		return tbkItem;
@@ -233,7 +233,7 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 	
 	
 	public TbkItemWap toTbkItemWap() {
-		TbkItemWap tbkItem = (TbkItemWap)Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.WAP);
+		TbkItemWap tbkItem = (TbkItemWap)Taobao.getTbkItemByIDFromTaobao(this.num_iid, Platform.WAP, TbkItemWap.class);
 		tbkItemGetFieldInfoFromTaobaoExcelItem(tbkItem);
 		return tbkItem;
 	}
@@ -250,6 +250,7 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 		tbkItem.setCommission(Double.parseDouble(this.commission));
 		tbkItem.setShopName(this.shopName);
 		tbkItem.setWebsite(this.website);
+		tbkItem.setZk_final_price_wap(Double.parseDouble(this.price));
 		
 		if (this.coupon != null && this.coupon.getId() >  0) {
 			tbkItem.setHasCoupon(true);

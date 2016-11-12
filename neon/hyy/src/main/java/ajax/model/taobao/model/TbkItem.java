@@ -362,6 +362,12 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 		return super.save();
 	}
 	
+	@Override
+	public void save(Session session) {
+		this.small_images_string = this.changeSmallImagesToString(this.small_images);
+		super.save(session);
+	}
+	
 	/**
 	 * return this.isInThisItemStatus(ItemStatus.IS_TBKITEM_CHANGE_TO_NORMAL_ITEM)
 	 * @return

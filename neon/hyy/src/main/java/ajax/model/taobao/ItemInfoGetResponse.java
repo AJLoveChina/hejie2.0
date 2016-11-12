@@ -4,6 +4,7 @@ import java.util.List;
 
 import ajax.model.taobao.model.TbkItem;
 
+@Deprecated
 public class ItemInfoGetResponse<X> {
 	
 	class R {
