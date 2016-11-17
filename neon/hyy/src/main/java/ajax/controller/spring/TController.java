@@ -28,6 +28,7 @@ import ajax.model.AjaxResponse;
 import ajax.model.PageChoice;
 import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
+import ajax.model.taobao.Coupon;
 import ajax.model.taobao.model.GoodsType;
 import ajax.model.taobao.model.Platform;
 import ajax.model.taobao.model.TbkItem;
@@ -50,7 +51,15 @@ public class TController {
 	public String tList() {
 		List<TbkItem> tbkItemsRoll = GoodsType.getTBKItemsOfRoll(Platform.PC);
 		
+		List<GoodsType> goodsTypes = GoodsType.getShowGoodsType();
+		
+		RealTimePagination<Coupon> pagination = new RealTimePagination<>();
+		List<Coupon> coupons = pagination.get(Coupon.COUPON_PAGINATION_GROUPID, 1, new Coupon());
+		
 		request.setAttribute("itemsRoll", tbkItemsRoll);
+		request.setAttribute("goodsTypes", goodsTypes);
+		request.setAttribute("coupons", coupons);
+		
 		return "/views/tbk/list";
 	}
 	

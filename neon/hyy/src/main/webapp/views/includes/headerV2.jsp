@@ -133,8 +133,7 @@
 								page : 1,
 								goodsTypeId : item.id
 						};
-						var url = "/t/tbkQuery/view?data=" + encodeURIComponent(JSON.stringify(params));
-						return encodeURI(url);
+						return goods.getGoodsTypeHref(params);
 					}
 					
 				})

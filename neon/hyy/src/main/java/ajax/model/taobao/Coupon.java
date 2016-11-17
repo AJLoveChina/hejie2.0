@@ -1,9 +1,14 @@
 package ajax.model.taobao;
 
+import java.util.List;
+
 import ajax.model.entity.Entity;
 import ajax.model.entity.EntityInterface;
+import ajax.model.pagesSeparate.RealTimePagination;
+import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
 
-public class Coupon extends Entity<Coupon> implements EntityInterface<Coupon>{
+public class Coupon extends Entity<Coupon> implements EntityInterface<Coupon>, RealTimePaginationConfiguration{
+	public static final String COUPON_PAGINATION_GROUPID = "ajax.model.taobao.Coupon";
 	private long id;
 	////@ExcelColumnName("商品id")
 	private String num_iid;
@@ -186,6 +191,33 @@ public class Coupon extends Entity<Coupon> implements EntityInterface<Coupon>{
 	}
 	public void setCoupon_link_slick(String coupon_link_slick) {
 		this.coupon_link_slick = coupon_link_slick;
+	}
+	
+	
+	@Override
+	public int getPaginationPageSize() {
+		return 20;
+	}
+	@Override
+	public String getPrimaryKeyValue() {
+		return this.getId() + "";
+	}
+	@Override
+	public String getPaginationPrimaryKey() {
+		return "id";
+	}
+	@Override
+	public PK_TYPE getPaginationPrimaryKeyType() {
+		return PK_TYPE.LONG;
+	}
+	
+	public static void main(String[] args) {
+		List<Coupon> coupons = Coupon.get(1, 1000, Coupon.class);
+		
+		RealTimePagination<Coupon> pagination = new RealTimePagination<>();
+		for (Coupon coupon : coupons) {
+			pagination.saveWithoutSaveT(Coupon.COUPON_PAGINATION_GROUPID, coupon);
+		}
 	}
 	
 }

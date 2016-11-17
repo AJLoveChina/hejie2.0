@@ -15,10 +15,11 @@ import org.hibernate.criterion.Restrictions;
 
 import com.google.gson.Gson;
 
+import ajax.model.Stamp;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
 
-public class GoodsType {
+public class GoodsType implements Stamp{
 	public static enum All{
 		DIANQI(10),
 		JIAJU(30),
@@ -211,7 +212,7 @@ public class GoodsType {
 					Session session = HibernateUtil.getCurrentSession();
 					session.beginTransaction();
 					Criteria criteria = session.createCriteria(TbkItemWap.class);
-					criteria.add(Restrictions.eq("goodsTypeId", 130));
+					criteria.add(Restrictions.eq("goodsTypeId", GoodsType.All.ROLL.id));
 					criteria.setFirstResult(0);
 					criteria.setMaxResults(20);
 					criteria.addOrder(Order.desc("id"));
@@ -227,7 +228,7 @@ public class GoodsType {
 					Session session = HibernateUtil.getCurrentSession();
 					session.beginTransaction();
 					Criteria criteria = session.createCriteria(TbkItemPC.class);
-					criteria.add(Restrictions.eq("goodsTypeId", 130));
+					criteria.add(Restrictions.eq("goodsTypeId", GoodsType.All.ROLL.id));
 					criteria.setFirstResult(0);
 					criteria.setMaxResults(20);
 					criteria.addOrder(Order.desc("id"));
@@ -285,5 +286,23 @@ public class GoodsType {
 		} else {
 			return 140;
 		}
+	}
+	
+	
+	@Override
+	public String getStampHref() {
+		return "javascript:;";
+	}
+	@Override
+	public String getStampIconClassName() {
+		return "aj-icon " + this.icon;
+	}
+	@Override
+	public String getStampName() {
+		return this.shortName;
+	}
+	@Override
+	public String getStampMoreInfo() {
+		return this.id + "";
 	}
 }

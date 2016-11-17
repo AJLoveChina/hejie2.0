@@ -90,7 +90,7 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	private int goodsTypeId = 140;	// 140 means all type
 	private String commission_rate;
 	//佣金
-	private double commission;
+	private Double commission = 0.0;
 	private String website;
 	private String shopName;
 	private boolean hasCoupon = false;
@@ -108,13 +108,15 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	public boolean isHasCoupon() {
 		return hasCoupon;
 	}
-	public void setHasCoupon(boolean hasCoupon) {
+	public void setHasCoupon(Boolean hasCoupon) {
+		if (hasCoupon == null) hasCoupon = false;
 		this.hasCoupon = hasCoupon;
 	}
 	public long getCoupon_id() {
 		return coupon_id;
 	}
-	public void setCoupon_id(long coupon_id) {
+	public void setCoupon_id(Long coupon_id) {
+		if (coupon_id == null) coupon_id = 0L;
 		this.coupon_id = coupon_id;
 	}
 	public String getShopName() {
@@ -135,10 +137,10 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	public void setCommission_rate(String commission_rate) {
 		this.commission_rate = commission_rate;
 	}
-	public double getCommission() {
+	public Double getCommission() {
 		return commission;
 	}
-	public void setCommission(double commission) {
+	public void setCommission(Double commission) {
 		this.commission = commission;
 	}
 	public int getGoodsTypeId() {

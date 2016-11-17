@@ -62,46 +62,12 @@
 			dots: true,
 			centerMode: true,
 			infinite: true,
-			slidesToShow: 3,
+			slidesToShow: 2,
 			slidesToScroll: 1,
 
 		  	autoplay: true,
 		  	autoplaySpeed: 2000
 		});
-		
-		
-		
-		/* slidesjs({
-			start : 1,
-			pagination : {
-				active : true
-			},
-			navigation : {
-				active : false
-			},
-			play : {
-				auto : true,
-				interval : 3000
-			},
-			callback : {
-				loaded : function () {
-					container.fadeIn();
-					container.css("height" , container.width() / 2);
-					container.find("img.aimg").each(function () {
-						$(this).css({
-							width : container.css('width'),
-							height : container.css('height')
-						});
-					});
-					container.find('.atitle').each(function () {
-						$(this).css({
-							top : container.height() - $(this).height() + "px",
-							bottom : 'auto'
-						});
-					});
-				}
-			}
-	    }); */
 	})
 </script>
 </div>

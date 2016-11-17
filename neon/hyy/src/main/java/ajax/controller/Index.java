@@ -3,7 +3,6 @@ package ajax.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,20 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.PropertyConfigurator;
-
-import ajax.model.*;
-import ajax.tools.*;
-import ajax.model.entity.*;
-import ajax.model.taobao.model.GoodsType;
-import ajax.model.taobao.model.Platform;
+import ajax.model.QueryParams;
+import ajax.model.entity.Item;
+import ajax.model.entity.Page;
+import ajax.tools.Tools;
 /**
  * Servlet implementation class Index
  */
 @WebServlet("")
 public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	
+	private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Index.class);
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,26 +32,7 @@ public class Index extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    @Override
-    public void init() throws ServletException {
-    	
-    	try {
-    		
-			Class.forName("ajax.model.ConfigFromProperties");
-			
-			Class.forName("ajax.model.ConfigFromSQL");
-			
-			GoodsType.getTBKItemsOfRoll(Platform.PC);
-			GoodsType.getTBKItemsOfRoll(Platform.WAP);
-			
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	super.init();
-    }
+   
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -73,7 +52,6 @@ public class Index extends HttpServlet {
 		
 		QueryParams qp = new QueryParams(request);
 		
-//		items = Item.query(qp);
 		items = Page.getPage(qp.getPage());
 		
 		List<Item> hotItems = Item.getHotItems();
@@ -86,6 +64,7 @@ public class Index extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
 		
 		rd.forward(request, response);
+		
 	}
 
 }
