@@ -9,6 +9,12 @@ textarea.form-control{
 ul li{
 	list-style: none;
 }
+.float-right{
+	float:right;
+}
+.float-left{
+	float:left;
+}
 
 body {
   font-size: 14px;

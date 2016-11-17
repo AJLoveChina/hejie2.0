@@ -219,5 +219,16 @@ public class Coupon extends Entity<Coupon> implements EntityInterface<Coupon>, R
 			pagination.saveWithoutSaveT(Coupon.COUPON_PAGINATION_GROUPID, coupon);
 		}
 	}
+	@Override
+	public String toString() {
+		return "Coupon [id=" + id + ", num_iid=" + num_iid + ", title=" + title + ", pict_url=" + pict_url
+				+ ", item_url=" + item_url + ", goods_type=" + goods_type + ", click_url=" + click_url + ", price="
+				+ price + ", volume=" + volume + ", commission_rate=" + commission_rate + ", commission=" + commission
+				+ ", nick=" + nick + ", nick_id=" + nick_id + ", shopName=" + shopName + ", website=" + website
+				+ ", coupon_id=" + coupon_id + ", coupon_total=" + coupon_total + ", coupon_remain=" + coupon_remain
+				+ ", coupon_denomination=" + coupon_denomination + ", coupon_start_time=" + coupon_start_time
+				+ ", coupon_end_time=" + coupon_end_time + ", coupon_link=" + coupon_link + ", coupon_link_slick="
+				+ coupon_link_slick + "]";
+	}
 	
 }
