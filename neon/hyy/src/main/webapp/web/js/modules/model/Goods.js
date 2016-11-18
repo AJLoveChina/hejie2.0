@@ -34,7 +34,15 @@ define(["tools/tools"], function(tools) {
 			}, params);
 			var url = "/t/tbkQuery/view?data=" + encodeURIComponent(JSON.stringify(params));
 			return encodeURI(url);
+		},
+		
+		getCoupons : function (page, fn) {
+			$.ajax({
+			
+			
+			})
 		}
+
 
 
 	};

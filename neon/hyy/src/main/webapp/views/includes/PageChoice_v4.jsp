@@ -3,6 +3,7 @@
 	PageChoice pageChoice = (PageChoice) request.getAttribute("pageChoice");
  %>
 
+<!-- page choice v4 の js code is inside tools/tools.js -->
 <div class="aj-page-choices-v2">
 	<ul class="aul clearfix ajs-page-choices ajs-page-choices-v4-ul" 
 		data-curPage="<%=pageChoice.getCurPage() %>" 
@@ -12,7 +13,6 @@
 		data-a-cur-cls="cur"
 		data-a-cls="atag" >
 		
-				
 		<li class="ali">
 			<span>...</span>
 		</li>
