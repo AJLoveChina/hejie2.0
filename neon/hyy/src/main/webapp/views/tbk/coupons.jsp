@@ -29,7 +29,7 @@
 			</c:forEach>
 
 
-			<span ng-controller="list" ng-cloak>
+			<span ng-controller="list" ng-cloak ng-init="s.curPage = ${pageChoice.getCurPage() }">
 				<div class="coupon col-sm-2 col-xs-4" ng-repeat="coupon in s.coupons">
 					<div class="inside">
 						<div class="img-wrap">

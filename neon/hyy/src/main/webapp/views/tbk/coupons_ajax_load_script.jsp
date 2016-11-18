@@ -13,6 +13,7 @@ $(function () {
 				$scope.s.curPage = 1;
 				$scope.s.isLoading = false;
 				
+				
 				$rootScope.$on("aj.loadNextPage", function () {
 					if ($scope.s.isLoading) return;
 					$scope.s.isLoading = true;
