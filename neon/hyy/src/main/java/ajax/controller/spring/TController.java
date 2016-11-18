@@ -4,11 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.boot.archive.scan.spi.PackageInfoArchiveEntryHandler;
@@ -21,9 +24,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
+import ajax.model.AjaxRequest;
 import ajax.model.AjaxResponse;
 import ajax.model.PageChoice;
 import ajax.model.pagesSeparate.RealTimePagination;
@@ -46,6 +51,30 @@ public class TController {
 	private HttpServletRequest request;
 	@Autowired
 	private HttpServletResponse response;
+	
+	@RequestMapping(value="/coupons_ajax")
+	@ResponseBody
+	public AjaxResponse<List<Coupon>> getCouponsForAjax(@RequestParam(name="page",defaultValue="1") int page) {
+		RealTimePagination<Coupon> pagination = new RealTimePagination<>();
+		List<Coupon> coupons = pagination.get(Coupon.COUPON_PAGINATION_GROUPID, page, new Coupon());
+		
+		AjaxResponse<List<Coupon>> ar = new AjaxResponse<>();
+		ar.setIsok(true);
+		ar.setData(coupons);
+		return ar;
+	}
+	
+	@RequestMapping(value="/coupons/{page}")
+	public ModelAndView getCouponsPage(@PathVariable("page") int page) {
+		RealTimePagination<Coupon> pagination = new RealTimePagination<>();
+		List<Coupon> coupons = pagination.get(Coupon.COUPON_PAGINATION_GROUPID, page, new Coupon());
+		PageChoice choice = new PageChoice(page, "/t/coupons/{page}");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("coupons", coupons);
+		map.put("pageChoice", choice);
+		return new ModelAndView("/views/tbk/coupons", map);
+	}
 	
 	@RequestMapping(value="/list")
 	public String tList() {

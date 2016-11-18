@@ -143,7 +143,11 @@ define(function () {
 			
 
 	$(function () {
+		/**
+		 * 1. 异步增加页码 : jDom.trigger("aj.ajaxIncreasePage");
+		 */
 		$(".ajs-page-choices-v4-ul").each(function () {
+			
 			var cur = parseInt($(this).attr("data-curPage")),
 				maxPage = parseInt($(this).attr("data-maxPage")),
 				liCls = $(this).attr("data-li-cls"),
@@ -151,11 +155,16 @@ define(function () {
 				aCurCls = $(this).attr("data-a-cur-cls"),
 				aCls = $(this).attr("data-a-cls")
 				uniCls = "aj-parsed";
-				
-				if ($(this).hasClass(uniCls)) {
-					return false;
-				}
-				$(this).addClass(uniCls);
+			
+			// 事件绑定到每个dom对象上是为了...(不要修改)
+			$(this).on("aj.ajaxIncreasePage", function () {
+				// 由ajax行为  异步增加了 当前页码
+				cur++;
+			});
+			if ($(this).hasClass(uniCls)) {
+				return false;
+			}
+			$(this).addClass(uniCls);
 			
 			var arr = [],
 				urls = [],

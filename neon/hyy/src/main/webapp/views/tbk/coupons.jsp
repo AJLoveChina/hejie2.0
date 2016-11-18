@@ -12,53 +12,16 @@
 %>
 
 <jsp:include page="/views/includes/headerV2.jsp"></jsp:include>
-<%@ include file="/views/tbk/style.jsp"%>
-<%@ include file="/views/tbk/script.jsp"%>
 
 <div style="height: 20px;"></div>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-8 col-xs-12">
-			<jsp:include page="/views/tbk/homeRoll.jsp"></jsp:include>
-
-		</div>
-		<div class="col-sm-4 col-xs-12">
-			<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
-
-			<div id="aj-goodstypes-stamps">
-				<c:set var="stamps" value="${goodsTypes }" scope="request"></c:set>
-				<jsp:include page="/views/tools/stamps.jsp"></jsp:include>
-				<script>
-					$(function() {
-						require(["main"], function() {
-							require(["model/Goods"], function(goods) {
-								$("#aj-goodstypes-stamps").find(".stamp-link").each(
 	
-								function() {
-									var params = {
-										plateForm: goods.getPlatForm(),
-										page: 1,
-										goodsTypeId: $(
-										this).parents(".ali").eq(
-										0).data("moreinfo")
-									};
-									$(this).attr("href", goods.getGoodsTypeHref(params));
-								})
-							})
-						})
-					})
-				</script>
-			</div>
-
-		</div>
-	</div>
-
 	<div class="row">
 		<p class="coupons-title alert alert-info">
-			<em class="aj-icon aj-icon-biaoqian"></em> 今日优惠券 <a href="/t/coupons/1"
-				class="label label-primary float-right">传送到到优惠券大陆</a>
+			<em class="aj-icon aj-icon-biaoqian"></em> 全部优惠券 <a href="javascript:;"
+				class="label label-primary float-right">欢迎来到优惠券大陆</a>
 		</p>
-		<div class="coupons clearfix coupons-hide-more" id="coupons-container">
+		<div class="coupons clearfix" id="coupons-container">
 			<%@ include file="/views/tbk/coupon-style.jsp"%>
 			<c:forEach items="${coupons }" var="coupon">
 				<c:set var="coupon" value="${coupon }" scope="request"></c:set>
@@ -107,33 +70,12 @@
 			
 			<%@ include file="/views/tbk/coupons_ajax_load_script.jsp" %>
 		</div>
-		<div class="show-hidden-coupons is-zhedie"
-			id="control-couponse-area-height">
-			<span class="status-a"> <em
-				class="glyphicon glyphicon-chevron-down"></em> 展开所有优惠券 <em
-				class="glyphicon glyphicon-chevron-down"></em>
-			</span> <span class="status-b"> <em
-				class="glyphicon glyphicon-chevron-up"></em> 点击我折叠优惠券 <em
-				class="glyphicon glyphicon-chevron-up"></em>
-			</span>
-		</div>
-		<script>
-			$(function() {
-				$("#control-couponse-area-height").on("click", function() {
-					$("#coupons-container").toggleClass("coupons-hide-more");
-					$(this).toggleClass("is-zhedie");
-				})
-			})
-		</script>
+	</div>
+	
+	<div style="display:none;">
+		<jsp:include page="/views/includes/PageChoice_v4.jsp"></jsp:include>
 	</div>
 
-	<div class="row">
-		<div class="col-sm-12 col-xs-12">
-
-			<%-- <%@ include file="/views/tbk/tbkitems-roll-show.jsp" %> --%>
-
-		</div>
-	</div>
 </div>
 <div style="height: 10px;"></div>
 <jsp:include page="/views/includes/footer.jsp"></jsp:include>
