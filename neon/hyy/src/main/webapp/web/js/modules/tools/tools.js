@@ -1,7 +1,4 @@
 define(function () {
-	var timeagoInstance = new timeago();
-	timeagoInstance.render($(".time_need_to_be_rendered"), 'zh_CN'); 
-	
 	
 	var tools = {
 		joinParams : function (url, params) {
@@ -220,6 +217,15 @@ define(function () {
 			}
 		});
 	})
-			
+	
+	
+	var timeagoInstance = new timeago();
+	var timeagoInstanceDoms = $(".time_need_to_be_rendered");
+	timeagoInstanceDoms.each(function () {
+		var text = $(this).text();
+		$(this).text(tools.timeago(text.replace(/\.0$/, "")));
+	})
+
+	
 	return tools;
 });

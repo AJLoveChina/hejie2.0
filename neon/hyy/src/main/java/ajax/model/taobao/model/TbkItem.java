@@ -10,7 +10,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Restrictions;import org.hibernate.transform.RootEntityResultTransformer;
 
 import ajax.model.FormComponents;
 import ajax.model.ItemStatus;
@@ -20,6 +20,7 @@ import ajax.model.entity.Entity;
 import ajax.model.entity.EntityInterface;
 import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.pagesSeparate.RealTimePaginationConfiguration;
+import ajax.model.taobao.Coupon;
 import ajax.model.taobao.TaobaoUtil;
 import ajax.tools.HibernateUtil;
 import ajax.tools.Tools;
@@ -514,7 +515,7 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	public static final String DETAIL_URL_PREFIX = "/t/one/";
 	
 	public static void main(String[] args) {
-		TbkItem.generateTbkItemsPCAndWapPages();
+		TbkItem.getCouponLinkSlickOnCouponIdAlreadyKnown();
 	}
 	
 	/**
@@ -525,5 +526,64 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	public static int getGoodsTypeIdByKeyWord(String keyword) {
 		return GoodsType.getGOodsTypeIdByKeyWord(keyword);
 	}
+	
+	/**
+	 * 在已知couponid的情况下获取couponLinkSlick(优惠券领取slick链接)
+	 */
+	private static void getCouponLinkSlickOnCouponIdAlreadyKnown() {
+		List<TbkItemPC> tbkItemPCs = null;
+		do {
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(TbkItemPC.class);
+			criteria.add(Restrictions.eq("hasCoupon", true));
+			criteria.addOrder(Order.desc("id"));
+			criteria.setMaxResults(1000);
+			criteria.setFirstResult(0);
+			tbkItemPCs = TbkItemPC.getListWithoutStatus(ItemStatus.IS_GET_COUPON_LINK_SLICK, criteria, TbkItemPC.class);
+			
+			for (TbkItemPC item : tbkItemPCs) {
+				try {
+					Coupon coupon = Coupon.get(Coupon.class, item.getCoupon_id());
+					item.setCoupon_link_slick(coupon.getCoupon_link_slick());
+					item.addItemStatus(ItemStatus.IS_GET_COUPON_LINK_SLICK);
+					item.update();
+				} catch(Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+			
+		} while (tbkItemPCs.size() == 1000);
+		
+		
+		List<TbkItemWap>  tbkItemWaps = null;
+		do {
+			Session session = HibernateUtil.getCurrentSession();
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(TbkItemWap.class);
+			criteria.add(Restrictions.eq("hasCoupon", true));
+			criteria.addOrder(Order.desc("id"));
+			criteria.setMaxResults(1000);
+			criteria.setFirstResult(0);
+			tbkItemWaps = TbkItemWap.getListWithoutStatus(ItemStatus.IS_GET_COUPON_LINK_SLICK, criteria, TbkItemWap.class);
+			
+			
+			for (TbkItemWap item : tbkItemWaps) {
+				try {
+					Coupon coupon = Coupon.get(Coupon.class, item.getCoupon_id());
+					item.setCoupon_link_slick(coupon.getCoupon_link_slick());
+					item.addItemStatus(ItemStatus.IS_GET_COUPON_LINK_SLICK);
+					item.update();
+				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
+				}
+			}
+			
+		} while (tbkItemWaps.size() == 1000);
+		
+		
+	}
+	
+	
 	
 }

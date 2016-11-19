@@ -641,5 +641,22 @@ public class Entity<T> implements Iterable<T>,Iterator<T>, EntityInterface<T>{
 	public static void notThisStatus(Criteria criteria, ItemStatus itemStatus) {
 		criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + itemStatus.wrapWithBE() + "%")));
 	}
+	
+	/**
+	 * 
+	 * @param itemStatus
+	 * @param criteria
+	 * @param cls
+	 * @return empty list if exception
+	 */
+	public static <T> List<T> getListWithoutStatus(ItemStatus itemStatus, Criteria criteria, Class<T> cls) {
+		try {
+			criteria.add(Restrictions.not(Restrictions.like("statusSplitByComma", "%" + itemStatus.wrapWithBE() + "%")));
+			return criteria.list();
+		} catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			return new ArrayList<>();
+		}
+	}
 
 }

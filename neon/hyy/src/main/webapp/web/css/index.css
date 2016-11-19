@@ -657,12 +657,14 @@ body {
 	.aj-hd-v2 .nav-bar .container{
 		position:relative;
 	}
-	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area{
-		display:block!important;
+	.aj-hd-v2 .nav-bar .aj-mobile-sign-area{
 		height:35px!important;
 		line-height:35px;
 	}
-	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area a {
+	.aj-hd-v2 .nav-bar.affix .aj-mobile-sign-area{
+		display:block!important;
+	}
+	.aj-hd-v2 .nav-bar .aj-mobile-sign-area a {
 		color:white;
 		font-size:12px;
 	}

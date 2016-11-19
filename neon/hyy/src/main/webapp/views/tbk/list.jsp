@@ -24,35 +24,15 @@
 		</div>
 		<div class="col-sm-4 col-xs-12">
 			<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
-
 			<div id="aj-goodstypes-stamps">
 				<c:set var="stamps" value="${goodsTypes }" scope="request"></c:set>
 				<jsp:include page="/views/tools/stamps.jsp"></jsp:include>
-				<script>
-					$(function() {
-						require(["main"], function() {
-							require(["model/Goods"], function(goods) {
-								$("#aj-goodstypes-stamps").find(".stamp-link").each(
-	
-								function() {
-									var params = {
-										plateForm: goods.getPlatForm(),
-										page: 1,
-										goodsTypeId: $(
-										this).parents(".ali").eq(
-										0).data("moreinfo")
-									};
-									$(this).attr("href", goods.getGoodsTypeHref(params));
-								})
-							})
-						})
-					})
-				</script>
+				<%@ include file="/views/tbk/stamps.script.jsp" %>
 			</div>
 
 		</div>
 	</div>
-
+	<div style="height:10px"></div>
 	<div class="row">
 		<p class="coupons-title alert alert-info">
 			<em class="aj-icon aj-icon-biaoqian"></em> 今日优惠券 <a href="/t/coupons/1"

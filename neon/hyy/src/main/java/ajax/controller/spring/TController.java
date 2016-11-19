@@ -253,10 +253,51 @@ public class TController {
 		map.put("model", tbkItem);
 		map.put("title", tbkItem.getTitle());
 		map.put("commentAreaId", commentAreaId);
-		
-		return new ModelAndView("views/tbk/one", map);
+		return this.getTbkItemById(map);
 		
 	}
+	
+	private ModelAndView getTbkItemById(Map<String, Object> map) {
+		map.put("stamps", GoodsType.getShowGoodsType());
+		return new ModelAndView("views/tbk/one", map);
+	}
+
+	@RequestMapping(value="/one/pc/{id}")
+	public ModelAndView getTbkItemPCById(@PathVariable("id") long id) {
+		
+		TbkItem tbkItem;
+		String commentAreaId = null;
+		tbkItem = TbkItemPC.get(TbkItemPC.class, id);
+		commentAreaId = "ajax.model.taobao.model.TbkItemPC-" + tbkItem.getId();
+		
+		request.setAttribute("model", tbkItem);
+		Map<String, Object> map = new HashMap<>();
+		map.put("model", tbkItem);
+		map.put("title", tbkItem.getTitle());
+		map.put("commentAreaId", commentAreaId);
+		
+		return this.getTbkItemById(map);
+	}
+	
+	@RequestMapping(value="/one/wap/{id}")
+	public ModelAndView getTbkItemWapById(@PathVariable("id") long id) {
+		
+		TbkItem tbkItem;
+		String commentAreaId = null;
+		tbkItem = TbkItemWap.get(TbkItemWap.class, id);
+		commentAreaId = "ajax.model.taobao.model.TbkItemWap-" + tbkItem.getId();
+		
+		request.setAttribute("model", tbkItem);
+		Map<String, Object> map = new HashMap<>();
+		map.put("model", tbkItem);
+		map.put("title", tbkItem.getTitle());
+		map.put("commentAreaId", commentAreaId);
+		
+		return this.getTbkItemById(map);
+		
+	}
+	
+	
 	
 	@Test
 	public void test1() {

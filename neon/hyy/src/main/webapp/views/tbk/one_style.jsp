@@ -5,9 +5,7 @@
 	}
 	.tbkitem-content .top{}
 	.tbkitem-content .top .img-wrap{
-	    width: 250px;
 	    height: 250px;
-	    margin-right: 20px;
 	    border: 1px solid #f2f2f2;
 	}
 	.tbkitem-content .top .info{}

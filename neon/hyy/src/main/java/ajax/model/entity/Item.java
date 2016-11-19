@@ -42,6 +42,7 @@ import ajax.model.Topic;
 import ajax.model.UniqueString;
 import ajax.model.UrlRoute;
 import ajax.model.exception.AJRunTimeException;
+import ajax.model.taobao.model.TbkItemPC;
 import ajax.spider.Spider3;
 import ajax.spider.rules.Rules;
 import ajax.spider.rules.RulesTag;

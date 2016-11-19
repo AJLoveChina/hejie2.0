@@ -43,14 +43,14 @@
 
 <div id="aj-headerV2" class="aj-hd-v2">
     <div id="aj-hd-v2-top" class="top">
-    	<div class="container" style="width:1050px;">
+    	<div class="container" style="width:100%;max-width:1050px;">
     		<div class="row clearfix">
-    			<div class="col-sm-2">
+    			<div class="col-sm-2 col-xs-5">
     				<a href="/">
     					<img class="img-responsive img" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logoV2200x80.png" />
     				</a>
     			</div>
-    			<div class="col-sm-4 search-area" ng-controller="searchController">
+    			<div class="col-sm-4 col-xs-7 search-area" ng-controller="searchController">
     				<div class="input-wrap">
     					<span class="glyphicon glyphicon-search icon" ng-click="searchV2()"></span>
     					<input ng-keyup="keyup($event)" class="search-input" ng-model="s.keyWord" placeholder="二货在手 好货我有">
@@ -66,7 +66,7 @@
     	</div>
     </div>
     <div id="aj-hd-v2-fixednav" class="nav-bar" ng-controller="listGoodsTypeController">
-    	<div class="container" style="width:1050px;">
+    	<div class="container" style="width:100%;max-width:1050px;height:34px;overflow:hidden;">
     		<ul ng-cloak>
 	    		<li class="li" ng-repeat="item in s.list">
 	    			<a href="{{getHref(item)}}">{{item.name}}</a>

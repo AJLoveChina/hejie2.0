@@ -242,7 +242,12 @@ $(function () {
 					var platform = $scope.getPlatForm();
 					for (i = 0; i < ar.data.length; i++) {
 						ar.data[i].js_time = tools.timeago(ar.data[i].dateEnteredOfSave);
-						ar.data[i].js_detail_url = $scope.s.detail_url + ar.data[i].id + "?platform=" + platform;
+						if (tools.isWap()) {
+							ar.data[i].js_detail_url = $scope.s.detail_url + "wap/" + ar.data[i].id;
+						} else {
+							ar.data[i].js_detail_url = $scope.s.detail_url + "pc/" + ar.data[i].id;
+						}
+						
 					}
 				}
 				

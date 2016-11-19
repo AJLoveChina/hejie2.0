@@ -7,7 +7,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<jsp:include page="/views/includes/header.jsp"></jsp:include>
+<jsp:include page="/views/includes/headerV2.jsp"></jsp:include>
 <jsp:include page="/views/tbk/one_style.jsp"></jsp:include>
 <jsp:include page="/views/item/pendant.jsp"></jsp:include>
 <script>
@@ -26,10 +26,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div id="tbkitem-content-id" class="tbkitem-content">
 			
 				<div class="row top">
-					<div class="col-xs-5 img-wrap img-middle">
+					<div class="col-sm-5  col-xs-12 img-wrap img-middle">
 						<img src="${model.getPict_url() }" class="tbkitem-img img-responsive"/>
 					</div>
-					<div class="col-xs-7 info">
+					<div class="col-sm-7 col-xs-12 info">
 						<h1 class="title">${model.getTitle() }</h1>
 						<span class="sp-line">
 							<span class="short-name" data-shopname="${model.getShopName() }"></span>
@@ -49,10 +49,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<c:if test="${model.isHasCoupon() }">
 							<span class="sp-line" >
 								Yes, 该商品还有优惠券哎,买之前要记得领优惠券哦~
-								<a href="${model.getCoupon_link_slick() }" class="label label-warning">${model.getCoupon_denomination() }</a>
+								<a target="_blank" href="${model.getCoupon_link_slick() }" class="label label-warning">${model.getCoupon_denomination() }</a>
 							</span>
 						</c:if>
-						<a href="${model.getClick_url() }" class="jump-link">链接|传送门</a>
+						<a target="_blank" href="${model.getClick_url() }" class="jump-link">链接|传送门</a>
 					</div>
 				</div>
 				
@@ -65,6 +65,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</c:forEach>
 			</div>
 			
+			<div style="height:10px;"></div>
+			
 			<jsp:include page="/views/item/itemsRecommend.jsp"></jsp:include>
 	
 			<div class="aj-comment-ui-area" data-grounp-id="${commentAreaId }"></div>
@@ -74,22 +76,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="col-sm-4 col-xs-12">
 			<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
 			
-			<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
+			<jsp:include page="/views/tools/stamps.jsp"></jsp:include>
+			<%@ include file="/views/tbk/stamps.script.jsp" %>
 			
-			<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
 		</div>
 	</div>
 
-	
-	<div class="aj-body-right">
-		<jsp:include page="/views/includes/userLogin.jsp"></jsp:include>
-		
-		<jsp:include page="/views/includes/allJokeTypesForHomePage.jsp"></jsp:include>
-		
-		<jsp:include page="/views/joke/jokesSwitch.jsp"></jsp:include>
-		
-		<jsp:include page="/views/huodong/huodong.jsp"></jsp:include>
-	</div>
 </div>
 <div style="height:10px;"></div>
 <script>

@@ -1,6 +1,11 @@
 package ajax.model.taobao.model;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+
+import ajax.model.ItemStatus;
 
 public class TbkItemPC extends TbkItem<TbkItemPC>{
 	public static String getGroupId(int goodsTypeId) {
@@ -22,6 +27,8 @@ public class TbkItemPC extends TbkItem<TbkItemPC>{
 	public boolean save() {
 		return super.save();
 	}
+
+	
 	
 	
 }
