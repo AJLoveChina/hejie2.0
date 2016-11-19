@@ -15,7 +15,7 @@ public class TbkItemPC extends TbkItem<TbkItemPC>{
 	private static Platform platform = Platform.PC;
 	@Override
 	public String getDetailUrl() {
-		return TbkItem.DETAIL_URL_PREFIX + this.getId() + "?platform=" + platform.getId();
+		return TbkItem.DETAIL_URL_PREFIX + "pc/" + this.getId();
 	}
 	
 	@Override

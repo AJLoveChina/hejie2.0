@@ -43,7 +43,7 @@ $(function () {
 	<div class="container">
 		<ul class="bs-docs-footer-links">
 			<li><a href="https://github.com/AJLoveChina">GitHub</a></li>
-			<li><a href="http://www.meajax.com/">Blog</a></li>
+			<li><a href="http://hejie.nigeerhuo.com">Blog</a></li>
 			<li><a href="http://www.oshjf.com">Shop</a></li>
 		</ul>
 		<p>

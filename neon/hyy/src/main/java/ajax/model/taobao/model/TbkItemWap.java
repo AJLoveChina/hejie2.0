@@ -14,7 +14,7 @@ public class TbkItemWap extends TbkItem<TbkItemWap>{
 	@Override
 	public String getDetailUrl() {
 		
-		return TbkItem.DETAIL_URL_PREFIX + this.getId() + "?platform=" + platform.getId();
+		return TbkItem.DETAIL_URL_PREFIX + "wap/" + this.getId();
 	}
 	
 	@Override

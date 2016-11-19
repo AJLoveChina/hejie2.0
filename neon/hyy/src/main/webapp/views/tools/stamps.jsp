@@ -1,13 +1,6 @@
 <%@ page language="java" import="java.util.*, ajax.model.*" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	List<Stamp> stamps = (List<Stamp>)request.getAttribute("stamps");
-
-	System.out.print(stamps.size());
-	
-%>
-
 <style>
 	.aj-right-types-choices{
 		margin-top:10px;	
@@ -135,7 +128,7 @@
 	});
 </script>
 
-<div class="aj-right-types-choices">
+<div class="aj-right-types-choices aj-goodstypes-stamps">
 	<div class="aheader">
 		<ul class="aul">
 			<li class="ali selected">分类导航 </li>
