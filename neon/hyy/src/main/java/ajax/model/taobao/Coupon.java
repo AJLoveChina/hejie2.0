@@ -1,6 +1,7 @@
 package ajax.model.taobao;
 
 import java.util.List;
+import java.util.Random;
 
 import ajax.model.entity.Entity;
 import ajax.model.entity.EntityInterface;
@@ -54,6 +55,21 @@ public class Coupon extends Entity<Coupon> implements EntityInterface<Coupon>, R
 	private String coupon_link;
 	//@ExcelColumnName("商品优惠券推广链接")
 	private String coupon_link_slick;
+	private long likes = 0;
+	private long dislikes = 0;
+	
+	public long getLikes() {
+		return likes;
+	}
+	public void setLikes(long likes) {
+		this.likes = likes;
+	}
+	public long getDislikes() {
+		return dislikes;
+	}
+	public void setDislikes(long dislikes) {
+		this.dislikes = dislikes;
+	}
 	public long getId() {
 		return id;
 	}
@@ -230,5 +246,29 @@ public class Coupon extends Entity<Coupon> implements EntityInterface<Coupon>, R
 				+ ", coupon_end_time=" + coupon_end_time + ", coupon_link=" + coupon_link + ", coupon_link_slick="
 				+ coupon_link_slick + "]";
 	}
+	
+	/**
+	 * 补充一些字段的信息, 根据已有的字段信息
+	 */
+	public void calculateMoreInfo() {
+		/**
+		 * 1.set likes and dislikes
+		 */
+		Random rd = new Random();
+		this.likes = this.volume / 10;
+		this.dislikes = this.likes / (6 + rd.nextInt(4));
+		if (this.commission < 1 && this.volume < 2000) {
+			this.dislikes = this.likes * (1 + rd.nextInt(2));
+		}
+		
+		if (this.volume < 1000) {
+			this.dislikes += this.likes / 4;
+		}
+		
+		if (this.volume > 3000) {
+			this.dislikes /= 2;
+		}
+	}
+	
 	
 }

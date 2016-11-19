@@ -73,7 +73,7 @@
 							<img class="img img-responsive" ng-src="{{coupon.pict_url}}" />
 						</div>
 						<p class="title pad-10 font12">
-							<a href="{{coupon.coupon_link_slick}}">
+							<a href="{{coupon.coupon_link_slick}}" target="_blank" rel="nofollow me">
 								{{coupon.title}} </a>
 						</p>
 						<p class="pad-10 font12 shopname">{{coupon.shopName}}</p>
@@ -81,11 +81,11 @@
 						<div class="user-callback">
 							<div class="likes btn-click">
 								<em class="b-icon glyphicon glyphicon-thumbs-up"></em> <span
-									class="num font12">123</span>
+									class="num font12">{{coupon.likes}}</span>
 							</div>
 							<div class="dislikes btn-click">
 								<em class="glyphicon glyphicon-thumbs-down"></em> <span
-									class="num font-12">25</span>
+									class="num font-12">{{coupon.dislikes}}</span>
 							</div>
 						</div>
 					</div>
@@ -130,7 +130,7 @@
 	<div class="row">
 		<div class="col-sm-12 col-xs-12">
 
-			<%-- <%@ include file="/views/tbk/tbkitems-roll-show.jsp" %> --%>
+			<%@ include file="/views/tbk/tbkitems-roll-show.jsp" %>
 
 		</div>
 	</div>

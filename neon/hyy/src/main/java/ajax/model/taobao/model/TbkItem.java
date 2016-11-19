@@ -95,10 +95,17 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	private String shopName;
 	private boolean hasCoupon = false;
 	private long coupon_id = 0;
+	private String coupon_link_slick  = "";
 	private String coupon_denomination;
 	
 	
 	
+	public void setCoupon_link_slick(String coupon_link_slick) {
+		this.coupon_link_slick = coupon_link_slick;
+	}
+	public String getCoupon_link_slick() {
+		return coupon_link_slick;
+	}
 	public String getCoupon_denomination() {
 		return coupon_denomination;
 	}

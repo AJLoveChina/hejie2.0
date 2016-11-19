@@ -28,13 +28,7 @@ public class Test01 {
 	
 	public static void main(String[] args) {
 		
-		Logger LOGGER = Logger.getLogger(Test01.class);
-		Enumeration enum1 = LOGGER.getAllAppenders();
-
-		if(!enum1.hasMoreElements())
-		{
-		        System.out.println(123);
-		}
+		System.out.println(3 / 2.0);
 		
 	}
 	

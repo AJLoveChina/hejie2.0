@@ -221,6 +221,7 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 		String json = gson.toJson(this);
 		Coupon coupon = gson.fromJson(json, Coupon.class);
 		
+		coupon.calculateMoreInfo();
 		return coupon;
 	}
 	
@@ -269,6 +270,8 @@ public class TaobaoExcelItem extends Entity<TaobaoExcelItem> implements EntityIn
 				tbkItem.setGoodsTypeId(GoodsType.All.JKJ.id);
 			}
 		}
+		
+		tbkItem.setCoupon_link_slick(this.coupon.getCoupon_link_slick());
 		
 	}
 	

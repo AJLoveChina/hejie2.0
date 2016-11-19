@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="row shop-line">
 									<span class="col-sm-8 col-xs-8 max-height-20 overflow-hidden">${item.getNick() }</span>
-									<span class="col-sm-4 col-xs-4 text-right max-height-20 overflow-hidden">${item.getDateEnteredOfSave() }</span>
+									<span class="col-sm-4 col-xs-4 text-right max-height-20 overflow-hidden time_need_to_be_rendered">${item.getDateEnteredOfSave() }</span>
 								</div>
 								<div class="row">
 									<div class="old-price col-sm-12">原价 : ${item.getReserve_price() }</div>

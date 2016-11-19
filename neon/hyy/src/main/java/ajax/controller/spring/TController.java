@@ -233,19 +233,28 @@ public class TController {
 	
 	
 	@RequestMapping(value="/one/{id}")
-	public String getTbkItemById(@PathVariable("id") long id, @RequestParam(name="platform", defaultValue="3") long platform) {
+	public ModelAndView getTbkItemById(@PathVariable("id") long id, @RequestParam(name="platform", defaultValue="3") long platform) {
 		
 		TbkItem tbkItem;
+		String commentAreaId = null;
 		if (platform == Platform.PC.getId()) {
 			tbkItem = TbkItemPC.get(TbkItemPC.class, id);
+			commentAreaId = "ajax.model.taobao.model.TbkItemPC-" + tbkItem.getId();
 		} else if (platform == Platform.WAP.getId()){
 			tbkItem = TbkItemWap.get(TbkItemWap.class, id);
+			commentAreaId = "ajax.model.taobao.model.TbkItemWap-" + tbkItem.getId();
 		} else {
 			tbkItem = TbkItemPC.get(TbkItemPC.class, id);
+			commentAreaId = "ajax.model.taobao.model.TbkItemPC-" + tbkItem.getId();
 		}
 		
 		request.setAttribute("model", tbkItem);
-		return "views/tbk/one";
+		Map<String, Object> map = new HashMap<>();
+		map.put("model", tbkItem);
+		map.put("title", tbkItem.getTitle());
+		map.put("commentAreaId", commentAreaId);
+		
+		return new ModelAndView("views/tbk/one", map);
 		
 	}
 	

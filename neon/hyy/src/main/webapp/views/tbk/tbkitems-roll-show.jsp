@@ -18,7 +18,7 @@
 			<div class="gt-o-top">
 				<em class="aj-icon aj-icon-jietijiangli"></em> <span class="floor">
 					{{$index + 1}} </span> <span class="name"> {{item.shortName}} </span> <a
-					class="more" href="">更多>></a>
+					class="more" href="{{item.goodsTypeHref}}">更多<em class="glyphicon glyphicon-chevron-right"></em></a>
 			</div>
 			<!-- content -->
 			<div class="gt-o-content clearfix">
@@ -57,7 +57,7 @@
 								<div class="row">
 									<div
 										class="col-sm-12 btn-group btn-group-justified btn-group-xs btn-options  center-block">
-										<a target="_blank" href="{{tbkitem.click_url}}"
+										<a rel="nofollow me" target="_blank" href="{{tbkitem.click_url}}"
 											class="btn btn-danger">直达链接</a> <a
 											href="{{tbkitem.js_detail_url}}" class="btn btn-warning">点击详情</a>
 									</div>

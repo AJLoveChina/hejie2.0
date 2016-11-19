@@ -3,6 +3,7 @@ package ajax.model.taobao;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.hibernate.Session;
 import org.junit.Test;
@@ -378,7 +379,8 @@ public class Taobao {
 	 * @throws Exception
 	 */
 	public static void getItemsFromExcel() throws Exception {
-		List<TaobaoExcelItem> excelItems = Tools.readExcel(new File("C:\\Users\\ajax\\Downloads\\data.xls"), TaobaoExcelItem.class);
+		List<TaobaoExcelItem> excelItems = Tools.readExcel(new File("C:\\Users\\ajax\\Downloads\\data2.xls"), TaobaoExcelItem.class);
+		Random rd = new Random();
 		for (TaobaoExcelItem taobaoExcelItem : excelItems) {
 			Session session = HibernateUtil.getCurrentSession();
 			session.beginTransaction();
@@ -394,6 +396,13 @@ public class Taobao {
 			try {
 				session.getTransaction().commit();
 				taobaoExcelItem.setCoupon(coupon);
+				
+				//2.1选择部分优惠券显示给用户, 即加入pagination
+				double cut = coupon.getVolume() / (coupon.getVolume() + 1000.0); 
+				if (rd.nextInt(10) <=1 || rd.nextInt(100) < 100 * cut) {
+					RealTimePagination<Coupon> couponPagination = new RealTimePagination<>();
+					couponPagination.saveWithoutSaveT(Coupon.COUPON_PAGINATION_GROUPID, coupon);
+				}
 			} catch(Exception ex) {
 				System.out.println(ex.getMessage());
 			}

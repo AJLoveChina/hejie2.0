@@ -35,6 +35,11 @@ $(function () {
 				
 				Goods.getGoodsTypeList(function (res) {
 					$scope.$apply(function () {
+						$.each(res.data, function (index, item) {
+							item.goodsTypeHref = Goods.getGoodsTypeHref({
+								goodsTypeId : item.id
+							});
+						})
 						$scope.s.goodsTypeList = res.data;
 					})
 

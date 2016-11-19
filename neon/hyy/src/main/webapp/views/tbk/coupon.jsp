@@ -16,7 +16,7 @@
 			<img class="img img-responsive" src="${coupon.getPict_url() }" />
 		</div>
 		<p class="title pad-10 font12">
-			<a href="${coupon.getCoupon_link_slick() }">
+			<a href="${coupon.getCoupon_link_slick() }" target="_blank" rel="nofollow me">
 				${coupon.getTitle() }
 			</a>
 		</p>
@@ -25,11 +25,11 @@
 		<div class="user-callback">
 			<div class="likes btn-click">
 				<em class="b-icon glyphicon glyphicon-thumbs-up"></em>
-				<span class="num font12">123</span>
+				<span class="num font12">${coupon.getLikes() }</span>
 			</div>
 			<div class="dislikes btn-click">
 				<em class="glyphicon glyphicon-thumbs-down"></em>
-				<span class="num font-12">25</span>
+				<span class="num font-12">${coupon.getDislikes() }</span>
 			</div>
 		</div>
 	</div>
