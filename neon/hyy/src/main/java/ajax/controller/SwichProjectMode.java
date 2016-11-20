@@ -13,7 +13,7 @@ import ajax.tools.Tools;
 public class SwichProjectMode {
 	public static void main(String[] args) throws Exception {
 		//switchToServerMode();
-		switchToDebugModel();
+		switchToServerMode();
 	}
 
 	private static void switchToDebugModel() throws IOException {
