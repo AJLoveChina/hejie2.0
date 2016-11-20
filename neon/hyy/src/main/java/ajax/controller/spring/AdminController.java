@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -43,6 +44,7 @@ import ajax.model.exception.AJRunTimeException;
 import ajax.model.pagesSeparate.ITaobaoItemsPagesSeparate;
 import ajax.model.pagesSeparate.RealTimePagination;
 import ajax.model.safe.User;
+import ajax.model.taobao.Taobao;
 import ajax.model.taobao.model.ITaobao;
 import ajax.model.taobao.model.TbkItem;
 import ajax.model.taobao.model.TbkItemPC;
@@ -50,7 +52,11 @@ import ajax.tools.Baidu;
 import ajax.tools.Tools;
 
 
-
+/**
+ * ajax method记住要添加 @AdminPointcutForAjax 注解, 否则发生错误不能返回正确的json数据错误提示
+ * @author ajax
+ *
+ */
 @Controller
 @AdminPointcut
 @RequestMapping(value="/admin")
@@ -62,6 +68,37 @@ public class AdminController {
 	private HttpServletResponse response;
 	@Autowired
 	private Gson gson;
+	
+	
+	@RequestMapping(value="/readTbkItemsFromExcel")
+	@ResponseBody
+	@AdminPointcutForAjax
+	public AjaxResponse<String> readTbkItemsFromExcel(@RequestParam(name="filename") String filename) {
+		AjaxResponse<String> ar = new AjaxResponse<>();
+		
+		if (filename == null || "".equals(filename.trim())) {
+			ar.setIsok(false);
+			ar.setData("filename not set!");
+			
+		} else {
+			String prefix = TbkItem.EXCEL_FILE_PATH_PREFIX;
+			String filepath = prefix + filename;
+			
+			try {
+				
+				Taobao.getItemsFromExcel(filepath);
+				ar.setIsok(true);
+				ar.setData("OK");
+				
+			} catch (Exception ex) {
+				ar.setIsok(false);
+				ar.setData(ex.getMessage());
+			}
+			
+		}
+		
+		return ar;
+	}
 	
 	@RequestMapping(value="/ajAddComment")
 	@ResponseBody

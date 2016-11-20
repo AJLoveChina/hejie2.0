@@ -361,9 +361,6 @@ public class Taobao {
 		}
 		
 	}
-	public static void main(String[] args) throws Exception {
-		getItemsFromExcel();
-	}
 	
 	public static String getITaobao() throws ApiException {
 		TaobaoClient client = new DefaultTaobaoClient(url, Taobao.getTAOBAO_NIGEERHUO_APP_KEY(), Taobao.getTAOBAO_NIGEERHUO_APP_SECRET());
@@ -378,8 +375,8 @@ public class Taobao {
 	 * 从Excel读取tbkitem 和coupon 商品
 	 * @throws Exception
 	 */
-	public static void getItemsFromExcel() throws Exception {
-		List<TaobaoExcelItem> excelItems = Tools.readExcel(new File("C:\\Users\\ajax\\Downloads\\data2.xls"), TaobaoExcelItem.class);
+	public static void getItemsFromExcel(String filepath) throws Exception {
+		List<TaobaoExcelItem> excelItems = Tools.readExcel(new File(filepath), TaobaoExcelItem.class);
 		Random rd = new Random();
 		for (TaobaoExcelItem taobaoExcelItem : excelItems) {
 			Session session = HibernateUtil.getCurrentSession();

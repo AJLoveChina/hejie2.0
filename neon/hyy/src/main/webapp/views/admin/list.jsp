@@ -75,6 +75,9 @@
 					}, {
 						href : "/admin/views/auto/ajAddComment",
 						text : "aj add comment"
+					}, {
+						href : "/admin/views/auto/readTbkItemsFromExcel_VIEW",
+						text : "readTbkItemsFromExcel_VIEW"
 					}];
 				});
 				

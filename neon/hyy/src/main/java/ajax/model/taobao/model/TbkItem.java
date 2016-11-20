@@ -513,6 +513,10 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 	 */
 	public abstract String getDetailUrl();
 	public static final String DETAIL_URL_PREFIX = "/t/one/";
+	/**
+	 * tbkitems excel 全部放在这个目录下下面进行读取
+	 */
+	public static final String EXCEL_FILE_PATH_PREFIX = "C:\\nigeerhuo\\tbkitems\\";
 	
 	public static void main(String[] args) {
 		TbkItem.getCouponLinkSlickOnCouponIdAlreadyKnown();
