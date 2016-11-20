@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <jsp:include page="/views/includes/headerV2.jsp"></jsp:include>
 <jsp:include page="/views/tbk/one_style.jsp"></jsp:include>
-<jsp:include page="/views/item/pendant.jsp"></jsp:include>
+<jsp:include page="/views/tbk/pendant.jsp"></jsp:include>
 <script>
 	$(function () {
 		var dom = $("#tbkitem-content-id");

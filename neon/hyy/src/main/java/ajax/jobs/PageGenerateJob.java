@@ -26,12 +26,7 @@ public class PageGenerateJob implements AJob {
 			System.out.println("page generate fail.." + e.getMessage());
 		}
 	}
-	
 
-	@Test
-	public void do1() throws AJRunTimeException {
-		Item.generateNewPageItems();
-	}
 	
 
 	@Override

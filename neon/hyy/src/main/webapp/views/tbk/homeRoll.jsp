@@ -20,9 +20,9 @@
 	
 	<div class="row">
 		<div class="col-sm-12">
-			<div  id="home-tbkitems-roll-img" class="home-tbkitems-roll-img">
+			<div id="home-tbkitems-roll-img" class="home-tbkitems-roll-img">
 				<c:forEach items="${itemsRoll }" var="item" begin="0" end="4">
-				  <div class="div col-sm-4">
+				  <div class="div col-sm-4 hidden">
 				  	<a href="${item.getDetailUrl() }">
 				  		<img class="aimg img-responsive" alt="${item.getTitle() }" src="${item.getPict_url() }">
 				  		<small>${item.getTitle() }</small>
@@ -31,15 +31,6 @@
 				</c:forEach>
 			</div>		
 		</div>
-		<%-- <div class="col-sm-6">
-			<div id="aj-home-showcase" class="aj-hide-when-phone">
-				<c:forEach begin="10" end="12" items="${itemsRoll }" var="one">
-					<span class="atag">
-						<img src="${one.getPict_url()  }" />
-					</span>
-				</c:forEach>
-			</div>	
-		</div>	 --%>
 	</div>
 
 </div>
@@ -49,6 +40,7 @@
 
 <style>
 	.home-tbkitems-roll-img{
+		max-height:315px;
 		overflow:hidden;
 	}
 </style>
@@ -58,6 +50,11 @@
 	$(function () {
 		var container = $("#home-tbkitems-roll-img"),
 			container2 = $("#aj-home-showcase");
+		container.hide();
+		container.on("init", function () {
+			container.fadeIn();
+			container.find(".div.hidden").removeClass("hidden");
+		})
 		container.slick({
 			dots: true,
 			centerMode: true,

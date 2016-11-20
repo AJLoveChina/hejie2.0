@@ -11,7 +11,8 @@ public enum ItemStatus {
 	HAVE_NOT_CHANGE_SLICK_URL(7, "该商品的链接还不是返利链接"), 
 	ZHIDEMAI_ITEM_IN_PAGE(8, "值得买已经加入到页面"),
 	ITEM_IS_HOMEROLL_IMAGE_ITEM(9, "首页滚动的item"), 
-	IS_GET_COUPON_LINK_SLICK(10, "");
+	IS_GET_COUPON_LINK_SLICK(10, ""), 
+	SELECTED(11, "被选中过后的状态");
 	
 	private int id;
 	private String info;

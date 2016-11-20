@@ -78,7 +78,7 @@ public class TController {
 	
 	@RequestMapping(value="/list")
 	public String tList() {
-		List<TbkItem> tbkItemsRoll = GoodsType.getTBKItemsOfRoll(Platform.PC);
+		List<? extends TbkItem> tbkItemsRoll = GoodsType.getTBKItemsOfRoll(Platform.PC);
 		
 		List<GoodsType> goodsTypes = GoodsType.getShowGoodsType();
 		

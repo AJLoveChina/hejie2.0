@@ -14,6 +14,7 @@
 		line-height: 30px;
 		height:90px;
 		border-bottom: 1px dashed #e4e4e4;
+		overflow:hidden;
 	}
 	.tbkitem-content .cut-of-alert{
 		padding:10px;

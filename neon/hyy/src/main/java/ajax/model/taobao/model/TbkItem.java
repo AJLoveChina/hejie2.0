@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
@@ -37,6 +38,8 @@ import ajax.tools.Tools;
  */
 @FormComponentUrlAnno(submitUrl="/admin/tbkitems/submit")
 public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>,RealTimePaginationConfiguration{
+	private static final Logger log = Logger.getLogger(TbkItem.class);
+	
 	public class SmallImages{
 		private List<String> string;
 
@@ -586,6 +589,90 @@ public abstract class TbkItem<T> extends Entity<T> implements EntityInterface<T>
 		} while (tbkItemWaps.size() == 1000);
 		
 		
+	}
+	
+	
+	private static List<? extends TbkItem> tbkItemsRollForPC;
+	private static List<? extends TbkItem> tbkITemsRollForWap;
+	/**
+	 * 返回tbkitem 首页滚动图 (容量20)
+	 * @param platform
+	 * @return
+	 */
+	public static List<? extends TbkItem> getHomeRollTbkItems(Platform platform) {
+		switch(platform) {
+		case WAP:
+			if (tbkITemsRollForWap == null) {
+				TbkItem.updateHomeRollTbkItemsForWap();
+			}
+			return tbkITemsRollForWap;
+		case PC:
+		default:
+			if (tbkItemsRollForPC == null) {
+				TbkItem.updateHomeRollTbkItemsForPC();
+			}
+			return tbkItemsRollForPC;
+		}
+	}
+	
+	/**
+	 * 更新tbkitem首页滚动图, tbkitem首页滚动图是保存在内存中的.
+	 */
+	public static void updateHomeRollTbkItems() {
+		TbkItem.updateHomeRollTbkItemsForPC();
+		TbkItem.updateHomeRollTbkItemsForWap();
+	}
+	
+	private synchronized static void updateHomeRollTbkItemsForWap() {
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(TbkItemWap.class);
+//		criteria.add(Restrictions.eq("goodsTypeId", GoodsType.All.ROLL.id));
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(20);
+		criteria.addOrder(Order.desc("id"));
+		criteria.add(Restrictions.gt("volume", 2000L));
+		criteria.add(Restrictions.ne("commission", 0.0));
+		try {
+			List<TbkItemWap> list = TbkItem.getListWithoutStatus(ItemStatus.SELECTED, criteria, TbkItemWap.class);
+			
+			session.getTransaction().commit();
+			if (list.size() == 20) {
+				tbkITemsRollForWap = list;
+				for (TbkItemWap wap : list) {
+					wap.addItemStatus(ItemStatus.SELECTED);
+					wap.update();
+				}
+			}
+			
+		} catch(Exception ex) {
+			log.warn(ex.getMessage());
+		}
+		
+	}
+	private synchronized static void updateHomeRollTbkItemsForPC() {
+		Session session = HibernateUtil.getCurrentSession();
+		session.beginTransaction();
+		Criteria criteria = session.createCriteria(TbkItemPC.class);
+//		criteria.add(Restrictions.eq("goodsTypeId", GoodsType.All.ROLL.id));
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(20);
+		criteria.addOrder(Order.desc("id"));
+		criteria.add(Restrictions.gt("volume", 2000L));
+		criteria.add(Restrictions.ne("commission", 0.0));
+		try {
+			List<TbkItemPC> list = TbkItem.getListWithoutStatus(ItemStatus.SELECTED, criteria, TbkItemPC.class);
+			session.getTransaction().commit();
+			if (list.size() == 20) {
+				tbkItemsRollForPC = list;
+				for (TbkItemPC pc : list) {
+					pc.addItemStatus(ItemStatus.SELECTED);
+					pc.update();
+				}
+			}
+		} catch(Exception ex) {
+			log.warn(ex.getMessage());
+		}
 	}
 	
 	

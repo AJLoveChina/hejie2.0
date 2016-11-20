@@ -196,48 +196,15 @@ public class GoodsType implements Stamp{
 		return goodsTypesList;
 	}
 	
-	private static List<TbkItem> tbkItemsRollForPC;
-	private static List<TbkItem> tbkITemsRollForWap;
+	
 	/**
 	 * 返回tbkitem 首页滚动图 (容量20)
 	 * @param platform
 	 * @return
 	 */
-	public static List<TbkItem> getTBKItemsOfRoll(Platform platform) {
+	public static List<? extends TbkItem> getTBKItemsOfRoll(Platform platform) {
 		
-		switch(platform) {
-		case WAP:
-			if (tbkITemsRollForWap == null) {
-				synchronized (GoodsType.class) {
-					Session session = HibernateUtil.getCurrentSession();
-					session.beginTransaction();
-					Criteria criteria = session.createCriteria(TbkItemWap.class);
-					criteria.add(Restrictions.eq("goodsTypeId", GoodsType.All.ROLL.id));
-					criteria.setFirstResult(0);
-					criteria.setMaxResults(20);
-					criteria.addOrder(Order.desc("id"));
-					tbkITemsRollForWap = criteria.list();
-					session.getTransaction().commit();
-				}
-			}
-			return tbkITemsRollForWap;
-		case PC:
-		default:
-			if (tbkItemsRollForPC == null) {
-				synchronized(GoodsType.class) {
-					Session session = HibernateUtil.getCurrentSession();
-					session.beginTransaction();
-					Criteria criteria = session.createCriteria(TbkItemPC.class);
-					criteria.add(Restrictions.eq("goodsTypeId", GoodsType.All.ROLL.id));
-					criteria.setFirstResult(0);
-					criteria.setMaxResults(20);
-					criteria.addOrder(Order.desc("id"));
-					tbkItemsRollForPC = criteria.list();
-					session.getTransaction().commit();
-				}
-			}
-			return tbkItemsRollForPC;
-		}
+		return TbkItem.getHomeRollTbkItems(platform);
 		
 	}
 	

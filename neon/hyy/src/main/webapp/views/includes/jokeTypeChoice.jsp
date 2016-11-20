@@ -67,18 +67,8 @@
        		}
        	}
        	
-       	container.slidesjs({
-       		start : 1,
-			pagination : {
-				active : false
-			},
-			navigation : {
-				active : false
-			},
-			play : {
-				auto : false,
-				interval : 3000
-			}
+       	container.slick({
+			autoplay : false
        	});
 	
 	})

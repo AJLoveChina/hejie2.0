@@ -2,6 +2,7 @@ package ajax.jobs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -12,6 +13,7 @@ import org.quartz.Trigger;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerKey;
 import org.quartz.impl.matchers.GroupMatcher;
+import org.reflections.Reflections;
 
 import ajax.jobs.JobsList.JobInfo;
 import ajax.tools.Tools;
@@ -48,11 +50,11 @@ public class JobsList {
 		if (JobsList.jobs == null) {
 			List<JobInfo> list = new ArrayList<>();
 			
-			list.add(new HelloJob().returnJobInfo());
-			list.add(new PageGenerateJob().returnJobInfo());
-			list.add(new GrabZhihuJob().returnJobInfo());
-			list.add(new GenerateHomeRollImagesAreaJob().returnJobInfo());
-			
+			Reflections reflections = new Reflections("ajax.jobs");
+			Set<Class<? extends AJob>> allJobs = reflections.getSubTypesOf(AJob.class);
+			for (Class<? extends AJob> aJob : allJobs) {
+				list.add(aJob.newInstance().returnJobInfo());
+			}
 			JobsList.jobs = list;
 		}
 		

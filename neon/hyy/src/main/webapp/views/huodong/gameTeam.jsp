@@ -107,7 +107,7 @@ String json = (String)request.getAttribute("model");
 			
 			
 			$scope.bindEvent = function () {
-				$("#game-team-editarea .in-wrap").slidesjs();
+				$("#game-team-editarea .in-wrap").slick();
 			}
 			$scope.bindEvent();
 			// AJ TODO
