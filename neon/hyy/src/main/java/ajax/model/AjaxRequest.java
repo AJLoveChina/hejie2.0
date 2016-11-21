@@ -80,8 +80,8 @@ public class AjaxRequest {
 		
 		HttpClient client = HttpClientBuilder.create().build();
 		
-		HttpHost proxy = new HttpHost("127.0.0.1", 9999, "http");
-		RequestConfig requestConfig = RequestConfig.custom().setProxy(proxy).build();
+		//HttpHost proxy = new HttpHost("127.0.0.1", 9999, "http");
+		//RequestConfig requestConfig = RequestConfig.custom().setProxy(proxy).build();
 		
 		
 		
@@ -99,7 +99,7 @@ public class AjaxRequest {
 			
 			if (method.toUpperCase().equals("POST"))  {
 				HttpPost request = new HttpPost(config.getUrl());
-				request.setConfig(requestConfig);
+				//request.setConfig(requestConfig);
 				
 				if (config.getMap() != null) {
 					List<NameValuePair> pairs = new ArrayList<NameValuePair>();
@@ -137,7 +137,7 @@ public class AjaxRequest {
 				}
 				
 				HttpGet request = new HttpGet(url);
-				request.setConfig(requestConfig);
+				//request.setConfig(requestConfig);
 				
 				if (config.getHeaders()!= null) {
 					Map<String, String> headers = config.getHeaders();

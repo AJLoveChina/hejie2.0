@@ -1,6 +1,7 @@
 package ajax.tools;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -10,8 +11,10 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -251,6 +254,26 @@ public class Tools {
 		}
 		return out.toString();
 	}
+	
+	
+	public static String readInputStream(InputStream in, String charset) {
+		try {
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in, charset));
+			
+			StringBuilder sb = new StringBuilder();
+			String data;
+			while((data = reader.readLine()) != null) {
+				sb.append(data);
+			}
+			return sb.toString();
+			
+		} catch (IOException e) {
+			return "";
+		}
+	}
+	
+	
 
 	public static void writeDataToFile(String data, File file) {
 		FileWriter fw;

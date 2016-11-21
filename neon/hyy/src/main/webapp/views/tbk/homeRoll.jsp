@@ -3,18 +3,6 @@
 <%@ page language="java" import="ajax.model.entity.*, java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-	List<ItemsRoll> list = ItemsRoll.getList(10);
-	
-	List<Fragment> fragments = Fragment.getFragments(Type.HOME_PAGE_THREE_ADS);
-	String url = UrlRoute.OSS_PUBLIC.getUrl();
-	
-	
-	request.setAttribute("fragments", fragments);
-	request.setAttribute("list", list);
-	
- %>
-
 
 <div style="position:relative;" class="clearfix">
 	

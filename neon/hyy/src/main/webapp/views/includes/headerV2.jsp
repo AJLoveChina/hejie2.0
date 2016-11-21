@@ -32,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="description" content="<%=description%>">
     <meta name="keywords" content="<%=keywords %>">
-    <link rel="shortcut icon" type="image/x-icon" href="http://images.nigeerhuo.com/images/web/pic/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logob32X32.ico" />
     <meta property="qc:admins" content="7712403257661755205763757" />
     <meta name="google-signin-client_id" content="724523861492-9q9uh77mcrajedcgggb90qva3u3j7sm8.apps.googleusercontent.com">
     <meta name="mobile-agent" content="format=html5;url=http://wap.nigeerhuo.com/">
@@ -47,7 +47,7 @@
     		<div class="row clearfix">
     			<div class="col-sm-2 col-xs-5">
     				<a href="/">
-    					<img class="img-responsive img" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logoV2200x80.png" />
+    					<img class="img-responsive img" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/images/web/pic/logov3.png" />
     				</a>
     			</div>
     			<div class="col-sm-4 col-xs-7 search-area" ng-controller="searchController">

@@ -77,7 +77,7 @@ public class TController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String tList() {
+	public ModelAndView tList() {
 		List<? extends TbkItem> tbkItemsRoll = GoodsType.getTBKItemsOfRoll(Platform.PC);
 		
 		List<GoodsType> goodsTypes = GoodsType.getShowGoodsType();
@@ -85,11 +85,13 @@ public class TController {
 		RealTimePagination<Coupon> pagination = new RealTimePagination<>();
 		List<Coupon> coupons = pagination.get(Coupon.COUPON_PAGINATION_GROUPID, 1, new Coupon());
 		
-		request.setAttribute("itemsRoll", tbkItemsRoll);
-		request.setAttribute("goodsTypes", goodsTypes);
-		request.setAttribute("coupons", coupons);
 		
-		return "/views/tbk/list";
+		Map<String, Object> map = new HashMap<>();
+		map.put("itemsRoll", tbkItemsRoll);
+		map.put("goodsTypes", goodsTypes);
+		map.put("coupons", coupons);
+		
+		return new ModelAndView("/views/tbk/list", map);
 	}
 	
 	@RequestMapping(value="/goodsTypeList")

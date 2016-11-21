@@ -126,7 +126,7 @@ public class GoodsType implements Stamp{
 	}
 	
 	static {
-		String GoodsTypeJsonData = Tools.readInputStream(GoodsType.class.getResourceAsStream("GoodsType.json"));
+		String GoodsTypeJsonData = Tools.readInputStream(GoodsType.class.getResourceAsStream("GoodsType.json"), "UTF-8");
 		A a = new Gson().fromJson(GoodsTypeJsonData, A.class);
 		goodsTypesList = a.GoodsType;
 		
