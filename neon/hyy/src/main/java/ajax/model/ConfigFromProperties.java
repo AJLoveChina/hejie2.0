@@ -4,13 +4,22 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Properties;
 
+/**
+ * only getters, without setters
+ * @author ajax
+ *
+ */
 public class ConfigFromProperties {
+	
 	private static  String google_nigeerhuo_oauth_id = null;
 	private static  String google_nigeerhuo_oauth_key = null;
 	private static  String TABLE_TIME_FORMAT = null;
 	private static  String WEIXIN_NIGEERHUO_APPID = null;
 	private static  String WEIXIN_NIGEERHUO_APPSECRET = null;
 	
+	private static String YIQIFA_SITE_OWNER_ID = null;
+	private static String YIQIFA_SITE_ID = null;
+	private static String YIQIFA_SITE_PASS = null;
 	
 	public static String getGoogle_nigeerhuo_oauth_id() {
 		return google_nigeerhuo_oauth_id;
@@ -27,6 +36,17 @@ public class ConfigFromProperties {
 	public static String getWEIXIN_NIGEERHUO_APPSECRET() {
 		return WEIXIN_NIGEERHUO_APPSECRET;
 	}
+	
+	public static String getYIQIFA_SITE_OWNER_ID() {
+		return YIQIFA_SITE_OWNER_ID;
+	}
+	public static String getYIQIFA_SITE_ID() {
+		return YIQIFA_SITE_ID;
+	}
+	public static String getYIQIFA_SITE_PASS() {
+		return YIQIFA_SITE_PASS;
+	}
+
 
 
 

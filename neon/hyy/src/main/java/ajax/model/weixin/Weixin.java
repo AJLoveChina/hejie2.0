@@ -60,7 +60,7 @@ public class Weixin {
 		AjaxRequest ar = new AjaxRequest();
 		
 		
-		Config config = ar.new Config("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" +  Weixin.getAccessToken() + "&type=jsapi", null, "GET");
+		Config config = new Config("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" +  Weixin.getAccessToken() + "&type=jsapi", null, "GET");
 		String res = AjaxRequest.getResponse(config);
 		JsonObject json = new JsonParser().parse(res).getAsJsonObject();
 		
@@ -77,7 +77,7 @@ public class Weixin {
 		String appsecret = ConfigFromProperties.getWEIXIN_NIGEERHUO_APPSECRET();
 		
 		
-		Config config = ar.new Config("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + appsecret, null, "GET");
+		Config config = new Config("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appid + "&secret=" + appsecret, null, "GET");
 		String res = AjaxRequest.getResponse(config);
 		JsonObject json = new JsonParser().parse(res).getAsJsonObject();
 		
