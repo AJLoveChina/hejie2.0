@@ -24,7 +24,7 @@ import junit.framework.Assert;
 
 
 public class AjaxRequest {
-	public class Config{
+	public static class Config{
 		private String url;
 		private Map<String, String> map;
 		private String method = "POST";
@@ -68,6 +68,10 @@ public class AjaxRequest {
 			this.url = url;
 			this.map = map;
 			this.method = method;
+		}
+		
+		public String getResponse() {
+			return AjaxRequest.getResponse(this);
 		}
 	}
 	
@@ -173,7 +177,7 @@ public class AjaxRequest {
 	@Test
 	public void test() {
 		AjaxRequest ar = new AjaxRequest();
-		AjaxRequest.Config config = ar.new Config("http://www.baidu.com", null, "GET");
+		AjaxRequest.Config config = new Config("http://www.baidu.com", null, "GET");
 		String data = AjaxRequest.getResponse(config);
 
 		Assert.assertNotNull(data);

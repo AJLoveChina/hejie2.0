@@ -29,6 +29,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import ajax.model.AjaxRequest;
+import ajax.model.AjaxRequest.Config;
 import ajax.model.AjaxResponse;
 import ajax.model.ConfigFromProperties;
 import ajax.model.UniqueString;
@@ -634,7 +635,7 @@ public class User extends Entity<User>{
 		map.put("code", code);
 		map.put("redirect_uri", UrlRoute.QQ_REDIRECT.getUrl());
 		
-		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, "GET");
+		AjaxRequest.Config config = new Config(url, map, "GET");
 		
 		String response = AjaxRequest.getResponse(config);
 		// access_token=FE04************************CCE2&expires_in=7776000&refresh_token=88E4************************BE14
@@ -666,7 +667,7 @@ public class User extends Entity<User>{
 		map.put("uid", wa.getUid());
 		String method = "GET";
 		
-		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		AjaxRequest.Config config = new Config(url, map, method);
 		
 		String response = AjaxRequest.getResponse(config);
 		
@@ -701,7 +702,7 @@ public class User extends Entity<User>{
 		map.put("access_token", qa.getAccess_token());
 		String method = "GET";
 		
-		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		AjaxRequest.Config config = new Config(url, map, method);
 		
 		String response = AjaxRequest.getResponse(config);
 		
@@ -727,7 +728,7 @@ public class User extends Entity<User>{
 		map.put("oauth_consumer_key", User.getQqAppId());
 		String method = "GET";
 		
-		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		AjaxRequest.Config config = new Config(url, map, method);
 		
 		String response = AjaxRequest.getResponse(config);
 		
@@ -781,7 +782,7 @@ public class User extends Entity<User>{
 		
 		String method = "POST";
 		
-		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, map, method);
+		AjaxRequest.Config config = new Config(url, map, method);
 		config.setHeaders(headers);
 		
 		String response = AjaxRequest.getResponse(config);
@@ -820,7 +821,7 @@ public class User extends Entity<User>{
 	public static GithubUserSimpleModel getGithubUserSimpleModel(GithubAccessToken gat) {
 		String url = "https://api.github.com/user?access_token=" + gat.getAccess_token();
 		
-		AjaxRequest.Config config = (new AjaxRequest()).new Config(url, null, "GET");
+		AjaxRequest.Config config = new Config(url, null, "GET");
 		
 		String response = AjaxRequest.getResponse(config);
 		

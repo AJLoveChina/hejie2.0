@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import ajax.model.AjaxRequest;
+import ajax.model.AjaxRequest.Config;
 
 import com.google.gson.Gson;
 
@@ -37,7 +38,7 @@ public class Baidu {
 		AjaxRequest ar = new AjaxRequest();
 		Map<String, String> map = new HashMap<String, String>();
 		
-		AjaxRequest.Config config = ar.new Config("http://data.zz.baidu.com/urls?site=" + Baidu.site + "&token=" + Baidu.getToken(), map, "POST");
+		AjaxRequest.Config config = new Config("http://data.zz.baidu.com/urls?site=" + Baidu.site + "&token=" + Baidu.getToken(), map, "POST");
 		config.setBody(Tools.join(links, "\n"));
 		
 		String response = AjaxRequest.getResponse(config);

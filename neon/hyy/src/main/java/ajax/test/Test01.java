@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import ajax.model.AjaxRequest;
+import ajax.model.AjaxRequest.Config;
 import ajax.model.ItemStatus;
 import ajax.model.entity.Item;
 import ajax.tools.Tools;
@@ -43,7 +44,7 @@ public class Test01 {
 		map.put("HotelCodes", "[123]");
 		String method = "POST";
 		
-		AjaxRequest.Config config = ar.new Config(url, map, method);
+		AjaxRequest.Config config = new Config(url, map, method);
 		String response = ar.getResponse(config);
 		System.out.println(response);
 	}
