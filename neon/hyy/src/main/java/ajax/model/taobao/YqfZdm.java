@@ -4,7 +4,7 @@ public class YqfZdm {
 	private Long id;
 	private String title;
 	private String subTitle;
-	private int channel;
+	private String channel;	// doc say int , but got china string...
 	private int status;
 	private String recommendedReason;
 	private String shareContent;
@@ -19,9 +19,9 @@ public class YqfZdm {
 	private String productName;
 	private String pc_productYiqifaUrl;
 	private String moblie_productYiqifaUrl;
-	private double pc_discountPrice;
+	private double pcDiscountPrice;
 	private double moblie_discountPrice;
-	private double pc_reservePrice;
+	private double pcReservePrice;
 	private double moblie_reservePrice;
 	private String brands;
 	private String storeName;
@@ -31,7 +31,7 @@ public class YqfZdm {
 	private String Category1Name;
 	private String Category2Id;
 	private String Category2Name;
-	private int pc_comissionRate;
+	private int pcComissionRate;
 	private int moblie_comissionRate;
 	private String startTime;
 	private String endTime;
@@ -55,10 +55,11 @@ public class YqfZdm {
 	public void setSubTitle(String subTitle) {
 		this.subTitle = subTitle;
 	}
-	public int getChannel() {
+
+	public String getChannel() {
 		return channel;
 	}
-	public void setChannel(int channel) {
+	public void setChannel(String channel) {
 		this.channel = channel;
 	}
 	public int getStatus() {
@@ -145,23 +146,11 @@ public class YqfZdm {
 	public void setMoblie_productYiqifaUrl(String moblie_productYiqifaUrl) {
 		this.moblie_productYiqifaUrl = moblie_productYiqifaUrl;
 	}
-	public double getPc_discountPrice() {
-		return pc_discountPrice;
-	}
-	public void setPc_discountPrice(double pc_discountPrice) {
-		this.pc_discountPrice = pc_discountPrice;
-	}
 	public double getMoblie_discountPrice() {
 		return moblie_discountPrice;
 	}
 	public void setMoblie_discountPrice(double moblie_discountPrice) {
 		this.moblie_discountPrice = moblie_discountPrice;
-	}
-	public double getPc_reservePrice() {
-		return pc_reservePrice;
-	}
-	public void setPc_reservePrice(double pc_reservePrice) {
-		this.pc_reservePrice = pc_reservePrice;
 	}
 	public double getMoblie_reservePrice() {
 		return moblie_reservePrice;
@@ -217,12 +206,6 @@ public class YqfZdm {
 	public void setCategory2Name(String category2Name) {
 		Category2Name = category2Name;
 	}
-	public int getPc_comissionRate() {
-		return pc_comissionRate;
-	}
-	public void setPc_comissionRate(int pc_comissionRate) {
-		this.pc_comissionRate = pc_comissionRate;
-	}
 	public int getMoblie_comissionRate() {
 		return moblie_comissionRate;
 	}
@@ -253,6 +236,23 @@ public class YqfZdm {
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	
+	public double getPcDiscountPrice() {
+		return pcDiscountPrice;
+	}
+	public void setPcDiscountPrice(double pcDiscountPrice) {
+		this.pcDiscountPrice = pcDiscountPrice;
+	}
+	public double getPcReservePrice() {
+		return pcReservePrice;
+	}
+	public void setPcReservePrice(double pcReservePrice) {
+		this.pcReservePrice = pcReservePrice;
+	}
+	public int getPcComissionRate() {
+		return pcComissionRate;
+	}
+	public void setPcComissionRate(int pcComissionRate) {
+		this.pcComissionRate = pcComissionRate;
+	}
 	
 }

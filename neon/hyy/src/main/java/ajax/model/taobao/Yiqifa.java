@@ -1,7 +1,10 @@
 package ajax.model.taobao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.google.gson.Gson;
 
 import ajax.model.AjaxRequest;
 import ajax.model.ConfigFromProperties;
@@ -11,6 +14,13 @@ public class Yiqifa {
 	
 	public static class ZdmQueryConfig {
 		
+	}
+	
+	private static class A{
+		int total;
+		int pageIndex;
+		int pageSize;
+		List<YqfZdm> data;
 	}
 	
 	public static void getZDM() {
@@ -43,6 +53,9 @@ public class Yiqifa {
 		String content = config.getResponse();
 		
 		System.out.println(content);
+		Gson gson = new Gson();
+		A a = gson.fromJson(content, A.class);
+		System.out.println(a);
 	}
 	
 	public static void main(String[] args) {
