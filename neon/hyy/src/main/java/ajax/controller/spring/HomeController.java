@@ -36,23 +36,4 @@ public class HomeController {
 		return new ModelAndView("/views/tbk/list", map);
 	}
 	
-	
-//	public String begore() {
-//List<Item> items = new ArrayList<Item>();
-//		
-//		QueryParams qp = new QueryParams(request);
-//		
-//		items = Page.getPage(qp.getPage());
-//		
-//		List<Item> hotItems = Item.getHotItems();
-//		
-//		request.setAttribute("hotItems", hotItems);
-//		request.setAttribute("items", items);
-//		request.setAttribute("page", Tools.parseInt(qp.getVal("page"), 1));
-//		request.setAttribute("queryParams", qp);
-//		
-//		RequestDispatcher rd = request.getRequestDispatcher("Index.jsp");
-//		
-//		rd.forward(request, response);
-//	}
 }
