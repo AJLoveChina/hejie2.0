@@ -30,8 +30,8 @@
 <link rel="stylesheet" href="/web/css/index.css?ts=20160725"/>
 
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script type="text/javascript" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/js/third-party-js-all.min.txt?ts=20160928"></script>
-<!--<script type="text/javascript" src="/web/js/third-party-js-all.txt"></script>-->
+<!--<script type="text/javascript" src="http://nigeerhuo-public.oss-cn-shanghai.aliyuncs.com/static/js/third-party-js-all.min.txt?ts=20160928"></script>-->
+<script type="text/javascript" src="/web/js/third-party-js-all.txt"></script>
 
 <script>
 	require.config({
