@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Clean Bombs</title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+
+<div id="main-div">
+    <div id="guide" ng-controller="main" class="container-fluid" ng-cloak>
+        <div ng-show="s.step === 1">
+            <form ng-submit="submitLevelForm($event)">
+                <p>Welcome To Clean Bombs</p>
+                <p>Plean select difficulties..</p>
+                青铜 <input type="radio" name="choice" ng-model="s.level" value="1" data-a="100" data-b="10"/>(100个方格，10个雷)<br>
+                黄金 <input type="radio" name="choice" ng-model="s.level" value="2" data-a="256" data-b="40"/>(256个方格，40个雷)<br>
+                钻石 <input type="radio" name="choice" ng-model="s.level" value="3" data-a="500" data-b="100"/>(500个方格，100个雷)<br>
+                王者 <input type="radio" name="choice" ng-model="s.level" value="4" data-a="1000" data-b="300"/>(1000个方格，300个雷)<br>
+                <button class="btn btn-info">Submit</button>
+            </form>
+        </div>
+        <div id="info-panel" ng-show="s.step === 2">
+            <p>方块：{{s.divNum}} | 已标记：{{s.bombFound}} | 剩余雷：{{s.bombNum - s.bombFound}} | 用时：{{s.seconds}}s</p>
+            <p ng-if="s.bombNum - s.bombFound < 0">亲，你标记的雷比总共还要多啊~~</p>
+        </div>
+        <div id="container" class="clearfix" ng-show="s.step === 2"></div>
+        <div id="gameover" ng-show="s.gameover && s.step === 2">
+            <h3>Game Over</h3>
+            <p ng-bind="getPinjia()"></p>
+            <button ng-click="returnHome()">返回首页</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

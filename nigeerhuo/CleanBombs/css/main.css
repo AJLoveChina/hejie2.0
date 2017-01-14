@@ -1,0 +1,47 @@
+body{
+    font-family: Microsoft Yahei, Arial;
+}
+#guide{
+    padding-top: 10px;
+}
+#container{
+    cursor: pointer;
+}
+.div {
+    position: relative;
+    z-index: 10;
+    -webkit-box-shadow: #999 2px 2px 2px;
+    -moz-box-shadow: #999 2px 2px 2px;
+    box-shadow: #999 2px 2px 2px;
+    width: 31px;
+    height: 31px;
+    border: 1px solid #666;
+    float: left;
+    margin-top: -1px;
+    margin-left: -1px;
+    background-color: #eee;
+    text-align: center;
+    line-height: 30px;
+}
+.div.close:hover{
+    background-color: #999;
+}
+.div.open{
+    z-index: 5;
+    background-color: #fff;
+}
+.div.open.no-bomb-around{
+    background-color: #fff;
+}
+.div.show-bomb{
+    background-color: #999;
+}
+.div.show-bomb.wrong-click{
+    background-color: #000;
+}
+.div.flag-as-bomb{
+
+}
+.div.flag-as-unknown{
+    font-weight: bold;
+}
