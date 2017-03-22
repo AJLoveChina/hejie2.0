@@ -266,7 +266,7 @@ $(function () {
             $scope.s.gameover = false;
             $scope.s.seconds = 0;
 
-            if ($scope.s.divNum >= $scope.s.bombNum) {
+            if ($scope.s.divNum <= $scope.s.bombNum) {
                 $scope.s.divNum = 100;
                 $scope.s.bombNum = 10;
             }
@@ -283,12 +283,18 @@ $(function () {
         $scope.returnHome = function () {
             $scope.s.step = 1;
         };
-        
+
+        var interval;
         $scope.calculateTime = function () {
-            setInterval(function () {
+            var time = 0;
+            if (interval) {
+                clearInterval(interval);
+            }
+            interval = setInterval(function () {
                 $scope.$apply(function () {
                     if (!$scope.s.gameover) {
-                        $scope.s.seconds += 1;
+                        time += 1;
+                        $scope.s.seconds = time;
                     }
                 })
             }, 1000)
@@ -340,6 +346,7 @@ $(function () {
                 var random = $scope.randomDivIndex();
                 if (!bombIndexMap["flag" + random]) {
                     bombIndexArr.push(random);
+                    bombIndexMap["flag" + random] = true;
                 }
             }
             bombIndexArr.sort(function (a, b) {

@@ -45,3 +45,16 @@ body{
 .div.flag-as-unknown{
     font-weight: bold;
 }
+div#gameover {
+    position: fixed;
+    width: 300px;
+    height: 200px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 20px;
+    box-shadow: #000 0 0 2px;
+    top: 50%;
+    left: 50%;
+    margin-top: -120px;
+    margin-left: -170px;
+    z-index: 999;
+}

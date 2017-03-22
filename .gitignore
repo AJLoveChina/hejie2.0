@@ -64,3 +64,9 @@ neon/nigeerhuo/.settings
 neon/nigeerhuo/ckeditor
 neon/nigeerhuo/nigeerhuo-clone
 *.xml
+*/.idea
+.idea
+nigeerhuo/.idea
+nigeerhuo/.idea/
+*.iml
+*.project
